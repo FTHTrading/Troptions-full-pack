@@ -431,6 +431,45 @@ body.glass-enabled .page-content {
   max-height: 16rem;
 }
 
+.glass-page .glass-anthem-catalog-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+  text-align: left;
+}
+
+.glass-page .glass-anthem-catalog {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.glass-page .glass-anthem-catalog th,
+.glass-page .glass-anthem-catalog td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--glass-border);
+  vertical-align: top;
+}
+
+.glass-page .glass-anthem-catalog th {
+  color: var(--glass-gold);
+  font-weight: 600;
+  text-align: left;
+}
+
+.glass-page .glass-anthem-catalog code {
+  font-size: 0.78rem;
+  color: var(--glass-muted);
+}
+
+.glass-page .glass-anthem-catalog audio {
+  width: min(220px, 100%);
+  max-height: 2.5rem;
+}
+
+.glass-page .glass-anthem-catalog .glass-btn {
+  white-space: nowrap;
+}
+
 /* Guide / Q&A */
 .glass-guide {
   display: grid;

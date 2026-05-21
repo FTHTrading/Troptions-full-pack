@@ -37,7 +37,7 @@ Open http://127.0.0.1:4000/Troptions-full-pack/
 - **Home** uses `layout: glass` — frosted panels, section nav, revenue tabs, live links, anthem player, Ask TROPTIONS panel.
 - **Assets:** `assets/css/glass.css`, `assets/js/glass-site.js`, `assets/js/troptions-guide.js`, `assets/data/site-narration.json`
 - **Audio tour page:** `/guide/audio-tour/`
-- **Anthem tracks:** Primary, Alt, **Mainframe (152254)** — `assets/audio/troptions-anthem-mainframe-152254.mp3` (manual play, no autoplay)
+- **Anthem catalog:** Five tracks in `#anthem` on home — Primary, Alt, Mainframe (152254), 22-years, 151853 edit (~16 MB total; manual play, no autoplay). See `assets/audio/README.md`.
 
 ### Audio tour + Q&A (static)
 
