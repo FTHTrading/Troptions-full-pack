@@ -116,6 +116,18 @@ class TroptionsL1Client:
             {"proposal_id": proposal_id, "voter": voter, "choice": choice},
         )
 
+    def treasury_get_balance(self, chain: str, asset: str) -> Dict[str, Any]:
+        return self.call("treasury_getBalance", {"chain": chain, "asset": asset})
+
+    def dao_get_proposals(self) -> Any:
+        return self.call("dao_getProposals")
+
+    def dao_get_votes(self, proposal_id: str) -> Any:
+        return self.call("dao_getVotes", {"proposal_id": proposal_id})
+
+    def submit_transaction(self, tx: Dict[str, Any]) -> Dict[str, Any]:
+        return self.call("submit_transaction", tx)
+
 
 def get_l1_client() -> TroptionsL1Client:
     return TroptionsL1Client()

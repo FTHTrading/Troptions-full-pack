@@ -9,7 +9,7 @@ async function fetchJson(path) {
 
 function renderProposals(data) {
   const el = document.getElementById("proposals-list");
-  const items = data.l1 || data.local || [];
+  const items = data.l1 || [];
   const list = Array.isArray(items) ? items : [];
   el.innerHTML = list.length
     ? list.map((p) => `

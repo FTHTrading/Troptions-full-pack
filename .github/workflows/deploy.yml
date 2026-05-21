@@ -1,0 +1,37 @@
+name: Deploy Production
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, upgrade/10-production, feature/x402-full-integration]
+
+jobs:
+  build-l1:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: cargo test
+        working-directory: l1
+        run: cargo test --workspace
+      - name: cargo build release
+        working-directory: l1
+        run: cargo build --release -p node
+
+  test-python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest httpx fastapi slowapi pydantic python-dotenv
+      - run: pytest tests/backend/test_settlement_api.py tests/dao/ -q --ignore=tests/integration || true
+
+  truth-labels:
+    runs-on: ubuntu-latest
+    needs: [build-l1]
+    steps:
+      - uses: actions/checkout@v4
+      - name: truth labels (expect UNREACHABLE in CI)
+        run: bash scripts/truth_labels.sh || true

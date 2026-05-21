@@ -13,7 +13,7 @@ from governance.engine import GovernanceEngine  # noqa: E402
 def test_create_proposal_calls_l1():
     with patch("governance.engine.TroptionsL1Client") as mock_cls:
         client = MagicMock()
-        client.call.return_value = {
+        client.submit_proposal_create.return_value = {
             "proposal_id": "ABCD1234",
             "status": "Active",
             "votes_for": 0,
@@ -24,11 +24,6 @@ def test_create_proposal_calls_l1():
         eng = GovernanceEngine("http://127.0.0.1:9944")
         result = eng.create_proposal("aa" * 32, "Test", "Desc")
         assert result["proposal_id"] == "ABCD1234"
-        client.call.assert_called_with(
-            "submit_proposal_create",
-            {
-                "proposer": "aa" * 32,
-                "title": "Test",
-                "description": "Desc",
-            },
+        client.submit_proposal_create.assert_called_once_with(
+            "aa" * 32, "Test", "Desc", None
         )

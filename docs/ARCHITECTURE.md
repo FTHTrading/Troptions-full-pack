@@ -19,8 +19,9 @@
 └────────────────────────────┬────────────────────────────────────┘
                              │ JSON-RPC
 ┌────────────────────────────▼────────────────────────────────────┐
-│  L1 NODE :9944 (Rust)                                            │
-│  soulbound · settlement · atomic-router · state · runtime       │
+│  L1 NODE :9944 (Rust) · metrics :9945                            │
+│  Sovereign Sequencer (single-node; multi-node + fraud proofs planned) │
+│  RocksDB · signed submit · on-chain DAO + treasury · multisig    │
 └────────────────────────────┬────────────────────────────────────┘
                              │
 ┌────────────────────────────▼────────────────────────────────────┐
@@ -47,5 +48,5 @@ See `dao/ARCHITECTURE.md`. Services: `dao-service:8093`, FTH `/dao/*`, L1 `gover
 ## Recommended build order
 
 1. ~~L1 bridge in fth-backend~~ — `/health/l1`, `/dao/state` wired.
-2. **Persistence** — Postgres migration in `scripts/migrations/001_dao_schema.sql`.
+2. **Persistence** — RocksDB on L1 (`L1_DATA_DIR`); SQLite audit/allocations cache only in dao-service.
 3. ~~WebSockets~~ — `backend/shared/ws_hub.py` on DAO service `/ws`.

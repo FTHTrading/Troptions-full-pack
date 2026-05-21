@@ -10,11 +10,14 @@ from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
 load_dotenv()
 
@@ -30,11 +33,17 @@ from ws_hub import dao_ws_hub  # noqa: E402
 from governance.engine import GovernanceEngine  # noqa: E402
 from registry.members import MemberRegistry  # noqa: E402
 from treasury.view import TreasuryView  # noqa: E402
+from settlement_api import SettlementSubmitBody, handle_settlement_submit  # noqa: E402
+from agent_client import startup_registration  # noqa: E402
+from telecom_router import router as telecom_router  # noqa: E402
+from x402_middleware import X402Middleware  # noqa: E402
 
 L1_RPC_URL = os.getenv("L1_RPC_URL", "http://127.0.0.1:9944")
 DAO_PORT = int(os.getenv("DAO_PORT", "8093"))
 
 STATIC_DIR = ROOT / "frontends" / "dao-dashboard"
+
+limiter = Limiter(key_func=get_remote_address)
 
 
 class ProposalBody(BaseModel):
@@ -42,42 +51,55 @@ class ProposalBody(BaseModel):
     title: str
     description: str
     action_uri: Optional[str] = None
+    signature: Optional[str] = None
 
 
 class VoteBody(BaseModel):
     proposal_id: str
     voter: str
     choice: str = "for"
+    signature: Optional[str] = None
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_dao_db()
+    app.state.agent_registration = await startup_registration()
+    await treasury.start_polling(10.0)
     asyncio.create_task(_poll_l1())
     yield
 
 
 async def _poll_l1():
-    engine = GovernanceEngine(L1_RPC_URL)
+    eng = GovernanceEngine(L1_RPC_URL)
     while True:
         try:
-            state = engine.state()
+            state = eng.state()
             await dao_ws_hub.broadcast("l1_state", state.get("l1", {}))
         except Exception:
             pass
         await asyncio.sleep(5)
 
 
-app = FastAPI(title="TROPTIONS DAO", version="1.0.0", lifespan=lifespan)
+app = FastAPI(title="TROPTIONS DAO", version="1.1.0", lifespan=lifespan)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
+app.add_middleware(
+    X402Middleware,
+    service_name="troptions-dao",
+    price_atp=os.getenv("DAO_PROPOSAL_FEE_ATP", "10000000000000000000"),
+    protected_prefixes=("/dao/proposals", "/settlement/"),
+)
+app.include_router(telecom_router)
 
 engine = GovernanceEngine(L1_RPC_URL)
-treasury = TreasuryView()
+treasury = TreasuryView(L1_RPC_URL)
 registry = MemberRegistry(L1_RPC_URL)
 
 
@@ -89,6 +111,7 @@ async def health():
         "service": "dao",
         "port": DAO_PORT,
         "l1_reachable": state.get("l1", {}).get("block_height") is not None,
+        "treasury_source": "l1_cache",
     }
 
 
@@ -106,11 +129,20 @@ async def dao_proposals():
     return engine.list_proposals()
 
 
+@app.get("/dao/proposals/{proposal_id}/votes")
+async def dao_proposal_votes(proposal_id: str):
+    return engine.get_votes(proposal_id)
+
+
 @app.post("/dao/proposals")
 async def create_proposal(body: ProposalBody):
     try:
         result = engine.create_proposal(
-            body.proposer, body.title, body.description, body.action_uri
+            body.proposer,
+            body.title,
+            body.description,
+            body.action_uri,
+            body.signature,
         )
         await dao_ws_hub.broadcast("proposal_created", result)
         return result
@@ -121,7 +153,9 @@ async def create_proposal(body: ProposalBody):
 @app.post("/dao/proposals/vote")
 async def vote_proposal(body: VoteBody):
     try:
-        result = engine.vote(body.proposal_id, body.voter, body.choice)
+        result = engine.vote(
+            body.proposal_id, body.voter, body.choice, body.signature
+        )
         await dao_ws_hub.broadcast("proposal_voted", result)
         return result
     except Exception as exc:
@@ -134,13 +168,26 @@ async def finalize_proposal(proposal_id: str):
 
 
 @app.post("/dao/proposals/{proposal_id}/execute")
-async def execute_proposal(proposal_id: str):
-    return engine.execute(proposal_id)
+async def execute_proposal(proposal_id: str, executor: Optional[str] = None, signature: Optional[str] = None):
+    return engine.execute(proposal_id, executor, signature)
 
 
 @app.get("/dao/treasury")
 async def dao_treasury():
     return treasury.overview()
+
+
+@app.post("/settlement/submit")
+@limiter.limit("10/minute")
+async def settlement_submit(
+    request: Request,
+    body: SettlementSubmitBody,
+    x_api_key: Optional[str] = Header(None, alias="X-API-Key"),
+    x_signature: Optional[str] = Header(None, alias="X-Signature"),
+):
+    return await handle_settlement_submit(
+        request, body, x_api_key=x_api_key, x_signature=x_signature
+    )
 
 
 @app.get("/dao/members")
@@ -186,4 +233,5 @@ if STATIC_DIR.exists():
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, host="0.0.0.0", port=DAO_PORT)

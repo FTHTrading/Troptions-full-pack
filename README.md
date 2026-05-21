@@ -39,10 +39,13 @@ pm2 start ecosystem.config.js
     FTH Academy + DONK (8091/8090)
             │
             ▼ JSON-RPC
-    TROPTIONS L1 Node (9944)
+    TROPTIONS L1 Node (9944) · metrics (9945)
+    Sovereign Sequencer — single-node today; BFT planned Q4 2026
+    ├─ RocksDB persistence
     ├─ soulbound (credentials)
     ├─ settlement (HTLC / locks)
-    └─ atomic-router (batch txs)
+    ├─ on-chain DAO + treasury
+    └─ atomic-router (signed batch txs)
             │
             ▼
  Polygon · XRPL · Solana
