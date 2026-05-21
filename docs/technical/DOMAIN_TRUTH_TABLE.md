@@ -1,7 +1,7 @@
 ---
 title: Domain truth table
 layout: default
-permalink: /DOMAIN_TRUTH_TABLE.html
+permalink: /technical/DOMAIN_TRUTH_TABLE.html
 ---
 
 # Domain truth table

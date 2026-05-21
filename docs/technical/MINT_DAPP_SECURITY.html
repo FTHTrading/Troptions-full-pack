@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TANTHEM mint DApp — security</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>TANTHEM mint DApp — security</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>TANTHEM mint DApp — security model</h1>
+<p><strong>Live DApp:</strong> <a href="https://fthtrading.github.io/Troptions-full-pack/mint.html">https://fthtrading.github.io/Troptions-full-pack/mint.html</a></p>
+<p><strong>Source:</strong> <code>sites/investor/mint.html</code> (copied to <code>docs/mint.html</code> for GitHub Pages)</p>
+<hr />
+<h2>Core rule: seed never leaves the browser</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Sent to server?</th>
+<th>Where it lives</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XRPL issuer seed (<code>s…</code>)</td>
+<td><strong>Never</strong></td>
+<td>Password field in browser only; used by <code>xrpl.js</code> to sign locally</td>
+</tr>
+<tr>
+<td>Unsigned mint batch</td>
+<td><strong>No</strong> (embedded in page)</td>
+<td>Static JSON in <code>mint.html</code></td>
+</tr>
+<tr>
+<td>Signed transactions</td>
+<td><strong>No</strong></td>
+<td>Submitted from browser directly to XRPL validators via WebSocket</td>
+</tr>
+</tbody>
+</table>
+<p>GitHub Pages serves <strong>static HTML only</strong>. There is no backend that can receive, log, or store a seed.</p>
+<hr />
+<h2>Operator checklist</h2>
+<ol>
+<li><strong>Prefer the browser mint DApp</strong> over <code>scripts/xrpl_mint_ready.py --sign</code> when possible — avoids seed in shell history or <code>.env</code> on shared machines.</li>
+<li><strong>Do not</strong> paste seeds into chat, docs, CI, or agent prompts.</li>
+<li><strong>Do not</strong> commit <code>.env</code>, signed tx dumps, or screenshots containing seeds.</li>
+<li>Use a <strong>dedicated issuer machine</strong> or air-gapped workflow for production mint.</li>
+<li><strong>Clear browser cache</strong> (and close the tab) after minting completes or if you abandon the session.</li>
+<li>Verify results on <a href="https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ">XRPSCAN issuer account</a> before external “collection live” claims.</li>
+</ol>
+<hr />
+<h2>What the DApp does</h2>
+<ol>
+<li>Loads <code>xrpl.js</code> from CDN (<code>unpkg.com</code>).</li>
+<li>Connects to XRPL mainnet via public WebSocket (<code>wss://xrplcluster.com</code> or equivalent in page).</li>
+<li>Reads 703 prepared <code>NFTokenMint</code> payloads from embedded <code>MINT_BATCH</code>.</li>
+<li>Signs each transaction <strong>in-browser</strong> with the seed you enter.</li>
+<li>Submits signed txs to the ledger.</li>
+</ol>
+<p>No step sends the seed over HTTP to FTH, GitHub, or Cursor.</p>
+<hr />
+<h2>Python script (fallback only)</h2>
+<p><code>scripts/xrpl_mint_ready.py</code> can sign with <code>XRPL_ISSUER_SEED</code> in local <code>.env</code>. Use only on a hardened host; <strong>never</strong> run via CI or remote agents. Prefer browser mint for seed safety.</p>
+<hr />
+<h2>Honest status labels</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IPFS audio + manifest</td>
+<td><strong>PROVEN</strong></td>
+</tr>
+<tr>
+<td>L1 collection hash anchor</td>
+<td><strong>PROVEN</strong> (<code>TROPTIONS_L1_ANCHOR_CONFIRMED.json</code>)</td>
+</tr>
+<tr>
+<td>Mint DApp deployed</td>
+<td><strong>LIVE</strong> (static; user must sign)</td>
+</tr>
+<tr>
+<td>703 NFTs on XRPL mainnet</td>
+<td><strong>PENDING</strong> until XRPSCAN shows issuer <code>NFToken</code> entries</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Related</h2>
+<ul>
+<li><a href="TANTHEM_NFT_COLLECTION.html">TANTHEM_NFT_COLLECTION.md</a></li>
+<li><a href="XRPL_NFT_MINT_RUNBOOK.html">XRPL_NFT_MINT_RUNBOOK.md</a></li>
+<li><a href="https://fthtrading.github.io/Troptions-full-pack/nft/">NFT gallery</a></li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/MINT_DAPP_SECURITY.html</p>
+</body>
+</html>

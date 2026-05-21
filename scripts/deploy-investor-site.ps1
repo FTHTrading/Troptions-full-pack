@@ -104,6 +104,9 @@ try {
 
         Set-Content -Path (Join-Path $Docs ".nojekyll") -Value "" -NoNewline
 
+        Write-Host "Syncing technical HTML artifacts for Pages..." -ForegroundColor Cyan
+        & (Join-Path $Root "scripts\sync-technical-html.ps1")
+
         # Standalone mint DApp + NFT gallery (not part of Next export)
         $mintSrc = Join-Path $Site "mint.html"
         if (Test-Path $mintSrc) {
@@ -114,7 +117,7 @@ try {
         if (-not (Test-Path $nftGallerySrc)) {
             $nftDir = Join-Path $Docs "nft"
             New-Item -ItemType Directory -Path $nftDir -Force | Out-Null
-            Write-Host "  WARN: docs/nft/index.html missing — commit gallery HTML before deploy" -ForegroundColor Yellow
+            Write-Host "  WARN: docs/nft/index.html missing - commit gallery HTML before deploy" -ForegroundColor Yellow
         }
         $anchorSrc = Join-Path $Root "TROPTIONS_L1_ANCHOR_CONFIRMED.json"
         if (Test-Path $anchorSrc) {

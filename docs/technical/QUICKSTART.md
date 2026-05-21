@@ -1,3 +1,9 @@
+---
+title: Quickstart
+layout: default
+permalink: /technical/QUICKSTART.html
+---
+
 # TROPTIONS — One-command quickstart
 
 Start the full sovereign stack (L1 → backends → DAO) in dependency order.

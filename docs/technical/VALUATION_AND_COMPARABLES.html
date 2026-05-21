@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valuation & comparables</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Valuation & comparables</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Valuation &amp; comparables — TROPTIONS / FTH / Unykorn</h1>
+<p><strong>Last updated:</strong> 2026-05-21<br />
+<strong>Maturity (honest):</strong> <strong>9.8 / 10</strong> — DAO + cross-chain proof on main; <strong>gap to 10:</strong> public TLS on <code>troptions.org</code> hostnames + XRPL production reserve top-up.<br />
+<strong>Labels:</strong> <strong>PROVEN</strong> (repo + explorer + live HTTP), <strong>PIPELINE</strong> (designed, not booked), <strong>PROJECTION</strong> (illustrative scenarios — not forecasts).</p>
+<hr />
+<h2>Executive framing</h2>
+<p>This document separates <strong>what is cash-real today</strong>, <strong>what it would cost to rebuild</strong>, <strong>what is in flight</strong>, and <strong>illustrative upside</strong> if pipeline segments close. It does <strong>not</strong> claim market capitalization from issued IOU supply (~874M on ledger is <strong>not</strong> equity value).</p>
+<p><strong>Trifecta narrative (in this integration monorepo):</strong> post-quantum <strong>identity</strong> (SNP) + agent <strong>commerce</strong> (x402) + on-chain <strong>governance</strong> (DAO ↔ L1). That combination is unusually complete <strong>here</strong> — not a claim that no other vendor offers pieces of each pillar globally.</p>
+<hr />
+<h2>Current cash value (PROVEN + PIPELINE)</h2>
+<table>
+<thead>
+<tr>
+<th>Revenue stream</th>
+<th>Label</th>
+<th>Model</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FTH Academy</td>
+<td><strong>PROVEN</strong></td>
+<td>$19 / $49 / $149 subscriptions</td>
+<td>Live at <a href="https://fthedu.unykorn.org">fthedu.unykorn.org</a></td>
+</tr>
+<tr>
+<td>Solana launcher SaaS</td>
+<td><strong>PROVEN</strong></td>
+<td>Per-launch &amp; mint fees</td>
+<td><a href="https://launch.unykorn.org">launch.unykorn.org</a></td>
+</tr>
+<tr>
+<td>x402 agent commerce</td>
+<td><strong>PROVEN</strong></td>
+<td>Metered API · ATP on Apostle (7332)</td>
+<td><strong>Health LIVE:</strong> <a href="https://x402.unykorn.org/health">x402.unykorn.org/health</a>. <strong>Twin demo PENDING:</strong> <a href="https://twin.unykorn.org">twin.unykorn.org</a> (522/timeouts)</td>
+</tr>
+<tr>
+<td>SNP namespaces</td>
+<td><strong>PROVEN</strong> (spec + roots)</td>
+<td>Scarcity / governance fees</td>
+<td><strong>955</strong> constitutional roots per SNP docs (not 1,000)</td>
+</tr>
+<tr>
+<td>Genesis / GSP</td>
+<td><strong>PROVEN</strong></td>
+<td>Treasury rails · coordination</td>
+<td><a href="https://drunks.app">drunks.app</a> · 9 Polygon contracts</td>
+</tr>
+<tr>
+<td>Cross-chain issuance utility</td>
+<td><strong>PROVEN</strong></td>
+<td>Trust lines · issuance services</td>
+<td>~874M <strong>issued</strong> on ledger — utility, not booked ARR</td>
+</tr>
+<tr>
+<td>DAO governance API</td>
+<td><strong>PROVEN</strong></td>
+<td>Platform / council tooling</td>
+<td><code>dao-service</code> + dashboard; public <code>dao.troptions.org</code> DNS <strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>TTN / WC26 sports</td>
+<td><strong>PIPELINE</strong></td>
+<td>$500 / $2.5K / $10K sponsorship tiers</td>
+<td>Not booked revenue until sponsors sign</td>
+</tr>
+<tr>
+<td>Exchange / desk</td>
+<td><strong>GATED</strong></td>
+<td>Spread / IOU desk fees</td>
+<td>Do <strong>not</strong> cite $175M desk as on-chain fact</td>
+</tr>
+<tr>
+<td>RWA / T-Lev-8</td>
+<td><strong>PIPELINE</strong></td>
+<td>LEV8 licensing gates</td>
+<td><a href="https://fthtrading.github.io/T-Lev-8-/">T-Lev-8 Pages</a></td>
+</tr>
+<tr>
+<td>Polygon community (KENNY / EVL)</td>
+<td><strong>PROVEN</strong></td>
+<td>Community token economics</td>
+<td>PolygonScan-verified addresses</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cash today (honest):</strong> early-scale <strong>PROVEN</strong> lines = Academy + launcher + x402 metered fees at operator-reported early volume. <strong>PIPELINE</strong> and <strong>PROJECTION</strong> rows are <strong>not</strong> in audited books.</p>
+<hr />
+<h2>Replacement cost (build-from-zero today)</h2>
+<table>
+<thead>
+<tr>
+<th>Band</th>
+<th>Scope</th>
+<th>Estimate</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conservative</td>
+<td>Monorepo L1 + backends + investor surfaces + SNP integration + partial satellites</td>
+<td><strong>$2.6M – $4.8M</strong> · 18–24 months</td>
+<td>Engineering replacement — not liquidation value</td>
+</tr>
+<tr>
+<td>With DAO + governance hardening</td>
+<td>Above + DAO service, signed RPC, council multisig, dashboard</td>
+<td><strong>$3.5M – $6.5M</strong> · 20–28 months</td>
+<td>Includes governance plane called out in audit</td>
+</tr>
+<tr>
+<td>Ongoing ops (ranges)</td>
+<td>Cloudflare + AWS x402 + PM2 operator host</td>
+<td>~$170–1,300 / mo</td>
+<td><strong>PROVEN</strong> cost bands, not audited GL</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sunk cost (PROVEN):</strong> ~6,937 audit-scope source files, 17 Rust workspace crates (L1 + x402 financial core), 8/8 PM2 services — years of multi-repo engineering already deployed.</p>
+<hr />
+<h2>Seven gaps (prioritized)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Gap</th>
+<th>Label</th>
+<th>Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Cloudflare origin health — <code>twin.unykorn.org</code>, <code>x402api.unykorn.org</code></td>
+<td><strong>PROVEN</strong> flaky</td>
+<td>Investor demos / agent twin UX</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Public TLS on <code>troptions.org</code> (<code>ai</code>, <code>ttn</code>, <code>dao</code>)</td>
+<td><strong>PIPELINE</strong></td>
+<td>Brand DNS vs unykorn.org-only story</td>
+</tr>
+<tr>
+<td>3</td>
+<td>L1 asset anchoring (anthem soulbound / IPFS manifest on L1)</td>
+<td><strong>PIPELINE</strong></td>
+<td>Prepared manifests; node restart + anchor</td>
+</tr>
+<tr>
+<td>4</td>
+<td>x402 production path alignment (monorepo sidecar ↔ UnyKorn-AWS)</td>
+<td><strong>PROVEN</strong> health / <strong>PENDING</strong> twin</td>
+<td>Do not conflate <code>:4020</code> sidecar with public mesh</td>
+</tr>
+<tr>
+<td>5</td>
+<td>IPFS publication for SNP + anthem CIDs in investor proof path</td>
+<td><strong>PIPELINE</strong></td>
+<td>Pinata CIDs exist; SNP cross-link in proof pack</td>
+</tr>
+<tr>
+<td>6</td>
+<td>XRPL production XRP reserves (issuer / AMM thin)</td>
+<td><strong>PROVEN</strong> thin</td>
+<td>Operational but needs top-up</td>
+</tr>
+<tr>
+<td>7</td>
+<td>T-Build Vitest suite green after <code>npm ci</code></td>
+<td><strong>PROVEN</strong> blocked</td>
+<td>Partner launch OS demos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Score impact:</strong> Fixing <strong>#1 + #2 + #6</strong> moves narrative from <strong>9.8 → 10/10</strong> on engineering maturity (investor site copy).</p>
+<hr />
+<h2>30-day rocket fuel (weeks)</h2>
+<table>
+<thead>
+<tr>
+<th>Week</th>
+<th>Focus</th>
+<th>Outcomes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td>Edge reliability</td>
+<td>Stabilize Cloudflare origins; document probe scripts; TLS templates → production certs on chosen hostnames</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Commerce + treasury</td>
+<td>x402 twin green; reconcile UnyKorn-AWS vs monorepo sidecar docs; XRPL reserve top-up + published reserve policy</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>Identity + proof</td>
+<td>SNP ↔ IPFS cross-links in counterparty pack; L1 anchor anthem credential; refresh <code>ON_CHAIN_PROOF</code></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Partner readiness</td>
+<td>T-Build tests green; label <strong>booked vs PIPELINE</strong> revenue in CRM; sponsor + issuer outreach</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>12–24 month valuation scenarios (PROJECTION — illustrative only)</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Assumptions (all PROJECTION)</th>
+<th>Illustrative enterprise value band</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Base</strong></td>
+<td>Academy + launcher scale; x402 modest agent volume; no large desk deals</td>
+<td>Replacement cost floor → <strong>$3M – $5M</strong> strategic acqui-hire / license</td>
+</tr>
+<tr>
+<td><strong>Growth</strong></td>
+<td>2–3 issuer programs + WC26 sponsor tier closes + SNP integrator fees</td>
+<td><strong>$8M – $15M</strong> — still not public-market cap</td>
+</tr>
+<tr>
+<td><strong>Strategic</strong></td>
+<td>RWA gates live + x402 standard adoption in agent mesh + DAO treasury flywheel</td>
+<td><strong>$20M – $40M</strong> — requires <strong>PROJECTION</strong> revenue proof, not ledger IOU supply</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Disclaimer:</strong> These bands are <strong>illustrative PROJECTIONS</strong> for strategic conversations. They are <strong>not</strong> audited financials, registered securities offerings, or guarantees. Token <strong>issued supply ≠ market cap</strong>.</p>
+<hr />
+<h2>Competitive landscape (honest differentiation)</h2>
+<h3>Pillar A — SNP vs ENS / Unstoppable / Handshake</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>ENS</th>
+<th>Unstoppable</th>
+<th>Handshake</th>
+<th><strong>SNP (Unykorn)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trust model</td>
+<td>Ethereum L1 registry</td>
+<td>Custodial/Web2 hybrid</td>
+<td>Handshake auction chain</td>
+<td><strong>Post-quantum roots (Dilithium5), stateless verify</strong></td>
+</tr>
+<tr>
+<td>Supply</td>
+<td>Millions of .eth</td>
+<td>Branded domains</td>
+<td>HNS coins</td>
+<td><strong>955</strong> constitutional roots (fixed scarcity narrative)</td>
+</tr>
+<tr>
+<td>Chain scope</td>
+<td>EVM-primary</td>
+<td>Multi-chain marketing</td>
+<td>HNS only</td>
+<td><strong>Constitutional layer</strong> for L1 + partner OS in <strong>this monorepo</strong></td>
+</tr>
+<tr>
+<td>Maturity</td>
+<td>Production</td>
+<td>Production</td>
+<td>Niche</td>
+<td><strong>PROVEN</strong> spec + integration paths; not mass retail DNS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Honest take:</strong> ENS wins EVM ecosystem distribution. SNP wins <strong>PQ-ready namespace constitution</strong> tied to TROPTIONS L1 and FTH partner OS — different buyer.</p>
+<h3>Pillar B — x402 vs Coinbase / BNB / Rootstock</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Coinbase x402 (ecosystem)</th>
+<th>BNB pay rails</th>
+<th>Rootstock</th>
+<th><strong>Unykorn x402</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Settlement</td>
+<td>CEX-linked / partner stack</td>
+<td>BSC-native</td>
+<td>Bitcoin L2</td>
+<td><strong>Apostle Chain ATP (7332)</strong> + HTTP 402</td>
+</tr>
+<tr>
+<td>Status</td>
+<td>Major brand pilots</td>
+<td>Exchange-native</td>
+<td>BTC DeFi</td>
+<td><strong>PROVEN</strong> <a href="https://x402.unykorn.org/health">health</a>; <strong>twin PENDING</strong></td>
+</tr>
+<tr>
+<td>Agent model</td>
+<td>Emerging</td>
+<td>Wallet-centric</td>
+<td>Contract-centric</td>
+<td><strong>Metered AI-to-AI</strong> (not API keys)</td>
+</tr>
+<tr>
+<td>Repo</td>
+<td>Closed / partner</td>
+<td>Binance stack</td>
+<td>RSK docs</td>
+<td><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a> public</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Honest take:</strong> Coinbase wins distribution and compliance brand. Unykorn wins <strong>sovereign agent meter + ATP</strong> integrated with FTH stack — niche, real, not “beats Coinbase globally.”</p>
+<h3>Pillar C — Unykorn L1 vs ICP / Fleek</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>ICP</th>
+<th>Fleek</th>
+<th><strong>TROPTIONS L1 (monorepo)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Architecture</td>
+<td>Internet Computer subnets</td>
+<td>Web3 hosting / IPFS edge</td>
+<td><strong>Rust sovereign sequencer, RocksDB, SNP hooks</strong></td>
+</tr>
+<tr>
+<td>Maturity</td>
+<td>Production network</td>
+<td>Production hosting</td>
+<td><strong>PROVEN</strong> code + local PM2; single-node (not BFT fleet)</td>
+</tr>
+<tr>
+<td>Differentiation</td>
+<td>Chain-as-cloud</td>
+<td>Deploy UX</td>
+<td><strong>Treasury multisig + DAO reads + issuance utility</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Honest take:</strong> ICP/Fleek win hosted scale. L1 wins <strong>integrated treasury + governance + namespace migration</strong> for TROPTIONS operator — not general-purpose cloud replacement.</p>
+<h3>Pillar D — DAO vs Aragon / Snapshot / Tally / DAOstack</h3>
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Aragon</th>
+<th>Snapshot</th>
+<th>Tally</th>
+<th>DAOstack</th>
+<th><strong>FTH DAO (monorepo)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Voting</td>
+<td>On-chain orgs</td>
+<td>Off-chain sigs</td>
+<td>Governor analytics</td>
+<td>Archetypes</td>
+<td><strong>Council + L1-signed RPC</strong></td>
+</tr>
+<tr>
+<td>Treasury</td>
+<td>Vault plugins</td>
+<td>External</td>
+<td>Multi-chain UI</td>
+<td>Stacks</td>
+<td><strong>L1 treasury reads, multisig debits</strong></td>
+</tr>
+<tr>
+<td>Maturity</td>
+<td>Production</td>
+<td>Production</td>
+<td>Production</td>
+<td>Legacy</td>
+<td><strong>PROVEN</strong> service; public DNS <strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>Integration</td>
+<td>Generic</td>
+<td>Generic</td>
+<td>Generic</td>
+<td>Generic</td>
+<td><strong>Native to TROPTIONS L1 + SNP claims</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Honest take:</strong> Aragon/Snapshot win ecosystem. FTH DAO wins <strong>tight coupling to L1 issuance and operator council</strong> in <strong>this repo</strong> — contributes to <strong>9.8/10</strong> score.</p>
+<hr />
+<h2>Full stack triad (identity · commerce · governance)</h2>
+<pre><code class="language-mermaid">flowchart LR
+  SNP[SNP identity roots] --&gt; L1[TROPTIONS L1]
+  X402[x402 commerce mesh] --&gt; L1
+  DAO[DAO governance] --&gt; L1
+  L1 --&gt; EDU[Academy]
+  L1 --&gt; LAUNCH[Launcher]
+  L1 --&gt; HUB[Institutional hub]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Leg</th>
+<th>What we ship</th>
+<th>Honest limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity</strong></td>
+<td>SNP 955 roots, Dilithium5, namespace migration scripts</td>
+<td>Not a retail ENS replacement</td>
+</tr>
+<tr>
+<td><strong>Commerce</strong></td>
+<td>x402 health LIVE, ATP settlement, Academy/launcher revenue</td>
+<td>Twin origin still PENDING</td>
+</tr>
+<tr>
+<td><strong>Governance</strong></td>
+<td>DAO API, dashboard, multisig treasury rules</td>
+<td>Single-node sequencer; BFT later</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Qualifier:</strong> This is the most complete <strong>integrated</strong> sovereign stack <strong>in Troptions-full-pack and its named satellites</strong> — not a claim that no other project combines all three elsewhere.</p>
+<hr />
+<h2>FTHTrading projects / repos</h2>
+<table>
+<thead>
+<tr>
+<th>Repo</th>
+<th>Role</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/FTHTrading/Troptions-full-pack">Troptions-full-pack</a></td>
+<td>Monorepo: L1, backends, investor site</td>
+<td><strong>Pages LIVE</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/sovereign-namespace-protocol">sovereign-namespace-protocol</a></td>
+<td>SNP constitutional layer (955 roots)</td>
+<td><strong>Public spec</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a></td>
+<td>Production x402 mesh</td>
+<td><strong>Health LIVE; twin PENDING</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/Troptions">Troptions</a></td>
+<td>Private Exchange OS source</td>
+<td><strong>Vercel LIVE</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/TExchange">TExchange</a></td>
+<td>Exchange variant lineage</td>
+<td><strong>Public</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/solana-launcher">solana-launcher</a></td>
+<td>Launch SaaS</td>
+<td><strong>LIVE</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/genesis-world">genesis-world</a></td>
+<td>GSP parallel stack</td>
+<td><strong>drunks.app LIVE</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/T-Lev-8-">T-Lev-8-</a></td>
+<td>RWA deal room</td>
+<td><strong>Pages LIVE</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/T-Build">T-Build</a></td>
+<td>TPLOS partner launch OS</td>
+<td><strong>Local; tests gap</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/aurora-site">aurora-site</a></td>
+<td>Aurora RWA portal</td>
+<td><strong>Pages LIVE; custom DNS ERR</strong></td>
+</tr>
+<tr>
+<td><a href="https://github.com/FTHTrading/impact-site">impact-site</a></td>
+<td>Impact / ESG</td>
+<td><strong>DNS/Pages fix needed</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Full map: <a href="ECOSYSTEM_MAP.html"><code>ECOSYSTEM_MAP.md</code></a>.</p>
+<hr />
+<h2>Related diligence</h2>
+<table>
+<thead>
+<tr>
+<th>Doc</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="FINAL_ECOSYSTEM_AUDIT.html"><code>FINAL_ECOSYSTEM_AUDIT.md</code></a></td>
+<td><strong>9.8/10</strong> scorecard</td>
+</tr>
+<tr>
+<td><a href="ON_CHAIN_PROOF.html"><code>ON_CHAIN_PROOF.md</code></a></td>
+<td>Explorer tables</td>
+</tr>
+<tr>
+<td><a href="counterparty/PROOF_FOR_COUNTERPARTIES.html"><code>counterparty/PROOF_FOR_COUNTERPARTIES.md</code></a></td>
+<td>Institutional pack</td>
+</tr>
+<tr>
+<td><a href="https://fthtrading.github.io/Troptions-full-pack/#valuation">Investor site — #valuation</a></td>
+<td>Interactive comparables</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Projections disclaimer:</em> Any “if X clients” revenue or valuation band in this file is <strong>PROJECTION</strong> for strategic planning only — not an offer, forecast, or audited financial statement.</p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/VALUATION_AND_COMPARABLES.html</p>
+</body>
+</html>

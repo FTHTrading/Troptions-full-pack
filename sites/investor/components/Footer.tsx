@@ -1,5 +1,23 @@
 import Link from "next/link";
-import { DOCS_URL, REPO_URL } from "@/lib/constants";
+import {
+  DOCS_URL,
+  PAGES_URL,
+  REPO_URL,
+} from "@/lib/constants";
+
+const onPages = Boolean(process.env.NEXT_PUBLIC_BASE_PATH);
+const archUrl = onPages
+  ? `${PAGES_URL}/technical/ARCHITECTURE.html`
+  : `${DOCS_URL}/ARCHITECTURE.md`;
+const quickstartUrl = onPages
+  ? `${PAGES_URL}/technical/QUICKSTART.html`
+  : `${DOCS_URL}/QUICKSTART.md`;
+const domainTruthUrl = onPages
+  ? `${PAGES_URL}/technical/DOMAIN_TRUTH_TABLE.html`
+  : `${DOCS_URL}/DOMAIN_TRUTH_TABLE.md`;
+const technicalHubUrl = onPages
+  ? `${PAGES_URL}/technical/index.html`
+  : `${DOCS_URL}/`;
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -29,7 +47,17 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`${DOCS_URL}/ARCHITECTURE.md`}
+                  href={technicalHubUrl}
+                  className="hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Technical index
+                </a>
+              </li>
+              <li>
+                <a
+                  href={archUrl}
                   className="hover:text-white"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -39,7 +67,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`${DOCS_URL}/QUICKSTART.md`}
+                  href={quickstartUrl}
                   className="hover:text-white"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -49,7 +77,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={`${DOCS_URL}/DOMAIN_TRUTH_TABLE.md`}
+                  href={domainTruthUrl}
                   className="hover:text-white"
                   target="_blank"
                   rel="noopener noreferrer"

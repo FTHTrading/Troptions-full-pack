@@ -32,7 +32,7 @@ export function ComparativeAnalysis() {
             rel="noopener noreferrer"
             className="text-sm font-medium text-[var(--color-gold-light)] hover:underline"
           >
-            Full VALUATION_AND_COMPARABLES.md →
+            Full valuation doc →
           </a>
         </div>
 

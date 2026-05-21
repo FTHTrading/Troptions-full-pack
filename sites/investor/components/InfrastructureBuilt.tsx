@@ -15,7 +15,7 @@ export function InfrastructureBuilt() {
         rel="noopener noreferrer"
         className="mb-6 inline-block text-sm text-[var(--color-gold-light)] hover:underline"
       >
-        Full ECOSYSTEM_MAP.md →
+        Full ecosystem map →
       </a>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {FTH_ECOSYSTEM_CARDS.map((card) => (

@@ -1,0 +1,31 @@
+{
+  "baseUrl": "https://fthtrading.github.io/Troptions-full-pack",
+  "paths": [
+    "/",
+    "/index.html",
+    "/mint.html",
+    "/nft/",
+    "/nft/index.html",
+    "/anthem/",
+    "/technical/index.html",
+    "/technical/VALUATION_AND_COMPARABLES.html",
+    "/technical/ON_CHAIN_PROOF.html",
+    "/technical/ECOSYSTEM_MAP.html",
+    "/technical/XRPL_STELLAR_VERIFICATION.html",
+    "/technical/VERIFICATION_STATUS.html",
+    "/technical/FINAL_ECOSYSTEM_AUDIT.html",
+    "/technical/GENESIS_POLYGON_CONTRACTS.html",
+    "/technical/TANTHEM_NFT_COLLECTION.html",
+    "/technical/MINT_DAPP_SECURITY.html",
+    "/technical/counterparty/PROOF_FOR_COUNTERPARTIES.html",
+    "/technical/ARCHITECTURE.html",
+    "/technical/QUICKSTART.html",
+    "/technical/DOMAIN_TRUTH_TABLE.html",
+    "/downloads/investor-executive-summary.html",
+    "/downloads/valuation-and-comparables.html",
+    "/downloads/on-chain-proof-sheet.html",
+    "/downloads/infrastructure-atlas.html",
+    "/downloads/opportunity-and-roadmap.html",
+    "/sitemap.html"
+  ]
+}

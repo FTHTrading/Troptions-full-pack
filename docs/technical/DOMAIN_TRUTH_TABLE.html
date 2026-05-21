@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Domain truth table</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Domain truth table</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Domain truth table</h1>
+<p><strong>Internal reference + public honesty.</strong> Last verified: <strong>2026-05-21</strong> (HTTP HEAD from operator network).</p>
+<p><strong>Operator note (Bryan):</strong> <code>ai.troptions.org</code> and <code>ttn.troptions.org</code> are <strong>not</strong> currently run on production DNS. Public surfaces today use the <strong>unykorn.org</strong> family and local dev ports until troptions.org subdomains are pointed.</p>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>Intended service</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://troptions.unykorn.org/troptions">troptions.unykorn.org</a></td>
+<td>Core brand / Exchange OS institutional hub</td>
+<td><strong>LIVE</strong> (HTTP 200)</td>
+<td>Primary investor-facing property</td>
+</tr>
+<tr>
+<td><a href="https://troptionslive.unykorn.org/sports">troptionslive.unykorn.org/sports</a></td>
+<td>TTN sports / WC26 surfaces</td>
+<td><strong>LIVE</strong> (HTTP 200)</td>
+<td>Broadcast + sponsorship pipeline</td>
+</tr>
+<tr>
+<td><a href="https://launch.unykorn.org/">launch.unykorn.org</a></td>
+<td>Solana token launcher SaaS</td>
+<td><strong>LIVE</strong> (HTTP 200)</td>
+<td>Mint registry, campaigns</td>
+</tr>
+<tr>
+<td><a href="https://fthedu.unykorn.org/">fthedu.unykorn.org</a></td>
+<td>FTH Academy public edu</td>
+<td><strong>LIVE</strong> (HTTP 200)</td>
+<td>Stripe tier patterns in revenue docs</td>
+</tr>
+<tr>
+<td><a href="https://ai.troptions.org/">ai.troptions.org</a></td>
+<td>DONK AI tutor (nginx → donk-tutor)</td>
+<td><strong>NOT DEPLOYED</strong></td>
+<td>DNS does not resolve; template only in <code>infrastructure/nginx/</code></td>
+</tr>
+<tr>
+<td><a href="https://ttn.troptions.org/">ttn.troptions.org</a></td>
+<td>TTN launcher API/UI edge</td>
+<td><strong>NOT DEPLOYED</strong></td>
+<td>DNS does not resolve; live sports on unykorn</td>
+</tr>
+<tr>
+<td><a href="https://dao.troptions.org/">dao.troptions.org</a></td>
+<td>DAO dashboard / governance API edge</td>
+<td><strong>NOT DEPLOYED</strong></td>
+<td>DNS does not resolve; run dao-service locally or post-DNS</td>
+</tr>
+<tr>
+<td>troptions.io / troptions.org apex</td>
+<td>Legacy → canonical unykorn paths</td>
+<td><strong>Future DNS</strong></td>
+<td>Documented redirects in Exchange OS; not broken promises</td>
+</tr>
+<tr>
+<td><code>127.0.0.1:8090</code></td>
+<td>DONK tutor (dev)</td>
+<td><strong>Local dev</strong></td>
+<td>Live AI Q&amp;A when quickstart running</td>
+</tr>
+<tr>
+<td><code>127.0.0.1:8091</code></td>
+<td>FTH Academy backend</td>
+<td><strong>Local dev</strong></td>
+<td>Mirrors fthedu when deployed</td>
+</tr>
+<tr>
+<td><code>127.0.0.1:8092</code></td>
+<td>TTN launcher backend</td>
+<td><strong>Local dev</strong></td>
+<td>Powers troptionslive when wired</td>
+</tr>
+<tr>
+<td><code>127.0.0.1:8093</code></td>
+<td>DAO service</td>
+<td><strong>Local dev</strong></td>
+<td>Governance API before public DNS</td>
+</tr>
+<tr>
+<td><code>127.0.0.1:9944</code></td>
+<td>TROPTIONS L1 RPC</td>
+<td><strong>Local dev</strong></td>
+<td>Sovereign sequencer</td>
+</tr>
+</tbody>
+</table>
+<h2>How to re-verify</h2>
+<pre><code class="language-powershell">Invoke-WebRequest -Uri &quot;https://troptions.unykorn.org/troptions&quot; -Method Head -UseBasicParsing
+</code></pre>
+<p>Re-run before investor decks or press. Update this table and <a href="{{ '/proof/truth-labels.html' | relative_url }}">truth labels</a> when status changes.</p>
+<h2>nginx templates</h2>
+<p>Files under <code>infrastructure/nginx/sites/</code> are <strong>configuration templates</strong> — not live edge until DNS A/AAAA records point at the host running Docker/nginx and TLS (certbot) is complete.</p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/DOMAIN_TRUTH_TABLE.html</p>
+</body>
+</html>

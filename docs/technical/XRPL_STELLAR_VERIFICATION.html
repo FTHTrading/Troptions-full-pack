@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XRPL & Stellar verification</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>XRPL & Stellar verification</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>XRPL &amp; Stellar verification (user-verified)</h1>
+<p><strong>Date:</strong> 2026-05-21<br />
+<strong>Method:</strong> XRPL WebSocket (<code>wss://xrplcluster.com</code>) + Stellar Horizon (<code>https://horizon.stellar.org</code>)<br />
+<strong>Overall stack score:</strong> <strong>9.5 / 10</strong> — only remaining gap: intermittent Cloudflare origin health on some web endpoints (<code>twin</code>, <code>x402api</code>).</p>
+<p><strong>Language discipline:</strong> Figures below are <strong>issued supply on ledger</strong> (IOU issuance / trust-line balances), <strong>not</strong> market cap, trade-desk PnL, or verified secondary-market value. Do <strong>not</strong> cite Exchange OS <strong>$175M desk</strong> notional as an on-chain fact.</p>
+<hr />
+<h2>XRPL production wallets</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Address</th>
+<th>Explorer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Production issuer</strong></td>
+<td><code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code></td>
+<td><a href="https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ">XRPScan</a> · <a href="https://bithomp.com/explorer/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ">Bithomp</a></td>
+</tr>
+<tr>
+<td><strong>Distribution treasury</strong></td>
+<td><code>rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt</code></td>
+<td><a href="https://xrpscan.com/account/rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt">XRPScan</a> · <a href="https://bithomp.com/explorer/rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt">Bithomp</a></td>
+</tr>
+<tr>
+<td><strong>AMM pool</strong></td>
+<td><code>rBU6exSQHkrTog6n1F5RX8gzcUrXoniGcp</code></td>
+<td><a href="https://xrpscan.com/account/rBU6exSQHkrTog6n1F5RX8gzcUrXoniGcp">XRPScan</a></td>
+</tr>
+<tr>
+<td><strong>Ops spend</strong></td>
+<td><code>rfbZzM6SGZHbfxrg85vyeKSEMMQCfNXTNw</code></td>
+<td><a href="https://xrpscan.com/account/rfbZzM6SGZHbfxrg85vyeKSEMMQCfNXTNw">XRPScan</a></td>
+</tr>
+<tr>
+<td><strong>Bootstrap (deprecated)</strong></td>
+<td><code>rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3</code></td>
+<td><a href="https://xrpscan.com/account/rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3">XRPScan</a> — legacy genesis; <strong>not</strong> production issuer</td>
+</tr>
+<tr>
+<td><strong>Legacy gateway (docs only)</strong></td>
+<td><code>rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3</code></td>
+<td><a href="https://bithomp.com/explorer/rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3">Bithomp</a> — README/.env; superseded by production issuer above</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Account status (2026-05-21):</strong> All six accounts returned live ledger data. Production XRP reserves are <strong>thin but operational</strong> (~20.5 XRP across production wallets; issuer/AMM near minimum reserve).</p>
+<hr />
+<h2>XRPL issued supply (issuer <code>rJLMST…</code>)</h2>
+<p>Issued to distribution <code>rNX4fa…</code> unless noted. Amounts from live <code>account_lines</code> / issuance queries.</p>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Issued (XRPL)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TROPTIONS</td>
+<td>~100,000,000</td>
+<td>~100M on XRPL leg of ~200M cross-chain</td>
+</tr>
+<tr>
+<td>USDC</td>
+<td>174,000,000</td>
+<td>XRPL leg of <strong>274M USDC</strong> cross-chain total</td>
+</tr>
+<tr>
+<td>USDT</td>
+<td>100,000,000</td>
+<td></td>
+</tr>
+<tr>
+<td>EURC</td>
+<td>50,000,000</td>
+<td>XRPL leg of <strong>100M EURC</strong> cross-chain</td>
+</tr>
+<tr>
+<td>DAI</td>
+<td>50,000,000</td>
+<td>XRPL leg of <strong>100M DAI</strong> cross-chain</td>
+</tr>
+<tr>
+<td>TROPTIONS (AMM)</td>
+<td>~1,000</td>
+<td>Pool <code>rBU6ex…</code> — <strong>AMM liquidity live</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Stellar production wallets</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Address</th>
+<th>Explorer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Issuer</strong></td>
+<td><code>GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4</code></td>
+<td><a href="https://stellar.expert/explorer/public/account/GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4">Stellar Expert</a></td>
+</tr>
+<tr>
+<td><strong>Distribution</strong></td>
+<td><code>GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC</code></td>
+<td><a href="https://stellar.expert/explorer/public/account/GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC">Stellar Expert</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Distribution holdings (2026-05-21):</strong> TROPTIONS ~99.99M, USDC 100M, USDT 100M, EURC 50M, DAI 50M — mirror of XRPL issuance strategy.</p>
+<hr />
+<h2>Cross-chain issued supply totals (PROVEN)</h2>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>XRPL</th>
+<th>Stellar</th>
+<th><strong>Total issued on ledger</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TROPTIONS</strong></td>
+<td>~100M</td>
+<td>~100M</td>
+<td><strong>~200M</strong></td>
+</tr>
+<tr>
+<td><strong>USDC</strong></td>
+<td>174M</td>
+<td>100M</td>
+<td><strong>274M</strong></td>
+</tr>
+<tr>
+<td><strong>USDT</strong></td>
+<td>100M</td>
+<td>100M</td>
+<td><strong>200M</strong></td>
+</tr>
+<tr>
+<td><strong>EURC</strong></td>
+<td>50M</td>
+<td>50M</td>
+<td><strong>100M</strong></td>
+</tr>
+<tr>
+<td><strong>DAI</strong></td>
+<td>50M</td>
+<td>50M</td>
+<td><strong>100M</strong></td>
+</tr>
+<tr>
+<td><strong>Approx. total</strong></td>
+<td></td>
+<td></td>
+<td><strong>~874M</strong> issued units (1:1 IOU labels, not USD market cap)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Honest caveats</h2>
+<ol>
+<li><strong>Bootstrap deprecated</strong> — <code>rPF2M1Qjd…</code> and README gateway <code>rPF2M1QjRj…</code> are legacy; production issuance flows through <code>rJLMST…</code> / <code>rNX4fa…</code>.</li>
+<li><strong>Reserve margin</strong> — Production XRP balances are low; ops wallet carries most spend buffer.</li>
+<li><strong>Desk narrative</strong> — Any Exchange OS desk notional is <strong>operator attestation</strong> until matched to ledger exports; use <strong>274M USDC issued</strong> language, not “$175M verified desk.”</li>
+<li><strong>Registry source</strong> — <code>T-Lev-8-/OPERATIONS/WALLET_ADDRESS_REGISTRY.md</code>, <code>frontends/exchange-os/src/content/troptions/troptionsWalletHubRegistry.ts</code></li>
+</ol>
+<hr />
+<h2>Related</h2>
+<ul>
+<li><a href="ON_CHAIN_PROOF.html"><code>ON_CHAIN_PROOF.md</code></a> — Polygon + unified proof registry  </li>
+<li><a href="FINAL_ECOSYSTEM_AUDIT.html"><code>FINAL_ECOSYSTEM_AUDIT.md</code></a> — <strong>9.5/10</strong> scorecard  </li>
+<li><a href="counterparty/PROOF_FOR_COUNTERPARTIES.html"><code>counterparty/PROOF_FOR_COUNTERPARTIES.md</code></a> — institutional counterparty pack</li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/XRPL_STELLAR_VERIFICATION.html</p>
+</body>
+</html>

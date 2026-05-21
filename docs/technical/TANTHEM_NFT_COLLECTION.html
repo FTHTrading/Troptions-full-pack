@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TANTHEM — XRPL NFT collection</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>TANTHEM — XRPL NFT collection</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>TANTHEM — TROPTIONS Anthem NFT collection (XRPL)</h1>
+<p><strong>Status labels:</strong> IPFS audio <strong>PROVEN</strong> (pinned CIDs). L1 collection hash <strong>PROVEN</strong> (<code>TROPTIONS_L1_ANCHOR_CONFIRMED.json</code>). Mint DApp <strong>LIVE</strong> at <a href="https://fthtrading.github.io/Troptions-full-pack/mint.html">mint.html</a> — client-side signing only. XRPL ledger mint <strong>PENDING</strong> until the operator completes 703 txs in the browser (or local script); not live on ledger until XRPSCAN shows issuer NFTs.</p>
+<p><strong>Not legal advice.</strong> Supply figures and benefits are product design in-repo; on-chain state is authoritative after mint.</p>
+<hr />
+<h2>Collection summary</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Symbol</strong></td>
+<td><code>TANTHEM</code></td>
+</tr>
+<tr>
+<td><strong>Collection name</strong></td>
+<td>TROPTIONS Anthem — Mainframe Explode</td>
+</tr>
+<tr>
+<td><strong>Issuer</strong></td>
+<td><a href="https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"><code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code></a></td>
+</tr>
+<tr>
+<td><strong>Total supply</strong></td>
+<td>703 NFTs (6 tiers)</td>
+</tr>
+<tr>
+<td><strong>Transfer fee</strong></td>
+<td>2.5% (2500 basis points on XRPL <code>TransferFee</code>)</td>
+</tr>
+<tr>
+<td><strong>IPFS manifest</strong></td>
+<td><a href="https://ipfs.io/ipfs/Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7"><code>Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7</code></a></td>
+</tr>
+<tr>
+<td><strong>Mint batch file</strong></td>
+<td><code>XRPL_MINT_BATCH.json</code> (703 unsigned <code>NFTokenMint</code> transactions)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Rarity tiers</h2>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Supply</th>
+<th>Track / edition</th>
+<th>IPFS CID (animation)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LEGENDARY</strong></td>
+<td>5</td>
+<td>Official TROPTIONS song (<code>troptions-theme-primary.mp3</code>)</td>
+<td><a href="https://ipfs.io/ipfs/QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb"><code>QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb</code></a></td>
+</tr>
+<tr>
+<td><strong>EPIC</strong></td>
+<td>22</td>
+<td>22 Years narrative (<code>troptions-anthem-22-years.mp3</code>)</td>
+<td><a href="https://ipfs.io/ipfs/Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV"><code>Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV</code></a></td>
+</tr>
+<tr>
+<td><strong>RARE</strong></td>
+<td>50</td>
+<td>Latest master cut (<code>troptions-anthem-mainframe-152254.mp3</code>)</td>
+<td><a href="https://ipfs.io/ipfs/QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def"><code>QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def</code></a></td>
+</tr>
+<tr>
+<td><strong>UNCOMMON</strong></td>
+<td>100</td>
+<td>Alternate studio mix (<code>troptions-theme-alt.mp3</code>)</td>
+<td><a href="https://ipfs.io/ipfs/QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A"><code>QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A</code></a></td>
+</tr>
+<tr>
+<td><strong>COMMON</strong></td>
+<td>500</td>
+<td>Session edit (<code>troptions-anthem-151853.mp3</code>)</td>
+<td><a href="https://ipfs.io/ipfs/QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj"><code>QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj</code></a></td>
+</tr>
+<tr>
+<td><strong>SPECIAL</strong></td>
+<td>26</td>
+<td>ElevenLabs Charlie AI voice (<code>troptions-anthem-elevenlabs-charlie.mp3</code>)</td>
+<td><a href="https://ipfs.io/ipfs/QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV"><code>QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV</code></a></td>
+</tr>
+</tbody>
+</table>
+<p>Canonical machine-readable tier table: <code>TROPTIONS_NFT_RARITY_MANIFEST.json</code> (repo root).</p>
+<hr />
+<h2>Mint status (honest)</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Status</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Audio pinned to IPFS</td>
+<td><strong>PROVEN</strong></td>
+<td>Six tracks + manifest; see <a href="assets/audio/README.html"><code>assets/audio/README.md</code></a></td>
+</tr>
+<tr>
+<td>Unsigned mint batch built</td>
+<td><strong>PREPARED</strong></td>
+<td><code>XRPL_MINT_BATCH.json</code> — no <code>TxnSignature</code> in repo</td>
+</tr>
+<tr>
+<td>L1 hash anchor</td>
+<td><strong>PROVEN</strong></td>
+<td>Collection hash <code>7e0631a1b3e2973a2b89cf26f954ba83b91e4674a0fda0d38000d10dff8b1aa8</code> — <code>TROPTIONS_L1_ANCHOR_CONFIRMED.json</code></td>
+</tr>
+<tr>
+<td>Browser mint DApp (GitHub Pages)</td>
+<td><strong>LIVE</strong></td>
+<td><a href="https://fthtrading.github.io/Troptions-full-pack/mint.html"><code>/mint.html</code></a> — seed never sent to server; see <a href="MINT_DAPP_SECURITY.html"><code>MINT_DAPP_SECURITY.md</code></a></td>
+</tr>
+<tr>
+<td>NFT gallery (investor)</td>
+<td><strong>LIVE</strong></td>
+<td><a href="https://fthtrading.github.io/Troptions-full-pack/nft/"><code>/nft/</code></a></td>
+</tr>
+<tr>
+<td>Signed + submitted to XRPL mainnet</td>
+<td><strong>PENDING</strong></td>
+<td>Operator-only; <strong>never</strong> commit seeds or signed secrets</td>
+</tr>
+<tr>
+<td>Operator runbook</td>
+<td><strong>READY</strong></td>
+<td><a href="XRPL_NFT_MINT_RUNBOOK.html"><code>XRPL_NFT_MINT_RUNBOOK.md</code></a> — Bryan / custody holder</td>
+</tr>
+</tbody>
+</table>
+<h3>Operator mint (preferred: browser DApp)</h3>
+<ol>
+<li>Open <strong><a href="https://fthtrading.github.io/Troptions-full-pack/mint.html">mint DApp</a></strong> (or local <code>sites/investor/mint.html</code>).</li>
+<li>Enter issuer seed in the password field — signing runs <strong>only in your browser</strong> via <code>xrpl.js</code>.</li>
+<li>Clear browser cache after minting. Full security notes: <strong><a href="MINT_DAPP_SECURITY.html"><code>MINT_DAPP_SECURITY.md</code></a></strong>.</li>
+</ol>
+<p>Gallery and tier reference: <strong><a href="https://fthtrading.github.io/Troptions-full-pack/nft/">NFT gallery</a></strong>.</p>
+<h3>Fallback: Python script (local only)</h3>
+<p>Full steps: <strong><a href="XRPL_NFT_MINT_RUNBOOK.html"><code>XRPL_NFT_MINT_RUNBOOK.md</code></a></strong>. Prefer browser mint over CLI when possible (avoids seed in shell history).</p>
+<pre><code class="language-bash"># Fallback only — seed in local .env (see .env.example XRPL_ISSUER_SEED)
+python scripts/xrpl_mint_ready.py --sign
+</code></pre>
+<ul>
+<li>Set <code>XRPL_ISSUER_SEED</code> in <strong>local</strong> <code>.env</code> (never committed) — <strong>not</strong> in git, docs, CI, or agent sessions.</li>
+<li>This repository documents addresses and unsigned batches only; <strong>no XRPL family seeds</strong> are stored here.</li>
+<li>After submission, verify NFTs on <a href="https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ">XRPSCAN issuer account</a> before external claims of a live collection.</li>
+</ul>
+<hr />
+<h2>Related files</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TROPTIONS_IPFS_CIDS.json</code></td>
+<td>Filename → CID map</td>
+</tr>
+<tr>
+<td><code>TROPTIONS_ANTHEM_COMPLETE_DELIVERABLE.md</code></td>
+<td>Delivery checklist</td>
+</tr>
+<tr>
+<td><code>scripts/xrpl_mint_ready.py</code></td>
+<td>Sign/submit helper (unsigned batch in repo)</td>
+</tr>
+<tr>
+<td><code>docs/technical/XRPL_NFT_MINT_RUNBOOK.md</code></td>
+<td>Operator mint + verification checklist</td>
+</tr>
+<tr>
+<td><code>scripts/xrpl_nft_rarity.py</code></td>
+<td>Tier design generator</td>
+</tr>
+<tr>
+<td><a href="counterparty/PROOF_FOR_COUNTERPARTIES.html"><code>PROOF_FOR_COUNTERPARTIES.md</code></a></td>
+<td>Diligence index</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/TANTHEM_NFT_COLLECTION.html</p>
+</body>
+</html>

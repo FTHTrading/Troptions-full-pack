@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XRPL NFT mint runbook (TANTHEM)</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>XRPL NFT mint runbook (TANTHEM)</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>XRPL NFT mint runbook — TANTHEM (operator: Bryan)</h1>
+<p><strong>Audience:</strong> Operator with custody of the XRPL production issuer key.<br />
+<strong>Security:</strong> This repo never stores XRPL family seeds. Agents and CI must not read Desktop files, run <code>--sign</code>, or paste seeds into chat or git.</p>
+<hr />
+<h2>Issuer (public only)</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Role</strong></td>
+<td>Production issuer / TANTHEM minter</td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code></td>
+</tr>
+<tr>
+<td><strong>Explorer</strong></td>
+<td><a href="https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ">XRPScan — issuer account</a></td>
+</tr>
+</tbody>
+</table>
+<p>Confirmed in <a href="ON_CHAIN_PROOF.html"><code>ON_CHAIN_PROOF.md</code></a>, <a href="TANTHEM_NFT_COLLECTION.html"><code>TANTHEM_NFT_COLLECTION.md</code></a>, and external registry <code>T-Lev-8-/OPERATIONS/WALLET_ADDRESS_REGISTRY.md</code> (addresses only).</p>
+<hr />
+<h2>Prerequisites</h2>
+<ol>
+<li><strong>Repo</strong> cloned at a trusted path (e.g. <code>Troptions-full-pack</code>).</li>
+<li><strong>Python 3.10+</strong> with dependencies for XRPL signing when signing is implemented (<code>xrpl-py</code> recommended for production).</li>
+<li><strong>Issuer seed</strong> from your secure store only (Coldcard backup, Xaman, hardware wallet export workflow, or password manager) — <strong>not</strong> from this repository, Desktop text files, or chat history.</li>
+<li><strong>Issuer XRP balance</strong> sufficient for 703 × mint fees (batch uses <code>Fee: "12"</code> drops per tx in <code>XRPL_MINT_BATCH.json</code>; fund issuer per <a href="https://github.com/fthtrading/T-Lev-8-"><code>WALLET_ADDRESS_REGISTRY</code></a> notes if under-reserved).</li>
+<li><strong>Unsigned batch present:</strong> <code>XRPL_MINT_BATCH.json</code> — <strong>703</strong> unsigned <code>NFTokenMint</code> transactions, no <code>TxnSignature</code>, empty <code>SigningPubKey</code>.</li>
+</ol>
+<hr />
+<h2>Local environment (seed never in git)</h2>
+<ol>
+<li>Copy <code>.env.example</code> → <code>.env</code> (local only; <code>.env</code> is gitignored).</li>
+<li>Set the placeholder (empty in repo):</li>
+</ol>
+<p><code>bash
+   # .env — local machine only
+   XRPL_ISSUER_SEED=</code></p>
+<p>Paste the issuer family seed <strong>only</strong> into your local <code>.env</code> on the signing machine. Do not commit <code>.env</code>.</p>
+<ol start="3">
+<li>Optional: load env before commands:</li>
+</ol>
+<p><code>powershell
+   # PowerShell — example; use your own secret injection method
+   Get-Content .env | ForEach-Object { if ($_ -match '^([^#=]+)=(.*)$') { Set-Item -Path "env:$($matches[1])" -Value $matches[2] } }</code></p>
+<hr />
+<h2>Inspect batch (safe, no secrets)</h2>
+<p>From repository root:</p>
+<pre><code class="language-bash">python scripts/xrpl_mint_ready.py --show
+</code></pre>
+<p>Review tier counts against <code>TROPTIONS_NFT_RARITY_MANIFEST.json</code> (703 total, 6 tiers).</p>
+<hr />
+<h2>Sign and submit (operator machine only)</h2>
+<blockquote>
+<p><strong>Warning:</strong> <code>--sign</code> and <code>XRPL_ISSUER_SEED</code> expose the family seed in process memory and shell history. Prefer an air-gapped or dedicated signing host. Rotate the key if exposure is suspected.</p>
+</blockquote>
+<p><strong>Option A — environment variable (preferred):</strong></p>
+<pre><code class="language-bash"># Seed loaded from local .env or secure enclave — never echo or log
+python scripts/xrpl_mint_ready.py --sign
+</code></pre>
+<p>When <code>--sign</code> is passed with no value, the script reads <code>XRPL_ISSUER_SEED</code> from the environment.</p>
+<p><strong>Option B — explicit CLI (discouraged; appears in shell history):</strong></p>
+<pre><code class="language-bash">python scripts/xrpl_mint_ready.py --sign YOUR_SEED_HERE
+</code></pre>
+<p><strong>Current tooling note:</strong> As of this runbook, <code>scripts/xrpl_mint_ready.py</code> documents signing; full broadcast may require <code>xrpl-py</code> or Xaman manual sign of each prepared tx. Treat <a href="TANTHEM_NFT_COLLECTION.html"><code>TANTHEM_NFT_COLLECTION.md</code></a> mint table as <strong>PENDING</strong> until explorer shows NFTs on the issuer account.</p>
+<hr />
+<h2>Post-mint verification</h2>
+<ol>
+<li>Open <a href="https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ">XRPScan issuer account</a>.</li>
+<li>Confirm <strong>NFTs</strong> tab (or NFToken offers) shows <strong>703</strong> minted items for collection taxons 1–6.</li>
+<li>Spot-check URI hex decodes to <code>ipfs://…</code> CIDs listed in <a href="assets/audio/README.html"><code>assets/audio/README.md</code></a>.</li>
+<li>Update internal status: set mint row to <strong>PROVEN</strong> in <code>TANTHEM_NFT_COLLECTION.md</code> only after explorer confirmation.</li>
+<li>Do <strong>not</strong> commit signed blobs, seeds, or <code>TxnSignature</code>-filled batch exports to git.</li>
+</ol>
+<hr />
+<h2>Related artifacts</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>XRPL_MINT_BATCH.json</code></td>
+<td>703 unsigned mint txs</td>
+</tr>
+<tr>
+<td><code>TROPTIONS_NFT_RARITY_MANIFEST.json</code></td>
+<td>Tier supply table</td>
+</tr>
+<tr>
+<td><code>scripts/xrpl_mint_ready.py</code></td>
+<td>Overview / prepare / sign entrypoint</td>
+</tr>
+<tr>
+<td><code>docs/technical/TANTHEM_NFT_COLLECTION.md</code></td>
+<td>Collection spec + honest mint status</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>If something goes wrong</h2>
+<ul>
+<li><strong>Wrong sequence:</strong> Re-fetch issuer sequence from XRPL, regenerate batch with <code>python scripts/xrpl_mint_ready.py --prepare --sequence &lt;n&gt;</code> (operator only).</li>
+<li><strong>Partial submit:</strong> Record last successful sequence; do not reuse consumed sequence numbers.</li>
+<li><strong>Suspected seed leak:</strong> Stop minting, rotate issuer per your key ceremony; never paste seeds into issues, PRs, or agent chats.</li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/XRPL_NFT_MINT_RUNBOOK.html</p>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Institutional Counterparty Proof Package</title>
+  <link rel="stylesheet" href="../../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Institutional Counterparty Proof Package</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Institutional Counterparty Proof Package</h1>
+<p><strong>Tone:</strong> Links and verifiable facts only ΓÇö no hype.<br />
+<strong>Not legal advice.</strong> This document is a technical diligence aid. Figures labeled <strong>PROJECTION</strong> or <strong>PIPELINE</strong> are illustrative, not audited financial statements.</p>
+<p><strong>Configure path (2ΓÇô4 weeks engineering):</strong> <a href="BUILD_AVID_ON_TROPTIONS.html"><code>BUILD_AVID_ON_TROPTIONS.md</code></a></p>
+<hr />
+<h2>What exists (PROVEN)</h2>
+<h3>Polygon ΓÇö community tokens</h3>
+<table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Address</th>
+<th>Explorer</th>
+<th>Repo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KENNY</strong></td>
+<td><code>0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7</code></td>
+<td><a href="https://polygonscan.com/token/0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7">PolygonScan</a></td>
+<td><code>contracts/polygon/KennyToken.sol</code></td>
+</tr>
+<tr>
+<td><strong>EVL</strong></td>
+<td><code>0xAFe185415D21671704EFaa5696dD219ACEB9fdA3</code></td>
+<td><a href="https://polygonscan.com/token/0xAFe185415D21671704EFaa5696dD219ACEB9fdA3">PolygonScan</a></td>
+<td><code>contracts/polygon/EvolveToken.sol</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Operator UI:</strong> <a href="https://fthedu.unykorn.org">fthedu.unykorn.org</a> ΓÇö token pages reference contracts above.</li>
+</ul>
+<h3>Polygon ΓÇö Genesis World (9 contracts)</h3>
+<ul>
+<li>Full table: <a href="../GENESIS_POLYGON_CONTRACTS.html"><code>../GENESIS_POLYGON_CONTRACTS.md</code></a></li>
+<li>Partner repo: <a href="https://github.com/FTHTrading/genesis-world">github.com/FTHTrading/genesis-world</a></li>
+<li>Live app: <a href="https://drunks.app">drunks.app</a></li>
+</ul>
+<h3>XRPL &amp; Stellar ΓÇö issued supply on ledger</h3>
+<ul>
+<li><strong>Unified registry:</strong> <a href="../ON_CHAIN_PROOF.html"><code>../ON_CHAIN_PROOF.md</code></a></li>
+<li><strong>Verification report:</strong> <a href="../XRPL_STELLAR_VERIFICATION.html"><code>../XRPL_STELLAR_VERIFICATION.md</code></a></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Chain</th>
+<th>Role</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XRPL</td>
+<td>Production issuer</td>
+<td><code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code></td>
+</tr>
+<tr>
+<td>XRPL</td>
+<td>Distribution</td>
+<td><code>rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt</code></td>
+</tr>
+<tr>
+<td>XRPL</td>
+<td>AMM pool</td>
+<td><code>rBU6exSQHkrTog6n1F5RX8gzcUrXoniGcp</code></td>
+</tr>
+<tr>
+<td>Stellar</td>
+<td>Issuer</td>
+<td><code>GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4</code></td>
+</tr>
+<tr>
+<td>Stellar</td>
+<td>Distribution</td>
+<td><code>GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cross-chain issued supply (ledger IOUs, not market cap):</strong> TROPTIONS ~200M, USDC <strong>274M</strong>, USDT 200M, EURC 100M, DAI 100M (~874M total). Do <strong>not</strong> cite Exchange OS desk notionals as on-chain proof.</p>
+<h3>x402 payment mesh (health)</h3>
+<ul>
+<li><a href="https://x402.unykorn.org/health">x402.unykorn.org/health</a> ΓÇö operator label <strong>CONFIRMED</strong> (2026-05-21)</li>
+<li>Repo: <a href="https://github.com/FTHTrading/UnyKorn-X402-aws">github.com/FTHTrading/UnyKorn-X402-aws</a></li>
+</ul>
+<h3>Monorepo, PM2 stack, Rust tests</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Link / command</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Troptions-full-pack</strong></td>
+<td><a href="https://github.com/FTHTrading/Troptions-full-pack">github.com/FTHTrading/Troptions-full-pack</a></td>
+</tr>
+<tr>
+<td><strong>Local quickstart</strong></td>
+<td><code>scripts/quickstart.ps1</code> ┬╖ <strong>8 PM2 services</strong> ΓÇö <code>FINAL_ECOSYSTEM_AUDIT.md</code></td>
+</tr>
+<tr>
+<td><strong>Rust L1</strong></td>
+<td><code>l1/</code> ┬╖ <code>cargo test --workspace</code> (passes per audit 2026-05-21)</td>
+</tr>
+<tr>
+<td><strong>Docs / investor mirror</strong></td>
+<td><a href="https://fthtrading.github.io/Troptions-full-pack/">fthtrading.github.io/Troptions-full-pack/</a></td>
+</tr>
+</tbody>
+</table>
+<h3>Live UnyKorn URLs (operator HTTP checks)</h3>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>URL</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Troptions hub</td>
+<td><a href="https://troptions.unykorn.org/troptions">troptions.unykorn.org/troptions</a></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>FTH education</td>
+<td><a href="https://fthedu.unykorn.org">fthedu.unykorn.org</a></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>Token launcher</td>
+<td><a href="https://launch.unykorn.org">launch.unykorn.org</a></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>Sports / TTN</td>
+<td><a href="https://troptionslive.unykorn.org/sports">troptionslive.unykorn.org/sports</a></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>Exchange OS</td>
+<td><a href="https://troptionsexchange.unykorn.org/exchange-os">troptionsexchange.unykorn.org/exchange-os</a></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>x402 health</td>
+<td><a href="https://x402.unykorn.org/health">x402.unykorn.org/health</a></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>Genesis app</td>
+<td><a href="https://drunks.app">drunks.app</a></td>
+<td>PROVEN</td>
+</tr>
+</tbody>
+</table>
+<p>Full map: <a href="../ECOSYSTEM_MAP.html"><code>../ECOSYSTEM_MAP.md</code></a> ┬╖ scorecard: <a href="../FINAL_ECOSYSTEM_AUDIT.html"><code>../FINAL_ECOSYSTEM_AUDIT.md</code></a></p>
+<hr />
+<h2>The DAO stack ΓÇö what was built</h2>
+<h3>L1 sovereign sequencer (<code>l1/</code>)</h3>
+<p>Rust node exposing JSON-RPC (default <code>:9944</code>) with:</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Capability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Soulbound</strong></td>
+<td>Credential mint / revoke ΓÇö non-transferable attestations</td>
+</tr>
+<tr>
+<td><strong>Settlement</strong></td>
+<td>HTLC-style settlement paths on L1 state</td>
+</tr>
+<tr>
+<td><strong>Treasury</strong></td>
+<td>On-chain treasury balances and disbursement RPCs</td>
+</tr>
+<tr>
+<td><strong>Governance</strong></td>
+<td>Proposals, votes, <strong>execute</strong> (signed submit-RPC in production branch)</td>
+</tr>
+</tbody>
+</table>
+<p>Spec: <code>docs/L1_SPEC.md</code> ┬╖ persistence on <code>upgrade/10-production</code> branch (RocksDB).</p>
+<h3>DAO service &amp; dashboard</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Path</th>
+<th>Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dao-service</strong></td>
+<td><code>backend/dao-service/</code></td>
+<td><code>:8093</code> ΓÇö health, <code>/dao/state</code>, L1 mirror</td>
+</tr>
+<tr>
+<td><strong>dao-dashboard</strong></td>
+<td><code>frontends/dao-dashboard/</code></td>
+<td>Served with dao-service</td>
+</tr>
+<tr>
+<td><strong>Python light client</strong></td>
+<td><code>backend/dao-service/main.py</code></td>
+<td>Mirrors L1 governance + treasury for ops</td>
+</tr>
+</tbody>
+</table>
+<p>Guide: <code>docs/DAO.md</code> ┬╖ bootstrap: <code>scripts/bootstrap-dao.ps1</code></p>
+<h3>Eight genesis brand domains (soulbound issuers)</h3>
+<p>Registered in <code>dao/registry/genesis_brands.json</code>:</p>
+<ol>
+<li>TROPTIONSXCHANGE.IO ΓÇö Exchange OS  </li>
+<li>TROPTIONS-UNIVERSITY.COM ΓÇö FTH Academy  </li>
+<li>TROPTIONSTelevisionNetwork.Tv ΓÇö TTN Sports  </li>
+<li>HOTRCW.COM ΓÇö TTN  </li>
+<li>TROPTIONS.IO / TROPTIONS.ORG ΓÇö Platform  </li>
+<li>TheRealEstateConnections.com ΓÇö Real Estate  </li>
+<li>Green-N-Go.Solar ΓÇö Solar Platform  </li>
+</ol>
+<p>Namespaces migrate to L1 soulbounds via <code>scripts/migrate-namespaces-to-l1.py</code> (dry-run first).</p>
+<h3>How a counterparty tokenized ecosystem configures</h3>
+<p>Executable engineering path (not self-serve mainnet in one session):</p>
+<ol>
+<li><strong>Namespaces</strong> ΓÇö map brand domains ΓåÆ L1 soulbound issuers (<code>dao/registry/</code>, Exchange OS <code>locked-namespaces.ts</code>).  </li>
+<li><strong>DAO realm</strong> ΓÇö proposals, voter credentials, treasury policy (<code>dao/governance/</code>, L1 <code>governance</code> crate).  </li>
+<li><strong>Academy / TTN</strong> ΓÇö <code>backend/fth-academy/</code>, <code>backend/ttn-launcher/</code>, WC2026 hooks in Exchange OS.  </li>
+<li><strong>Production cutover</strong> ΓÇö merge <code>upgrade/10-production</code>, signed RPC keys, TLS/nginx, compliance gates in <code>docs/TROPTIONS-GENESIS-BUILD.md</code>.</li>
+</ol>
+<p><strong>Step-by-step configure doc:</strong> <a href="BUILD_AVID_ON_TROPTIONS.html"><code>BUILD_AVID_ON_TROPTIONS.md</code></a> (2ΓÇô4 weeks with TROPTIONS engineering; ~15 minutes is local demo only).</p>
+<h3>SNP ΓÇö constitutional namespace layer (optional satellite)</h3>
+<p><strong>Sovereign Namespace Protocol</strong> ΓÇö post-quantum namespace roots and verification primitives consumed by L1 migration and Exchange OS proof surfaces. Not a standalone revenue product; governs allowed names/claims.</p>
+<ul>
+<li>Repo: <a href="https://github.com/FTHTrading/sovereign-namespace-protocol">github.com/FTHTrading/sovereign-namespace-protocol</a></li>
+<li>Context: <a href="../ECOSYSTEM_MAP.html"><code>../ECOSYSTEM_MAP.md</code></a> ┬º SNP</li>
+</ul>
+<h3>x402 ΓÇö pay-per-request for agent APIs</h3>
+<p>Metered API pricing and ATP settlement on Apostle Chain ΓÇö <strong>separate</strong> from core DAO/L1 configure path. Optional branch <code>feature/x402-full-integration</code>; do not block ecosystem go-live on x402 unless contracted.</p>
+<hr />
+<h2>Configure onboarding</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Duration</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orientation</td>
+<td>~15 min</td>
+<td>Clone, quickstart, architecture read ΓÇö <strong>dev/demo only</strong></td>
+</tr>
+<tr>
+<td>Production configure</td>
+<td><strong>2ΓÇô4 weeks</strong></td>
+<td>Signed RPC, DAO realm, soulbound mapping, TLS, compliance sign-off</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Canonical configure prompt:</strong> <a href="BUILD_AVID_ON_TROPTIONS.html"><code>BUILD_AVID_ON_TROPTIONS.md</code></a></p>
+<p><strong>Prerequisites:</strong> mutual NDA, client intake, engineering contacts both sides for keys and DNS.</p>
+<hr />
+<h2>PENDING (say out loud)</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ai.troptions.org</strong></td>
+<td>DNS not pointed; AI edge on alternate host</td>
+</tr>
+<tr>
+<td><strong>twin.unykorn.org</strong></td>
+<td>Cloudflare origin flaky / timeout (2026-05-21)</td>
+</tr>
+<tr>
+<td><strong>x402api.unykorn.org</strong></td>
+<td>Same ΓÇö re-probe before demos</td>
+</tr>
+<tr>
+<td><strong>Full BFT L1</strong></td>
+<td>Single-node sovereign sequencer today; multi-validator quorum is roadmap</td>
+</tr>
+<tr>
+<td><strong>Public TLS on all L1 RPC</strong></td>
+<td>Production nginx cutover per <code>docs/DEPLOY_PRODUCTION.md</code></td>
+</tr>
+<tr>
+<td><strong>Legacy XRPL gateway</strong> <code>rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3</code></td>
+<td>README only ΓÇö superseded by production issuer <code>rJLMSTΓÇª</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Engineering maturity (honest)</h2>
+<p><strong>9.5 / 10</strong> ΓÇö Polygon, genesis-world, and XRPL/Stellar issued-supply proofs verified; intermittent Cloudflare origins keep the gap. Breakdown: <code>FINAL_ECOSYSTEM_AUDIT.md</code> ┬º Honest Scorecard.</p>
+<p><strong>Not BFT mainnet today.</strong> Do not describe current L1 as Byzantine-fault tolerant.</p>
+<hr />
+<h2>Downloads (investor PDF HTML pack)</h2>
+<p>Print ΓåÆ Save as PDF from browser:</p>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Executive summary</td>
+<td><a href="../../downloads/investor-executive-summary.html"><code>../../downloads/investor-executive-summary.html</code></a></td>
+</tr>
+<tr>
+<td>On-chain proof sheet</td>
+<td><a href="../../downloads/on-chain-proof-sheet.html"><code>../../downloads/on-chain-proof-sheet.html</code></a></td>
+</tr>
+<tr>
+<td>Infrastructure atlas</td>
+<td><a href="../../downloads/infrastructure-atlas.html"><code>../../downloads/infrastructure-atlas.html</code></a></td>
+</tr>
+<tr>
+<td>Opportunity &amp; roadmap</td>
+<td><a href="../../downloads/opportunity-and-roadmap.html"><code>../../downloads/opportunity-and-roadmap.html</code></a></td>
+</tr>
+<tr>
+<td>One-pager (markdown)</td>
+<td><a href="../investor/ONE_PAGER.html"><code>../investor/ONE_PAGER.md</code></a></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Attach for diligence review</h2>
+<ol>
+<li>This file  </li>
+<li><a href="BUILD_AVID_ON_TROPTIONS.html"><code>BUILD_AVID_ON_TROPTIONS.md</code></a>  </li>
+<li><a href="../ON_CHAIN_PROOF.html"><code>../ON_CHAIN_PROOF.md</code></a>  </li>
+<li>Optional: <a href="../investor/ONE_PAGER.html"><code>../investor/ONE_PAGER.md</code></a></li>
+</ol>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/counterparty/PROOF_FOR_COUNTERPARTIES.html</p>
+</body>
+</html>

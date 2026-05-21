@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>x402 integration (Troptions-full-pack ↔ UnyKorn)</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>x402 integration (Troptions-full-pack ↔ UnyKorn)</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>x402 integration — Troptions-full-pack ↔ UnyKorn</h1>
+<p><strong>Last verified:</strong> 2026-05-21</p>
+<p>This document explains how the <strong>Troptions-full-pack</strong> monorepo relates to the <strong>production x402 payment mesh</strong> in <a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a>. They are related products, not the same deployment.</p>
+<hr />
+<h2>Two stacks (do not conflate)</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Repository / path</th>
+<th>Port</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Production mesh</strong></td>
+<td><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a></td>
+<td>4020 (gateway), 7332 (Apostle), 3100–4400 (mesh services)</td>
+<td>Live AWS + Cloudflare: facilitator, treasury, guardian, financial core, Apostle Chain ATP settlement</td>
+</tr>
+<tr>
+<td><strong>Monorepo sidecar</strong></td>
+<td><code>Troptions-full-pack/backend/x402-gateway/</code></td>
+<td><strong>4020</strong> (local PM2)</td>
+<td>Lightweight FastAPI gateway: SQLite receipts, optional proxy to UnyKorn upstream</td>
+</tr>
+</tbody>
+</table>
+<p>Public health (<code>https://x402.unykorn.org/health</code>) reflects the <strong>UnyKorn</strong> gateway on EC2, not the Python sidecar in this repo unless you point DNS at your own host.</p>
+<hr />
+<h2>Protocol (Apostle Chain)</h2>
+<ul>
+<li>Clients receive <strong>HTTP 402</strong> with payment instructions.</li>
+<li>Settlement uses <strong>ATP</strong> on <strong>Apostle Chain</strong> (<code>chain_id</code> <strong>7332</strong>).</li>
+<li>Proofs use <strong>TxEnvelope</strong> and <strong><code>X-Payment-Proof</code></strong> headers (see UnyKorn <code>packages/x402-credit-gateway</code> and <code>x402-book/</code>).</li>
+</ul>
+<p><strong>Live surfaces (operator):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public health</td>
+<td>https://x402.unykorn.org/health</td>
+</tr>
+<tr>
+<td>Digital twin (agent mesh UI)</td>
+<td>https://twin.unykorn.org</td>
+</tr>
+<tr>
+<td>API docs</td>
+<td>https://x402api.unykorn.org</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mesh services (UnyKorn repo, typical ports):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Port</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x402 Facilitator</td>
+<td>3100</td>
+</tr>
+<tr>
+<td>x402 Treasury</td>
+<td>3200</td>
+</tr>
+<tr>
+<td>x402 Guardian</td>
+<td>3300</td>
+</tr>
+<tr>
+<td>x402 Financial Core (Rust)</td>
+<td>4400</td>
+</tr>
+<tr>
+<td>Credit gateway (public edge)</td>
+<td>4020</td>
+</tr>
+<tr>
+<td>Apostle Chain</td>
+<td>7332</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Connecting the monorepo sidecar</h2>
+<h3>Environment</h3>
+<pre><code class="language-bash"># Local sidecar (Troptions-full-pack)
+PORT=4020
+X402_MODE=staged          # or production when Apostle is up
+APOSTLE_URL=http://127.0.0.1:7332
+X402_UPSTREAM=            # set to UnyKorn gateway when proxying, e.g. http://127.0.0.1:4020 on same host as UnyKorn package
+</code></pre>
+<p>When <code>X402_UPSTREAM</code> is set, <code>/v1/verify</code> forwards to the upstream UnyKorn credit gateway instead of using only the local SQLite ledger.</p>
+<h3>PM2 (optional)</h3>
+<p>From repo root:</p>
+<pre><code class="language-bash">pm2 start ecosystem.config.js
+</code></pre>
+<p>The <code>x402-gateway</code> app runs <code>backend/x402-gateway/main.py</code> on port <strong>4020</strong> with <code>X402_GATEWAY_URL</code> consumed by <code>dao-service</code> (<code>http://127.0.0.1:4020</code>).</p>
+<p>To run <strong>UnyKorn</strong> production gateway locally or on EC2, use the operator runbook in UnyKorn-X402-aws (<code>packages/x402-credit-gateway/docs/X402_OPERATOR_RUNBOOK.md</code>, <code>aws/X402_AWS_DEPLOYMENT_RUNBOOK.md</code>). Do not copy <code>.env</code> secrets from that repo into git.</p>
+<h3>Staged vs production</h3>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Sidecar behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>staged</code></td>
+<td>Local verify may return <code>staged: true</code>; Apostle optional</td>
+</tr>
+<tr>
+<td><code>production</code></td>
+<td>Startup checks <code>APOSTLE_URL/health</code>; pay path expects agent balances</td>
+</tr>
+</tbody>
+</table>
+<p>UnyKorn public health (2026-05-21 sample) reported <code>x402_mode: live</code>, <code>chain.operational: true</code>, <code>chain_id: 7332</code>, <code>real_settlement_active: true</code>.</p>
+<hr />
+<h2>What lives on <code>main</code> in Troptions-full-pack</h2>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sidecar gateway</td>
+<td><code>backend/x402-gateway/main.py</code></td>
+</tr>
+<tr>
+<td>DAO middleware</td>
+<td><code>backend/dao-service/x402_middleware.py</code></td>
+</tr>
+<tr>
+<td>L1 registry hooks</td>
+<td><code>l1/crates/rpc/src/x402.rs</code></td>
+</tr>
+<tr>
+<td>Compose stub</td>
+<td><code>docker/docker-compose.x402.yml</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Not on main:</strong> full facilitator/treasury/guardian/financial-core mesh — that is <strong>UnyKorn-X402-aws</strong> (public repo, AWS deployment in <code>aws/</code>).</p>
+<hr />
+<h2>Investor honesty</h2>
+<ul>
+<li><strong>CONFIRMED:</strong> <code>https://x402.unykorn.org/health</code> returns live gateway + Apostle chain status when probed.</li>
+<li><strong>PENDING / flaky:</strong> <code>twin.unykorn.org</code> and <code>x402api.unykorn.org</code> may return Cloudflare <strong>522</strong> or timeouts when the EC2 origin for those hostnames is down — re-probe before demos.</li>
+<li>Monorepo <strong>:4020</strong> sidecar is for <strong>integration and staging</strong>, not a substitute for the public mesh unless you operate your own edge.</li>
+</ul>
+<hr />
+<h2>Related docs</h2>
+<ul>
+<li><a href="ECOSYSTEM_MAP.html">ECOSYSTEM_MAP.md</a></li>
+<li><a href="infrastructure/x402.html">infrastructure/x402.md</a></li>
+<li><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a> — <code>aws/</code>, <code>proofs/</code>, <code>packages/x402-credit-gateway/</code></li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/X402_INTEGRATION.html</p>
+</body>
+</html>

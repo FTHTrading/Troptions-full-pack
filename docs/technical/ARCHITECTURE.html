@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Architecture</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Architecture</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>TROPTIONS Sovereign Stack Architecture</h1>
+<h2>Layer diagram</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│  GENESIS DOMAINS (8) — TROPTIONSXCHANGE.IO, TTN.Tv, etc.        │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────────┐
+│  FRONTENDS                                                       │
+│  exchange-os · fth-edu · ttn-tv · unified-dashboard · landing   │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ HTTPS / WS
+┌────────────────────────────▼────────────────────────────────────┐
+│  BACKENDS + AI                                                   │
+│  fth-academy :8091 · ttn-launcher :8092 · donk-tutor :8090      │
+│  Ollama :11434 · Qdrant :6333                                    │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ JSON-RPC
+┌────────────────────────────▼────────────────────────────────────┐
+│  L1 NODE :9944 (Rust) · metrics :9945                            │
+│  Sovereign Sequencer (single-node; multi-node + fraud proofs planned) │
+│  RocksDB · signed submit · on-chain DAO + treasury · multisig    │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
+┌────────────────────────────▼────────────────────────────────────┐
+│  EXTERNAL CHAINS                                                 │
+│  Polygon (KENNY/EVL) · XRPL gateway · Solana ($PICK)             │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h2>Clawd / OpenClaw integration</h2>
+<p>Operational services run with <code>exec_cwd</code> under <code>C:\Users\Kevan\.openclaw\workspace</code> (PM2). Knowledge artifacts from clawd are copied to <code>ai/knowledge-base/openclaw-content</code> and architecture notes in <code>docs/</code>.</p>
+<h2>Data flows</h2>
+<ol>
+<li><strong>Education:</strong> User → fth-edu / exchange-os → fth-academy → Stripe + Ollama; certificates → IPFS (planned) + KENNY burn proof.</li>
+<li><strong>Tutoring:</strong> User → donk-tutor → Qdrant RAG → Ollama; optional voice via ElevenLabs.</li>
+<li><strong>Broadcast:</strong> Creator → ttn-launcher → namespace registry (SQLite) → L1 soulbound migration (script).</li>
+<li><strong>Sovereign state:</strong> Backends → <code>l1_client</code> → <code>state_get</code> / <code>soulbound_*</code> / <code>settlement_*</code> on port 9944.</li>
+</ol>
+<h2>DAO layer (implemented)</h2>
+<p>See <code>dao/ARCHITECTURE.md</code>. Services: <code>dao-service:8093</code>, FTH <code>/dao/*</code>, L1 <code>governance</code> crate + submit RPC.</p>
+<h2>Recommended build order</h2>
+<ol>
+<li>~~L1 bridge in fth-backend~~ — <code>/health/l1</code>, <code>/dao/state</code> wired.</li>
+<li><strong>Persistence</strong> — RocksDB on L1 (<code>L1_DATA_DIR</code>); SQLite audit/allocations cache only in dao-service.</li>
+<li>~~WebSockets~~ — <code>backend/shared/ws_hub.py</code> on DAO service <code>/ws</code>.</li>
+</ol>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/ARCHITECTURE.html</p>
+</body>
+</html>

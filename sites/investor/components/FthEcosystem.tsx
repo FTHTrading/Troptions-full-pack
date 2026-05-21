@@ -1,5 +1,5 @@
 import { Section } from "./Section";
-import { FTH_ECOSYSTEM_CARDS } from "@/lib/constants";
+import { ECOSYSTEM_MAP_URL, FTH_ECOSYSTEM_CARDS } from "@/lib/constants";
 import { StatusBadge } from "./StatusBadge";
 
 export function FthEcosystem() {
@@ -64,12 +64,12 @@ export function FthEcosystem() {
       <p className="mt-6 text-center text-sm text-[var(--color-muted)]">
         Full matrix:{" "}
         <a
-          href="https://fthtrading.github.io/Troptions-full-pack/technical/ECOSYSTEM_MAP.html"
+          href={ECOSYSTEM_MAP_URL}
           className="text-[var(--color-gold-light)] hover:underline"
           target="_blank"
           rel="noopener noreferrer"
         >
-          ECOSYSTEM_MAP.md
+          Ecosystem map
         </a>{" "}
         · Re-verify with <code className="text-xs">scripts/verify-ecosystem-links.ps1</code>
       </p>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Full audit report (archived)</title>
+  <link rel="stylesheet" href="../../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Full audit report (archived)</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<blockquote>
+<p><strong>Archived 2026-05-21.</strong> Superseded by <a href="../FINAL_ECOSYSTEM_AUDIT.html">FINAL_ECOSYSTEM_AUDIT.md</a>.<br />
+Several claims below were wrong (e.g. only 2/9 repos cloned, all HTTP timeouts). Kept for history.</p>
+</blockquote>
+<h1>COMPLETE AUDIT REPORT — TROPTIONS ECOSYSTEM</h1>
+<h2>Date: 2026-05-21 12:30 PM EDT</h2>
+<h2>Auditor: DONK AI / CLAWD</h2>
+<h2>Scope: All FTHTrading GitHub Repositories + Local Infrastructure</h2>
+<hr />
+<h2>🏛️ REPOSITORY INVENTORY</h2>
+<h3>✅ CONFIRMED EXIST (Local + GitHub)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Repository</th>
+<th>Local Path</th>
+<th>GitHub</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Troptions-full-pack</strong></td>
+<td><code>C:\Users\Kevan\Troptions-full-pack</code></td>
+<td>✅ Public</td>
+<td>🟢 Active</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Troptions</strong> (private)</td>
+<td><code>C:\Users\Kevan\troptions</code></td>
+<td>✅ Private</td>
+<td>🟢 Active</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>T-Lev-8-</strong></td>
+<td>❌ NOT LOCAL</td>
+<td>✅ Public</td>
+<td>🔴 Cloned?</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>T-Build</strong></td>
+<td>❌ NOT LOCAL</td>
+<td>✅ Public</td>
+<td>🔴 Cloned?</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>aurora-site</strong></td>
+<td>❌ NOT LOCAL</td>
+<td>✅ Public</td>
+<td>🔴 Cloned?</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>impact-site</strong></td>
+<td>❌ NOT LOCAL</td>
+<td>✅ Public</td>
+<td>🔴 Cloned?</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>TExchange</strong></td>
+<td>❌ NOT LOCAL</td>
+<td>✅ Public</td>
+<td>🔴 Cloned?</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>Genesis World</strong></td>
+<td>✅ CLONED</td>
+<td>✅ <strong>Public</strong></td>
+<td>🟢 <a href="https://github.com/FTHTrading/genesis-world">github.com/FTHTrading/genesis-world</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>UnyKorn-L-1</strong></td>
+<td>❌ NOT LOCAL</td>
+<td>✅ Private</td>
+<td>🔴 Cloned?</td>
+</tr>
+</tbody>
+</table>
+<p><strong>CRITICAL FINDING:</strong> Only 2 of 9 repos are cloned locally. The rest exist on GitHub but are NOT on this machine.</p>
+<hr />
+<h2>🔍 TROPTIONS-FULL-PACK AUDIT</h2>
+<h3>✅ WHAT EXISTS (Verified)</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Path</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rust L1 (9 crates)</td>
+<td><code>l1/crates/</code></td>
+<td>Cargo.toml, 19 tests passing</td>
+</tr>
+<tr>
+<td>KENNY Contract</td>
+<td><code>contracts/polygon/KennyToken.sol</code></td>
+<td>Solidity source exists</td>
+</tr>
+<tr>
+<td>EVL Contract</td>
+<td><code>contracts/polygon/EvolveToken.sol</code></td>
+<td>Solidity source exists</td>
+</tr>
+<tr>
+<td>Vault Contracts</td>
+<td><code>contracts/polygon/troptions-vaults/</code></td>
+<td>Gateway + USDC vaults</td>
+</tr>
+<tr>
+<td>DAO Engine</td>
+<td><code>dao/governance/engine.py</code></td>
+<td>Python governance module</td>
+</tr>
+<tr>
+<td>DAO Registry</td>
+<td><code>dao/registry/genesis_brands.json</code></td>
+<td>8 brand domains</td>
+</tr>
+<tr>
+<td>FTH Backend</td>
+<td><code>backend/fth-academy/main.py</code></td>
+<td>FastAPI service</td>
+</tr>
+<tr>
+<td>DAO Service</td>
+<td><code>backend/dao-service/main.py</code></td>
+<td>FastAPI service</td>
+</tr>
+<tr>
+<td>DONK AI</td>
+<td><code>ai/donk-tutor/main.py</code></td>
+<td>RAG tutor</td>
+</tr>
+<tr>
+<td>TTN Launcher</td>
+<td><code>backend/ttn-launcher/main.py</code></td>
+<td>Channel registry</td>
+</tr>
+<tr>
+<td>x402 Gateway</td>
+<td><code>backend/x402-gateway/main.py</code></td>
+<td>SQLite ledger</td>
+</tr>
+<tr>
+<td>Popeye Relay</td>
+<td><code>backend/popeye-relay/main.py</code></td>
+<td>Stale agent detection</td>
+</tr>
+<tr>
+<td>Investor Site</td>
+<td><code>sites/investor/</code></td>
+<td>Next.js app</td>
+</tr>
+<tr>
+<td>Docs (Pages)</td>
+<td><code>docs/index.html</code></td>
+<td>GitHub Pages deployed</td>
+</tr>
+<tr>
+<td>Nginx Config</td>
+<td><code>docker/nginx/nginx.conf</code></td>
+<td>TLS templates</td>
+</tr>
+</tbody>
+</table>
+<h3>❌ WHAT'S MISSING (From Showcase Claims)</h3>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Status</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>scripts/truth_labels.ps1</code></td>
+<td>❌ MISSING</td>
+<td>Not in repo</td>
+</tr>
+<tr>
+<td><code>docs/truth-labels.md</code></td>
+<td>❌ MISSING</td>
+<td>Not in repo</td>
+</tr>
+<tr>
+<td>truth_labels generated</td>
+<td>❌ MISSING</td>
+<td>No automation found</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🔍 TROPTIONS (PRIVATE REPO) AUDIT</h2>
+<h3>✅ WHAT EXISTS (Verified)</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Next.js app</td>
+<td><code>package.json</code> scripts</td>
+</tr>
+<tr>
+<td>XRPL Platform</td>
+<td><code>/troptions/xrpl-platform</code> routes</td>
+</tr>
+<tr>
+<td>PayOps module</td>
+<td>Commit history</td>
+</tr>
+<tr>
+<td>Wallet system</td>
+<td>XRPL/Stellar/Solana create + vault</td>
+</tr>
+<tr>
+<td>World Cup sales</td>
+<td><code>worldcup/sales_scripts/</code></td>
+</tr>
+<tr>
+<td>Rust L1</td>
+<td><code>troptions-rust-l1/</code> directory</td>
+</tr>
+<tr>
+<td>D1 Database</td>
+<td>Cloudflare D1 campaign persistence</td>
+</tr>
+<tr>
+<td>Workers</td>
+<td>Cloudflare Workers AI image gen</td>
+</tr>
+<tr>
+<td>troptions-pof-usdc-175m-desk.pdf</td>
+<td>✅ EXISTS</td>
+</tr>
+</tbody>
+</table>
+<h3>❌ WHAT'S MISSING / UNVERIFIED</h3>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Status</th>
+<th>Issue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>182 deployments</td>
+<td>⚠️ UNVERIFIED</td>
+<td>Vercel dashboard claim</td>
+</tr>
+<tr>
+<td>Production troptions-xc2h</td>
+<td>⚠️ UNVERIFIED</td>
+<td>Can't verify without access</td>
+</tr>
+<tr>
+<td>109 Jest tests passing</td>
+<td>⚠️ UNVERIFIED</td>
+<td>Not run locally</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🔍 T-LEV-8- AUDIT (GitHub Only — Not Local)</h2>
+<h3>From GitHub README:</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Claim</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T-LEV-8 Deal Room</td>
+<td>✅</td>
+<td>GitHub Pages live</td>
+</tr>
+<tr>
+<td>72-Hour Playbook</td>
+<td>✅</td>
+<td>Exists in repo</td>
+</tr>
+<tr>
+<td>AI Protocol Governor</td>
+<td>✅</td>
+<td><code>AI_SYSTEM/PROTOCOL_GOVERNANCE_PROMPT.md</code></td>
+</tr>
+<tr>
+<td>Legal Master Agreement</td>
+<td>✅</td>
+<td><code>LEGAL/</code> directory</td>
+</tr>
+<tr>
+<td>Compliance Gates</td>
+<td>✅</td>
+<td><code>COMPLIANCE/</code> directory</td>
+</tr>
+<tr>
+<td>49 Deployments</td>
+<td>⚠️</td>
+<td>GitHub Pages only</td>
+</tr>
+</tbody>
+</table>
+<h3>CRITICAL: NOT CLONED LOCALLY</h3>
+<p><strong>This repo exists on GitHub but is NOT on this machine.</strong> Cannot verify actual file contents without clone.</p>
+<hr />
+<h2>🔍 T-BUILD AUDIT (GitHub Only — Not Local)</h2>
+<h3>From GitHub README:</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Claim</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TPLOS (Partner Launch OS)</td>
+<td>✅</td>
+<td>Next.js 14, Prisma, 32 Vitest tests</td>
+</tr>
+<tr>
+<td>7 Import Waves</td>
+<td>✅</td>
+<td>Waves 1-7 complete</td>
+</tr>
+<tr>
+<td>Compliance Score ~10/100</td>
+<td>✅</td>
+<td>Critical by design</td>
+</tr>
+<tr>
+<td>Anchor Stubs</td>
+<td>✅</td>
+<td><code>contracts/anchor-stubs/</code></td>
+</tr>
+<tr>
+<td>Docker</td>
+<td>✅</td>
+<td>Dockerfile + compose</td>
+</tr>
+</tbody>
+</table>
+<h3>CRITICAL: NOT CLONED LOCALLY</h3>
+<p><strong>This repo exists on GitHub but is NOT on this machine.</strong></p>
+<hr />
+<h2>🔍 GENESIS WORLD AUDIT (GitHub Only)</h2>
+<h3>From GitHub README:</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Claim</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12 Rust Crates</td>
+<td>✅</td>
+<td>Cargo workspace</td>
+</tr>
+<tr>
+<td>Polygon Mainnet (9 contracts)</td>
+<td>⚠️</td>
+<td>Claimed deployed</td>
+</tr>
+<tr>
+<td>15 Soul-Bound NFTs</td>
+<td>⚠️</td>
+<td>Claimed minted</td>
+</tr>
+<tr>
+<td>Moltbot Daemon (port 3402)</td>
+<td>⚠️</td>
+<td>Claimed live</td>
+</tr>
+<tr>
+<td>drunks.app (28 pages)</td>
+<td>⚠️</td>
+<td>Claimed live</td>
+</tr>
+<tr>
+<td>$CORE + $ORIGIN tokens</td>
+<td>⚠️</td>
+<td>Claimed deployed</td>
+</tr>
+</tbody>
+</table>
+<h3>CRITICAL: NOT CLONED LOCALLY</h3>
+<p><strong>Cannot verify on-chain claims without PolygonScan lookup.</strong></p>
+<hr />
+<h2>🔍 UNYKORN L-1 AUDIT (GitHub Only)</h2>
+<h3>From GitHub README:</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Claim</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>32 Rust Crates</td>
+<td>✅</td>
+<td>Cargo workspace</td>
+</tr>
+<tr>
+<td>UCP 600 Trade Finance</td>
+<td>✅</td>
+<td>Protocol opcodes</td>
+</tr>
+<tr>
+<td>5-Node Devnet</td>
+<td>✅</td>
+<td>Docker compose</td>
+</tr>
+<tr>
+<td>144 Tests Passing</td>
+<td>✅</td>
+<td><code>cargo test --workspace</code></td>
+</tr>
+<tr>
+<td>PolicyQuorum (2-of-3)</td>
+<td>✅</td>
+<td>Oracle quorum</td>
+</tr>
+</tbody>
+</table>
+<h3>CRITICAL: NOT CLONED LOCALLY</h3>
+<p><strong>Cannot verify tests without source code.</strong></p>
+<hr />
+<h2>🎯 CONTRACT ADDRESS VERIFICATION</h2>
+<h3>KENNY (Polygon)</h3>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Address</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Showcase</td>
+<td><code>0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7</code></td>
+<td>⚠️ UNVERIFIED</td>
+</tr>
+<tr>
+<td>Source</td>
+<td><code>contracts/polygon/KennyToken.sol</code></td>
+<td>✅ EXISTS</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verification needed:</strong> Check PolygonScan for actual deployment.</p>
+<h3>XRPL Gateway</h3>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Address</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Showcase</td>
+<td><code>rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3</code></td>
+<td>⚠️ UNVERIFIED</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Verification needed:</strong> Check XRPL explorer for account activity.</p>
+<hr />
+<h2>🚨 CRITICAL GAPS</h2>
+<h3>1. REPOS NOT CLONED</h3>
+<p><strong>7 of 9 repositories are NOT on this machine.</strong> They exist on GitHub but cannot be verified or modified locally.</p>
+<p><strong>Action Required:</strong></p>
+<pre><code class="language-bash">git clone https://github.com/FTHTrading/T-Lev-8-.git
+git clone https://github.com/FTHTrading/T-Build.git
+git clone https://github.com/FTHTrading/aurora-site.git
+git clone https://github.com/FTHTrading/impact-site.git
+git clone https://github.com/FTHTrading/TExchange.git
+# Private repos require auth:
+git clone https://github.com/FTHTrading/genesis-world.git
+git clone https://github.com/FTHTrading/UnyKorn-L-1.git
+</code></pre>
+<h3>2. TRUTH LABELS MISSING</h3>
+<p>The showcase claims truth labels are generated but:<br />
+- <code>scripts/truth_labels.ps1</code> does NOT exist<br />
+- <code>docs/truth-labels.md</code> does NOT exist<br />
+- No automation found</p>
+<p><strong>Action Required:</strong> Create truth label generation script.</p>
+<h3>3. ON-CHAIN CLAIMS UNVERIFIED</h3>
+<ul>
+<li>KENNY Polygon address: Not checked on PolygonScan</li>
+<li>XRPL gateway: Not checked on XRPL explorer</li>
+<li>Genesis World contracts: Not verified</li>
+<li>UnyKorn L1 devnet: Not running locally</li>
+</ul>
+<p><strong>Action Required:</strong> Verify all on-chain claims with public explorers.</p>
+<h3>4. DNS NOT CONFIGURED</h3>
+<ul>
+<li><code>troptions.io</code> CNAME commented out in docs</li>
+<li><code>ai.troptions.org</code>, <code>ttn.troptions.org</code>, <code>dao.troptions.org</code> — Future DNS</li>
+<li>8 Genesis domains redirect to unykorn.org</li>
+</ul>
+<p><strong>Action Required:</strong> Configure DNS records.</p>
+<hr />
+<h2>📊 HONEST SCORECARD</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Score</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local Infrastructure</td>
+<td>8.5/10</td>
+<td>8/8 services running, real Apostle Chain</td>
+</tr>
+<tr>
+<td>Repository Completeness</td>
+<td>4/9</td>
+<td>Only 2 of 9 repos cloned</td>
+</tr>
+<tr>
+<td>Contract Verification</td>
+<td>3/10</td>
+<td>Source exists, deployment unverified</td>
+</tr>
+<tr>
+<td>Documentation</td>
+<td>6/10</td>
+<td>Good docs, missing truth labels</td>
+</tr>
+<tr>
+<td>DNS / Public TLS</td>
+<td>2/10</td>
+<td>Self-signed only, no troptions.org</td>
+</tr>
+<tr>
+<td>On-Chain Verification</td>
+<td>3/10</td>
+<td>Claims made, explorers not checked</td>
+</tr>
+<tr>
+<td><strong>OVERALL</strong></td>
+<td><strong>5.5/10</strong></td>
+<td>Infrastructure good, verification poor</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>🎯 PRIORITY ACTIONS</h2>
+<h3>Immediate (Today)</h3>
+<ol>
+<li><strong>Clone missing repos</strong> — 7 repositories need local copies</li>
+<li><strong>Verify KENNY on PolygonScan</strong> — Check <code>0x93F2...69BD7</code></li>
+<li><strong>Verify XRPL gateway</strong> — Check <code>rPF2M1...BdJds3</code></li>
+<li><strong>Create truth_labels.ps1</strong> — Automate verification</li>
+</ol>
+<h3>Short-term (This Week)</h3>
+<ol start="5">
+<li><strong>Verify Genesis World contracts</strong> — PolygonScan + OpenSea</li>
+<li><strong>Verify UnyKorn L1 tests</strong> — Clone and run <code>cargo test</code></li>
+<li><strong>Configure DNS</strong> — troptions.org + subdomains</li>
+<li><strong>Deploy investor site</strong> — Already built, needs CNAME</li>
+</ol>
+<h3>For Bijan Deal</h3>
+<ol start="9">
+<li><strong>Package deliverables</strong> — Only use VERIFIED claims</li>
+<li><strong>Be honest</strong> — "Source exists, deployment verified" vs "Source exists, deployment pending"</li>
+</ol>
+<hr />
+<h2>💬 THE BRUTAL TRUTH</h2>
+<p><strong>What we CAN prove today:</strong><br />
+- 8 services running on localhost<br />
+- Rust L1 compiles and tests pass<br />
+- 3 Anchor contracts compile<br />
+- Real Apostle Chain running<br />
+- Code exists in repositories</p>
+<p><strong>What we CANNOT prove today:</strong><br />
+- Polygon contracts are actually deployed<br />
+- Genesis World is on mainnet<br />
+- UnyKorn L1 tests pass (no local source)<br />
+- $175M exchange desk (PDF exists but unverified)<br />
+- 1,000 namespaces (code exists, claims unverified)</p>
+<p><strong>The gap is VERIFICATION, not BUILD.</strong></p>
+<hr />
+<p><strong>Recommendation:</strong> Before sending anything to Bijan, verify the on-chain claims. Use PolygonScan, XRPL explorer, and SolanaFM. Only claim what you can prove with a transaction hash.</p>
+<p><strong>Current honest score: 5.5/10</strong> (infrastructure built, verification missing)</p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/archive/FULL_AUDIT_REPORT.html</p>
+</body>
+</html>

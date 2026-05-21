@@ -1,3 +1,9 @@
+---
+title: Architecture
+layout: default
+permalink: /technical/ARCHITECTURE.html
+---
+
 # TROPTIONS Sovereign Stack Architecture
 
 ## Layer diagram

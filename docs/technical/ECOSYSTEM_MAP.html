@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FTH / TROPTIONS ecosystem map</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>FTH / TROPTIONS ecosystem map</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>FTH Trading / TROPTIONS ecosystem map</h1>
+<p><strong>Last verified:</strong> 2026-05-21 (HTTP HEAD + <code>gh repo view</code> + local path scan)</p>
+<p>This document is the <strong>authoritative catalog</strong> of repos, deploy surfaces, and how each piece connects to <strong>Troptions-full-pack</strong>. Re-run <a href="../../scripts/verify-ecosystem-links.ps1"><code>scripts/verify-ecosystem-links.ps1</code></a> before investor decks.</p>
+<hr />
+<h2>Architecture (how pieces connect)</h2>
+<pre><code class="language-mermaid">flowchart TB
+  subgraph constitutional[&quot;Constitutional layer&quot;]
+    SNP[Sovereign Namespace Protocol]
+  end
+  subgraph monorepo[&quot;Troptions-full-pack&quot;]
+    L1[TROPTIONS L1 node]
+    BE[Academy / DONK / TTN / DAO backends]
+    FE[exchange-os extract + dao-dashboard]
+  end
+  subgraph satellite[&quot;Satellite repos&quot;]
+    GSP[genesis-world GSP]
+    LEV[T-Lev-8 deal room]
+    BUILD[T-Build TPLOS]
+    TRO[Troptions private]
+    TEX[TExchange]
+    AUR[aurora-site]
+    IMP[impact-site]
+    SOL[solana-launcher]
+  end
+  subgraph live[&quot;Live Unykorn edge&quot;]
+    HUB[troptions.unykorn.org]
+    LIVE[troptionslive.unykorn.org]
+    LAUNCH[launch.unykorn.org]
+    EDU[fthedu.unykorn.org]
+    X402[x402.unykorn.org AWS]
+  end
+  SNP --&gt; L1
+  SNP --&gt; BE
+  monorepo --&gt; HUB
+  TRO --&gt; HUB
+  TEX --&gt; HUB
+  SOL --&gt; LAUNCH
+  GSP --&gt; SNP
+  LEV --&gt; SNP
+  BUILD --&gt; SNP
+</code></pre>
+<p><strong>genesis-world (GSP)</strong> is a <strong>parallel capital-coordination stack</strong> — not merged into Troptions-full-pack. It complements SNP, x402, and TROPTIONS L1 (12-crate Rust L0, AI agents, five rails).</p>
+<p><strong>SNP (Sovereign Namespace Protocol)</strong> is the <strong>constitutional layer</strong>: post-quantum namespace roots, Dilithium5 verification, and stateless trust primitives referenced by L1 namespace migration (<code>scripts/migrate-namespaces-to-l1.py</code>), Exchange OS proof surfaces, and partner deal rooms. It is <strong>not</strong> a revenue product by itself — it governs <strong>what names and claims are allowed</strong> across the stack.</p>
+<hr />
+<h2>Core repos (operator catalog)</h2>
+<table>
+<thead>
+<tr>
+<th>Repo</th>
+<th>GitHub</th>
+<th>Local path (if cloned)</th>
+<th>Deploy / public URL</th>
+<th>Status</th>
+<th>Role &amp; link to full-pack</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Troptions-full-pack</strong></td>
+<td><a href="https://github.com/FTHTrading/Troptions-full-pack">FTHTrading/Troptions-full-pack</a></td>
+<td><code>C:\Users\Kevan\Troptions-full-pack</code></td>
+<td><a href="https://fthtrading.github.io/Troptions-full-pack/">GitHub Pages</a></td>
+<td><strong>Pages LIVE</strong></td>
+<td>Monorepo: Rust L1, Python backends, DAO, <code>frontends/exchange-os</code>, investor site → <code>docs/</code></td>
+</tr>
+<tr>
+<td><strong>sovereign-namespace-protocol</strong></td>
+<td><a href="https://github.com/FTHTrading/sovereign-namespace-protocol">FTHTrading/sovereign-namespace-protocol</a></td>
+<td><em>(not cloned on this machine)</em></td>
+<td>—</td>
+<td><strong>GitHub public</strong></td>
+<td>SNP v1.0 spec + verification; root trust for namespaces consumed by L1 and partner OS repos</td>
+</tr>
+<tr>
+<td><strong>T-Lev-8-</strong></td>
+<td><a href="https://github.com/FTHTrading/T-Lev-8-">FTHTrading/T-Lev-8-</a></td>
+<td><code>C:\Users\Kevan\Documents\GitHub\T-Lev-8-</code></td>
+<td><a href="https://fthtrading.github.io/T-Lev-8-/">GitHub Pages</a></td>
+<td><strong>Pages LIVE</strong></td>
+<td>RWA deal room, LEV8 gates; licensing surface adjacent to Exchange OS desk narrative</td>
+</tr>
+<tr>
+<td><strong>T-Build</strong></td>
+<td><a href="https://github.com/FTHTrading/T-Build">FTHTrading/T-Build</a></td>
+<td><code>C:\Users\Kevan\Documents\UNYKORN_Ecosystem\T-Build</code></td>
+<td>—</td>
+<td><strong>Local / sandbox</strong></td>
+<td>TPLOS partner launch OS; sandbox for partner token launches (feeds launcher + Exchange OS patterns)</td>
+</tr>
+<tr>
+<td><strong>Troptions</strong></td>
+<td><a href="https://github.com/FTHTrading/Troptions">FTHTrading/Troptions</a></td>
+<td><code>C:\Users\Kevan\troptions</code></td>
+<td><a href="https://troptions.vercel.app">Vercel</a></td>
+<td><strong>Private repo · Vercel LIVE</strong></td>
+<td>Institutional Exchange OS source; <code>frontends/exchange-os</code> in full-pack is a synchronized extract</td>
+</tr>
+<tr>
+<td><strong>aurora-site</strong></td>
+<td><a href="https://github.com/FTHTrading/aurora-site">FTHTrading/aurora-site</a></td>
+<td><code>C:\Users\Kevan\Documents\UNYKORN_Ecosystem\aurora-site</code></td>
+<td><a href="https://fthtrading.github.io/aurora-site/">Pages</a> · <code>aurora.unykorn.org</code></td>
+<td><strong>Pages LIVE · custom DNS ERR</strong></td>
+<td>Aurora RWA portal (ESG / asset storytelling)</td>
+</tr>
+<tr>
+<td><strong>impact-site</strong></td>
+<td><a href="https://github.com/FTHTrading/impact-site">FTHTrading/impact-site</a></td>
+<td><code>C:\Users\Kevan\Documents\UNYKORN_Ecosystem\impact-site</code></td>
+<td><code>impact.unykorn.org</code></td>
+<td><strong>Custom DNS ERR · Pages 404</strong></td>
+<td>Impact / ESG portal — repo exists; production Pages/DNS needs operator fix</td>
+</tr>
+<tr>
+<td><strong>solana-launcher</strong></td>
+<td><a href="https://github.com/FTHTrading/solana-launcher">FTHTrading/solana-launcher</a></td>
+<td><code>C:\Users\Kevan\solana-launcher</code> <em>(verify remote)</em></td>
+<td><a href="https://launch.unykorn.org">launch.unykorn.org</a></td>
+<td><strong>Vercel/Unykorn LIVE</strong></td>
+<td>SPL + NFT launcher SaaS; mint registry + system truth linked from Exchange OS nav</td>
+</tr>
+<tr>
+<td><strong>UnyKorn-X402-aws</strong></td>
+<td><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">FTHTrading/UnyKorn-X402-aws</a></td>
+<td><code>C:\Users\Kevan\UnyKorn-X402-aws</code></td>
+<td><a href="https://x402.unykorn.org/health">x402.unykorn.org/health</a> · <a href="https://twin.unykorn.org">twin.unykorn.org</a></td>
+<td><strong>Public · LIVE AWS+CF</strong></td>
+<td>Production x402 mesh + Apostle ATP; monorepo <code>backend/x402-gateway</code> is lightweight sidecar only</td>
+</tr>
+<tr>
+<td><strong>genesis-world</strong></td>
+<td><a href="https://github.com/FTHTrading/genesis-world">FTHTrading/genesis-world</a></td>
+<td><code>C:\Users\Kevan\genesis-world</code></td>
+<td><a href="https://drunks.app">drunks.app</a> · <a href="https://gsp-api.kevanbtc.workers.dev/api/health">gsp-api health</a></td>
+<td><strong>GitHub public · LIVE</strong></td>
+<td>Genesis Sentience Protocol (GSP): 12-crate Rust L0, AI agents, 5 rails. <strong>Not</strong> in full-pack monorepo — parallel stack to SNP/x402/TROPTIONS L1</td>
+</tr>
+<tr>
+<td><strong>TExchange</strong></td>
+<td><a href="https://github.com/FTHTrading/TExchange">FTHTrading/TExchange</a></td>
+<td><code>C:\Users\Kevan\GitHub_Audit\TExchange</code></td>
+<td>Vercel (project-specific)</td>
+<td><strong>GitHub public</strong></td>
+<td>Exchange variant / deployment lineage; shares Exchange OS architecture with Troptions</td>
+</tr>
+</tbody>
+</table>
+<h3>genesis-world (GSP) — satellite detail</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repo</strong></td>
+<td><a href="https://github.com/FTHTrading/genesis-world">github.com/FTHTrading/genesis-world</a> — <strong>Public</strong></td>
+</tr>
+<tr>
+<td><strong>Product</strong></td>
+<td>Genesis Sentience Protocol (GSP) — 12-crate Rust L0, AI agents, 5 sovereign rails</td>
+</tr>
+<tr>
+<td><strong>Live</strong></td>
+<td><a href="https://drunks.app">drunks.app</a> (28-page dashboard) · <code>gsp-api</code> Cloudflare Worker · Moltbot treasury <code>:3402</code> (x402 USDC on Polygon — start locally per README)</td>
+</tr>
+<tr>
+<td><strong>On-chain</strong></td>
+<td>9 Polygon contracts + 15 soul-bound NFTs — addresses in repo README; label <strong>verify on PolygonScan</strong> (optional <code>POLYGONSCAN_API_KEY</code> in <code>.env.example</code>)</td>
+</tr>
+<tr>
+<td><strong>Relation to Troptions</strong></td>
+<td>Parallel capital-coordination stack; complements SNP, x402 mesh, and TROPTIONS L1 — <strong>not</strong> merged into Troptions-full-pack</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Live Unykorn surfaces (curl-verified 2026-05-21)</h2>
+<table>
+<thead>
+<tr>
+<th>URL</th>
+<th>HTTP</th>
+<th>Product name (investor language)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>https://troptions.unykorn.org/troptions</td>
+<td>200</td>
+<td>Institutional brand hub</td>
+</tr>
+<tr>
+<td>https://troptionsexchange.unykorn.org/exchange-os</td>
+<td>200</td>
+<td>Exchange OS control plane</td>
+</tr>
+<tr>
+<td>https://troptionslive.unykorn.org/sports</td>
+<td>200</td>
+<td>Sports &amp; event network (TTN / WC26)</td>
+</tr>
+<tr>
+<td>https://launch.unykorn.org</td>
+<td>200</td>
+<td>Token &amp; NFT launcher</td>
+</tr>
+<tr>
+<td>https://fthedu.unykorn.org</td>
+<td>200</td>
+<td>Education platform (FTH Academy)</td>
+</tr>
+<tr>
+<td>https://x402.unykorn.org/health</td>
+<td>200</td>
+<td>x402 payment mesh health (UnyKorn AWS + CF)</td>
+</tr>
+<tr>
+<td>https://twin.unykorn.org</td>
+<td>522/timeout*</td>
+<td>Digital twin — agent mesh demo (origin may be down; re-probe)</td>
+</tr>
+<tr>
+<td>https://x402api.unykorn.org</td>
+<td>timeout*</td>
+<td>x402 API docs (re-probe before investor demos)</td>
+</tr>
+</tbody>
+</table>
+<p>*Twin/API docs: intermittent at 2026-05-21 curl; health endpoint was stable.<br />
+| https://troptions.vercel.app | 200 | Troptions institutional preview (private repo deploy) |<br />
+| https://portfolio.unykorn.org | 200 | Portfolio &amp; proof registry |<br />
+| https://goat.unykorn.org | 200 | GoatX token surface |<br />
+| https://whichway.live | 200 | WWAI guest OS |<br />
+| https://fifa.unykorn.org | 200 | WWAI FIFA host |<br />
+| https://drunks.app | 200 | Genesis World (GSP) live dashboard |<br />
+| https://gsp-api.kevanbtc.workers.dev/api/health | 200 | GSP API Worker health |</p>
+<hr />
+<h2>NOT live (honest)</h2>
+<table>
+<thead>
+<tr>
+<th>Host / URL</th>
+<th>HTTP</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>https://ai.troptions.org</td>
+<td>ERR</td>
+<td>DONK tutor — nginx template only in full-pack; use local quickstart or future DNS</td>
+</tr>
+<tr>
+<td>https://ttn.troptions.org</td>
+<td>ERR</td>
+<td>TTN edge hostname not pointed; sports live on <code>troptionslive.unykorn.org</code></td>
+</tr>
+<tr>
+<td>https://dao.troptions.org</td>
+<td>ERR</td>
+<td>DAO dashboard public edge not deployed; <code>dao-service</code> local :8093</td>
+</tr>
+<tr>
+<td>https://aurora.unykorn.org</td>
+<td>ERR</td>
+<td>Custom domain not resolving; use GitHub Pages URL until DNS fixed</td>
+</tr>
+<tr>
+<td>https://impact.unykorn.org</td>
+<td>ERR</td>
+<td>Custom domain not resolving; GitHub Pages project returns 404 — fix deploy branch</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>x402 payment mesh (UnyKorn — production)</h2>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Where it lives</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>UnyKorn-X402-aws</strong></td>
+<td><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">github.com/FTHTrading/UnyKorn-X402-aws</a></td>
+<td><strong>Public</strong> · LIVE AWS + Cloudflare</td>
+</tr>
+<tr>
+<td>Public health</td>
+<td><code>https://x402.unykorn.org/health</code></td>
+<td><strong>LIVE</strong> — gateway <code>x402_mode: live</code>, Apostle <code>chain_id: 7332</code> operational (curl 2026-05-21)</td>
+</tr>
+<tr>
+<td>Digital twin</td>
+<td><code>https://twin.unykorn.org</code></td>
+<td><strong>LIVE*</strong> — agent mesh UI (origin flaky; 522 observed)</td>
+</tr>
+<tr>
+<td>API docs</td>
+<td><code>https://x402api.unykorn.org</code></td>
+<td><strong>LIVE*</strong> — operator docs (probe before demos)</td>
+</tr>
+<tr>
+<td>Credit gateway package</td>
+<td><code>packages/x402-credit-gateway</code></td>
+<td>Production edge (:4020)</td>
+</tr>
+<tr>
+<td>AWS runbooks</td>
+<td><code>aws/X402_AWS_*.md</code></td>
+<td>EC2 + systemd + tunnel cutover</td>
+</tr>
+<tr>
+<td>Monorepo sidecar</td>
+<td><code>Troptions-full-pack/backend/x402-gateway/</code> (:4020)</td>
+<td><strong>On <code>main</code></strong> — lightweight proxy/staging; <strong>not</strong> the public mesh</td>
+</tr>
+</tbody>
+</table>
+<p>Pay-per-request for AI agents (HTTP 402, ATP, <code>X-Payment-Proof</code>) — <strong>not</strong> API-key billing. See <a href="X402_INTEGRATION.html">X402_INTEGRATION.md</a>.</p>
+<p>Do <strong>not</strong> conflate monorepo <code>backend/x402-gateway</code> with <code>x402.unykorn.org</code> unless you deploy and point DNS yourself.</p>
+<hr />
+<h2>Troptions-full-pack internal map</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Investor-facing name</th>
+<th>Connects to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>l1/</code></td>
+<td>TROPTIONS L1</td>
+<td>SNP namespaces, RocksDB, treasury, DAO RPCs</td>
+</tr>
+<tr>
+<td><code>backend/fth-academy/</code></td>
+<td>Education platform backend</td>
+<td><code>fthedu.unykorn.org</code></td>
+</tr>
+<tr>
+<td><code>backend/ttn-launcher/</code></td>
+<td>Broadcast / TTN registry</td>
+<td><code>troptionslive.unykorn.org</code></td>
+</tr>
+<tr>
+<td><code>ai/donk-tutor/</code></td>
+<td>AI tutor (local)</td>
+<td>Future <code>ai.troptions.org</code></td>
+</tr>
+<tr>
+<td><code>backend/dao-service/</code> + <code>frontends/dao-dashboard/</code></td>
+<td>Governance</td>
+<td>Future <code>dao.troptions.org</code></td>
+</tr>
+<tr>
+<td><code>frontends/exchange-os/</code></td>
+<td>Exchange OS (extract)</td>
+<td>Synced from private <strong>Troptions</strong> repo</td>
+</tr>
+<tr>
+<td><code>sites/investor/</code></td>
+<td>Investor showcase</td>
+<td>Exports to <code>docs/</code> for Pages</td>
+</tr>
+<tr>
+<td><code>contracts/polygon/</code></td>
+<td>KENNY / EVL community assets</td>
+<td>Proof docs + mainnet addresses in README</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Additional FTHTrading repos discovered locally</h2>
+<p>Not in the original operator table but present under <code>C:\Users\Kevan</code> or GitHub org:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>portfolio-unykorn</code> / <strong>portfolio-</strong></td>
+<td>Live https://portfolio.unykorn.org</td>
+</tr>
+<tr>
+<td><code>UnyKorn-X402-aws</code></td>
+<td><strong>Public</strong> — production x402 mesh + Apostle on AWS (<code>aws/</code>, <code>proofs/</code>)</td>
+</tr>
+<tr>
+<td><code>fth-capital-os</code>, <code>fth-distribution-os</code>, <code>fth-operator-hub</code></td>
+<td>Capital / distribution operator tools</td>
+</tr>
+<tr>
+<td><code>unykorn-rwa-treasury-os</code>, <code>unykorn-asset-infrastructure-os</code></td>
+<td>RWA treasury &amp; asset OS</td>
+</tr>
+<tr>
+<td><code>troptions-event-os</code>, <code>troptions-launch-os</code>, <code>troptions-partner-launch-os</code></td>
+<td>Event &amp; launch automation</td>
+</tr>
+<tr>
+<td><code>needai-phone-service</code> skill path</td>
+<td>NEED AI telecom (separate product line)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Gaps (action items)</h2>
+<ol>
+<li>Point <strong>troptions.org</strong> subdomains (<code>ai</code>, <code>ttn</code>, <code>dao</code>) or keep investor copy on <strong>unykorn.org</strong> only.</li>
+<li>Fix <strong>impact-site</strong> GitHub Pages deploy (404) and <strong>aurora/impact</strong> custom DNS at <code>*.unykorn.org</code>.</li>
+<li>Align <strong>solana-launcher</strong> local folder remote (operator machine may point at wrong origin — verify before edits).</li>
+<li>Publish <strong>T-Build</strong> sandbox to a stable preview URL when TPLOS partners need demos.</li>
+<li>Keep <strong>Exchange desk $175M</strong> and similar figures in <strong>attestation / PENDING</strong> truth labels until proofs land.</li>
+</ol>
+<hr />
+<h2>Related docs</h2>
+<ul>
+<li><a href="DOMAIN_TRUTH_TABLE.html">Domain truth table</a></li>
+<li><a href="X402_INTEGRATION.html">x402 integration (monorepo ↔ UnyKorn)</a></li>
+<li><a href="UNYKORN-ECOSYSTEM-MAP.html">UNYKORN ecosystem map (layer detail)</a></li>
+<li><a href="../proof/truth-labels.html">Truth labels</a></li>
+<li><a href="https://fthtrading.github.io/Troptions-full-pack/">Investor site</a> — sections <strong>FTH Ecosystem</strong> · <strong>Verification</strong></li>
+<li><a href="VERIFICATION_STATUS.html">Verification status</a></li>
+<li><a href="FINAL_ECOSYSTEM_AUDIT.html">Final ecosystem audit (verified)</a></li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/ECOSYSTEM_MAP.html</p>
+</body>
+</html>

@@ -40,7 +40,7 @@ export function Downloads() {
           rel="noopener noreferrer"
           className="text-[var(--color-gold-light)] hover:underline"
         >
-          GitHub: ON_CHAIN_PROOF.md
+          On-chain proof (HTML)
         </a>
         <a
           href={XRPL_STELLAR_VERIFICATION_URL}
@@ -48,7 +48,7 @@ export function Downloads() {
           rel="noopener noreferrer"
           className="text-[var(--color-gold-light)] hover:underline"
         >
-          GitHub: XRPL_STELLAR_VERIFICATION.md
+          XRPL &amp; Stellar verification
         </a>
         <a
           href={VALUATION_URL}
@@ -56,7 +56,7 @@ export function Downloads() {
           rel="noopener noreferrer"
           className="text-[var(--color-gold-light)] hover:underline"
         >
-          GitHub: VALUATION_AND_COMPARABLES.md
+          Valuation &amp; comparables
         </a>
         <a
           href={REPO_URL}
