@@ -1,3 +1,9 @@
+---
+title: TROPTIONS Revenue Engine
+layout: default
+permalink: /technical/TROPTIONS_REVENUE_ENGINE.html
+---
+
 # TROPTIONS Revenue Engine
 
 **Truth labels:** PROVEN = responds today · PIPELINE = wired stub · PROJECTION = modeled dollars

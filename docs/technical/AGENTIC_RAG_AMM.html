@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agentic RAG and AMM</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Agentic RAG and AMM</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Agentic RAG + AMM Orchestration</h1>
+<p><strong>Status:</strong> PIPELINE (stubs respond; revenue figures are PROJECTION)<br />
+<strong>Date:</strong> 2026-05-21</p>
+<h2>Architecture</h2>
+<pre><code class="language-mermaid">flowchart TB
+  subgraph agents [Agent Orchestrator :4031]
+    RA[ResearchAgent]
+    RK[RiskAgent]
+    EX[ExecutionAgent]
+    RA --&gt; RK --&gt; EX
+  end
+
+  MCP[MCP XRPL Server :4032]
+  ARB[arbitrage-bot :4028]
+  CE[compliance-engine :4025]
+  X4[x402-gateway-v2 :4030]
+  PO[payment-orchestrator :4022]
+  BAAS[baas-api :8097]
+  DASH[baas-dashboard :4029]
+  X4M[backend x402-gateway :4020]
+
+  agents --&gt; MCP
+  EX --&gt; ARB
+  RK --&gt; CE
+  RA --&gt; X4
+  EX --&gt; PO
+  agents --&gt; BAAS
+  X4 --&gt; BAAS
+  DASH -. UI .-&gt; BAAS
+  X4M -. Apostle mesh .-&gt; X4
+</code></pre>
+<h2>Port map (local PM2)</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Port</th>
+<th>Path</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backend <code>x402-gateway</code> (Apostle mesh)</td>
+<td><strong>4020</strong></td>
+<td><code>backend/x402-gateway/</code></td>
+<td>PROVEN (health)</td>
+</tr>
+<tr>
+<td>popeye-relay</td>
+<td>4021</td>
+<td><code>backend/popeye-relay/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>payment-orchestrator</td>
+<td><strong>4022</strong></td>
+<td><code>fiat-rails/orchestrator/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>fedwire-adapter</td>
+<td>4023</td>
+<td><code>fiat-rails/fedwire-adapter/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>swift-bridge</td>
+<td>4024</td>
+<td><code>fiat-rails/swift-bridge/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>compliance-engine</td>
+<td><strong>4025</strong></td>
+<td><code>fiat-rails/compliance-engine/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>neobank-api</td>
+<td>4026</td>
+<td><code>fiat-rails/neobank-api/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>iou-reserve-monitor</td>
+<td>4027</td>
+<td><code>fiat-rails/iou-reserve-monitor/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>arbitrage-bot</td>
+<td><strong>4028</strong></td>
+<td><code>fiat-rails/arbitrage-bot/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>baas-dashboard (UI)</td>
+<td><strong>4029</strong></td>
+<td><code>fiat-rails/baas-dashboard/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>x402-gateway-v2 (paid proxies + stats)</td>
+<td><strong>4030</strong></td>
+<td><code>fiat-rails/x402-gateway/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td><strong>agent-orchestrator</strong></td>
+<td><strong>4031</strong></td>
+<td><code>fiat-rails/agent-orchestrator/</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>MCP XRPL (external vendor)</td>
+<td><strong>4032</strong></td>
+<td>install per <code>scripts/setup-mcp-xrpl.ps1</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>baas-api (liquidity API)</td>
+<td><strong>8097</strong></td>
+<td><code>fiat-rails/baas-api/</code></td>
+<td>PIPELINE</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> User-facing BaaS “:4029” is the dashboard; programmatic agent registration uses <strong>baas-api :8097</strong> (<code>POST /api/v1/agents/register</code>). The orchestrator proxies registration to 8097.</p>
+<h2>x402 stats</h2>
+<ul>
+<li><strong>Canonical (fiat-rails):</strong> <code>GET http://127.0.0.1:4030/x402/stats</code></li>
+<li><strong>Legacy mesh sidecar:</strong> <code>GET http://127.0.0.1:4020/health</code> (Python gateway)</li>
+</ul>
+<h2>Agent revenue honesty</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Truth label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Health endpoints return JSON</td>
+<td><strong>PROVEN</strong></td>
+</tr>
+<tr>
+<td>Agent cycle runs Research → Risk → Execution</td>
+<td><strong>PROVEN</strong> (stub logic)</td>
+</tr>
+<tr>
+<td>Arbitrage profit today</td>
+<td><strong>PIPELINE</strong> until MSB omnibus + live pools</td>
+</tr>
+<tr>
+<td>x402 metered revenue totals</td>
+<td><strong>PROJECTION</strong> (counters at zero)</td>
+</tr>
+<tr>
+<td>MCP XRPL ledger reads</td>
+<td><strong>PIPELINE</strong> (requires vendor MCP on :4032)</td>
+</tr>
+<tr>
+<td>FTH Academy Stripe</td>
+<td><strong>PROVEN</strong> (separate product)</td>
+</tr>
+</tbody>
+</table>
+<h2>Tool wrappers (<code>agent-orchestrator/lib/tools.js</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>execute_arbitrage</code></td>
+<td><code>POST :4028/execute</code> or <code>/start</code>; fallback <code>POST :4022/api/v1/arbitrage</code></td>
+</tr>
+<tr>
+<td><code>compliance_screen</code></td>
+<td><code>POST :4025/screen</code></td>
+</tr>
+<tr>
+<td><code>x402_pay_and_fetch</code></td>
+<td><code>GET :4030/x402/...</code> with mock <code>X-402-Payment</code></td>
+</tr>
+<tr>
+<td><code>registerAgent</code></td>
+<td><code>POST :8097/api/v1/agents/register</code></td>
+</tr>
+</tbody>
+</table>
+<h2>MCP XRPL setup</h2>
+<pre><code class="language-powershell">.\scripts\setup-mcp-xrpl.ps1
+</code></pre>
+<p>Install the vendor MCP XRPL server separately (placeholder repo in script). Set <code>MCP_XRPL_URL=http://127.0.0.1:4032</code> in <code>fiat-rails/agent-orchestrator/.env</code>.</p>
+<h2>Activation</h2>
+<pre><code class="language-powershell">.\scripts\activate-troptions-revenue.ps1 -DryRun
+</code></pre>
+<h2>API quick reference</h2>
+<pre><code class="language-bash"># Agent cycle (DRY_RUN default true)
+curl -X POST http://127.0.0.1:4031/run-cycle -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;agent_id\&quot;:\&quot;agent-demo\&quot;,\&quot;wallet\&quot;:\&quot;rDemo\&quot;,\&quot;capital_troptions\&quot;:100000,\&quot;dry_run\&quot;:true}&quot;
+
+# Register agent (orchestrator proxy → baas-api)
+curl -X POST http://127.0.0.1:4031/agents/register -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;agent_id\&quot;:\&quot;agent-demo\&quot;,\&quot;wallet\&quot;:\&quot;rDemo\&quot;,\&quot;capital_troptions\&quot;:100000}&quot;
+
+# Arbitrage
+curl -X POST http://127.0.0.1:4028/start
+curl -X POST http://127.0.0.1:4028/execute -H &quot;Content-Type: application/json&quot; -d &quot;{\&quot;dry_run\&quot;:true}&quot;
+
+# x402 stats (use 4030, not 4020)
+curl http://127.0.0.1:4030/x402/stats
+</code></pre>
+<p>See also: <a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS_REVENUE_ENGINE.md</a>, <a href="ARBITRAGE_AND_BAAS.html">ARBITRAGE_AND_BAAS.md</a>.</p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/AGENTIC_RAG_AMM.html</p>
+</body>
+</html>

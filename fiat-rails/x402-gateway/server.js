@@ -15,6 +15,9 @@ app.get('/health', (req, res) => {
 // Mount proxied routes
 app.use('/x402', proxiedRoutes);
 
+// Alias — curl http://127.0.0.1:4030/stats (same payload as /x402/stats)
+app.get('/stats', (req, res) => res.redirect(307, '/x402/stats'));
+
 // Legacy x402 endpoints (compatibility)
 app.get('/status', (req, res) => {
  res.json({

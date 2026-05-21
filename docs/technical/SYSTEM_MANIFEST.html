@@ -108,7 +108,7 @@
        ▲
        └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
 </code></pre>
-<p><strong>Port discipline:</strong> <code>popeye-relay</code> <strong>:4021</strong>; fiat rails <strong>:4022–:4028</strong>; BaaS API <strong>:8097</strong> — no collision with core backends 8090–8093.</p>
+<p><strong>Port discipline:</strong> <code>popeye-relay</code> <strong>:4021</strong>; fiat rails <strong>:4022–:4028</strong>; BaaS dashboard <strong>:4029</strong>; x402-gateway-v2 <strong>:4030</strong>; agent-orchestrator <strong>:4031</strong>; MCP XRPL <strong>:4032</strong>; BaaS liquidity API <strong>:8097</strong> — no collision with core backends 8090–8093.</p>
 <hr />
 <h2>Fiat-rails service integration table</h2>
 <table>
@@ -172,15 +172,43 @@
 <td><strong>PIPELINE</strong></td>
 </tr>
 <tr>
+<td><code>baas-dashboard</code></td>
+<td><strong>4029</strong></td>
+<td><code>fiat-rails/baas-dashboard/</code></td>
+<td>BaaS self-service UI (tokens, billing)</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>x402-gateway-v2</code></td>
+<td><strong>4030</strong></td>
+<td><code>fiat-rails/x402-gateway/</code></td>
+<td>Paid proxies; <code>GET /x402/stats</code></td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>agent-orchestrator</code></td>
+<td><strong>4031</strong></td>
+<td><code>fiat-rails/agent-orchestrator/</code></td>
+<td>MCP XRPL + Research/Risk/Execution agents</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>MCP XRPL (vendor)</td>
+<td><strong>4032</strong></td>
+<td>external</td>
+<td>Ledger tools for agents</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
 <td><code>baas-api</code></td>
 <td><strong>8097</strong></td>
 <td><code>fiat-rails/baas-api/</code></td>
-<td>BaaS x402 onboarding + PROJECTION dashboard</td>
+<td>Liquidity API; <code>POST /api/v1/agents/register</code></td>
 <td><strong>PROJECTION</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Setup:</strong> <code>.\scripts\setup-fiat-rails.ps1</code> · <code>.\scripts\setup-arbitrage-baas.ps1</code> · <strong>PM2:</strong> <code>pm2 start ecosystem.config.js --only payment-orchestrator,fedwire-adapter,swift-bridge,compliance-engine,neobank-api,iou-reserve-monitor,arbitrage-bot,baas-api</code></p>
+<p><strong>Setup:</strong> <code>.\scripts\setup-fiat-rails.ps1</code> · <code>.\scripts\setup-arbitrage-baas.ps1</code> · <code>.\scripts\setup-mcp-xrpl.ps1</code> · <code>.\scripts\activate-troptions-revenue.ps1 -DryRun</code> · <strong>PM2:</strong> <code>pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,baas-dashboard,agent-orchestrator</code></p>
 <p><strong>OpenAPI:</strong> <code>fiat-rails/orchestrator/openapi.yaml</code></p>
 <hr />
 <h2>IOU issuer model (<strong>PROVEN</strong> supply, <strong>PIPELINE</strong> backing)</h2>

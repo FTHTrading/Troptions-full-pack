@@ -68,7 +68,7 @@ Legacy Python stubs under `backend/payment-orchestrator` and `backend/msb-compli
        └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
 ```
 
-**Port discipline:** `popeye-relay` **:4021**; fiat rails **:4022–:4028**; BaaS API **:8097** — no collision with core backends 8090–8093.
+**Port discipline:** `popeye-relay` **:4021**; fiat rails **:4022–:4028**; BaaS dashboard **:4029**; x402-gateway-v2 **:4030**; agent-orchestrator **:4031**; MCP XRPL **:4032**; BaaS liquidity API **:8097** — no collision with core backends 8090–8093.
 
 ---
 
@@ -83,9 +83,13 @@ Legacy Python stubs under `backend/payment-orchestrator` and `backend/msb-compli
 | `neobank-api` | **4026** | `fiat-rails/neobank-api/` | Mobile/card partner (design) | **PROJECTION** |
 | `iou-reserve-monitor` | **4027** | `fiat-rails/iou-reserve-monitor/` | Omnibus statements vs ledger supply | **PIPELINE** |
 | `arbitrage-bot` | **4028** | `fiat-rails/arbitrage-bot/` | x402 orderbook watch → orchestrator arb | **PIPELINE** |
-| `baas-api` | **8097** | `fiat-rails/baas-api/` | BaaS x402 onboarding + PROJECTION dashboard | **PROJECTION** |
+| `baas-dashboard` | **4029** | `fiat-rails/baas-dashboard/` | BaaS self-service UI (tokens, billing) | **PIPELINE** |
+| `x402-gateway-v2` | **4030** | `fiat-rails/x402-gateway/` | Paid proxies; `GET /x402/stats` | **PIPELINE** |
+| `agent-orchestrator` | **4031** | `fiat-rails/agent-orchestrator/` | MCP XRPL + Research/Risk/Execution agents | **PIPELINE** |
+| MCP XRPL (vendor) | **4032** | external | Ledger tools for agents | **PIPELINE** |
+| `baas-api` | **8097** | `fiat-rails/baas-api/` | Liquidity API; `POST /api/v1/agents/register` | **PROJECTION** |
 
-**Setup:** `.\scripts\setup-fiat-rails.ps1` · `.\scripts\setup-arbitrage-baas.ps1` · **PM2:** `pm2 start ecosystem.config.js --only payment-orchestrator,fedwire-adapter,swift-bridge,compliance-engine,neobank-api,iou-reserve-monitor,arbitrage-bot,baas-api`
+**Setup:** `.\scripts\setup-fiat-rails.ps1` · `.\scripts\setup-arbitrage-baas.ps1` · `.\scripts\setup-mcp-xrpl.ps1` · `.\scripts\activate-troptions-revenue.ps1 -DryRun` · **PM2:** `pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,baas-dashboard,agent-orchestrator`
 
 **OpenAPI:** `fiat-rails/orchestrator/openapi.yaml`
 

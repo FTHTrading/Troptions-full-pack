@@ -1,3 +1,9 @@
+---
+title: Agentic RAG and AMM
+layout: default
+permalink: /technical/AGENTIC_RAG_AMM.html
+---
+
 # Agentic RAG + AMM Orchestration
 
 **Status:** PIPELINE (stubs respond; revenue figures are PROJECTION)  
