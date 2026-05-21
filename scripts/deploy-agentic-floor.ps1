@@ -18,7 +18,7 @@ if (-not (Test-Path $envPath)) {
 
 Push-Location $Fiat
 $dryFlag = if ($DryRun) { "true" } else { "false" }
-pm2 start ecosystem.config.js --only agent-orchestrator,x402-gateway-v2,x402-eu,x402-jp,baas-api,arbitrage-bot --update-env 2>$null
+pm2 start ecosystem.config.js --only agent-orchestrator,x402-gateway-v2,x402-gateway-eu,x402-gateway-jp,baas-api,arbitrage-bot --update-env 2>$null
 pm2 set agent-orchestrator:DRY_RUN $dryFlag 2>$null
 Pop-Location
 

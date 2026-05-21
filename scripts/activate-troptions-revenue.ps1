@@ -23,7 +23,7 @@ if (-not (Test-Path $agentEnv)) {
 if (-not $SkipPm2) {
     Push-Location $Fiat
     $dryFlag = if ($DryRun) { "true" } else { "false" }
-    pm2 start ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-eu,x402-jp,agent-orchestrator --update-env 2>$null
+    pm2 start ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-gateway-eu,x402-gateway-jp,agent-orchestrator --update-env 2>$null
     pm2 set agent-orchestrator:DRY_RUN $dryFlag 2>$null
     pm2 set arbitrage-bot:DRY_RUN $dryFlag 2>$null
     Pop-Location
@@ -36,7 +36,8 @@ if (-not $SkipHealth) {
         @{ Name = "agent-orchestrator"; Url = "http://127.0.0.1:4031/health" },
         @{ Name = "arbitrage-bot"; Url = "http://127.0.0.1:4028/health" },
         @{ Name = "x402-gateway-v2"; Url = "http://127.0.0.1:4030/health" },
-        @{ Name = "x402-eu"; Url = "http://127.0.0.1:4032/health" },
+        @{ Name = "x402-gateway-eu"; Url = "http://127.0.0.1:4032/health" },
+        @{ Name = "x402-gateway-jp"; Url = "http://127.0.0.1:4033/health" },
         @{ Name = "baas-api"; Url = "http://127.0.0.1:4029/health" },
         @{ Name = "x402-stats"; Url = "http://127.0.0.1:4030/x402/stats" }
     )

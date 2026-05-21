@@ -83,6 +83,7 @@ $hub = @'
     <li><a href="MSB_FIAT_RAILS.html">MSB fiat rails (capitalization tree)</a></li>
     <li><a href="PARTNER_BANK_MESH.html">Partner bank mesh (multi-bank + Alexandrite)</a></li>
     <li><a href="ARBITRAGE_AND_BAAS.html">Arbitrage &amp; BaaS hub</a></li>
+    <li><a href="X402_GLOBAL_MESH.html">x402 global mesh (US/EU/JP ports)</a></li>
     <li><a href="BAAS_BATCH_POOLS.html">BaaS batch liquidity pools</a></li>
   </ul>
   <h2>Investor diligence (primary)</h2>
@@ -127,6 +128,7 @@ $hub = @'
     <li><a href="DOMAIN_TRUTH_TABLE.html">Domain truth table</a></li>
     <li><a href="X402_AWS_VERIFICATION.html">x402 AWS verification</a></li>
     <li><a href="X402_INTEGRATION.html">x402 integration</a></li>
+    <li><a href="X402_GLOBAL_MESH.html">x402 global mesh</a></li>
   </ul>
 </body>
 </html>

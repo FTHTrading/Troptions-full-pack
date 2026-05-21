@@ -68,7 +68,7 @@ Legacy Python stubs under `backend/payment-orchestrator` and `backend/msb-compli
        └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
 ```
 
-**Port discipline:** `popeye-relay` **:4021**; fiat rails **:4022–:4028**; **baas-api** **:4029**; x402-gateway-v2 (US) **:4030**; agent-orchestrator **:4031**; x402-eu **:4032**; x402-jp **:4033**; baas-dashboard UI **:4040**; MCP **:4731** — no collision with core backends 8090–8093. See [MULTI_X402_MESH.md](MULTI_X402_MESH.md), [AGENTIC_RAG_AMM.md](AGENTIC_RAG_AMM.md).
+**Port discipline:** `popeye-relay` **:4021**; fiat rails **:4022–:4028**; **baas-api** **:4029**; x402-gateway-v2 (US) **:4030**; agent-orchestrator **:4031**; x402-gateway-eu **:4032**; x402-gateway-jp **:4033**; baas-dashboard UI **:4040**; MCP **:4731** — no collision with core backends 8090–8093. See [MULTI_X402_MESH](MULTI_X402_MESH.html), [AGENTIC_RAG_AMM](AGENTIC_RAG_AMM.html).
 
 ---
 
@@ -86,12 +86,13 @@ Legacy Python stubs under `backend/payment-orchestrator` and `backend/msb-compli
 | `baas-api` | **4029** | `fiat-rails/baas-api/` | Agents, pools, tokens; `POST /api/v1/agents` | **PROJECTION** |
 | `x402-gateway-v2` (US) | **4030** | `fiat-rails/x402-gateway/` | Paid proxies; `GET /x402/stats` | **PIPELINE** |
 | `agent-orchestrator` | **4031** | `fiat-rails/agent-orchestrator/` | Agent Orchestration Layer | **PIPELINE** |
-| `x402-eu` | **4032** | `fiat-rails/x402-gateway-regional/` | Frankfurt regional stub | **PIPELINE** |
-| `x402-jp` | **4033** | `fiat-rails/x402-gateway-regional/` | Tokyo regional stub | **PIPELINE** |
+| MCP XRPL (reserved) | **4032** | external | Ledger tools for agents | **PIPELINE** |
+| `x402-gateway-eu` | **4032** | `fiat-rails/x402-gateway-eu/` | Frankfurt regional gateway | **PIPELINE** |
+| `x402-gateway-jp` | **4033** | `fiat-rails/x402-gateway-jp/` | Tokyo regional gateway | **PIPELINE** |
 | `baas-dashboard` | **4040** | `fiat-rails/baas-dashboard/` | BaaS self-service UI | **PIPELINE** |
 | MCP (vendor) | **4731** | external | Ledger tools; mock when down | **PIPELINE** |
 
-**Setup:** `.\scripts\deploy-agentic-floor.ps1` · `.\scripts\setup-second-x402.ps1` · `.\scripts\activate-troptions-revenue.ps1 -DryRun` · **PM2:** `pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-eu,x402-jp,agent-orchestrator`
+**Setup:** `.\scripts\setup-x402-global-mesh.ps1` · `.\scripts\setup-second-x402.ps1` · `.\scripts\activate-troptions-revenue.ps1 -DryRun` · **PM2:** `pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-gateway-eu,x402-gateway-jp,agent-orchestrator`
 
 **OpenAPI:** `fiat-rails/orchestrator/openapi.yaml`
 

@@ -42,9 +42,9 @@ app.get('/health', async (req, res) => {
       baas_api: process.env.BAAS_API_URL || 'http://127.0.0.1:4029',
       payment_orchestrator: process.env.ORCHESTRATOR_URL || 'http://127.0.0.1:4022',
       x402_us: process.env.X402_US_URL || 'http://127.0.0.1:4030',
-      x402_eu: process.env.X402_EU_URL || 'http://127.0.0.1:4034',
-      x402_jp: process.env.X402_JP_URL || 'http://127.0.0.1:4035',
-      mcp_xrpl_reserved: 'http://127.0.0.1:4032',
+      x402_eu: process.env.X402_EU_URL || 'http://127.0.0.1:4032',
+      x402_jp: process.env.X402_JP_URL || 'http://127.0.0.1:4033',
+      mcp: process.env.MCP_URL || 'http://127.0.0.1:4731',
     },
     projection_note: 'All agent revenue metrics are PROJECTION until live pools.',
   });

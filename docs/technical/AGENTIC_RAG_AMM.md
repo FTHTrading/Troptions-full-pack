@@ -70,12 +70,13 @@ flowchart TB
 | **baas-api** | **4029** | `fiat-rails/baas-api/` | PIPELINE |
 | x402-gateway-v2 (US) | **4030** | `fiat-rails/x402-gateway/` | PIPELINE |
 | **agent-orchestrator** | **4031** | `fiat-rails/agent-orchestrator/` | PIPELINE |
-| x402-eu | **4032** | `fiat-rails/x402-gateway-regional/` | PIPELINE |
-| x402-jp | **4033** | `fiat-rails/x402-gateway-regional/` | PIPELINE |
+| x402-gateway-eu | **4032** | `fiat-rails/x402-gateway-eu/` | PIPELINE |
+| x402-gateway-jp | **4033** | `fiat-rails/x402-gateway-jp/` | PIPELINE |
+| MCP XRPL (reserved) | **4032** | external vendor | PIPELINE |
 | baas-dashboard (UI) | **4040** | `fiat-rails/baas-dashboard/` | PIPELINE |
 | MCP (external) | **4731** | vendor install | PIPELINE |
 
-See [MULTI_X402_MESH.md](MULTI_X402_MESH.md) for NY / Frankfurt / Tokyo table.
+See [MULTI_X402_MESH](MULTI_X402_MESH.html) for NY / Frankfurt / Tokyo ports (**4030** / **4032** / **4033**).
 
 ## BaaS agent API (`:4029`)
 

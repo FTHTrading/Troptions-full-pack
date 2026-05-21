@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multi-x402 Global Mesh</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Multi-x402 Global Mesh</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Multi-x402 Global Mesh</h1>
+<p><strong>Canonical doc:</strong> <a href="X402_GLOBAL_MESH.html">X402_GLOBAL_MESH</a> — full 402 flow, endpoint map, arbitrage sequence, fee projections, and activation.</p>
+<h2>Quick port reference (corrected)</h2>
+<table>
+<thead>
+<tr>
+<th>Region</th>
+<th>Port</th>
+<th>PM2 name</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US</td>
+<td><strong>4030</strong></td>
+<td><code>x402-gateway-v2</code></td>
+<td><code>fiat-rails/x402-gateway/</code></td>
+</tr>
+<tr>
+<td>EU</td>
+<td><strong>4034</strong></td>
+<td><code>x402-gateway-eu</code></td>
+<td><code>fiat-rails/x402-gateway-eu/</code></td>
+</tr>
+<tr>
+<td>JP</td>
+<td><strong>4035</strong></td>
+<td><code>x402-gateway-jp</code></td>
+<td><code>fiat-rails/x402-gateway-jp/</code></td>
+</tr>
+<tr>
+<td>Orchestrator</td>
+<td><strong>4031</strong></td>
+<td><code>agent-orchestrator</code></td>
+<td>not a gateway</td>
+</tr>
+<tr>
+<td>MCP XRPL</td>
+<td><strong>4032</strong></td>
+<td>external</td>
+<td>reserved — <strong>not</strong> EU gateway</td>
+</tr>
+</tbody>
+</table>
+<p>Setup: <code>.\scripts\setup-x402-global-mesh.ps1</code></p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/MULTI_X402_MESH.html</p>
+</body>
+</html>

@@ -32,8 +32,8 @@ cd C:\Users\Kevan\Troptions-full-pack
 ## PM2 services (revenue stack)
 
 ```powershell
-pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-eu,x402-jp,agent-orchestrator
-pm2 start ecosystem.config.js --only x402-gateway,baas-api,agent-orchestrator,x402-eu,x402-jp
+pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-gateway-eu,x402-gateway-jp,agent-orchestrator
+pm2 start ecosystem.config.js --only x402-gateway,baas-api,agent-orchestrator
 ```
 
 ## Verification curls
@@ -44,7 +44,7 @@ curl -X POST http://127.0.0.1:4031/run-cycle -H "Content-Type: application/json"
 curl http://127.0.0.1:4030/x402/stats
 curl http://127.0.0.1:4029/health
 curl -X POST http://127.0.0.1:4028/execute -H "Content-Type: application/json" -d '{\"dry_run\":true}'
-curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H "Content-Type: application/json" -d '{\"buy_location\":\"us\",\"sell_location\":\"eu\",\"dry_run\":true}'
+curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H "Content-Type: application/json" -d '{\"buy\":\"us\",\"sell\":\"eu\",\"dry_run\":true}'
 ```
 
 ## Port reference
@@ -58,8 +58,9 @@ curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H "Content-Type: appl
 | 4029 | baas-api |
 | 4030 | x402-gateway-v2 (US) + `/x402/stats` |
 | 4031 | agent-orchestrator |
-| 4032 | x402-eu |
-| 4033 | x402-jp |
+| 4032 | MCP XRPL (reserved) |
+| 4032 | x402-gateway-eu |
+| 4033 | x402-gateway-jp |
 | 4040 | baas-dashboard UI |
 | 4731 | MCP server |
 
@@ -67,4 +68,4 @@ curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H "Content-Type: appl
 
 All agent capital, arbitrage profit, and x402 revenue totals in dashboards are **PROJECTION** until MSB omnibus, live pools, and MCP :4731 are wired.
 
-See [AGENTIC_RAG_AMM.md](AGENTIC_RAG_AMM.md), [MULTI_X402_MESH.md](MULTI_X402_MESH.md).
+See [AGENTIC_RAG_AMM](AGENTIC_RAG_AMM.html), [X402 global mesh](X402_GLOBAL_MESH.html).

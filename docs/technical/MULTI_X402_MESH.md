@@ -6,39 +6,33 @@ permalink: /technical/MULTI_X402_MESH.html
 
 # Multi-x402 Global Mesh
 
-**Status:** PIPELINE (regional stubs respond; revenue is **PROJECTION**)  
+**Status:** PIPELINE · Revenue labels: **PROJECTION** (not realized; do not cite $791K-style totals as fact)  
 **Date:** 2026-05-21
 
-## Regional gateways
+## Regional gateways (NY / Frankfurt / Tokyo)
 
 | Region | City | Port | PM2 name | Path |
 |--------|------|------|----------|------|
 | **US** | New York (NY) | **4030** | `x402-gateway-v2` | `fiat-rails/x402-gateway/` |
-| **EU** | Frankfurt | **4032** | `x402-eu` | `fiat-rails/x402-gateway-regional/` (`REGION=eu`) |
-| **JP** | Tokyo | **4033** | `x402-jp` | `fiat-rails/x402-gateway-regional/` (`REGION=jp`) |
+| **EU** | Frankfurt | **4032** | `x402-gateway-eu` | `fiat-rails/x402-gateway-eu/` |
+| **JP** | Tokyo | **4033** | `x402-gateway-jp` | `fiat-rails/x402-gateway-jp/` |
+| Orchestrator | — | **4031** | `agent-orchestrator` | not a gateway |
+| MCP | — | **4731** | external | ledger tools (mock when down) |
+| Apostle mesh | — | **4020** | `x402-gateway` (Python) | separate from fiat-rails v2 |
 
-**Apostle mesh (legacy Python):** `backend/x402-gateway` on **:4020** — not the same as fiat-rails v2 unless DNS is repointed.
+## Stats
 
-## Stats endpoints
-
-| Gateway | Stats URL |
-|---------|-----------|
-| US (canonical) | `GET http://127.0.0.1:4030/x402/stats` or `GET /stats` |
+| Gateway | URL |
+|---------|-----|
+| US | `GET http://127.0.0.1:4030/x402/stats` (alias `/stats`) |
 | EU | `GET http://127.0.0.1:4032/x402/stats` |
 | JP | `GET http://127.0.0.1:4033/x402/stats` |
-| Apostle mesh | `GET http://127.0.0.1:4020/health` (sidecar; separate counters) |
-
-All counters default to **zero** until live ATP settlement — label **PROJECTION**.
 
 ## ATP price setting
 
-ATP and x402 fee tiers are an **operator PIPELINE strategy** (not automated in this repo):
+ATP and metered fees are an **operator PIPELINE strategy** — configure PASS tiers / OpenMeter externally. Regional gateways proxy to Exchange OS; they do not auto-set live ATP prices in this repo.
 
-1. Configure regional `REGION` + upstream `EXCHANGE_OS_URL`
-2. Set PASS tier / OpenMeter pricing in x402 facilitator (external)
-3. Agent orchestrator reads stats only — does not set ATP prices live
-
-## Multi-region arbitrage (orchestrator)
+## Multi-region arbitrage
 
 ```bash
 curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi \
@@ -46,21 +40,22 @@ curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi \
   -d '{"buy_location":"us","sell_location":"eu","pair":"USD-IOU/EUR-IOU","amount_usd":5000,"dry_run":true}'
 ```
 
-Returns **PROJECTION** spread estimate; no live cross-gateway settlement in stub mode.
+Response is **PROJECTION** until cross-gateway settlement is live.
 
-## Agent revenue (honesty)
+## PROJECTION revenue
 
 | Metric | Label |
 |--------|-------|
-| Regional x402 fee counters | **PROJECTION** (zero until live) |
-| Multi-mesh arbitrage PnL | **PROJECTION** |
-| Marketing totals (e.g. $791K) | **NOT FACT** — do not cite as realized |
+| Regional x402 counters | **PROJECTION** (default zero) |
+| Multi-mesh arb PnL | **PROJECTION** |
+| Agent dashboards | **PROJECTION** |
 
-## Activation
+## Setup
 
 ```powershell
 .\scripts\setup-second-x402.ps1
 .\scripts\deploy-agentic-floor.ps1
+.\scripts\activate-troptions-revenue.ps1 -DryRun
 ```
 
 See [AGENTIC_RAG_AMM.md](AGENTIC_RAG_AMM.md), [TROPTIONS_REVENUE_ENGINE.md](TROPTIONS_REVENUE_ENGINE.md).

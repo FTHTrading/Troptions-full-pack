@@ -60,30 +60,32 @@
 <tr>
 <td>Agent AMM / RAG yield</td>
 <td><strong>PROJECTION</strong></td>
-<td>Until XRPL AMM pools + MCP :4032 live</td>
+<td>Until XRPL AMM pools + MCP :4731 live</td>
 </tr>
 <tr>
-<td>BaaS pool fees</td>
+<td>BaaS pool / agent fees</td>
 <td><strong>PROJECTION</strong></td>
-<td><code>baas-api</code> registration only</td>
+<td><code>baas-api</code> :4029 registration only</td>
 </tr>
 </tbody>
 </table>
-<p><strong>“Earning today”</strong> in investor materials must say <strong>PIPELINE</strong> for exchange-side revenue until pools are live. Academy Stripe remains the only <strong>PROVEN</strong> recurring software revenue in this monorepo.</p>
+<p><strong>Do not cite</strong> marketing agent totals (e.g. <strong>$791K</strong>) as realized revenue.</p>
 <h2>One-click activation</h2>
 <pre><code class="language-powershell">cd C:\Users\Kevan\Troptions-full-pack
 .\scripts\activate-troptions-revenue.ps1 -DryRun
+.\scripts\deploy-agentic-floor.ps1
 </code></pre>
 <h2>PM2 services (revenue stack)</h2>
-<pre><code class="language-powershell">pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,baas-dashboard,agent-orchestrator
+<pre><code class="language-powershell">pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-gateway-eu,x402-gateway-jp,agent-orchestrator
 pm2 start ecosystem.config.js --only x402-gateway,baas-api,agent-orchestrator
 </code></pre>
 <h2>Verification curls</h2>
 <pre><code class="language-powershell">curl http://127.0.0.1:4031/health
-curl -X POST http://127.0.0.1:4031/run-cycle -H &quot;Content-Type: application/json&quot; -d '{\&quot;dry_run\&quot;:true}'
+curl -X POST http://127.0.0.1:4031/run-cycle -H &quot;Content-Type: application/json&quot; -d '{\&quot;dry_run\&quot;:true,\&quot;agent_id\&quot;:\&quot;agent-demo\&quot;}'
 curl http://127.0.0.1:4030/x402/stats
-curl http://127.0.0.1:8097/health
+curl http://127.0.0.1:4029/health
 curl -X POST http://127.0.0.1:4028/execute -H &quot;Content-Type: application/json&quot; -d '{\&quot;dry_run\&quot;:true}'
+curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H &quot;Content-Type: application/json&quot; -d '{\&quot;buy\&quot;:\&quot;us\&quot;,\&quot;sell\&quot;:\&quot;eu\&quot;,\&quot;dry_run\&quot;:true}'
 </code></pre>
 <h2>Port reference</h2>
 <table>
@@ -112,11 +114,11 @@ curl -X POST http://127.0.0.1:4028/execute -H &quot;Content-Type: application/js
 </tr>
 <tr>
 <td>4029</td>
-<td>baas-dashboard</td>
+<td>baas-api</td>
 </tr>
 <tr>
 <td>4030</td>
-<td>x402-gateway-v2 + <code>/x402/stats</code></td>
+<td>x402-gateway-v2 (US) + <code>/x402/stats</code></td>
 </tr>
 <tr>
 <td>4031</td>
@@ -124,22 +126,29 @@ curl -X POST http://127.0.0.1:4028/execute -H &quot;Content-Type: application/js
 </tr>
 <tr>
 <td>4032</td>
-<td>MCP XRPL (external)</td>
+<td>MCP XRPL (reserved)</td>
 </tr>
 <tr>
-<td>8097</td>
-<td>baas-api</td>
+<td>4034</td>
+<td>x402-gateway-eu</td>
+</tr>
+<tr>
+<td>4035</td>
+<td>x402-gateway-jp</td>
+</tr>
+<tr>
+<td>4040</td>
+<td>baas-dashboard UI</td>
+</tr>
+<tr>
+<td>4731</td>
+<td>MCP server</td>
 </tr>
 </tbody>
 </table>
 <h2>PROJECTION disclaimer</h2>
-<p>All agent capital, arbitrage profit, and x402 revenue totals in dashboards are <strong>PROJECTION</strong> until:</p>
-<ol>
-<li>MSB omnibus and bank credentials are wired (fiat rails)</li>
-<li>Exchange OS liquidity pools are live</li>
-<li>MCP XRPL server is installed and reachable on :4032</li>
-</ol>
-<p>Do not commit wallet seeds or issuer secrets. See <code>.gitignore</code> patterns.</p>
+<p>All agent capital, arbitrage profit, and x402 revenue totals in dashboards are <strong>PROJECTION</strong> until MSB omnibus, live pools, and MCP :4731 are wired.</p>
+<p>See <a href="AGENTIC_RAG_AMM.html">AGENTIC_RAG_AMM</a>, <a href="X402_GLOBAL_MESH.html">X402 global mesh</a>.</p>
   </div>
   <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/TROPTIONS_REVENUE_ENGINE.html</p>
 </body>

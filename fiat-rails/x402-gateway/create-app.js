@@ -1,5 +1,5 @@
 /**
- * Shared x402 gateway v2 factory — US :4030, EU :4034, JP :4035
+ * Shared x402 gateway v2 factory — US :4030, EU :4034, JP :4035 (MCP XRPL :4032)
  */
 const express = require('express');
 const proxiedRoutes = require('./routes/proxied');

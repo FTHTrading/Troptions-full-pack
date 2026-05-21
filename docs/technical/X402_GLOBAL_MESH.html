@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>x402 Global Mesh</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>x402 Global Mesh</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>x402 Global Mesh (TROPTIONS)</h1>
+<p><strong>Status:</strong> PIPELINE (gateways respond; ATP settlement and fee counters are PROJECTION)<br />
+<strong>Date:</strong> 2026-05-21</p>
+<h2>What x402 is in this stack</h2>
+<p>HTTP <strong>402 Payment Required</strong> is the metered API rail for agent and bot access across TROPTIONS. Two layers coexist:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Port</th>
+<th>Path</th>
+<th>Role</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apostle mesh</strong></td>
+<td><strong>4020</strong></td>
+<td><code>backend/x402-gateway/</code></td>
+<td>ATP / Lightning sidecar for dao-service and legacy mesh</td>
+<td>PROVEN (health)</td>
+</tr>
+<tr>
+<td><strong>Fiat-rails v2</strong></td>
+<td><strong>4030</strong> (US), <strong>4034</strong> (EU), <strong>4035</strong> (JP)</td>
+<td><code>fiat-rails/x402-gateway*/</code></td>
+<td>Paid proxies to Exchange OS, neobank, BaaS, compliance</td>
+<td>PIPELINE</td>
+</tr>
+</tbody>
+</table>
+<p>Agents and arbitrage bots should use <strong>:4030+</strong> for orderbook and orchestration. Do not point production bots at <strong>:4020</strong> unless you explicitly deploy the Python Apostle gateway.</p>
+<h2>Corrected port table (main host)</h2>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Service</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>4020</strong></td>
+<td><code>backend/x402-gateway</code></td>
+<td>Apostle ATP mesh</td>
+</tr>
+<tr>
+<td><strong>4021</strong></td>
+<td>popeye-relay</td>
+<td>L1 relay</td>
+</tr>
+<tr>
+<td><strong>4022–4028</strong></td>
+<td>fiat rails (orchestrator → arbitrage-bot)</td>
+<td>MSB scaffold</td>
+</tr>
+<tr>
+<td><strong>4029</strong></td>
+<td>baas-dashboard (UI)</td>
+<td>Self-service</td>
+</tr>
+<tr>
+<td><strong>4030</strong></td>
+<td><strong>x402-gateway-v2</strong> (US)</td>
+<td>Canonical <code>GET /x402/stats</code></td>
+</tr>
+<tr>
+<td><strong>4031</strong></td>
+<td><strong>agent-orchestrator</strong></td>
+<td><code>POST /api/v1/arbitrage/multi</code></td>
+</tr>
+<tr>
+<td><strong>4032</strong></td>
+<td><strong>MCP XRPL</strong> (reserved)</td>
+<td>External vendor — <strong>not</strong> EU gateway</td>
+</tr>
+<tr>
+<td><strong>4034</strong></td>
+<td><strong>x402-gateway-eu</strong></td>
+<td>Frankfurt regional clone</td>
+</tr>
+<tr>
+<td><strong>4035</strong></td>
+<td><strong>x402-gateway-jp</strong></td>
+<td>Tokyo regional clone</td>
+</tr>
+<tr>
+<td><strong>8097</strong></td>
+<td>baas-api</td>
+<td>Agent registration API</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Common mistake:</strong> assigning EU/JP to <strong>:4031</strong> or <strong>:4032</strong>. Those ports are orchestrator and MCP respectively. Regional gateways are <strong>4034</strong> and <strong>4035</strong>.</p>
+<h2>Step-by-step 402 flow (bot orderbook example)</h2>
+<ol>
+<li><strong>Bot</strong> <code>GET http://127.0.0.1:4030/x402/market-data/orderbook?pair=USD-IOU/EUR-IOU</code> with no payment header.</li>
+<li><strong>Gateway</strong> returns <strong>402</strong> JSON invoice (<code>type: x402-invoice</code>, <code>amount</code>, <code>currency</code>, <code>description</code>).</li>
+<li><strong>Bot</strong> pays (Lightning preimage or ATP receipt — <strong>PIPELINE</strong> today uses mock <code>X-402-Payment</code>).</li>
+<li><strong>Bot</strong> retries same URL with <code>X-402-Payment: &lt;proof&gt;</code>.</li>
+<li><strong>Gateway</strong> proxies to Exchange OS <code>GET /api/orderbook</code>, returns book + <code>x402_paid: true</code>.</li>
+<li><strong>Arbitrage-bot</strong> compares spread vs <code>MIN_SPREAD_BPS</code>, calls compliance, then orchestrator if <code>DRY_RUN=false</code>.</li>
+</ol>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant Bot as arbitrage-bot :4028
+  participant X4 as x402-gateway-v2 :4030
+  participant EX as Exchange OS :8091
+  Bot-&gt;&gt;X4: GET /x402/market-data/orderbook
+  X4--&gt;&gt;Bot: 402 invoice
+  Bot-&gt;&gt;X4: GET + X-402-Payment
+  X4-&gt;&gt;EX: GET /api/orderbook
+  EX--&gt;&gt;X4: orderbook JSON
+  X4--&gt;&gt;Bot: 200 + x402_paid
+</code></pre>
+<h2>Endpoint map (:4030 family — all regions)</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Fee model</th>
+<th>Upstream</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/health</code></td>
+<td>—</td>
+<td>—</td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/x402/stats</code></td>
+<td>—</td>
+<td>local counters</td>
+<td>PROJECTION</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/x402/market-data/orderbook</code></td>
+<td>~$0.001</td>
+<td>Exchange OS</td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/x402/exchange/place-order</code></td>
+<td>0.01% notional</td>
+<td>Exchange OS</td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/x402/cards/auth</code></td>
+<td>$0.02</td>
+<td>neobank :4026</td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/x402/baas/onboard</code></td>
+<td>$10,000 setup</td>
+<td>baas-dashboard :4029</td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/x402/compliance/screen</code></td>
+<td>—</td>
+<td>compliance-engine :4025</td>
+<td>PIPELINE</td>
+</tr>
+</tbody>
+</table>
+<p>Regional gateways expose the <strong>same routes</strong>; <code>REGION</code> and <code>BASE_CURRENCY</code> differ (<code>us/USD</code>, <code>eu/EUR</code>, <code>jp/JPY</code>).</p>
+<h2>Multi-gateway topology</h2>
+<pre><code>                    ┌─────────────────────────────────────┐
+                    │     agent-orchestrator :4031        │
+                    │  POST /api/v1/arbitrage/multi       │
+                    └──────────┬──────────────────────────┘
+           ┌───────────────────┼───────────────────┐
+           ▼                   ▼                   ▼
+    x402-gateway-v2      x402-gateway-eu    x402-gateway-jp
+         :4030 US            :4034 EU           :4035 JP
+           │                   │                   │
+           └───────────────────┴───────────────────┘
+                               │
+                    Exchange OS :8091 (shared)
+                    compliance-engine :4025
+</code></pre>
+<pre><code class="language-mermaid">flowchart LR
+  AO[agent-orchestrator :4031]
+  US[x402 US :4030]
+  EU[x402 EU :4034]
+  JP[x402 JP :4035]
+  MCP[MCP XRPL :4032]
+  EX[Exchange OS :8091]
+  CE[compliance :4025]
+  AO --&gt; US
+  AO --&gt; EU
+  AO --&gt; JP
+  AO -. optional .-&gt; MCP
+  US --&gt; EX
+  EU --&gt; EX
+  JP --&gt; EX
+  US --&gt; CE
+</code></pre>
+<h2>Cross-gateway arbitrage sequence</h2>
+<ol>
+<li>Research agent reads stats from US/EU/JP (<code>GET /x402/stats</code> per region).</li>
+<li>Operator or bot calls <code>POST http://127.0.0.1:4031/api/v1/arbitrage/multi</code> with body <code>{ "buy": "us", "sell": "eu", "pair": "USD-IOU/EUR-IOU", "dry_run": true }</code>.</li>
+<li>Orchestrator returns <strong>PIPELINE</strong> legs with gateway URLs <code>4030</code> / <code>4034</code> (not live settlement).</li>
+<li>When pools are live, Execution agent will place buy on buy-region gateway and sell on sell-region gateway with compliance screen on each leg.</li>
+</ol>
+<h2>ATP price setting (operator strategy)</h2>
+<p>Until liquidity pools are live, ATP reference prices are <strong>PIPELINE</strong>:</p>
+<ul>
+<li>Operator sets target spread bands per region in env (<code>BASE_CURRENCY</code>, <code>ISSUER_HINT</code>).</li>
+<li>Gateways return <strong>PROJECTION</strong> stats (<code>total_revenue: 0</code>, <code>atp_price_setting: operator PIPELINE strategy</code>).</li>
+<li>Live ATP pricing hooks to Apostle <strong>:4020</strong> remain optional; fiat-rails v2 does not double-charge when <code>REGION=us</code> and mesh is co-located.</li>
+</ul>
+<h2>Per-loop fee table (PROJECTION)</h2>
+<table>
+<thead>
+<tr>
+<th>Loop</th>
+<th>Trigger</th>
+<th>Est. fee / loop</th>
+<th>Annual @ 1/min</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orderbook poll</td>
+<td>arbitrage scan</td>
+<td>$0.001 × 3 gateways</td>
+<td>~$1.6k</td>
+<td>PROJECTION</td>
+</tr>
+<tr>
+<td>Place-order arb</td>
+<td>spread &gt; min bps</td>
+<td>0.01% × notional</td>
+<td>variable</td>
+<td>PROJECTION</td>
+</tr>
+<tr>
+<td>Card auth agent</td>
+<td>neobank tool</td>
+<td>$0.02</td>
+<td>low</td>
+<td>PROJECTION</td>
+</tr>
+<tr>
+<td>BaaS onboard</td>
+<td>one-shot</td>
+<td>$10,000</td>
+<td>rare</td>
+<td>PROJECTION</td>
+</tr>
+<tr>
+<td>Multi-region arb</td>
+<td>orchestrator multi</td>
+<td>2× orderbook + 2× compliance</td>
+<td>variable</td>
+<td>PROJECTION</td>
+</tr>
+</tbody>
+</table>
+<p>Figures assume mock payment acceptance; real Lightning/XRPL fees will differ.</p>
+<h2>Activation (honest labels)</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Command</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clone regional <code>.env</code></td>
+<td><code>.\scripts\setup-second-x402.ps1</code></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>Full mesh + npm</td>
+<td><code>.\scripts\setup-x402-global-mesh.ps1</code></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>PM2 US/EU/JP</td>
+<td><code>pm2 start fiat-rails/ecosystem.config.js --only x402-gateway-v2,x402-gateway-eu,x402-gateway-jp</code></td>
+<td>PROVEN</td>
+</tr>
+<tr>
+<td>Multi-arb stub</td>
+<td><code>curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H "Content-Type: application/json" -d "{\"buy\":\"us\",\"sell\":\"eu\",\"dry_run\":true}"</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td>Live ATP settlement</td>
+<td>Wire Apostle :4020 + pool keys</td>
+<td><strong>Not live</strong></td>
+</tr>
+<tr>
+<td>Real arbitrage profit</td>
+<td><code>DRY_RUN=false</code> + MSB omnibus</td>
+<td><strong>Not live</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>One-liner (setup + PM2 + smoke test):</strong></p>
+<pre><code class="language-powershell">cd C:\Users\Kevan\Troptions-full-pack; .\scripts\setup-x402-global-mesh.ps1 -StartPm2; curl http://127.0.0.1:4031/health; curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H &quot;Content-Type: application/json&quot; -d '{\&quot;buy\&quot;:\&quot;us\&quot;,\&quot;sell\&quot;:\&quot;eu\&quot;,\&quot;dry_run\&quot;:true}'
+</code></pre>
+<h2>Arbitrage bot <code>GATEWAY_URLS</code></h2>
+<p>Default: <code>http://127.0.0.1:4030,http://127.0.0.1:4034,http://127.0.0.1:4035</code> — bot walks the list for the first live orderbook.</p>
+<h2>Related docs</h2>
+<ul>
+<li><a href="AGENTIC_RAG_AMM.html">Agentic RAG + AMM</a></li>
+<li><a href="SYSTEM_MANIFEST.html">System manifest</a></li>
+<li><a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS revenue engine</a></li>
+<li><a href="X402_INTEGRATION.html">x402 integration</a></li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/X402_GLOBAL_MESH.html</p>
+</body>
+</html>
