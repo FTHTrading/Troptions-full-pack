@@ -1,4 +1,4 @@
-# TROPTIONS Sovereign Stack — Full Pack
+﻿# TROPTIONS Sovereign Stack — Full Pack
 
 > **Monorepo** for the TROPTIONS L1 node, FTH Academy, DONK AI Tutor, TTN Launcher, Exchange OS, and multi-chain contracts.  
 > **Maturity 9.0/10** on `main` — TLS nginx template, API-key writes, DAO reads L1 directly, signed governance RPC. **Sovereign Sequencer** (not BFT). x402 branch not merged.
@@ -159,6 +159,17 @@ npm run build  # static export → out/
 ```
 
 Technical markdown lives under [`docs/technical/`](docs/technical/) after Pages deploy; the polished investor build is `docs/index.html`.
+
+### GitHub Pages URL format
+
+| Item | Value |
+|------|--------|
+| Pages source | Branch `main`, folder **`/docs`** (repo Settings → Pages) |
+| Public URL | `https://fthtrading.github.io/Troptions-full-pack/` |
+| Entry file | `docs/index.html` (from `deploy-investor-site.ps1 -CopyToDocs`) |
+
+Use only the public URL above. Paths like `.../Troptions-full-pack/Troptions-full-pack/` are wrong and return **404**. A repo-root `index.html` is not used when Pages publishes from `/docs`.
+
 
 ## FTH ecosystem (repos & live URLs)
 
