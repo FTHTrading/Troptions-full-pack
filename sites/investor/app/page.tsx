@@ -16,6 +16,7 @@ import { BijanCounterparty } from "@/components/BijanCounterparty";
 import { ThreeColumns } from "@/components/ThreeColumns";
 import { RevenuePillars } from "@/components/RevenuePillars";
 import { EngineeringMaturity } from "@/components/EngineeringMaturity";
+import { AiInfrastructure } from "@/components/AiInfrastructure";
 import { TruthLabels } from "@/components/TruthLabels";
 import { VerificationStatus } from "@/components/VerificationStatus";
 import { AnthemSection } from "@/components/AnthemSection";
@@ -39,6 +40,7 @@ export default function HomePage() {
         <PathToSkyrocket />
         <ThreeColumns />
         <RevenuePillars />
+        <AiInfrastructure />
         <VerificationStatus />
         <EngineeringMaturity />
         <TruthLabels />

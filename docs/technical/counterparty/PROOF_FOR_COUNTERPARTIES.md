@@ -61,6 +61,7 @@ Six Mainframe Explode audio masters plus one JSON manifest are pinned on IPFS wi
 | Official theme (primary) | `QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb` | [ipfs.io](https://ipfs.io/ipfs/QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb) |
 
 - Repo map: `TROPTIONS_IPFS_CIDS.json`
+- L1 integrity anchor: `TROPTIONS_L1_ANCHOR_CONFIRMED.json` — collection hash `7e0631a1b3e2973a2b89cf26f954ba83b91e4674a0fda0d38000d10dff8b1aa8` (deterministic genesis hash; full soulbound mint optional via `scripts/anchor-l1-proof.ps1`)
 - Catalog: [`../assets/audio/README.md`](../assets/audio/README.html)
 - **XRPL NFT (TANTHEM):** design + unsigned mint batch **PREPARED** — [`../TANTHEM_NFT_COLLECTION.md`](../TANTHEM_NFT_COLLECTION.html). Not live on ledger until operator signs `scripts/xrpl_mint_ready.py` locally (seeds never in repo).
 

@@ -43,8 +43,28 @@
 <tbody>
 <tr>
 <td>PM2 local services</td>
-<td><strong>8/8 online</strong></td>
-<td><code>pm2 list</code> 2026-05-21</td>
+<td><strong>7/7 online</strong> (L1 may restart)</td>
+<td><code>pm2 start ecosystem.config.cjs</code> 2026-05-21</td>
+</tr>
+<tr>
+<td>x402 + AI activation</td>
+<td><strong>CONFIRMED local</strong></td>
+<td><code>scripts/activate-ai-stack.ps1</code>; public health LIVE</td>
+</tr>
+<tr>
+<td>goat.unykorn.org</td>
+<td><strong>CONFIRMED</strong> when :8850 + tunnel</td>
+<td>goat-launch + goat.yml</td>
+</tr>
+<tr>
+<td>junior.unykorn.org</td>
+<td><strong>PENDING</strong></td>
+<td>Origin :4099 not running</td>
+</tr>
+<tr>
+<td>twin / x402api</td>
+<td><strong>PENDING</strong></td>
+<td>DNS A → EC2 98.91.89.169 — 522</td>
 </tr>
 <tr>
 <td>Rust workspace crates (L1 + X402 financial core)</td>
@@ -89,7 +109,7 @@
 <tr>
 <td><strong>Honest overall score</strong></td>
 <td><strong>9.9 / 10</strong></td>
-<td>Same as 9.8 plus anthem deploy complete; gap to 10: <strong>703 XRPL mints</strong> on ledger + TLS/reserves</td>
+<td>AI/x402 PM2 activated; goat LIVE; gap to 10: <strong>twin/x402api EC2</strong>, <strong>junior :4099</strong>, <strong>703 XRPL mints</strong>, TLS/reserves</td>
 </tr>
 <tr>
 <td><strong>DAO layer</strong></td>
@@ -137,8 +157,8 @@
 </tr>
 <tr>
 <td>Test execution</td>
-<td>5/10</td>
-<td>Partial; T-Build blocked on deps</td>
+<td>8/10</td>
+<td>T-Build 32/32 pass (2026-05-21); L1 cargo partial</td>
 </tr>
 <tr>
 <td><strong>DAO / governance</strong></td>

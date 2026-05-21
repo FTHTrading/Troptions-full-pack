@@ -108,7 +108,38 @@ if (Test-Path "backend/x402-gateway/main.py") {
 } else {
     Write-Label "PENDING" "x402 monorepo sidecar"
 }
-Write-Label "PENDING" "twin.unykorn.org - probe before demos (522/timeouts possible)"
+try {
+    $goat = Invoke-WebRequest -Uri "https://goat.unykorn.org" -Method Head -TimeoutSec 20 -UseBasicParsing
+    if ($goat.StatusCode -ge 200 -and $goat.StatusCode -lt 400) {
+        Write-Label "CONFIRMED" "goat.unykorn.org - HTTP $($goat.StatusCode) (tunnel + :8850)"
+    } else {
+        Write-Label "PENDING" "goat.unykorn.org - HTTP $($goat.StatusCode)"
+    }
+} catch {
+    Write-Label "PENDING" "goat.unykorn.org - origin or tunnel down"
+}
+try {
+    $jr = Invoke-WebRequest -Uri "https://junior.unykorn.org" -Method Head -TimeoutSec 20 -UseBasicParsing
+    if ($jr.StatusCode -ge 200 -and $jr.StatusCode -lt 400) {
+        Write-Label "CONFIRMED" "junior.unykorn.org - HTTP $($jr.StatusCode)"
+    } else {
+        Write-Label "PENDING" "junior.unykorn.org - HTTP $($jr.StatusCode)"
+    }
+} catch {
+    Write-Label "PENDING" "junior.unykorn.org - start :4099 + junior-tilden tunnel"
+}
+Write-Label "PENDING" "twin.unykorn.org - EC2 :8402 / DNS A 98.91.89.169 (522)"
+Write-Label "PENDING" "x402api.unykorn.org - same EC2 origin as twin"
+if (Test-Path "TROPTIONS_L1_ANCHOR_CONFIRMED.json") {
+    Write-Label "CONFIRMED" "L1 anthem anchor hash - TROPTIONS_L1_ANCHOR_CONFIRMED.json"
+} else {
+    Write-Label "PENDING" "L1 anthem anchor - run scripts/anchor-l1-proof.ps1"
+}
+if (Test-Path "TROPTIONS_IPFS_CIDS.json") {
+    Write-Label "CONFIRMED" "IPFS CIDs for counterparty proof - TROPTIONS_IPFS_CIDS.json"
+} else {
+    Write-Label "PENDING" "TROPTIONS_IPFS_CIDS.json"
+}
 Write-Label "PENDING" "Popeye external heartbeat monitor"
 Write-Label "PENDING" "Telnyx NEED AI vanity routing"
 

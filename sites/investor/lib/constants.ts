@@ -838,6 +838,7 @@ export const BUILT_ITEMS = [
   "Genesis-world 9 Polygon contracts + drunks.app live",
   "XRPL + Stellar issued supply verified — ~874M on ledger (not market cap)",
   "AMM pool live on XRPL; cross-chain USDC 274M issued total",
+  "T-Build Vitest — 32/32 pass after npm install (GitHub_Audit/T-Build)",
 ];
 
 export const GAP_ITEMS = [
@@ -846,7 +847,7 @@ export const GAP_ITEMS = [
   "Public TLS on troptions.org hostnames (ai, ttn, dao)",
   "XRPL TANTHEM 703 mints on ledger — mint DApp LIVE; user sign pending",
   "XRPL production XRP reserves thin — top-up per runbook (~500 XRP each)",
-  "T-Build Vitest suite — npm ci && npm test on CI",
+  "T-Build CI gate — wire npm test into GitHub Actions (local: 32/32 pass 2026-05-21)",
   "Workers AI — enable WORKERS_AI_ENABLED=1 when cfut token configured",
 ];
 

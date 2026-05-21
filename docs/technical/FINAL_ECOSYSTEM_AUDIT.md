@@ -17,7 +17,11 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 
 | Category | Result | Evidence |
 |----------|--------|----------|
-| PM2 local services | **8/8 online** | `pm2 list` 2026-05-21 |
+| PM2 local services | **7/7 online** (L1 may restart) | `pm2 start ecosystem.config.cjs` 2026-05-21 |
+| x402 + AI activation | **CONFIRMED local** | `scripts/activate-ai-stack.ps1`; public health LIVE |
+| goat.unykorn.org | **CONFIRMED** when :8850 + tunnel | goat-launch + goat.yml |
+| junior.unykorn.org | **PENDING** | Origin :4099 not running |
+| twin / x402api | **PENDING** | DNS A → EC2 98.91.89.169 — 522 |
 | Rust workspace crates (L1 + X402 financial core) | **17** (11 + 6) | `l1/Cargo.toml`, `UnyKorn-X402-aws/packages/fth-financial-core/` |
 | Audit-scope source files | **~6,937** (excl. `node_modules`, `.next`, `target`) | File recount |
 | Live HTTP (Unykorn / GSP) | **12+ URLs return 200** | PowerShell `Invoke-WebRequest -Method Head` |
@@ -26,7 +30,7 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 | TROPTIONS Anthem IPFS (6 tracks + manifest) | **PROVEN** | CIDs in `TROPTIONS_IPFS_CIDS.json` — [`assets/audio/README.md`](assets/audio/README.html) |
 | TANTHEM XRPL NFT mint (703) | **PREPARED** (DApp **LIVE**) | Unsigned batch + [mint.html](https://fthtrading.github.io/Troptions-full-pack/mint.html); on-chain **PENDING** user sign; [`TANTHEM_NFT_COLLECTION.md`](TANTHEM_NFT_COLLECTION.html) |
 | TANTHEM anthem stack (prep) | **10 / 10** | IPFS PROVEN, L1 hash anchored, gallery `/nft/`, mint DApp deployed — ledger gap only |
-| **Honest overall score** | **9.9 / 10** | Same as 9.8 plus anthem deploy complete; gap to 10: **703 XRPL mints** on ledger + TLS/reserves |
+| **Honest overall score** | **9.9 / 10** | AI/x402 PM2 activated; goat LIVE; gap to 10: **twin/x402api EC2**, **junior :4099**, **703 XRPL mints**, TLS/reserves |
 | **DAO layer** | **PROVEN on main** | `dao-service` + dashboard, L1 reads, council multisig — contributes +0.3 vs prior 9.5 |
 
 **Bottom line:** Infrastructure and code are real. Cross-chain **~874M issued supply on ledger** is verified (not market cap). Do not cite **$175M desk** as on-chain fact — use **274M USDC issued** language. Valuation detail: [`VALUATION_AND_COMPARABLES.md`](VALUATION_AND_COMPARABLES.html).
@@ -42,7 +46,7 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 | Local services | 10/10 | PM2 8/8 |
 | Live HTTP | 9/10 | Most Unykorn 200; twin/x402api intermittent |
 | On-chain verification | 9.5/10 | Polygon + XRPL + Stellar user-verified |
-| Test execution | 5/10 | Partial; T-Build blocked on deps |
+| Test execution | 8/10 | T-Build 32/32 pass (2026-05-21); L1 cargo partial |
 | **DAO / governance** | **9.5/10** | Service + dashboard on main; public `dao.troptions.org` DNS pending |
 | **Overall** | **9.9/10** | Investor-safe: proven stack + DAO + anthem DApp live; label projections clearly |
 | **Anthem / TANTHEM prep** | **10/10** | IPFS, L1 anchor, mint DApp, gallery — on-chain mint still operator action |

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cloudflare services — junior, goat, twin, x402</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Cloudflare services — junior, goat, twin, x402</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Cloudflare services — junior, goat, twin, x402</h1>
+<p><strong>Last verified:</strong> 2026-05-21<br />
+<strong>Zone:</strong> <code>unykorn.org</code> (<code>8aa6916f4c1c7e8e42130455dfd5c029</code>)<br />
+<strong>Operator script:</strong> <code>scripts/cloudflare-status.ps1</code> (reads <code>CLOUDFLARE_API_TOKEN</code> from gitignored <code>.env</code>)</p>
+<hr />
+<h2>Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>DNS target</th>
+<th>Origin (expected)</th>
+<th>Status (2026-05-21)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x402.unykorn.org</code></td>
+<td>CNAME → <code>x402-unykorn.pages.dev</code></td>
+<td>Cloudflare Pages / mesh health</td>
+<td><strong>CONFIRMED</strong> — <code>/health</code> HTTP 200</td>
+</tr>
+<tr>
+<td><code>goat.unykorn.org</code></td>
+<td>CNAME → <code>a2da25a0-…cfargotunnel.com</code></td>
+<td>Local <code>127.0.0.1:8850</code> (GoatX site)</td>
+<td><strong>CONFIRMED</strong> when tunnel + <code>node server.js</code> running</td>
+</tr>
+<tr>
+<td><code>junior.unykorn.org</code></td>
+<td>CNAME → <code>3fe7b6d1-…cfargotunnel.com</code></td>
+<td>Local <code>127.0.0.1:4099</code> (Junior/Tilden OS)</td>
+<td><strong>PENDING</strong> — tunnel OK; origin :4099 must be started</td>
+</tr>
+<tr>
+<td><code>twin.unykorn.org</code></td>
+<td>A → <code>98.91.89.169</code> (EC2)</td>
+<td>EC2 <code>:8402</code> digital twin</td>
+<td><strong>PENDING</strong> — Cloudflare 522 (EC2 origin down)</td>
+</tr>
+<tr>
+<td><code>x402api.unykorn.org</code></td>
+<td>A → <code>98.91.89.169</code> (EC2)</td>
+<td>EC2 API docs</td>
+<td><strong>PENDING</strong> — same stale EC2 IP as twin</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Do not conflate</strong> <code>x402.unykorn.org</code> (healthy Pages/tunnel path) with <code>twin</code> / <code>x402api</code> (legacy A records to EC2).</p>
+<hr />
+<h2>Junior (Tilden OS)</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public URLs</td>
+<td><code>https://junior.unykorn.org</code>, <code>https://jr.unykorn.org</code>, <code>https://tilden.unykorn.org</code>, <code>https://tilden-api.unykorn.org</code></td>
+</tr>
+<tr>
+<td>Tunnel config</td>
+<td><code>C:\Users\Kevan\.cloudflared\junior-tilden.yml</code> (tunnel <code>3fe7b6d1-ea63-48f3-b70b-a9ccedb0f336</code>)</td>
+</tr>
+<tr>
+<td>Ingress</td>
+<td><code>junior</code> / <code>jr</code> → <code>http://localhost:4099</code>; <code>tilden</code> → <code>:3000</code>; <code>tilden-api</code> → <code>:4001</code></td>
+</tr>
+<tr>
+<td>Repo (Exchange OS registry)</td>
+<td><code>kevanbtc/junior-tilden</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Boot checklist</strong></p>
+<ol>
+<li>Start Junior API on port <strong>4099</strong> (project path on operator machine — not in Troptions-full-pack).</li>
+<li>Ensure <code>tilden</code> (:3000) and <code>tilden-api</code> (:4001) if those hostnames are needed.</li>
+<li>Run tunnel: <code>cloudflared tunnel --config C:\Users\Kevan\.cloudflared\junior-tilden.yml run</code></li>
+<li>Probe: <code>curl -I https://junior.unykorn.org</code></li>
+</ol>
+<hr />
+<h2>Goat (GoatX / TGOAT)</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public URL</td>
+<td><code>https://goat.unykorn.org</code></td>
+</tr>
+<tr>
+<td>Tunnel config</td>
+<td><code>C:\Users\Kevan\.cloudflared\goat.yml</code> (tunnel <code>a2da25a0-808e-49ed-8acd-18a732f2db70</code>)</td>
+</tr>
+<tr>
+<td>Origin</td>
+<td><code>C:\Users\Kevan\iCloudDrive\Archives\projects\goat-launch\server.js</code> → <strong>8850</strong></td>
+</tr>
+<tr>
+<td>PM2 (optional)</td>
+<td><code>iCloudDrive\Archives\projects\goat-launch\ecosystem.config.js</code> — <code>tgoat-governance</code> daemon</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Boot checklist</strong></p>
+<ol>
+<li><code>cd goat-launch &amp;&amp; node server.js</code> (listens <code>127.0.0.1:8850</code>).</li>
+<li><code>cloudflared tunnel --config C:\Users\Kevan\.cloudflared\goat.yml run</code> (or systemd equivalent).</li>
+<li>Probe: <code>curl -I https://goat.unykorn.org</code> → expect <strong>200</strong>.</li>
+</ol>
+<hr />
+<h2>Twin &amp; x402api (EC2 origin — manual fix)</h2>
+<p>Per <a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a> (<code>x402-book/src/ops/infrastructure.md</code>):</p>
+<ul>
+<li><code>twin.unykorn.org</code> → EC2 <strong>:8402</strong> (<code>digital_twin_server.py</code>)</li>
+<li><code>x402api.unykorn.org</code> → EC2 mesh API docs</li>
+</ul>
+<p><strong>Current DNS (API read):</strong> both are <strong>A</strong> records to <code>98.91.89.169</code> (proxied). Health uses <strong>CNAME</strong> to Pages — different path.</p>
+<p><strong>Fix options (operator)</strong></p>
+<ol>
+<li><strong>Restore EC2</strong> — SSH production host, start twin (:8402) and API processes; confirm security group allows Cloudflare.</li>
+<li><strong>Retarget DNS</strong> — Point <code>twin</code> / <code>x402api</code> CNAME to the same <strong>cloudflared tunnel</strong> as working <code>x402</code> health (only if those services run behind that tunnel).</li>
+<li>See <a href="CLOUDFLARE_ORIGIN_FIX.html">CLOUDFLARE_ORIGIN_FIX.md</a> for curl probes and Cloudflare dashboard steps.</li>
+</ol>
+<p>API token scope may allow <strong>read</strong> DNS but not <strong>write</strong> — if PATCH fails, use dashboard manually.</p>
+<hr />
+<h2>x402 routing</h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>https://x402.unykorn.org/health</code></td>
+<td>Public mesh health (<strong>CONFIRMED</strong>)</td>
+</tr>
+<tr>
+<td>Monorepo <code>backend/x402-gateway</code></td>
+<td>Local sidecar <strong>:4020</strong> — set <code>X402_UPSTREAM=http://127.0.0.1:4020</code> when co-located with UnyKorn gateway</td>
+</tr>
+<tr>
+<td>Apostle Chain</td>
+<td><strong>:7332</strong> — ATP settlement</td>
+</tr>
+<tr>
+<td>Popeye relay</td>
+<td><strong>:4021</strong></td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="X402_INTEGRATION.html">X402_INTEGRATION.md</a>.</p>
+<hr />
+<h2>Related live surfaces (same zone)</h2>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>portfolio.unykorn.org</code></td>
+<td>Portfolio registry — HTTP 200</td>
+</tr>
+<tr>
+<td><code>fifa.unykorn.org</code></td>
+<td>WWAI FIFA — HTTP 200</td>
+</tr>
+<tr>
+<td><code>whichway.live</code></td>
+<td>Separate zone — WWAI guest OS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Scripts</h2>
+<pre><code class="language-powershell">.\scripts\cloudflare-status.ps1
+.\scripts\activate-ai-stack.ps1
+</code></pre>
+<p>Never commit <code>CLOUDFLARE_API_TOKEN</code> or log full tokens (suffix <code>e4fa5</code> is sufficient for audit notes).</p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/CLOUDFLARE_SERVICES.html</p>
+</body>
+</html>
