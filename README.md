@@ -3,6 +3,7 @@
 > **Monorepo** for the TROPTIONS L1 node, FTH Academy, DONK AI Tutor, TTN Launcher, Exchange OS, and multi-chain contracts.  
 > **Maturity 9.0/10** on `main` — TLS nginx template, API-key writes, DAO reads L1 directly, signed governance RPC. **Sovereign Sequencer** (not BFT). x402 branch not merged.
 
+[![Investor site](https://img.shields.io/badge/public-Vercel%2FNetlify-gold)](sites/investor/)
 [![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://fthtrading.github.io/Troptions-full-pack/)
 [![L1](https://img.shields.io/badge/L1-operational-9944-success)](http://127.0.0.1:9944)
 [![DONK](https://img.shields.io/badge/DONK-8090-blue)](http://127.0.0.1:8090/health)
@@ -139,6 +140,23 @@ cd frontends/exchange-os
 npm install
 npm run dev
 ```
+
+## Public investor site
+
+**Canonical showcase:** Next.js app in [`sites/investor/`](sites/investor/) — deploy to Vercel or Netlify (see [`sites/investor/DEPLOY.md`](sites/investor/DEPLOY.md)).
+
+```powershell
+cd sites/investor
+npm install
+npm run dev    # http://localhost:3000
+npm run build  # static export → out/
+```
+
+```powershell
+.\scripts\deploy-investor-site.ps1
+```
+
+Legacy Jekyll/docs under `docs/` remain for technical documentation; prefer the investor app for the public face.
 
 ## Documentation
 

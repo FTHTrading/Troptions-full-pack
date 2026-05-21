@@ -1,6 +1,8 @@
 # GitHub Pages setup (for Bryan)
 
-Target URL: **https://fthtrading.github.io/Troptions-full-pack/**
+**Canonical public investor face:** deploy [`sites/investor/`](../sites/investor/) to **Vercel** or **Netlify** (see [`sites/investor/DEPLOY.md`](../sites/investor/DEPLOY.md)). GitHub Pages below is **technical docs fallback** only.
+
+Legacy Pages URL: **https://fthtrading.github.io/Troptions-full-pack/**
 
 ## Enable in GitHub UI
 
