@@ -9,10 +9,12 @@ license.workspace = true
 primitives = { workspace = true }
 crypto = { workspace = true }
 state = { workspace = true }
-runtime = { workspace = true }
 soulbound = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 sha2 = { workspace = true }
 hex = { workspace = true }
 thiserror = { workspace = true }
+
+[dev-dependencies]
+runtime = { workspace = true }

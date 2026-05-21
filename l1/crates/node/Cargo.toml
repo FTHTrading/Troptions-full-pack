@@ -14,6 +14,7 @@ settlement = { workspace = true }
 atomic-router = { workspace = true }
 crypto = { workspace = true }
 rpc = { workspace = true }
+sequencer = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
 hex = { workspace = true }

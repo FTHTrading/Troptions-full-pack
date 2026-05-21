@@ -1,0 +1,53 @@
+{
+  "title": "TROPTIONS L1 Sovereign Node",
+  "uid": "troptions-l1",
+  "timezone": "browser",
+  "panels": [
+    {
+      "title": "RPC Requests",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "troptions_rpc_requests_total",
+          "legendFormat": "requests"
+        }
+      ]
+    },
+    {
+      "title": "RPC Errors",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "troptions_rpc_errors_total",
+          "legendFormat": "errors"
+        }
+      ]
+    },
+    {
+      "title": "Block Height",
+      "type": "stat",
+      "gridPos": { "h": 6, "w": 8, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "troptions_block_height",
+          "legendFormat": "height"
+        }
+      ]
+    },
+    {
+      "title": "Transactions Submitted",
+      "type": "stat",
+      "gridPos": { "h": 6, "w": 8, "x": 8, "y": 8 },
+      "targets": [
+        {
+          "expr": "troptions_tx_submitted_total",
+          "legendFormat": "tx"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "version": 1
+}

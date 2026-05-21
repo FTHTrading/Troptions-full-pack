@@ -39,6 +39,14 @@ pub fn verify_signature(
         .map_err(|_| PrimitiveError::InvalidSignature)
 }
 
+/// Sign serialized transaction operations for L1 submit.
+pub fn sign_transaction_ops(
+    operations: &[u8],
+    secret_key: &[u8],
+) -> Result<Signature, PrimitiveError> {
+    sign_message(operations, secret_key)
+}
+
 /// Hash data using SHA-256.
 pub fn sha256_hash(data: &[u8]) -> [u8; 32] {
     let hash = Sha256::digest(data);

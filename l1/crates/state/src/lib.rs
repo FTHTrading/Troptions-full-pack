@@ -1,6 +1,8 @@
 //! State management for TROPTIONS L1.
 //! Provides key-value storage with Merkle tree support and snapshot capability.
 
+pub mod persistence;
+
 use primitives::{AccountId, Amount, AssetId, BlockHeight, PrimitiveError, TxHash};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
@@ -18,7 +20,22 @@ pub struct State {
     pub governance_proposals: HashMap<[u8; 32], Proposal>,
     pub governance_votes: HashMap<String, VoteRecord>,
     pub namespaces: HashMap<String, NamespaceRecord>,
+    /// On-chain treasury balances — key `chain:asset` (source of truth, not SQLite).
+    pub treasury_balances: HashMap<String, Amount>,
+    /// x402 Apostle agent registry (agent_id -> record JSON).
+    pub x402_agents: HashMap<String, X402AgentRecord>,
     pub events: Vec<Event>,
+}
+
+/// Registered x402 service agent on L1.
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct X402AgentRecord {
+    pub agent_id: String,
+    pub label: String,
+    pub service_port: Option<u16>,
+    pub registered_at: u64,
+    pub last_heartbeat: u64,
+    pub active: bool,
 }
 
 impl State {
@@ -33,8 +50,36 @@ impl State {
             governance_proposals: HashMap::new(),
             governance_votes: HashMap::new(),
             namespaces: HashMap::new(),
+            treasury_balances: HashMap::new(),
+            x402_agents: HashMap::new(),
             events: Vec::new(),
         }
+    }
+
+    pub fn treasury_key(chain: &str, asset: &str) -> String {
+        format!("{}:{}", chain.to_lowercase(), asset.to_uppercase())
+    }
+
+    pub fn credit_treasury(&mut self, chain: &str, asset: &str, amount: Amount) -> Result<(), PrimitiveError> {
+        let key = Self::treasury_key(chain, asset);
+        let current = self.treasury_balances.get(&key).copied().unwrap_or(0);
+        self.treasury_balances.insert(key, current.saturating_add(amount));
+        Ok(())
+    }
+
+    pub fn debit_treasury(&mut self, chain: &str, asset: &str, amount: Amount) -> Result<(), PrimitiveError> {
+        let key = Self::treasury_key(chain, asset);
+        let current = self.treasury_balances.get(&key).copied().unwrap_or(0);
+        if current < amount {
+            return Err(PrimitiveError::InsufficientBalance);
+        }
+        self.treasury_balances.insert(key, current - amount);
+        Ok(())
+    }
+
+    pub fn get_treasury_balance(&self, chain: &str, asset: &str) -> Amount {
+        let key = Self::treasury_key(chain, asset);
+        self.treasury_balances.get(&key).copied().unwrap_or(0)
     }
 
     /// Create a snapshot of the current state (deep clone for rollback).
@@ -49,6 +94,8 @@ impl State {
             governance_proposals: self.governance_proposals.clone(),
             governance_votes: self.governance_votes.clone(),
             namespaces: self.namespaces.clone(),
+            treasury_balances: self.treasury_balances.clone(),
+            x402_agents: self.x402_agents.clone(),
             events: self.events.clone(),
             current_height: self.current_height,
         }
@@ -65,6 +112,8 @@ impl State {
         self.governance_proposals = snapshot.governance_proposals.clone();
         self.governance_votes = snapshot.governance_votes.clone();
         self.namespaces = snapshot.namespaces.clone();
+        self.treasury_balances = snapshot.treasury_balances.clone();
+        self.x402_agents = snapshot.x402_agents.clone();
         self.events = snapshot.events.clone();
         self.current_height = snapshot.current_height;
     }
@@ -150,6 +199,8 @@ pub struct StateSnapshot {
     pub governance_proposals: HashMap<[u8; 32], Proposal>,
     pub governance_votes: HashMap<String, VoteRecord>,
     pub namespaces: HashMap<String, NamespaceRecord>,
+    pub treasury_balances: HashMap<String, Amount>,
+    pub x402_agents: HashMap<String, X402AgentRecord>,
     pub events: Vec<Event>,
     pub current_height: BlockHeight,
 }
@@ -164,6 +215,8 @@ impl StateSnapshot {
         state.governance_proposals = self.governance_proposals;
         state.governance_votes = self.governance_votes;
         state.namespaces = self.namespaces;
+        state.treasury_balances = self.treasury_balances;
+        state.x402_agents = self.x402_agents;
         state.events = self.events;
         state.current_height = self.current_height;
     }

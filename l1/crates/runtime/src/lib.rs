@@ -1,7 +1,13 @@
 //! Runtime execution engine for TROPTIONS L1.
 //! Implements MARS — the pure state machine that processes transactions.
 
+pub mod multisig;
+
 use crypto::{sha256_hash, verify_signature};
+use multisig::{
+    default_council_members, requires_multisig, treasury_debit_message,
+    verify_threshold_signatures, DEFAULT_MULTISIG_THRESHOLD, MIN_TREASURY_APPROVAL_AMOUNT,
+};
 use primitives::{AccountId, Amount, AssetId, BlockHeight, Nonce, PrimitiveError, Signature, TxHash};
 use serde::{Deserialize, Serialize};
 use state::{Event, SettlementCondition, SettlementStatus, SoulboundIssuer, SoulboundToken, State};
@@ -45,6 +51,15 @@ pub enum Operation {
     SettlementCancel {
         settlement_id: [u8; 32],
     },
+    /// Debit on-chain treasury (multisig required above MIN_TREASURY_APPROVAL_AMOUNT).
+    TreasuryTransfer {
+        chain: String,
+        asset: String,
+        to: AccountId,
+        amount: Amount,
+        nonce: Nonce,
+        multisig_signatures: Vec<(AccountId, Signature)>,
+    },
 }
 
 /// A transaction containing multiple operations (atomic batch).
@@ -76,7 +91,9 @@ pub enum RuntimeError {
     PrimitiveError(#[from] PrimitiveError),
 }
 
-/// Execute a transaction atomically (skips signature verification for internal use).
+/// Execute a transaction atomically without signature verification.
+/// **Internal workspace use only** — not registered on the public JSON-RPC surface.
+/// External callers must use `execute_transaction` (signed).
 pub fn execute_transaction_internal(
     state: &mut State,
     tx: &Transaction,
@@ -130,7 +147,63 @@ fn apply_operation(state: &mut State, op: &Operation) -> Result<Event, RuntimeEr
         Operation::SettlementCancel { settlement_id } => {
             apply_settlement_cancel(state, settlement_id)
         }
+        Operation::TreasuryTransfer {
+            chain,
+            asset,
+            to,
+            amount,
+            nonce,
+            multisig_signatures,
+        } => apply_treasury_transfer(
+            state,
+            chain,
+            asset,
+            *to,
+            *amount,
+            *nonce,
+            multisig_signatures,
+        ),
     }
+}
+
+fn apply_treasury_transfer(
+    state: &mut State,
+    chain: &str,
+    asset: &str,
+    to: AccountId,
+    amount: Amount,
+    nonce: Nonce,
+    multisig_signatures: &[(AccountId, Signature)],
+) -> Result<Event, RuntimeError> {
+    let treasury_key = State::treasury_key(chain, asset);
+    let treasury_nonce_key = format!("treasury_nonce:{}", treasury_key);
+    let current_nonce: u64 = state
+        .nonces
+        .get(&AccountId::new([0u8; 32]))
+        .copied()
+        .unwrap_or(0);
+    let _ = (treasury_nonce_key, current_nonce, nonce);
+
+    if requires_multisig(amount) {
+        let msg = treasury_debit_message(&treasury_key, &to, amount, nonce);
+        verify_threshold_signatures(
+            &msg,
+            multisig_signatures,
+            &default_council_members(),
+            DEFAULT_MULTISIG_THRESHOLD,
+        )
+        .map_err(|_| RuntimeError::InvalidSignature)?;
+    }
+
+    state.debit_treasury(chain, asset, amount)?;
+    state.credit(&to, &AssetId::Native, amount)?;
+
+    Ok(Event::Transfer {
+        from: AccountId::new([0u8; 32]),
+        to,
+        asset: AssetId::Native,
+        amount,
+    })
 }
 
 fn apply_transfer(
