@@ -78,9 +78,12 @@ $hub = @'
   </header>
   <h2>Banking &amp; system map (MSB / SWIFT / FedWire)</h2>
   <ul>
+    <li><a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS revenue engine (waves, 18 streams, flywheel)</a></li>
     <li><a href="SYSTEM_MANIFEST.html">System manifest (ports, rails, revenue labels)</a></li>
     <li><a href="MSB_FIAT_RAILS.html">MSB fiat rails (capitalization tree)</a></li>
     <li><a href="PARTNER_BANK_MESH.html">Partner bank mesh (multi-bank + Alexandrite)</a></li>
+    <li><a href="ARBITRAGE_AND_BAAS.html">Arbitrage &amp; BaaS hub</a></li>
+    <li><a href="BAAS_BATCH_POOLS.html">BaaS batch liquidity pools</a></li>
   </ul>
   <h2>Investor diligence (primary)</h2>
   <ul>

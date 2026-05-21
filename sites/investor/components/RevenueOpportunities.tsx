@@ -1,5 +1,5 @@
 import { Section } from "./Section";
-import { REVENUE_OPPORTUNITIES } from "@/lib/constants";
+import { REVENUE_OPPORTUNITIES, TROPTIONS_REVENUE_ENGINE_URL } from "@/lib/constants";
 import { StatusBadge } from "./StatusBadge";
 
 export function RevenueOpportunities() {
@@ -38,6 +38,17 @@ export function RevenueOpportunities() {
           </tbody>
         </table>
       </div>
+      <p className="mt-4 text-sm text-[var(--color-muted)]">
+        Full activation waves, 18 labeled streams (A–F), daily illustrative snapshot, and
+        flywheel:{" "}
+        <a
+          href={TROPTIONS_REVENUE_ENGINE_URL}
+          className="text-[var(--color-accent)] underline-offset-2 hover:underline"
+        >
+          TROPTIONS revenue engine
+        </a>{" "}
+        (PROVEN / PIPELINE / PROJECTION).
+      </p>
     </Section>
   );
 }

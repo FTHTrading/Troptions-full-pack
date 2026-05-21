@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TROPTIONS revenue engine</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>TROPTIONS revenue engine</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>TROPTIONS revenue engine — monetary core, activation waves, honest labels</h1>
+<p><strong>Last updated:</strong> 2026-05-21<br />
+<strong>Audience:</strong> Investors, operators, technical diligence.<br />
+<strong>Labels:</strong> <strong>PROVEN</strong> (ledger, live product, repo + HTTP), <strong>PIPELINE</strong> (built stubs — not live settlement), <strong>PROJECTION</strong> (scenario math — <strong>not</strong> audited forecasts).</p>
+<p><strong>Related:</strong> <a href="SYSTEM_MANIFEST.html">System manifest</a> · <a href="MSB_FIAT_RAILS.html">MSB fiat rails</a> · <a href="../TROPTIONS_IOU_ISSUER_MANIFEST.html">IOU issuer manifest v3.0</a> · <a href="ARBITRAGE_AND_BAAS.html">Arbitrage &amp; BaaS</a> · <a href="PARTNER_BANK_MESH.html">Partner bank mesh</a></p>
+<p><strong>Code anchors:</strong> Wire → IOU path landed in commit <code>fac96df</code>; post-MSB fiat-rails scaffolding in <code>ebc3aef</code>. Batch pools: <a href="../../scripts/batch-create-pools.ps1"><code>scripts/batch-create-pools.ps1</code></a> · <a href="../../ARBITRAGE_BAAS_X402_COMPLETE.html"><code>ARBITRAGE_BAAS_X402_COMPLETE.md</code></a>.</p>
+<hr />
+<h2>Honesty banner (read first)</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Allowed today</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~874M IOUs on XRPL + Stellar</td>
+<td>Issued supply / proven demand</td>
+<td><strong>PROVEN</strong> (ledger)</td>
+</tr>
+<tr>
+<td>IOUs = Circle USDC or bank reserves</td>
+<td><strong>Do not claim</strong></td>
+<td>Misleading</td>
+</tr>
+<tr>
+<td>1:1 fiat-backed redemption</td>
+<td>Omnibus + MSB <strong>PIPELINE</strong></td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>“Revenue in wallet within seconds”</td>
+<td><strong>Only</strong> for local x402/BaaS <strong>mock verify</strong> or stub ledger credits — <strong>not</strong> omnibus cash until pools + exchange + MSB live</td>
+<td><strong>PIPELINE</strong> / dev stub</td>
+</tr>
+<tr>
+<td>Academy + Solana launcher cash</td>
+<td>Stripe / launch fees on live surfaces</td>
+<td><strong>PROVEN</strong></td>
+</tr>
+<tr>
+<td>All 16+ streams active today</td>
+<td><strong>No</strong> — see table per stream</td>
+<td>Mixed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>TROPTIONS as monetary core</h2>
+<p>TROPTIONS is the <strong>settlement and issuance layer</strong> for the stack — not Circle native USDC on XRPL/Stellar.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What it is</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Issued IOUs</strong></td>
+<td>TROPTIONS, USDC/USDT/DAI/EURC <strong>codes</strong> on issuer accounts</td>
+<td><strong>PROVEN</strong> supply (~874M cross-chain issued — <strong>demand proof</strong>, not AUM)</td>
+</tr>
+<tr>
+<td><strong>Backing model</strong></td>
+<td>Target <strong>1:1 reserve</strong> at partner omnibus when MSB + FedWire/SWIFT live</td>
+<td><strong>PIPELINE</strong> (1:1 mint/burn in orchestrator design)</td>
+</tr>
+<tr>
+<td><strong>Today</strong></td>
+<td>Promise-to-pay credits; redemption rail not operational</td>
+<td><strong>PROVEN</strong> IOU · <strong>PIPELINE</strong> redemption</td>
+</tr>
+<tr>
+<td><strong>Monetary rail</strong></td>
+<td><code>payment-orchestrator</code> :4022 wire webhook → compliance → mint</td>
+<td><strong>PIPELINE</strong> (code <strong>PROVEN</strong> in repo since <code>fac96df</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Investor one-liner:</strong> Proven <strong>~874M IOU demand</strong> on ledger → <strong>PIPELINE</strong> converts to redeemable claims when MSB + bank omnibus are live — fees A–F and agent rails layer on top.</p>
+<hr />
+<h2>Speed to money — three activation waves</h2>
+<table>
+<thead>
+<tr>
+<th>Wave</th>
+<th>Time-to-cash</th>
+<th>What turns on</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Wave 1 — IMMEDIATE</strong></td>
+<td>Minutes–hours (existing products)</td>
+<td>FTH Academy Stripe, Solana launcher, public x402 health, SNP/Genesis surfaces, Polygon community tokens</td>
+<td><strong>PROVEN</strong> (product live; volume varies)</td>
+</tr>
+<tr>
+<td><strong>Wave 2 — HOURS</strong></td>
+<td>Same day after operator starts PM2 + scripts</td>
+<td><code>batch-create-pools.ps1</code>, arbitrage bot with <strong><code>DRY_RUN=true</code></strong>, BaaS/x402 <strong>mock</strong> pay receipts, wire stub <code>POST /api/v1/payments/wire</code> → mock IOU hash</td>
+<td><strong>PIPELINE</strong> (infrastructure + stub credits — <strong>not</strong> bank cash)</td>
+</tr>
+<tr>
+<td><strong>Wave 3 — MSB go-live</strong></td>
+<td>Days–weeks (bank + compliance)</td>
+<td>FedWire/SWIFT credentials, omnibus, <code>iou-reserve-monitor</code> attestation, live pool trading, interchange</td>
+<td><strong>PIPELINE</strong> → <strong>PROVEN</strong> per stream when attested</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Correction:</strong> Marketing “revenue in wallet within seconds” applies <strong>only</strong> to Wave 2 <strong>stub/mock</strong> paths (x402 invoice verify in dev, BaaS dashboard counters, orchestrator mock issuance) until <strong>exchange liquidity + MSB omnibus</strong> settle real fiat. Wave 1 Academy/launcher remain the only <strong>PROVEN</strong> cash today.</p>
+<hr />
+<h2>Revenue streams — 18 rows (categories A–F + live core)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Category</th>
+<th>Stream</th>
+<th>Speed wave</th>
+<th>Label today</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>A</strong></td>
+<td>Issuance fee (0.1–0.25% on wire-in)</td>
+<td>3</td>
+<td><strong>PIPELINE</strong></td>
+<td><code>POST /api/v1/payments/wire</code> — <code>fac96df</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>A</strong></td>
+<td>Redemption fee (wire-out after burn)</td>
+<td>3</td>
+<td><strong>PIPELINE</strong></td>
+<td>Orchestrator + FedWire stub</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>B</strong></td>
+<td>Float margin (omnibus yield − holder yield)</td>
+<td>3</td>
+<td><strong>PIPELINE</strong></td>
+<td>Requires live omnibus</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>C</strong></td>
+<td>Exchange trading fee (~0.25%)</td>
+<td>2–3</td>
+<td><strong>PIPELINE</strong></td>
+<td>Pools via <code>batch-create-pools.ps1</code>; desk gated</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>C</strong></td>
+<td>Desk / round-trip spread (~0.1%)</td>
+<td>3</td>
+<td><strong>PIPELINE</strong></td>
+<td>Operator attestation — not verified $175M without rails</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>D</strong></td>
+<td>Cross-border B2B (USD→IOU→EUR)</td>
+<td>3</td>
+<td><strong>PIPELINE</strong></td>
+<td><code>swift-bridge</code> :4024 — <code>ebc3aef</code> scaffold</td>
+</tr>
+<tr>
+<td>7</td>
+<td><strong>E</strong></td>
+<td>WC26 / TTN sponsorship tiers</td>
+<td>1–2</td>
+<td><strong>PIPELINE</strong></td>
+<td>Live sports surface; tiers not booked revenue</td>
+</tr>
+<tr>
+<td>8</td>
+<td><strong>E</strong></td>
+<td>TTN commerce discount take (~1.5%)</td>
+<td>3</td>
+<td><strong>PIPELINE</strong></td>
+<td>Settlement when sponsor volume flows</td>
+</tr>
+<tr>
+<td>9</td>
+<td><strong>F</strong></td>
+<td>Neobank interchange (~1.5%)</td>
+<td>3</td>
+<td><strong>PROJECTION</strong></td>
+<td><code>neobank-api</code> :4026 design stub</td>
+</tr>
+<tr>
+<td>10</td>
+<td><strong>F</strong></td>
+<td>Neobank premium subs</td>
+<td>3</td>
+<td><strong>PROJECTION</strong></td>
+<td>Card program not shipped</td>
+</tr>
+<tr>
+<td>11</td>
+<td><strong>F</strong></td>
+<td>BaaS platform fee (~$10K/client illustrative)</td>
+<td>2–3</td>
+<td><strong>PROJECTION</strong></td>
+<td><code>baas-api</code> :8097 — x402-gated onboarding</td>
+</tr>
+<tr>
+<td>12</td>
+<td><strong>F</strong></td>
+<td>BaaS pool / txn fee (0.25%)</td>
+<td>2–3</td>
+<td><strong>PIPELINE</strong></td>
+<td>Pool create via BaaS + batch script</td>
+</tr>
+<tr>
+<td>13</td>
+<td><strong>F</strong></td>
+<td>Arbitrage cross-pair profit</td>
+<td>2</td>
+<td><strong>PIPELINE</strong></td>
+<td><code>arbitrage-bot</code> :4028 — <strong><code>DRY_RUN=true</code> default</strong></td>
+</tr>
+<tr>
+<td>14</td>
+<td><strong>F</strong></td>
+<td>x402 API microfees (orderbook, orders, cards)</td>
+<td>2</td>
+<td><strong>PIPELINE</strong></td>
+<td>Monorepo <code>:4020</code> + proxied routes; public mesh separate</td>
+</tr>
+<tr>
+<td>15</td>
+<td><strong>F</strong></td>
+<td>x402 BaaS onboard gate ($10K illustrative)</td>
+<td>2</td>
+<td><strong>PIPELINE</strong></td>
+<td>Invoice + mock verify until production merge</td>
+</tr>
+<tr>
+<td>16</td>
+<td><strong>F</strong></td>
+<td>Alexandrite / AXL001 collateral playbook</td>
+<td>3</td>
+<td><strong>PROJECTION</strong></td>
+<td>See <a href="PARTNER_BANK_MESH.html">Partner bank mesh</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td><strong>Live</strong></td>
+<td>FTH Academy subscriptions</td>
+<td>1</td>
+<td><strong>PROVEN</strong></td>
+<td><code>$19</code> / <code>$49</code> / <code>$149</code> — <code>fth-backend</code> :8091</td>
+</tr>
+<tr>
+<td>18</td>
+<td><strong>Live</strong></td>
+<td>Solana launcher launch fees</td>
+<td>1</td>
+<td><strong>PROVEN</strong></td>
+<td>launch.unykorn.org</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Also live (not in A–F fee bundle):</strong> SNP namespace governance, Genesis/GSP coordination, Polygon KENNY/EVL community, TANTHEM NFT mint (client-side; ledger mint <strong>PENDING</strong>), DAO API — treat incremental cash as <strong>PROVEN</strong> only where Stripe/launch/metering is booked.</p>
+<hr />
+<h2>Daily snapshot — <strong>PROJECTION / illustrative only</strong></h2>
+<p><strong>Not an audited forecast.</strong> Assumes Wave 3 rails live + Wave 2 pools started + illustrative volumes from <a href="../../ARBITRAGE_BAAS_X402_COMPLETE.html"><code>ARBITRAGE_BAAS_X402_COMPLETE.md</code></a> monthly map ÷ 30.</p>
+<table>
+<thead>
+<tr>
+<th>Line (illustrative day)</th>
+<th>USD/day</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Issuance/redemption (IOU core)</td>
+<td>~$8,300</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Float income</td>
+<td>~$5,600</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Exchange + spread</td>
+<td>~$4,200</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Arbitrage</td>
+<td>~$500</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Neobank bundle</td>
+<td>~$8,300</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>BaaS + x402 microfees</td>
+<td>~$4,700</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td><strong>Illustrative rails subtotal</strong></td>
+<td><strong>~$31,600/day</strong></td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Academy + launcher (today-scale placeholder)</td>
+<td>~$200–$2,000</td>
+<td><strong>PROVEN</strong> category — <strong>actual books not published here</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>TROPTIONS flywheel</h2>
+<p><strong>One-liner:</strong> Fiat intent → compliance → <strong>TROPTIONS IOU</strong> mint → liquidity pools → trading + arbitrage → fees recycle through x402-metered APIs and BaaS dashboards → reserve monitor attests 1:1 when MSB live.</p>
+<pre><code class="language-mermaid">flowchart LR
+  subgraph wave1 [Wave 1 PROVEN]
+    AC[Academy Stripe]
+    LA[Solana launcher]
+    X4H[x402 health mesh]
+  end
+
+  subgraph wave2 [Wave 2 PIPELINE stubs]
+    PO[payment-orchestrator :4022]
+    POOL[batch-create-pools.ps1]
+    AB[arbitrage-bot DRY_RUN]
+    BAAS[baas-api :8097]
+    GW[x402-gateway :4020]
+  end
+
+  subgraph wave3 [Wave 3 MSB PIPELINE]
+    FW[FedWire :4023]
+    SW[SWIFT :4024]
+    CE[compliance :4025]
+    MON[iou-reserve-monitor :4027]
+  end
+
+  AC --&gt; IOU[TROPTIONS IOU ledger PROVEN supply]
+  LA --&gt; IOU
+  FW --&gt; PO
+  PO --&gt; CE
+  CE --&gt; IOU
+  POOL --&gt; IOU
+  IOU --&gt; AB
+  AB --&gt; GW
+  GW --&gt; BAAS
+  PO --&gt; MON
+  MON --&gt; IOU
+</code></pre>
+<hr />
+<h2>Activation steps (operator)</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Action</th>
+<th>Wave</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>pm2 start ecosystem.config.js</code> — verify <code>:8091</code> Academy, <code>:4020</code> x402, fiat <code>:4022–4028</code>, <code>baas-api</code> <code>:8097</code></td>
+<td>1–2</td>
+<td><strong>PROVEN</strong> / <strong>PIPELINE</strong> per app</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Copy <code>fiat-rails/.env.template</code> → <code>.env</code> locally (<strong>never commit</strong>); optional <code>ISSUER_SEED</code> for test mint</td>
+<td>2</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Batch pools:</strong> <code>.\scripts\batch-create-pools.ps1 -BaaSUrl "http://localhost:8097" -ApiKey "&lt;key&gt;" -WalletAddress "r…"</code></td>
+<td>2</td>
+<td><strong>PIPELINE</strong> until exchange live</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Arbitrage:</strong> <code>DRY_RUN=true</code> in <code>fiat-rails/arbitrage-bot/.env</code>; <code>POST http://localhost:4028/start</code></td>
+<td>2</td>
+<td><strong>PIPELINE</strong> — no live settlement</td>
+</tr>
+<tr>
+<td>5</td>
+<td><strong>x402 gateway:</strong> start <code>:4020</code>; exercise proxied routes per <a href="X402_INTEGRATION.html">X402 integration</a></td>
+<td>2</td>
+<td><strong>PIPELINE</strong> mock pay</td>
+</tr>
+<tr>
+<td>6</td>
+<td><strong>Wire endpoint:</strong> <code>POST http://127.0.0.1:4022/api/v1/payments/wire</code> with test body (see <code>fiat-rails/README.md</code>)</td>
+<td>2</td>
+<td><strong>PIPELINE</strong> — <code>fac96df</code> path</td>
+</tr>
+<tr>
+<td>7</td>
+<td>MSB + bank credentials → enable FedWire/SWIFT live; daily <code>iou-reserve-monitor</code></td>
+<td>3</td>
+<td><strong>PIPELINE</strong> → <strong>PROVEN</strong> when attested</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regenerate docs after ecosystem changes:</strong> <code>npm run docs:update</code> from repo root.</p>
+<hr />
+<h2>Scenario totals (<strong>PROJECTION</strong> — monthly, not audited)</h2>
+<p>Aligned with layered map in <a href="../../ARBITRAGE_BAAS_X402_COMPLETE.html"><code>ARBITRAGE_BAAS_X402_COMPLETE.md</code></a> when <strong>all</strong> components are active (hypothetical steady state):</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Illustrative monthly</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IOU core (issuance + float)</td>
+<td>~$417K</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Exchange + spread</td>
+<td>~$125K</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Arbitrage</td>
+<td>~$15K</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Neobank</td>
+<td>~$85K</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>BaaS</td>
+<td>~$125K</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>x402</td>
+<td>~$17K</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td><strong>Illustrative total</strong></td>
+<td><strong>~$784K/mo</strong></td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Today:</strong> Book <strong>PROVEN</strong> cash from Wave 1 only; treat table above as engineering target math after Wave 3 — not current P&amp;L.</p>
+<hr />
+<h2>Document index</h2>
+<table>
+<thead>
+<tr>
+<th>Doc</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS_REVENUE_ENGINE</a></td>
+<td>This file — waves, 18 streams, flywheel</td>
+</tr>
+<tr>
+<td><a href="SYSTEM_MANIFEST.html">SYSTEM_MANIFEST</a></td>
+<td>Ports, rails, section 5 IOU sync</td>
+</tr>
+<tr>
+<td><a href="ARBITRAGE_AND_BAAS.html">ARBITRAGE_AND_BAAS</a></td>
+<td>Bot + BaaS API detail</td>
+</tr>
+<tr>
+<td><a href="../../fiat-rails/orchestrator/README.html"><code>fiat-rails/orchestrator/README</code></a></td>
+<td>Wire → IOU ops</td>
+</tr>
+<tr>
+<td><a href="../../scripts/batch-create-pools.ps1"><code>scripts/batch-create-pools.ps1</code></a></td>
+<td>Alexandrite / GOLD / partner pools</td>
+</tr>
+</tbody>
+</table>
+<p><em>Regenerate HTML: <code>npm run docs:update</code>.</em></p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/TROPTIONS_REVENUE_ENGINE.html</p>
+</body>
+</html>

@@ -139,6 +139,7 @@ export const TANTHEM_MINT_DAPP_URL = onPages
 export const ANTHEM_IPFS_MANIFEST_CID = "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7";
 export const VALUATION_URL = `${PAGES_URL}/technical/VALUATION_AND_COMPARABLES.html`;
 export const SYSTEM_MANIFEST_URL = `${PAGES_URL}/technical/SYSTEM_MANIFEST.html`;
+export const TROPTIONS_REVENUE_ENGINE_URL = `${PAGES_URL}/technical/TROPTIONS_REVENUE_ENGINE.html`;
 export const MSB_FIAT_RAILS_URL = `${PAGES_URL}/technical/MSB_FIAT_RAILS.html`;
 export const DAO_PAGE_URL = `${PAGES_URL}/dao/`;
 export const DAO_ARCHITECTURE_URL = `${PAGES_URL}/technical/DAO_ARCHITECTURE.html`;
@@ -293,7 +294,7 @@ export const PATH_TO_SKYROCKET: SkyrocketStep[] = [
     label: "Sales",
     bullets: [
       "Booked / LIVE: Academy Stripe, launch.unykorn.org, unykorn product URLs, Polygon/XRPL/Stellar proofs",
-      "Pipeline / illustrative: MSB rails revenue A–E, WC26 tiers, desk attestation, neobank/BaaS — see SYSTEM_MANIFEST (PROJECTION labeled)",
+      "Pipeline / illustrative: MSB rails revenue A–F, WC26 tiers, desk attestation, neobank/BaaS — see TROPTIONS_REVENUE_ENGINE + SYSTEM_MANIFEST (PROJECTION labeled)",
     ],
   },
 ];
@@ -515,6 +516,13 @@ export const REVENUE_OPPORTUNITIES: RevenueOpportunity[] = [
     revenueModel: "Issuance/redemption, float, B2B — when omnibus live",
     tamNote: "See SYSTEM_MANIFEST + MSB_FIAT_RAILS",
     clientType: "Institutional / banks",
+  },
+  {
+    opportunity: "TROPTIONS revenue engine (A–F + flywheel)",
+    status: "pipeline",
+    revenueModel: "18 streams — PROVEN / PIPELINE / PROJECTION labeled",
+    tamNote: "Waves 1–3; daily snapshot illustrative only",
+    clientType: "Operators / investors",
   },
 ];
 

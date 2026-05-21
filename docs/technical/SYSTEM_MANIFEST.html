@@ -29,7 +29,7 @@
 <p><strong>Last updated:</strong> 2026-05-21<br />
 <strong>Overall status:</strong> <strong>DESIGN</strong> / <strong>PIPELINE</strong> until FinCEN MSB program and correspondent omnibus are live and verified.<br />
 <strong>Labels:</strong> <strong>PROVEN</strong> (repo + live HTTP/explorer), <strong>PIPELINE</strong> (designed, stub, awaiting credentials), <strong>PROJECTION</strong> (scenario math — not forecasts or audited financials).</p>
-<p><strong>Related:</strong> <a href="MSB_FIAT_RAILS.html">MSB fiat rails</a> · <a href="PARTNER_BANK_MESH.html">Partner bank mesh</a> · <a href="ON_CHAIN_PROOF.html">On-chain proof</a> · <a href="XRPL_STELLAR_VERIFICATION.html">XRPL &amp; Stellar</a> · <a href="ARCHITECTURE.html">Architecture</a></p>
+<p><strong>Related:</strong> <a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS revenue engine</a> · <a href="MSB_FIAT_RAILS.html">MSB fiat rails</a> · <a href="PARTNER_BANK_MESH.html">Partner bank mesh</a> · <a href="ON_CHAIN_PROOF.html">On-chain proof</a> · <a href="XRPL_STELLAR_VERIFICATION.html">XRPL &amp; Stellar</a> · <a href="ARCHITECTURE.html">Architecture</a></p>
 <p><strong>PDF export (optional):</strong> <code>scripts/generate-manifest-pdf.ps1</code> — requires <code>pandoc</code> (and optionally <code>wkhtmltopdf</code>); HTML fallback always written to <code>docs/downloads/SYSTEM_MANIFEST.html</code>.</p>
 <hr />
 <h2>Honesty banner (read first)</h2>
@@ -108,7 +108,7 @@
        ▲
        └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
 </code></pre>
-<p><strong>Port discipline:</strong> <code>popeye-relay</code> <strong>:4021</strong>; fiat rails <strong>:4022–:4027</strong> — no collision.</p>
+<p><strong>Port discipline:</strong> <code>popeye-relay</code> <strong>:4021</strong>; fiat rails <strong>:4022–:4028</strong>; BaaS API <strong>:8097</strong> — no collision with core backends 8090–8093.</p>
 <hr />
 <h2>Fiat-rails service integration table</h2>
 <table>
@@ -164,9 +164,23 @@
 <td>Omnibus statements vs ledger supply</td>
 <td><strong>PIPELINE</strong></td>
 </tr>
+<tr>
+<td><code>arbitrage-bot</code></td>
+<td><strong>4028</strong></td>
+<td><code>fiat-rails/arbitrage-bot/</code></td>
+<td>x402 orderbook watch → orchestrator arb</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>baas-api</code></td>
+<td><strong>8097</strong></td>
+<td><code>fiat-rails/baas-api/</code></td>
+<td>BaaS x402 onboarding + PROJECTION dashboard</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
 </tbody>
 </table>
-<p><strong>Setup:</strong> <code>.\scripts\setup-fiat-rails.ps1</code> · <strong>PM2:</strong> <code>pm2 start ecosystem.config.js --only payment-orchestrator,fedwire-adapter,swift-bridge,compliance-engine,neobank-api,iou-reserve-monitor</code></p>
+<p><strong>Setup:</strong> <code>.\scripts\setup-fiat-rails.ps1</code> · <code>.\scripts\setup-arbitrage-baas.ps1</code> · <strong>PM2:</strong> <code>pm2 start ecosystem.config.js --only payment-orchestrator,fedwire-adapter,swift-bridge,compliance-engine,neobank-api,iou-reserve-monitor,arbitrage-bot,baas-api</code></p>
 <p><strong>OpenAPI:</strong> <code>fiat-rails/orchestrator/openapi.yaml</code></p>
 <hr />
 <h2>IOU issuer model (<strong>PROVEN</strong> supply, <strong>PIPELINE</strong> backing)</h2>
@@ -338,6 +352,9 @@
 </tbody>
 </table>
 <p><strong>PROVEN cash today:</strong> Academy, launcher, x402 — <strong>not</strong> MSB wire volume or neobank interchange.</p>
+<h2>6. TROPTIONS revenue engine (canonical map)</h2>
+<p>Full activation waves (IMMEDIATE / HOURS / MSB go-live), <strong>18</strong> labeled streams (A–F + live core), daily <strong>PROJECTION</strong> snapshot, flywheel diagram, and operator activation steps (batch pools, <code>DRY_RUN</code> arbitrage, x402 gateway, wire endpoint):</p>
+<p>→ <strong><a href="TROPTIONS_REVENUE_ENGINE.html"><code>TROPTIONS_REVENUE_ENGINE.md</code></a></strong> — honest <strong>PROVEN</strong> / <strong>PIPELINE</strong> / <strong>PROJECTION</strong> labels; references commits <code>fac96df</code> (wire → IOU), <code>ebc3aef</code> (fiat-rails scaffold).</p>
 <h3>Economic scenarios (<strong>PROJECTION</strong> only)</h3>
 <table>
 <thead>
@@ -475,7 +492,7 @@
 <td><strong>9944</strong> (RPC), <strong>9945</strong> (<code>/metrics</code>)</td>
 <td><strong>PROVEN</strong></td>
 <td><code>l1/</code></td>
-<td>Rust L1; metrics :9945</td>
+<td>Rust L1; local/operator host</td>
 </tr>
 <tr>
 <td><code>donk-ai-tutor</code></td>
@@ -568,481 +585,7 @@
 <hr />
 <!-- AUTO:IOU_REVENUE_START -->
 <h2>5. MSB / SWIFT / FedWire &amp; IOU Revenue Model</h2>
-<p><em>Auto-synced from <code>docs/TROPTIONS_IOU_ISSUER_MANIFEST.md</code> — do not edit between markers.</em></p>
-<h2>Corrected Model: $874M in Unbacked IOUs → Fully-Backed Digital Dollar Ecosystem</h2>
-<h2>Revenue Potential: $3M–$30M+ Annually (scenario tables — <strong>PROJECTION</strong>)</h2>
-<h2>Status: INFRASTRUCTURE BUILT — FIAT RAILS <strong>PIPELINE</strong> (not claimed live)</h2>
-<p><strong>Truth labels:</strong> <strong>PROVEN</strong> = ledger/explorer or live product · <strong>PIPELINE</strong> = MSB/bank/orchestrator stubs · <strong>PROJECTION</strong> = scenario math / neobank / BaaS / partner-bank mesh / Alexandrite playbook — <strong>not</strong> audited financials.</p>
-<p>Canonical system map: <a href="technical/SYSTEM_MANIFEST.html"><code>docs/technical/SYSTEM_MANIFEST.md</code></a> · Partner mesh: <a href="technical/PARTNER_BANK_MESH.html"><code>docs/technical/PARTNER_BANK_MESH.md</code></a></p>
-<hr />
-<h2>THE CORRECTION (Truth Labels)</h2>
-<p><strong>What we actually have:</strong><br />
-- <strong>~$874M in issued IOUs</strong> across XRPL and Stellar (<strong>PROVEN</strong> ledger supply — <strong>not</strong> bank reserves)<br />
-- These are <strong>TROPTIONS-issued promises</strong>, not Circle/Tether native tokens<br />
-- <strong>Currently unfunded</strong> — no guaranteed redemption rail (<strong>PIPELINE</strong> until omnibus live)<br />
-- <strong>Market demand proven</strong> — not yet monetized as fully-backed stable value</p>
-<p><strong>What MSB + SWIFT + FedWire unlock (</strong>PIPELINE<strong>):</strong><br />
-- <strong>Fiat omnibus account</strong> at partner bank<br />
-- <strong>1:1 backing</strong> of IOUs with real USD/EUR reserves<br />
-- <strong>Fully redeemable</strong> digital dollars (when rails + attestations live)<br />
-- <strong>Verifiable cash equivalents</strong> on balance sheet (bank statements + reserve monitor)</p>
-<p><strong>The shift:</strong> From "operator attestation" → "regulated financial institution" (<strong>PIPELINE</strong>)</p>
-<hr />
-<h2>REVENUE MODEL: IOU ISSUER EDITION</h2>
-<h3>A. Issuance &amp; Redemption Fees (Core Business) — <strong>PIPELINE</strong></h3>
-<p><strong>Mechanics:</strong><br />
-- Client wires USD via FedWire → Orchestrator issues TROPTIONS-USD IOU 1:1<br />
-- Fee: 0.1%–0.25% per issuance (illustrative)<br />
-- Redemption: Client sends IOU → Wire USD back; same fee</p>
-<p><strong>Revenue Calculation (</strong>PROJECTION<strong> — illustrative math only):</strong></p>
-<table>
-<thead>
-<tr>
-<th>Monthly Volume</th>
-<th>Fee Rate</th>
-<th>Monthly Revenue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$10M</td>
-<td>0.25%</td>
-<td>$25,000</td>
-</tr>
-<tr>
-<td>$50M</td>
-<td>0.25%</td>
-<td>$125,000</td>
-</tr>
-<tr>
-<td>$100M</td>
-<td>0.25%</td>
-<td>$250,000</td>
-</tr>
-<tr>
-<td><strong>$500M</strong></td>
-<td><strong>0.25%</strong></td>
-<td><strong>$1,250,000</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3>B. Float Income (The Bank Model) — <strong>PIPELINE</strong></h3>
-<table>
-<thead>
-<tr>
-<th>Float Size</th>
-<th>Gross Yield</th>
-<th>Paid to Holders</th>
-<th>Net Margin</th>
-<th>Annual Revenue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$50M</td>
-<td>4%</td>
-<td>2%</td>
-<td>2%</td>
-<td><strong>$1,000,000</strong></td>
-</tr>
-<tr>
-<td>$100M</td>
-<td>4%</td>
-<td>2%</td>
-<td>2%</td>
-<td><strong>$2,000,000</strong></td>
-</tr>
-<tr>
-<td>$500M</td>
-<td>4%</td>
-<td>2%</td>
-<td>2%</td>
-<td><strong>$10,000,000</strong></td>
-</tr>
-</tbody>
-</table>
-<p><em>All figures </em><em>PROJECTION</em><em> until omnibus balances and yield programs are live.</em></p>
-<hr />
-<h3>C. Exchange Spread (Round-Trip) — <strong>PIPELINE</strong></h3>
-<table>
-<thead>
-<tr>
-<th>Monthly Volume</th>
-<th>Spread</th>
-<th>Monthly Revenue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$10M</td>
-<td>0.1%</td>
-<td>$10,000</td>
-</tr>
-<tr>
-<td>$100M</td>
-<td>0.1%</td>
-<td>$100,000</td>
-</tr>
-<tr>
-<td><strong>$500M</strong></td>
-<td><strong>0.1%</strong></td>
-<td><strong>$500,000</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3>D. Cross-Border B2B Payments — <strong>PIPELINE</strong></h3>
-<table>
-<thead>
-<tr>
-<th># Clients</th>
-<th>Avg Volume/Client</th>
-<th>Fee</th>
-<th>Monthly Revenue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>10</td>
-<td>$1M</td>
-<td>0.5%</td>
-<td>$50,000</td>
-</tr>
-<tr>
-<td>50</td>
-<td>$1M</td>
-<td>0.5%</td>
-<td>$250,000</td>
-</tr>
-<tr>
-<td><strong>100</strong></td>
-<td><strong>$1M</strong></td>
-<td><strong>0.5%</strong></td>
-<td><strong>$500,000</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h3>E. WC26/TTN Commerce — <strong>PIPELINE</strong></h3>
-<table>
-<thead>
-<tr>
-<th>Monthly Commerce</th>
-<th>Discount</th>
-<th>Monthly Revenue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>$1M</td>
-<td>1.5%</td>
-<td>$15,000</td>
-</tr>
-<tr>
-<td>$5M</td>
-<td>1.5%</td>
-<td>$75,000</td>
-</tr>
-<tr>
-<td><strong>$20M</strong></td>
-<td><strong>1.5%</strong></td>
-<td><strong>$300,000</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>MULTI-BANK PARTNER MESH — <strong>PROJECTION</strong></h2>
-<p>Cross-bank settlement routes fiat between correspondent banks while IOUs settle instantly on XRPL. See <a href="technical/PARTNER_BANK_MESH.html"><code>PARTNER_BANK_MESH.md</code></a>.</p>
-<table>
-<thead>
-<tr>
-<th>Leg</th>
-<th>Role</th>
-<th>Label</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Bank A (US omnibus)</td>
-<td>FedWire in / ACH</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>Bank B (EU correspondent)</td>
-<td>SWIFT EUR out</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>Bank C (treasury / MM)</td>
-<td>Float yield</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td><code>payment-orchestrator</code> :4022</td>
-<td>Wire webhook → mint</td>
-<td><strong>PIPELINE</strong> (code <strong>PROVEN</strong> in repo)</td>
-</tr>
-<tr>
-<td><code>iou-reserve-monitor</code> :4027</td>
-<td>Omnibus vs ledger</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>THE NEOBANK: IOU-NATIVE ARCHITECTURE — <strong>PROJECTION</strong></h2>
-<table>
-<thead>
-<tr>
-<th>Stream</th>
-<th>Conservative (10K users)</th>
-<th>Growth (100K users)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Interchange</strong> (1.5%)</td>
-<td>$75K/month</td>
-<td>$750K/month</td>
-</tr>
-<tr>
-<td><strong>Premium subs</strong> ($9.99)</td>
-<td>$10K/month</td>
-<td>$100K/month</td>
-</tr>
-<tr>
-<td><strong>Float income</strong> (2%)</td>
-<td>$80K/month</td>
-<td>$400K/month</td>
-</tr>
-<tr>
-<td><strong>Card fees</strong></td>
-<td>$5K/month</td>
-<td>$50K/month</td>
-</tr>
-<tr>
-<td><strong>TOTAL</strong></td>
-<td><strong>$170K/month</strong></td>
-<td><strong>$1.3M/month</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>BANKING-AS-A-SERVICE (BaaS) — <strong>PROJECTION</strong></h2>
-<table>
-<thead>
-<tr>
-<th># Clients</th>
-<th>Avg Fee</th>
-<th>Monthly Revenue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>5</td>
-<td>$10K</td>
-<td>$50,000</td>
-</tr>
-<tr>
-<td>10</td>
-<td>$10K</td>
-<td>$100,000</td>
-</tr>
-<tr>
-<td><strong>50</strong></td>
-<td><strong>$10K</strong></td>
-<td><strong>$500,000</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>ALEXANDRITE RWA FAST-MONEY PLAYBOOK — <strong>PROJECTION</strong></h2>
-<p>Collateral-backed gem liquidity (AXL001 receipt) — <strong>not</strong> live bank lending. Illustrative operator scenario only.</p>
-<table>
-<thead>
-<tr>
-<th>Step</th>
-<th>Action</th>
-<th>Label</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Custody + appraisal of 2kg Alexandrite collateral</td>
-<td><strong>PROJECTION</strong></td>
-</tr>
-<tr>
-<td>2</td>
-<td>Issue AXL001 IOU receipt on XRPL (gated mint)</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>3</td>
-<td>Lender wires USD → omnibus → orchestrator mints USD IOU</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>4</td>
-<td>Borrower repays → burn IOU → wire out</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>5</td>
-<td>Default → collateral liquidation (off-chain legal)</td>
-<td><strong>PROJECTION</strong></td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>Scenario</th>
-<th>Collateral mark (<strong>PROJECTION</strong>)</th>
-<th>LTV</th>
-<th>Illustrative advance</th>
-<th>Label</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Conservative</td>
-<td>$12.5M</td>
-<td>40%</td>
-<td>$5.0M</td>
-<td><strong>PROJECTION</strong></td>
-</tr>
-<tr>
-<td>Desk ask</td>
-<td>$12.5M</td>
-<td>60%</td>
-<td>$7.5M</td>
-<td><strong>PROJECTION</strong></td>
-</tr>
-</tbody>
-</table>
-<p><em>Do not cite gem marks as audited NAV without third-party appraisal on file.</em></p>
-<hr />
-<h2>TOTAL REVENUE SUMMARY (<strong>PROJECTION</strong>)</h2>
-<h3>Conservative ($50M/month IOU volume)</h3>
-<table>
-<thead>
-<tr>
-<th>Stream</th>
-<th>Monthly</th>
-<th>Annual</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Issuance/Redemption</td>
-<td>$125K</td>
-<td>$1.5M</td>
-</tr>
-<tr>
-<td>Float Income</td>
-<td>$83K</td>
-<td>$1M</td>
-</tr>
-<tr>
-<td>Exchange Spread</td>
-<td>$50K</td>
-<td>$600K</td>
-</tr>
-<tr>
-<td>B2B Payments</td>
-<td>$50K</td>
-<td>$600K</td>
-</tr>
-<tr>
-<td>Neobank</td>
-<td>$170K</td>
-<td>$2M</td>
-</tr>
-<tr>
-<td>BaaS</td>
-<td>$100K</td>
-<td>$1.2M</td>
-</tr>
-<tr>
-<td><strong>TOTAL</strong></td>
-<td><strong>$578K</strong></td>
-<td><strong>$6.9M</strong></td>
-</tr>
-</tbody>
-</table>
-<h3>Scale ($500M/month IOU volume)</h3>
-<table>
-<thead>
-<tr>
-<th>Stream</th>
-<th>Monthly</th>
-<th>Annual</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Issuance/Redemption</td>
-<td>$1.25M</td>
-<td>$15M</td>
-</tr>
-<tr>
-<td>Float Income</td>
-<td>$833K</td>
-<td>$10M</td>
-</tr>
-<tr>
-<td>Exchange Spread</td>
-<td>$500K</td>
-<td>$6M</td>
-</tr>
-<tr>
-<td>B2B Payments</td>
-<td>$500K</td>
-<td>$6M</td>
-</tr>
-<tr>
-<td>Neobank</td>
-<td>$1.3M</td>
-<td>$15.6M</td>
-</tr>
-<tr>
-<td>BaaS</td>
-<td>$500K</td>
-<td>$6M</td>
-</tr>
-<tr>
-<td><strong>TOTAL</strong></td>
-<td><strong>$4.9M</strong></td>
-<td><strong>$58.6M</strong></td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>INVESTOR PITCH (Corrected)</h2>
-<p><strong>Weak:</strong> "We have $874M in issued tokens on XRPL."</p>
-<p><strong>Strong:</strong> "We have <strong>~$874M proven IOU demand</strong> on ledger. With MSB + FedWire/SWIFT (<strong>PIPELINE</strong>), we convert unfunded promises into <strong>redeemable claims</strong> backed by omnibus reserves — capturing fees A–E. Stack is in repo; rails await bank credentials."</p>
-<hr />
-<h2>WIRE → IOU ORCHESTRATION (<strong>PIPELINE</strong> code path)</h2>
-<pre><code>POST /api/v1/payments/wire   # bank webhook
-  → compliance-engine POST /screen
-  → fedwire-adapter POST /verify
-  → issueIou (XRPL if ISSUER_SEED set; else PIPELINE mock hash)
-GET  /api/v1/payments/:id    # status
-</code></pre>
-<p><code>ISSUER_SEED</code> only in operator <code>.env</code> — <strong>never commit</strong>. See <code>fiat-rails/orchestrator/README.md</code>.</p>
-<hr />
-<h2>ACCEPTANCE CRITERIA (<strong>PIPELINE</strong> until live)</h2>
-<ul>
-<li>[ ] IOUs 1:1 backed by fiat reserves (attested)</li>
-<li>[ ] Issuance/redemption fees collected</li>
-<li>[ ] Float income tracked daily</li>
-<li>[ ] Compliance reports auto-generated</li>
-<li>[ ] Revenue dashboard shows labeled PROVEN/PIPELINE/PROJECTION flows</li>
-</ul>
-<hr />
-<p><strong>STATUS:</strong> Manifest v3.0 locked — MSB/SWIFT/FedWire <strong>PIPELINE</strong> · Revenue tables <strong>PROJECTION</strong> unless labeled otherwise.</p>
+<p><em>Placeholder — run <code>npm run docs:update</code> to sync from <code>docs/TROPTIONS_IOU_ISSUER_MANIFEST.md</code>.</em></p>
 <!-- AUTO:IOU_REVENUE_END -->
 
 <hr />
@@ -1136,7 +679,15 @@ POST /api/swift/send            # swift-bridge :4024
 GET  /api/swift/status/:id      # swift-bridge
 GET  /api/reserve/attestation   # iou-reserve-monitor :4027
 GET  /api/neobank/balance       # neobank-api :4026 (PROJECTION)
+POST /api/v1/arbitrage          # orchestrator :4022 — arb execute/dry-run
+POST /api/v1/tokens             # baas-api :8097 — x402 $10K setup stub
+POST /api/v1/pools              # baas-api :8097 — single pool (402)
+POST /api/v1/pools/batch        # baas-api :8097 — batch pools (402 sum)
+GET  /api/v1/pools/jobs         # baas-api :8097 — job queue
+GET  /api/v1/dashboard/:id/revenue  # baas-api — PROJECTION revenue
+GET  /x402/market-data/orderbook    # x402-gateway :4020
 </code></pre>
+<p>See <a href="ARBITRAGE_AND_BAAS.html">ARBITRAGE_AND_BAAS</a> · <a href="LOCAL_PREVIEW.html">LOCAL_PREVIEW</a>.</p>
 <hr />
 <h2>Document index</h2>
 <table>
@@ -1150,6 +701,10 @@ GET  /api/neobank/balance       # neobank-api :4026 (PROJECTION)
 <tr>
 <td><a href="SYSTEM_MANIFEST.html">SYSTEM_MANIFEST</a></td>
 <td>This file</td>
+</tr>
+<tr>
+<td><a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS_REVENUE_ENGINE</a></td>
+<td>Waves, 18 streams, flywheel, activation</td>
 </tr>
 <tr>
 <td><a href="MSB_FIAT_RAILS.html">MSB_FIAT_RAILS</a></td>
@@ -1174,6 +729,22 @@ GET  /api/neobank/balance       # neobank-api :4026 (PROJECTION)
 <tr>
 <td><a href="../../fiat-rails/orchestrator/README.html"><code>fiat-rails/orchestrator/README</code></a></td>
 <td>Wire → IOU ops</td>
+</tr>
+<tr>
+<td><a href="ARBITRAGE_AND_BAAS.html">ARBITRAGE_AND_BAAS</a></td>
+<td>Arbitrage bot + BaaS x402</td>
+</tr>
+<tr>
+<td><a href="BAAS_BATCH_POOLS.html">BAAS_BATCH_POOLS</a></td>
+<td>Batch pool call sequence (:8097)</td>
+</tr>
+<tr>
+<td><a href="../../fiat-rails/baas-api/README.html"><code>fiat-rails/baas-api/README</code></a></td>
+<td>BaaS liquidity API</td>
+</tr>
+<tr>
+<td><a href="LOCAL_PREVIEW.html">LOCAL_PREVIEW</a></td>
+<td>Port 3123 preview fix</td>
 </tr>
 </tbody>
 </table>
