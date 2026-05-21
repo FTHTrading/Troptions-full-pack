@@ -2,6 +2,8 @@
 
 Eight brand domains registered in L1 genesis and mapped to sovereign products.
 
+**Live vs planned hostnames:** see [`DOMAIN_TRUTH_TABLE.md`](DOMAIN_TRUTH_TABLE.md) before investor or press materials.
+
 | Domain | Primary product | Stack component |
 |--------|-----------------|-----------------|
 | **TROPTIONSXCHANGE.IO** | Exchange OS | `frontends/exchange-os` |

@@ -19,14 +19,14 @@ minima:
 
 header_pages:
   - index.md
-  - guide/audio-tour.md
-  - infrastructure/l1.md
-  - infrastructure/backends.md
-  - infrastructure/frontends.md
+  - executive/overview.md
+  - executive/history.md
+  - executive/revenue.md
+  - executive/infrastructure.md
   - proof/truth-labels.md
+  - executive/deck.md
+  - infrastructure/l1.md
   - deploy/quickstart.md
-  - deploy/secrets-setup.md
-  - ROADMAP.md
 
 exclude:
   - counterparty

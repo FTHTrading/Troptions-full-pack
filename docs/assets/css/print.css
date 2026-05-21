@@ -1,0 +1,66 @@
+/* Executive / deck print — use with executive layout */
+
+@media print {
+  .glass-ambient,
+  .glass-nav,
+  .glass-nav-toggle,
+  .glass-footer,
+  .site-header,
+  .site-footer,
+  .theme-player,
+  .glass-guide,
+  .glass-tour-controls,
+  .glass-qa-form,
+  details.theme-lyrics,
+  .glass-engineers details summary::marker {
+    display: none !important;
+  }
+
+  body,
+  body.glass-enabled {
+    background: #fff !important;
+    color: #111 !important;
+  }
+
+  .glass-page,
+  .executive-page {
+    min-height: auto;
+  }
+
+  .glass-panel,
+  .glass-card,
+  .executive-panel {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .glass-hero h1,
+  .executive-hero h1 {
+    font-size: 28pt !important;
+    color: #000 !important;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #444;
+  }
+
+  .glass-btn,
+  .no-print {
+    display: none !important;
+  }
+
+  pre.language-mermaid {
+    border: 1px solid #ddd;
+    padding: 1rem;
+  }
+
+  @page {
+    margin: 1.2cm;
+  }
+}

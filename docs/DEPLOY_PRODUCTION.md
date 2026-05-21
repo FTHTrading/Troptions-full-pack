@@ -54,14 +54,14 @@ Root `.env` (from `.env.example`) supplies RPC URLs, Stripe keys, Polygon/XRPL a
 
 ## nginx hostnames
 
-Configured in `infrastructure/nginx/sites/troptions.conf`:
+Templates in `infrastructure/nginx/sites/troptions.conf` — **not deployed until DNS pointed** (see [`DOMAIN_TRUTH_TABLE.md`](DOMAIN_TRUTH_TABLE.md)).
 
-| Host | Upstream |
-|------|----------|
-| `fthedu.unykorn.org` | fth-academy:8091 |
-| `ai.troptions.org` | donk-tutor:8090 |
-| `ttn.troptions.org` | ttn-launcher:8092 |
-| `dao.troptions.org` | dao-service:8093 |
+| Host | Upstream | Public status (2026-05-21) |
+|------|----------|----------------------------|
+| `fthedu.unykorn.org` | fth-academy:8091 | **LIVE** (unykorn) |
+| `ai.troptions.org` | donk-tutor:8090 | **Future DNS** — Bryan not running |
+| `ttn.troptions.org` | ttn-launcher:8092 | **Future DNS** — use troptionslive.unykorn.org |
+| `dao.troptions.org` | dao-service:8093 | **Future DNS** |
 
 ## TLS / SSL (optional)
 

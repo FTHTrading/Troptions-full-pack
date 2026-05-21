@@ -1,39 +1,35 @@
 ---
 layout: default
 ---
-<div class="glass-page" id="top">
+<div class="glass-page executive-page" id="top">
   <div class="glass-ambient" aria-hidden="true"></div>
-  <nav class="glass-nav" id="glass-nav" aria-label="Showcase sections">
+  <nav class="glass-nav executive-nav" aria-label="Executive sections">
     <div class="glass-nav-inner wrapper">
       <a class="glass-nav-brand" href="{{ '/' | relative_url }}">
         <img src="{{ '/assets/images/troptions-logo-primary.png' | relative_url }}" alt="" width="36" height="36" />
         <span class="glass-nav-title">TROPTIONS</span>
       </a>
-      <button type="button" class="glass-nav-toggle" aria-expanded="false" aria-controls="glass-nav-links">Menu</button>
       <div class="glass-nav-links" id="glass-nav-links">
         <a href="{{ '/executive/overview.html' | relative_url }}">Overview</a>
         <a href="{{ '/executive/history.html' | relative_url }}">History</a>
         <a href="{{ '/executive/revenue.html' | relative_url }}">Revenue</a>
         <a href="{{ '/executive/infrastructure.html' | relative_url }}">Infrastructure</a>
         <a href="{{ '/proof/truth-labels.html' | relative_url }}">Proof</a>
+        <a href="{{ '/executive/deck.html' | relative_url }}">Deck</a>
         <a href="{{ '/infrastructure/l1.html' | relative_url }}" class="glass-nav-doc">For Engineers</a>
-        <a href="{{ '/executive/deck.html' | relative_url }}" class="glass-nav-doc">Deck</a>
       </div>
     </div>
   </nav>
-
-  <main class="glass-main post-content">
+  <main class="glass-main post-content executive-content">
     {{ content }}
   </main>
-
   <footer class="glass-footer">
     <div class="wrapper">
       <p class="glass-footer-line">
-        <a href="https://github.com/fthtrading/Troptions-full-pack">Troptions-full-pack</a>
-        · <a href="{{ '/DOMAIN_TRUTH_TABLE.html' | relative_url }}">Domain truth</a>
-        · Maturity <strong>9.0</strong> on <code>main</code> · Honest labels
+        <a href="{{ '/DOMAIN_TRUTH_TABLE.html' | relative_url }}">Domain truth</a>
+        · <a href="https://github.com/fthtrading/Troptions-full-pack">Source</a>
+        · Not legal advice
       </p>
-      <p class="glass-footer-muted">© FTH Trading — proprietary anthem audio; no redistribution without permission.</p>
     </div>
   </footer>
 </div>

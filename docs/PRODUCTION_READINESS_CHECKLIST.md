@@ -42,8 +42,9 @@
 |:----:|------|-------|
 | [ ] | `docker/docker-compose.prod.yml` deployed via `scripts/deploy-production.ps1` / `.sh` | Ops |
 | [x] | TLS termination template (`docker/nginx/`, `scripts/setup-tls.ps1`) — self-signed local demo | Engineering |
-| [ ] | TLS on public DNS (`certbot` + `dao.troptions.org`, etc.) | Ops |
-| [ ] | DNS A/AAAA for `dao.troptions.org`, `fthedu.unykorn.org`, etc. | Ops |
+| [ ] | TLS on public DNS (`certbot` + troptions.org subdomains) | Ops — **Future DNS** per [`DOMAIN_TRUTH_TABLE.md`](DOMAIN_TRUTH_TABLE.md) |
+| [x] | unykorn.org live surfaces (troptions, troptionslive, launch, fthedu) | Verified 2026-05-21 |
+| [ ] | DNS A/AAAA for `ai.troptions.org`, `ttn.troptions.org`, `dao.troptions.org` | Ops — Bryan not running today |
 | [ ] | Prometheus :9945 scraped; Grafana dashboard `ops/grafana/dashboard.json` | Ops |
 
 ---

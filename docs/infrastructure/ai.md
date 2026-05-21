@@ -19,6 +19,7 @@ permalink: /infrastructure/ai/
 - Whisper STT paths in donk-tutor (GPU optional)
 - OpenClaw / whichway docs mirrored under `knowledge-base/openclaw-content`
 - Glass site live Q&A: point `troptions-guide.js` at `http://127.0.0.1:8090` — **no API keys in browser JS**
+- Public hostname `ai.troptions.org` is **Future DNS** (not resolving); see [`DOMAIN_TRUTH_TABLE.md`](../DOMAIN_TRUTH_TABLE.html)
 
 ## Dependencies
 

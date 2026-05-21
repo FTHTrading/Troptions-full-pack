@@ -6,6 +6,6 @@
 ./gen-self-signed.sh
 ```
 
-**Production:** Use Let's Encrypt (certbot) on real hostnames (`dao.troptions.org`, etc.). Do not ship production traffic on self-signed certs.
+**Production:** Use Let's Encrypt (certbot) on real hostnames after DNS cutover. `ai.troptions.org` / `ttn.troptions.org` are **Future DNS** (see `docs/DOMAIN_TRUTH_TABLE.md`). Live today: unykorn.org family. Do not ship production traffic on self-signed certs.
 
 Private keys are listed in `.gitignore`; if you regenerate, run `scripts/setup-tls.sh` from the repo root.
