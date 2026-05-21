@@ -87,7 +87,7 @@
 <td><strong>PIPELINE</strong> — <strong>do not</strong> cite as verified without bank statements</td>
 </tr>
 <tr>
-<td>Funding plan $5M–$10M</td>
+<td>Funding plan $2M–$3.5M</td>
 <td>Capitalization planning</td>
 <td><strong>PROJECTION</strong></td>
 </tr>
@@ -112,7 +112,7 @@
   PIPELINE_BLOCK --&gt; L0[IOU = unfunded promise today]
   PIPELINE_BLOCK --&gt; L1[MSB + BSA program]
   PIPELINE_BLOCK --&gt; L2[Omnibus 1:1 reserve at bank]
-  PIPELINE_BLOCK --&gt; L3[msb-compliance :4098]
+  PIPELINE_BLOCK --&gt; L3[compliance-engine :4025]
   PIPELINE_BLOCK --&gt; L4[payment-orchestrator :4022]
   PIPELINE_BLOCK --&gt; L5[swift-bridge + FedWire]
   PIPELINE_BLOCK --&gt; L6[Redeemable claims + fee capture A–E]
@@ -126,7 +126,7 @@
 <pre><code class="language-mermaid">sequenceDiagram
   participant Client
   participant PO as payment-orchestrator PIPELINE
-  participant CMP as msb-compliance PIPELINE
+  participant CMP as compliance-engine :4025 PIPELINE
   participant Bank as Omnibus bank PIPELINE
   participant XRPL as TROPTIONS issuer PROVEN
 
@@ -238,7 +238,7 @@
 <tr>
 <td>Transaction monitoring</td>
 <td><strong>PIPELINE</strong></td>
-<td><code>backend/msb-compliance/</code></td>
+<td><code>fiat-rails/compliance-engine/</code> :4025</td>
 </tr>
 <tr>
 <td>KYC / CIP</td>
@@ -405,7 +405,7 @@
 <tbody>
 <tr>
 <td>MSB integration, bank omnibus, compliance, engineering, reserve seed</td>
-<td><strong>$5M – $10M</strong> planning range</td>
+<td><strong>$2M – $3.5M</strong> planning range</td>
 <td><strong>PROJECTION</strong></td>
 </tr>
 </tbody>
@@ -414,7 +414,7 @@
 <hr />
 <h2>Week 1–4 operator checklist (condensed)</h2>
 <ol>
-<li><strong>Week 1:</strong> MSB artifact vault; stub <code>:4098</code> / <code>:4022</code>; fix IOU vs Circle copy on investor surfaces</li>
+<li><strong>Week 1:</strong> MSB artifact vault; stub <code>fiat-rails</code> :4022–:4027; fix IOU vs Circle copy on investor surfaces</li>
 <li><strong>Week 2:</strong> Banking API behind feature flags; compliance provider env</li>
 <li><strong>Week 3:</strong> SWIFT skeleton; FedWire sandbox with bank</li>
 <li><strong>Week 4:</strong> Publish manifest + MSB rails to Pages; legal BSA review; <strong>no</strong> live neobank marketing</li>

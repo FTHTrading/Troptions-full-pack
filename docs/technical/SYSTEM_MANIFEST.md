@@ -4,227 +4,227 @@ layout: default
 permalink: /technical/SYSTEM_MANIFEST.html
 ---
 
-# TROPTIONS system manifest — IOU issuer model & MSB / SWIFT / FedWire map
+# TROPTIONS system manifest — post-MSB hybrid fiat-crypto blueprint
 
-**Last updated:** 2026-05-21 (auto-sync via `npm run docs:update`)  
-**Labels:** **PROVEN** (repo + live HTTP/explorer), **PIPELINE** (designed, stub, or awaiting credentials), **PROJECTION** (illustrative scenarios — not forecasts or audited financials).
+**Last updated:** 2026-05-21  
+**Overall status:** **DESIGN** / **PIPELINE** until FinCEN MSB program and correspondent omnibus are live and verified.  
+**Labels:** **PROVEN** (repo + live HTTP/explorer), **PIPELINE** (designed, stub, awaiting credentials), **PROJECTION** (scenario math — not forecasts or audited financials).
 
-**Related docs:** [MSB fiat rails](MSB_FIAT_RAILS.html) · [On-chain proof](ON_CHAIN_PROOF.html) · [XRPL & Stellar verification](XRPL_STELLAR_VERIFICATION.html) · [Architecture](ARCHITECTURE.html) · [Valuation & comparables](VALUATION_AND_COMPARABLES.html)
+**Related:** [MSB fiat rails](MSB_FIAT_RAILS.html) · [On-chain proof](ON_CHAIN_PROOF.html) · [XRPL & Stellar](XRPL_STELLAR_VERIFICATION.html) · [Architecture](ARCHITECTURE.html)
+
+**PDF export (optional):** `scripts/generate-manifest-pdf.ps1` — requires `pandoc` (and optionally `wkhtmltopdf`); HTML fallback always written to `docs/downloads/SYSTEM_MANIFEST.html`.
 
 ---
 
-## IOU issuer model (read this first)
+## Honesty banner (read first)
 
-### What is on ledger today (**PROVEN**)
+| Claim | Allowed today | Label |
+|-------|---------------|-------|
+| ~874M IOUs on XRPL + Stellar | Issued supply / **proven demand** | **PROVEN** (ledger) |
+| ~874M = bank reserves or AUM | **Do not claim** | Misleading |
+| Fully-backed 1:1 USD redemption | **Not operational** | **PIPELINE** |
+| Fiat rails (FedWire / SWIFT / MSB) | Stubs in `fiat-rails/` | **DESIGN** / **PIPELINE** |
+| Neobank / BaaS revenue tables | Product design only | **PROJECTION** |
+| Funding **$2M–$3.5M** | Internal capitalization plan | **PROJECTION** |
+
+**Shift when live:** unfunded promise-to-pay IOUs → **redeemable claims** backed by **audited** omnibus reporting (not marketing copy).
+
+---
+
+## Hybrid fiat-crypto model
+
+1. **PROVEN today:** Crypto IOUs on XRPL/Stellar/Polygon; Academy Stripe; launcher; x402 health; L1 node.  
+2. **PIPELINE:** USD/EUR enters via FedWire/ACH/SWIFT → `compliance-engine` screens → `payment-orchestrator` routes → omnibus credit → mint IOU 1:1 on ledger.  
+3. **Redemption (PIPELINE):** Burn IOU → orchestrator → compliance → wire out.  
+4. **PROJECTION:** Neobank app and BaaS APIs sit on the same orchestrator — no live interchange until card program ships.
+
+Legacy Python stubs under `backend/payment-orchestrator` and `backend/msb-compliance` (:4098) are **superseded** by `fiat-rails/` (:4022–:4027). **No duplicate PM2 apps.**
+
+---
+
+## ASCII architecture (post-MSB target)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│ CLIENTS: Exchange OS │ Academy │ TTN │ Neobank (PROJECTION) │ x402    │
+└────────────┬───────────────────────┬──────────────────┬───────────────┘
+             │ fiat intent           │ Stripe (PROVEN)  │ ATP :4020
+             v                       v                  v
+┌──────────────────────┐    ┌──────────────┐    ┌──────────────┐
+│ payment-orchestrator │    │ fth :8091    │    │ popeye :4021 │
+│        :4022         │    │ ttn  :8092   │    └──────────────┘
+└──────┬───────┬───────┘    └──────────────┘
+       │       │
+       │       ├──► compliance-engine :4025 (KYC/OFAC/SAR)
+       │       ├──► fedwire-adapter  :4023
+       │       └──► swift-bridge     :4024
+       │
+       v
+┌──────────────────┐     mint/burn 1:1      ┌─────────────────────────┐
+│ Bank omnibus     │ ◄──────────────────────►│ XRPL/Stellar issuer     │
+│ (PIPELINE)       │                           │ ~874M IOU PROVEN demand │
+└──────────────────┘                           └─────────────────────────┘
+       ▲
+       └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
+```
+
+**Port discipline:** `popeye-relay` **:4021**; fiat rails **:4022–:4027** — no collision.
+
+---
+
+## Fiat-rails service integration table
+
+| Service | Port | Path | Upstream / downstream | Label |
+|---------|------|------|------------------------|-------|
+| `payment-orchestrator` | **4022** | `fiat-rails/payment-orchestrator/` | Clients, Exchange OS; calls compliance + adapters | **PIPELINE** |
+| `fedwire-adapter` | **4023** | `fiat-rails/fedwire-adapter/` | Orchestrator ↔ bank FedWire | **PIPELINE** |
+| `swift-bridge` | **4024** | `fiat-rails/swift-bridge/` | Orchestrator ↔ MT103/202 bureau | **PIPELINE** |
+| `compliance-engine` | **4025** | `fiat-rails/compliance-engine/` | All fiat ingress/egress screening | **PIPELINE** |
+| `neobank-api` | **4026** | `fiat-rails/neobank-api/` | Mobile/card partner (design) | **PROJECTION** |
+| `iou-reserve-monitor` | **4027** | `fiat-rails/iou-reserve-monitor/` | Omnibus statements vs ledger supply | **PIPELINE** |
+
+**Setup:** `.\scripts\setup-fiat-rails.ps1` · **PM2:** `pm2 start ecosystem.config.js --only payment-orchestrator,fedwire-adapter,swift-bridge,compliance-engine,neobank-api,iou-reserve-monitor`
+
+**OpenAPI (stub):** `fiat-rails/payment-orchestrator/openapi.yaml`
+
+---
+
+## IOU issuer model (**PROVEN** supply, **PIPELINE** backing)
 
 | Fact | Label | Investor language |
 |------|-------|-------------------|
-| **~874M** units issued on XRPL + Stellar (TROPTIONS, USDC, USDT, EURC, DAI **currency codes**) | **PROVEN** (ledger) | **Issued supply / proven demand** — wallets hold trust-line IOUs |
-| Issuer wallets `rJLMST…` / `GB4FHG…` | **PROVEN** | TROPTIONS gateway issues these IOUs |
-| USDC / USDT / DAI / EURC on XRPL | **PROVEN** (IOU) | **TROPTIONS-issued IOUs** — **not** Circle, Tether, or Maker **native** mainnet tokens |
-| Regulated 1:1 fiat redemption today | **Not claimed** | **Unfunded promise-to-pay** until omnibus + reserve path is live |
-| Market cap, AUM, or fully-backed bank reserves | **Do not use** | Issued supply ≠ USD in bank |
-
-**Honesty:** This monorepo is **not** a live full-reserve settlement institution. Fiat banking rails (MSB registration, SWIFT, FedWire) and correspondent omnibus accounts are **PIPELINE** until wired and verified. Do **not** present issued ledger supply or operator desk attestations as booked bank reserves.
-
-### What MSB + SWIFT + FedWire unlock (**PIPELINE** → future **PROVEN**)
-
-| Capability | Label | Outcome when live |
-|------------|-------|-------------------|
-| FinCEN MSB program + BSA/AML | **PIPELINE** | Legal money-transmission posture |
-| FedWire / ACH / SWIFT in | **PIPELINE** | Fiat lands in partner omnibus |
-| `msb-compliance` :4098 + `payment-orchestrator` :4022 | **PIPELINE** | Screen, route, mint/burn IOUs 1:1 against fiat |
-| Redeemable digital-dollar claims | **PIPELINE** | IOUs backed by **audited** reserve reporting — not marketing copy |
-
-**Shift:** unfunded operator attestation → **legally-backed redeemable claims** (only after bank + compliance evidence exists).
-
-### Operator desk (~$175M) — do not over-claim
-
-| Item | Label | Notes |
-|------|-------|-------|
-| Exchange OS desk ~$175M USDC narrative | **PIPELINE** | **Operator attestation only** — not Circle USDC, not verified without correspondent statements |
-| On-chain **274M** USDC-labeled IOU issued (XRPL+Stellar) | **PROVEN** (ledger) | IOU supply — **not** $175M verifiable desk without rails |
-| Full-reserve institution live today | **Not claimed** | — |
+| **~874M** issued on XRPL + Stellar (TROPTIONS, USDC, USDT, EURC, DAI **codes**) | **PROVEN** | **Issued demand** — not bank reserves |
+| Issuer `rJLMST…` / `GB4FHG…` | **PROVEN** | Gateway-issued IOUs |
+| USDC/USDT on XRPL | **PROVEN** (IOU) | **Not** Circle/Tether **native** mainnet tokens |
+| Regulated 1:1 fiat redemption today | **Not claimed** | Promise-to-pay until omnibus live |
+| Operator desk ~$175M narrative | **PIPELINE** | Attestation only — not verified without bank statements |
 
 ---
 
-## Fiat → IOU issuance & redemption loop
+## Sequence diagrams (target state — **PIPELINE**)
+
+### 1. Fiat deposit → IOU mint
 
 ```mermaid
-flowchart TB
-  subgraph proven_today [PROVEN today]
-    LEDGER[~874M issued IOUs on XRPL + Stellar]
-    CRYPTO[Crypto rails: trust lines, DEX, wallets]
-    CASH[Academy Stripe + launcher + x402 health]
-    LEDGER --> CRYPTO
-  end
+sequenceDiagram
+  participant C as Client
+  participant PO as payment-orchestrator :4022
+  participant CE as compliance-engine :4025
+  participant FW as fedwire-adapter :4023
+  participant B as Omnibus bank PIPELINE
+  participant XR as XRPL issuer PROVEN
 
-  subgraph pipeline_rails [PIPELINE — MSB + bank partner]
-    USDIN[USD/EUR fiat in — FedWire / ACH / SWIFT]
-    OMN[Omnibus reserve account]
-    CMP[msb-compliance :4098 — KYC/OFAC]
-    PO[payment-orchestrator :4022]
-    MINT[Issue IOU 1:1 on ledger]
-    BURN[Redeem IOU — wire fiat out]
-    USDIN --> CMP --> PO --> OMN
-    PO --> MINT
-    BURN --> PO
-    OMN --> BURN
-  end
-
-  subgraph fees [Revenue when rails PROVEN in GL]
-    FEE1[Issuance fee 0.1–0.25%]
-    FEE2[Redemption fee 0.1–0.25%]
-    MINT --> FEE1
-    BURN --> FEE2
-  end
-
-  MINT --> LEDGER
-  LEDGER --> BURN
-
-  style proven_today fill:#1a3d1a,color:#e8ffe8
-  style pipeline_rails fill:#333,color:#fff
+  C->>FW: FedWire/ACH USD in PIPELINE
+  FW->>B: Credit omnibus PIPELINE
+  B->>CE: Funds received event
+  CE->>PO: KYC/OFAC pass PIPELINE
+  PO->>XR: Mint IOU 1:1 PIPELINE
+  XR-->>C: IOU credit
+  Note over C,XR: Today IOUs exist without guaranteed fiat redemption
 ```
 
-**Today:** loop is **open** between fiat and IOU — issuance/redemption fees are **PIPELINE**, not booked revenue.
-
----
-
-## Revenue streams A–E (issuer edition)
-
-*Scenario math below is **PIPELINE** or **PROJECTION** until fiat rails and GL exist. **PROVEN** cash today is Academy + launcher + x402 (see bottom).*
-
-| Stream | Description | Label | Notes |
-|--------|-------------|-------|-------|
-| **A** | Issuance & redemption fees (wire in → mint IOU; burn → wire out) | **PIPELINE** | 0.1–0.25% illustrative; requires omnibus + MSB |
-| **B** | Float income (reserve yield minus holder yield) | **PIPELINE** | Bank-model margin — **not** live |
-| **C** | Exchange / desk round-trip spread | **PIPELINE** | Desk attestation gated; not $175M verified fact |
-| **D** | Cross-border B2B (USD in → IOU → EUR out via SWIFT) | **PIPELINE** | SWIFT + correspondent **PIPELINE** |
-| **E** | WC26 / TTN commerce (sponsor wire → IOU / $LEV8 settlement) | **PIPELINE** | Sponsorship tiers documented; **not signed revenue** |
-
-**Illustrative scale (PIPELINE / PROJECTION — not forecasts):**
-
-| Scenario | A + B + C + D + E (illustrative) | Label |
-|----------|----------------------------------|-------|
-| $50M/mo IOU flow through backed rails | ~$578K/mo scenario | **PROJECTION** |
-| $500M/mo IOU flow | ~$4.9M/mo scenario | **PROJECTION** |
-
-See repo root [`TROPTIONS_IOU_ISSUER_MANIFEST.md`](../../TROPTIONS_IOU_ISSUER_MANIFEST.md) for full scenario tables.
-
-### PROVEN revenue & demand (today)
-
-| Item | Label | Evidence |
-|------|-------|----------|
-| ~874M issued IOUs | **PROVEN** (demand/supply) | [ON_CHAIN_PROOF](ON_CHAIN_PROOF.html) — **not** revenue |
-| FTH Academy | **PROVEN** | [fthedu.unykorn.org](https://fthedu.unykorn.org) |
-| Solana launcher SaaS | **PROVEN** | [launch.unykorn.org](https://launch.unykorn.org) |
-| x402 metered APIs | **PROVEN** (health) | [x402.unykorn.org/health](https://x402.unykorn.org/health) |
-| DAO governance API | **PROVEN** | `dao-service` :8093 |
-| Cross-chain issuance utility | **PROVEN** | XRPL + Stellar + Polygon proofs |
-
-**Honest cash today:** early-scale Academy + launcher + x402 — **not** MSB wire volume, float, neobank interchange, or BaaS platform fees.
-
----
-
-## Neobank — thin layer on IOUs (**PROJECTION**)
-
-*Disclaimer: Product design only. No live interchange, card program, or deposit insurance claims.*
+### 2. IOU redeem → fiat out
 
 ```mermaid
-flowchart LR
-  subgraph projection [PROJECTION — not shipped]
-    APP[Neobank app TBD]
-    CARD[Debit via card partner TBD]
-    APP -->|display USD| IOU[TROPTIONS-USD IOU on XRPL]
-    CARD -->|redeem IOU| MER[Merchant settlement]
-  end
+sequenceDiagram
+  participant C as Client
+  participant XR as XRPL issuer PROVEN
+  participant PO as payment-orchestrator :4022
+  participant CE as compliance-engine :4025
+  participant FW as fedwire-adapter :4023
+  participant B as Omnibus bank PIPELINE
 
-  subgraph pipeline [PIPELINE rails]
-    PO[payment-orchestrator :4022]
-    CMP[msb-compliance :4098]
-    BANK[Correspondent omnibus TBD]
-    PO --> CMP --> BANK
-  end
-
-  APP --> PO
-  MER --> PO
-
-  style projection fill:#4a3728,color:#fff
-  style pipeline fill:#333,color:#fff
+  C->>XR: Burn/redeem IOU PIPELINE
+  XR->>PO: Redemption request
+  PO->>CE: Screen egress
+  CE->>FW: Approve wire PIPELINE
+  FW->>B: Debit omnibus
+  B-->>C: USD settled PIPELINE
 ```
 
-| Neobank line (illustrative) | 10K users scenario | 100K users scenario | Label |
-|----------------------------|-------------------|---------------------|-------|
+### 3. Cross-border USD → IOU → EUR (SWIFT)
+
+```mermaid
+sequenceDiagram
+  participant C as B2B client
+  participant PO as payment-orchestrator :4022
+  participant SW as swift-bridge :4024
+  participant CE as compliance-engine :4025
+  participant XR as IOU ledger PROVEN
+
+  C->>PO: USD funding intent PIPELINE
+  PO->>CE: Sanctions + KYC
+  PO->>XR: Mint USD IOU PIPELINE
+  PO->>SW: MT103 EUR leg PIPELINE
+  SW-->>C: Beneficiary credited PIPELINE
+```
+
+---
+
+## Implementation phases 1–5
+
+| Phase | Scope | Exit criteria | Label |
+|-------|--------|---------------|-------|
+| **1** | MSB artifact vault; `fiat-rails` stubs; IOU copy fix on investor surfaces | Six `/health` return `pipeline`; PM2 ports 4022–4027 | **PIPELINE** |
+| **2** | Orchestrator contracts; Exchange OS fiat behind feature flag | `POST /payments/request` wired to compliance mock | **PIPELINE** |
+| **3** | FedWire sandbox + SWIFT skeleton with bank partner | First sandbox wire trace (non-prod) | **PIPELINE** |
+| **4** | Omnibus live; `iou-reserve-monitor` daily reconcile | Attestation memo separate from on-chain supply | **PIPELINE** → **PROVEN** |
+| **5** | Neobank/BaaS pilots | GL + legal sign-off before marketing interchange | **PROJECTION** |
+
+---
+
+## Revenue streams A–E
+
+| Stream | Description | Label |
+|--------|-------------|-------|
+| **A** | Issuance/redemption fees (0.1–0.25% illustrative) | **PIPELINE** |
+| **B** | Float margin (omnibus yield − holder yield) | **PIPELINE** |
+| **C** | Exchange/desk spread | **PIPELINE** (desk attestation gated) |
+| **D** | Cross-border B2B (USD→IOU→EUR) | **PIPELINE** |
+| **E** | WC26 / TTN sponsor settlement | **PIPELINE** |
+
+**PROVEN cash today:** Academy, launcher, x402 — **not** MSB wire volume or neobank interchange.
+
+### Economic scenarios (**PROJECTION** only)
+
+| Scenario | Illustrative monthly | Annualized | Label |
+|----------|---------------------|------------|-------|
+| Conservative rails throughput | ~$305K/mo | ~$3.6M/yr | **PROJECTION** |
+| Scale rails throughput | ~$2.6M/mo | ~$31M/yr | **PROJECTION** |
+| $50M/mo IOU flow (A–E bundle) | ~$578K/mo | — | **PROJECTION** |
+| $500M/mo IOU flow | ~$4.9M/mo | — | **PROJECTION** |
+
+---
+
+## Funding ask (**PROJECTION**)
+
+| Item | Range | Label | Use (planning) |
+|------|-------|-------|----------------|
+| MSB + bank + compliance + engineering + reserve seed | **$2M – $3.5M** | **PROJECTION** | Omnibus, legal, integration — **not** an offering term sheet |
+
+*(Prior $5–10M range superseded for investor pack alignment; adjust only with counsel.)*
+
+---
+
+## Neobank & BaaS (**PROJECTION**)
+
+| Neobank line (illustrative) | 10K users | 100K users | Label |
+|----------------------------|-----------|------------|-------|
 | Interchange ~1.5% | $75K/mo | $750K/mo | **PROJECTION** |
 | Premium subs | $10K/mo | $100K/mo | **PROJECTION** |
 | Float margin | $80K/mo | $400K/mo | **PROJECTION** |
-| Card fees | $5K/mo | $50K/mo | **PROJECTION** |
-| **Neobank subtotal** | **~$170K/mo** | **~$1.3M/mo** | **PROJECTION** |
+| **Subtotal** | **~$170K/mo** | **~$1.3M/mo** | **PROJECTION** |
 
----
-
-## BaaS — white-label rails (**PROJECTION**)
-
-```mermaid
-flowchart TB
-  subgraph projection_baas [PROJECTION — API clients TBD]
-    F1[Fintech client A]
-    F2[Fintech client B]
-    API[BaaS API — MSB + IOU mint + compliance]
-    F1 --> API
-    F2 --> API
-  end
-
-  API --> PO[payment-orchestrator :4022]
-  PO --> CMP[msb-compliance :4098]
-  CMP --> BANK[Correspondent + FedWire/SWIFT]
-
-  style projection_baas fill:#4a3728,color:#fff
-  style PO fill:#333,color:#fff
-  style CMP fill:#333,color:#fff
-  style BANK fill:#333,color:#fff
-```
-
-| BaaS scenario | Illustrative $/mo | Label |
-|---------------|---------------------|-------|
-| 5 clients × ~$10K platform | $50K | **PROJECTION** |
-| 50 clients × ~$10K | $500K | **PROJECTION** |
-
----
-
-## Funding ask (**PROJECTION** / planning)
-
-| Item | Range | Label | Use of funds (planning) |
-|------|-------|-------|-------------------------|
-| MSB + bank + compliance integration | **$5M – $10M** | **PROJECTION** | Omnibus setup, legal, engineering, reserve seed — **not** an offering term sheet |
-
----
-
-## Legacy scenario tables (PROJECTION only)
-
-*Superseded for investor meetings by A–E above; kept for sensitivity modeling.*
-
-**Conservative scenario (monthly) — PROJECTION**
-
-| Stream | PROJECTION $/mo | Basis (illustrative) |
-|--------|-----------------|----------------------|
-| Exchange fees | $30K | $10M volume × 0.3% |
-| Stablecoin issuance fee | $25K | $10M × 0.25% |
-| Wire fees | $5K | 200 × $25 |
-| B2B payments | $20K | 10 × $2K |
-| Neobank interchange | $75K | 10K users × $500 spend × 1.5% |
-| Subscriptions | $20K | 2K × $10 |
-| Lending margin | $80K | $30M deposits × 3.2% spread |
-| BaaS platform fees | $50K | 5 × $10K |
-| **Total** | **~$305K/mo** | **~$3.6M/yr scenario** |
-
-**Scale scenario (monthly) — PROJECTION:** combined rows **~$2.6M/mo** — see [Valuation & comparables](VALUATION_AND_COMPARABLES.html).
+| BaaS | Illustrative $/mo | Label |
+|------|-------------------|-------|
+| 5 × ~$10K platform | $50K | **PROJECTION** |
+| 50 × ~$10K | $500K | **PROJECTION** |
 
 ---
 
 ## PM2 service map
 
-Source of truth: `ecosystem.config.js` at repo root. Regenerate the port table with `python scripts/generate-system-manifest.py` or `npm run docs:update`.
+Source of truth: `ecosystem.config.js`. Regenerate: `npm run docs:update`.
 
 <!-- AUTO:PM2_PORTS_START -->
 | PM2 name | Port | Label | Path | Notes |
@@ -234,135 +234,97 @@ Source of truth: `ecosystem.config.js` at repo root. Regenerate the port table w
 | `fth-backend` | **8091** | **PROVEN** | `backend/fth-academy/` | Academy API + Stripe patterns |
 | `ttn-launcher` | **8092** | **PROVEN** | `backend/ttn-launcher/` | TTN / sports backend |
 | `dao-service` | **8093** | **PROVEN** | `backend/dao-service/` | Governance API |
-| `x402-gateway` | **4020** | **PROVEN** | `backend/x402-gateway/` | Metered ATP sidecar; [x402 health](https://x402.unykorn.org/health) |
+| `x402-gateway` | **4020** | **PROVEN** | `backend/x402-gateway/` | Metered ATP sidecar |
 | `popeye-relay` | **4021** | **PROVEN** | `backend/popeye-relay/` | Stale agent relay |
-| `payment-orchestrator` | **4022** | **PIPELINE** | `backend/payment-orchestrator/` | Fiat/crypto routing stub; `autorestart: false` |
-| `msb-compliance` | **4098** | **PIPELINE** | `backend/msb-compliance/` | AML/KYC/OFAC stub; `autorestart: false` |
-| `swift-bridge` | *(container)* | **PIPELINE** | `backend/swift-bridge/` *(planned)* | MT103/202 — not in PM2 until image exists |
+| `payment-orchestrator` | **4022** | **PIPELINE** | `fiat-rails/payment-orchestrator/` | Hybrid fiat/crypto routing stub |
+| `fedwire-adapter` | **4023** | **PIPELINE** | `fiat-rails/fedwire-adapter/` | FedWire RTGS adapter stub |
+| `swift-bridge` | **4024** | **PIPELINE** | `fiat-rails/swift-bridge/` | MT103/202 messaging stub |
+| `compliance-engine` | **4025** | **PIPELINE** | `fiat-rails/compliance-engine/` | AML/KYC/OFAC stub |
+| `neobank-api` | **4026** | **PROJECTION** | `fiat-rails/neobank-api/` | Neobank API design stub |
+| `iou-reserve-monitor` | **4027** | **PIPELINE** | `fiat-rails/iou-reserve-monitor/` | Omnibus vs ledger reconciliation stub |
 <!-- AUTO:PM2_PORTS_END -->
-
-**Port check:** `popeye-relay` uses **4021**; `payment-orchestrator` **4022** does not conflict. **4098** is reserved for `msb-compliance`.
 
 ---
 
 ## Banking rails status
 
-| Rail | Capability | Label | Verification path |
-|------|------------|-------|-------------------|
-| **MSB (FinCEN MSB registration)** | Fiat remittance / money transmission compliance program | **PIPELINE** | License upload + policy pack in repo; Form 107 not claimed live here |
-| **SWIFT** | Cross-border MT103/MT202 messaging | **PIPELINE** | BIC + service bureau credentials; `swift-bridge` container TBD |
-| **FedWire** | USD RTGS settlement | **PIPELINE** | Routing + participation agreement; same-day USD not live until bank partner confirms |
-| **ACH (bank partner)** | Retail/bulk ACH | **PIPELINE** | Via correspondent — not standalone in monorepo |
-| **Stripe (Academy)** | Card subscriptions | **PROVEN** | [fthedu.unykorn.org](https://fthedu.unykorn.org) |
-| **x402 / Apostle ATP** | Agent metered settlement | **PROVEN** (health) | `:4020` sidecar; Apostle **7332** when operator runs chain |
+| Rail | Label | Monorepo hook |
+|------|-------|---------------|
+| MSB (FinCEN program) | **PIPELINE** | Operator vault + `compliance-engine` |
+| FedWire RTGS | **PIPELINE** | `fedwire-adapter` :4023 |
+| SWIFT MT103/202 | **PIPELINE** | `swift-bridge` :4024 |
+| ACH (correspondent) | **PIPELINE** | Via bank partner |
+| Stripe (Academy) | **PROVEN** | `fth-backend` :8091 |
+| x402 / Apostle | **PROVEN** (health) | :4020 / :7332 when up |
 
 ---
 
-## Fiat ↔ crypto (PROVEN crypto + PIPELINE fiat)
+## Fiat ↔ crypto flow (overview)
 
 ```mermaid
 flowchart TD
-  subgraph clients [Client interfaces]
+  subgraph clients [Clients]
     A[User / investor]
     C[Exchange OS]
-    D[Academy :8091 / fthedu]
-    E[TTN :8092]
+    D[Academy :8091]
   end
 
-  subgraph proven [PROVEN today]
-    D -->|Stripe card| J[Stripe]
+  subgraph proven [PROVEN]
+    D -->|Stripe| J[Stripe]
     C -->|Crypto IOUs| I[XRPL / Stellar / Polygon]
-    A -->|ATP metered| X[x402 :4020]
-    X -->|settlement| AP[Apostle :7332 when up]
+    A -->|ATP| X[x402 :4020]
   end
 
-  subgraph pipeline [PIPELINE — not live settlement]
-    A -->|USD deposit| B[payment-orchestrator :4022]
-    B -->|FedWire RTGS| G[Bank partner TBD]
-    B -->|SWIFT MT103| H[Correspondent TBD]
-    P[msb-compliance :4098] -->|screen| B
-    R[swift-bridge container] --> H
-    G --> L[Omnibus reserve — attestation path]
+  subgraph pipeline [PIPELINE fiat-rails]
+    A --> PO[payment-orchestrator :4022]
+    PO --> CE[compliance-engine :4025]
+    PO --> FW[fedwire-adapter :4023]
+    PO --> SW[swift-bridge :4024]
+    FW --> BANK[Omnibus TBD]
+    PO --> MON[iou-reserve-monitor :4027]
   end
 
-  B -->|mint / burn IOU 1:1| I
-
-  style B fill:#333,color:#fff
-  style P fill:#333,color:#fff
-  style R fill:#333,color:#fff
-  style G fill:#333,color:#fff
+  PO -->|mint/burn 1:1| I
 ```
 
 ---
 
-## Integration checklist (weeks 1–4)
+## Next actions (operator)
 
-### Week 1 — Foundation
-
-- [ ] **PIPELINE:** MSB artifacts in secure operator store (not public git secrets)
-- [ ] **PIPELINE:** `msb-compliance` :4098 and `payment-orchestrator` :4022 stub health
-- [ ] **PROVEN:** PM2 stack (`8090–8093`, `4020–4021`, `9944`) via [Quickstart](QUICKSTART.html)
-- [ ] Document IOU vs native stablecoin language in investor + Exchange OS copy
-
-### Week 2 — Orchestration
-
-- [ ] **PIPELINE:** `POST /api/banking/deposit` / withdraw contracts
-- [ ] **PIPELINE:** Exchange OS fiat intents → orchestrator (feature flag)
-- [ ] **PROVEN:** Regression x402 + dao health probes
-
-### Week 3 — SWIFT + FedWire
-
-- [ ] **PIPELINE:** `swift-bridge` skeleton; FedWire sandbox with bank
-- [ ] Update manifest via `npm run docs:update`
-
-### Week 4 — Investor pack
-
-- [ ] Publish [MSB_FIAT_RAILS](MSB_FIAT_RAILS.html) to GitHub Pages
-- [ ] **PROJECTION:** Neobank / BaaS scope docs only — no live interchange claims
-- [ ] Re-run truth labels before external meetings
+1. Run `.\scripts\setup-fiat-rails.ps1` and start six fiat PM2 apps; verify `/health` on 4022–4027.  
+2. Store MSB/bank/API keys in operator vault — copy `fiat-rails/.env.template` → `.env` locally (**never commit**).  
+3. Legal review of BSA/AML pack before any live wire.  
+4. Re-run `npm run docs:update` and `.\scripts\generate-manifest-pdf.ps1` before investor meetings.  
+5. Fix Exchange OS / investor copy: IOU ≠ Circle native USDC; ~874M ≠ reserves.
 
 ---
 
-## Document manifest (compliance artifacts)
-
-| Artifact | MSB | FedWire | SWIFT | Label |
-|----------|-----|---------|-------|-------|
-| FinCEN Form 107 / registration | Required | — | — | **PIPELINE** |
-| BSA/AML policy manual | Required | — | — | **PIPELINE** |
-| KYC / CIP procedures | Required | — | — | **PIPELINE** |
-| SAR / CTR procedures | Required | — | — | **PIPELINE** |
-| FedWire participation + security proc | — | Required | — | **PIPELINE** |
-| SWIFT RMA + bilateral keys | — | — | Required | **PIPELINE** |
-| MT103/202 message specs | — | — | Required | **PIPELINE** |
-
-Plug-and-play document AI: `scripts/plug_and_play_system.py` — does **not** replace legal review.
-
----
-
-## API surface (PIPELINE contracts)
+## API surface (**PIPELINE**)
 
 ```
-POST /api/banking/deposit      # PIPELINE
-POST /api/banking/withdraw     # PIPELINE
-POST /api/banking/transfer     # PIPELINE
-GET  /api/banking/balance      # PIPELINE
-POST /api/compliance/screen    # PIPELINE — msb-compliance :4098
-POST /api/compliance/kyc       # PIPELINE
-POST /api/swift/send           # PIPELINE — swift-bridge
-GET  /api/swift/status/:id     # PIPELINE
+POST /payments/request          # orchestrator :4022
+GET  /payments/status           # orchestrator :4022
+POST /api/banking/deposit       # orchestrator
+POST /api/banking/withdraw      # orchestrator
+POST /api/compliance/screen     # compliance-engine :4025
+POST /api/compliance/kyc        # compliance-engine
+POST /api/fedwire/send          # fedwire-adapter :4023
+POST /api/swift/send            # swift-bridge :4024
+GET  /api/swift/status/:id      # swift-bridge
+GET  /api/reserve/attestation   # iou-reserve-monitor :4027
+GET  /api/neobank/balance       # neobank-api :4026 (PROJECTION)
 ```
 
 ---
 
-## Technical index
+## Document index
 
 | Doc | Purpose |
 |-----|---------|
-| [SYSTEM_MANIFEST](SYSTEM_MANIFEST.html) | This file — IOU model, revenue A–E, rails |
-| [MSB_FIAT_RAILS](MSB_FIAT_RAILS.html) | Capitalization tree + investor summary |
-| [ON_CHAIN_PROOF](ON_CHAIN_PROOF.html) | Explorer tables + IOU honesty |
-| [XRPL_STELLAR_VERIFICATION](XRPL_STELLAR_VERIFICATION.html) | Live issuance verification |
-| [ARCHITECTURE](ARCHITECTURE.html) | Layer diagram |
-| [PLUG_AND_PLAY](../../TROPTIONS_PLUG_AND_PLAY_SYSTEM.md) | Document manifest AI |
+| [SYSTEM_MANIFEST](SYSTEM_MANIFEST.html) | This file |
+| [MSB_FIAT_RAILS](MSB_FIAT_RAILS.html) | Capitalization tree |
+| [ON_CHAIN_PROOF](ON_CHAIN_PROOF.html) | Explorer tables |
+| [`fiat-rails/README`](../../fiat-rails/README.md) | Stub ops |
+| [`TROPTIONS_IOU_ISSUER_MANIFEST.md`](../../TROPTIONS_IOU_ISSUER_MANIFEST.md) | Scenario tables |
 
-*PM2 port rows sync from `ecosystem.config.js`. IOU/revenue prose edited in this file.*
+*PM2 rows sync from `ecosystem.config.js`. Prose labels edited here.*

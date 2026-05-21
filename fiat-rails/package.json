@@ -1,0 +1,11 @@
+{
+  "name": "troptions-fiat-rails",
+  "private": true,
+  "description": "Post-MSB fiat rails stubs (PIPELINE until bank credentials wired)",
+  "scripts": {
+    "health-check": "node scripts/health-check-all.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

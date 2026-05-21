@@ -25,13 +25,151 @@
     <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
   </header>
   <div class="md-body">
-<h1>TROPTIONS system manifest — IOU issuer model &amp; MSB / SWIFT / FedWire map</h1>
-<p><strong>Last updated:</strong> 2026-05-21 (auto-sync via <code>npm run docs:update</code>)<br />
-<strong>Labels:</strong> <strong>PROVEN</strong> (repo + live HTTP/explorer), <strong>PIPELINE</strong> (designed, stub, or awaiting credentials), <strong>PROJECTION</strong> (illustrative scenarios — not forecasts or audited financials).</p>
-<p><strong>Related docs:</strong> <a href="MSB_FIAT_RAILS.html">MSB fiat rails</a> · <a href="ON_CHAIN_PROOF.html">On-chain proof</a> · <a href="XRPL_STELLAR_VERIFICATION.html">XRPL &amp; Stellar verification</a> · <a href="ARCHITECTURE.html">Architecture</a> · <a href="VALUATION_AND_COMPARABLES.html">Valuation &amp; comparables</a></p>
+<h1>TROPTIONS system manifest — post-MSB hybrid fiat-crypto blueprint</h1>
+<p><strong>Last updated:</strong> 2026-05-21<br />
+<strong>Overall status:</strong> <strong>DESIGN</strong> / <strong>PIPELINE</strong> until FinCEN MSB program and correspondent omnibus are live and verified.<br />
+<strong>Labels:</strong> <strong>PROVEN</strong> (repo + live HTTP/explorer), <strong>PIPELINE</strong> (designed, stub, awaiting credentials), <strong>PROJECTION</strong> (scenario math — not forecasts or audited financials).</p>
+<p><strong>Related:</strong> <a href="MSB_FIAT_RAILS.html">MSB fiat rails</a> · <a href="ON_CHAIN_PROOF.html">On-chain proof</a> · <a href="XRPL_STELLAR_VERIFICATION.html">XRPL &amp; Stellar</a> · <a href="ARCHITECTURE.html">Architecture</a></p>
+<p><strong>PDF export (optional):</strong> <code>scripts/generate-manifest-pdf.ps1</code> — requires <code>pandoc</code> (and optionally <code>wkhtmltopdf</code>); HTML fallback always written to <code>docs/downloads/SYSTEM_MANIFEST.html</code>.</p>
 <hr />
-<h2>IOU issuer model (read this first)</h2>
-<h3>What is on ledger today (<strong>PROVEN</strong>)</h3>
+<h2>Honesty banner (read first)</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Allowed today</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>~874M IOUs on XRPL + Stellar</td>
+<td>Issued supply / <strong>proven demand</strong></td>
+<td><strong>PROVEN</strong> (ledger)</td>
+</tr>
+<tr>
+<td>~874M = bank reserves or AUM</td>
+<td><strong>Do not claim</strong></td>
+<td>Misleading</td>
+</tr>
+<tr>
+<td>Fully-backed 1:1 USD redemption</td>
+<td><strong>Not operational</strong></td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>Fiat rails (FedWire / SWIFT / MSB)</td>
+<td>Stubs in <code>fiat-rails/</code></td>
+<td><strong>DESIGN</strong> / <strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>Neobank / BaaS revenue tables</td>
+<td>Product design only</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Funding <strong>$2M–$3.5M</strong></td>
+<td>Internal capitalization plan</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Shift when live:</strong> unfunded promise-to-pay IOUs → <strong>redeemable claims</strong> backed by <strong>audited</strong> omnibus reporting (not marketing copy).</p>
+<hr />
+<h2>Hybrid fiat-crypto model</h2>
+<ol>
+<li><strong>PROVEN today:</strong> Crypto IOUs on XRPL/Stellar/Polygon; Academy Stripe; launcher; x402 health; L1 node.  </li>
+<li><strong>PIPELINE:</strong> USD/EUR enters via FedWire/ACH/SWIFT → <code>compliance-engine</code> screens → <code>payment-orchestrator</code> routes → omnibus credit → mint IOU 1:1 on ledger.  </li>
+<li><strong>Redemption (PIPELINE):</strong> Burn IOU → orchestrator → compliance → wire out.  </li>
+<li><strong>PROJECTION:</strong> Neobank app and BaaS APIs sit on the same orchestrator — no live interchange until card program ships.</li>
+</ol>
+<p>Legacy Python stubs under <code>backend/payment-orchestrator</code> and <code>backend/msb-compliance</code> (:4098) are <strong>superseded</strong> by <code>fiat-rails/</code> (:4022–:4027). <strong>No duplicate PM2 apps.</strong></p>
+<hr />
+<h2>ASCII architecture (post-MSB target)</h2>
+<pre><code>┌─────────────────────────────────────────────────────────────────────────┐
+│ CLIENTS: Exchange OS │ Academy │ TTN │ Neobank (PROJECTION) │ x402    │
+└────────────┬───────────────────────┬──────────────────┬───────────────┘
+             │ fiat intent           │ Stripe (PROVEN)  │ ATP :4020
+             v                       v                  v
+┌──────────────────────┐    ┌──────────────┐    ┌──────────────┐
+│ payment-orchestrator │    │ fth :8091    │    │ popeye :4021 │
+│        :4022         │    │ ttn  :8092   │    └──────────────┘
+└──────┬───────┬───────┘    └──────────────┘
+       │       │
+       │       ├──► compliance-engine :4025 (KYC/OFAC/SAR)
+       │       ├──► fedwire-adapter  :4023
+       │       └──► swift-bridge     :4024
+       │
+       v
+┌──────────────────┐     mint/burn 1:1      ┌─────────────────────────┐
+│ Bank omnibus     │ ◄──────────────────────►│ XRPL/Stellar issuer     │
+│ (PIPELINE)       │                           │ ~874M IOU PROVEN demand │
+└──────────────────┘                           └─────────────────────────┘
+       ▲
+       └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
+</code></pre>
+<p><strong>Port discipline:</strong> <code>popeye-relay</code> <strong>:4021</strong>; fiat rails <strong>:4022–:4027</strong> — no collision.</p>
+<hr />
+<h2>Fiat-rails service integration table</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Port</th>
+<th>Path</th>
+<th>Upstream / downstream</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>payment-orchestrator</code></td>
+<td><strong>4022</strong></td>
+<td><code>fiat-rails/payment-orchestrator/</code></td>
+<td>Clients, Exchange OS; calls compliance + adapters</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>fedwire-adapter</code></td>
+<td><strong>4023</strong></td>
+<td><code>fiat-rails/fedwire-adapter/</code></td>
+<td>Orchestrator ↔ bank FedWire</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>swift-bridge</code></td>
+<td><strong>4024</strong></td>
+<td><code>fiat-rails/swift-bridge/</code></td>
+<td>Orchestrator ↔ MT103/202 bureau</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>compliance-engine</code></td>
+<td><strong>4025</strong></td>
+<td><code>fiat-rails/compliance-engine/</code></td>
+<td>All fiat ingress/egress screening</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>neobank-api</code></td>
+<td><strong>4026</strong></td>
+<td><code>fiat-rails/neobank-api/</code></td>
+<td>Mobile/card partner (design)</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td><code>iou-reserve-monitor</code></td>
+<td><strong>4027</strong></td>
+<td><code>fiat-rails/iou-reserve-monitor/</code></td>
+<td>Omnibus statements vs ledger supply</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Setup:</strong> <code>.\scripts\setup-fiat-rails.ps1</code> · <strong>PM2:</strong> <code>pm2 start ecosystem.config.js --only payment-orchestrator,fedwire-adapter,swift-bridge,compliance-engine,neobank-api,iou-reserve-monitor</code></p>
+<p><strong>OpenAPI (stub):</strong> <code>fiat-rails/payment-orchestrator/openapi.yaml</code></p>
+<hr />
+<h2>IOU issuer model (<strong>PROVEN</strong> supply, <strong>PIPELINE</strong> backing)</h2>
 <table>
 <thead>
 <tr>
@@ -42,271 +180,230 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>~874M</strong> units issued on XRPL + Stellar (TROPTIONS, USDC, USDT, EURC, DAI <strong>currency codes</strong>)</td>
-<td><strong>PROVEN</strong> (ledger)</td>
-<td><strong>Issued supply / proven demand</strong> — wallets hold trust-line IOUs</td>
-</tr>
-<tr>
-<td>Issuer wallets <code>rJLMST…</code> / <code>GB4FHG…</code></td>
+<td><strong>~874M</strong> issued on XRPL + Stellar (TROPTIONS, USDC, USDT, EURC, DAI <strong>codes</strong>)</td>
 <td><strong>PROVEN</strong></td>
-<td>TROPTIONS gateway issues these IOUs</td>
+<td><strong>Issued demand</strong> — not bank reserves</td>
 </tr>
 <tr>
-<td>USDC / USDT / DAI / EURC on XRPL</td>
+<td>Issuer <code>rJLMST…</code> / <code>GB4FHG…</code></td>
+<td><strong>PROVEN</strong></td>
+<td>Gateway-issued IOUs</td>
+</tr>
+<tr>
+<td>USDC/USDT on XRPL</td>
 <td><strong>PROVEN</strong> (IOU)</td>
-<td><strong>TROPTIONS-issued IOUs</strong> — <strong>not</strong> Circle, Tether, or Maker <strong>native</strong> mainnet tokens</td>
+<td><strong>Not</strong> Circle/Tether <strong>native</strong> mainnet tokens</td>
 </tr>
 <tr>
 <td>Regulated 1:1 fiat redemption today</td>
 <td><strong>Not claimed</strong></td>
-<td><strong>Unfunded promise-to-pay</strong> until omnibus + reserve path is live</td>
+<td>Promise-to-pay until omnibus live</td>
 </tr>
 <tr>
-<td>Market cap, AUM, or fully-backed bank reserves</td>
-<td><strong>Do not use</strong></td>
-<td>Issued supply ≠ USD in bank</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Honesty:</strong> This monorepo is <strong>not</strong> a live full-reserve settlement institution. Fiat banking rails (MSB registration, SWIFT, FedWire) and correspondent omnibus accounts are <strong>PIPELINE</strong> until wired and verified. Do <strong>not</strong> present issued ledger supply or operator desk attestations as booked bank reserves.</p>
-<h3>What MSB + SWIFT + FedWire unlock (<strong>PIPELINE</strong> → future <strong>PROVEN</strong>)</h3>
-<table>
-<thead>
-<tr>
-<th>Capability</th>
-<th>Label</th>
-<th>Outcome when live</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FinCEN MSB program + BSA/AML</td>
+<td>Operator desk ~$175M narrative</td>
 <td><strong>PIPELINE</strong></td>
-<td>Legal money-transmission posture</td>
-</tr>
-<tr>
-<td>FedWire / ACH / SWIFT in</td>
-<td><strong>PIPELINE</strong></td>
-<td>Fiat lands in partner omnibus</td>
-</tr>
-<tr>
-<td><code>msb-compliance</code> :4098 + <code>payment-orchestrator</code> :4022</td>
-<td><strong>PIPELINE</strong></td>
-<td>Screen, route, mint/burn IOUs 1:1 against fiat</td>
-</tr>
-<tr>
-<td>Redeemable digital-dollar claims</td>
-<td><strong>PIPELINE</strong></td>
-<td>IOUs backed by <strong>audited</strong> reserve reporting — not marketing copy</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Shift:</strong> unfunded operator attestation → <strong>legally-backed redeemable claims</strong> (only after bank + compliance evidence exists).</p>
-<h3>Operator desk (~$175M) — do not over-claim</h3>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Label</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Exchange OS desk ~$175M USDC narrative</td>
-<td><strong>PIPELINE</strong></td>
-<td><strong>Operator attestation only</strong> — not Circle USDC, not verified without correspondent statements</td>
-</tr>
-<tr>
-<td>On-chain <strong>274M</strong> USDC-labeled IOU issued (XRPL+Stellar)</td>
-<td><strong>PROVEN</strong> (ledger)</td>
-<td>IOU supply — <strong>not</strong> $175M verifiable desk without rails</td>
-</tr>
-<tr>
-<td>Full-reserve institution live today</td>
-<td><strong>Not claimed</strong></td>
-<td>—</td>
+<td>Attestation only — not verified without bank statements</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2>Fiat → IOU issuance &amp; redemption loop</h2>
-<pre><code class="language-mermaid">flowchart TB
-  subgraph proven_today [PROVEN today]
-    LEDGER[~874M issued IOUs on XRPL + Stellar]
-    CRYPTO[Crypto rails: trust lines, DEX, wallets]
-    CASH[Academy Stripe + launcher + x402 health]
-    LEDGER --&gt; CRYPTO
-  end
+<h2>Sequence diagrams (target state — <strong>PIPELINE</strong>)</h2>
+<h3>1. Fiat deposit → IOU mint</h3>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant C as Client
+  participant PO as payment-orchestrator :4022
+  participant CE as compliance-engine :4025
+  participant FW as fedwire-adapter :4023
+  participant B as Omnibus bank PIPELINE
+  participant XR as XRPL issuer PROVEN
 
-  subgraph pipeline_rails [PIPELINE — MSB + bank partner]
-    USDIN[USD/EUR fiat in — FedWire / ACH / SWIFT]
-    OMN[Omnibus reserve account]
-    CMP[msb-compliance :4098 — KYC/OFAC]
-    PO[payment-orchestrator :4022]
-    MINT[Issue IOU 1:1 on ledger]
-    BURN[Redeem IOU — wire fiat out]
-    USDIN --&gt; CMP --&gt; PO --&gt; OMN
-    PO --&gt; MINT
-    BURN --&gt; PO
-    OMN --&gt; BURN
-  end
-
-  subgraph fees [Revenue when rails PROVEN in GL]
-    FEE1[Issuance fee 0.1–0.25%]
-    FEE2[Redemption fee 0.1–0.25%]
-    MINT --&gt; FEE1
-    BURN --&gt; FEE2
-  end
-
-  MINT --&gt; LEDGER
-  LEDGER --&gt; BURN
-
-  style proven_today fill:#1a3d1a,color:#e8ffe8
-  style pipeline_rails fill:#333,color:#fff
+  C-&gt;&gt;FW: FedWire/ACH USD in PIPELINE
+  FW-&gt;&gt;B: Credit omnibus PIPELINE
+  B-&gt;&gt;CE: Funds received event
+  CE-&gt;&gt;PO: KYC/OFAC pass PIPELINE
+  PO-&gt;&gt;XR: Mint IOU 1:1 PIPELINE
+  XR--&gt;&gt;C: IOU credit
+  Note over C,XR: Today IOUs exist without guaranteed fiat redemption
 </code></pre>
-<p><strong>Today:</strong> loop is <strong>open</strong> between fiat and IOU — issuance/redemption fees are <strong>PIPELINE</strong>, not booked revenue.</p>
+<h3>2. IOU redeem → fiat out</h3>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant C as Client
+  participant XR as XRPL issuer PROVEN
+  participant PO as payment-orchestrator :4022
+  participant CE as compliance-engine :4025
+  participant FW as fedwire-adapter :4023
+  participant B as Omnibus bank PIPELINE
+
+  C-&gt;&gt;XR: Burn/redeem IOU PIPELINE
+  XR-&gt;&gt;PO: Redemption request
+  PO-&gt;&gt;CE: Screen egress
+  CE-&gt;&gt;FW: Approve wire PIPELINE
+  FW-&gt;&gt;B: Debit omnibus
+  B--&gt;&gt;C: USD settled PIPELINE
+</code></pre>
+<h3>3. Cross-border USD → IOU → EUR (SWIFT)</h3>
+<pre><code class="language-mermaid">sequenceDiagram
+  participant C as B2B client
+  participant PO as payment-orchestrator :4022
+  participant SW as swift-bridge :4024
+  participant CE as compliance-engine :4025
+  participant XR as IOU ledger PROVEN
+
+  C-&gt;&gt;PO: USD funding intent PIPELINE
+  PO-&gt;&gt;CE: Sanctions + KYC
+  PO-&gt;&gt;XR: Mint USD IOU PIPELINE
+  PO-&gt;&gt;SW: MT103 EUR leg PIPELINE
+  SW--&gt;&gt;C: Beneficiary credited PIPELINE
+</code></pre>
 <hr />
-<h2>Revenue streams A–E (issuer edition)</h2>
-<p><em>Scenario math below is </em><em>PIPELINE</em><em> or </em><em>PROJECTION</em><em> until fiat rails and GL exist. </em><em>PROVEN</em><em> cash today is Academy + launcher + x402 (see bottom).</em></p>
+<h2>Implementation phases 1–5</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Scope</th>
+<th>Exit criteria</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td>MSB artifact vault; <code>fiat-rails</code> stubs; IOU copy fix on investor surfaces</td>
+<td>Six <code>/health</code> return <code>pipeline</code>; PM2 ports 4022–4027</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>Orchestrator contracts; Exchange OS fiat behind feature flag</td>
+<td><code>POST /payments/request</code> wired to compliance mock</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>FedWire sandbox + SWIFT skeleton with bank partner</td>
+<td>First sandbox wire trace (non-prod)</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Omnibus live; <code>iou-reserve-monitor</code> daily reconcile</td>
+<td>Attestation memo separate from on-chain supply</td>
+<td><strong>PIPELINE</strong> → <strong>PROVEN</strong></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>Neobank/BaaS pilots</td>
+<td>GL + legal sign-off before marketing interchange</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Revenue streams A–E</h2>
 <table>
 <thead>
 <tr>
 <th>Stream</th>
 <th>Description</th>
 <th>Label</th>
-<th>Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>A</strong></td>
-<td>Issuance &amp; redemption fees (wire in → mint IOU; burn → wire out)</td>
+<td>Issuance/redemption fees (0.1–0.25% illustrative)</td>
 <td><strong>PIPELINE</strong></td>
-<td>0.1–0.25% illustrative; requires omnibus + MSB</td>
 </tr>
 <tr>
 <td><strong>B</strong></td>
-<td>Float income (reserve yield minus holder yield)</td>
+<td>Float margin (omnibus yield − holder yield)</td>
 <td><strong>PIPELINE</strong></td>
-<td>Bank-model margin — <strong>not</strong> live</td>
 </tr>
 <tr>
 <td><strong>C</strong></td>
-<td>Exchange / desk round-trip spread</td>
-<td><strong>PIPELINE</strong></td>
-<td>Desk attestation gated; not $175M verified fact</td>
+<td>Exchange/desk spread</td>
+<td><strong>PIPELINE</strong> (desk attestation gated)</td>
 </tr>
 <tr>
 <td><strong>D</strong></td>
-<td>Cross-border B2B (USD in → IOU → EUR out via SWIFT)</td>
+<td>Cross-border B2B (USD→IOU→EUR)</td>
 <td><strong>PIPELINE</strong></td>
-<td>SWIFT + correspondent <strong>PIPELINE</strong></td>
 </tr>
 <tr>
 <td><strong>E</strong></td>
-<td>WC26 / TTN commerce (sponsor wire → IOU / $LEV8 settlement)</td>
+<td>WC26 / TTN sponsor settlement</td>
 <td><strong>PIPELINE</strong></td>
-<td>Sponsorship tiers documented; <strong>not signed revenue</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Illustrative scale (PIPELINE / PROJECTION — not forecasts):</strong></p>
+<p><strong>PROVEN cash today:</strong> Academy, launcher, x402 — <strong>not</strong> MSB wire volume or neobank interchange.</p>
+<h3>Economic scenarios (<strong>PROJECTION</strong> only)</h3>
 <table>
 <thead>
 <tr>
 <th>Scenario</th>
-<th>A + B + C + D + E (illustrative)</th>
+<th>Illustrative monthly</th>
+<th>Annualized</th>
 <th>Label</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>$50M/mo IOU flow through backed rails</td>
-<td>~$578K/mo scenario</td>
+<td>Conservative rails throughput</td>
+<td>~$305K/mo</td>
+<td>~$3.6M/yr</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Scale rails throughput</td>
+<td>~$2.6M/mo</td>
+<td>~$31M/yr</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>$50M/mo IOU flow (A–E bundle)</td>
+<td>~$578K/mo</td>
+<td>—</td>
 <td><strong>PROJECTION</strong></td>
 </tr>
 <tr>
 <td>$500M/mo IOU flow</td>
-<td>~$4.9M/mo scenario</td>
+<td>~$4.9M/mo</td>
+<td>—</td>
 <td><strong>PROJECTION</strong></td>
 </tr>
 </tbody>
 </table>
-<p>See repo root <a href="../../TROPTIONS_IOU_ISSUER_MANIFEST.html"><code>TROPTIONS_IOU_ISSUER_MANIFEST.md</code></a> for full scenario tables.</p>
-<h3>PROVEN revenue &amp; demand (today)</h3>
+<hr />
+<h2>Funding ask (<strong>PROJECTION</strong>)</h2>
 <table>
 <thead>
 <tr>
 <th>Item</th>
+<th>Range</th>
 <th>Label</th>
-<th>Evidence</th>
+<th>Use (planning)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>~874M issued IOUs</td>
-<td><strong>PROVEN</strong> (demand/supply)</td>
-<td><a href="ON_CHAIN_PROOF.html">ON_CHAIN_PROOF</a> — <strong>not</strong> revenue</td>
-</tr>
-<tr>
-<td>FTH Academy</td>
-<td><strong>PROVEN</strong></td>
-<td><a href="https://fthedu.unykorn.org">fthedu.unykorn.org</a></td>
-</tr>
-<tr>
-<td>Solana launcher SaaS</td>
-<td><strong>PROVEN</strong></td>
-<td><a href="https://launch.unykorn.org">launch.unykorn.org</a></td>
-</tr>
-<tr>
-<td>x402 metered APIs</td>
-<td><strong>PROVEN</strong> (health)</td>
-<td><a href="https://x402.unykorn.org/health">x402.unykorn.org/health</a></td>
-</tr>
-<tr>
-<td>DAO governance API</td>
-<td><strong>PROVEN</strong></td>
-<td><code>dao-service</code> :8093</td>
-</tr>
-<tr>
-<td>Cross-chain issuance utility</td>
-<td><strong>PROVEN</strong></td>
-<td>XRPL + Stellar + Polygon proofs</td>
+<td>MSB + bank + compliance + engineering + reserve seed</td>
+<td><strong>$2M – $3.5M</strong></td>
+<td><strong>PROJECTION</strong></td>
+<td>Omnibus, legal, integration — <strong>not</strong> an offering term sheet</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Honest cash today:</strong> early-scale Academy + launcher + x402 — <strong>not</strong> MSB wire volume, float, neobank interchange, or BaaS platform fees.</p>
+<p><em>(Prior $5–10M range superseded for investor pack alignment; adjust only with counsel.)</em></p>
 <hr />
-<h2>Neobank — thin layer on IOUs (<strong>PROJECTION</strong>)</h2>
-<p><em>Disclaimer: Product design only. No live interchange, card program, or deposit insurance claims.</em></p>
-<pre><code class="language-mermaid">flowchart LR
-  subgraph projection [PROJECTION — not shipped]
-    APP[Neobank app TBD]
-    CARD[Debit via card partner TBD]
-    APP --&gt;|display USD| IOU[TROPTIONS-USD IOU on XRPL]
-    CARD --&gt;|redeem IOU| MER[Merchant settlement]
-  end
-
-  subgraph pipeline [PIPELINE rails]
-    PO[payment-orchestrator :4022]
-    CMP[msb-compliance :4098]
-    BANK[Correspondent omnibus TBD]
-    PO --&gt; CMP --&gt; BANK
-  end
-
-  APP --&gt; PO
-  MER --&gt; PO
-
-  style projection fill:#4a3728,color:#fff
-  style pipeline fill:#333,color:#fff
-</code></pre>
+<h2>Neobank &amp; BaaS (<strong>PROJECTION</strong>)</h2>
 <table>
 <thead>
 <tr>
 <th>Neobank line (illustrative)</th>
-<th>10K users scenario</th>
-<th>100K users scenario</th>
+<th>10K users</th>
+<th>100K users</th>
 <th>Label</th>
 </tr>
 </thead>
@@ -330,144 +427,37 @@
 <td><strong>PROJECTION</strong></td>
 </tr>
 <tr>
-<td>Card fees</td>
-<td>$5K/mo</td>
-<td>$50K/mo</td>
-<td><strong>PROJECTION</strong></td>
-</tr>
-<tr>
-<td><strong>Neobank subtotal</strong></td>
+<td><strong>Subtotal</strong></td>
 <td><strong>~$170K/mo</strong></td>
 <td><strong>~$1.3M/mo</strong></td>
 <td><strong>PROJECTION</strong></td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2>BaaS — white-label rails (<strong>PROJECTION</strong>)</h2>
-<pre><code class="language-mermaid">flowchart TB
-  subgraph projection_baas [PROJECTION — API clients TBD]
-    F1[Fintech client A]
-    F2[Fintech client B]
-    API[BaaS API — MSB + IOU mint + compliance]
-    F1 --&gt; API
-    F2 --&gt; API
-  end
-
-  API --&gt; PO[payment-orchestrator :4022]
-  PO --&gt; CMP[msb-compliance :4098]
-  CMP --&gt; BANK[Correspondent + FedWire/SWIFT]
-
-  style projection_baas fill:#4a3728,color:#fff
-  style PO fill:#333,color:#fff
-  style CMP fill:#333,color:#fff
-  style BANK fill:#333,color:#fff
-</code></pre>
 <table>
 <thead>
 <tr>
-<th>BaaS scenario</th>
+<th>BaaS</th>
 <th>Illustrative $/mo</th>
 <th>Label</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>5 clients × ~$10K platform</td>
+<td>5 × ~$10K platform</td>
 <td>$50K</td>
 <td><strong>PROJECTION</strong></td>
 </tr>
 <tr>
-<td>50 clients × ~$10K</td>
+<td>50 × ~$10K</td>
 <td>$500K</td>
 <td><strong>PROJECTION</strong></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2>Funding ask (<strong>PROJECTION</strong> / planning)</h2>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Range</th>
-<th>Label</th>
-<th>Use of funds (planning)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MSB + bank + compliance integration</td>
-<td><strong>$5M – $10M</strong></td>
-<td><strong>PROJECTION</strong></td>
-<td>Omnibus setup, legal, engineering, reserve seed — <strong>not</strong> an offering term sheet</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2>Legacy scenario tables (PROJECTION only)</h2>
-<p><em>Superseded for investor meetings by A–E above; kept for sensitivity modeling.</em></p>
-<p><strong>Conservative scenario (monthly) — PROJECTION</strong></p>
-<table>
-<thead>
-<tr>
-<th>Stream</th>
-<th>PROJECTION $/mo</th>
-<th>Basis (illustrative)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Exchange fees</td>
-<td>$30K</td>
-<td>$10M volume × 0.3%</td>
-</tr>
-<tr>
-<td>Stablecoin issuance fee</td>
-<td>$25K</td>
-<td>$10M × 0.25%</td>
-</tr>
-<tr>
-<td>Wire fees</td>
-<td>$5K</td>
-<td>200 × $25</td>
-</tr>
-<tr>
-<td>B2B payments</td>
-<td>$20K</td>
-<td>10 × $2K</td>
-</tr>
-<tr>
-<td>Neobank interchange</td>
-<td>$75K</td>
-<td>10K users × $500 spend × 1.5%</td>
-</tr>
-<tr>
-<td>Subscriptions</td>
-<td>$20K</td>
-<td>2K × $10</td>
-</tr>
-<tr>
-<td>Lending margin</td>
-<td>$80K</td>
-<td>$30M deposits × 3.2% spread</td>
-</tr>
-<tr>
-<td>BaaS platform fees</td>
-<td>$50K</td>
-<td>5 × $10K</td>
-</tr>
-<tr>
-<td><strong>Total</strong></td>
-<td><strong>~$305K/mo</strong></td>
-<td><strong>~$3.6M/yr scenario</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Scale scenario (monthly) — PROJECTION:</strong> combined rows <strong>~$2.6M/mo</strong> — see <a href="VALUATION_AND_COMPARABLES.html">Valuation &amp; comparables</a>.</p>
-<hr />
 <h2>PM2 service map</h2>
-<p>Source of truth: <code>ecosystem.config.js</code> at repo root. Regenerate the port table with <code>python scripts/generate-system-manifest.py</code> or <code>npm run docs:update</code>.</p>
+<p>Source of truth: <code>ecosystem.config.js</code>. Regenerate: <code>npm run docs:update</code>.</p>
 <!-- AUTO:PM2_PORTS_START -->
 <table>
 <thead>
@@ -520,7 +510,7 @@
 <td><strong>4020</strong></td>
 <td><strong>PROVEN</strong></td>
 <td><code>backend/x402-gateway/</code></td>
-<td>Metered ATP sidecar; <a href="https://x402.unykorn.org/health">x402 health</a></td>
+<td>Metered ATP sidecar</td>
 </tr>
 <tr>
 <td><code>popeye-relay</code></td>
@@ -533,215 +523,142 @@
 <td><code>payment-orchestrator</code></td>
 <td><strong>4022</strong></td>
 <td><strong>PIPELINE</strong></td>
-<td><code>backend/payment-orchestrator/</code></td>
-<td>Fiat/crypto routing stub; <code>autorestart: false</code></td>
+<td><code>fiat-rails/payment-orchestrator/</code></td>
+<td>Hybrid fiat/crypto routing stub</td>
 </tr>
 <tr>
-<td><code>msb-compliance</code></td>
-<td><strong>4098</strong></td>
+<td><code>fedwire-adapter</code></td>
+<td><strong>4023</strong></td>
 <td><strong>PIPELINE</strong></td>
-<td><code>backend/msb-compliance/</code></td>
-<td>AML/KYC/OFAC stub; <code>autorestart: false</code></td>
+<td><code>fiat-rails/fedwire-adapter/</code></td>
+<td>FedWire RTGS adapter stub</td>
 </tr>
 <tr>
 <td><code>swift-bridge</code></td>
-<td><em>(container)</em></td>
+<td><strong>4024</strong></td>
 <td><strong>PIPELINE</strong></td>
-<td><code>backend/swift-bridge/</code> <em>(planned)</em></td>
-<td>MT103/202 — not in PM2 until image exists</td>
+<td><code>fiat-rails/swift-bridge/</code></td>
+<td>MT103/202 messaging stub</td>
+</tr>
+<tr>
+<td><code>compliance-engine</code></td>
+<td><strong>4025</strong></td>
+<td><strong>PIPELINE</strong></td>
+<td><code>fiat-rails/compliance-engine/</code></td>
+<td>AML/KYC/OFAC stub</td>
+</tr>
+<tr>
+<td><code>neobank-api</code></td>
+<td><strong>4026</strong></td>
+<td><strong>PROJECTION</strong></td>
+<td><code>fiat-rails/neobank-api/</code></td>
+<td>Neobank API design stub</td>
+</tr>
+<tr>
+<td><code>iou-reserve-monitor</code></td>
+<td><strong>4027</strong></td>
+<td><strong>PIPELINE</strong></td>
+<td><code>fiat-rails/iou-reserve-monitor/</code></td>
+<td>Omnibus vs ledger reconciliation stub</td>
 </tr>
 </tbody>
 </table>
 <!-- AUTO:PM2_PORTS_END -->
 
-<p><strong>Port check:</strong> <code>popeye-relay</code> uses <strong>4021</strong>; <code>payment-orchestrator</code> <strong>4022</strong> does not conflict. <strong>4098</strong> is reserved for <code>msb-compliance</code>.</p>
 <hr />
 <h2>Banking rails status</h2>
 <table>
 <thead>
 <tr>
 <th>Rail</th>
-<th>Capability</th>
 <th>Label</th>
-<th>Verification path</th>
+<th>Monorepo hook</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>MSB (FinCEN MSB registration)</strong></td>
-<td>Fiat remittance / money transmission compliance program</td>
+<td>MSB (FinCEN program)</td>
 <td><strong>PIPELINE</strong></td>
-<td>License upload + policy pack in repo; Form 107 not claimed live here</td>
+<td>Operator vault + <code>compliance-engine</code></td>
 </tr>
 <tr>
-<td><strong>SWIFT</strong></td>
-<td>Cross-border MT103/MT202 messaging</td>
+<td>FedWire RTGS</td>
 <td><strong>PIPELINE</strong></td>
-<td>BIC + service bureau credentials; <code>swift-bridge</code> container TBD</td>
+<td><code>fedwire-adapter</code> :4023</td>
 </tr>
 <tr>
-<td><strong>FedWire</strong></td>
-<td>USD RTGS settlement</td>
+<td>SWIFT MT103/202</td>
 <td><strong>PIPELINE</strong></td>
-<td>Routing + participation agreement; same-day USD not live until bank partner confirms</td>
+<td><code>swift-bridge</code> :4024</td>
 </tr>
 <tr>
-<td><strong>ACH (bank partner)</strong></td>
-<td>Retail/bulk ACH</td>
+<td>ACH (correspondent)</td>
 <td><strong>PIPELINE</strong></td>
-<td>Via correspondent — not standalone in monorepo</td>
+<td>Via bank partner</td>
 </tr>
 <tr>
-<td><strong>Stripe (Academy)</strong></td>
-<td>Card subscriptions</td>
+<td>Stripe (Academy)</td>
 <td><strong>PROVEN</strong></td>
-<td><a href="https://fthedu.unykorn.org">fthedu.unykorn.org</a></td>
+<td><code>fth-backend</code> :8091</td>
 </tr>
 <tr>
-<td><strong>x402 / Apostle ATP</strong></td>
-<td>Agent metered settlement</td>
+<td>x402 / Apostle</td>
 <td><strong>PROVEN</strong> (health)</td>
-<td><code>:4020</code> sidecar; Apostle <strong>7332</strong> when operator runs chain</td>
+<td>:4020 / :7332 when up</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2>Fiat ↔ crypto (PROVEN crypto + PIPELINE fiat)</h2>
+<h2>Fiat ↔ crypto flow (overview)</h2>
 <pre><code class="language-mermaid">flowchart TD
-  subgraph clients [Client interfaces]
+  subgraph clients [Clients]
     A[User / investor]
     C[Exchange OS]
-    D[Academy :8091 / fthedu]
-    E[TTN :8092]
+    D[Academy :8091]
   end
 
-  subgraph proven [PROVEN today]
-    D --&gt;|Stripe card| J[Stripe]
+  subgraph proven [PROVEN]
+    D --&gt;|Stripe| J[Stripe]
     C --&gt;|Crypto IOUs| I[XRPL / Stellar / Polygon]
-    A --&gt;|ATP metered| X[x402 :4020]
-    X --&gt;|settlement| AP[Apostle :7332 when up]
+    A --&gt;|ATP| X[x402 :4020]
   end
 
-  subgraph pipeline [PIPELINE — not live settlement]
-    A --&gt;|USD deposit| B[payment-orchestrator :4022]
-    B --&gt;|FedWire RTGS| G[Bank partner TBD]
-    B --&gt;|SWIFT MT103| H[Correspondent TBD]
-    P[msb-compliance :4098] --&gt;|screen| B
-    R[swift-bridge container] --&gt; H
-    G --&gt; L[Omnibus reserve — attestation path]
+  subgraph pipeline [PIPELINE fiat-rails]
+    A --&gt; PO[payment-orchestrator :4022]
+    PO --&gt; CE[compliance-engine :4025]
+    PO --&gt; FW[fedwire-adapter :4023]
+    PO --&gt; SW[swift-bridge :4024]
+    FW --&gt; BANK[Omnibus TBD]
+    PO --&gt; MON[iou-reserve-monitor :4027]
   end
 
-  B --&gt;|mint / burn IOU 1:1| I
-
-  style B fill:#333,color:#fff
-  style P fill:#333,color:#fff
-  style R fill:#333,color:#fff
-  style G fill:#333,color:#fff
+  PO --&gt;|mint/burn 1:1| I
 </code></pre>
 <hr />
-<h2>Integration checklist (weeks 1–4)</h2>
-<h3>Week 1 — Foundation</h3>
-<ul>
-<li>[ ] <strong>PIPELINE:</strong> MSB artifacts in secure operator store (not public git secrets)</li>
-<li>[ ] <strong>PIPELINE:</strong> <code>msb-compliance</code> :4098 and <code>payment-orchestrator</code> :4022 stub health</li>
-<li>[ ] <strong>PROVEN:</strong> PM2 stack (<code>8090–8093</code>, <code>4020–4021</code>, <code>9944</code>) via <a href="QUICKSTART.html">Quickstart</a></li>
-<li>[ ] Document IOU vs native stablecoin language in investor + Exchange OS copy</li>
-</ul>
-<h3>Week 2 — Orchestration</h3>
-<ul>
-<li>[ ] <strong>PIPELINE:</strong> <code>POST /api/banking/deposit</code> / withdraw contracts</li>
-<li>[ ] <strong>PIPELINE:</strong> Exchange OS fiat intents → orchestrator (feature flag)</li>
-<li>[ ] <strong>PROVEN:</strong> Regression x402 + dao health probes</li>
-</ul>
-<h3>Week 3 — SWIFT + FedWire</h3>
-<ul>
-<li>[ ] <strong>PIPELINE:</strong> <code>swift-bridge</code> skeleton; FedWire sandbox with bank</li>
-<li>[ ] Update manifest via <code>npm run docs:update</code></li>
-</ul>
-<h3>Week 4 — Investor pack</h3>
-<ul>
-<li>[ ] Publish <a href="MSB_FIAT_RAILS.html">MSB_FIAT_RAILS</a> to GitHub Pages</li>
-<li>[ ] <strong>PROJECTION:</strong> Neobank / BaaS scope docs only — no live interchange claims</li>
-<li>[ ] Re-run truth labels before external meetings</li>
-</ul>
+<h2>Next actions (operator)</h2>
+<ol>
+<li>Run <code>.\scripts\setup-fiat-rails.ps1</code> and start six fiat PM2 apps; verify <code>/health</code> on 4022–4027.  </li>
+<li>Store MSB/bank/API keys in operator vault — copy <code>fiat-rails/.env.template</code> → <code>.env</code> locally (<strong>never commit</strong>).  </li>
+<li>Legal review of BSA/AML pack before any live wire.  </li>
+<li>Re-run <code>npm run docs:update</code> and <code>.\scripts\generate-manifest-pdf.ps1</code> before investor meetings.  </li>
+<li>Fix Exchange OS / investor copy: IOU ≠ Circle native USDC; ~874M ≠ reserves.</li>
+</ol>
 <hr />
-<h2>Document manifest (compliance artifacts)</h2>
-<table>
-<thead>
-<tr>
-<th>Artifact</th>
-<th>MSB</th>
-<th>FedWire</th>
-<th>SWIFT</th>
-<th>Label</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FinCEN Form 107 / registration</td>
-<td>Required</td>
-<td>—</td>
-<td>—</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>BSA/AML policy manual</td>
-<td>Required</td>
-<td>—</td>
-<td>—</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>KYC / CIP procedures</td>
-<td>Required</td>
-<td>—</td>
-<td>—</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>SAR / CTR procedures</td>
-<td>Required</td>
-<td>—</td>
-<td>—</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>FedWire participation + security proc</td>
-<td>—</td>
-<td>Required</td>
-<td>—</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>SWIFT RMA + bilateral keys</td>
-<td>—</td>
-<td>—</td>
-<td>Required</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-<tr>
-<td>MT103/202 message specs</td>
-<td>—</td>
-<td>—</td>
-<td>Required</td>
-<td><strong>PIPELINE</strong></td>
-</tr>
-</tbody>
-</table>
-<p>Plug-and-play document AI: <code>scripts/plug_and_play_system.py</code> — does <strong>not</strong> replace legal review.</p>
-<hr />
-<h2>API surface (PIPELINE contracts)</h2>
-<pre><code>POST /api/banking/deposit      # PIPELINE
-POST /api/banking/withdraw     # PIPELINE
-POST /api/banking/transfer     # PIPELINE
-GET  /api/banking/balance      # PIPELINE
-POST /api/compliance/screen    # PIPELINE — msb-compliance :4098
-POST /api/compliance/kyc       # PIPELINE
-POST /api/swift/send           # PIPELINE — swift-bridge
-GET  /api/swift/status/:id     # PIPELINE
+<h2>API surface (<strong>PIPELINE</strong>)</h2>
+<pre><code>POST /payments/request          # orchestrator :4022
+GET  /payments/status           # orchestrator :4022
+POST /api/banking/deposit       # orchestrator
+POST /api/banking/withdraw      # orchestrator
+POST /api/compliance/screen     # compliance-engine :4025
+POST /api/compliance/kyc        # compliance-engine
+POST /api/fedwire/send          # fedwire-adapter :4023
+POST /api/swift/send            # swift-bridge :4024
+GET  /api/swift/status/:id      # swift-bridge
+GET  /api/reserve/attestation   # iou-reserve-monitor :4027
+GET  /api/neobank/balance       # neobank-api :4026 (PROJECTION)
 </code></pre>
 <hr />
-<h2>Technical index</h2>
+<h2>Document index</h2>
 <table>
 <thead>
 <tr>
@@ -752,31 +669,27 @@ GET  /api/swift/status/:id     # PIPELINE
 <tbody>
 <tr>
 <td><a href="SYSTEM_MANIFEST.html">SYSTEM_MANIFEST</a></td>
-<td>This file — IOU model, revenue A–E, rails</td>
+<td>This file</td>
 </tr>
 <tr>
 <td><a href="MSB_FIAT_RAILS.html">MSB_FIAT_RAILS</a></td>
-<td>Capitalization tree + investor summary</td>
+<td>Capitalization tree</td>
 </tr>
 <tr>
 <td><a href="ON_CHAIN_PROOF.html">ON_CHAIN_PROOF</a></td>
-<td>Explorer tables + IOU honesty</td>
+<td>Explorer tables</td>
 </tr>
 <tr>
-<td><a href="XRPL_STELLAR_VERIFICATION.html">XRPL_STELLAR_VERIFICATION</a></td>
-<td>Live issuance verification</td>
+<td><a href="../../fiat-rails/README.html"><code>fiat-rails/README</code></a></td>
+<td>Stub ops</td>
 </tr>
 <tr>
-<td><a href="ARCHITECTURE.html">ARCHITECTURE</a></td>
-<td>Layer diagram</td>
-</tr>
-<tr>
-<td><a href="../../TROPTIONS_PLUG_AND_PLAY_SYSTEM.html">PLUG_AND_PLAY</a></td>
-<td>Document manifest AI</td>
+<td><a href="../../TROPTIONS_IOU_ISSUER_MANIFEST.html"><code>TROPTIONS_IOU_ISSUER_MANIFEST.md</code></a></td>
+<td>Scenario tables</td>
 </tr>
 </tbody>
 </table>
-<p><em>PM2 port rows sync from <code>ecosystem.config.js</code>. IOU/revenue prose edited in this file.</em></p>
+<p><em>PM2 rows sync from <code>ecosystem.config.js</code>. Prose labels edited here.</em></p>
   </div>
   <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/SYSTEM_MANIFEST.html</p>
 </body>

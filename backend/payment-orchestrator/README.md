@@ -1,9 +1,6 @@
-# payment-orchestrator (PIPELINE)
+# payment-orchestrator (legacy Python)
 
-Fiat/crypto routing — **port 4022** (adjacent to `popeye-relay` on **4021**).
+**Superseded by** `fiat-rails/payment-orchestrator/` (Node, port **4022**). PM2 uses the `fiat-rails/` tree only — do not start this copy alongside the new stub.
 
-- **Label:** PIPELINE until MSB compliance, FedWire, and SWIFT bridges are configured.
-- **Health:** `GET http://127.0.0.1:4022/health`
-- **PM2:** `payment-orchestrator` with `autorestart: false`.
-
-Operator desk USDC attestations route through **PIPELINE** verification until correspondent + FedWire reporting is live.
+- **Health (new):** `GET http://127.0.0.1:4022/health`
+- **Setup:** `.\scripts\setup-fiat-rails.ps1`

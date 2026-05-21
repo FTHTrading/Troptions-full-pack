@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: TROPTIONS Payment Orchestrator (PIPELINE)
+  version: 0.1.0-pipeline
+  description: |
+    Stub API — STATUS DESIGN/PIPELINE until MSB and bank omnibus are live.
+    Do not treat responses as settlement or compliance approval.
+servers:
+  - url: http://127.0.0.1:4022
+paths:
+  /health:
+    get:
+      summary: Pipeline health
+      responses:
+        "200":
+          description: Stub healthy
+  /payments/request:
+    post:
+      summary: Request fiat or hybrid payment (not implemented)
+      responses:
+        "501":
+          description: PIPELINE stub
+  /payments/status:
+    get:
+      summary: Mock payment status
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Mock pending state only

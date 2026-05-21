@@ -24,11 +24,8 @@ COMPLY_ADVANTAGE_KEY=ca_live_XXXX
 # Payment Orchestrator
 pm2 start ecosystem.config.cjs --only payment-orchestrator
 
-# MSB Compliance
-pm2 start ecosystem.config.cjs --only msb-compliance
-
-# SWIFT Bridge
-pm2 start ecosystem.config.cjs --only swift-bridge
+# Fiat rails (six stubs)
+pm2 start ecosystem.config.cjs --only payment-orchestrator,fedwire-adapter,swift-bridge,compliance-engine,neobank-api,iou-reserve-monitor
 ```
 
 ## Step 3: Test Connectivity

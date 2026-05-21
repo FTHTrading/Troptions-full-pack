@@ -27,7 +27,7 @@ permalink: /technical/MSB_FIAT_RAILS.html
 | Revenue A–E (issuance, float, desk, B2B, WC26) | Requires backed rails | **PIPELINE** / scenario **PROJECTION** |
 | Neobank + BaaS tables | Product design only | **PROJECTION** |
 | Exchange desk ~$175M | Operator attestation | **PIPELINE** — **do not** cite as verified without bank statements |
-| Funding plan $5M–$10M | Capitalization planning | **PROJECTION** |
+| Funding plan $2M–$3.5M | Capitalization planning | **PROJECTION** |
 
 **Investor one-liner:** Proven **~874M IOU demand** on ledger → **PIPELINE** converts to **legally-backed redeemable claims** when MSB + bank omnibus + FedWire/SWIFT are live — capturing fees A–E and optional neobank/BaaS (**PROJECTION**).
 
@@ -52,7 +52,7 @@ flowchart TB
   PIPELINE_BLOCK --> L0[IOU = unfunded promise today]
   PIPELINE_BLOCK --> L1[MSB + BSA program]
   PIPELINE_BLOCK --> L2[Omnibus 1:1 reserve at bank]
-  PIPELINE_BLOCK --> L3[msb-compliance :4098]
+  PIPELINE_BLOCK --> L3[compliance-engine :4025]
   PIPELINE_BLOCK --> L4[payment-orchestrator :4022]
   PIPELINE_BLOCK --> L5[swift-bridge + FedWire]
   PIPELINE_BLOCK --> L6[Redeemable claims + fee capture A–E]
@@ -70,7 +70,7 @@ flowchart TB
 sequenceDiagram
   participant Client
   participant PO as payment-orchestrator PIPELINE
-  participant CMP as msb-compliance PIPELINE
+  participant CMP as compliance-engine :4025 PIPELINE
   participant Bank as Omnibus bank PIPELINE
   participant XRPL as TROPTIONS issuer PROVEN
 
@@ -127,7 +127,7 @@ Full tables: [On-chain proof](ON_CHAIN_PROOF.html) · [XRPL verification](XRPL_S
 | Item | Label | Monorepo hook |
 |------|-------|---------------|
 | FinCEN MSB registration | **PIPELINE** | Operator-held credentials |
-| Transaction monitoring | **PIPELINE** | `backend/msb-compliance/` |
+| Transaction monitoring | **PIPELINE** | `fiat-rails/compliance-engine/` :4025 |
 | KYC / CIP | **PIPELINE** | Env provider keys |
 | SAR / CTR workflow | **PIPELINE** | `docs/compliance/` TBD |
 
@@ -200,7 +200,7 @@ All interchange, float, and BaaS platform fees in scenario tables stay **PROJECT
 
 | Item | Amount | Label |
 |------|--------|-------|
-| MSB integration, bank omnibus, compliance, engineering, reserve seed | **$5M – $10M** planning range | **PROJECTION** |
+| MSB integration, bank omnibus, compliance, engineering, reserve seed | **$2M – $3.5M** planning range | **PROJECTION** |
 
 Not an offering document. Use for internal capitalization discussions only.
 
@@ -208,7 +208,7 @@ Not an offering document. Use for internal capitalization discussions only.
 
 ## Week 1–4 operator checklist (condensed)
 
-1. **Week 1:** MSB artifact vault; stub `:4098` / `:4022`; fix IOU vs Circle copy on investor surfaces
+1. **Week 1:** MSB artifact vault; stub `fiat-rails` :4022–:4027; fix IOU vs Circle copy on investor surfaces
 2. **Week 2:** Banking API behind feature flags; compliance provider env
 3. **Week 3:** SWIFT skeleton; FedWire sandbox with bank
 4. **Week 4:** Publish manifest + MSB rails to Pages; legal BSA review; **no** live neobank marketing
