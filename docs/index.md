@@ -1,185 +1,231 @@
 ---
-layout: home
-title: Home
+layout: glass
+title: Showcase
 permalink: /
 ---
 
-<section class="hero">
+<div class="glass-hero" id="top">
   <picture>
     <source srcset="{{ '/assets/images/troptions-logo-primary.webp' | relative_url }}" type="image/webp">
-    <img
-      class="hero-logo"
-      src="{{ '/assets/images/troptions-logo-primary.png' | relative_url }}"
-      alt="TROPTIONS — sovereign stack for tokenized economies"
-      width="420"
-      height="358"
-    />
+    <img class="glass-hero-logo" src="{{ '/assets/images/troptions-logo-primary.png' | relative_url }}" alt="TROPTIONS" width="420" height="358" />
   </picture>
-  <img
-    class="hero-rings"
-    src="{{ '/assets/images/troptions-logo-rings.png' | relative_url }}"
-    alt=""
-    aria-hidden="true"
-    width="140"
-    height="131"
-  />
-  <h1>TROPTIONS Sovereign Stack</h1>
-  <p class="tagline">Operating company and open infrastructure for education, broadcast, governance, and exchange on a sovereign L1.</p>
-  <p class="maturity-badge"><strong>Maturity 9.0 / 10</strong> on <code>main</code> — honest scope; not claiming BFT or live fraud proofs.</p>
-</section>
+  <h1>Sovereign Stack Showcase</h1>
+  <p class="tagline">Operating company and open infrastructure — education, broadcast, governance, and exchange on a sovereign L1. Honest labels; no false BFT claims.</p>
+  <p class="glass-badge"><span class="dot" aria-hidden="true"></span> Maturity <strong>9.0 / 10</strong> on <code>main</code></p>
+</div>
 
-<section class="troptions-theme-audio" aria-labelledby="troptions-theme-heading">
-  <h2 id="troptions-theme-heading">TROPTIONS Theme</h2>
-  <p class="theme-caption">Brand anthem — <em>Mainframe Explode</em> (proprietary FTH Trading; play manually, no autoplay).</p>
-  <div class="theme-player" role="group" aria-label="Theme audio controls">
-    <div class="theme-track-select">
-      <button type="button" class="theme-track-btn is-active" data-src="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}" aria-pressed="true">Primary</button>
-      <button type="button" class="theme-track-btn" data-src="{{ '/assets/audio/troptions-theme-alt.mp3' | relative_url }}" aria-pressed="false">Alt</button>
+<section class="glass-section" id="what">
+  <div class="glass-panel">
+    <h2>What is TROPTIONS</h2>
+    <p class="section-lead">Plain English map of the operating co and the repo you can clone today.</p>
+    <div class="glass-grid">
+      <div class="glass-card">
+        <h3>Operating company</h3>
+        <p>Domains, FTH Academy, TTN broadcast, Exchange OS surfaces, and partner programs (Avid configure, T-Lev-8 deal room) — brand and GTM live alongside engineering.</p>
+      </div>
+      <div class="glass-card">
+        <h3>Sovereign stack</h3>
+        <p><strong>Troptions-full-pack</strong> ships Rust L1, Python backends, frontends, contracts, Docker/nginx templates, and truth-label scripts in one monorepo.</p>
+      </div>
+      <div class="glass-card">
+        <h3>Who it is for</h3>
+        <p>Developers integrating APIs; investors needing an honest LIVE vs ROADMAP map; operators running TLS, API keys, and L1 governance before DNS cutover.</p>
+      </div>
+      <div class="glass-card">
+        <h3>What it is not</h3>
+        <p>Not BFT multi-validator consensus on <code>main</code>. Not merged public x402 — see <code>feature/x402-full-integration</code> separately.</p>
+      </div>
     </div>
-    <button type="button" class="theme-play-btn" aria-pressed="false">Play</button>
-    <audio preload="metadata" src="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}">
-      <p>Your browser does not support audio. <a href="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}">Download primary theme</a>.</p>
-    </audio>
   </div>
-  <details class="theme-lyrics">
-    <summary>View lyrics</summary>
-    <div class="theme-lyrics-body">
-      <p class="theme-lyrics-lead"><strong>Mainframe Explode</strong> — <a href="{{ '/media/anthem.html' | relative_url }}">full lyrics page</a> · <a href="{{ '/assets/audio/TROPTIONS_ANTHEM_LYRICS.md' | relative_url }}">source markdown</a></p>
-      <h3>Intro — Hype Beat Drop</h3>
-      <p>Yeah! (ATL!)<br>TROPTIONS! (Macon!)<br>Let's get it! (Uh!)</p>
-      <h3>Verse 1</h3>
-      <p>Back in '03, world was sleepin', analog dreams, yeah,<br>
-      Macon, Georgia birthed it, we crushed those old schemes.<br>
-      Digital ledger, that's what we brought to the game, still,<br>
-      Knocked on Washington's door, shoutin' out our name.<br>
-      SEC came next, tried to hold back our light,<br>
-      They challenged our vision, but we held on tight, that's right.</p>
-      <h3>Pre-Chorus</h3>
-      <p>They doubted the grind, talked slick behind our backs, fools,<br>
-      But we never paused, stayed on these digital tracks.</p>
-      <h3>Chorus</h3>
-      <p>Look at us now, yeah, we runnin' this game, homie,<br>
-      TROPTIONS on top, shout out loud our name!<br>
-      From Rust L1 to the chain, we broke all the rules, son,<br>
-      They tried to stop us, but we built all the tools! (Yeah!)<br>
-      Look at us now! (C'mon!)</p>
-      <h3>Verse 2</h3>
-      <p>Headlines screamin', legal drama, felt the heat, nah,<br>
-      Thought we'd crumble, but we stood on our own two feet.<br>
-      Showed 'em the books, every single dime was clean, no dirt,<br>
-      No verdicts dropped, no charges, know what I mean, fam?<br>
-      All that talkin' disappeared, they had nothing to say, huh,<br>
-      TROPTIONS still here, watch us lead the way, every day.</p>
-      <h3>Pre-Chorus</h3>
-      <p>They doubted the grind, talked slick behind our backs, fools,<br>
-      But we never paused, stayed on these digital tracks.</p>
-      <h3>Chorus</h3>
-      <p>Look at us now, yeah, we runnin' this game, homie,<br>
-      TROPTIONS on top, shout out loud our name!<br>
-      From Rust L1 to the chain, we broke all the rules, son,<br>
-      They tried to stop us, but we built all the tools! (Yeah!)<br>
-      Look at us now! (Uh huh!)</p>
-      <h3>Bridge — Breakdown</h3>
-      <p>Twenty-two years deep, put in blood, sweat, and tears, no lie,<br>
-      AI agents rollin', no more baseless fears. (None!)<br>
-      NEEDAI, CLAWD, Popeye, makin' moves every day, word,<br>
-      Hunnid seventy-five mil, no one standing in our way!</p>
-      <p class="theme-lyrics-footnote"><strong>Honesty note:</strong> The $175M line is brand narrative / operator attestation — verify via <a href="{{ '/proof/on-chain-proofs.html' | relative_url }}">Exchange OS proof docs</a>. NEEDAI, CLAWD, and Popeye refer to optional integration branches, not necessarily <code>main</code>.</p>
-      <h3>Outro — Fade Out</h3>
-      <p>Yeah, TROPTIONS worldwide! (Worldwide, for real!)<br>
-      Still here, still ridin' high! (Ridin' high, baby!)<br>
-      Look at us now! (Uh huh, now!)<br>
-      Macon strong! (Georgia!)</p>
-    </div>
-  </details>
 </section>
 
-## What is TROPTIONS?
-
-**TROPTIONS** is the operating brand and engineering home for a **sovereign stack**: a Layer-1 ledger, service backends, web frontends, and proof artifacts shipped together in this monorepo. The company side covers domains, education (FTH Academy), broadcast (TTN), and exchange surfaces; the infrastructure side is what developers clone, run, and extend.
-
-This repository (**Troptions-full-pack**) is the **full pack** — not a slide deck. It contains the **Rust L1 node** (`l1/`), **Python backends** (academy, TTN launcher, DAO service), **frontends** (exchange OS, edu, DAO dashboard), **contracts and DAO tooling**, Docker/nginx production templates, and **truth-label / verify scripts** so claims stay checkable.
-
-**Who it is for:** **Developers** wiring integrations and running local or staged stacks; **investors and counterparties** who need a single honest map of what ships on `main` versus roadmap; and **operators** preparing TLS, API keys, and L1-backed governance before public DNS cutover.
-
-**What it is not (on `main`):** Byzantine fault-tolerant consensus, permissionless validator sets, or a merged public x402 payment rail — those are documented separately or on feature branches without overclaiming production status.
-
-## What each layer means
-
-| Layer | What it does | Port |
-|-------|----------------|------|
-| **L1 node** | Sovereign sequencer, RocksDB state, on-chain DAO/treasury, signed submit RPC | **9944** (RPC), **9945** (metrics) |
-| **nginx edge** | TLS termination and path routing to L1 and backends | **443** (template) |
-| **fth-academy** | Courses, Stripe hooks, DAO helpers, L1 client | **8091** |
-| **ttn-launcher** | TTN channel / namespace registry | **8092** |
-| **donk-tutor** | AI tutor backend | **8090** |
-| **dao-service** | DAO API, WebSocket hub, settlement gateway | **8093** |
-| **Frontends** | exchange-os, fth-edu, dao-dashboard — static/UI over APIs | (via nginx / static host) |
-| **Proof / labels** | Scripts and docs that tag LIVE vs LOCAL vs ROADMAP claims | — |
-
-Deeper pages: [L1]({{ '/infrastructure/l1.html' | relative_url }}), [backends]({{ '/infrastructure/backends.html' | relative_url }}), [frontends]({{ '/infrastructure/frontends.html' | relative_url }}).
-
-## Maturity 9.0
-
-Engineering targets met on **`main`** (single-node **Sovereign Sequencer**, **11 Rust workspace crates**, RocksDB-backed state, PM2/Docker prod compose). Public DNS/certbot and multi-node fraud proofs remain **Q4 2026**.
-
-- [x] **TLS_ENABLED** — `docker/nginx/` self-signed + HTTPS paths `/l1/`, `/ai/`, `/fth/`, `/ttn/`, `/dao/`
-- [x] **API_KEY_AUTH** — `backend/shared/auth.py`, `API_KEYS` / `SETTLEMENT_API_KEYS`
-- [x] **DAO_DIRECT_L1** — `dao_getProposals`, `dao_getVotes`, `treasury_getBalance`; SQLite audit-only
-- [x] **SIGNED_DAO_RPC** — `dao_submit_proposal` / `dao_cast_vote` / `dao_execute` + `scripts/l1-gov-sign.py`
-- [x] **SOVEREIGN_SEQUENCER** — documented; [fraud proofs design]({{ '/design/fraud-proofs.html' | relative_url }}) only
-- [ ] **TLS_PUBLIC_DNS** — certbot on production hostnames (ops)
-- [ ] **FRAUD_PROOFS_LIVE** — Q4 2026 design → implementation
-
-## Architecture
-
-```mermaid
-flowchart TB
-  subgraph domains["Genesis domains"]
-    D1[TROPTIONS.IO]
-    D2[TTN.Tv]
-    D3[Exchange OS]
-  end
+<section class="glass-section" id="stack">
+  <div class="glass-panel">
+    <h2>The stack</h2>
+    <p class="section-lead">Layers, ports, and doc deep-links.</p>
+    <div class="glass-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Layer</th><th>Role</th><th>Port</th><th>Docs</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>L1 node</strong></td><td>Sovereign sequencer, RocksDB, on-chain DAO/treasury, signed submit RPC</td><td>9944 / 9945</td><td><a href="{{ '/infrastructure/l1.html' | relative_url }}">L1</a></td></tr>
+          <tr><td><strong>nginx edge</strong></td><td>TLS termination, path routing</td><td>443</td><td><a href="{{ '/deploy/production-checklist.html' | relative_url }}">Production</a></td></tr>
+          <tr><td><strong>fth-academy</strong></td><td>Courses, Stripe, DAO helpers</td><td>8091</td><td><a href="{{ '/infrastructure/backends.html' | relative_url }}">Backends</a></td></tr>
+          <tr><td><strong>ttn-launcher</strong></td><td>TTN channels / namespaces</td><td>8092</td><td><a href="{{ '/infrastructure/backends.html' | relative_url }}">Backends</a></td></tr>
+          <tr><td><strong>donk-tutor</strong></td><td>AI tutor (live Q&amp;A optional)</td><td>8090</td><td><a href="{{ '/deploy/quickstart.html' | relative_url }}">Quickstart</a></td></tr>
+          <tr><td><strong>dao-service</strong></td><td>DAO API, WebSocket, settlement gateway</td><td>8093</td><td><a href="{{ '/infrastructure/backends.html' | relative_url }}">Backends</a></td></tr>
+          <tr><td><strong>Frontends</strong></td><td>exchange-os, fth-edu, dao-dashboard</td><td>via nginx</td><td><a href="{{ '/infrastructure/frontends.html' | relative_url }}">Frontends</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <pre class="language-mermaid">flowchart TB
   subgraph fe["Frontends"]
     EX[exchange-os]
     EDU[fth-edu]
     DAO_UI[dao-dashboard]
   end
-  subgraph be["Backends + AI"]
+  subgraph be["Backends"]
     FTH[fth-academy :8091]
     TTN[ttn-launcher :8092]
     DONK[donk-tutor :8090]
     DAO[dao-service :8093]
   end
-  subgraph edge["nginx TLS :443"]
-    NGX[Path routing]
-  end
   subgraph l1["TROPTIONS L1 :9944"]
     SEQ[Sovereign Sequencer]
-    RDB[(RocksDB)]
-    GOV[On-chain DAO + treasury]
-    SIG[Signed submit RPC]
+    GOV[DAO + treasury]
   end
-  domains --> fe --> NGX --> be --> l1
-  NGX --> l1
-  SEQ --> RDB
-  GOV --> RDB
-```
+  fe --> be --> l1</pre>
+  </div>
+</section>
 
-## Get started
+<section class="glass-section" id="revenue">
+  <div class="glass-panel" data-glass-tabs>
+    <h2>Revenue &amp; monetization</h2>
+    <p class="section-lead">Honest map — built vs billing vs mainnet-gated.</p>
+    <div class="glass-tabs" role="tablist">
+      <button type="button" class="glass-tab is-active" data-tab="edu" aria-selected="true">Education</button>
+      <button type="button" class="glass-tab" data-tab="media">TTN / Sports</button>
+      <button type="button" class="glass-tab" data-tab="exchange">Exchange</button>
+      <button type="button" class="glass-tab" data-tab="tokens">Tokens</button>
+      <button type="button" class="glass-tab" data-tab="other">DAO / RWA / AI</button>
+    </div>
+    <div class="glass-tab-panel is-active" data-panel="edu">
+      <p><strong>FTH Academy</strong> — <a href="https://fthedu.unykorn.org/" target="_blank" rel="noopener">fthedu.unykorn.org</a> · Stripe tiers (free / $19 / $49 / $149 mo patterns). Backend <code>fth-academy :8091</code>.</p>
+    </div>
+    <div class="glass-tab-panel" data-panel="media">
+      <p><strong>TTN channels / namespaces / sponsors</strong> — <a href="https://troptionslive.unykorn.org/sports" target="_blank" rel="noopener">troptionslive sports</a> · WC26 sponsorship tiers ($500 / $2.5K / $10K mo) — pipeline until contracts + venue QR.</p>
+    </div>
+    <div class="glass-tab-panel" data-panel="exchange">
+      <p><strong>Exchange OS / XRPL trade desk</strong> — x402, launch, swap modules. UI may cite large desk figures — treat as <strong>operator attestation</strong> until XRPL/mainnet proofs. Testnet today; mainnet flag gated.</p>
+      <p class="glass-honesty">Anthem / brand line “$175M” is narrative — verify via <a href="{{ '/proof/truth-labels.html' | relative_url }}">truth labels</a> and on-chain proof docs.</p>
+    </div>
+    <div class="glass-tab-panel" data-panel="tokens">
+      <p><strong>Token launcher</strong> — <a href="https://launch.unykorn.org/" target="_blank" rel="noopener">launch.unykorn.org</a> (Solana SaaS).</p>
+      <p><strong>Polygon KENNY / EVL</strong> — community tokens on mainnet (see truth labels for contract refs).</p>
+    </div>
+    <div class="glass-tab-panel" data-panel="other">
+      <p><strong>DAO governance fees</strong> — on optional ATP / x402 branch (not <code>main</code>).</p>
+      <p><strong>RWA / T-Lev-8 deal room</strong> — <a href="https://fthtrading.github.io/T-Lev-8-/" target="_blank" rel="noopener">T-Lev-8 Pages</a> · contracts in <a href="https://github.com/FTHTrading/rwa-realestate" target="_blank" rel="noopener">rwa-realestate</a>.</p>
+      <p><strong>NEED AI / phone</strong> — optional Telnyx + Stripe branch (<code>frontends/needai</code>).</p>
+    </div>
+  </div>
+</section>
 
-- [Deploy quickstart]({{ '/deploy/quickstart.html' | relative_url }})
-- [Truth labels]({{ '/proof/truth-labels.html' | relative_url }}) — what is LIVE vs LOCAL vs ROADMAP
-- [Production checklist]({{ '/deploy/production-checklist.html' | relative_url }})
-- [GitHub repository](https://github.com/fthtrading/Troptions-full-pack)
+<section class="glass-section" id="live">
+  <div class="glass-panel">
+    <h2>Live systems</h2>
+    <p class="section-lead">Opens in a new tab — verify each property before external claims.</p>
+    <div class="glass-live-grid">
+      <a class="glass-btn glass-btn-primary" href="https://troptions.unykorn.org/troptions" target="_blank" rel="noopener">troptions.unykorn.org</a>
+      <a class="glass-btn glass-btn-primary" href="https://troptionslive.unykorn.org/sports" target="_blank" rel="noopener">Sports / WC26</a>
+      <a class="glass-btn glass-btn-primary" href="https://launch.unykorn.org/" target="_blank" rel="noopener">Token launcher</a>
+      <a class="glass-btn glass-btn-ghost" href="https://fthtrading.github.io/T-Lev-8-/" target="_blank" rel="noopener">T-Lev-8 deal room</a>
+      <a class="glass-btn glass-btn-ghost" href="https://fthtrading.github.io/Troptions-full-pack/" target="_blank" rel="noopener">This docs site</a>
+      <a class="glass-btn glass-btn-ghost" href="https://fthedu.unykorn.org/" target="_blank" rel="noopener">fthedu.unykorn.org</a>
+      <a class="glass-btn glass-btn-ghost" href="https://ai.troptions.org/" target="_blank" rel="noopener">ai.troptions.org</a>
+      <a class="glass-btn glass-btn-ghost" href="https://ttn.troptions.org/" target="_blank" rel="noopener">ttn.troptions.org</a>
+    </div>
+  </div>
+</section>
 
-Verify locally:
+<section class="glass-section" id="proof">
+  <div class="glass-panel">
+    <h2>Proof &amp; maturity</h2>
+    <p class="section-lead">9.0 checklist on <code>main</code> — run scripts before you publish new claims.</p>
+    <ul class="glass-checklist">
+      <li>TLS templates — <code>docker/nginx/</code></li>
+      <li>API key auth — <code>backend/shared/auth.py</code></li>
+      <li>DAO direct L1 reads + signed submit RPC</li>
+      <li>Sovereign Sequencer documented (not BFT)</li>
+      <li class="pending">TLS public DNS / certbot (ops)</li>
+      <li class="pending">Fraud proofs live (Q4 2026 design)</li>
+    </ul>
+    <p><a class="glass-btn glass-btn-primary" href="{{ '/proof/truth-labels.html' | relative_url }}">Truth labels</a>
+    <a class="glass-btn glass-btn-ghost" href="{{ '/deploy/quickstart.html' | relative_url }}">Deploy quickstart</a></p>
+    <p class="glass-honesty">Re-run <code>.\scripts\truth_labels.ps1</code> and <code>.\scripts\verify-9-production.ps1</code> before investor-facing updates.</p>
+  </div>
+</section>
 
-```powershell
-cd l1; cargo test --workspace
-cd ..; python -m pytest tests/backend tests/dao -q
-.\scripts\truth_labels.ps1
-.\scripts\verify-9-production.ps1
-```
+<section class="glass-section" id="anthem">
+  <div class="glass-panel troptions-theme-audio" aria-labelledby="troptions-theme-heading">
+    <h2 id="troptions-theme-heading">TROPTIONS anthem</h2>
+    <p class="theme-caption">Mainframe Explode — proprietary FTH Trading. Manual play only.</p>
+    <div class="theme-player" role="group" aria-label="Theme audio controls">
+      <div class="theme-track-select">
+        <button type="button" class="theme-track-btn is-active" data-src="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}" aria-pressed="true">Primary</button>
+        <button type="button" class="theme-track-btn" data-src="{{ '/assets/audio/troptions-theme-alt.mp3' | relative_url }}" aria-pressed="false">Alt</button>
+        <button type="button" class="theme-track-btn" data-src="{{ '/assets/audio/troptions-anthem-mainframe-152254.mp3' | relative_url }}" aria-pressed="false">Mainframe (152254)</button>
+      </div>
+      <button type="button" class="theme-play-btn" aria-pressed="false">Play</button>
+      <audio preload="metadata" src="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}"></audio>
+    </div>
+    <details class="theme-lyrics">
+      <summary>View lyrics</summary>
+      <div class="theme-lyrics-body">
+        <p class="theme-lyrics-lead"><strong>Mainframe Explode</strong> — <a href="{{ '/media/anthem.html' | relative_url }}">full lyrics</a></p>
+        <p>Yeah! (ATL!) · TROPTIONS! (Macon!) · From Rust L1 to the chain…</p>
+        <p class="theme-lyrics-footnote"><strong>Honesty:</strong> $175M and agent names in lyrics are brand narrative / optional branches — not automatic <code>main</code> production claims.</p>
+      </div>
+    </details>
+  </div>
+</section>
 
-**Note:** x402 / Apostle integration lives on `feature/x402-full-integration` and is **not** merged to `main`; this site describes `main` unless a page says otherwise.
+<section class="glass-section" id="guide">
+  <div class="glass-panel" data-troptions-tour data-troptions-qa data-narration-url="{{ '/assets/data/site-narration.json' | relative_url }}" data-baseurl="{{ site.baseurl }}">
+    <h2>Ask TROPTIONS</h2>
+    <p class="section-lead">Audio tour + offline FAQ. Optional live DONK on port 8090.</p>
+    <div class="glass-guide">
+      <div>
+        <h3>Listen to the stack</h3>
+        <p>Web Speech API reads the monorepo tour (~2–3 min).</p>
+        <div class="glass-tour-controls">
+          <button type="button" class="glass-btn glass-btn-primary" data-tour-play>Play tour</button>
+          <button type="button" class="glass-btn glass-btn-ghost" data-tour-pause>Pause</button>
+          <button type="button" class="glass-btn glass-btn-ghost" data-tour-stop>Stop</button>
+        </div>
+        <p data-tour-status class="glass-api-hint"></p>
+      </div>
+      <div>
+        <h3>Ask about TROPTIONS</h3>
+        <form class="glass-qa-form">
+          <input class="glass-qa-input" type="text" placeholder="e.g. Is x402 on main?" autocomplete="off" />
+          <button type="button" class="glass-btn glass-btn-ghost" data-qa-mic>Mic</button>
+          <button type="submit" class="glass-btn glass-btn-primary">Ask</button>
+        </form>
+        <div class="glass-tour-controls">
+          <input class="glass-qa-input" data-api-input type="url" placeholder="http://127.0.0.1:8090" />
+          <button type="button" class="glass-btn glass-btn-ghost" data-api-save>Save API</button>
+        </div>
+        <p class="glass-api-hint">Live mode: run <a href="{{ '/deploy/quickstart.html' | relative_url }}">quickstart</a>, then <code>?api=http://127.0.0.1:8090</code> or save API above (POST <code>/chat</code>).</p>
+        <div class="glass-chat-log" aria-live="polite"></div>
+      </div>
+    </div>
+    <p><a class="glass-btn glass-btn-ghost" href="{{ '/guide/audio-tour.html' | relative_url }}">Full audio description page</a></p>
+  </div>
+</section>
+
+<section class="glass-section" id="tlev8">
+  <div class="glass-panel">
+    <h2>T-LEV-8 deal room</h2>
+    <p class="section-lead">Partner governance, LEV8 pipeline, and RWA execution — separate repo, linked here for revenue context.</p>
+    <div class="glass-grid">
+      <div class="glass-card" data-href="https://fthtrading.github.io/T-Lev-8-/">
+        <h3>Deal room UI</h3>
+        <p>GitHub Pages control plane: gates, conditions precedent, and protocol governor modes (SOLO_LAUNCH default until partner gates clear).</p>
+        <span class="glass-btn glass-btn-ghost">Open deal room →</span>
+      </div>
+      <div class="glass-card">
+        <h3>Governance gates</h3>
+        <p>Algorithmic modes: 7/7 gates → PARTNER_EXECUTE; 5–6 → negotiate; 3–4 → hold; else SOLO_LAUNCH. Compliance tracks G1–G8 — counsel review required.</p>
+      </div>
+      <div class="glass-card" data-href="https://github.com/FTHTrading/rwa-realestate">
+        <h3>Smart contracts</h3>
+        <p>Implementation in <strong>rwa-realestate</strong> — TLEV8GateManager, FTHEnforcer kill switch, compliance registry extensions (paraphrased from T-Lev-8 README).</p>
+        <span class="glass-btn glass-btn-ghost">Contracts repo →</span>
+      </div>
+    </div>
+    <p class="glass-honesty">No secrets or internal-only negotiation docs on this public site — see T-Lev-8 repo for operational detail.</p>
+  </div>
+</section>
+

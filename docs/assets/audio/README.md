@@ -1,5 +1,12 @@
 # TROPTIONS theme audio
 
+| File | Role |
+|------|------|
+| `troptions-theme-primary.mp3` | Primary brand track |
+| `troptions-theme-alt.mp3` | Alternate mix |
+| `troptions-anthem-mainframe-152254.mp3` | Mainframe Explode export 2026-05-21T152254 (~3.06 MB) |
+
+
 Canonical tracks served on [GitHub Pages](https://fthtrading.github.io/Troptions-full-pack/) for brand showcase. **Not royalty-free** for third parties — proprietary **FTH Trading**; internal and brand use only.
 
 ## Published files

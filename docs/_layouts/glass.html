@@ -1,0 +1,40 @@
+---
+layout: default
+---
+<div class="glass-page" id="top">
+  <div class="glass-ambient" aria-hidden="true"></div>
+  <nav class="glass-nav" id="glass-nav" aria-label="Showcase sections">
+    <div class="glass-nav-inner wrapper">
+      <a class="glass-nav-brand" href="{{ '/' | relative_url }}">
+        <img src="{{ '/assets/images/troptions-logo-primary.png' | relative_url }}" alt="" width="36" height="36" />
+        <span class="glass-nav-title">TROPTIONS</span>
+      </a>
+      <button type="button" class="glass-nav-toggle" aria-expanded="false" aria-controls="glass-nav-links">Menu</button>
+      <div class="glass-nav-links" id="glass-nav-links">
+        <a href="#what" data-glass-nav="what">What</a>
+        <a href="#stack" data-glass-nav="stack">Stack</a>
+        <a href="#revenue" data-glass-nav="revenue">Revenue</a>
+        <a href="#live" data-glass-nav="live">Live</a>
+        <a href="#proof" data-glass-nav="proof">Proof</a>
+        <a href="#anthem" data-glass-nav="anthem">Anthem</a>
+        <a href="#guide" data-glass-nav="guide">Ask</a>
+        <a href="#tlev8" data-glass-nav="tlev8">T-Lev-8</a>
+        <a href="{{ '/guide/audio-tour.html' | relative_url }}" class="glass-nav-doc">Audio tour</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="glass-main post-content">
+    {{ content }}
+  </main>
+
+  <footer class="glass-footer">
+    <div class="wrapper">
+      <p class="glass-footer-line">
+        <a href="https://github.com/fthtrading/Troptions-full-pack">Troptions-full-pack</a>
+        · Maturity <strong>9.0</strong> on <code>main</code> · Not BFT · Honest labels
+      </p>
+      <p class="glass-footer-muted">© FTH Trading — proprietary anthem audio; no redistribution without permission.</p>
+    </div>
+  </footer>
+</div>

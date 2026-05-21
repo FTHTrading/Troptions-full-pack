@@ -19,6 +19,7 @@ minima:
 
 header_pages:
   - index.md
+  - guide/audio-tour.md
   - infrastructure/l1.md
   - infrastructure/backends.md
   - infrastructure/frontends.md

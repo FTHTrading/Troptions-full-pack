@@ -1,0 +1,157 @@
+{
+  "version": "1.0",
+  "tourTitle": "Listen to the stack",
+  "tourDurationHint": "About two and a half minutes",
+  "tourSegments": [
+    {
+      "id": "intro",
+      "text": "Welcome to the TROPTIONS full pack public showcase. This site documents what ships on main in the Troptions-full-pack monorepo: an operating company brand plus an open sovereign stack you can clone, run, and extend."
+    },
+    {
+      "id": "l1",
+      "text": "At the center is the TROPTIONS Layer 1 node in Rust. It runs as a single-node Sovereign Sequencer on ports 9944 for RPC and 9945 for metrics. State persists in RocksDB. On-chain DAO and treasury modules are wired, with signed submit RPC for governance actions. We document maturity 9.0 on main with honest limits: this is not Byzantine fault tolerant consensus, and live fraud proofs remain a Q4 2026 design track."
+    },
+    {
+      "id": "backends",
+      "text": "Python backends surround the L1. FTH Academy on 8091 handles courses and Stripe hooks. TTN launcher on 8092 manages broadcast channels and namespaces. DONK tutor on 8090 powers AI education. DAO service on 8093 exposes governance APIs, WebSocket hub, and settlement gateway paths. Optional x402 and Apostle integrations live on a feature branch, not merged to main."
+    },
+    {
+      "id": "frontends",
+      "text": "Frontends include Exchange OS for XRPL and multi-chain desks, FTH education surfaces, DAO dashboard, sports and live properties on unykorn.org, and the Solana token launcher at launch.unykorn.org. Production routing is documented through nginx TLS templates on port 443."
+    },
+    {
+      "id": "revenue",
+      "text": "Revenue is mapped honestly. Live or near-live paths include FTH Academy subscriptions, TTN sponsorship tiers, Exchange OS and launch fees when mainnet gates clear, Polygon KENNY and EVL community tokens, DAO governance fees on optional ATP and x402 branches, T-Lev-8 RWA deal room partnerships, and NEED AI phone answering as an optional branch. Exchange OS marketing figures like one hundred seventy five million dollars are operator attestation and brand narrative until verified on chain."
+    },
+    {
+      "id": "proof",
+      "text": "Proof and maturity come from truth label scripts, pytest and cargo tests, and production checklists linked from this site. Before you claim live status, run truth labels locally and read the truth labels page for CONFIRMED versus PENDING versus ROADMAP."
+    },
+    {
+      "id": "links",
+      "text": "Use the Live Systems section for troptions.unykorn.org, troptionslive sports, launch.unykorn.org, the T-Lev-8 deal room on GitHub Pages, and this documentation site. For live AI answers from DONK, run the deploy quickstart and point the Ask panel API to port 8090. Thank you for reviewing TROPTIONS with honest labels."
+    }
+  ],
+  "faq": [
+    {
+      "keywords": ["what", "troptions", "company", "operating", "brand"],
+      "question": "What is TROPTIONS?",
+      "answer": "TROPTIONS is the operating brand and engineering home for a sovereign stack: a Rust L1 ledger, Python backends, web frontends, and proof artifacts in the Troptions-full-pack monorepo. The company side covers education, broadcast, and exchange domains; the repo is what developers clone and run."
+    },
+    {
+      "keywords": ["l1", "layer", "sequencer", "9944", "rust", "node"],
+      "question": "What is the TROPTIONS L1?",
+      "answer": "The L1 is a Rust workspace with a Sovereign Sequencer (single-node on main), RocksDB state, on-chain DAO and treasury, and signed submit RPC on port 9944. It is not BFT multi-validator consensus on main."
+    },
+    {
+      "keywords": ["bft", "byzantine", "consensus", "validator"],
+      "question": "Is the L1 Byzantine fault tolerant?",
+      "answer": "No on main. Documentation labels the node as Sovereign Sequencer. Fraud proofs and multi-node designs are roadmap (Q4 2026), not live production claims."
+    },
+    {
+      "keywords": ["maturity", "9", "9.0", "production", "ready"],
+      "question": "What does maturity 9.0 mean?",
+      "answer": "On main, engineering targets include TLS templates, API key auth, DAO direct L1 reads, signed DAO RPC, RocksDB persistence, and verify scripts. Public DNS certbot and live fraud proofs are still pending ops items."
+    },
+    {
+      "keywords": ["dao", "governance", "vote", "proposal", "8093"],
+      "question": "How does DAO governance work?",
+      "answer": "dao-service on 8093 exposes APIs and WebSocket hub. Governance actions use signed submit paths to L1 (dao_submit_proposal, dao_cast_vote, dao_execute). SQLite in the service is audit-oriented; authoritative state is on L1."
+    },
+    {
+      "keywords": ["x402", "apostle", "atp", "payment", "branch"],
+      "question": "Is x402 on main?",
+      "answer": "No. x402 gateway, Apostle chain integration, and related telecom paths are on feature/x402-full-integration, not merged to main. This site describes main unless a page says otherwise."
+    },
+    {
+      "keywords": ["revenue", "money", "monetize", "saas", "stripe"],
+      "question": "How does TROPTIONS make money?",
+      "answer": "Documented streams: FTH Academy / Stripe courses, TTN sponsorships, Exchange OS and launch fees (mainnet-gated), token launcher at launch.unykorn.org, Polygon KENNY/EVL, DAO fees on optional ATP/x402, T-Lev-8 RWA deal room licensing, and optional NEED AI phone service."
+    },
+    {
+      "keywords": ["175", "175m", "million", "exchange", "attestation"],
+      "question": "What about the $175M claim?",
+      "answer": "Treat it as operator attestation and brand narrative in Exchange OS / anthem lyrics until verified via on-chain proofs and your own diligence. See proof/on-chain-proofs and truth labels."
+    },
+    {
+      "keywords": ["launch", "token", "solana", "launcher", "unykorn"],
+      "question": "Where is the token launcher?",
+      "answer": "Public launcher: https://launch.unykorn.org/ — Solana token deployment SaaS documented in the monorepo frontends and solana-launcher skill patterns."
+    },
+    {
+      "keywords": ["sports", "wc26", "ttn", "broadcast", "troptionslive"],
+      "question": "Where is sports / TTN?",
+      "answer": "Live sports surface: https://troptionslive.unykorn.org/sports — TTN launcher backend on 8092; sponsorship tiers are documented as pipeline until contracts close."
+    },
+    {
+      "keywords": ["kenny", "kenney", "evl", "polygon"],
+      "question": "What are KENNY and EVL?",
+      "answer": "Community tokens on Polygon mainnet documented in truth labels (e.g. KENNY contract 0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7). Manage via kenny-polygon skill/repo patterns; not the same as L1 native coin."
+    },
+    {
+      "keywords": ["exchange", "xrpl", "desk", "mainnet"],
+      "question": "Is Exchange OS on mainnet?",
+      "answer": "Honest status: DEX and desk features may run testnet; XRPL mainnet enablement is gated. Check Exchange OS env flags and truth labels before claiming live trading fees."
+    },
+    {
+      "keywords": ["fth", "academy", "edu", "course", "fthedu"],
+      "question": "Where is FTH Academy?",
+      "answer": "Backend fth-academy on 8091; public edu surface documented at fthedu.unykorn.org with Stripe tier pricing ($19 / $49 / $149 mo patterns in revenue docs)."
+    },
+    {
+      "keywords": ["donk", "tutor", "ai", "8090", "live"],
+      "question": "How do I get live AI answers?",
+      "answer": "Run deploy quickstart, start donk-tutor on 8090, then set Ask TROPTIONS API base to http://127.0.0.1:8090 (localStorage or ?api= query). Offline mode uses FAQ keyword matching only."
+    },
+    {
+      "keywords": ["deploy", "quickstart", "run", "local"],
+      "question": "How do I run the stack locally?",
+      "answer": "See deploy/quickstart: scripts/quickstart.ps1 or quickstart-all, copy .env.example to .env, PM2 ecosystem.config.js, cargo test in l1/, pytest for backends."
+    },
+    {
+      "keywords": ["truth", "labels", "live", "roadmap", "confirmed"],
+      "question": "What are truth labels?",
+      "answer": "Scripts truth_labels.ps1 / .sh tag claims as CONFIRMED, PENDING, or ROADMAP. The proof/truth-labels page is the published snapshot—re-run before updating external claims."
+    },
+    {
+      "keywords": ["t-lev", "tlev", "lev8", "deal", "room", "rwa"],
+      "question": "What is T-Lev-8?",
+      "answer": "T-Lev-8 is a separate deal room repo (FTHTrading/T-Lev-8-) with governance gates, LEV8 partner pipeline, and RWA contract references at FTHTrading/rwa-realestate. Site: https://fthtrading.github.io/T-Lev-8-/"
+    },
+    {
+      "keywords": ["need", "needai", "phone", "telnyx"],
+      "question": "What is NEED AI?",
+      "answer": "Optional branch: AI phone answering with Telnyx vanity numbers and Stripe/USDC billing—documented in frontends/needai; not required for main stack maturity."
+    },
+    {
+      "keywords": ["avid", "counterparty", "configure", "bijan"],
+      "question": "How long to configure Avid?",
+      "answer": "Counterparty docs state 2–4 weeks with TROPTIONS engineering for production configure (signed RPC, DAO realm, TLS, compliance)—not a 15-minute self-serve mainnet cutover."
+    },
+    {
+      "keywords": ["ports", "8091", "8092", "8093", "9944"],
+      "question": "What ports does the stack use?",
+      "answer": "L1 RPC 9944, metrics 9945, donk-tutor 8090, fth-academy 8091, ttn-launcher 8092, dao-service 8093, nginx TLS 443 in production templates."
+    },
+    {
+      "keywords": ["github", "pages", "site", "docs"],
+      "question": "Where is this site hosted?",
+      "answer": "GitHub Pages from /docs on main: https://fthtrading.github.io/Troptions-full-pack/ with baseurl /Troptions-full-pack."
+    },
+    {
+      "keywords": ["anthem", "mainframe", "song", "audio", "152254"],
+      "question": "What anthem tracks are available?",
+      "answer": "Three manual-play tracks: Primary, Alt, and Mainframe (152254 export). Proprietary FTH Trading—no autoplay on this site."
+    },
+    {
+      "keywords": ["troptions", "unykorn", "live"],
+      "question": "What is troptions.unykorn.org?",
+      "answer": "Primary live TROPTIONS property linked from this showcase—open https://troptions.unykorn.org/troptions for the current deployed experience."
+    },
+    {
+      "keywords": ["popeye", "clawd", "optional"],
+      "question": "Are Popeye and CLAWD on main?",
+      "answer": "Referenced in brand anthem as optional integration branches. Popeye relay and similar services are optional/roadmap per truth labels—not core main maturity requirements."
+    }
+  ]
+}

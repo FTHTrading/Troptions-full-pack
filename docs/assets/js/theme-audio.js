@@ -7,6 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
   var trackBtns = section.querySelectorAll(".theme-track-btn");
   if (!audio || !playBtn) return;
 
+  function activeSrc() {
+    var active = section.querySelector(".theme-track-btn.is-active");
+    return active ? active.getAttribute("data-src") : audio.getAttribute("src");
+  }
+
   function setPlayLabel() {
     var playing = !audio.paused;
     playBtn.textContent = playing ? "Pause" : "Play";
