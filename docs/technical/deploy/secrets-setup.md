@@ -14,9 +14,10 @@ From repo root:
 
 ```powershell
 .\scripts\setup-local-env.ps1
+.\scripts\setup-cloudflare-env.ps1
 ```
 
-The script:
+**`setup-local-env.ps1`:**
 
 1. Copies `.env.example` → `.env` (`.env` is gitignored).
 2. Reads **local Desktop paths only** (not tracked in git):
@@ -25,13 +26,20 @@ The script:
    - `eleven labs.txt` → `ELEVENLABS_API_KEY`.
 3. Leaves `TELECOM_DRY_RUN=true` and `WORKERS_AI_ENABLED=0` until you opt in.
 
-Add **`CLOUDFLARE_ACCOUNT_ID`** manually (Cloudflare dashboard → account ID). The Desktop Workers file does not include it.
+**`setup-cloudflare-env.ps1`:**
+
+1. Reads **Read all resources** token from `OneDrive - FTH Trading\11-Downloads\Read all resources API token was su.txt` (or pass a custom path).
+2. Sets `CLOUDFLARE_API_TOKEN` in `.env` for zone/DNS/tunnel work (see [CLOUDFLARE_ORIGIN_FIX.md](../CLOUDFLARE_ORIGIN_FIX.md)).
+3. Sets `CLOUDFLARE_ACCOUNT_ID` only if present in the source file or already in the shell environment.
+
+Add **`CLOUDFLARE_ACCOUNT_ID`** manually (Cloudflare dashboard → account ID) when not in the credential file.
 
 ## Environment variable map
 
 | Variable | Service | Used by |
 |----------|---------|---------|
 | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare | `ai/donk-tutor`, `backend/dao-service/workers_ai_router.py`, Exchange OS image route |
+| `CLOUDFLARE_API_TOKEN` | Zone/DNS/tunnel admin | Operator API scripts; origin fix runbook — **not** Workers AI inference |
 | `CLOUDFLARE_WORKERS_AI_TOKEN` or `WORKERS_AI_API_TOKEN` | Workers AI | Same (Bearer token for `api.cloudflare.com`) |
 | `WORKERS_AI_ENABLED` | Feature flag | Set `1` to allow Workers AI fallback / dao proxy |
 | `WORKERS_AI_MODEL` | Model id | Default `@cf/meta/llama-3.1-8b-instruct` |
