@@ -1,0 +1,39 @@
+graph TD
+    A[Client wires USD via FedWire] -->|MSB Account| B[Payment Orchestrator :4022]
+    B -->|Verify| C[MSB Compliance :4098]
+    C -->|Screen| D[OFAC/Sanctions Check]
+    C -->|Log| E[Audit Trail : Blockchain]
+    
+    B -->|Mint| F[TROPTIONS-USD IOU on XRPL]
+    F -->|1:1 Backed| G[ Fiat Reserve Account]
+    G -->|Earns Yield| H[Float Income 3-4%]
+    H -->|Net Margin| I[Profit 1-2%]
+    
+    F -->|User Holds| J[User Wallet]
+    J -->|Spend| K[Debit Card Swipe]
+    K -->|Instant Redeem| L[Merchant Settlement]
+    L -->|Via| M[Visa/Mastercard Network]
+    M -->|Interchange| N[1.5% Fee to TROPTIONS]
+    
+    J -->|Trade| O[Exchange OS]
+    O -->|Buy| P[TROPTIONS-USD @ $1.000]
+    O -->|Sell| Q[TROPTIONS-USD @ $0.999]
+    Q -->|Spread| R[0.1% Round-Trip]
+    
+    F -->|Corporate| S[B2B Payment]
+    S -->|Company A sends IOU| T[TROPTIONS Network]
+    T -->|Company B receives| U[Redeem EUR via SWIFT]
+    U -->|Fee| V[0.5-1% Conversion]
+    
+    W[Other Fintechs] -->|API| X[BaaS Platform]
+    X -->|White-Label| Y[IOU Issuance API]
+    X -->|Compliance| Z[KYC/AML as Service]
+    X -->|Settlement| AA[FedWire/SWIFT Access]
+    
+    style A fill:#FFD700
+    style F fill:#00FF00
+    style G fill:#4169E1
+    style N fill:#FF69B4
+    style X fill:#FF8C00
+    style C fill:#FF0000
+    style E fill:#9370DB
