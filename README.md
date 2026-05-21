@@ -107,7 +107,7 @@ Details: [`docs/DOMAIN_MAP.md`](docs/DOMAIN_MAP.md)
 **Full stack (L1 + backends + DAO):** see [`docs/QUICKSTART.md`](docs/QUICKSTART.md)
 
 ```powershell
-.\scripts\quickstart-all.ps1
+.\scripts\quickstart.ps1
 ```
 
 ### L1
@@ -143,7 +143,10 @@ npm run dev
 - [Domain map](docs/DOMAIN_MAP.md)
 - [Full DAO guide](docs/DAO.md)
 - [One-command quickstart](docs/QUICKSTART.md)
-- [Investor one-pager](docs/WHATS_BUILT_INVESTOR_ONE_PAGER.md)
+- [Bryan status (verified paths)](docs/BRYAN_STATUS.md)
+- [Investor one-pager](docs/investor/ONE_PAGER.md)
+- [Production deploy](docs/DEPLOY_PRODUCTION.md)
+- [Loom demo script](docs/LOOM_DEMO_SCRIPT.md)
 - [Ops runbook](docs/RUNBOOK.md)  
 
 ## Source provenance

@@ -13,21 +13,21 @@ Start the full sovereign stack (L1 → backends → DAO) in dependency order.
 
 ```powershell
 cd C:\Users\Kevan\Troptions-full-pack
-.\scripts\quickstart-all.ps1
+.\scripts\quickstart.ps1
 ```
 
 Dry run (prints steps only):
 
 ```powershell
-.\scripts\quickstart-all.ps1 -DryRun
+.\scripts\quickstart.ps1 -DryRun
 ```
 
 ## Linux / macOS
 
 ```bash
-chmod +x scripts/quickstart-all.sh
-./scripts/quickstart-all.sh
-./scripts/quickstart-all.sh --dry-run
+chmod +x scripts/quickstart.sh
+./scripts/quickstart.sh
+./scripts/quickstart.sh --dry-run
 ```
 
 ## After start
@@ -50,11 +50,13 @@ DAO-only bootstrap (build L1 + init DB): `scripts/bootstrap-dao.ps1` / `scripts/
 
 ```powershell
 $env:L1_NODE_BIN = "C:\path\to\troptions-node.exe"
-.\scripts\quickstart-all.ps1
+.\scripts\quickstart.ps1
 ```
 
 ## Related docs
 
 - [DAO guide](DAO.md)
 - [Runbook](RUNBOOK.md)
-- [Investor one-pager](WHATS_BUILT_INVESTOR_ONE_PAGER.md)
+- [Bryan status](BRYAN_STATUS.md)
+- [Investor one-pager](investor/ONE_PAGER.md)
+- [Production deploy](DEPLOY_PRODUCTION.md)

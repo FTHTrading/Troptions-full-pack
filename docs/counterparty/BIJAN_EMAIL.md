@@ -1,7 +1,5 @@
 # Email draft — Bryan → Bijan
 
-> **Canonical path:** [`docs/counterparty/BIJAN_EMAIL.md`](counterparty/BIJAN_EMAIL.md)
-
 Use placeholders below. Attach or link `docs/investor/ONE_PAGER.md` if sending as PDF/markdown export.
 
 ---
@@ -46,7 +44,7 @@ cp .env.example .env   # fill locally only
 Then open the DAO dashboard at **http://127.0.0.1:8093** and skim `docs/DAO.md` for governance flows.
 
 **Executable build context for tokenized ecosystems:**  
-Use `docs/TROPTIONS-GENESIS-BUILD.md` as the genesis/system audit prompt (8 brands, L1, XRPL/Polygon/Solana layers, compliance gates). For day-to-day ops, `docs/RUNBOOK.md` and `scripts/bootstrap-dao.ps1` mirror what we run in production-style PM2 layouts.
+Use `docs/TROPTIONS-GENESIS-BUILD.md` as the genesis/system audit prompt (8 brands, L1, XRPL/Polygon/Solana layers, compliance gates). Canonical copy lives at repo root `docs/`; source also under `frontends/exchange-os/docs/`. For day-to-day ops, `docs/RUNBOOK.md` and `scripts/bootstrap-dao.ps1` mirror production-style PM2 layouts.
 
 **Suggested ask:** [specific ask/meeting — e.g., 30-minute technical walkthrough week of [date], or review of DAO + Exchange OS integration for [project name].]
 
