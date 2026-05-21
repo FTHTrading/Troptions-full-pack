@@ -34,8 +34,8 @@ from ws_hub import dao_ws_hub  # noqa: E402
 from governance.engine import GovernanceEngine  # noqa: E402
 from registry.members import MemberRegistry  # noqa: E402
 from treasury.view import TreasuryView  # noqa: E402
-from settlement_api import SettlementSubmitBody, handle_settlement_submit  # noqa: E402
 from agent_client import startup_registration  # noqa: E402
+from settlement_router import router as settlement_router  # noqa: E402
 from telecom_router import router as telecom_router  # noqa: E402
 from x402_middleware import X402Middleware  # noqa: E402
 
@@ -97,6 +97,7 @@ app.add_middleware(
     price_atp=os.getenv("DAO_PROPOSAL_FEE_ATP", "10000000000000000000"),
     protected_prefixes=("/dao/proposals", "/settlement/"),
 )
+app.include_router(settlement_router)
 app.include_router(telecom_router)
 
 engine = GovernanceEngine(L1_RPC_URL)
@@ -176,19 +177,6 @@ async def execute_proposal(proposal_id: str, executor: Optional[str] = None, sig
 @app.get("/dao/treasury")
 async def dao_treasury():
     return treasury.overview()
-
-
-@app.post("/settlement/submit", dependencies=[Depends(verify_api_key)])
-@limiter.limit("10/minute")
-async def settlement_submit(
-    request: Request,
-    body: SettlementSubmitBody,
-    x_api_key: Optional[str] = Header(None, alias="X-API-Key"),
-    x_signature: Optional[str] = Header(None, alias="X-Signature"),
-):
-    return await handle_settlement_submit(
-        request, body, x_api_key=x_api_key, x_signature=x_signature
-    )
 
 
 @app.get("/dao/members")

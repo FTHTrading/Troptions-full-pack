@@ -1,4 +1,4 @@
-"""Shared API key verification for FastAPI write routes."""
+﻿"""Shared API key verification for FastAPI write routes."""
 
 from __future__ import annotations
 
@@ -15,6 +15,9 @@ def get_valid_api_keys() -> Set[str]:
         part = part.strip()
         if part:
             keys.add(part)
+    legacy = os.getenv("SETTLEMENT_API_KEY", "").strip()
+    if legacy:
+        keys.add(legacy)
     for part in os.getenv("SETTLEMENT_API_KEYS", "").split(","):
         part = part.strip()
         if not part:
@@ -36,7 +39,7 @@ async def verify_api_key(
 ) -> None:
     """
     Require X-API-Key when API_KEYS or SETTLEMENT_API_KEYS is set.
-    Dev mode: no keys configured → allow (document in .env.example).
+    Dev mode: no keys configured â†’ allow (document in .env.example).
     """
     valid = get_valid_api_keys()
     if not valid:

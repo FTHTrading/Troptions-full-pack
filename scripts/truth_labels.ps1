@@ -95,3 +95,44 @@ Write-Label "PENDING" "x402 public facilitator - LOCAL_ONLY on main; optional br
 
 Write-Host ""
 Write-Host "Publish output: docs/proof/truth-labels.md"
+Write-Host ""
+Write-Host "--- Local stack probes (x402 branch; services optional) ---"
+
+function Test-Endpoint {
+    param($Name, $Url, $Method = "GET", $Body = $null, $Keys = @())
+    try {
+        if ($Method -eq "GET") {
+            $r = Invoke-WebRequest -Uri $Url -UseBasicParsing -TimeoutSec 5
+            $json = $r.Content | ConvertFrom-Json
+        } else {
+            $r = Invoke-WebRequest -Uri $Url -Method POST -Body ($Body | ConvertTo-Json) -ContentType "application/json" -UseBasicParsing -TimeoutSec 5
+            $json = $r.Content | ConvertFrom-Json
+        }
+        $ok = $r.StatusCode -eq 200
+        foreach ($k in $Keys) {
+            $parts = $k -split '\.'
+            $v = $json
+            foreach ($p in $parts) {
+                if ($v.PSObject.Properties.Name -contains $p) { $v = $v.$p } else { $ok = $false; break }
+            }
+        }
+        $label = if ($ok) { "CONFIRMED" } else { "DEGRADED" }
+        [PSCustomObject]@{ Service = $Name; Url = $Url; Label = $label; Code = $r.StatusCode }
+    } catch {
+        [PSCustomObject]@{ Service = $Name; Url = $Url; Label = "UNREACHABLE"; Code = "-" }
+    }
+}
+
+$probeResults = @()
+$probeResults += Test-Endpoint "Apostle" "http://127.0.0.1:7332/health" -Keys @("status")
+$probeResults += Test-Endpoint "x402 Gateway" "http://127.0.0.1:4020/health" -Keys @("status")
+$probeResults += Test-Endpoint "Popeye" "http://127.0.0.1:4021/health" -Keys @("status")
+$l1Body = @{ jsonrpc = "2.0"; method = "state_get"; params = @{}; id = 1 }
+$probeResults += Test-Endpoint "L1 RPC" "http://127.0.0.1:9944" -Method POST -Body $l1Body -Keys @("result.block_height")
+foreach ($p in @(8090, 8091, 8092, 8093)) {
+    $probeResults += Test-Endpoint "Backend $p" "http://127.0.0.1:$p/health" -Keys @("status")
+}
+$probeResults | Format-Table -AutoSize
+$probeResults | ConvertTo-Json | Out-File -FilePath (Join-Path $Root "truth_labels_report.json")
+Write-Label "PENDING" "x402_gateway LOCAL_ONLY - run stack then re-probe :4020"
+Write-Label "PENDING" "Apostle ATP settlement - staged; not AWS production"

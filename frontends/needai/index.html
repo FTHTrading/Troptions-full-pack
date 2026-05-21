@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NEED AI — Troptions Telecom</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; padding: 2rem; }
+    a { color: #38bdf8; }
+    .card { background: #1e293b; padding: 1rem; border-radius: 8px; max-width: 520px; }
+  </style>
+</head>
+<body>
+  <h1>NEED AI × Troptions</h1>
+  <div class="card">
+    <p>Telecom webhooks: <code>POST /telecom/telnyx/webhook</code> on dao-service :8093</p>
+    <p>x402 dispatch: <code>POST /v1/needai/dispatch</code> on gateway :4020</p>
+    <p><a href="http://127.0.0.1:8093/telecom/health">Telecom health</a></p>
+    <p><a href="http://127.0.0.1:4020/health">x402 gateway health</a></p>
+    <p>Dry-run: set <code>TELECOM_DRY_RUN=true</code> (default).</p>
+  </div>
+</body>
+</html>
