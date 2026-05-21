@@ -20,9 +20,9 @@ function Fix-PrintHtml {
     $css = "${DepthPrefix}downloads/print-shared.css"
     $content = $Content -replace 'href="print-shared\.css"', "href=`"$css`""
     $nav = @"
-  <nav class="site-nav no-print" style="margin-bottom:1.5rem;font-size:0.9rem">
-    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
-    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+  <nav class="site-nav no-print" style="margin-bottom:1rem;font-size:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem 0.75rem">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
   </nav>
 "@
     if ($content -notmatch "site-nav") {
@@ -68,9 +68,9 @@ $hub = @'
   <link rel="stylesheet" href="../downloads/print-shared.css" />
 </head>
 <body>
-  <nav class="site-nav no-print" style="margin-bottom:1.5rem">
-    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
-    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  <nav class="site-nav no-print" style="margin-bottom:1rem;font-size:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem 0.75rem">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
   </nav>
   <header class="doc-header">
     <h1>Technical documentation</h1>

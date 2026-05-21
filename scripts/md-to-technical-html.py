@@ -21,8 +21,8 @@ TEMPLATE = """<!DOCTYPE html>
   <title>{title}</title>
   <link rel="stylesheet" href="{css}" />
   <style>
-    .site-nav {{ margin-bottom: 1.5rem; font-size: 0.9rem; }}
-    .site-nav a {{ color: var(--gold-light, #d4af37); margin-right: 1rem; }}
+    .site-nav {{ margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }}
+    .site-nav a {{ color: var(--gold-light, #d4af37); }}
     .md-body table {{ width: 100%; border-collapse: collapse; margin: 1rem 0; }}
     .md-body th, .md-body td {{ border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }}
     .md-body code {{ background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }}
@@ -31,9 +31,9 @@ TEMPLATE = """<!DOCTYPE html>
 </head>
 <body>
   <nav class="site-nav no-print">
-    <a href="{home}">← Investor showcase</a>
-    <a href="{hub}">Technical index</a>
-    <a href="{repo}">GitHub repo</a>
+    <a href="{home}">Investor</a>
+    <a href="{hub}">Docs hub</a>
+    <a href="{repo}">GitHub</a>
   </nav>
   <header class="doc-header">
     <h1>{title}</h1>

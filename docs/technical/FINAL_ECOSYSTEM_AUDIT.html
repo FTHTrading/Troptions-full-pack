@@ -6,8 +6,8 @@
   <title>Final ecosystem audit (verified)</title>
   <link rel="stylesheet" href="../downloads/print-shared.css" />
   <style>
-    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
-    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
     .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
     .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
     .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
@@ -16,9 +16,9 @@
 </head>
 <body>
   <nav class="site-nav no-print">
-    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
-    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
-    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
   </nav>
   <header class="doc-header">
     <h1>Final ecosystem audit (verified)</h1>
@@ -159,13 +159,14 @@
 </table>
 <hr />
 <h2>Path to 10/10 (actionable)</h2>
+<p>See investor playbook (<strong>9.8 → 10.0</strong>) — full table in <a href="VALUATION_AND_COMPARABLES.html"><code>VALUATION_AND_COMPARABLES.md</code></a>:</p>
 <ol>
-<li><strong>Cloudflare origins</strong> — stabilize <code>twin.unykorn.org</code> and <code>x402api.unykorn.org</code> (522/timeouts).</li>
-<li><strong>DNS</strong> — <code>troptions.org</code> subdomains (<code>ai</code>, <code>ttn</code>, <code>dao</code>) or keep investor copy on unykorn.org only.</li>
-<li><strong>x402 prod merge</strong> — align monorepo sidecar with UnyKorn-X402-aws production mesh where needed.</li>
-<li><strong>T-Build</strong> — <code>npm ci &amp;&amp; npm test</code> green for partner demos.</li>
-<li><strong>XRPL reserves</strong> — top up production issuer/AMM XRP (thin margin today).</li>
-<li><strong>Truth labels</strong> — automate <code>scripts/truth_labels.ps1</code> refresh after each verification run.</li>
+<li><strong>Engineering</strong> — Cloudflare origins: <code>twin.unykorn.org</code>, <code>x402api.unykorn.org</code> (Workers/tunnels).</li>
+<li><strong>Ops</strong> — <code>troptions.org</code> hostnames (<code>ai</code>, <code>ttn</code>, <code>dao</code>) TLS <strong>or</strong> documented <code>unykorn.org</code> + Pages standard.</li>
+<li><strong>Engineering</strong> — x402 production merge (<code>feature/x402-full-integration</code>, Apostle :7332).</li>
+<li><strong>Engineering</strong> — T-Build Vitest green on CI.</li>
+<li><strong>Ops</strong> — XRPL issuer/AMM reserve top-up (~500 XRP each).</li>
+<li><strong>Sales</strong> — Booked/LIVE vs pipeline/illustrative revenue labels.</li>
 </ol>
 <hr />
 <h2>Anthem &amp; TANTHEM (2026-05-21)</h2>

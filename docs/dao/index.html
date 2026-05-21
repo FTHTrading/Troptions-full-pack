@@ -26,15 +26,38 @@
     }
     .nav {
       position: sticky; top: 0; z-index: 50;
-      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
-      padding: 0.75rem 1.5rem;
+      display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; align-items: center; justify-content: space-between;
+      padding: 0.5rem 1rem;
       background: rgba(15, 17, 20, 0.92);
       border-bottom: 1px solid var(--border);
       backdrop-filter: blur(12px);
     }
-    .nav a { color: var(--gold-light); text-decoration: none; font-size: 0.9rem; }
-    .nav a:hover { text-decoration: underline; }
-    .nav-brand { font-weight: 600; color: #fff; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.35rem 0.65rem; align-items: center; }
+    .nav a, .nav-dropdown summary {
+      color: var(--gold-light); text-decoration: none; font-size: 0.75rem; white-space: nowrap;
+      cursor: pointer;
+    }
+    .nav a:hover, .nav-dropdown summary:hover { text-decoration: underline; }
+    .nav-brand { font-weight: 600; color: #fff; font-size: 0.8rem; }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown summary { list-style: none; }
+    .nav-dropdown summary::-webkit-details-marker { display: none; }
+    .nav-menu {
+      position: absolute; left: 0; top: calc(100% + 0.35rem);
+      min-width: 10.5rem;
+      padding: 0.35rem 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--elevated);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      z-index: 60;
+    }
+    .nav-menu a {
+      display: block;
+      padding: 0.4rem 0.75rem;
+      font-size: 0.72rem;
+    }
+    .nav-menu a:hover { background: rgba(255,255,255,0.04); text-decoration: none; }
     .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
     .hero {
       text-align: center;
@@ -148,13 +171,39 @@
   </style>
 </head>
 <body>
-  <nav class="nav">
+  <nav class="nav" aria-label="Primary">
     <a class="nav-brand" href="https://fthtrading.github.io/Troptions-full-pack/">TROPTIONS</a>
-    <div>
-      <a href="https://fthtrading.github.io/Troptions-full-pack/#sovereign-dao">Investor site</a>
-      <a href="../technical/DAO_ARCHITECTURE.html">Architecture</a>
-      <a href="../technical/QUICKSTART.html">Quickstart</a>
-      <a href="../technical/ECOSYSTEM_MAP.html">Ecosystem map</a>
+    <div class="nav-links">
+      <a href="https://fthtrading.github.io/Troptions-full-pack/">Home</a>
+      <a href="https://fthtrading.github.io/Troptions-full-pack/#story">Story</a>
+      <a href="https://fthtrading.github.io/Troptions-full-pack/#proof-wall">Proof</a>
+      <details class="nav-dropdown">
+        <summary>Stack ▾</summary>
+        <div class="nav-menu">
+          <a href="https://fthtrading.github.io/Troptions-full-pack/#infrastructure">Infrastructure</a>
+          <a href="https://fthtrading.github.io/Troptions-full-pack/#sovereign-dao">Sovereign DAO</a>
+          <a href="../technical/DAO_ARCHITECTURE.html">Architecture</a>
+          <a href="../technical/ECOSYSTEM_MAP.html">Ecosystem map</a>
+        </div>
+      </details>
+      <a href="https://fthtrading.github.io/Troptions-full-pack/#opportunities">Revenue</a>
+      <details class="nav-dropdown">
+        <summary>Invest ▾</summary>
+        <div class="nav-menu">
+          <a href="https://fthtrading.github.io/Troptions-full-pack/#valuation">Valuation</a>
+          <a href="https://fthtrading.github.io/Troptions-full-pack/#downloads">Downloads</a>
+          <a href="https://fthtrading.github.io/Troptions-full-pack/#counterparty">Counterparty</a>
+        </div>
+      </details>
+      <details class="nav-dropdown">
+        <summary>More ▾</summary>
+        <div class="nav-menu">
+          <a href="../technical/index.html">Technical hub</a>
+          <a href="https://fthtrading.github.io/Troptions-full-pack/mint.html">Mint NFTs</a>
+          <a href="https://fthtrading.github.io/Troptions-full-pack/nft/">NFT gallery</a>
+          <a href="https://fthtrading.github.io/Troptions-full-pack/#anthem">Anthem</a>
+        </div>
+      </details>
     </div>
   </nav>
 
