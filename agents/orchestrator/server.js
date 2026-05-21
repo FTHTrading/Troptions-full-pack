@@ -1,127 +1,128 @@
-// agents/orchestrator/server.js
-// REST API for the Agent Orchestrator
-
+// agents/orchestrator/server.js — AWS agent floor (:4100)
+// Calls arbitrage :4028, compliance :4025, x402 US :4030, baas :8097
 const express = require('express');
-const { AgentOrchestrator } = require('./agent-orchestrator');
+const downstream = require('./downstream');
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 
-let orchestrator = null;
+const PORT = Number(process.env.PORT) || 4100;
+const DRY_RUN_DEFAULT = process.env.DRY_RUN !== 'false';
 
-// Initialize orchestrator
-async function init() {
- orchestrator = new AgentOrchestrator({
- xrplNode: process.env.XRPL_NODE || 'wss://xrplcluster.com',
- issuerSeed: process.env.ISSUER_SEED,
- complianceUrl: process.env.COMPLIANCE_URL || 'http://localhost:4025',
- arbitrageBotUrl: process.env.ARBITRAGE_BOT_URL || 'http://localhost:4028',
- x402Gateway: process.env.X402_GATEWAY || 'http://localhost:4030',
- maxPositionUsd: parseFloat(process.env.MAX_POSITION_USD) || 10000,
- maxDailyLoss: parseFloat(process.env.MAX_DAILY_LOSS) || 1000
- });
- 
- await orchestrator.initialize();
+app.get('/health', async (req, res) => {
+  const [arbitrage, compliance, x402, baas] = await Promise.all([
+    downstream.pingHealth(downstream.ARBITRAGE_URL, 'arbitrage-bot'),
+    downstream.pingHealth(downstream.COMPLIANCE_URL, 'compliance-engine'),
+    downstream.pingHealth(downstream.X402_US_URL, 'x402-us'),
+    downstream.pingHealth(downstream.BAAS_API_URL, 'baas-api'),
+  ]);
+
+  res.json({
+    status: 'ok',
+    service: 'agent-orchestrator',
+    port: PORT,
+    label: 'PIPELINE',
+    revenue_label: 'PROJECTION',
+    dry_run_default: DRY_RUN_DEFAULT,
+    projection_note:
+      '10/10 agent score and $874K/month are PIPELINE/PROJECTION — not realized revenue.',
+    downstream: { arbitrage, compliance, x402, baas },
+    mcp_stub: process.env.MCP_URL || 'http://127.0.0.1:4101',
+    legacy_fiat_orchestrator: 'http://127.0.0.1:4031 (fiat-rails/agent-orchestrator)',
+  });
+});
+
+app.post('/trade', async (req, res) => {
+  const body = req.body || {};
+  const symbol = body.symbol || body.pair;
+  if (!symbol) {
+    return res.status(400).json({ error: 'symbol or pair required', label: 'PIPELINE' });
+  }
+
+  const dry_run = body.dry_run !== undefined ? Boolean(body.dry_run) : DRY_RUN_DEFAULT;
+
+  const compliance = await downstream.screenCompliance(body);
+  const arbitrage = await downstream.runArbitrage({ ...body, symbol, dry_run });
+  const x402 = await downstream.x402Stats();
+  let baas = null;
+  if (body.agent_id) {
+    try {
+      const r = await fetch(
+        `${downstream.BAAS_API_URL}/api/v1/agents/${encodeURIComponent(body.agent_id)}/trades`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            symbol,
+            dry_run,
+            projected_pnl_usd: body.projected_pnl_usd ?? 0,
+            label: 'PIPELINE',
+          }),
+          signal: AbortSignal.timeout(8000),
+        }
+      );
+      baas = await r.json().catch(() => ({}));
+    } catch (err) {
+      baas = { label: 'PIPELINE', error: err.message };
+    }
+  }
+
+  res.json({
+    label: 'PIPELINE',
+    revenue_label: 'PROJECTION',
+    dry_run,
+    symbol,
+    compliance,
+    arbitrage,
+    x402_stats: x402,
+    baas_trade: baas,
+    disclaimer: 'Trade cycle is stubbed until MSB + live exchange.',
+  });
+});
+
+app.post('/trade/batch', async (req, res) => {
+  const symbols = req.body?.symbols;
+  if (!Array.isArray(symbols) || symbols.length === 0) {
+    return res.status(400).json({ error: 'symbols array required', label: 'PIPELINE' });
+  }
+
+  const dry_run = req.body.dry_run !== undefined ? Boolean(req.body.dry_run) : DRY_RUN_DEFAULT;
+  const results = [];
+
+  for (const symbol of symbols) {
+    const compliance = await downstream.screenCompliance({ ...req.body, symbol });
+    const arbitrage = await downstream.runArbitrage({ ...req.body, symbol, dry_run });
+    results.push({ symbol, label: 'PIPELINE', compliance, arbitrage });
+  }
+
+  const revenue = await downstream.baasRevenue();
+
+  res.json({
+    label: 'PIPELINE',
+    revenue_label: 'PROJECTION',
+    dry_run,
+    count: results.length,
+    results,
+    billing_revenue_stub: revenue,
+    disclaimer: 'Batch trades are PROJECTION — not revenue in seconds.',
+  });
+});
+
+app.get('/status', (req, res) => {
+  res.json({
+    service: 'agent-orchestrator',
+    port: PORT,
+    label: 'PIPELINE',
+    agents: ['research', 'risk', 'execution'],
+    dry_run_default: DRY_RUN_DEFAULT,
+  });
+});
+
+if (require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Agent orchestrator :${PORT} (PIPELINE) DRY_RUN=${DRY_RUN_DEFAULT}`);
+    console.log('  POST /trade  POST /trade/batch  GET /health');
+  });
 }
 
-// Health check
-app.get('/health', (req, res) => {
- res.json({
- status: 'ok',
- service: 'agent-orchestrator',
- port: 4100,
- agents: orchestrator ? Array.from(orchestrator.agents.keys()) : [],
- uptime: process.uptime()
- });
-});
-
-// POST /trade — Execute a single trade cycle
-app.post('/trade', async (req, res) => {
- const { symbol, strategy } = req.body;
- 
- if (!symbol) {
- return res.status(400).json({ error: 'symbol is required' });
- }
- 
- try {
- const result = await orchestrator.executeTradeCycle(symbol);
- res.json(result);
- } catch (err) {
- res.status(500).json({ error: err.message });
- }
-});
-
-// POST /trade/batch — Execute trades for multiple symbols
-app.post('/trade/batch', async (req, res) => {
- const { symbols } = req.body;
- 
- if (!Array.isArray(symbols)) {
- return res.status(400).json({ error: 'symbols must be an array' });
- }
- 
- const results = [];
- for (const symbol of symbols) {
- try {
- const result = await orchestrator.executeTradeCycle(symbol);
- results.push({ symbol, ...result });
- } catch (err) {
- results.push({ symbol, error: err.message });
- }
- }
- 
- res.json({ results });
-});
-
-// GET /status — Orchestrator status
-app.get('/status', (req, res) => {
- if (!orchestrator) {
- return res.status(503).json({ error: 'Orchestrator not initialized' });
- }
- res.json(orchestrator.getStatus());
-});
-
-// GET /positions — Current positions
-app.get('/positions', (req, res) => {
- if (!orchestrator) {
- return res.status(503).json({ error: 'Orchestrator not initialized' });
- }
- res.json({
- positions: Object.fromEntries(orchestrator.positions),
- tradeHistory: orchestrator.tradeHistory.slice(-50)
- });
-});
-
-// POST /config — Update agent configuration
-app.post('/config', (req, res) => {
- const { maxPositionUsd, maxDailyLoss } = req.body;
- 
- if (orchestrator) {
- if (maxPositionUsd) orchestrator.config.maxPositionUsd = maxPositionUsd;
- if (maxDailyLoss) orchestrator.config.maxDailyLoss = maxDailyLoss;
- }
- 
- res.json({ updated: true, config: orchestrator?.config });
-});
-
-// Error handler
-app.use((err, req, res, next) => {
- console.error('Agent Orchestrator error:', err);
- res.status(500).json({ error: err.message });
-});
-
-const PORT = process.env.PORT || 4100;
-app.listen(PORT, () => {
- console.log(`Agent Orchestrator running on port ${PORT}`);
- console.log('Endpoints:');
- console.log('  POST /trade         - Execute single trade');
- console.log('  POST /trade/batch   - Execute multiple trades');
- console.log('  GET  /status        - Orchestrator status');
- console.log('  GET  /positions     - Current positions');
- console.log('  POST /config        - Update configuration');
- 
- // Initialize
- init().catch(err => {
- console.error('Failed to initialize:', err);
- process.exit(1);
- });
-});
+module.exports = app;

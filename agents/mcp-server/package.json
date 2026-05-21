@@ -1,18 +1,15 @@
 {
- "name": "troptions-mcp-xrpl",
- "version": "1.0.0",
- "description": "MCP server for XRPL AMM operations on TROPTIONS",
- "main": "server.js",
- "scripts": {
- "start": "node server.js",
- "test": "jest"
- },
- "dependencies": {
- "@modelcontextprotocol/sdk": "^1.0.0",
- "xrpl": "^2.14.0",
- "axios": "^1.6.0"
- },
- "engines": {
- "node": ">=18.0.0"
- }
+  "name": "troptions-mcp-server-stub",
+  "version": "1.0.0",
+  "description": "HTTP MCP tools list stub for TROPTIONS AWS mesh (:4101)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json({ limit: '1mb' }));
 app.use(morgan('combined'));
 
-const PORT = Number(process.env.PORT) || 4029;
+const PORT = Number(process.env.PORT) || 8097;
 
 app.get('/health', async (req, res) => {
   let x402_ok = false;
@@ -47,13 +47,14 @@ app.get('/api/v1', (req, res) => {
       pool_jobs: 'GET /api/v1/pools/jobs',
       dashboard_revenue: 'GET /api/v1/dashboard/:token_id/revenue (PROJECTION)',
       billing: 'GET /api/v1/billing/history',
+      billing_revenue: 'GET /api/v1/billing/revenue (PROJECTION)',
       token_arbitrage: 'POST /api/v1/tokens/:token_id/arbitrage',
       agents_register: 'POST /api/v1/agents',
       agents_trades: 'POST /api/v1/agents/:id/trades',
       agents_revenue: 'GET /api/v1/agents/:id/revenue (PROJECTION)',
       agents_list: 'GET /api/v1/agents',
     },
-    port_note: 'BaaS API :4029. Dashboard UI :4040 (baas-dashboard PM2 app).',
+    port_note: 'BaaS API :8097. Dashboard UI :4029 (baas-dashboard PM2 app). USDC relay :4040.',
   });
 });
 

@@ -1,18 +1,15 @@
 {
- "name": "troptions-agent-orchestrator",
- "version": "1.0.0",
- "description": "AI Agent Orchestrator for TROPTIONS AMM Trading",
- "main": "server.js",
- "scripts": {
- "start": "node server.js",
- "test": "jest"
- },
- "dependencies": {
- "express": "^4.18.2",
- "xrpl": "^2.14.0",
- "axios": "^1.6.0"
- },
- "engines": {
- "node": ">=18.0.0"
- }
+  "name": "troptions-agent-orchestrator",
+  "version": "1.0.0",
+  "description": "Agent orchestrator for TROPTIONS AWS floor (:4100)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }

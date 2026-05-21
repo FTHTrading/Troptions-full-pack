@@ -81,4 +81,22 @@ router.post('/:token_id/arbitrage', (req, res) => {
   res.json({ ok: true, config: cfg });
 });
 
+/** POST /api/v1/tokens/:token_id/price — PIPELINE stub for Telegram /setprice */
+router.post('/:token_id/price', (req, res) => {
+  const price = Number(req.body?.price_usd ?? req.body?.price);
+  if (!Number.isFinite(price) || price <= 0) {
+    return res.status(400).json({ error: 'price_usd required', label: 'PIPELINE' });
+  }
+  const token = tokens.get(req.params.token_id);
+  res.json({
+    token_id: req.params.token_id,
+    price_usd: price,
+    label: 'PIPELINE',
+    revenue_label: 'PROJECTION',
+    token_found: Boolean(token),
+    disclaimer: 'Price set is a PIPELINE stub — not live exchange listing.',
+    updated_at: new Date().toISOString(),
+  });
+});
+
 module.exports = router;

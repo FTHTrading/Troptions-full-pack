@@ -1,0 +1,12 @@
+{
+  "name": "troptions-agents",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TROPTIONS agent orchestrator (:4100) and MCP stub (:4101)",
+  "scripts": {
+    "install": "npm install --prefix orchestrator && npm install --prefix mcp-server",
+    "start:orchestrator": "npm start --prefix orchestrator",
+    "start:mcp": "npm start --prefix mcp-server",
+    "start": "npm run start:orchestrator"
+  }
+}

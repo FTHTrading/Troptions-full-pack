@@ -1,4 +1,5 @@
-// fiat-rails/agent-orchestrator — Agent Orchestration Layer (:4031)
+// fiat-rails/agent-orchestrator — legacy layer (:4031)
+// Canonical AWS orchestrator: agents/orchestrator/server.js (:4100)
 const express = require('express');
 const runner = require('./agent-runner');
 const baas = require('./baas-client');
@@ -39,7 +40,7 @@ app.get('/health', async (req, res) => {
     downstream: {
       arbitrage: process.env.ARBITRAGE_URL || 'http://127.0.0.1:4028',
       compliance: process.env.COMPLIANCE_URL || 'http://127.0.0.1:4025',
-      baas_api: process.env.BAAS_API_URL || 'http://127.0.0.1:4029',
+      baas_api: process.env.BAAS_API_URL || 'http://127.0.0.1:8097',
       payment_orchestrator: process.env.ORCHESTRATOR_URL || 'http://127.0.0.1:4022',
       x402_us: process.env.X402_US_URL || 'http://127.0.0.1:4030',
       x402_eu: process.env.X402_EU_URL || 'http://127.0.0.1:4034',
@@ -79,7 +80,7 @@ app.post('/agents/register', async (req, res) => {
       return res.status(400).json({
         error: 'agent_id and wallet required',
         label: 'PIPELINE',
-        baas_direct: 'POST http://127.0.0.1:4029/api/v1/agents',
+        baas_direct: 'POST http://127.0.0.1:8097/api/v1/agents',
       });
     }
     const result = await baas.registerAgent({ agent_id, wallet, capital_troptions });
