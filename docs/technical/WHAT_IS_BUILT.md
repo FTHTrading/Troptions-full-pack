@@ -20,8 +20,12 @@ Condensed snapshot for investors and operators. **Last updated:** 2026-05-21.
 
 | Item | Status |
 |------|--------|
-| `backend/x402-gateway/` on **main** | Code present; default **LOCAL_ONLY** / staged |
-| https://x402.unykorn.org/health | **Live** on UnyKorn AWS — separate from Troptions L1 mainnet posture |
+| [UnyKorn-X402-aws](https://github.com/FTHTrading/UnyKorn-X402-aws) | **Public** — production mesh (AWS + CF) |
+| https://x402.unykorn.org/health | **Live** — facilitator + Apostle `chain_id: 7332` |
+| `backend/x402-gateway/` on **main** | Sidecar on :4020 — staged/proxy via `X402_UPSTREAM`, not the public mesh |
+| https://twin.unykorn.org | Demo UI — re-probe (522/timeouts possible) |
+
+See [X402_INTEGRATION.md](X402_INTEGRATION.html).
 
 ## Sovereign L1 (repo-verified)
 

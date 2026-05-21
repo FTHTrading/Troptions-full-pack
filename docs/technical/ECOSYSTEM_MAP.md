@@ -67,6 +67,7 @@ flowchart TB
 | **aurora-site** | [FTHTrading/aurora-site](https://github.com/FTHTrading/aurora-site) | `C:\Users\Kevan\Documents\UNYKORN_Ecosystem\aurora-site` | [Pages](https://fthtrading.github.io/aurora-site/) · `aurora.unykorn.org` | **Pages LIVE · custom DNS ERR** | Aurora RWA portal (ESG / asset storytelling) |
 | **impact-site** | [FTHTrading/impact-site](https://github.com/FTHTrading/impact-site) | `C:\Users\Kevan\Documents\UNYKORN_Ecosystem\impact-site` | `impact.unykorn.org` | **Custom DNS ERR · Pages 404** | Impact / ESG portal — repo exists; production Pages/DNS needs operator fix |
 | **solana-launcher** | [FTHTrading/solana-launcher](https://github.com/FTHTrading/solana-launcher) | `C:\Users\Kevan\solana-launcher` *(verify remote)* | [launch.unykorn.org](https://launch.unykorn.org) | **Vercel/Unykorn LIVE** | SPL + NFT launcher SaaS; mint registry + system truth linked from Exchange OS nav |
+| **UnyKorn-X402-aws** | [FTHTrading/UnyKorn-X402-aws](https://github.com/FTHTrading/UnyKorn-X402-aws) | `C:\Users\Kevan\UnyKorn-X402-aws` | [x402.unykorn.org/health](https://x402.unykorn.org/health) · [twin.unykorn.org](https://twin.unykorn.org) | **Public · LIVE AWS+CF** | Production x402 mesh + Apostle ATP; monorepo `backend/x402-gateway` is lightweight sidecar only |
 
 ---
 
@@ -79,7 +80,11 @@ flowchart TB
 | https://troptionslive.unykorn.org/sports | 200 | Sports & event network (TTN / WC26) |
 | https://launch.unykorn.org | 200 | Token & NFT launcher |
 | https://fthedu.unykorn.org | 200 | Education platform (FTH Academy) |
-| https://x402.unykorn.org/health | 200 | x402 payment rail health (UnyKorn AWS — **separate stack** from monorepo `main`) |
+| https://x402.unykorn.org/health | 200 | x402 payment mesh health (UnyKorn AWS + CF) |
+| https://twin.unykorn.org | 522/timeout* | Digital twin — agent mesh demo (origin may be down; re-probe) |
+| https://x402api.unykorn.org | timeout* | x402 API docs (re-probe before investor demos) |
+
+\*Twin/API docs: intermittent at 2026-05-21 curl; health endpoint was stable.
 | https://troptions.vercel.app | 200 | Troptions institutional preview (private repo deploy) |
 | https://portfolio.unykorn.org | 200 | Portfolio & proof registry |
 | https://goat.unykorn.org | 200 | GoatX token surface |
@@ -100,15 +105,21 @@ flowchart TB
 
 ---
 
-## x402 & AWS (separate from monorepo production path)
+## x402 payment mesh (UnyKorn — production)
 
 | Component | Where it lives | Status |
 |-----------|----------------|--------|
-| Public health endpoint | `https://x402.unykorn.org/health` | **LIVE** (UnyKorn AWS / Cloudflare tunnel) |
-| Facilitator code on `main` | `Troptions-full-pack` (gateway stubs) | **LOCAL_ONLY** on main branch |
-| Full Apostle + facilitator integration | `UnyKorn-X402-aws` / feature branches | Staged — see [UNYKORN-ECOSYSTEM-MAP.md](UNYKORN-ECOSYSTEM-MAP.html) |
+| **UnyKorn-X402-aws** | [github.com/FTHTrading/UnyKorn-X402-aws](https://github.com/FTHTrading/UnyKorn-X402-aws) | **Public** · LIVE AWS + Cloudflare |
+| Public health | `https://x402.unykorn.org/health` | **LIVE** — gateway `x402_mode: live`, Apostle `chain_id: 7332` operational (curl 2026-05-21) |
+| Digital twin | `https://twin.unykorn.org` | **LIVE\*** — agent mesh UI (origin flaky; 522 observed) |
+| API docs | `https://x402api.unykorn.org` | **LIVE\*** — operator docs (probe before demos) |
+| Credit gateway package | `packages/x402-credit-gateway` | Production edge (:4020) |
+| AWS runbooks | `aws/X402_AWS_*.md` | EC2 + systemd + tunnel cutover |
+| Monorepo sidecar | `Troptions-full-pack/backend/x402-gateway/` (:4020) | **On `main`** — lightweight proxy/staging; **not** the public mesh |
 
-Do **not** conflate “health URL returns 200” with “on-chain x402 settlement proven on main.”
+Pay-per-request for AI agents (HTTP 402, ATP, `X-Payment-Proof`) — **not** API-key billing. See [X402_INTEGRATION.md](X402_INTEGRATION.html).
+
+Do **not** conflate monorepo `backend/x402-gateway` with `x402.unykorn.org` unless you deploy and point DNS yourself.
 
 ---
 
@@ -134,7 +145,7 @@ Not in the original operator table but present under `C:\Users\Kevan` or GitHub 
 | Name | Notes |
 |------|-------|
 | `portfolio-unykorn` / **portfolio-** | Live https://portfolio.unykorn.org |
-| `UnyKorn-X402-aws` | AWS x402 + Apostle staging |
+| `UnyKorn-X402-aws` | **Public** — production x402 mesh + Apostle on AWS (`aws/`, `proofs/`) |
 | `fth-capital-os`, `fth-distribution-os`, `fth-operator-hub` | Capital / distribution operator tools |
 | `unykorn-rwa-treasury-os`, `unykorn-asset-infrastructure-os` | RWA treasury & asset OS |
 | `troptions-event-os`, `troptions-launch-os`, `troptions-partner-launch-os` | Event & launch automation |
@@ -155,6 +166,7 @@ Not in the original operator table but present under `C:\Users\Kevan` or GitHub 
 ## Related docs
 
 - [Domain truth table](DOMAIN_TRUTH_TABLE.html)
+- [x402 integration (monorepo ↔ UnyKorn)](X402_INTEGRATION.html)
 - [UNYKORN ecosystem map (layer detail)](UNYKORN-ECOSYSTEM-MAP.html)
 - [Truth labels](../proof/truth-labels.html)
 - [Investor site](https://fthtrading.github.io/Troptions-full-pack/) — section **FTH Ecosystem**

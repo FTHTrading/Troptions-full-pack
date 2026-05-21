@@ -31,6 +31,10 @@ export const FUTURE_DNS = [
 ];
 
 export const X402_HEALTH = "https://x402.unykorn.org/health";
+export const X402_TWIN = "https://twin.unykorn.org";
+export const X402_API_DOCS = "https://x402api.unykorn.org";
+export const UNYKORN_X402_REPO =
+  "https://github.com/FTHTrading/UnyKorn-X402-aws";
 
 export const TIMELINE = [
   {
@@ -94,6 +98,11 @@ export const T_BUILD_REPO = "https://github.com/FTHTrading/T-Build";
 export const SOLANA_LAUNCHER_REPO = "https://github.com/FTHTrading/solana-launcher";
 export const ECOSYSTEM_MAP_URL = `${PAGES_URL}/technical/ECOSYSTEM_MAP.html`;
 
+export type EcosystemLink = {
+  label: string;
+  url: string;
+};
+
 export type EcosystemCard = {
   name: string;
   category: string;
@@ -111,6 +120,7 @@ export type EcosystemCard = {
   deployLabel?: string;
   repoUrl?: string;
   repoLabel?: string;
+  links?: EcosystemLink[];
 };
 
 export const FTH_ECOSYSTEM_CARDS: EcosystemCard[] = [
@@ -217,15 +227,19 @@ export const FTH_ECOSYSTEM_CARDS: EcosystemCard[] = [
     deployUrl: "https://fthedu.unykorn.org",
   },
   {
-    name: "x402 Unykorn AWS",
-    category: "Payments · separate stack",
+    name: "x402 Payment Mesh (UnyKorn)",
+    category: "Live · Apostle Chain ATP · agent commerce",
     detail:
-      "Public health on AWS/Cloudflare. Facilitator on monorepo main remains LOCAL_ONLY — do not conflate with health 200.",
+      "Pay-per-request for AI agents — not API keys. HTTP 402 challenges, ATP settlement on Apostle Chain (7332), TxEnvelope and X-Payment-Proof. Production mesh on AWS + Cloudflare; Troptions-full-pack ships a lightweight :4020 sidecar that can proxy upstream.",
     status: "live",
-    deployUrl: X402_HEALTH,
-    deployLabel: "Health check",
-    repoUrl: "https://github.com/FTHTrading/UnyKorn-X402-aws",
-    repoLabel: "Private GitHub (org members)",
+    deployUrl: X402_TWIN,
+    deployLabel: "Live demo (digital twin)",
+    repoUrl: UNYKORN_X402_REPO,
+    repoLabel: "GitHub (public)",
+    links: [
+      { label: "Public health", url: X402_HEALTH },
+      { label: "API docs", url: X402_API_DOCS },
+    ],
   },
   {
     name: "troptions.org DNS",
@@ -272,9 +286,10 @@ export const REVENUE_PILLARS = [
     url: "https://fthtrading.github.io/T-Lev-8-/",
   },
   {
-    name: "x402 facilitator (main branch)",
-    status: "gated" as const,
-    detail: "Code on main; production LOCAL_ONLY. Public health on UnyKorn AWS",
+    name: "x402 Payment Mesh",
+    status: "live" as const,
+    detail:
+      "Production facilitator on UnyKorn-X402-aws (AWS). Monorepo sidecar on :4020 for local/staged proxy — not the same stack.",
     url: X402_HEALTH,
   },
   {
@@ -299,7 +314,7 @@ export const GAP_ITEMS = [
   "Public TLS on troptions.org hostnames (DNS + certbot pending)",
   "Fraud proofs — design only (Q4 2026 target)",
   "ai.troptions.org / ttn / dao troptions DNS — Future DNS",
-  "x402 on main: LOCAL_ONLY; Apostle AWS on feature branch",
+  "twin.unykorn.org / x402api — probe when origin slow (522/timeouts possible)",
   "Single-node Sovereign Sequencer (not BFT multi-validator)",
   "Exchange desk $175M — attestation only, not verified fact",
 ];

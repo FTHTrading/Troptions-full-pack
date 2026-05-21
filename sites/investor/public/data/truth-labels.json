@@ -93,16 +93,28 @@
                        "proof":  "Design: docs/design/fraud_proofs.md â€” Q4 2026"
                    },
                    {
-                       "label":  "x402 facilitator on main branch",
-                       "status":  "PENDING",
+                       "label":  "x402_PUBLIC_FACILITATOR",
+                       "status":  "CONFIRMED",
                        "lastCheck":  "2026-05-21",
-                       "proof":  "Gateway code on main; production posture LOCAL_ONLY. Public health: https://x402.unykorn.org/health (UnyKorn AWS, separate stack)"
+                       "proof":  "https://x402.unykorn.org/health — ok:true, x402_mode:live, real_settlement_active:true (UnyKorn-X402-aws AWS+CF)"
                    },
                    {
-                       "label":  "Apostle Chain AWS public endpoint",
+                       "label":  "APOSTLE_CHAIN (public health)",
+                       "status":  "CONFIRMED",
+                       "lastCheck":  "2026-05-21",
+                       "proof":  "x402.unykorn.org/health chain.operational:true chain_id:7332"
+                   },
+                   {
+                       "label":  "x402 monorepo sidecar (:4020)",
+                       "status":  "CONFIRMED",
+                       "lastCheck":  "2026-05-21",
+                       "proof":  "backend/x402-gateway/main.py on main — staged/local; proxies via X402_UPSTREAM to UnyKorn mesh"
+                   },
+                   {
+                       "label":  "twin.unykorn.org digital twin",
                        "status":  "PENDING",
                        "lastCheck":  "2026-05-21",
-                       "proof":  "feature/x402-full-integration branch only"
+                       "proof":  "https://twin.unykorn.org — HTTP 522 / timeout at curl; re-probe before demos"
                    },
                    {
                        "label":  "Exchange desk $175M notional",

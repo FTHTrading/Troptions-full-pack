@@ -36,6 +36,17 @@ export function FthEcosystem() {
                   {card.deployLabel ?? "Open live surface"} →
                 </a>
               ) : null}
+              {card.links?.map((link) => (
+                <a
+                  key={link.url}
+                  href={link.url}
+                  className="text-[var(--color-gold-light)] hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label} →
+                </a>
+              ))}
               {card.repoUrl ? (
                 <a
                   href={card.repoUrl}

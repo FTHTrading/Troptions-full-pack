@@ -30,6 +30,8 @@ $targets = @(
     @{ Name = "launch.unykorn.org"; Url = "https://launch.unykorn.org" },
     @{ Name = "fthedu.unykorn.org"; Url = "https://fthedu.unykorn.org" },
     @{ Name = "x402.unykorn.org health"; Url = "https://x402.unykorn.org/health" },
+    @{ Name = "twin.unykorn.org"; Url = "https://twin.unykorn.org" },
+    @{ Name = "x402api.unykorn.org"; Url = "https://x402api.unykorn.org" },
     @{ Name = "troptions.vercel.app"; Url = "https://troptions.vercel.app" },
     @{ Name = "portfolio.unykorn.org"; Url = "https://portfolio.unykorn.org" },
     @{ Name = "goat.unykorn.org"; Url = "https://goat.unykorn.org" },
