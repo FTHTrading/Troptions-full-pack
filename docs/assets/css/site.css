@@ -149,6 +149,83 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Theme audio — home only, no autoplay */
+.troptions-theme-audio {
+  text-align: center;
+  margin: 0 0 2.5rem;
+  padding: 1.25rem 1rem;
+  border: 1px solid var(--troptions-border);
+  border-radius: 6px;
+  background: linear-gradient(180deg, #faf8f4 0%, #fff 100%);
+}
+
+.troptions-theme-audio h2 {
+  font-size: 1.15rem;
+  margin: 0 0 0.35rem;
+  border: none;
+  padding: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--troptions-gold);
+}
+
+.troptions-theme-audio .theme-caption {
+  font-size: 0.9rem;
+  color: var(--troptions-muted);
+  margin: 0 0 1rem;
+}
+
+.troptions-theme-audio .theme-player {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.troptions-theme-audio .theme-track-select {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.troptions-theme-audio .theme-track-btn,
+.troptions-theme-audio .theme-play-btn {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--troptions-border);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--troptions-text);
+  cursor: pointer;
+}
+
+.troptions-theme-audio .theme-track-btn:hover,
+.troptions-theme-audio .theme-play-btn:hover {
+  border-color: var(--troptions-gold);
+  color: var(--troptions-gold);
+}
+
+.troptions-theme-audio .theme-track-btn.is-active {
+  background: var(--troptions-gold);
+  border-color: var(--troptions-gold);
+  color: #fff;
+}
+
+.troptions-theme-audio .theme-play-btn {
+  font-weight: 600;
+  min-width: 5.5rem;
+}
+
+.troptions-theme-audio audio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 .troptions-home .get-started {
   list-style: none;
   padding: 0;

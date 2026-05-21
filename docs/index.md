@@ -28,6 +28,21 @@ permalink: /
   <p class="maturity-badge"><strong>Maturity 9.0 / 10</strong> on <code>main</code> — honest scope; not claiming BFT or live fraud proofs.</p>
 </section>
 
+<section class="troptions-theme-audio" aria-labelledby="troptions-theme-heading">
+  <h2 id="troptions-theme-heading">TROPTIONS Theme</h2>
+  <p class="theme-caption">Brand anthem — <em>Mainframe Explode</em> (proprietary FTH Trading; play manually, no autoplay).</p>
+  <div class="theme-player" role="group" aria-label="Theme audio controls">
+    <div class="theme-track-select">
+      <button type="button" class="theme-track-btn is-active" data-src="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}" aria-pressed="true">Primary</button>
+      <button type="button" class="theme-track-btn" data-src="{{ '/assets/audio/troptions-theme-alt.mp3' | relative_url }}" aria-pressed="false">Alt</button>
+    </div>
+    <button type="button" class="theme-play-btn" aria-pressed="false">Play</button>
+    <audio preload="metadata" src="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}">
+      <p>Your browser does not support audio. <a href="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}">Download primary theme</a>.</p>
+    </audio>
+  </div>
+</section>
+
 ## What is TROPTIONS?
 
 **TROPTIONS** is the operating brand and engineering home for a **sovereign stack**: a Layer-1 ledger, service backends, web frontends, and proof artifacts shipped together in this monorepo. The company side covers domains, education (FTH Academy), broadcast (TTN), and exchange surfaces; the infrastructure side is what developers clone, run, and extend.
