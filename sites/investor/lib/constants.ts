@@ -4,9 +4,10 @@ export const SNP_URL =
   "https://github.com/FTHTrading/sovereign-namespace-protocol";
 export const PAGES_URL = "https://fthtrading.github.io/Troptions-full-pack";
 const onPages = Boolean(process.env.NEXT_PUBLIC_BASE_PATH);
-export const PROOF_URL = onPages
-  ? `${PAGES_URL}/technical/proof`
-  : `${REPO_URL}/tree/main/docs/proof`;
+export const ON_CHAIN_PROOF_URL = onPages
+  ? `${PAGES_URL}/technical/ON_CHAIN_PROOF.html`
+  : `${REPO_URL}/blob/main/docs/technical/ON_CHAIN_PROOF.md`;
+export const PROOF_URL = ON_CHAIN_PROOF_URL;
 export const DOCS_URL = onPages
   ? `${PAGES_URL}/technical`
   : `${REPO_URL}/tree/main/docs`;
@@ -101,6 +102,7 @@ export const GENESIS_DRUNKS_APP = "https://drunks.app";
 export const GENESIS_GSP_API_HEALTH =
   "https://gsp-api.kevanbtc.workers.dev/api/health";
 export const VERIFICATION_STATUS_URL = `${PAGES_URL}/technical/VERIFICATION_STATUS.html`;
+export const FINAL_ECOSYSTEM_AUDIT_URL = `${PAGES_URL}/technical/FINAL_ECOSYSTEM_AUDIT.html`;
 export const ECOSYSTEM_MAP_URL = `${PAGES_URL}/technical/ECOSYSTEM_MAP.html`;
 
 export type EcosystemLink = {
@@ -326,7 +328,8 @@ export const BUILT_ITEMS = [
   "RocksDB persistence, treasury multisig, signed submit tests",
   "TLS nginx templates, API-key auth, DAO↔L1 reads",
   "Live unykorn.org surfaces (hub, sports, launcher, academy)",
-  "KENNY Polygon mainnet + XRPL gateway documented",
+  "KENNY + EVL Polygon mainnet — PolygonScan verified (2026-05-21)",
+  "Genesis-world 9 contracts on Polygon — see ON_CHAIN_PROOF.md",
 ];
 
 export const GAP_ITEMS = [

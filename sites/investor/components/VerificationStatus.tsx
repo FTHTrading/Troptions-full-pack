@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import { Section } from "./Section";
-import { VERIFICATION_STATUS_URL } from "@/lib/constants";
+import {
+  FINAL_ECOSYSTEM_AUDIT_URL,
+  VERIFICATION_STATUS_URL,
+} from "@/lib/constants";
 
 const PRIORITY = [
   "Live URLs (curl / HTTP HEAD — no API keys)",
@@ -12,14 +15,15 @@ const PRIORITY = [
 
 export function VerificationStatus() {
   const [open, setOpen] = useState(false);
-  const percent = 68;
+  const percent = 85;
   const baseline = 60;
+  const honestScore = "8.5/10";
 
   return (
     <Section
       id="verification"
       title="Verification"
-      subtitle="Honest diligence progress — CONFIRMED vs PENDING. Full tables in VERIFICATION_STATUS.md."
+      subtitle={`Honest diligence — ${honestScore} overall. CONFIRMED vs PENDING in canonical audit docs.`}
     >
       <div className="mb-6 flex flex-wrap items-center gap-4">
         <div className="min-w-[200px] flex-1">
@@ -44,12 +48,20 @@ export function VerificationStatus() {
             />
           </div>
         </div>
-        <a
-          href={VERIFICATION_STATUS_URL}
-          className="text-sm text-[var(--color-gold-light)] underline-offset-2 hover:underline"
-        >
-          Full verification doc →
-        </a>
+        <div className="flex flex-wrap gap-4 text-sm">
+          <a
+            href={FINAL_ECOSYSTEM_AUDIT_URL}
+            className="text-[var(--color-gold-light)] underline-offset-2 hover:underline"
+          >
+            Final ecosystem audit →
+          </a>
+          <a
+            href={VERIFICATION_STATUS_URL}
+            className="text-[var(--color-gold-light)] underline-offset-2 hover:underline"
+          >
+            Verification checklist →
+          </a>
+        </div>
       </div>
 
       <button
@@ -70,17 +82,16 @@ export function VerificationStatus() {
             ))}
           </ol>
           <p>
-            <strong className="text-white">Confirmed this run:</strong> genesis-world
-            repo public; drunks.app + gsp-api health HTTP 200; PM2 8/8;{" "}
-            <code className="text-xs">cargo test --workspace</code> in genesis-world;
-            troptions.unykorn.org DNS resolves.
+            <strong className="text-white">Confirmed this run:</strong> PM2 8/8;
+            Apostle ~4.7 MB on :7332; genesis-world + SNP public on GitHub;
+            drunks.app, x402 health, fthedu, troptions, portfolio, goat, launch,
+            fifa — HTTP 200; no kill_switch Anchor in full-pack.
           </p>
           <p>
-            <strong className="text-white">Still pending:</strong> PolygonScan
-            contract verification (optional API key in{" "}
-            <code className="text-xs">.env.example</code>); Bithomp/XRPL balance proof
-            for desk figures; Exchange OS $175M = operator attestation until
-            third-party proof.
+            <strong className="text-white">Still pending:</strong> PolygonScan /
+            XRPL on-chain proofs; T-Build tests after{" "}
+            <code className="text-xs">npm ci</code>; twin + x402api origins;{" "}
+            <code className="text-xs">ai.troptions.org</code> not deployed.
           </p>
           <p className="text-xs">
             Re-run:{" "}

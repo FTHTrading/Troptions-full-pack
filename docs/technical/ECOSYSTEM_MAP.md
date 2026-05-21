@@ -188,3 +188,4 @@ Not in the original operator table but present under `C:\Users\Kevan` or GitHub 
 - [Truth labels](../proof/truth-labels.html)
 - [Investor site](https://fthtrading.github.io/Troptions-full-pack/) — sections **FTH Ecosystem** · **Verification**
 - [Verification status](VERIFICATION_STATUS.html)
+- [Final ecosystem audit (verified)](FINAL_ECOSYSTEM_AUDIT.html)

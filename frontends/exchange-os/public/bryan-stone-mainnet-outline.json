@@ -139,7 +139,7 @@
       "network": "polygon-mainnet",
       "quantumVaultFactory": "0x9BE7E2A62D8fE9b76E50cBDB9C4e0B80a8b7Ff3A",
       "kennyToken": "0x93F2a3e8E13E0B81B5cE3a84b5c1BC23E1Ac45Ce",
-      "evlToken": "0xAFe18578D2E7d4C3a9aA5Ef0EF85c2a2D57Bb1A",
+      "evlToken": "0xAFe185415D21671704EFaa5696dD219ACEB9fdA3",
       "evlSaleContract": "0x496b0c4D2Ae3F7aa3B8Bc3fD9b2d9aFd72BC8e7A"
     },
     "posture": "Mainnet display is ready now. The 175M USDC proof is already set up and provable for desk use through the Chainlink-validated reporting path, while the dedicated Ethereum vault surface still requires deployment."

@@ -1,3 +1,9 @@
+---
+title: Genesis Polygon contracts
+layout: default
+permalink: /technical/GENESIS_POLYGON_CONTRACTS.html
+---
+
 # Genesis World — Polygon Mainnet Contracts (9)
 
 **Source of truth:** [`genesis-world/README.md`](https://github.com/FTHTrading/genesis-world/blob/main/README.md) (deployed contracts table).  

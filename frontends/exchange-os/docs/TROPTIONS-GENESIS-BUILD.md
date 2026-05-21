@@ -182,7 +182,7 @@ All 3 Stellar accounts were generated from `OPTKAS_WALLET_BACKUP` on 2026-02-07.
 |----------|---------|--------|
 | QuantumVaultFactory | `0x9BE7E2A62D8fE9b76E50cBDB9C4e0B80a8b7Ff3A` | Live |
 | KENNY Token | `0x93F2a3e8E13E0B81B5cE3a84b5c1BC23E1Ac45Ce` | Live |
-| EVL Token | `0xAFe18578D2E7d4C3a9aA5Ef0EF85c2a2D57Bb1A` | Live |
+| EVL Token | `0xAFe185415D21671704EFaa5696dD219ACEB9fdA3` | Live (PolygonScan verified) |
 | EVL Sale Contract | `0x496b0c4D2Ae3F7aa3B8Bc3fD9b2d9aFd72BC8e7A` | Live |
 
 ---

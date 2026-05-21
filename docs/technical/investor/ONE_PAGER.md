@@ -43,6 +43,7 @@ Counterparty configure prompt: `docs/counterparty/BUILD_AVID_ON_TROPTIONS.md`.
 | Asset | Chain | Address |
 |-------|-------|---------|
 | **KENNY** | Polygon | `0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7` |
+| **EVL** | Polygon | `0xAFe185415D21671704EFaa5696dD219ACEB9fdA3` |
 | **XRPL Gateway** | XRPL | `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` |
 
 Sale/treasury env vars: `.env.example` (not committed).

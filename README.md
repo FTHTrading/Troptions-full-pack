@@ -91,7 +91,8 @@ Troptions-full-pack/
 | Asset | Chain | Address |
 |-------|-------|---------|
 | **KENNY** | Polygon | `0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7` |
-| **XRPL Gateway** | XRPL | `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` |
+| **EVL** | Polygon | `0xAFe185415D21671704EFaa5696dD219ACEB9fdA3` |
+| **XRPL Gateway** | XRPL | `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` (PENDING explorer proof) |
 
 Polygon sale/treasury env vars: see `.env.example`.
 

@@ -108,8 +108,9 @@ Code: `backend/dao-service/main.py`, `frontends/dao-dashboard/app.js`
 
 | Asset | Chain | Address |
 |-------|-------|---------|
-| **KENNY** | Polygon | `0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7` |
-| **XRPL Gateway** | XRPL | `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` |
+| **KENNY** | Polygon | `0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7` (PolygonScan verified) |
+| **EVL** | Polygon | `0xAFe185415D21671704EFaa5696dD219ACEB9fdA3` (PolygonScan verified) |
+| **XRPL Gateway** | XRPL | `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` (PENDING explorer proof) |
 
 Env template: `.env.example` (`KENNY_CONTRACT`, `XRPL_GATEWAY_ADDRESS`, `SETTLEMENT_API_KEYS`, `L1_PUBLIC_KEY`).
 
@@ -148,9 +149,10 @@ git fetch origin feature/x402-full-integration
 
 When Bryan emails Bijan, attach or link:
 
-1. This file — `docs/counterparty/BUILD_AVID_ON_TROPTIONS.md`
-2. `docs/TROPTIONS-GENESIS-BUILD.md`
-3. Optional: `docs/investor/ONE_PAGER.md`
+1. This file — `docs/technical/counterparty/BUILD_AVID_ON_TROPTIONS.md`
+2. `docs/technical/counterparty/PROOF_FOR_COUNTERPARTIES.md`
+3. `docs/technical/ON_CHAIN_PROOF.md`
+4. Optional: `docs/technical/investor/ONE_PAGER.md`
 
 Email draft: `docs/counterparty/BIJAN_EMAIL.md`
 

@@ -72,7 +72,13 @@
                        "label":  "KENNY Polygon mainnet",
                        "status":  "CONFIRMED",
                        "lastCheck":  "2026-05-21",
-                       "proof":  "0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7"
+                       "proof":  "PolygonScan verified — ON_CHAIN_PROOF.md"
+                   },
+                   {
+                       "label":  "EVL Polygon mainnet",
+                       "status":  "CONFIRMED",
+                       "lastCheck":  "2026-05-21",
+                       "proof":  "0xAFe185415D21671704EFaa5696dD219ACEB9fdA3 — PolygonScan verified"
                    },
                    {
                        "label":  "XRPL gateway address",

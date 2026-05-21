@@ -1,3 +1,9 @@
+---
+title: On-chain proof registry
+layout: default
+permalink: /technical/ON_CHAIN_PROOF.html
+---
+
 # On-Chain Proof Registry
 
 **Last updated:** 2026-05-21  

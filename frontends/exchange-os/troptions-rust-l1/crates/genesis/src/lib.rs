@@ -200,7 +200,7 @@ fn polygon_config() -> PolygonGenesisConfig {
     PolygonGenesisConfig {
         quantum_vault_factory: "0x9BE7E2A62D8fE9b76E50cBDB9C4e0B80a8b7Ff3A",
         kenny_token_address: "0x93F2a3e8E13E0B81B5cE3a84b5c1BC23E1Ac45Ce",
-        evl_token_address: "0xAFe18578D2E7d4C3a9aA5Ef0EF85c2a2D57Bb1A",
+        evl_token_address: "0xAFe185415D21671704EFaa5696dD219ACEB9fdA3",
         network: "polygon-mainnet",
         simulation_only: true,
     }
