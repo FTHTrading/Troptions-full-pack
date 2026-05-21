@@ -1,7 +1,7 @@
 # TROPTIONS Sovereign Stack — Full Pack
 
 > **Monorepo** for the TROPTIONS L1 node, FTH Academy, DONK AI Tutor, TTN Launcher, Exchange OS, and multi-chain contracts.  
-> Assembled from production paths on Windows (UNYKORN Ecosystem + clawd workspace).
+> **Maturity 9.0/10** on `main` — TLS nginx template, API-key writes, DAO reads L1 directly, signed governance RPC. **Sovereign Sequencer** (not BFT). x402 branch not merged.
 
 [![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://fthtrading.github.io/Troptions-full-pack/)
 [![L1](https://img.shields.io/badge/L1-operational-9944-success)](http://127.0.0.1:9944)
@@ -73,7 +73,8 @@ Troptions-full-pack/
 │   ├── ttn-tv/            # TTN pages (extracted from exchange-os)
 │   ├── unified-dashboard/
 │   └── landing-pages/
-├── infrastructure/        # nginx templates for *.troptions.org
+├── docker/nginx/          # TLS termination (HTTPS /l1/, /dao/, …)
+├── infrastructure/        # legacy hostname nginx (optional vhosts)
 ├── contracts/
 │   ├── polygon/           # KENNY, EVL, vaults
 │   ├── solana/            # Launcher scripts

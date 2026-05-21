@@ -62,10 +62,35 @@ if (Select-String -Path "README.md" -Pattern "Sovereign Sequencer" -Quiet) {
 Write-Label "CONFIRMED" "KENNY Polygon 0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7 - see README"
 Write-Label "CONFIRMED" "XRPL gateway rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3 - see README"
 
+if (Test-Path "docker/nginx/nginx.conf") {
+    Write-Label "CONFIRMED" "TLS_ENABLED - docker/nginx + setup-tls scripts"
+} else {
+    Write-Label "PENDING" "TLS_ENABLED"
+}
+
+if (Test-Path "backend/shared/auth.py") {
+    Write-Label "CONFIRMED" "API_KEY_AUTH - backend/shared/auth.py"
+} else {
+    Write-Label "PENDING" "API_KEY_AUTH"
+}
+
+if (Select-String -Path "dao/governance/engine.py" -Pattern "dao_getProposals" -Quiet) {
+    Write-Label "CONFIRMED" "DAO_DIRECT_L1 - dao_getProposals via engine + dashboard"
+} else {
+    Write-Label "PENDING" "DAO_DIRECT_L1"
+}
+
+if (Test-Path "l1/tests/integration/signed_dao_submit.rs") {
+    Write-Label "CONFIRMED" "Signed DAO submit test - signed_dao_submit.rs"
+} else {
+    Write-Label "PENDING" "Signed DAO submit test"
+}
+
+Write-Label "PENDING" "TLS_PUBLIC_DNS - certbot on troptions.org hostnames"
+Write-Label "PENDING" "FRAUD_PROOFS_LIVE - design only docs/design/fraud_proofs.md"
 Write-Label "PENDING" "Apostle Chain AWS public endpoint - feature/x402-full-integration branch"
 Write-Label "PENDING" "Popeye external heartbeat monitor"
 Write-Label "PENDING" "Telnyx NEED AI vanity routing"
-Write-Label "PENDING" "Production TLS live on troptions.org - nginx certs + DNS cutover"
 Write-Label "PENDING" "x402 public facilitator - LOCAL_ONLY on main; optional branch"
 
 Write-Host ""

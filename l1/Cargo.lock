@@ -451,7 +451,10 @@ name = "l1-integration-tests"
 version = "0.1.0"
 dependencies = [
  "crypto",
+ "governance",
+ "hex",
  "primitives",
+ "rpc",
  "runtime",
  "serde_json",
  "state",

@@ -6,9 +6,19 @@ permalink: /
 
 # TROPTIONS Sovereign Stack
 
-**Maturity: 8.2 / 10** (post `upgrade/10-production` merge on `main`) — production-grade L1 persistence and signed RPC; ops cutover (TLS, public x402) still pending.
+**Maturity: 9.0 / 10** — TLS termination template, API-key write auth, DAO dashboard reads L1 directly, signed DAO RPC paths, Sovereign Sequencer labeling (not BFT). Public DNS/certbot cutover and multi-node fraud proofs remain **Q4 2026**.
 
-Honest scope: this monorepo ships a **single-node Sovereign Sequencer** (not BFT), **11 Rust workspace crates** under `l1/` (not 27), RocksDB-backed state, and PM2/docker paths for backends and DAO. Byzantine quorum is **Q4 2026** on the [roadmap](roadmap.html).
+Honest scope: **single-node Sovereign Sequencer**, **11 Rust workspace crates** under `l1/`, RocksDB-backed state, PM2/docker prod compose. **No BFT** and **no public x402** on `main`.
+
+## 9.0 checklist (engineering complete on `main`)
+
+- [x] **TLS_ENABLED** — `docker/nginx/` self-signed + HTTPS paths `/l1/`, `/ai/`, `/fth/`, `/ttn/`, `/dao/`
+- [x] **API_KEY_AUTH** — `backend/shared/auth.py`, `API_KEYS` / `SETTLEMENT_API_KEYS`, dao + settlement + sensitive FTH/TTN writes
+- [x] **DAO_DIRECT_L1** — `dao_getProposals`, `dao_getVotes`, `treasury_getBalance`; SQLite audit-only
+- [x] **SIGNED_DAO_RPC** — `dao_submit_proposal` / `dao_cast_vote` / `dao_execute` + `scripts/l1-gov-sign.py`
+- [x] **SOVEREIGN_SEQUENCER** — docs/README; fraud proofs design only ([fraud proofs]({{ '/design/fraud-proofs.html' | relative_url }}))
+- [ ] **TLS_PUBLIC_DNS** — certbot on production hostnames (ops)
+- [ ] **FRAUD_PROOFS_LIVE** — Q4 2026 design → implementation
 
 ## Architecture
 
@@ -30,48 +40,31 @@ flowchart TB
     DONK[donk-tutor :8090]
     DAO[dao-service :8093]
   end
+  subgraph edge["nginx TLS :443"]
+    NGX[Path routing]
+  end
   subgraph l1["TROPTIONS L1 :9944"]
     SEQ[Sovereign Sequencer]
     RDB[(RocksDB)]
     GOV[On-chain DAO + treasury]
     SIG[Signed submit RPC]
   end
-  subgraph chains["External chains"]
-    POL[Polygon KENNY]
-    XRPL[XRPL gateway]
-    SOL[Solana launcher]
-  end
-  domains --> fe --> be --> l1 --> chains
+  domains --> fe --> NGX --> be --> l1
+  NGX --> l1
   SEQ --> RDB
   GOV --> RDB
 ```
 
-Source: [`assets/diagrams/stack.mmd`]({{ '/assets/diagrams/stack.mmd' | relative_url }})
-
-## What shipped on main
-
-| Area | Status | Source |
-|------|--------|--------|
-| RocksDB persistence | Live in code | [`l1/crates/state/src/persistence.rs`](https://github.com/fthtrading/Troptions-full-pack/blob/main/l1/crates/state/src/persistence.rs) |
-| Signed `submit_transaction` | Tests pass | [`l1/tests/integration/signed_submit.rs`](https://github.com/fthtrading/Troptions-full-pack/blob/main/l1/tests/integration/signed_submit.rs) |
-| Treasury multisig | Threshold 1000 | [`l1/crates/runtime/src/multisig.rs`](https://github.com/fthtrading/Troptions-full-pack/blob/main/l1/crates/runtime/src/multisig.rs) |
-| DAO on L1 | Governance crate + dashboard RPC | [`l1/crates/governance/`](https://github.com/fthtrading/Troptions-full-pack/tree/main/l1/crates/governance) |
-| Metrics | Prometheus `:9945` | [`l1/crates/rpc/src/metrics.rs`](https://github.com/fthtrading/Troptions-full-pack/blob/main/l1/crates/rpc/src/metrics.rs) |
-| Prod compose | Template + deploy scripts | [`docker/docker-compose.prod.yml`](https://github.com/fthtrading/Troptions-full-pack/blob/main/docker/docker-compose.prod.yml) |
-
-~~In-memory only~~ — **removed** after RocksDB merge; set `L1_DATA_DIR` for durable nodes.
-
 ## Proof and deploy
 
-- [Truth labels]({{ '/proof/truth-labels.html' | relative_url }}) — CONFIRMED vs PENDING with reproduction commands
-- [On-chain proofs]({{ '/proof/on-chain-proofs.html' | relative_url }}) — KENNY, XRPL gateway
-- [Quickstart]({{ '/deploy/quickstart.html' | relative_url }}) — local full stack
-- [Production checklist]({{ '/deploy/production-checklist.html' | relative_url }}) — internal 7.5 → 10 tracker
+- [Truth labels]({{ '/proof/truth-labels.html' | relative_url }})
+- [Quickstart]({{ '/deploy/quickstart.html' | relative_url }})
+- [Production checklist]({{ '/deploy/production-checklist.html' | relative_url }})
+- Verify: `scripts/verify-9-production.ps1`
 
 ## Optional / separate branches
 
-- **x402 / Apostle** — `feature/x402-full-integration`; **LOCAL_ONLY** on main; see [infrastructure/x402]({{ '/infrastructure/x402.html' | relative_url }})
-- Exchange OS **$175M desk** references — operator attestation / desk tooling only; not verified on-chain by this repo
+- **x402 / Apostle** — `feature/x402-full-integration` **not merged**; LOCAL_ONLY on main
 
 ## Verify locally
 
@@ -79,6 +72,5 @@ Source: [`assets/diagrams/stack.mmd`]({{ '/assets/diagrams/stack.mmd' | relative
 cd l1; cargo test --workspace
 cd ..; python -m pytest tests/backend tests/dao -q
 .\scripts\truth_labels.ps1
+.\scripts\verify-9-production.ps1
 ```
-
-Full internal docs: [`ARCHITECTURE.md`](ARCHITECTURE.html), [`L1_SPEC.md`](L1_SPEC.html), [`UPGRADE_REPORT.md` on repo root](https://github.com/fthtrading/Troptions-full-pack/blob/main/UPGRADE_REPORT.md).

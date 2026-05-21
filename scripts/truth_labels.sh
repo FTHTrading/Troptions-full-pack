@@ -53,11 +53,35 @@ fi
 label "CONFIRMED" "KENNY Polygon 0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7 (see README)"
 label "CONFIRMED" "XRPL gateway rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3 (see README)"
 
-# PENDING — external / ops not verified by this script
+if [ -f docker/nginx/nginx.conf ]; then
+  label "CONFIRMED" "TLS_ENABLED (docker/nginx + setup-tls scripts)"
+else
+  label "PENDING" "TLS_ENABLED"
+fi
+
+if [ -f backend/shared/auth.py ]; then
+  label "CONFIRMED" "API_KEY_AUTH (backend/shared/auth.py)"
+else
+  label "PENDING" "API_KEY_AUTH"
+fi
+
+if grep -q dao_getProposals dao/governance/engine.py 2>/dev/null; then
+  label "CONFIRMED" "DAO_DIRECT_L1 (dao_getProposals via engine + dashboard)"
+else
+  label "PENDING" "DAO_DIRECT_L1"
+fi
+
+if [ -f l1/tests/integration/signed_dao_submit.rs ]; then
+  label "CONFIRMED" "Signed DAO submit test (signed_dao_submit.rs)"
+else
+  label "PENDING" "Signed DAO submit test"
+fi
+
+label "PENDING" "TLS_PUBLIC_DNS (certbot on troptions.org hostnames)"
+label "PENDING" "FRAUD_PROOFS_LIVE (design only docs/design/fraud_proofs.md)"
 label "PENDING" "Apostle Chain AWS public endpoint (feature/x402-full-integration branch)"
 label "PENDING" "Popeye external heartbeat monitor"
 label "PENDING" "Telnyx NEED AI vanity routing"
-label "PENDING" "Production TLS live on troptions.org (nginx certs + DNS cutover)"
 label "PENDING" "x402 public facilitator (LOCAL_ONLY on main; optional branch)"
 
 echo ""

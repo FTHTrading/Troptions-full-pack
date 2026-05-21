@@ -18,26 +18,6 @@ except ImportError:
     verify_ed25519_hex = None
 
 
-def _parse_api_keys() -> Dict[str, str]:
-    raw = os.getenv("SETTLEMENT_API_KEYS", "")
-    keys: Dict[str, str] = {}
-    for part in raw.split(","):
-        part = part.strip()
-        if ":" in part:
-            kid, secret = part.split(":", 1)
-            keys[kid.strip()] = secret.strip()
-    return keys
-
-
-def _require_api_key(x_api_key: Optional[str]) -> None:
-    keys = _parse_api_keys()
-    if not keys:
-        # Dev mode: allow when unset (document in UPGRADE_REPORT)
-        return
-    if not x_api_key or x_api_key not in keys.values():
-        raise HTTPException(status_code=401, detail="Invalid or missing X-API-Key")
-
-
 def _settlement_hash(payload: Dict[str, Any]) -> bytes:
     canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(canonical.encode()).digest()
@@ -56,8 +36,6 @@ async def handle_settlement_submit(
     x_api_key: Optional[str] = Header(None, alias="X-API-Key"),
     x_signature: Optional[str] = Header(None, alias="X-Signature"),
 ) -> Dict[str, Any]:
-    _require_api_key(x_api_key)
-
     l1_pubkey = os.getenv("L1_PUBLIC_KEY", "")
     meta = body.settlement_meta or {}
     settlement_digest = _settlement_hash(

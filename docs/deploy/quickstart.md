@@ -41,10 +41,33 @@ cargo run -p node
 
 Set `L1_DATA_DIR` for RocksDB persistence.
 
+## TLS (local demo)
+
+```powershell
+.\scripts\setup-tls.ps1
+docker compose -f docker/docker-compose.prod.yml up -d nginx
+curl -k https://localhost/health
+curl -k https://localhost/l1/ -d '{"jsonrpc":"2.0","method":"state_get","params":{},"id":1}'
+```
+
+## Signed DAO (CLI)
+
+```powershell
+# Generate Ed25519 secret locally; never commit
+python scripts/l1-gov-sign.py create --actor-hex <32-byte-hex> --secret-hex <seed-hex> --submit
+```
+
+Requires soulbound voting power on L1 for votes; see `l1/crates/governance/`.
+
+## API keys
+
+Copy `API_KEYS` and `SETTLEMENT_API_KEYS` from `.env.example`. Protected writes need header `X-API-Key`.
+
 ## Health check
 
 ```powershell
 .\scripts\health-check-all.ps1
+.\scripts\verify-9-production.ps1
 ```
 
 ## Internal runbook

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -27,6 +27,7 @@ sys.path.insert(0, str(ROOT / "backend" / "shared"))
 sys.path.insert(0, str(ROOT / "dao"))
 sys.path.insert(0, str(ROOT))
 
+from auth import verify_api_key  # noqa: E402
 from dao_db import init_dao_db, list_audit  # noqa: E402
 from ws_hub import dao_ws_hub  # noqa: E402
 
@@ -134,7 +135,7 @@ async def dao_proposal_votes(proposal_id: str):
     return engine.get_votes(proposal_id)
 
 
-@app.post("/dao/proposals")
+@app.post("/dao/proposals", dependencies=[Depends(verify_api_key)])
 async def create_proposal(body: ProposalBody):
     try:
         result = engine.create_proposal(
@@ -150,7 +151,7 @@ async def create_proposal(body: ProposalBody):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@app.post("/dao/proposals/vote")
+@app.post("/dao/proposals/vote", dependencies=[Depends(verify_api_key)])
 async def vote_proposal(body: VoteBody):
     try:
         result = engine.vote(
@@ -162,12 +163,12 @@ async def vote_proposal(body: VoteBody):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@app.post("/dao/proposals/{proposal_id}/finalize")
+@app.post("/dao/proposals/{proposal_id}/finalize", dependencies=[Depends(verify_api_key)])
 async def finalize_proposal(proposal_id: str):
     return engine.finalize(proposal_id)
 
 
-@app.post("/dao/proposals/{proposal_id}/execute")
+@app.post("/dao/proposals/{proposal_id}/execute", dependencies=[Depends(verify_api_key)])
 async def execute_proposal(proposal_id: str, executor: Optional[str] = None, signature: Optional[str] = None):
     return engine.execute(proposal_id, executor, signature)
 
@@ -177,7 +178,7 @@ async def dao_treasury():
     return treasury.overview()
 
 
-@app.post("/settlement/submit")
+@app.post("/settlement/submit", dependencies=[Depends(verify_api_key)])
 @limiter.limit("10/minute")
 async def settlement_submit(
     request: Request,

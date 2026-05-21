@@ -17,7 +17,7 @@ permalink: /roadmap/
 
 ## Q3 2026
 
-- Multi-sequencer federation with **fraud proof challenge window**
+- Multi-sequencer federation with **fraud proof challenge window** ([design doc]({{ '/design/fraud-proofs.html' | relative_url }}))
 - Light client state proofs export
 - Hardened settlement gateway (mTLS, HSM keys)
 
