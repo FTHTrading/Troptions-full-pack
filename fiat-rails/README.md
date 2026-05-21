@@ -33,4 +33,12 @@ curl http://127.0.0.1:4022/health
 curl http://127.0.0.1:4025/health
 ```
 
+## Wire → IOU (orchestrator)
+
+See [`orchestrator/README.md`](orchestrator/README.md). `ISSUER_SEED` in `.env` only — **never commit**.
+
+```powershell
+curl -X POST http://127.0.0.1:4022/api/v1/payments/wire -H "Content-Type: application/json" -d "{\"amount\":\"100\",\"currency\":\"USD\",\"recipient_address\":\"rPT1MdvSi4WpeE4d3bAMEYaFBPZsTF8j1E\",\"source_wire_ref\":\"TEST-001\"}"
+```
+
 Canonical architecture: [`docs/technical/SYSTEM_MANIFEST.md`](../docs/technical/SYSTEM_MANIFEST.md).

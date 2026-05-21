@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Partner bank mesh</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Partner bank mesh</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Multi-bank partner mesh &amp; cross-border settlement</h1>
+<p><strong>Last updated:</strong> 2026-05-21<br />
+<strong>Labels:</strong> <strong>PROVEN</strong> (repo/orchestrator code), <strong>PIPELINE</strong> (bank credentials), <strong>PROJECTION</strong> (scenario tables, Alexandrite fast-money).</p>
+<p><strong>Related:</strong> <a href="SYSTEM_MANIFEST.html">System manifest</a> · <a href="MSB_FIAT_RAILS.html">MSB fiat rails</a> · <a href="../TROPTIONS_IOU_ISSUER_MANIFEST.html">IOU issuer manifest v3.0</a></p>
+<p><strong>Not legal advice.</strong> Correspondent banking requires licensed counsel and executed bank agreements.</p>
+<hr />
+<h2>Purpose</h2>
+<p>Describe how TROPTIONS routes fiat across <strong>multiple partner banks</strong> while IOUs settle on XRPL/Stellar. This is the target operating model — not a claim that all banks are live today.</p>
+<hr />
+<h2>Mesh topology (<strong>PIPELINE</strong> target)</h2>
+<pre><code class="language-mermaid">flowchart LR
+  subgraph clients [Clients]
+    U[User / corporate]
+    EO[Exchange OS]
+  end
+
+  subgraph orchestration [PIPELINE — fiat-rails]
+    PO[payment-orchestrator :4022]
+    CE[compliance-engine :4025]
+    MON[iou-reserve-monitor :4027]
+  end
+
+  subgraph banks [Partner banks PIPELINE]
+    A[Bank A — US omnibus FedWire/ACH]
+    B[Bank B — EU SWIFT correspondent]
+    C[Bank C — treasury / MM float]
+  end
+
+  subgraph ledger [PROVEN demand]
+    XR[XRPL IOU issuer]
+  end
+
+  U --&gt;|FedWire in| A
+  A --&gt; PO
+  PO --&gt; CE
+  PO --&gt; XR
+  PO --&gt; MON
+  MON --&gt; A
+  PO --&gt;|SWIFT EUR out| B
+  C --&gt;|yield on float| PO
+  EO --&gt; PO
+</code></pre>
+<hr />
+<h2>Partner roles (illustrative)</h2>
+<table>
+<thead>
+<tr>
+<th>Bank slot</th>
+<th>Function</th>
+<th>Rails</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>US MSB omnibus — primary USD in/out</td>
+<td>FedWire, ACH</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>EU correspondent — EUR settlement</td>
+<td>SWIFT MT103/202</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>Treasury / money-market — float yield</td>
+<td>Internal transfer</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><strong>Backup</strong></td>
+<td>Failover omnibus (disaster)</td>
+<td>FedWire</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Bank legal names and account numbers live in <strong>operator vault only</strong> — never in git.</p>
+<hr />
+<h2>Cross-bank settlement flow</h2>
+<ol>
+<li><strong>USD in (Bank A):</strong> FedWire credited to omnibus → webhook → <code>POST /api/v1/payments/wire</code> → compliance <code>/screen</code> → FedWire <code>/verify</code> → mint IOU 1:1 (<strong>PIPELINE</strong> until live).</li>
+<li><strong>Internal mesh (A↔C):</strong> Move float for yield without client IOU movement (<strong>PIPELINE</strong>).</li>
+<li><strong>EUR out (Bank B):</strong> Burn IOU → orchestrator → SWIFT via <code>swift-bridge</code> :4024 (<strong>PIPELINE</strong>).</li>
+<li><strong>Reconciliation:</strong> <code>iou-reserve-monitor</code> compares omnibus statements vs on-chain supply (<strong>PIPELINE</strong> → <strong>PROVEN</strong> when attestations published).</li>
+</ol>
+<hr />
+<h2>Alexandrite fast-money table (<strong>PROJECTION</strong>)</h2>
+<p>RWA collateral playbook for AXL001 — gem package described in Exchange OS; <strong>not</strong> audited NAV.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Activity</th>
+<th>Time (<strong>PROJECTION</strong>)</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T0</td>
+<td>Collateral custody + appraisal on file</td>
+<td>2–4 weeks</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>T1</td>
+<td>Issue AXL001 receipt IOU (gated)</td>
+<td>1 day</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>T2</td>
+<td>Lender FedWire → mint USD IOU to borrower</td>
+<td>Same day</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>T3</td>
+<td>Servicing / interest via orchestrator ledger</td>
+<td>Ongoing</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>T4</td>
+<td>Repay → burn IOU → wire out</td>
+<td>1–2 FedWire cycles</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>T5</td>
+<td>Default → off-chain UCC sale</td>
+<td>Case-by-case</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Illustrative value</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Collateral (operator mark)</td>
+<td>2kg Alexandrite ~$12.5M</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>LTV band</td>
+<td>40–60%</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Advance range</td>
+<td>$5.0M – $7.5M</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>IOU fee on wire-in</td>
+<td>0.1–0.25%</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>API hooks (orchestrator)</h2>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Service</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /api/v1/payments/wire</code></td>
+<td>payment-orchestrator</td>
+<td><strong>PIPELINE</strong> (implemented)</td>
+</tr>
+<tr>
+<td><code>GET /api/v1/payments/:id</code></td>
+<td>payment-orchestrator</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>POST /screen</code></td>
+<td>compliance-engine :4025</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><code>POST /verify</code></td>
+<td>fedwire-adapter :4023</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Honesty checklist</h2>
+<ul>
+<li>Do <strong>not</strong> claim multi-bank mesh is live without executed correspondent agreements.</li>
+<li>Do <strong>not</strong> mix <strong>PROJECTION</strong> gem marks with <strong>PROVEN</strong> ledger IOU supply.</li>
+<li>Publish reserve attestations separately from marketing manifests.</li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/PARTNER_BANK_MESH.html</p>
+</body>
+</html>
