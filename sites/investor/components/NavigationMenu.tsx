@@ -1,9 +1,8 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
-import { assetPath } from "@/lib/base-path";
 import {
   getSiteNavigation,
   type NavEntry,
@@ -66,7 +65,7 @@ function DesktopDropdown({
       >
         {label}
         <span className="text-[10px] opacity-70" aria-hidden>
-          ▾
+          â–¾
         </span>
       </button>
       <div className="pointer-events-none absolute left-0 top-full z-50 min-w-[11rem] pt-2 opacity-0 transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
@@ -101,7 +100,7 @@ function MobileGroup({
         aria-expanded={open}
       >
         {entry.label}
-        <span className="text-xs text-[var(--color-muted)]">{open ? "▴" : "▾"}</span>
+        <span className="text-xs text-[var(--color-muted)]">{open ? "â–´" : "â–¾"}</span>
       </button>
       {open && (
         <div className="space-y-0.5 px-2 pb-3">
@@ -194,7 +193,7 @@ export function HeaderBrand() {
   return (
     <Link href="/" className="flex shrink-0 items-center gap-3">
       <Image
-        src={assetPath("/logo.png")}
+        src="/logo.png"
         alt="TROPTIONS"
         width={32}
         height={32}

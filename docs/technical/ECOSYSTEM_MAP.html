@@ -127,16 +127,16 @@
 <td><a href="https://github.com/FTHTrading/aurora-site">FTHTrading/aurora-site</a></td>
 <td><code>C:\Users\Kevan\Documents\UNYKORN_Ecosystem\aurora-site</code></td>
 <td><a href="https://fthtrading.github.io/aurora-site/">Pages</a> · <code>aurora.unykorn.org</code></td>
-<td><strong>Pages LIVE · custom DNS ERR</strong></td>
-<td>Aurora RWA portal (ESG / asset storytelling)</td>
+<td><strong>Pages LIVE · DNS PENDING TLS</strong></td>
+<td>Aurora RWA portal — CNAME added 2026-05-21; see <a href="IMPACT_DNS.html">IMPACT_DNS.md</a></td>
 </tr>
 <tr>
 <td><strong>impact-site</strong></td>
 <td><a href="https://github.com/FTHTrading/impact-site">FTHTrading/impact-site</a></td>
 <td><code>C:\Users\Kevan\Documents\UNYKORN_Ecosystem\impact-site</code></td>
-<td><code>impact.unykorn.org</code></td>
-<td><strong>Custom DNS ERR · Pages 404</strong></td>
-<td>Impact / ESG portal — repo exists; production Pages/DNS needs operator fix</td>
+<td><a href="https://fthtrading.github.io/impact-site/">Pages</a> · <code>impact.unykorn.org</code></td>
+<td><strong>Pages LIVE · DNS PENDING TLS</strong></td>
+<td>Impact / ESG portal — Pages deploy fixed + CNAME 2026-05-21</td>
 </tr>
 <tr>
 <td><strong>solana-launcher</strong></td>
@@ -295,13 +295,13 @@
 </tr>
 <tr>
 <td>https://aurora.unykorn.org</td>
-<td>ERR</td>
-<td>Custom domain not resolving; use GitHub Pages URL until DNS fixed</td>
+<td>PENDING</td>
+<td>CNAME → <code>fthtrading.github.io</code> added 2026-05-21; HTTPS may lag — use <a href="https://fthtrading.github.io/aurora-site/">Pages URL</a> · landing <a href="../sites/aurora/">/sites/aurora/</a></td>
 </tr>
 <tr>
 <td>https://impact.unykorn.org</td>
-<td>ERR</td>
-<td>Custom domain not resolving; GitHub Pages project returns 404 — fix deploy branch</td>
+<td>PENDING</td>
+<td>CNAME + Pages deploy fixed 2026-05-21 — confirm TLS in GitHub Pages settings · landing <a href="../sites/impact/">/sites/impact/</a></td>
 </tr>
 </tbody>
 </table>
@@ -465,7 +465,7 @@
 <h2>Gaps (action items)</h2>
 <ol>
 <li>Point <strong>troptions.org</strong> subdomains (<code>ai</code>, <code>ttn</code>, <code>dao</code>) or keep investor copy on <strong>unykorn.org</strong> only.</li>
-<li>Fix <strong>impact-site</strong> GitHub Pages deploy (404) and <strong>aurora/impact</strong> custom DNS at <code>*.unykorn.org</code>.</li>
+<li>Confirm <strong>impact/aurora</strong> custom-domain HTTPS in GitHub Pages UI after DNS propagation (<a href="IMPACT_DNS.html">IMPACT_DNS.md</a>).</li>
 <li>Align <strong>solana-launcher</strong> local folder remote (operator machine may point at wrong origin — verify before edits).</li>
 <li>Publish <strong>T-Build</strong> sandbox to a stable preview URL when TPLOS partners need demos.</li>
 <li>Keep <strong>Exchange desk $175M</strong> and similar figures in <strong>attestation / PENDING</strong> truth labels until proofs land.</li>

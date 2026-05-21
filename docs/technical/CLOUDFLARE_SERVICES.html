@@ -188,6 +188,35 @@
 </table>
 <p>See <a href="X402_INTEGRATION.html">X402_INTEGRATION.md</a>.</p>
 <hr />
+<h2>GitHub Pages custom domains (impact / aurora)</h2>
+<p>Per <a href="IMPACT_DNS.html">IMPACT_DNS.md</a>. <strong>Zone:</strong> <code>unykorn.org</code> (<code>8aa6916f4c1c7e8e42130455dfd5c029</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>DNS (Cloudflare)</th>
+<th>Origin</th>
+<th>Status (2026-05-21)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>impact.unykorn.org</code></td>
+<td>CNAME → <code>fthtrading.github.io</code> (DNS only)</td>
+<td><a href="https://github.com/FTHTrading/impact-site">impact-site</a> Pages</td>
+<td><strong>PENDING TLS</strong> — NXDOMAIN fixed; Pages <strong>200</strong> at <code>/impact-site/</code></td>
+</tr>
+<tr>
+<td><code>aurora.unykorn.org</code></td>
+<td>CNAME → <code>fthtrading.github.io</code> (DNS only)</td>
+<td><a href="https://github.com/FTHTrading/aurora-site">aurora-site</a> Pages</td>
+<td><strong>PENDING TLS</strong> — same pattern</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Manual dashboard:</strong> DNS → Add CNAME <code>impact</code> / <code>aurora</code> → <code>fthtrading.github.io</code> → Proxy <strong>off</strong>.<br />
+<strong>GitHub:</strong> Each repo → Settings → Pages → Source <strong>GitHub Actions</strong>; custom domain must match repo root <code>CNAME</code> file.</p>
+<hr />
 <h2>Related live surfaces (same zone)</h2>
 <table>
 <thead>
