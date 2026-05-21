@@ -1,9 +1,9 @@
-"""Apostle + L1 agent registration on dao-service startup."""
+﻿"""Apostle + L1 agent registration on dao-service startup."""
 
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 import httpx
 
@@ -41,7 +41,7 @@ async def register_l1_agent(agent_id: str, label: str, port: int) -> Dict[str, A
 
 
 async def startup_registration() -> Dict[str, Any]:
-    """Register dao-service on Apostle and L1 agent registry."""
+    """Register dao-service on Apostle and L1 agent registry (best-effort)."""
     out: Dict[str, Any] = {"apostle": None, "l1": None}
     try:
         out["apostle_health"] = await apostle_health()

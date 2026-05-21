@@ -1,8 +1,9 @@
 # TROPTIONS Sovereign Stack — Full Pack
 
 > **Monorepo** for the TROPTIONS L1 node, FTH Academy, DONK AI Tutor, TTN Launcher, Exchange OS, and multi-chain contracts.  
-> Assembled from production paths on Windows (UNYKORN Ecosystem + clawd workspace).
+> **Maturity 9.0/10** on `main` — TLS nginx template, API-key writes, DAO reads L1 directly, signed governance RPC. **Sovereign Sequencer** (not BFT). x402 branch not merged.
 
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://fthtrading.github.io/Troptions-full-pack/)
 [![L1](https://img.shields.io/badge/L1-operational-9944-success)](http://127.0.0.1:9944)
 [![DONK](https://img.shields.io/badge/DONK-8090-blue)](http://127.0.0.1:8090/health)
 [![FTH](https://img.shields.io/badge/FTH_Academy-8091-purple)](http://127.0.0.1:8091/health)
@@ -72,7 +73,8 @@ Troptions-full-pack/
 │   ├── ttn-tv/            # TTN pages (extracted from exchange-os)
 │   ├── unified-dashboard/
 │   └── landing-pages/
-├── infrastructure/        # nginx templates for *.troptions.org
+├── docker/nginx/          # TLS termination (HTTPS /l1/, /dao/, …)
+├── infrastructure/        # legacy hostname nginx (optional vhosts)
 ├── contracts/
 │   ├── polygon/           # KENNY, EVL, vaults
 │   ├── solana/            # Launcher scripts
@@ -148,6 +150,8 @@ npm run dev
 - [One-command quickstart](docs/QUICKSTART.md)
 - [Bryan status (verified paths)](docs/BRYAN_STATUS.md)
 - [Investor one-pager](docs/investor/ONE_PAGER.md)
+- [Configure Avid on stack](docs/counterparty/BUILD_AVID_ON_TROPTIONS.md)
+- [Production readiness checklist](docs/PRODUCTION_READINESS_CHECKLIST.md)
 - [Production deploy](docs/DEPLOY_PRODUCTION.md)
 - [Loom demo script](docs/LOOM_DEMO_SCRIPT.md)
 - [Ops runbook](docs/RUNBOOK.md)  

@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -27,14 +27,15 @@ sys.path.insert(0, str(ROOT / "backend" / "shared"))
 sys.path.insert(0, str(ROOT / "dao"))
 sys.path.insert(0, str(ROOT))
 
+from auth import verify_api_key  # noqa: E402
 from dao_db import init_dao_db, list_audit  # noqa: E402
 from ws_hub import dao_ws_hub  # noqa: E402
 
 from governance.engine import GovernanceEngine  # noqa: E402
 from registry.members import MemberRegistry  # noqa: E402
 from treasury.view import TreasuryView  # noqa: E402
-from settlement_api import SettlementSubmitBody, handle_settlement_submit  # noqa: E402
 from agent_client import startup_registration  # noqa: E402
+from settlement_router import router as settlement_router  # noqa: E402
 from telecom_router import router as telecom_router  # noqa: E402
 from x402_middleware import X402Middleware  # noqa: E402
 
@@ -96,6 +97,7 @@ app.add_middleware(
     price_atp=os.getenv("DAO_PROPOSAL_FEE_ATP", "10000000000000000000"),
     protected_prefixes=("/dao/proposals", "/settlement/"),
 )
+app.include_router(settlement_router)
 app.include_router(telecom_router)
 
 engine = GovernanceEngine(L1_RPC_URL)
@@ -134,7 +136,7 @@ async def dao_proposal_votes(proposal_id: str):
     return engine.get_votes(proposal_id)
 
 
-@app.post("/dao/proposals")
+@app.post("/dao/proposals", dependencies=[Depends(verify_api_key)])
 async def create_proposal(body: ProposalBody):
     try:
         result = engine.create_proposal(
@@ -150,7 +152,7 @@ async def create_proposal(body: ProposalBody):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@app.post("/dao/proposals/vote")
+@app.post("/dao/proposals/vote", dependencies=[Depends(verify_api_key)])
 async def vote_proposal(body: VoteBody):
     try:
         result = engine.vote(
@@ -162,12 +164,12 @@ async def vote_proposal(body: VoteBody):
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@app.post("/dao/proposals/{proposal_id}/finalize")
+@app.post("/dao/proposals/{proposal_id}/finalize", dependencies=[Depends(verify_api_key)])
 async def finalize_proposal(proposal_id: str):
     return engine.finalize(proposal_id)
 
 
-@app.post("/dao/proposals/{proposal_id}/execute")
+@app.post("/dao/proposals/{proposal_id}/execute", dependencies=[Depends(verify_api_key)])
 async def execute_proposal(proposal_id: str, executor: Optional[str] = None, signature: Optional[str] = None):
     return engine.execute(proposal_id, executor, signature)
 
@@ -175,19 +177,6 @@ async def execute_proposal(proposal_id: str, executor: Optional[str] = None, sig
 @app.get("/dao/treasury")
 async def dao_treasury():
     return treasury.overview()
-
-
-@app.post("/settlement/submit")
-@limiter.limit("10/minute")
-async def settlement_submit(
-    request: Request,
-    body: SettlementSubmitBody,
-    x_api_key: Optional[str] = Header(None, alias="X-API-Key"),
-    x_signature: Optional[str] = Header(None, alias="X-Signature"),
-):
-    return await handle_settlement_submit(
-        request, body, x_api_key=x_api_key, x_signature=x_signature
-    )
 
 
 @app.get("/dao/members")

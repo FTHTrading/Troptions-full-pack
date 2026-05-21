@@ -42,6 +42,7 @@ _repo_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."
 _sys.path.insert(0, os.path.join(_repo_root, "backend", "shared"))
 _sys.path.insert(0, os.path.join(_repo_root, "dao"))
 from l1_client import get_l1_client, L1ClientError  # noqa: E402
+from auth import verify_api_key  # noqa: E402
 from dao_db import init_dao_db  # noqa: E402
 from governance.engine import GovernanceEngine  # noqa: E402
 from registry.members import MemberRegistry  # noqa: E402
@@ -301,7 +302,7 @@ async def get_stripe_config():
         "prices": {k: int(v["price"] * 100) for k, v in COURSES.items() if v["price"] > 0}
     }
 
-@app.post("/payments/create-session")
+@app.post("/payments/create-session", dependencies=[Depends(verify_api_key)])
 async def create_checkout(request: PurchaseRequest):
     if request.course_id not in COURSES:
         raise HTTPException(status_code=404, detail="Course not found")
@@ -359,7 +360,7 @@ async def verify_payment(session_id: str):
         raise HTTPException(status_code=400, detail=str(e))
 
 # ── KENNY Burn (Blockchain) ──
-@app.post("/payments/burn-kenny")
+@app.post("/payments/burn-kenny", dependencies=[Depends(verify_api_key)])
 async def burn_kenny(request: BurnRequest):
     """Verify KENNY token burn and grant course access."""
     # TODO: Verify burn tx on Polygon via web3.py
@@ -711,7 +712,7 @@ async def start_lab(lab_id: str, user_id: str):
         "message": f"Welcome to {lab['title']}. Complete all {len(lab['steps'])} steps to earn your certificate."
     }
 
-@app.post("/labs/{lab_id}/complete")
+@app.post("/labs/{lab_id}/complete", dependencies=[Depends(verify_api_key)])
 async def complete_lab(lab_id: str, user_id: str):
     """Complete a lab - issue rewards and certificate."""
     if lab_id not in LABS:
@@ -751,7 +752,7 @@ async def list_careers():
         }
         for cid, c in CAREER_PATHWAYS.items()
     ]
-@app.post("/certificates/create")
+@app.post("/certificates/create", dependencies=[Depends(verify_api_key)])
 async def create_certificate(request: CertRequest):
     """Create IPFS-backed certificate for course completion."""
     conn = get_db()
@@ -855,7 +856,7 @@ async def health_l1():
         return {"reachable": False, "error": str(exc)}
 
 
-# ── DAO routes (orchestration via L1 + SQLite mirror) ──
+# ── DAO routes (read-only; writes go through dao-service :8093) ──
 _dao_engine = None
 _dao_registry = None
 

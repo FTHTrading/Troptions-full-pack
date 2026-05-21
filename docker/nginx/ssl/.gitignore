@@ -1,0 +1,2 @@
+# Production: regenerate and do not commit real keys
+*.prod.key

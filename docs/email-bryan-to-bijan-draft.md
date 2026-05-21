@@ -1,8 +1,9 @@
 # Email draft — Bryan → Bijan
 
-> **Canonical path:** [`docs/counterparty/BIJAN_EMAIL.md`](counterparty/BIJAN_EMAIL.md)
+> **Canonical path:** [`docs/counterparty/BIJAN_EMAIL.md`](counterparty/BIJAN_EMAIL.md)  
+> **Avid configure prompt:** [`docs/counterparty/BUILD_AVID_ON_TROPTIONS.md`](counterparty/BUILD_AVID_ON_TROPTIONS.md) — replaces informal `BUILD_AVID_DREAM_ON_TROPTIONS.txt` (never in repo).
 
-Use placeholders below. Attach or link `docs/investor/ONE_PAGER.md` if sending as PDF/markdown export.
+Use placeholders below. Attach `BUILD_AVID_ON_TROPTIONS.md`, `docs/TROPTIONS-GENESIS-BUILD.md`, and optionally `docs/investor/ONE_PAGER.md`.
 
 ---
 

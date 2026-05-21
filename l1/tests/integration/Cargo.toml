@@ -8,9 +8,16 @@ publish = false
 name = "signed_submit"
 path = "signed_submit.rs"
 
+[[test]]
+name = "signed_dao_submit"
+path = "signed_dao_submit.rs"
+
 [dependencies]
 primitives = { path = "../../crates/primitives" }
 crypto = { path = "../../crates/crypto" }
 state = { path = "../../crates/state" }
 runtime = { path = "../../crates/runtime" }
+governance = { path = "../../crates/governance" }
+rpc = { path = "../../crates/rpc" }
 serde_json = { workspace = true }
+hex = { workspace = true }

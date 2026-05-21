@@ -1,6 +1,12 @@
+---
+layout: default
+title: Roadmap
+permalink: /roadmap/
+---
+
 # TROPTIONS L1 Roadmap
 
-## Current (v0.1 — production upgrade branch)
+## Current (v0.1 on main)
 
 - **Sovereign Sequencer (single-node)** — one `troptions-node` orders transactions locally
 - RocksDB persistence (state, soulbounds, settlements, balances)
@@ -11,7 +17,7 @@
 
 ## Q3 2026
 
-- Multi-sequencer federation with **fraud proof challenge window**
+- Multi-sequencer federation with **fraud proof challenge window** ([design doc]({{ '/design/fraud-proofs.html' | relative_url }}))
 - Light client state proofs export
 - Hardened settlement gateway (mTLS, HSM keys)
 

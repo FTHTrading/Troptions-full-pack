@@ -15,6 +15,15 @@
 | 15 | Fee schedule constants; production middleware enforces ATP | Partial — live Apostle debit in gateway `production` mode needs running chain |
 | 16 | `scripts/truth_labels.*`, `docs/PROOF_STACK.md` | Implemented |
 
+
+## Combined merge (main + x402)
+
+After merging `origin/main` (~9/10 production hardening: `backend/shared/auth.py`, TLS/nginx, L1 dashboard, signed DAO) into `feature/x402-full-integration`:
+
+- **Auth:** Settlement and DAO write routes use shared `API_KEYS` / `SETTLEMENT_API_KEYS`; x402 middleware checks API keys before ATP in `X402_MODE=production`.
+- **x402:** Gateway :4020, middleware, Apostle hooks remain **staged / LOCAL_ONLY** — not production-ready on AWS.
+- **Honest score:** ~**8.0–8.5** with x402 optional and `X402_MODE=staged` default; not claiming 10/10.
+
 ## Part A production (baseline)
 
 Merged from `upgrade/10-production` work: RocksDB persistence, signed submit, multisig, treasury on L1, DAO RPCs, metrics :9945, docker-compose.prod, PM2 ecosystem.
@@ -29,7 +38,7 @@ bash scripts/truth_labels.sh   # with stack running
 
 Integration tests in `tests/integration/full_flow.py` skip when L1 is down.
 
-## Maturity rating: **6.5 / 10**
+## Maturity rating: **8.0 / 10** (combined with main 9/10 hardening)
 
 | Area | Score | Notes |
 |------|-------|-------|

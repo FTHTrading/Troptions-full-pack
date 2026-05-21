@@ -10,7 +10,13 @@ import hashlib
 from datetime import datetime, timedelta
 from typing import Optional, List, Dict, Any
 
-from fastapi import FastAPI, HTTPException
+import sys as _sys
+
+_repo_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+_sys.path.insert(0, os.path.join(_repo_root, "backend", "shared"))
+
+from fastapi import Depends, FastAPI, HTTPException
+from auth import verify_api_key  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, FileResponse
@@ -215,7 +221,7 @@ async def list_categories():
         for cat_id, data in CHANNEL_CATEGORIES.items()
     }
 
-@app.post("/channels/create")
+@app.post("/channels/create", dependencies=[Depends(verify_api_key)])
 async def create_channel(request: ChannelCreate):
     """Create a new TTN channel with namespace registration."""
     
@@ -296,7 +302,7 @@ async def create_channel(request: ChannelCreate):
         ]
     }
 
-@app.post("/channels/{channel_id}/activate")
+@app.post("/channels/{channel_id}/activate", dependencies=[Depends(verify_api_key)])
 async def activate_channel(channel_id: str, payment_tx_hash: Optional[str] = None):
     """Activate channel after payment confirmation."""
     now = datetime.now().isoformat()
@@ -355,7 +361,7 @@ async def list_channels(category: Optional[str] = None, status: Optional[str] = 
 
 # ── Namespace System ──
 
-@app.post("/namespaces/claim")
+@app.post("/namespaces/claim", dependencies=[Depends(verify_api_key)])
 async def claim_namespace(request: NamespaceClaim):
     """Claim a namespace domain (.sports, .tennis, .mlb, .ncaa, .creator)."""
     
@@ -420,7 +426,7 @@ async def check_namespace(namespace: str):
 
 # ── Sponsor Drops ──
 
-@app.post("/sponsor-drops/create")
+@app.post("/sponsor-drops/create", dependencies=[Depends(verify_api_key)])
 async def create_sponsor_drop(request: SponsorDropCreate):
     """Create a QR sponsor drop for a channel."""
     drop_id = str(uuid.uuid4())[:8]
@@ -475,7 +481,7 @@ async def scan_sponsor_drop(drop_id: str, user_wallet: str):
     
     return {"status": "scanned", "drop_id": drop_id, "scanned_at": now}
 
-@app.post("/sponsor-drops/{drop_id}/claim")
+@app.post("/sponsor-drops/{drop_id}/claim", dependencies=[Depends(verify_api_key)])
 async def claim_sponsor_drop(drop_id: str, user_wallet: str):
     """Claim a sponsor drop reward."""
     now = datetime.now().isoformat()

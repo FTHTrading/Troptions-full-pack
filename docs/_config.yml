@@ -1,0 +1,33 @@
+title: TROPTIONS Sovereign Stack
+description: Public showcase for the TROPTIONS full-pack monorepo — L1, backends, frontends, and proof artifacts.
+baseurl: "/Troptions-full-pack"
+url: "https://fthtrading.github.io"
+theme: minima
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+minima:
+  skin: auto
+  social_links:
+    - platform: github
+      user_url: "https://github.com/fthtrading/Troptions-full-pack"
+
+header_pages:
+  - index.md
+  - infrastructure/l1.md
+  - infrastructure/backends.md
+  - infrastructure/frontends.md
+  - proof/truth-labels.md
+  - deploy/quickstart.md
+  - ROADMAP.md
+
+exclude:
+  - counterparty
+  - investor
+  - email-bryan-to-bijan-draft.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor

@@ -1,0 +1,31 @@
+flowchart TB
+  subgraph domains["Genesis domains"]
+    D1[TROPTIONS.IO]
+    D2[TTN.Tv]
+    D3[Exchange OS]
+  end
+  subgraph fe["Frontends"]
+    EX[exchange-os]
+    EDU[fth-edu]
+    DAO_UI[dao-dashboard]
+  end
+  subgraph be["Backends + AI"]
+    FTH[fth-academy :8091]
+    TTN[ttn-launcher :8092]
+    DONK[donk-tutor :8090]
+    DAO[dao-service :8093]
+  end
+  subgraph l1["TROPTIONS L1 :9944"]
+    SEQ[Sovereign Sequencer]
+    RDB[(RocksDB)]
+    GOV[On-chain DAO + treasury]
+    SIG[Signed submit RPC]
+  end
+  subgraph chains["External chains"]
+    POL[Polygon KENNY]
+    XRPL[XRPL gateway]
+    SOL[Solana launcher]
+  end
+  domains --> fe --> be --> l1 --> chains
+  SEQ --> RDB
+  GOV --> RDB

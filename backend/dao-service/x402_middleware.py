@@ -1,14 +1,21 @@
-"""Shared x402 middleware for FastAPI services on ports 8090-8093."""
+"""Shared x402 middleware for FastAPI services (staged default; production enforces ATP)."""
 
 from __future__ import annotations
 
 import os
-from typing import Callable, Optional
+import sys
+from pathlib import Path
+from typing import Callable, List, Optional
 
 import httpx
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.responses import Response
+
+_DAO = Path(__file__).resolve().parent
+sys.path.insert(0, str(_DAO.parent / "shared"))
+from auth import api_keys_configured, get_valid_api_keys  # noqa: E402
 
 X402_GATEWAY_URL = os.getenv("X402_GATEWAY_URL", "http://127.0.0.1:4020")
 X402_MODE = os.getenv("X402_MODE", "staged").lower()
@@ -52,21 +59,21 @@ async def verify_payment(
 
 
 class X402Middleware(BaseHTTPMiddleware):
-    """Return HTTP 402 for unpaid mutating routes when X402_MODE=production."""
+    """HTTP 402 for unpaid mutating routes when X402_MODE=production; API keys enforced first."""
 
     def __init__(
         self,
         app,
-        service_name: str,
-        price_atp: str,
-        protected_prefixes: tuple[str, ...] = ("/api/", "/dao/proposals", "/settlement/"),
+        service_name: str = "troptions-dao",
+        price_atp: str = "0",
+        protected_prefixes: Optional[List[str]] = None,
     ):
         super().__init__(app)
         self.service_name = service_name
         self.price_atp = price_atp
-        self.protected_prefixes = protected_prefixes
+        self.protected_prefixes = tuple(protected_prefixes or ("/dao/proposals", "/settlement/"))
 
-    async def dispatch(self, request: Request, call_next: Callable):
+    async def dispatch(self, request: Request, call_next: Callable) -> Response:
         if X402_MODE != "production":
             return await call_next(request)
 
@@ -76,6 +83,15 @@ class X402Middleware(BaseHTTPMiddleware):
 
         if not any(path.startswith(p) for p in self.protected_prefixes):
             return await call_next(request)
+
+        if api_keys_configured():
+            api_key = request.headers.get("X-API-Key") or request.headers.get("x-api-key")
+            valid = get_valid_api_keys()
+            if not api_key or api_key not in valid:
+                return JSONResponse(
+                    status_code=401,
+                    content={"detail": "Invalid or missing X-API-Key"},
+                )
 
         receipt = request.headers.get("X-Payment-Receipt") or request.headers.get("x-payment-receipt")
         if not receipt:

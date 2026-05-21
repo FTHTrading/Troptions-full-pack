@@ -1,24 +1,26 @@
-"""Settlement HTTP API — X-API-Key, X-Signature, rate limited."""
+"""Settlement HTTP API — shared API keys, signed submit, x402 create."""
 
 from __future__ import annotations
 
 import hashlib
 import hmac
 import os
+import sys
 import time
-from typing import Optional
+from pathlib import Path
+from typing import List, Optional
 
-from fastapi import APIRouter, Header, HTTPException, Request
+from fastapi import APIRouter, Depends, Header, HTTPException, Request
 from pydantic import BaseModel, Field
-from slowapi import Limiter
-from slowapi.util import get_remote_address
+_DAO = Path(__file__).resolve().parent
+sys.path.insert(0, str(_DAO.parent / "shared"))
+from auth import api_keys_configured, verify_api_key  # noqa: E402
 
-from x402_middleware import X402_MODE, verify_payment
+from settlement_api import SettlementSubmitBody, handle_settlement_submit  # noqa: E402
+from x402_middleware import X402_MODE, verify_payment  # noqa: E402
 
-limiter = Limiter(key_func=get_remote_address)
 router = APIRouter(prefix="/settlement", tags=["settlement"])
 
-SETTLEMENT_API_KEY = os.getenv("SETTLEMENT_API_KEY", "")
 SETTLEMENT_HMAC_SECRET = os.getenv("SETTLEMENT_HMAC_SECRET", "")
 SETTLEMENT_FEE_ATP = os.getenv("SETTLEMENT_FEE_ATP", "1000000000000000000")
 L1_RPC_URL = os.getenv("L1_RPC_URL", "http://127.0.0.1:9944")
@@ -32,13 +34,6 @@ class SettlementCreate(BaseModel):
     condition: str = "manual_release"
     expires_at: Optional[int] = None
     idempotency_key: Optional[str] = None
-
-
-def _verify_api_key(key: Optional[str]) -> None:
-    if not SETTLEMENT_API_KEY:
-        return
-    if not key or not hmac.compare_digest(key, SETTLEMENT_API_KEY):
-        raise HTTPException(status_code=401, detail="invalid api key")
 
 
 def _verify_signature(body: bytes, signature: Optional[str], timestamp: Optional[str]) -> None:
@@ -63,22 +58,36 @@ def _verify_signature(body: bytes, signature: Optional[str], timestamp: Optional
 
 
 @router.get("/health")
-async def settlement_health():
-    return {"status": "ok", "service": "settlement", "x402_mode": X402_MODE}
+async def settlement_health() -> dict:
+    return {
+        "status": "ok",
+        "service": "settlement",
+        "x402_mode": X402_MODE,
+        "api_keys_configured": api_keys_configured(),
+    }
 
 
-@router.post("/create")
-@limiter.limit("30/minute")
+@router.post("/submit", dependencies=[Depends(verify_api_key)])
+async def settlement_submit(
+    request: Request,
+    body: SettlementSubmitBody,
+    x_api_key: Optional[str] = Header(None, alias="X-API-Key"),
+    x_signature: Optional[str] = Header(None, alias="X-Signature"),
+):
+    return await handle_settlement_submit(
+        request, body, x_api_key=x_api_key, x_signature=x_signature
+    )
+
+
+@router.post("/create", dependencies=[Depends(verify_api_key)])
 async def create_settlement(
     request: Request,
     body: SettlementCreate,
-    x_api_key: Optional[str] = Header(None, alias="X-API-Key"),
     x_signature: Optional[str] = Header(None, alias="X-Signature"),
     x_timestamp: Optional[str] = Header(None, alias="X-Timestamp"),
     x_payment_receipt: Optional[str] = Header(None, alias="X-Payment-Receipt"),
 ):
     raw = await request.body()
-    _verify_api_key(x_api_key)
     _verify_signature(raw, x_signature, x_timestamp)
 
     if X402_MODE == "production":

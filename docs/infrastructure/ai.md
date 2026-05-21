@@ -1,0 +1,26 @@
+---
+layout: default
+title: AI Layer
+permalink: /infrastructure/ai/
+---
+
+# AI (`ai/`)
+
+| Component | Port | Path |
+|-----------|------|------|
+| **donk-tutor** | 8090 | [`ai/donk-tutor/`](https://github.com/fthtrading/Troptions-full-pack/tree/main/ai/donk-tutor) |
+| **knowledge-base** | — | [`ai/knowledge-base/`](https://github.com/fthtrading/Troptions-full-pack/tree/main/ai/knowledge-base) |
+
+## Capabilities
+
+- RAG tutoring over Qdrant + Ollama (`:11434`)
+- Whisper STT paths in donk-tutor (GPU optional)
+- OpenClaw / whichway docs mirrored under `knowledge-base/openclaw-content`
+
+## Dependencies
+
+Local stack expects Ollama and optionally Qdrant — see [`docs/QUICKSTART.md`](../QUICKSTART.html) and `ecosystem.config.js`.
+
+## Maturity
+
+**8/10** for local dev tutoring; production GPU sizing and external voice (ElevenLabs) are operator choices, not verified by CI in this repo.
