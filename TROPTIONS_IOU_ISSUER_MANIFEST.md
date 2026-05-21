@@ -1,7 +1,9 @@
 # TROPTIONS IOU Issuer Manifest v3.0
 ## Corrected Model: $874M in Unbacked IOUs → Fully-Backed Digital Dollar Ecosystem
 ## Revenue Potential: $3M–$30M+ Annually
-## Status: INFRASTRUCTURE BUILT — FIAT RAILS ARRIVING TODAY
+## Status: INFRASTRUCTURE BUILT — FIAT RAILS **PIPELINE** (not claimed live)
+
+**Truth labels:** **PROVEN** = ledger/explorer or live product · **PIPELINE** = MSB/bank/orchestrator stubs · **PROJECTION** = scenario math / neobank / BaaS / $5–10M funding ask. Canonical investor doc: [`docs/technical/SYSTEM_MANIFEST.md`](docs/technical/SYSTEM_MANIFEST.md).
 
 ---
 
@@ -25,7 +27,7 @@
 
 ## 🏦 REVENUE MODEL: IOU ISSUER EDITION
 
-### A. Issuance & Redemption Fees (Core Business)
+### A. Issuance & Redemption Fees (Core Business) — **PIPELINE**
 
 **Mechanics:**
 - Client wires USD via FedWire → You issue TROPTIONS-USD IOU 1:1
@@ -46,7 +48,7 @@
 
 ---
 
-### B. Float Income (The Bank Model)
+### B. Float Income (The Bank Model) — **PIPELINE**
 
 **Mechanics:**
 - Fiat held as backing earns 3–4% in money-market
@@ -64,7 +66,7 @@
 
 ---
 
-### C. Exchange Spread (Round-Trip)
+### C. Exchange Spread (Round-Trip) — **PIPELINE**
 
 **Mechanics:**
 - Buy IOU from user: $0.999
@@ -80,7 +82,7 @@
 
 ---
 
-### D. Cross-Border B2B Payments
+### D. Cross-Border B2B Payments — **PIPELINE**
 
 **Mechanics:**
 - Company A (US) wires USD → You issue IOU
@@ -96,7 +98,7 @@
 
 ---
 
-### E. WC26/TTN Commerce
+### E. WC26/TTN Commerce — **PIPELINE**
 
 **Mechanics:**
 - Sponsors pay via wire → Convert to IOU or $LEV8
@@ -112,7 +114,7 @@
 
 ---
 
-## 🏛️ THE NEOBANK: IOU-NATIVE ARCHITECTURE
+## 🏛️ THE NEOBANK: IOU-NATIVE ARCHITECTURE — **PROJECTION**
 
 ### How It Works (Corrected)
 
@@ -160,7 +162,7 @@ Blockchain Layer
 
 ---
 
-## 🏗️ BANKING-AS-A-SERVICE (BaaS)
+## 🏗️ BANKING-AS-A-SERVICE (BaaS) — **PROJECTION**
 
 ### The Pitch to Other Fintechs
 

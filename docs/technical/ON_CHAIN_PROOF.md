@@ -27,6 +27,10 @@ permalink: /technical/ON_CHAIN_PROOF.html
 
 **Issued supply:** IOU amounts on ledger — **not** market cap, desk PnL, or secondary trading volume.
 
+### IOU vs native stablecoin (honest)
+
+On XRPL and Stellar, balances labeled **USDC**, **USDT**, **DAI**, and **EURC** in this pack are **TROPTIONS-gateway issued IOUs** (trust-line credits from issuer wallets `rJLMST…` / `GB4FHG…`). They are **not** Circle-, Tether-, or Maker-**native** tokens on those chains, and they are **not** automatically redeemable 1:1 for regulated fiat today. They function as **promise-to-pay** ledger units with **proven issued demand** (~874M total). **Legally-backed redeemable claims** require **PIPELINE** MSB program + bank omnibus + FedWire/SWIFT — see [System manifest](SYSTEM_MANIFEST.html) and [MSB fiat rails](MSB_FIAT_RAILS.html). Do **not** describe issued supply as fully-backed reserves or Circle USDC.
+
 ---
 
 ## Polygon — FTH community tokens (PROVEN)
@@ -62,7 +66,7 @@ Full table: [`GENESIS_POLYGON_CONTRACTS.md`](GENESIS_POLYGON_CONTRACTS.html). Li
 | Asset | Amount (XRPL leg) |
 |-------|-------------------|
 | TROPTIONS | ~100,000,000 |
-| USDC | 174,000,000 |
+| USDC (TROPTIONS IOU, not Circle native) | 174,000,000 |
 | USDT | 100,000,000 |
 | EURC | 50,000,000 |
 | DAI | 50,000,000 |
@@ -85,7 +89,7 @@ Full table: [`GENESIS_POLYGON_CONTRACTS.md`](GENESIS_POLYGON_CONTRACTS.html). Li
 | Asset | Amount (Stellar leg) |
 |-------|----------------------|
 | TROPTIONS | ~99,990,000 |
-| USDC | 100,000,000 |
+| USDC (TROPTIONS IOU) | 100,000,000 |
 | USDT | 100,000,000 |
 | EURC | 50,000,000 |
 | DAI | 50,000,000 |
@@ -97,7 +101,7 @@ Full table: [`GENESIS_POLYGON_CONTRACTS.md`](GENESIS_POLYGON_CONTRACTS.html). Li
 | Asset | Total |
 |-------|-------|
 | TROPTIONS | **~200M** |
-| USDC | **274M** |
+| USDC (IOU label) | **274M** |
 | USDT | **200M** |
 | EURC | **100M** |
 | DAI | **100M** |

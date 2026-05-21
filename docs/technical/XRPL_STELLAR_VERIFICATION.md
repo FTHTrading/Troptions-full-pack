@@ -12,6 +12,8 @@ permalink: /technical/XRPL_STELLAR_VERIFICATION.html
 
 **Language discipline:** Figures below are **issued supply on ledger** (IOU issuance / trust-line balances), **not** market cap, trade-desk PnL, or verified secondary-market value. Do **not** cite Exchange OS **$175M desk** notional as an on-chain fact.
 
+**IOU vs native stablecoin:** **USDC**, **USDT**, **DAI**, and **EURC** rows below are **TROPTIONS-issued IOUs** on the production issuer accounts — **not** Circle/Tether/Maker native assets. Holders have ledger credits (promise-to-pay); **regulated 1:1 fiat redemption** is **PIPELINE** until MSB + bank omnibus + FedWire/SWIFT are operational. See [System manifest](SYSTEM_MANIFEST.html).
+
 ---
 
 ## XRPL production wallets
@@ -36,7 +38,7 @@ Issued to distribution `rNX4fa…` unless noted. Amounts from live `account_line
 | Asset | Issued (XRPL) | Notes |
 |-------|---------------|-------|
 | TROPTIONS | ~100,000,000 | ~100M on XRPL leg of ~200M cross-chain |
-| USDC | 174,000,000 | XRPL leg of **274M USDC** cross-chain total |
+| USDC (TROPTIONS IOU) | 174,000,000 | XRPL leg of **274M** USDC-labeled IOU cross-chain total — **not Circle native** |
 | USDT | 100,000,000 | |
 | EURC | 50,000,000 | XRPL leg of **100M EURC** cross-chain |
 | DAI | 50,000,000 | XRPL leg of **100M DAI** cross-chain |
@@ -60,7 +62,7 @@ Issued to distribution `rNX4fa…` unless noted. Amounts from live `account_line
 | Asset | XRPL | Stellar | **Total issued on ledger** |
 |-------|------|---------|----------------------------|
 | **TROPTIONS** | ~100M | ~100M | **~200M** |
-| **USDC** | 174M | 100M | **274M** |
+| **USDC (IOU)** | 174M | 100M | **274M** |
 | **USDT** | 100M | 100M | **200M** |
 | **EURC** | 50M | 50M | **100M** |
 | **DAI** | 50M | 50M | **100M** |

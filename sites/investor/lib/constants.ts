@@ -138,6 +138,8 @@ export const TANTHEM_MINT_DAPP_URL = onPages
   : "/mint.html";
 export const ANTHEM_IPFS_MANIFEST_CID = "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7";
 export const VALUATION_URL = `${PAGES_URL}/technical/VALUATION_AND_COMPARABLES.html`;
+export const SYSTEM_MANIFEST_URL = `${PAGES_URL}/technical/SYSTEM_MANIFEST.html`;
+export const MSB_FIAT_RAILS_URL = `${PAGES_URL}/technical/MSB_FIAT_RAILS.html`;
 export const DAO_PAGE_URL = `${PAGES_URL}/dao/`;
 export const DAO_ARCHITECTURE_URL = `${PAGES_URL}/technical/DAO_ARCHITECTURE.html`;
 
@@ -291,7 +293,7 @@ export const PATH_TO_SKYROCKET: SkyrocketStep[] = [
     label: "Sales",
     bullets: [
       "Booked / LIVE: Academy Stripe, launch.unykorn.org, unykorn product URLs, Polygon/XRPL/Stellar proofs",
-      "Pipeline / illustrative: WC26 sponsor tiers, T-Lev-8 gates, exchange desk attestation revenue, projection scenarios in valuation doc",
+      "Pipeline / illustrative: MSB rails revenue A–E, WC26 tiers, desk attestation, neobank/BaaS — see SYSTEM_MANIFEST (PROJECTION labeled)",
     ],
   },
 ];
@@ -381,7 +383,7 @@ export const PROOF_WALL: ProofChainCard[] = [
     chain: "XRPL",
     status: "proven",
     summary:
-      "~474M issued on XRPL leg; AMM live; reserves thin. ~874M cross-chain total.",
+      "~474M TROPTIONS-issued IOUs on XRPL leg (not Circle native). ~874M cross-chain issued supply — demand proof, not bank reserves.",
     rows: [
       {
         label: "Issuer",
@@ -399,8 +401,8 @@ export const PROOF_WALL: ProofChainCard[] = [
         href: "https://xrpscan.com/account/rBU6exSQHkrTog6n1F5RX8gzcUrXoniGcp",
       },
       {
-        label: "USDC (XRPL)",
-        value: "174M issued",
+        label: "USDC IOU (XRPL)",
+        value: "174M issued — TROPTIONS gateway, not Circle",
       },
       {
         label: "TROPTIONS (XRPL)",
@@ -424,12 +426,12 @@ export const PROOF_WALL: ProofChainCard[] = [
         href: "https://stellar.expert/explorer/public/account/GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
       },
       {
-        label: "USDC (Stellar)",
-        value: "100M issued",
+        label: "USDC IOU (Stellar)",
+        value: "100M issued — TROPTIONS gateway",
       },
       {
-        label: "Cross-chain USDC",
-        value: "274M total",
+        label: "Cross-chain USDC-labeled IOU",
+        value: "274M total — not native Circle USDC",
       },
     ],
   },
@@ -489,8 +491,8 @@ export const REVENUE_OPPORTUNITIES: RevenueOpportunity[] = [
   {
     opportunity: "Exchange desk",
     status: "gated",
-    revenueModel: "Spread / IOU desk fees",
-    tamNote: "Institutional IOU — not $175M verified fact",
+    revenueModel: "Spread / IOU desk fees (PIPELINE)",
+    tamNote: "Operator desk attestation — not Circle USDC; not $175M verified without bank rails",
     clientType: "Issuers & liquidity",
   },
   {
@@ -503,9 +505,16 @@ export const REVENUE_OPPORTUNITIES: RevenueOpportunity[] = [
   {
     opportunity: "Cross-chain issuance utility",
     status: "live",
-    revenueModel: "Trust lines · issuance services",
-    tamNote: "~874M issued on ledger",
+    revenueModel: "Trust lines · IOU issuance (demand PROVEN)",
+    tamNote: "~874M issued IOUs — not market cap or fully-backed reserves",
     clientType: "Corporates / funds",
+  },
+  {
+    opportunity: "MSB fiat rails (A–E fees)",
+    status: "pipeline",
+    revenueModel: "Issuance/redemption, float, B2B — when omnibus live",
+    tamNote: "See SYSTEM_MANIFEST + MSB_FIAT_RAILS",
+    clientType: "Institutional / banks",
   },
 ];
 
@@ -799,7 +808,7 @@ export const REVENUE_PILLARS = [
   {
     name: "Exchange / desk",
     status: "gated" as const,
-    detail: "XRPL desk figures = operator attestation until proofs verified",
+    detail: "TROPTIONS-issued IOUs — operator desk attestation; not Circle USDC or verified $175M without rails",
     url: "https://troptions.unykorn.org/troptions",
   },
   {
@@ -842,8 +851,8 @@ export const BUILT_ITEMS = [
   "IPFS anthem + manifest CIDs — TROPTIONS_IPFS_CIDS.json (counterparty proof)",
   "KENNY + EVL Polygon — PolygonScan verified (2026-05-21)",
   "Genesis-world 9 Polygon contracts + drunks.app live",
-  "XRPL + Stellar issued supply verified — ~874M on ledger (not market cap)",
-  "AMM pool live on XRPL; cross-chain USDC 274M issued total",
+  "XRPL + Stellar issued supply verified — ~874M IOUs on ledger (demand proof, not bank reserves)",
+  "AMM pool live on XRPL; 274M USDC-labeled IOU issued (TROPTIONS gateway, not Circle native)",
   "T-Build Vitest — 32/32 pass after npm install (GitHub_Audit/T-Build)",
 ];
 
