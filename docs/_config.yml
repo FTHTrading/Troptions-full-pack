@@ -21,7 +21,7 @@ header_pages:
   - infrastructure/frontends.md
   - proof/truth-labels.md
   - deploy/quickstart.md
-  - roadmap.md
+  - ROADMAP.md
 
 exclude:
   - counterparty
