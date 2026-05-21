@@ -226,6 +226,61 @@ body {
   white-space: nowrap;
 }
 
+.troptions-theme-audio .theme-lyrics {
+  margin-top: 1.25rem;
+  text-align: left;
+  border-top: 1px solid var(--troptions-border);
+  padding-top: 1rem;
+}
+
+.troptions-theme-audio .theme-lyrics summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--troptions-gold);
+  list-style: none;
+}
+
+.troptions-theme-audio .theme-lyrics summary::-webkit-details-marker {
+  display: none;
+}
+
+.troptions-theme-audio .theme-lyrics-body {
+  margin-top: 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  max-height: 22rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.troptions-theme-audio .theme-lyrics-body h3 {
+  font-size: 0.82rem;
+  margin: 1rem 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--troptions-gold);
+}
+
+.troptions-theme-audio .theme-lyrics-lead {
+  margin: 0 0 0.5rem;
+}
+
+.troptions-theme-audio .theme-lyrics-footnote {
+  font-size: 0.8rem;
+  color: var(--troptions-muted);
+  border-left: 3px solid var(--troptions-gold);
+  padding-left: 0.65rem;
+  margin: 0.75rem 0;
+}
+
+.anthem-footnote {
+  font-size: 0.9rem;
+  color: var(--troptions-muted);
+  border-left: 3px solid var(--troptions-gold);
+  padding-left: 0.75rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
 .troptions-home .get-started {
   list-style: none;
   padding: 0;

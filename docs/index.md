@@ -41,6 +41,57 @@ permalink: /
       <p>Your browser does not support audio. <a href="{{ '/assets/audio/troptions-theme-primary.mp3' | relative_url }}">Download primary theme</a>.</p>
     </audio>
   </div>
+  <details class="theme-lyrics">
+    <summary>View lyrics</summary>
+    <div class="theme-lyrics-body">
+      <p class="theme-lyrics-lead"><strong>Mainframe Explode</strong> — <a href="{{ '/media/anthem.html' | relative_url }}">full lyrics page</a> · <a href="{{ '/assets/audio/TROPTIONS_ANTHEM_LYRICS.md' | relative_url }}">source markdown</a></p>
+      <h3>Intro — Hype Beat Drop</h3>
+      <p>Yeah! (ATL!)<br>TROPTIONS! (Macon!)<br>Let's get it! (Uh!)</p>
+      <h3>Verse 1</h3>
+      <p>Back in '03, world was sleepin', analog dreams, yeah,<br>
+      Macon, Georgia birthed it, we crushed those old schemes.<br>
+      Digital ledger, that's what we brought to the game, still,<br>
+      Knocked on Washington's door, shoutin' out our name.<br>
+      SEC came next, tried to hold back our light,<br>
+      They challenged our vision, but we held on tight, that's right.</p>
+      <h3>Pre-Chorus</h3>
+      <p>They doubted the grind, talked slick behind our backs, fools,<br>
+      But we never paused, stayed on these digital tracks.</p>
+      <h3>Chorus</h3>
+      <p>Look at us now, yeah, we runnin' this game, homie,<br>
+      TROPTIONS on top, shout out loud our name!<br>
+      From Rust L1 to the chain, we broke all the rules, son,<br>
+      They tried to stop us, but we built all the tools! (Yeah!)<br>
+      Look at us now! (C'mon!)</p>
+      <h3>Verse 2</h3>
+      <p>Headlines screamin', legal drama, felt the heat, nah,<br>
+      Thought we'd crumble, but we stood on our own two feet.<br>
+      Showed 'em the books, every single dime was clean, no dirt,<br>
+      No verdicts dropped, no charges, know what I mean, fam?<br>
+      All that talkin' disappeared, they had nothing to say, huh,<br>
+      TROPTIONS still here, watch us lead the way, every day.</p>
+      <h3>Pre-Chorus</h3>
+      <p>They doubted the grind, talked slick behind our backs, fools,<br>
+      But we never paused, stayed on these digital tracks.</p>
+      <h3>Chorus</h3>
+      <p>Look at us now, yeah, we runnin' this game, homie,<br>
+      TROPTIONS on top, shout out loud our name!<br>
+      From Rust L1 to the chain, we broke all the rules, son,<br>
+      They tried to stop us, but we built all the tools! (Yeah!)<br>
+      Look at us now! (Uh huh!)</p>
+      <h3>Bridge — Breakdown</h3>
+      <p>Twenty-two years deep, put in blood, sweat, and tears, no lie,<br>
+      AI agents rollin', no more baseless fears. (None!)<br>
+      NEEDAI, CLAWD, Popeye, makin' moves every day, word,<br>
+      Hunnid seventy-five mil, no one standing in our way!</p>
+      <p class="theme-lyrics-footnote"><strong>Honesty note:</strong> The $175M line is brand narrative / operator attestation — verify via <a href="{{ '/proof/on-chain-proofs.html' | relative_url }}">Exchange OS proof docs</a>. NEEDAI, CLAWD, and Popeye refer to optional integration branches, not necessarily <code>main</code>.</p>
+      <h3>Outro — Fade Out</h3>
+      <p>Yeah, TROPTIONS worldwide! (Worldwide, for real!)<br>
+      Still here, still ridin' high! (Ridin' high, baby!)<br>
+      Look at us now! (Uh huh, now!)<br>
+      Macon strong! (Georgia!)</p>
+    </div>
+  </details>
 </section>
 
 ## What is TROPTIONS?

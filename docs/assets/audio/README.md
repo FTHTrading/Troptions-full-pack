@@ -30,13 +30,29 @@ Twelve MP3s were on the Desktop (2026-05-21); only the two **troptions song**–
 | Mainframe_22 yrs 3Explode_2026-05-21T150232 (1).mp3 | 3.15 |
 | Mainframe22 yrs_Explode_2026-05-21T150232 (1).mp3 | 3.40 |
 
+## Lyrics
+
+Canonical text: [`TROPTIONS_ANTHEM_LYRICS.md`](TROPTIONS_ANTHEM_LYRICS.md) (this folder).
+
+| Pages URL | Purpose |
+|-----------|---------|
+| `/media/anthem.html` | Rendered lyrics + honesty footnotes |
+| `/media/troptions-anthem.html` | Short alias → anthem page |
+| `/assets/audio/TROPTIONS_ANTHEM_LYRICS.md` | Raw markdown (repo / direct download) |
+
+**Honesty (Bridge):**
+
+- **“Hunnid seventy-five mil…”** — Brand narrative / operator attestation only; verify via [Exchange OS proof docs](/Troptions-full-pack/proof/on-chain-proofs.html) before external citation.
+- **NEEDAI, CLAWD, Popeye** — Optional branch references (`feature/x402-full-integration` and related backends); not all agent integrations are on `main`. Do not imply live production status from the anthem bridge alone.
+
 ## Pages URLs (after deploy)
 
 Base: `https://fthtrading.github.io/Troptions-full-pack`
 
-- Home player: `/` (play/pause, no autoplay)
+- Home player: `/` (play/pause, no autoplay; collapsible lyrics)
 - Direct: `/assets/audio/troptions-theme-primary.mp3`
 - Direct: `/assets/audio/troptions-theme-alt.mp3`
+- Lyrics: `/media/anthem.html`
 
 ## License
 
