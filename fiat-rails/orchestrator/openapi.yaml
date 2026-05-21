@@ -1,0 +1,60 @@
+openapi: 3.0.3
+info:
+  title: TROPTIONS Payment Orchestrator
+  version: 1.0.0-pipeline
+  description: |
+    Wire → IOU orchestration. LABEL PIPELINE until MSB omnibus and bank webhooks are live.
+    ISSUER_SEED must only exist in operator .env (never committed).
+servers:
+  - url: http://127.0.0.1:4022
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: Orchestrator healthy
+  /api/v1/payments/wire:
+    post:
+      summary: Bank wire received — mint IOU
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [amount, currency, recipient_address]
+              properties:
+                source_wire_ref:
+                  type: string
+                amount:
+                  type: string
+                currency:
+                  type: string
+                recipient_address:
+                  type: string
+                sender_info:
+                  type: object
+                reference:
+                  type: string
+      responses:
+        "201":
+          description: IOU issued (or PIPELINE mock hash)
+        "422":
+          description: Compliance hold
+        "500":
+          description: Processing failed
+  /api/v1/payments/{id}:
+    get:
+      summary: Payment status
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Payment record
+        "404":
+          description: Not found

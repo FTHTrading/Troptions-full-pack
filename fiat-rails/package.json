@@ -6,6 +6,10 @@
     "health-check": "node scripts/health-check-all.js"
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "axios": "^1.7.9",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "uuid": "^11.0.3",
+    "xrpl": "^4.0.0"
   }
 }
