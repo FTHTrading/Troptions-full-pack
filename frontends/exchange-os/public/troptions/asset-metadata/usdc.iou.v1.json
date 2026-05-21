@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "assetId": "USDC.TROPTIONS-GATEWAY",
+  "assetType": "stablecoin-iou",
+  "ticker": "USDC",
+  "name": "USD Coin — Troptions Gateway IOU",
+  "description": "USD Coin (USDC) issued as an on-ledger IOU from the Troptions Gateway. Each token represents one real USDC held in custody by the Troptions Gateway issuer. Redeemable 1:1 for USDC upon verified deal settlement. AAVE-compatible collateral structure. Issued on XRPL and Stellar mainnet as gateway proof-of-issuance for deal-closing transactions.",
+  "issuer": "Troptions Gateway — FTH Trading",
+  "underlyingAsset": "USD Coin (USDC)",
+  "underlyingIssuer": "Circle Internet Financial, LLC",
+  "underlyingContractEth": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  "peg": "USD",
+  "pegRatio": "1:1",
+  "supply": {
+    "initial": "100000000",
+    "unit": "USDC",
+    "decimals": 6
+  },
+  "aaveCompatible": true,
+  "aaveVersion": "v3",
+  "aavePool": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+  "branding": {
+    "logo": "https://troptions.org/assets/troptions/logos/usdc-iou-logo.svg",
+    "primaryColor": "#2775CA",
+    "backgroundColor": "#0D1C3A",
+    "textColor": "#FFFFFF"
+  },
+  "ledgers": {
+    "xrpl": {
+      "network": "mainnet",
+      "currencyCode": "USDC",
+      "currencyHex": "5553444300000000000000000000000000000000",
+      "issuerAddress": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributorAddress": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "defaultRipple": true,
+      "domain": "troptions.org",
+      "trustLimit": "1000000000"
+    },
+    "stellar": {
+      "network": "mainnet",
+      "assetCode": "USDC",
+      "issuerAddress": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributorAddress": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "authRequired": true,
+      "authRevocable": true,
+      "authClawback": true,
+      "trustLimit": "1000000000"
+    }
+  },
+  "compliance": {
+    "kycRequired": true,
+    "amlPolicy": "FTH Trading AML/KYC Policy v2",
+    "jurisdiction": "United States",
+    "redeemable": true,
+    "redemptionFee": "0.1%",
+    "redemptionContact": "gateway@troptions.org",
+    "custodianProof": "Available upon verified deal settlement",
+    "auditable": true
+  },
+  "dealReference": "TROPTIONS-STABLECOIN-USDC-ISSUANCE-2026",
+  "issuanceDate": "2026-04-28",
+  "metadataVersion": "1.0.0"
+}

@@ -1,0 +1,257 @@
+{
+  "operating_model": [
+    {
+      "id": "sports-agency",
+      "label": "Sports Agency Layer",
+      "description": "Event activation, sponsor representation, athlete and creator relations, and city-level operations. The commercial and production engine modeled on global sports agency standards.",
+      "accent": "gold"
+    },
+    {
+      "id": "broadcast",
+      "label": "Broadcast / TTN Layer",
+      "description": "TROPTIONS Television Network provides the owned media and broadcast distribution layer for matchday content, sponsor segments, and fan programming.",
+      "accent": "blue"
+    },
+    {
+      "id": "fan-experience",
+      "label": "Fan Experience Layer",
+      "description": "QR claim flows, digital moment drops, matchday offers, restaurant rewards, and the mobile-first fan engagement system for stadium cities.",
+      "accent": "amber"
+    },
+    {
+      "id": "sponsor-merchant",
+      "label": "Sponsor + Merchant Layer",
+      "description": "Corporate sponsor activation packages, local merchant onboarding, offer management, proof reporting, and campaign analytics for every event window.",
+      "accent": "green"
+    },
+    {
+      "id": "solana-launch",
+      "label": "Solana Launch Layer",
+      "description": "SPL token launcher, digital moment minting, fan badge issuance, wallet-free claim flows, and Solana Mobile integration for stadium-scale activations.",
+      "accent": "purple"
+    },
+    {
+      "id": "infrastructure",
+      "label": "Infrastructure + Proof Layer",
+      "description": "UNYKORN/FTH routing, Cloudflare delivery, x402 payment rails, public proof dashboards, and system health monitoring during live event windows.",
+      "accent": "rose"
+    }
+  ],
+  "groups": [
+    {
+      "id": "leadership",
+      "label": "Leadership Team",
+      "description": "The core strategy and operating leadership of TROPTIONS Sports Network.",
+      "roles": [
+        {
+          "title": "Founder / Systems Architect",
+          "status": "active",
+          "responsibility": "Owns vision, infrastructure, Solana launcher, UNYKORN/FTH rails, and the funding narrative. Sets direction across all four platform pillars.",
+          "importance": "The integrating force across sports agency, broadcast, event commerce, and infrastructure layers."
+        },
+        {
+          "title": "Head of Sports Network",
+          "status": "needed",
+          "responsibility": "Owns the sports network product, event strategy, fan experience design, and site direction. Primary face of the network to external partners.",
+          "importance": "Drives event activation quality, fan product depth, and the credibility of the network with sponsors and media."
+        },
+        {
+          "title": "Head of Partnerships",
+          "status": "needed",
+          "responsibility": "Owns sponsor deals, agency relations, local business programs, restaurant and hotel networks, charity campaigns, and event operator agreements.",
+          "importance": "Revenue depends on sponsors, venue partners, and corporate activations signing and renewing at scale."
+        },
+        {
+          "title": "Head of Media / TTN Broadcast",
+          "status": "needed",
+          "responsibility": "Owns TROPTIONS Television Network, the content schedule, matchday programming, sponsor integration segments, interviews, and short-form distribution.",
+          "importance": "The broadcast layer is the public face of the network and the primary vehicle for sponsor activation and fan reach."
+        },
+        {
+          "title": "Head of Product",
+          "status": "needed",
+          "responsibility": "Owns the full platform experience: fan flows, partner dashboards, moments and claims, proof reporting, wallet flows, and admin tools.",
+          "importance": "Product polish determines conversion from fan interest to merchant revenue to sponsor renewals."
+        },
+        {
+          "title": "Head of Grants + Funding",
+          "status": "needed",
+          "responsibility": "Owns Solana Foundation, Colosseum, Superteam, Solana Mobile, infrastructure credits, and institutional sponsor funding relationships.",
+          "importance": "Infrastructure grants and ecosystem funding are material non-dilutive capital at early stage. Requires dedicated focus."
+        }
+      ]
+    },
+    {
+      "id": "event-ops",
+      "label": "Event Operations",
+      "description": "The on-the-ground team that runs city activations, fan engagement, and sponsor execution at each event.",
+      "roles": [
+        {
+          "title": "Event Director",
+          "status": "needed",
+          "responsibility": "Plans and executes each city event activation end-to-end: venue logistics, merchant setup, QR deployment, on-site coordination, and post-event reporting.",
+          "importance": "Event quality is the proof-of-concept. One well-run activation converts sponsor skeptics into buyers and media coverage into credibility."
+        },
+        {
+          "title": "Fan Experience Lead",
+          "status": "needed",
+          "responsibility": "Owns fan rewards design, claim flows, moment drop timing, digital badge logic, and the mobile experience for stadium and watch-party attendees.",
+          "importance": "Fan engagement drives claim volume, which drives the sponsor proof data and merchant traffic metrics that justify renewal spend."
+        },
+        {
+          "title": "Sponsor Activation Lead",
+          "status": "needed",
+          "responsibility": "Converts sponsor agreements into live campaigns: logo placement, TTN mentions, digital rewards, offer packages, and post-event proof reports.",
+          "importance": "Sponsor activation quality determines renewals and referrals. One sponsor served well becomes three the following season."
+        },
+        {
+          "title": "Merchant Network Lead",
+          "status": "needed",
+          "responsibility": "Onboards and manages restaurants, hotels, rideshare operators, venues, and local offer partners for each event city market.",
+          "importance": "Merchant density is the core of the fan value proposition. Without local offers, digital moments have no commercial anchor."
+        },
+        {
+          "title": "Charity + Community Lead",
+          "status": "needed",
+          "responsibility": "Owns nonprofit partnerships, local youth sports campaigns, donation drives, community events, and the public proof reports for impact claims.",
+          "importance": "Community proof is a major differentiator for sponsor trust, press coverage, and public benefit positioning."
+        },
+        {
+          "title": "Athlete / Creator Relations Lead",
+          "status": "needed",
+          "responsibility": "Sources athletes, creators, broadcast hosts, local soccer voices, and influencers to amplify event activations and TTN content reach.",
+          "importance": "Talent relationships unlock earned media, authentic fan content, and creator-driven claim distribution that paid media cannot replicate."
+        }
+      ]
+    },
+    {
+      "id": "media",
+      "label": "Media Team",
+      "description": "The production and content operation behind TROPTIONS Television Network and sports programming.",
+      "roles": [
+        {
+          "title": "Executive Producer",
+          "status": "needed",
+          "responsibility": "Owns all TTN Sports programming: show formats, segment structure, content calendar, sponsor integration points, and overall production standards.",
+          "importance": "Broadcast quality determines whether advertisers, athletes, and media partners take the network seriously enough to commit."
+        },
+        {
+          "title": "Host / Anchor",
+          "status": "needed",
+          "responsibility": "The front-facing on-air personality for TROPTIONS Sports Network programming, matchday shows, branded content, and sponsor features.",
+          "importance": "A credible, camera-ready anchor makes the network feel real and attracts talent relationships, sponsor investment, and viewership."
+        },
+        {
+          "title": "Soccer Analyst",
+          "status": "needed",
+          "responsibility": "Provides expert match breakdowns, player and team analysis, global storylines, and fan programming commentary across tournament coverage.",
+          "importance": "Analytical depth separates a real sports media brand from event marketing. Credibility is built through knowledge, not production value alone."
+        },
+        {
+          "title": "Field Producer",
+          "status": "needed",
+          "responsibility": "Captures on-location content: fan activations, restaurant partnerships, charity events, merchant profiles, and city-level human stories.",
+          "importance": "Field footage is the proof content that makes sponsor reports real and social clips authentic for fan audiences."
+        },
+        {
+          "title": "Video Editor",
+          "status": "needed",
+          "responsibility": "Cuts highlights, sponsor reels, social media clips, event recaps, and promotional packages to broadcast-grade standard.",
+          "importance": "Edited content is the deliverable sponsors are purchasing and the content fans are sharing. Quality is the metric."
+        },
+        {
+          "title": "Social Media Producer",
+          "status": "needed",
+          "responsibility": "Publishes daily matchday clips, fan polls, behind-the-scenes content, and sponsor activations across all distribution platforms.",
+          "importance": "Social reach is the distribution layer that drives fan discovery, moment claim volume, and sponsor audience reach data."
+        }
+      ]
+    },
+    {
+      "id": "technology",
+      "label": "Technology Team",
+      "description": "The engineering and design team building the TROPTIONS Sports Network platform and Solana infrastructure.",
+      "roles": [
+        {
+          "title": "Lead Full-Stack Engineer",
+          "status": "active",
+          "responsibility": "Owns the TROPTIONS Sports Network Next.js application: all pages, APIs, data pipelines, partner dashboards, and deployment infrastructure.",
+          "importance": "Platform stability and feature velocity are the foundation of every other team function during live event windows."
+        },
+        {
+          "title": "Solana Engineer",
+          "status": "needed",
+          "responsibility": "Owns the SPL token launcher, wallet signing, metadata management, token authority controls, mint flows, and claim verification on-chain.",
+          "importance": "The Solana layer is the infrastructure beneath digital moments, fan rewards, and the token economy that sponsors are purchasing reach into."
+        },
+        {
+          "title": "Infrastructure Engineer",
+          "status": "active",
+          "responsibility": "Owns Cloudflare tunnel routing, PM2 process management, domain configuration, public uptime monitoring, and system health during event windows.",
+          "importance": "All sites and APIs depend on infrastructure reliability. Event traffic spikes are predictable and require deliberate preparation."
+        },
+        {
+          "title": "UX/UI Designer",
+          "status": "needed",
+          "responsibility": "Makes the platform feel premium: broadcast-grade sports polish, agency-quality presentation, and TROPTIONS brand consistency across all surfaces.",
+          "importance": "Visual credibility is the first impression for sponsors, media partners, and venue operators evaluating the network."
+        },
+        {
+          "title": "Data / Analytics Engineer",
+          "status": "needed",
+          "responsibility": "Tracks and reports on claim volume, sponsor click-through, merchant redemptions, proof dashboard accuracy, and event KPIs in real time.",
+          "importance": "Sponsor renewals are driven by data. Proof without clean, auditable data is an assertion, not an asset."
+        },
+        {
+          "title": "Security / Compliance Advisor",
+          "status": "needed",
+          "responsibility": "Reviews token disclosures, risk language, privacy policies, no-investment disclaimers, and ensures no false affiliation or endorsement claims.",
+          "importance": "One compliance failure in language or presentation eliminates institutional partnerships before they begin."
+        }
+      ]
+    },
+    {
+      "id": "advisory",
+      "label": "Advisory Board",
+      "description": "Domain experts advising on sports agency standards, soccer media, Solana ecosystem, and enterprise sponsor sales.",
+      "roles": [
+        {
+          "title": "Sports Agency Advisor",
+          "status": "advisor",
+          "responsibility": "Advises on agency model structure, talent representation standards, sponsor deal terms, event activation protocols, and media rights awareness.",
+          "importance": "Sports agency credibility is built through relationships. The right advisor opens the right rooms."
+        },
+        {
+          "title": "Soccer Media Advisor",
+          "status": "advisor",
+          "responsibility": "Advises on soccer content depth, fan programming formats, broadcast rights awareness, and commentary quality standards for global tournament coverage.",
+          "importance": "Soccer-specific media knowledge is distinct from general sports broadcasting. Domain expertise is the difference between credible and imitative."
+        },
+        {
+          "title": "Solana Ecosystem Advisor",
+          "status": "advisor",
+          "responsibility": "Advises on Solana Foundation relationships, grant program applications, token mechanics review, Colosseum submissions, and ecosystem partnership positioning.",
+          "importance": "The Solana grant pipeline is material non-dilutive capital. The right advisor accelerates access and de-risks application quality."
+        },
+        {
+          "title": "Sponsor Sales Advisor",
+          "status": "advisor",
+          "responsibility": "Advises on corporate sponsorship deal structure, activation packaging, proof reporting standards, pricing, and enterprise sales cycle management.",
+          "importance": "Enterprise sponsors operate on long cycles. An experienced advisor shortens the timeline and frames the pitch in the language buyers respond to."
+        },
+        {
+          "title": "Event Safety / Compliance Advisor",
+          "status": "advisor",
+          "responsibility": "Advises on event permitting, public safety compliance, venue liability structure, and operational risk management for large-scale activations.",
+          "importance": "Event-scale activations carry operational risk. Compliance gaps at the event level become company-level liability."
+        },
+        {
+          "title": "Charity / Community Advisor",
+          "status": "advisor",
+          "responsibility": "Advises on nonprofit partnership structure, charity campaign proof standards, community trust-building, and impact reporting integrity.",
+          "importance": "Community proof is only credible when partnerships and claims are independently verifiable and structured correctly from the start."
+        }
+      ]
+    }
+  ]
+}

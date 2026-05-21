@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+python-dotenv
+stripe
+httpx
+sqlite3
+pydantic

@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "generated": "2026-04-25",
+  "description": "Proof-gated issuance index. All items require full gate clearance before activation.",
+  "disclaimer": "No item in this index is active or executable without all listed gates cleared.",
+  "items": [
+    {
+      "id": "gold-intake",
+      "assetType": "gold",
+      "requiredProofs": ["bullion-assay-certificate", "vault-confirmation", "chain-of-custody"],
+      "gates": ["proof-gate", "custody-gate", "legal-review", "board-approval"],
+      "status": "gated"
+    },
+    {
+      "id": "energy-intake",
+      "assetType": "energy",
+      "requiredProofs": ["asset-ownership-docs", "regulatory-clearance", "valuation-report"],
+      "gates": ["proof-gate", "compliance-gate", "legal-review", "board-approval"],
+      "status": "gated"
+    },
+    {
+      "id": "carbon-intake",
+      "assetType": "carbon",
+      "requiredProofs": ["registry-verification", "retirement-certificate", "ownership-proof"],
+      "gates": ["proof-gate", "compliance-gate", "legal-review"],
+      "status": "gated"
+    },
+    {
+      "id": "sblc-intake",
+      "assetType": "sblc",
+      "requiredProofs": ["bank-issued-instrument", "swift-confirmation", "source-bank-verification"],
+      "gates": ["compliance-gate", "provider-gate", "legal-review"],
+      "status": "gated"
+    },
+    {
+      "id": "pof-intake",
+      "assetType": "proof-of-funds",
+      "requiredProofs": ["bank-issued-source-document", "account-verification"],
+      "gates": ["compliance-gate", "source-document-required"],
+      "status": "gated",
+      "fabricationAllowed": false
+    },
+    {
+      "id": "xrpl-settlement",
+      "assetType": "xrpl-transaction",
+      "requiredProofs": ["readiness-assessment-complete", "all-gates-cleared"],
+      "gates": ["provider-gate", "legal-review", "compliance-gate", "board-approval"],
+      "status": "simulation-only",
+      "liveExecutionAllowed": false
+    }
+  ]
+}

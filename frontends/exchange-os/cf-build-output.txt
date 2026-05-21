@@ -1,0 +1,985 @@
+
+> troptions@0.1.0 cf:build C:\Users\Kevan\troptions
+> opennextjs-cloudflare build
+
+
+ΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+Γöé OpenNext ΓÇö Cloudflare build Γöé
+ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+
+WARN OpenNext is not fully compatible with Windows.
+WARN For optimal performance, it is recommended to use Windows Subsystem for Linux (WSL).
+WARN While OpenNext may function on Windows, it could encounter unpredictable failures during runtime.
+App directory: C:\Users\Kevan\troptions
+Next.js version : 16.2.4
+@opennextjs/cloudflare version: 1.19.6
+@opennextjs/aws version: 3.10.4
+workerd compatibility_date: 2026-04-25
+
+ΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+Γöé OpenNext ΓÇö Building Next.js app Γöé
+ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+
+npm warn Unknown env config "ignore-workspace-packages". This will stop working in the next major version of npm.
+npm warn Unknown env config "npm-globalconfig". This will stop working in the next major version of npm.
+npm warn Unknown env config "verify-deps-before-run". This will stop working in the next major version of npm.
+npm warn Unknown env config "_jsr-registry". This will stop working in the next major version of npm.
+npm warn Unknown global config "ignore-workspace-packages". This will stop working in the next major version of npm.
+
+> troptions@0.1.0 build
+> next build --webpack
+
+Γû▓ Next.js 16.2.4 (webpack)
+- Environments: .env.local
+- Experiments (use with caution):
+  ┬╖ cpus: 1
+
+  Creating an optimized production build ...
+Γ£ô Compiled successfully in 30.0s
+  Running TypeScript ...
+  Finished TypeScript in 22.5s ...
+  Collecting page data using 1 worker ...
+ΓÜá Using edge runtime on a page currently disables static generation for that page
+  Generating static pages using 1 worker (0/809) ...
+  Generating static pages using 1 worker (202/809) 
+  Generating static pages using 1 worker (404/809) 
+  Generating static pages using 1 worker (606/809) 
+Γ£ô Generating static pages using 1 worker (809/809) in 27.9s
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)                                                                                Revalidate  Expire
+Γöî Γùï /
+Γö£ Γùï /_not-found
+Γö£ ╞Æ /admin/infrastructure
+Γö£ ╞Æ /admin/infrastructure/adapters
+Γö£ ╞Æ /admin/infrastructure/audit
+Γö£ ╞Æ /admin/infrastructure/billing-readiness
+Γö£ ╞Æ /admin/infrastructure/deployments
+Γö£ ╞Æ /admin/infrastructure/health
+Γö£ ╞Æ /admin/infrastructure/namespaces
+Γö£ ╞Æ /admin/infrastructure/systems
+Γö£ ╞Æ /admin/platform
+Γö£ ╞Æ /admin/platform/capabilities
+Γö£ ╞Æ /admin/platform/execution-policy
+Γö£ ╞Æ /admin/platform/networks
+Γö£ ╞Æ /admin/platform/readiness
+Γö£ ╞Æ /admin/platform/rwa-adapters
+Γö£ ╞Æ /admin/platform/rwa-adapters/compliance
+Γö£ ╞Æ /admin/platform/rwa-adapters/providers
+Γö£ ╞Æ /admin/platform/rwa-adapters/readiness
+Γö£ ╞Æ /admin/proof-room
+Γö£ ╞Æ /admin/proof-room/approved-copy
+Γö£ ╞Æ /admin/proof-room/capabilities
+Γö£ ╞Æ /admin/proof-room/claims
+Γö£ ╞Æ /admin/proof-room/evidence
+Γö£ ╞Æ /admin/proof-room/history
+Γö£ ╞Æ /admin/proof-room/regulatory
+Γö£ ╞Æ /admin/proof-room/risk-review
+Γö£ ╞Æ /admin/revenue
+Γö£ ╞Æ /admin/troptions
+Γö£ ╞Æ /admin/troptions-cloud/ai-x402
+Γö£ ╞Æ /admin/troptions-nil/layer1
+Γö£ ╞Æ /admin/troptions/actions
+Γö£ ╞Æ /admin/troptions/advertising-audit
+Γö£ ╞Æ /admin/troptions/ai-ops
+Γö£ ╞Æ /admin/troptions/alerts
+Γö£ ╞Æ /admin/troptions/anti-illicit-finance
+Γö£ ╞Æ /admin/troptions/approvals
+Γö£ ╞Æ /admin/troptions/audit-log
+Γö£ ╞Æ /admin/troptions/banking-rails
+Γö£ ╞Æ /admin/troptions/broker-dealer
+Γö£ ╞Æ /admin/troptions/chain-risk
+Γö£ ╞Æ /admin/troptions/chains
+Γö£ ╞Æ /admin/troptions/chains/evm-trex
+Γö£ ╞Æ /admin/troptions/chains/solana
+Γö£ ╞Æ /admin/troptions/chains/tron
+Γö£ ╞Æ /admin/troptions/claims/approved
+Γö£ ╞Æ /admin/troptions/claims/high-risk
+Γö£ ╞Æ /admin/troptions/claims/missing-evidence
+Γö£ ╞Æ /admin/troptions/claims/rejected
+Γö£ ╞Æ /admin/troptions/claims/review
+Γö£ ╞Æ /admin/troptions/client-portal
+Γö£ ╞Æ /admin/troptions/clients
+Γö£ ╞Æ /admin/troptions/control-hub
+Γö£ ╞Æ /admin/troptions/control-plane
+Γö£ ╞Æ /admin/troptions/database
+Γö£ ╞Æ /admin/troptions/disclosures
+Γö£ ╞Æ /admin/troptions/ecosystem
+Γö£ ╞Æ /admin/troptions/entities
+Γö£ ╞Æ /admin/troptions/escalations
+Γö£ ╞Æ /admin/troptions/exchange-routing
+Γö£ ╞Æ /admin/troptions/global-rails
+Γö£ ╞Æ /admin/troptions/impact-reporting
+Γö£ ╞Æ /admin/troptions/incidents
+Γö£ ╞Æ /admin/troptions/intake
+Γö£ ╞Æ /admin/troptions/logs
+Γö£ ╞Æ /admin/troptions/metrics
+Γö£ ╞Æ /admin/troptions/mint
+Γö£ ╞Æ /admin/troptions/momentum
+Γö£ ╞Æ /admin/troptions/navigation-audit
+Γö£ ╞Æ /admin/troptions/observability
+Γö£ ╞Æ /admin/troptions/openclaw
+Γö£ ╞Æ /admin/troptions/openclaw/agents
+Γö£ ╞Æ /admin/troptions/openclaw/audit
+Γö£ ╞Æ /admin/troptions/openclaw/chat
+Γö£ ╞Æ /admin/troptions/openclaw/dashboard
+Γö£ ╞Æ /admin/troptions/openclaw/jefe
+Γö£ ╞Æ /admin/troptions/openclaw/jefe/commands
+Γö£ ╞Æ /admin/troptions/openclaw/jefe/policies
+Γö£ ╞Æ /admin/troptions/openclaw/jefe/routing
+Γö£ ╞Æ /admin/troptions/openclaw/jefe/tasks
+Γö£ ╞Æ /admin/troptions/openclaw/mcp
+Γö£ ╞Æ /admin/troptions/openclaw/policies
+Γö£ ╞Æ /admin/troptions/openclaw/rag
+Γö£ ╞Æ /admin/troptions/openclaw/site-ops
+Γö£ ╞Æ /admin/troptions/openclaw/tasks
+Γö£ ╞Æ /admin/troptions/openclaw/tools
+Γö£ ╞Æ /admin/troptions/openclaw/x402
+Γö£ ╞Æ /admin/troptions/paxos-rails
+Γö£ ╞Æ /admin/troptions/permissions
+Γö£ ╞Æ /admin/troptions/pof
+Γö£ ╞Æ /admin/troptions/proof-packages
+Γö£ ╞Æ /admin/troptions/public-benefit
+Γö£ ╞Æ /admin/troptions/readiness
+Γö£ ╞Æ /admin/troptions/release-gates
+Γö£ ╞Æ /admin/troptions/retention
+Γö£ ╞Æ /admin/troptions/roles
+Γö£ ╞Æ /admin/troptions/rwa-operations
+Γö£ ╞Æ /admin/troptions/sblc
+Γö£ ╞Æ /admin/troptions/settlement-ops
+Γö£ ╞Æ /admin/troptions/sla
+Γö£ ╞Æ /admin/troptions/smoke-checks
+Γö£ ╞Æ /admin/troptions/stablecoin-issuers
+Γö£ ╞Æ /admin/troptions/stablecoin-rails
+Γö£ ╞Æ /admin/troptions/telecom
+Γö£ ╞Æ /admin/troptions/trading
+Γö£ ╞Æ /admin/troptions/trading/algorithmic
+Γö£ ╞Æ /admin/troptions/trading/risk
+Γö£ ╞Æ /admin/troptions/transitions
+Γö£ ╞Æ /admin/troptions/wallet-forensics
+Γö£ ╞Æ /admin/troptions/wallet-forensics/exchange-deposits
+Γö£ ╞Æ /admin/troptions/wallet-forensics/funds-flow
+Γö£ ╞Æ /admin/troptions/wallet-forensics/investigation
+Γö£ ╞Æ /admin/troptions/wallet-forensics/reports
+Γö£ ╞Æ /admin/troptions/wallet-forensics/risk
+Γö£ ╞Æ /admin/troptions/wallet-forensics/transactions
+Γö£ ╞Æ /admin/troptions/wallet-forensics/wallets
+Γö£ ╞Æ /admin/troptions/wallets
+Γö£ ╞Æ /admin/troptions/wallets/accounts
+Γö£ ╞Æ /admin/troptions/wallets/balances
+Γö£ ╞Æ /admin/troptions/wallets/cards
+Γö£ ╞Æ /admin/troptions/wallets/funding
+Γö£ ╞Æ /admin/troptions/wallets/invites
+Γö£ ╞Æ /admin/troptions/wallets/qr
+Γö£ ╞Æ /admin/troptions/wallets/risk
+Γö£ ╞Æ /admin/troptions/wallets/users
+Γö£ ╞Æ /admin/troptions/wallets/x402
+Γö£ ╞Æ /admin/troptions/workflows
+Γö£ ╞Æ /admin/troptions/workflows/board
+Γö£ ╞Æ /admin/troptions/workflows/custody
+Γö£ ╞Æ /admin/troptions/workflows/exceptions
+Γö£ ╞Æ /admin/troptions/workflows/funding
+Γö£ ╞Æ /admin/troptions/workflows/intake
+Γö£ ╞Æ /admin/troptions/workflows/investor
+Γö£ ╞Æ /admin/troptions/workflows/issuance
+Γö£ ╞Æ /admin/troptions/workflows/legal
+Γö£ ╞Æ /admin/troptions/workflows/proof
+Γö£ ╞Æ /admin/troptions/workflows/settlement
+Γö£ ╞Æ /admin/troptions/x402
+Γö£ ╞Æ /admin/troptions/xrpl
+Γö£ ╞Æ /admin/troptions/xrpl-platform
+Γö£ ╞Æ /admin/troptions/xrpl-platform/amm-pools
+Γö£ ╞Æ /admin/troptions/xrpl-platform/audit
+Γö£ ╞Æ /admin/troptions/xrpl-platform/dependencies
+Γö£ ╞Æ /admin/troptions/xrpl-platform/issued-assets
+Γö£ ╞Æ /admin/troptions/xrpl-platform/live-data
+Γö£ ╞Æ /admin/troptions/xrpl-platform/order-books
+Γö£ ╞Æ /admin/troptions/xrpl-platform/readiness-gates
+Γö£ ╞Æ /admin/troptions/xrpl-platform/security
+Γö£ ╞Æ /admin/troptions/xrpl-platform/trustlines
+Γö£ ╞Æ /admin/troptions/xrpl-stellar
+Γö£ ╞Æ /admin/troptions/xrpl-stellar-compliance
+Γö£ ╞Æ /admin/troptions/xrpl/accounts
+Γö£ ╞Æ /admin/troptions/xrpl/amm
+Γö£ ╞Æ /admin/troptions/xrpl/conversions
+Γö£ ╞Æ /admin/troptions/xrpl/dex
+Γö£ ╞Æ /admin/troptions/xrpl/ledger-monitor
+Γö£ ╞Æ /admin/troptions/xrpl/trustlines
+Γö£ ╞Æ /api/auth/login
+Γö£ ╞Æ /api/auth/logout
+Γö£ ╞Æ /api/auth/register
+Γö£ ╞Æ /api/genius-yield/application-clock
+Γö£ ╞Æ /api/genius-yield/blocked-patterns
+Γö£ ╞Æ /api/genius-yield/classify-yield
+Γö£ ╞Æ /api/genius-yield/merchant-reward
+Γö£ ╞Æ /api/genius-yield/mock-opportunities
+Γö£ ╞Æ /api/genius-yield/overview
+Γö£ ╞Æ /api/genius-yield/partner-packet
+Γö£ ╞Æ /api/genius-yield/public-chain
+Γö£ ╞Æ /api/genius-yield/rwa-guardrail
+Γö£ ╞Æ /api/genius-yield/score-credit-union
+Γö£ ╞Æ /api/genius-yield/tokenized-deposit
+Γö£ ╞Æ /api/genius-yield/value-capture
+Γö£ ╞Æ /api/genius/evaluate-action
+Γö£ ╞Æ /api/genius/evidence
+Γö£ ╞Æ /api/genius/gates
+Γö£ ╞Æ /api/genius/merchant-settlement-map
+Γö£ ╞Æ /api/genius/overview
+Γö£ ╞Æ /api/genius/partners
+Γö£ ╞Æ /api/genius/regulator-packet
+Γö£ ╞Æ /api/genius/simulate-mint
+Γö£ ╞Æ /api/genius/simulate-redemption
+Γö£ ╞Æ /api/health/live
+Γö£ ╞Æ /api/health/ready
+Γö£ ╞Æ /api/insights/feed.json
+Γö£ ╞Æ /api/insights/rss.xml
+Γö£ Γùï /api/insights/sitemap.xml
+Γö£ ╞Æ /api/ipfs/add
+Γö£ ╞Æ /api/ipfs/health
+Γö£ ╞Æ /api/ipfs/pin
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/ai-infrastructure
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/ai-x402/snapshot
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/ai/simulate-access
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/ai/simulate-route
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/ai/simulate-tool
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/x402
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/x402/simulate-charge
+Γö£ ╞Æ /api/troptions-cloud/namespaces/[namespace]/x402/usage
+Γö£ ╞Æ /api/troptions/ai/capabilities
+Γö£ ╞Æ /api/troptions/ai/entities
+Γö£ ╞Æ /api/troptions/ai/knowledge-graph
+Γö£ ╞Æ /api/troptions/ai/llms
+Γö£ ╞Æ /api/troptions/ai/proof-index
+Γö£ ╞Æ /api/troptions/ai/summary
+Γö£ ╞Æ /api/troptions/alerts/acknowledge
+Γö£ ╞Æ /api/troptions/anti-illicit-finance/wallet-risk/simulate
+Γö£ ╞Æ /api/troptions/approvals/approve
+Γö£ ╞Æ /api/troptions/approvals/reject
+Γö£ ╞Æ /api/troptions/approvals/request
+Γö£ ╞Æ /api/troptions/audit-log/append
+Γö£ ╞Æ /api/troptions/audit-log/export
+Γö£ ╞Æ /api/troptions/banking/rails
+Γö£ ╞Æ /api/troptions/booking-requests
+Γö£ ╞Æ /api/troptions/carbon
+Γö£ ╞Æ /api/troptions/carbon/[assetId]
+Γö£ ╞Æ /api/troptions/carbon/simulate
+Γö£ ╞Æ /api/troptions/chain-risk/summary
+Γö£ Γùï /api/troptions/chain/live                                                                      1m      1y
+Γö£ ╞Æ /api/troptions/chains/summary
+Γö£ ╞Æ /api/troptions/cis-requests
+Γö£ ╞Æ /api/troptions/clawd/govern
+Γö£ ╞Æ /api/troptions/clawd/plan
+Γö£ ╞Æ /api/troptions/client-portal/access-request
+Γö£ ╞Æ /api/troptions/client-portal/summary
+Γö£ ╞Æ /api/troptions/control-hub/audit
+Γö£ ╞Æ /api/troptions/control-hub/recommendations
+Γö£ ╞Æ /api/troptions/control-hub/state
+Γö£ ╞Æ /api/troptions/control-hub/tasks
+Γö£ ╞Æ /api/troptions/conversions/simulate
+Γö£ ╞Æ /api/troptions/cross-rail/readiness
+Γö£ ╞Æ /api/troptions/escrow/simulate
+Γö£ ╞Æ /api/troptions/evm-trex/eligibility/simulate
+Γö£ ╞Æ /api/troptions/exceptions/resolve
+Γö£ ╞Æ /api/troptions/exchange-routes
+Γö£ ╞Æ /api/troptions/fund/amm
+Γö£ ╞Æ /api/troptions/fund/wallet
+Γö£ ╞Æ /api/troptions/funding-routes/recommend
+Γö£ ╞Æ /api/troptions/handbooks
+Γö£ ╞Æ /api/troptions/handbooks/[handbookId]
+Γö£ ╞Æ /api/troptions/impact/report/simulate
+Γö£ ╞Æ /api/troptions/infrastructure/adapters
+Γö£ ╞Æ /api/troptions/infrastructure/audit
+Γö£ ╞Æ /api/troptions/infrastructure/health
+Γö£ ╞Æ /api/troptions/infrastructure/launch-checklist
+Γö£ ╞Æ /api/troptions/infrastructure/namespaces
+Γö£ ╞Æ /api/troptions/inquiries
+Γö£ ╞Æ /api/troptions/inquiries/export
+Γö£ ╞Æ /api/troptions/jefe/command
+Γö£ ╞Æ /api/troptions/jefe/commands
+Γö£ ╞Æ /api/troptions/jefe/route-agent
+Γö£ ╞Æ /api/troptions/jefe/site-check
+Γö£ ╞Æ /api/troptions/jefe/status
+Γö£ ╞Æ /api/troptions/jefe/summary
+Γö£ ╞Æ /api/troptions/jefe/task-plan
+Γö£ ╞Æ /api/troptions/jefe/wallet-check
+Γö£ ╞Æ /api/troptions/jefe/x402-check
+Γö£ ╞Æ /api/troptions/jefe/xrpl-check
+Γö£ ╞Æ /api/troptions/kyc/[walletAddress]
+Γö£ ╞Æ /api/troptions/kyc/submit
+Γö£ ╞Æ /api/troptions/mcp/tools
+Γö£ ╞Æ /api/troptions/media
+Γö£ ╞Æ /api/troptions/media/episodes
+Γö£ ╞Æ /api/troptions/media/rights
+Γö£ ╞Æ /api/troptions/mint/lp-token
+Γö£ ╞Æ /api/troptions/mint/mpt
+Γö£ ╞Æ /api/troptions/mint/nft
+Γö£ ╞Æ /api/troptions/mint/tradeline
+Γö£ ╞Æ /api/troptions/momentum/claims/evaluate
+Γö£ ╞Æ /api/troptions/momentum/readiness
+Γö£ ╞Æ /api/troptions/momentum/snapshot
+Γö£ ╞Æ /api/troptions/narration/synthesize
+Γö£ ╞Æ /api/troptions/nil/campaigns
+Γö£ ╞Æ /api/troptions/nil/creators
+Γö£ ╞Æ /api/troptions/observability/export
+Γö£ ╞Æ /api/troptions/observability/snapshot
+Γö£ ╞Æ /api/troptions/openclaw/agents
+Γö£ ╞Æ /api/troptions/openclaw/audit
+Γö£ ╞Æ /api/troptions/openclaw/chat
+Γö£ ╞Æ /api/troptions/openclaw/rag/query
+Γö£ ╞Æ /api/troptions/openclaw/site/check
+Γö£ ╞Æ /api/troptions/openclaw/site/draft-fix
+Γö£ ╞Æ /api/troptions/openclaw/status
+Γö£ ╞Æ /api/troptions/openclaw/task/approve-request
+Γö£ ╞Æ /api/troptions/openclaw/task/create
+Γö£ ╞Æ /api/troptions/openclaw/task/simulate
+Γö£ ╞Æ /api/troptions/openclaw/tasks
+Γö£ ╞Æ /api/troptions/openclaw/tools
+Γö£ ╞Æ /api/troptions/openclaw/x402/simulate
+Γö£ ╞Æ /api/troptions/pate-coal
+Γö£ ╞Æ /api/troptions/paxos/rail/simulate
+Γö£ ╞Æ /api/troptions/payops/adapters
+Γö£ ╞Æ /api/troptions/payops/audit-events
+Γö£ ╞Æ /api/troptions/payops/compliance
+Γö£ ╞Æ /api/troptions/payops/fee-ledger
+Γö£ ╞Æ /api/troptions/payops/funding-sources
+Γö£ ╞Æ /api/troptions/payops/funding-vaults
+Γö£ ╞Æ /api/troptions/payops/namespaces
+Γö£ ╞Æ /api/troptions/payops/payees
+Γö£ ╞Æ /api/troptions/payops/payout-batches
+Γö£ ╞Æ /api/troptions/payops/payout-items
+Γö£ ╞Æ /api/troptions/payops/receipts
+Γö£ ╞Æ /api/troptions/pdf-documents
+Γö£ ╞Æ /api/troptions/platform/capabilities
+Γö£ ╞Æ /api/troptions/platform/networks
+Γö£ ╞Æ /api/troptions/pof/status
+Γö£ ╞Æ /api/troptions/pof/submit-evidence
+Γö£ Γùï /api/troptions/price                                                                           1m      1y
+Γö£ ╞Æ /api/troptions/proof-room/claims
+Γö£ ╞Æ /api/troptions/proof-room/history
+Γö£ ╞Æ /api/troptions/proof-room/proof-packet
+Γö£ ╞Æ /api/troptions/public-benefit/intake
+Γö£ ╞Æ /api/troptions/rag/query
+Γö£ ╞Æ /api/troptions/readiness/summary
+Γö£ ╞Æ /api/troptions/release-gates/status
+Γö£ ╞Æ /api/troptions/revenue/opportunities
+Γö£ ╞Æ /api/troptions/rwa-adapters/compliance
+Γö£ ╞Æ /api/troptions/rwa-adapters/evidence
+Γö£ ╞Æ /api/troptions/rwa-adapters/providers
+Γö£ ╞Æ /api/troptions/rwa-adapters/readiness
+Γö£ ╞Æ /api/troptions/rwa/assets
+Γö£ ╞Æ /api/troptions/rwa/carbon-bitcoin/simulate
+Γö£ ╞Æ /api/troptions/rwa/intake
+Γö£ ╞Æ /api/troptions/sblc/status
+Γö£ ╞Æ /api/troptions/sblc/submit-package
+Γö£ ╞Æ /api/troptions/settlement/bitcoin
+Γö£ ╞Æ /api/troptions/settlement/bitcoin/[settlementId]
+Γö£ ╞Æ /api/troptions/settlement/bitcoin/simulate
+Γö£ ╞Æ /api/troptions/settlement/simulate
+Γö£ ╞Æ /api/troptions/signatures/collect
+Γö£ ╞Æ /api/troptions/solana/payment-intent/simulate
+Γö£ ╞Æ /api/troptions/stablecoins/routes
+Γö£ ╞Æ /api/troptions/stablecoins/summary
+Γö£ ╞Æ /api/troptions/stellar-ecosystem/assets
+Γö£ ╞Æ /api/troptions/stellar-ecosystem/simulate/liquidity-pool
+Γö£ ╞Æ /api/troptions/stellar-ecosystem/simulate/path-payment
+Γö£ ╞Æ /api/troptions/stellar-ecosystem/simulate/trustline
+Γö£ ╞Æ /api/troptions/stellar-ecosystem/status
+Γö£ ╞Æ /api/troptions/stellar/genesis
+Γö£ ╞Æ /api/troptions/stellar/lp
+Γö£ ╞Æ /api/troptions/telecom/send-sms
+Γö£ ╞Æ /api/troptions/telecom/status
+Γö£ ╞Æ /api/troptions/trading/simulate
+Γö£ ╞Æ /api/troptions/transactions
+Γö£ ╞Æ /api/troptions/transactions/[txnId]
+Γö£ ╞Æ /api/troptions/transactions/simulate
+Γö£ ╞Æ /api/troptions/treasury
+Γö£ ╞Æ /api/troptions/treasury/funding-plan
+Γö£ ╞Æ /api/troptions/tron/usdt-risk/check
+Γö£ ╞Æ /api/troptions/trust/audit-status
+Γö£ ╞Æ /api/troptions/trust/disclaimers
+Γö£ ╞Æ /api/troptions/trust/manifest
+Γö£ ╞Æ /api/troptions/trust/release-gates
+Γö£ ╞Æ /api/troptions/wallet-forensics/add-wallet
+Γö£ ╞Æ /api/troptions/wallet-forensics/classify-transaction
+Γö£ ╞Æ /api/troptions/wallet-forensics/exchange-deposits
+Γö£ ╞Æ /api/troptions/wallet-forensics/funds-flow
+Γö£ ╞Æ /api/troptions/wallet-forensics/generate-report
+Γö£ ╞Æ /api/troptions/wallet-forensics/ious
+Γö£ ╞Æ /api/troptions/wallet-forensics/summary
+Γö£ ╞Æ /api/troptions/wallet-forensics/transactions
+Γö£ ╞Æ /api/troptions/wallet-forensics/wallets
+Γö£ ╞Æ /api/troptions/wallet-hub
+Γö£ ╞Æ /api/troptions/wallet-hub/receipt
+Γö£ ╞Æ /api/troptions/wallet-hub/transfer/request-approval
+Γö£ ╞Æ /api/troptions/wallet-hub/transfer/simulate
+Γö£ ╞Æ /api/troptions/wallet/balances
+Γö£ ╞Æ /api/troptions/wallet/convert
+Γö£ ╞Æ /api/troptions/wallet/create
+Γö£ ╞Æ /api/troptions/wallet/funding-request
+Γö£ ╞Æ /api/troptions/wallet/generate
+Γö£ ╞Æ /api/troptions/wallet/history
+Γö£ ╞Æ /api/troptions/wallet/invites/verify
+Γö£ ╞Æ /api/troptions/wallet/receive
+Γö£ ╞Æ /api/troptions/wallet/send
+Γö£ ╞Æ /api/troptions/wallet/status
+Γö£ ╞Æ /api/troptions/wallet/trustlines
+Γö£ ╞Æ /api/troptions/wallet/verify
+Γö£ ╞Æ /api/troptions/wallet/x402/payment-intent
+Γö£ ╞Æ /api/troptions/workflows/transition
+Γö£ ╞Æ /api/troptions/x402/payment-intent
+Γö£ ╞Æ /api/troptions/x402/readiness
+Γö£ ╞Æ /api/troptions/xrpl-ecosystem/assets
+Γö£ ╞Æ /api/troptions/xrpl-ecosystem/simulate/amm
+Γö£ ╞Æ /api/troptions/xrpl-ecosystem/simulate/nft
+Γö£ ╞Æ /api/troptions/xrpl-ecosystem/simulate/trustline
+Γö£ ╞Æ /api/troptions/xrpl-ecosystem/status
+Γö£ ╞Æ /api/troptions/xrpl-iou/checklist
+Γö£ ╞Æ /api/troptions/xrpl-iou/simulate
+Γö£ ╞Æ /api/troptions/xrpl-iou/verify
+Γö£ ╞Æ /api/troptions/xrpl-platform/amm-pools
+Γö£ ╞Æ /api/troptions/xrpl-platform/compliance/screen
+Γö£ ╞Æ /api/troptions/xrpl-platform/issued-assets
+Γö£ ╞Æ /api/troptions/xrpl-platform/live-data
+Γö£ ╞Æ /api/troptions/xrpl-platform/lp/positions
+Γö£ ╞Æ /api/troptions/xrpl-platform/mainnet/readiness-check
+Γö£ ╞Æ /api/troptions/xrpl-platform/nft/mint-client
+Γö£ ╞Æ /api/troptions/xrpl-platform/order-book
+Γö£ ╞Æ /api/troptions/xrpl-platform/quote/simulate
+Γö£ ╞Æ /api/troptions/xrpl-platform/security/dependencies
+Γö£ ╞Æ /api/troptions/xrpl-platform/summary
+Γö£ ╞Æ /api/troptions/xrpl-platform/testnet/unsigned-offer
+Γö£ ╞Æ /api/troptions/xrpl-platform/testnet/unsigned-payment
+Γö£ ╞Æ /api/troptions/xrpl-platform/tradeline/provision
+Γö£ ╞Æ /api/troptions/xrpl-platform/trustlines
+Γö£ ╞Æ /api/troptions/xrpl-platform/wallet/generate
+Γö£ ╞Æ /api/troptions/xrpl-stellar-compliance/claim-review
+Γö£ Γùï /api/troptions/xrpl-stellar-compliance/controls                                                1m      1y
+Γö£ ╞Æ /api/troptions/xrpl-stellar-compliance/evaluate
+Γö£ Γùï /api/troptions/xrpl-stellar-compliance/genius/report                                           1m      1y
+Γö£ Γùï /api/troptions/xrpl-stellar-compliance/iso20022/report                                         1m      1y
+Γö£ Γùï /api/troptions/xrpl-stellar-compliance/jurisdictions                                           1m      1y
+Γö£ ╞Æ /api/troptions/xrpl-stellar-compliance/snapshot
+Γö£ ╞Æ /api/troptions/xrpl/accounts
+Γö£ ╞Æ /api/troptions/xrpl/amm
+Γö£ ╞Æ /api/troptions/xrpl/dex
+Γö£ ╞Æ /api/troptions/xrpl/genesis
+Γö£ ╞Æ /api/troptions/xrpl/nft
+Γö£ ╞Æ /api/troptions/xrpl/orderbook
+Γö£ ╞Æ /api/troptions/xrpl/quote
+Γö£ Γùï /insights
+Γö£ ΓùÅ /insights/[slug]
+Γöé Γö£ /insights/proof-gated-issuance
+Γöé Γö£ /insights/xrpl-settlement-readiness
+Γöé Γö£ /insights/gold-digital-twin
+Γöé Γöö [+17 more paths]
+Γö£ Γùï /join-troptions
+Γö£ Γùï /join-troptions/create-wallet
+Γö£ Γùï /join-troptions/invite
+Γö£ Γùï /join-troptions/qr
+Γö£ Γùï /join-troptions/success
+Γö£ Γùï /login
+Γö£ ╞Æ /portal/troptions
+Γö£ ╞Æ /portal/troptions/agents
+Γö£ ╞Æ /portal/troptions/agents/chat
+Γö£ ╞Æ /portal/troptions/agents/support
+Γö£ ╞Æ /portal/troptions/agents/x402-status
+Γö£ ╞Æ /portal/troptions/anti-illicit-finance
+Γö£ ╞Æ /portal/troptions/assets
+Γö£ ╞Æ /portal/troptions/banking
+Γö£ ╞Æ /portal/troptions/chains
+Γö£ ╞Æ /portal/troptions/chains/evm-trex
+Γö£ ╞Æ /portal/troptions/chains/solana
+Γö£ ╞Æ /portal/troptions/chains/tron
+Γö£ ╞Æ /portal/troptions/custody
+Γö£ ╞Æ /portal/troptions/dashboard
+Γö£ ╞Æ /portal/troptions/documents
+Γö£ ╞Æ /portal/troptions/entities
+Γö£ ╞Æ /portal/troptions/exchange-routing
+Γö£ ╞Æ /portal/troptions/impact-reporting
+Γö£ ╞Æ /portal/troptions/kyb
+Γö£ ╞Æ /portal/troptions/kyc
+Γö£ ╞Æ /portal/troptions/onboarding
+Γö£ ╞Æ /portal/troptions/profile
+Γö£ ╞Æ /portal/troptions/proof-of-funds
+Γö£ ╞Æ /portal/troptions/public-benefit
+Γö£ ╞Æ /portal/troptions/reports
+Γö£ ╞Æ /portal/troptions/rwa
+Γö£ ╞Æ /portal/troptions/sblc
+Γö£ ╞Æ /portal/troptions/settlement
+Γö£ ╞Æ /portal/troptions/stablecoin-rails
+Γö£ ╞Æ /portal/troptions/stablecoins
+Γö£ ╞Æ /portal/troptions/support
+Γö£ ╞Æ /portal/troptions/support/telecom
+Γö£ ╞Æ /portal/troptions/trading
+Γö£ ╞Æ /portal/troptions/trading/algorithmic
+Γö£ ╞Æ /portal/troptions/trading/simulation
+Γö£ ╞Æ /portal/troptions/vaults
+Γö£ ╞Æ /portal/troptions/wallet-forensics
+Γö£ ╞Æ /portal/troptions/wallet-forensics/exchange-deposits
+Γö£ ╞Æ /portal/troptions/wallet-forensics/funds-flow
+Γö£ ╞Æ /portal/troptions/wallet-forensics/investigation
+Γö£ ╞Æ /portal/troptions/wallet-forensics/recovery-checklist
+Γö£ ╞Æ /portal/troptions/wallet-forensics/xrpl
+Γö£ ╞Æ /portal/troptions/wallet/convert
+Γö£ ╞Æ /portal/troptions/wallet/dashboard
+Γö£ ╞Æ /portal/troptions/wallet/funding-request
+Γö£ ╞Æ /portal/troptions/wallet/history
+Γö£ ╞Æ /portal/troptions/wallet/receive
+Γö£ ╞Æ /portal/troptions/wallet/send
+Γö£ ╞Æ /portal/troptions/wallet/x402
+Γö£ ╞Æ /portal/troptions/x402
+Γö£ ╞Æ /portal/troptions/xrpl
+Γö£ ╞Æ /portal/troptions/xrpl-platform
+Γö£ ╞Æ /portal/troptions/xrpl-platform/amm
+Γö£ ╞Æ /portal/troptions/xrpl-platform/dex
+Γö£ ╞Æ /portal/troptions/xrpl-platform/live-data
+Γö£ ╞Æ /portal/troptions/xrpl-platform/quote
+Γö£ ╞Æ /portal/troptions/xrpl-platform/readiness
+Γö£ ╞Æ /portal/troptions/xrpl-platform/testnet-lab
+Γö£ ╞Æ /portal/troptions/xrpl/accounts
+Γö£ ╞Æ /portal/troptions/xrpl/amm
+Γö£ ╞Æ /portal/troptions/xrpl/conversions
+Γö£ ╞Æ /portal/troptions/xrpl/dex
+Γö£ ╞Æ /portal/troptions/xrpl/trustlines
+Γö£ Γùï /register
+Γö£ Γùï /sales-rep
+Γö£ Γùï /troptions
+Γö£ Γùï /troptions-ai
+Γö£ Γùï /troptions-ai/ai-citations
+Γö£ Γùï /troptions-ai/entities
+Γö£ Γùï /troptions-ai/feeds
+Γö£ Γùï /troptions-ai/knowledge-graph
+Γö£ Γùï /troptions-ai/llms
+Γö£ Γùï /troptions-ai/machine-readable-trust
+Γö£ Γùï /troptions-ai/search-optimization
+Γö£ Γùï /troptions-ai/sovereign
+Γö£ Γùï /troptions-ai/telecom
+Γö£ Γùï /troptions-ai/templates
+Γö£ ΓùÅ /troptions-ai/templates/[templateId]
+Γöé Γö£ /troptions-ai/templates/tmpl-001
+Γöé Γö£ /troptions-ai/templates/tmpl-002
+Γöé Γö£ /troptions-ai/templates/tmpl-003
+Γöé Γöö [+9 more paths]
+Γö£ Γùï /troptions-ai/x402
+Γö£ Γùï /troptions-cloud
+Γö£ ΓùÅ /troptions-cloud/[namespace]
+Γöé Γö£ /troptions-cloud/troptions
+Γöé Γö£ /troptions-cloud/troptions-tv
+Γöé Γö£ /troptions-cloud/troptions-media
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/ai
+Γöé Γö£ /troptions-cloud/troptions/ai
+Γöé Γö£ /troptions-cloud/troptions-tv/ai
+Γöé Γö£ /troptions-cloud/troptions-media/ai
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/ai-infrastructure
+Γöé Γö£ /troptions-cloud/troptions/ai-infrastructure
+Γöé Γö£ /troptions-cloud/troptions-tv/ai-infrastructure
+Γöé Γö£ /troptions-cloud/troptions-media/ai-infrastructure
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/ai-policy
+Γöé Γö£ /troptions-cloud/troptions/ai-policy
+Γöé Γö£ /troptions-cloud/troptions-tv/ai-policy
+Γöé Γö£ /troptions-cloud/troptions-media/ai-policy
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/ai/systems
+Γöé Γö£ /troptions-cloud/troptions/ai/systems
+Γöé Γö£ /troptions-cloud/troptions-tv/ai/systems
+Γöé Γö£ /troptions-cloud/troptions-media/ai/systems
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/audit
+Γöé Γö£ /troptions-cloud/troptions/audit
+Γöé Γö£ /troptions-cloud/troptions-tv/audit
+Γöé Γö£ /troptions-cloud/troptions-media/audit
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/business
+Γöé Γö£ /troptions-cloud/troptions/business
+Γöé Γö£ /troptions-cloud/troptions-tv/business
+Γöé Γö£ /troptions-cloud/troptions-media/business
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/healthcare
+Γöé Γö£ /troptions-cloud/troptions/healthcare
+Γöé Γö£ /troptions-cloud/troptions-tv/healthcare
+Γöé Γö£ /troptions-cloud/troptions-media/healthcare
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/knowledge-vault
+Γöé Γö£ /troptions-cloud/troptions/knowledge-vault
+Γöé Γö£ /troptions-cloud/troptions-tv/knowledge-vault
+Γöé Γö£ /troptions-cloud/troptions-media/knowledge-vault
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/knowledge-vault/[itemId]
+Γöé Γö£ /troptions-cloud/troptions/knowledge-vault/ki-001
+Γöé Γö£ /troptions-cloud/troptions/knowledge-vault/ki-002
+Γöé Γö£ /troptions-cloud/troptions/knowledge-vault/ki-003
+Γöé Γöö [+5 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/media
+Γöé Γö£ /troptions-cloud/troptions/media
+Γöé Γö£ /troptions-cloud/troptions-tv/media
+Γöé Γö£ /troptions-cloud/troptions-media/media
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/membership
+Γöé Γö£ /troptions-cloud/troptions/membership
+Γöé Γö£ /troptions-cloud/troptions-tv/membership
+Γöé Γö£ /troptions-cloud/troptions-media/membership
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/model-router
+Γöé Γö£ /troptions-cloud/troptions/model-router
+Γöé Γö£ /troptions-cloud/troptions-tv/model-router
+Γöé Γö£ /troptions-cloud/troptions-media/model-router
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops
+Γöé Γö£ /troptions-cloud/troptions/payops
+Γöé Γö£ /troptions-cloud/troptions-tv/payops
+Γöé Γö£ /troptions-cloud/troptions-media/payops
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops/adapters
+Γöé Γö£ /troptions-cloud/troptions/payops/adapters
+Γöé Γö£ /troptions-cloud/troptions-tv/payops/adapters
+Γöé Γö£ /troptions-cloud/troptions-media/payops/adapters
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops/batches
+Γöé Γö£ /troptions-cloud/troptions/payops/batches
+Γöé Γö£ /troptions-cloud/troptions-tv/payops/batches
+Γöé Γö£ /troptions-cloud/troptions-media/payops/batches
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops/compliance
+Γöé Γö£ /troptions-cloud/troptions/payops/compliance
+Γöé Γö£ /troptions-cloud/troptions-tv/payops/compliance
+Γöé Γö£ /troptions-cloud/troptions-media/payops/compliance
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops/funding
+Γöé Γö£ /troptions-cloud/troptions/payops/funding
+Γöé Γö£ /troptions-cloud/troptions-tv/payops/funding
+Γöé Γö£ /troptions-cloud/troptions-media/payops/funding
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops/payees
+Γöé Γö£ /troptions-cloud/troptions/payops/payees
+Γöé Γö£ /troptions-cloud/troptions-tv/payops/payees
+Γöé Γö£ /troptions-cloud/troptions-media/payops/payees
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops/receipts
+Γöé Γö£ /troptions-cloud/troptions/payops/receipts
+Γöé Γö£ /troptions-cloud/troptions-tv/payops/receipts
+Γöé Γö£ /troptions-cloud/troptions-media/payops/receipts
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/payops/settings
+Γöé Γö£ /troptions-cloud/troptions/payops/settings
+Γöé Γö£ /troptions-cloud/troptions-tv/payops/settings
+Γöé Γö£ /troptions-cloud/troptions-media/payops/settings
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/proof
+Γöé Γö£ /troptions-cloud/troptions/proof
+Γöé Γö£ /troptions-cloud/troptions-tv/proof
+Γöé Γö£ /troptions-cloud/troptions-media/proof
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/settings
+Γöé Γö£ /troptions-cloud/troptions/settings
+Γöé Γö£ /troptions-cloud/troptions-tv/settings
+Γöé Γö£ /troptions-cloud/troptions-media/settings
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/sovereign-ai
+Γöé Γö£ /troptions-cloud/troptions/sovereign-ai
+Γöé Γö£ /troptions-cloud/troptions-tv/sovereign-ai
+Γöé Γö£ /troptions-cloud/troptions-media/sovereign-ai
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/sovereign-ai/[systemId]
+Γöé Γö£ /troptions-cloud/troptions/sovereign-ai/sys-001
+Γöé Γö£ /troptions-cloud/troptions-tv/sovereign-ai/sys-002
+Γöé Γöö /troptions-cloud/troptions-business/sovereign-ai/sys-003
+Γö£ ΓùÅ /troptions-cloud/[namespace]/sovereign-ai/new
+Γöé Γö£ /troptions-cloud/troptions/sovereign-ai/new
+Γöé Γö£ /troptions-cloud/troptions-tv/sovereign-ai/new
+Γöé Γö£ /troptions-cloud/troptions-media/sovereign-ai/new
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/team
+Γöé Γö£ /troptions-cloud/troptions/team
+Γöé Γö£ /troptions-cloud/troptions-tv/team
+Γöé Γö£ /troptions-cloud/troptions-media/team
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/usage
+Γöé Γö£ /troptions-cloud/troptions/usage
+Γöé Γö£ /troptions-cloud/troptions-tv/usage
+Γöé Γö£ /troptions-cloud/troptions-media/usage
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/web3
+Γöé Γö£ /troptions-cloud/troptions/web3
+Γöé Γö£ /troptions-cloud/troptions-tv/web3
+Γöé Γö£ /troptions-cloud/troptions-media/web3
+Γöé Γöö [+7 more paths]
+Γö£ ΓùÅ /troptions-cloud/[namespace]/x402
+Γöé Γö£ /troptions-cloud/troptions/x402
+Γöé Γö£ /troptions-cloud/troptions-tv/x402
+Γöé Γö£ /troptions-cloud/troptions-media/x402
+Γöé Γöö [+7 more paths]
+Γö£ Γùï /troptions-live
+Γö£ Γùï /troptions-nil/layer1
+Γö£ Γùï /troptions-old-money
+Γö£ Γùï /troptions-old-money/annual-letter
+Γö£ Γùï /troptions-old-money/contact
+Γö£ Γùï /troptions-old-money/custody
+Γö£ Γùï /troptions-old-money/energy
+Γö£ Γùï /troptions-old-money/gold
+Γö£ Γùï /troptions-old-money/governance
+Γö£ Γùï /troptions-old-money/institutional
+Γö£ Γùï /troptions-old-money/media
+Γö£ Γùï /troptions-old-money/overview
+Γö£ Γùï /troptions-old-money/proof
+Γö£ Γùï /troptions-old-money/reports
+Γö£ Γùï /troptions-old-money/rwa
+Γö£ Γùï /troptions-old-money/settlement
+Γö£ Γùï /troptions-portal
+Γö£ Γùï /troptions/anti-illicit-finance
+Γö£ Γùï /troptions/asset-issuance
+Γö£ Γùï /troptions/auth/login
+Γö£ Γùï /troptions/auth/register
+Γö£ Γùï /troptions/book
+Γö£ Γùï /troptions/capabilities
+Γö£ Γùï /troptions/capabilities-expanded
+Γö£ Γùï /troptions/carbon
+Γö£ ╞Æ /troptions/carbon/[assetId]
+Γö£ Γùï /troptions/chain-risk
+Γö£ Γùï /troptions/chains
+Γö£ Γùï /troptions/chains/evm-trex
+Γö£ Γùï /troptions/chains/solana
+Γö£ Γùï /troptions/chains/tron
+Γö£ Γùï /troptions/chains/xrpl
+Γö£ Γùï /troptions/cis
+Γö£ Γùï /troptions/client-onboarding
+Γö£ Γùï /troptions/compliance
+Γö£ Γùï /troptions/compliance/handbooks
+Γö£ Γùï /troptions/contact
+Γö£ Γùï /troptions/cross-rail
+Γö£ Γùï /troptions/custody
+Γö£ Γùï /troptions/diligence/legacy-sources
+Γö£ Γùï /troptions/diligence/public-claims
+Γö£ Γùï /troptions/diligence/source-map
+Γö£ Γùï /troptions/disclaimers
+Γö£ Γùï /troptions/docs/downloads
+Γö£ Γùï /troptions/docs/funding-playbook
+Γö£ Γùï /troptions/ecosystem
+Γö£ Γùï /troptions/exchange-readiness
+Γö£ Γùï /troptions/funding
+Γö£ Γùï /troptions/funding-routes
+Γö£ Γùï /troptions/future
+Γö£ ╞Æ /troptions/gated/downloads
+Γö£ Γùï /troptions/genius-control-tower
+Γö£ Γùï /troptions/genius-yield-opportunity
+Γö£ Γùï /troptions/history
+Γö£ Γùï /troptions/insights
+Γö£ Γùï /troptions/institutional
+Γö£ Γùï /troptions/institutional/audit-room
+Γö£ Γùï /troptions/institutional/claims
+Γö£ Γùï /troptions/institutional/diligence-room
+Γö£ Γùï /troptions/institutional/disclosures
+Γö£ Γùï /troptions/institutional/gold
+Γö£ Γùï /troptions/institutional/merchant-network
+Γö£ Γùï /troptions/institutional/overview
+Γö£ Γùï /troptions/institutional/partners
+Γö£ Γùï /troptions/institutional/pay
+Γö£ Γùï /troptions/institutional/proof
+Γö£ Γùï /troptions/institutional/risk
+Γö£ Γùï /troptions/institutional/rwa
+Γö£ Γùï /troptions/institutional/token-roles
+Γö£ Γùï /troptions/institutional/unity
+Γö£ Γùï /troptions/kyc
+Γö£ Γùï /troptions/layer1
+Γö£ Γùï /troptions/ledger
+Γö£ Γùï /troptions/legacy
+Γö£ Γùï /troptions/legal
+Γö£ Γùï /troptions/live                                                                                1m      1y
+Γö£ Γùï /troptions/media
+Γö£ Γùï /troptions/migration
+Γö£ Γùï /troptions/mobile-medical
+Γö£ Γùï /troptions/momentum
+Γö£ Γùï /troptions/neobank
+Γö£ Γùï /troptions/nil
+Γö£ Γùï /troptions/onboarding
+Γö£ Γùï /troptions/onboarding/choose-plan
+Γö£ Γùï /troptions/onboarding/create-namespace
+Γö£ Γùï /troptions/onboarding/issue-access
+Γö£ Γùï /troptions/payment-rails
+Γö£ Γùï /troptions/payments
+Γö£ Γùï /troptions/platform
+Γö£ Γùï /troptions/pof
+Γö£ Γùï /troptions/pricing
+Γö£ Γùï /troptions/proof
+Γö£ Γùï /troptions/proof-room
+Γö£ Γùï /troptions/public-benefit
+Γö£ Γùï /troptions/public-benefit/fentanyl-prevention
+Γö£ Γùï /troptions/real-estate
+Γö£ Γùï /troptions/request-access
+Γö£ Γùï /troptions/risk-analytics
+Γö£ Γùï /troptions/rwa
+Γö£ Γùï /troptions/rwa-readiness
+Γö£ Γùï /troptions/rwa/axl-001
+Γö£ Γùï /troptions/rwa/carbon-bitcoin-demo
+Γö£ Γùï /troptions/rwa/multichain
+Γö£ Γùï /troptions/rwa/pate-coal
+Γö£ Γùï /troptions/rwa/pate-coal/documents
+Γö£ Γùï /troptions/rwa/pate-coal/funding
+Γö£ Γùï /troptions/rwa/pate-coal/readiness
+Γö£ Γùï /troptions/rwa/trex
+Γö£ Γùï /troptions/services
+Γö£ Γùï /troptions/settlement
+Γö£ Γùï /troptions/settlement/bitcoin
+Γö£ ╞Æ /troptions/settlement/bitcoin/[settlementId]
+Γö£ Γùï /troptions/solar
+Γö£ Γùï /troptions/stablecoins
+Γö£ Γùï /troptions/stablecoins/dai
+Γö£ Γùï /troptions/stablecoins/eurc
+Γö£ Γùï /troptions/stablecoins/paxg
+Γö£ Γùï /troptions/stablecoins/paxos
+Γö£ Γùï /troptions/stablecoins/pyusd
+Γö£ Γùï /troptions/stablecoins/usdc
+Γö£ Γùï /troptions/stablecoins/usdp
+Γö£ Γùï /troptions/stablecoins/usdt
+Γö£ Γùï /troptions/stellar
+Γö£ Γùï /troptions/system-status
+Γö£ Γùï /troptions/then-now
+Γö£ Γùï /troptions/transactions
+Γö£ ╞Æ /troptions/transactions/[type]
+Γö£ ╞Æ /troptions/treasury
+Γö£ ╞Æ /troptions/treasury/funding-plan
+Γö£ Γùï /troptions/trust
+Γö£ Γùï /troptions/unity-token
+Γö£ Γùï /troptions/university
+Γö£ Γùï /troptions/verification
+Γö£ Γùï /troptions/verify
+Γö£ Γùï /troptions/wallet-forensics
+Γö£ Γùï /troptions/wallet-forensics/amm
+Γö£ Γùï /troptions/wallet-forensics/exchange-deposits
+Γö£ Γùï /troptions/wallet-forensics/funds-flow
+Γö£ Γùï /troptions/wallet-forensics/investigation
+Γö£ Γùï /troptions/wallet-forensics/ious
+Γö£ Γùï /troptions/wallet-forensics/nfts
+Γö£ Γùï /troptions/wallet-forensics/overview
+Γö£ Γùï /troptions/wallet-forensics/recovery-checklist
+Γö£ Γùï /troptions/wallet-forensics/signing-keys
+Γö£ Γùï /troptions/wallet-forensics/transactions
+Γö£ Γùï /troptions/wallet-forensics/trustlines
+Γö£ Γùï /troptions/wallet-forensics/xrpl
+Γö£ Γùï /troptions/wallet-hub
+Γö£ Γùï /troptions/wallets
+Γö£ Γùï /troptions/what-changes
+Γö£ Γùï /troptions/workflows
+Γö£ Γùï /troptions/workflows/asset-intake
+Γö£ Γùï /troptions/workflows/board-approval
+Γö£ Γùï /troptions/workflows/custody-review
+Γö£ Γùï /troptions/workflows/exceptions
+Γö£ Γùï /troptions/workflows/funding-readiness
+Γö£ Γùï /troptions/workflows/investor-readiness
+Γö£ Γùï /troptions/workflows/issuance-readiness
+Γö£ Γùï /troptions/workflows/legal-review
+Γö£ Γùï /troptions/workflows/proof-package
+Γö£ Γùï /troptions/workflows/settlement-readiness
+Γö£ Γùï /troptions/xchange
+Γö£ Γùï /troptions/xrpl
+Γö£ Γùï /troptions/xrpl-iou
+Γö£ Γùï /troptions/xrpl-platform
+Γö£ Γùï /troptions/xrpl-platform/amm
+Γö£ Γùï /troptions/xrpl-platform/dex
+Γö£ Γùï /troptions/xrpl-platform/genesis
+Γö£ Γùï /troptions/xrpl-platform/issued-assets
+Γö£ Γùï /troptions/xrpl-platform/links
+Γö£ Γùï /troptions/xrpl-platform/live-data
+Γö£ Γùï /troptions/xrpl-platform/mainnet-readiness
+Γö£ Γùï /troptions/xrpl-platform/overview
+Γö£ Γùï /troptions/xrpl-platform/pathfinding
+Γö£ Γùï /troptions/xrpl-platform/security
+Γö£ Γùï /troptions/xrpl-platform/testnet-lab
+Γö£ Γùï /troptions/xrpl-platform/trustlines
+Γö£ Γùï /troptions/xrpl-stellar-compliance
+Γö£ Γùï /ttn
+Γö£ ╞Æ /ttn/admin/content-review
+Γö£ ΓùÅ /ttn/admin/content-review/[id]
+Γöé Γö£ /ttn/admin/content-review/sub-001
+Γöé Γö£ /ttn/admin/content-review/sub-002
+Γöé Γö£ /ttn/admin/content-review/sub-003
+Γöé Γöö [+6 more paths]
+Γö£ Γùï /ttn/channels
+Γö£ ΓùÅ /ttn/channels/[slug]
+Γöé Γö£ /ttn/channels/fth-news
+Γöé Γö£ /ttn/channels/troptions-tv
+Γöé Γö£ /ttn/channels/ttn-originals
+Γöé Γöö [+4 more paths]
+Γö£ Γùï /ttn/creators
+Γö£ ΓùÅ /ttn/creators/[slug]
+Γöé Γö£ /ttn/creators/kevan-burns
+Γöé Γö£ /ttn/creators/ttn-originals
+Γöé Γö£ /ttn/creators/real-estate-connections
+Γöé Γöö [+2 more paths]
+Γö£ Γùï /ttn/films
+Γö£ ΓùÅ /ttn/films/[slug]
+Γöé Γö£ /ttn/films/ttn-origins
+Γöé Γöö /ttn/films/first-block-student-short
+Γö£ Γùï /ttn/news
+Γö£ ΓùÅ /ttn/news/[slug]
+Γöé Γö£ /ttn/news/ttn-creatorOS-launch
+Γöé Γö£ /ttn/news/ipfs-proof-registry-what-it-means-for-creators
+Γöé Γö£ /ttn/news/ttn-originals-first-documentary-announcement
+Γöé Γöö [+2 more paths]
+Γö£ Γùï /ttn/podcasts
+Γö£ ΓùÅ /ttn/podcasts/[slug]
+Γöé Γöö /ttn/podcasts/troptions-sovereignty-podcast
+Γö£ ΓùÅ /ttn/podcasts/[slug]/episodes/[episodeSlug]
+Γöé Γö£ /ttn/podcasts/troptions-sovereignty-podcast/episodes/ep-003-ttn-creatorOS-walkthrough
+Γöé Γö£ /ttn/podcasts/troptions-sovereignty-podcast/episodes/ep-002-ipfs-proof-for-creators
+Γöé Γöö /ttn/podcasts/troptions-sovereignty-podcast/episodes/ep-001-what-is-troptions
+Γö£ Γùï /ttn/proof
+Γö£ ΓùÅ /ttn/proof/[cid]
+Γöé Γö£ /ttn/proof/QmeDKjm5ovtHycSQzfhC35iNU1niEFTKBq2Yxc49kZsZ3H
+Γöé Γö£ /ttn/proof/QmPlaceholderCreator001
+Γöé Γöö /ttn/proof/QmPlaceholderCreator002
+Γö£ Γùï /ttn/sponsors
+Γö£ Γùï /ttn/studio
+Γö£ Γùï /ttn/studio/submissions
+Γö£ ΓùÅ /ttn/studio/submissions/[id]
+Γöé Γö£ /ttn/studio/submissions/sub-001
+Γöé Γö£ /ttn/studio/submissions/sub-002
+Γöé Γö£ /ttn/studio/submissions/sub-003
+Γöé Γöö [+6 more paths]
+Γö£ Γùï /ttn/studio/submit
+Γö£ Γùï /ttn/studio/submit/blog
+Γö£ Γùï /ttn/studio/submit/channel
+Γö£ Γùï /ttn/studio/submit/film
+Γö£ Γùï /ttn/studio/submit/podcast
+Γöö Γùï /ttn/studio/submit/video
+
+
+Γùï  (Static)   prerendered as static content
+ΓùÅ  (SSG)      prerendered as static HTML (uses generateStaticParams)
+╞Æ  (Dynamic)  server-rendered on demand
+
+
+ΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+Γöé OpenNext ΓÇö Generating bundle Γöé
+ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+
+Bundling middleware function...
+Bundling static assets...
+Bundling cache assets...
+Building server function: default...
+file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+aws@3.10.4_next_cbf475f19674108ad1dc9d8eb97d28de/node_modules/@opennextjs/aws/dist/build/copyTracedFiles.js:128
+                throw new Error(`
+                      ^
+
+Error: 
+--------------------------------------------------------------------------------
+app/api\troptions\pdf-documents\route cannot use the edge runtime.
+OpenNext requires edge runtime function to be defined in a separate function.
+See the docs for more information on how to bundle edge runtime functions.
+--------------------------------------------------------------------------------
+        
+    at computeCopyFilesForPage (file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+aws@3.10.4_next_cbf475f19674108ad1dc9d8eb97d28de/node_modules/@opennextjs/aws/dist/build/copyTracedFiles.js:128:23)
+    at file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+aws@3.10.4_next_cbf475f19674108ad1dc9d8eb97d28de/node_modules/@opennextjs/aws/dist/build/copyTracedFiles.js:193:9
+    at Array.forEach (<anonymous>)
+    at copyTracedFiles (file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+aws@3.10.4_next_cbf475f19674108ad1dc9d8eb97d28de/node_modules/@opennextjs/aws/dist/build/copyTracedFiles.js:192:12)
+    at generateBundle (file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+cloudflare@1.19_408f00fe5fbc69964f167e5ea92b49c5/node_modules/@opennextjs/cloudflare/dist/cli/build/open-next/createServerBundle.js:121:60)
+    at createServerBundle (file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+cloudflare@1.19_408f00fe5fbc69964f167e5ea92b49c5/node_modules/@opennextjs/cloudflare/dist/cli/build/open-next/createServerBundle.js:75:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async build (file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+cloudflare@1.19_408f00fe5fbc69964f167e5ea92b49c5/node_modules/@opennextjs/cloudflare/dist/cli/build/build.js:87:5)
+    at async buildCommand (file:///C:/Users/Kevan/troptions/node_modules/.pnpm/@opennextjs+cloudflare@1.19_408f00fe5fbc69964f167e5ea92b49c5/node_modules/@opennextjs/cloudflare/dist/cli/commands/build.js:40:5)
+
+Node.js v24.13.0
+ΓÇëELIFECYCLEΓÇë Command failed with exit code 1.

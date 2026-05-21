@@ -1,0 +1,47 @@
+export const JEFE_ALLOWED_ACTIONS = [
+  "read-registries",
+  "summarize-status",
+  "route-tasks",
+  "draft-checklists",
+  "simulate-x402",
+  "simulate-xrpl-check",
+  "simulate-wallet-check",
+  "run-site-audit",
+  "create-task-plan",
+  "request-approvals",
+] as const;
+
+export const JEFE_BLOCKED_ACTIONS = [
+  "approve-users",
+  "approve-kyc",
+  "approve-kyb",
+  "approve-pof",
+  "approve-sblc",
+  "approve-rwa",
+  "approve-x402-production-payments",
+  "approve-live-trading",
+  "approve",
+  "reject",
+  "issue",
+  "trade",
+  "settle",
+  "move-funds",
+  "send-funds",
+  "submit-transactions",
+  "sign-transaction",
+  "enable-live-x402",
+  "enable-live-xrpl-mainnet",
+  "bypass-board-approvals",
+  "bypass-sanctions",
+  "bypass-compliance",
+  "expose-secrets",
+  "modify-dns",
+  "deploy-production-directly",
+] as const;
+
+export const JEFE_REQUIRED_APPROVALS = [
+  "Operator approval",
+  "Compliance approval",
+  "Provider approval",
+  "Board approval",
+] as const;

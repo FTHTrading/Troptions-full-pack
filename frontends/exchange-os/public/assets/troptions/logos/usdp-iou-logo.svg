@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg-usdp" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#001A1A"/>
+      <stop offset="100%" stop-color="#000F0F"/>
+    </radialGradient>
+    <radialGradient id="coin-usdp" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#00B8A0"/>
+      <stop offset="100%" stop-color="#007D6C"/>
+    </radialGradient>
+    <filter id="shadow-usdp">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#007D6C" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+  <rect width="200" height="200" rx="20" fill="url(#bg-usdp)"/>
+  <circle cx="100" cy="95" r="66" fill="none" stroke="#009A88" stroke-width="2" opacity="0.4"/>
+  <circle cx="100" cy="95" r="60" fill="url(#coin-usdp)" filter="url(#shadow-usdp)"/>
+  <circle cx="100" cy="95" r="52" fill="none" stroke="white" stroke-width="1.5" opacity="0.35"/>
+  <text x="100" y="90" font-family="Georgia, serif" font-size="40" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle" opacity="0.95">$</text>
+  <line x1="100" y1="55" x2="100" y2="63" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="100" y1="127" x2="100" y2="135" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <text x="100" y="115" font-family="'Arial Black', Arial, sans-serif" font-size="12" font-weight="900"
+        fill="white" text-anchor="middle" letter-spacing="3">USDP</text>
+  <rect x="66" y="142" width="68" height="20" rx="10" fill="#007D6C"/>
+  <text x="100" y="156" font-family="Arial, sans-serif" font-size="10" font-weight="700"
+        fill="white" text-anchor="middle" letter-spacing="2">IOU</text>
+  <text x="100" y="183" font-family="Arial, sans-serif" font-size="7.5" font-weight="600"
+        fill="#5A9A90" text-anchor="middle" letter-spacing="1.5">TROPTIONS GATEWAY</text>
+</svg>

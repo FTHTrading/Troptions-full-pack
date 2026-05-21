@@ -1,0 +1,251 @@
+{
+  "audit_metadata": {
+    "title": "Troptions Master System Inventory",
+    "version": "1.0.0",
+    "audit_date": "2026-04-28",
+    "auditor": "GitHub Copilot (Read-Only Audit Mode)",
+    "repository_head": "6763757",
+    "branch": "main",
+    "safety_mode": "read-only",
+    "disclaimer": "This inventory does not provide legal, tax, investment, or compliance advice. Public wallet addresses are included for verification. Private keys, seeds, and signing material must never be disclosed. No blockchain execution was performed during this audit."
+  },
+  "platform": {
+    "framework": "Next.js 15",
+    "language": "TypeScript",
+    "runtime": "Node 22",
+    "deployment_target": "Netlify",
+    "path_alias": "@/ -> src/",
+    "database": {
+      "primary": "SQLite (better-sqlite3)",
+      "migration_target": "PostgreSQL",
+      "migration_status": "Not migrated"
+    }
+  },
+  "blockchain": {
+    "xrpl": {
+      "network": "Mainnet",
+      "rpc_endpoint": "https://xrplcluster.com",
+      "issuer_address": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributor_address": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "asset_hex": "54524F5054494F4E530000000000000000000000",
+      "compromised_address": "rpP12ND2K7ZRzXZBEUnQM2i18tMGytXnW1",
+      "compromised_note": "DO NOT USE — retired/compromised",
+      "live_execution_enabled": false,
+      "live_nft_mint_enabled": false,
+      "amm_seeded": false
+    },
+    "stellar": {
+      "network": "Mainnet",
+      "horizon_endpoint": "https://horizon.stellar.org",
+      "issuer_address": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributor_address": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "live_execution_enabled": false
+    },
+    "treasury_log": {
+      "file": "data/treasury-funding-log.json",
+      "all_entries_mode": "dry-run",
+      "all_entries_status": "simulated",
+      "live_transactions": 0
+    }
+  },
+  "genesis": {
+    "genesis_hash": "5c0a395f3a83008c8a644325145ac44679747fdd880c9c260ac7781613f4cd29",
+    "ipfs_cid": "QmeDKjm5ovtHycSQzfhC35iNU1niEFTKBq2Yxc49kZsZ3H",
+    "phase": 20,
+    "commit": "6827657"
+  },
+  "rust_l1": {
+    "workspace_path": "troptions-rust-l1/",
+    "total_crates": 28,
+    "primary_crate": "tsn-nil",
+    "nil_safety_constants": {
+      "LIVE_PAYMENT_ENABLED": false,
+      "LIVE_WEB3_ANCHOR_ENABLED": false,
+      "LIVE_SETTLEMENT_ENABLED": false,
+      "TESTNET_ENABLED": false
+    },
+    "nil_tests": 51,
+    "nil_tests_passing": 51,
+    "crates": [
+      "tsn-agora", "tsn-amm", "tsn-assets", "tsn-brands",
+      "tsn-bridge-stellar", "tsn-bridge-xrpl", "tsn-cli", "tsn-compliance",
+      "tsn-consensus", "tsn-control-hub", "tsn-crypto", "tsn-genesis",
+      "tsn-governance", "tsn-mbridge", "tsn-nft", "tsn-nil",
+      "tsn-node", "tsn-pq-crypto", "tsn-rln", "tsn-rpc",
+      "tsn-runtime", "tsn-rwa", "tsn-sdk", "tsn-stablecoin",
+      "tsn-state", "tsn-telemetry", "tsn-trustlines", "tsn-validator"
+    ]
+  },
+  "ai_systems": {
+    "jefe": {
+      "description": "Primary AI command and operations agent",
+      "policy_guard": true,
+      "can_submit_transactions": false
+    },
+    "openclaw": {
+      "description": "AI assistant for client and operations tasks",
+      "policy_guard": true,
+      "rag_enabled": true,
+      "can_submit_transactions": false
+    },
+    "sovereign_ai": {
+      "description": "Sovereign AI gateway and knowledge vault",
+      "location": "src/app/troptions-ai/"
+    },
+    "clawd": {
+      "description": "CLAWD governance and planning agent",
+      "governance": true,
+      "planning": true
+    },
+    "mcp": {
+      "description": "Model Context Protocol tool registry",
+      "tools_endpoint": "/api/troptions/mcp/tools"
+    }
+  },
+  "x402": {
+    "live_payments_enabled": false,
+    "namespace_x402_enabled": false,
+    "simulation_only": true,
+    "requires_legal_review": true
+  },
+  "compliance": {
+    "frameworks_addressed": [
+      "FATF Travel Rule",
+      "Genius Act (US Stablecoin)",
+      "ISO 20022",
+      "KYC/AML",
+      "BSA",
+      "Multi-jurisdiction"
+    ],
+    "engines": [
+      "momentumComplianceEngine",
+      "xrplStellarComplianceEngine",
+      "antiIllicitFinanceRegistry",
+      "walletForensicsEngine",
+      "releaseGateEngine",
+      "claimGuards",
+      "termGuards"
+    ],
+    "live_ofac_integration": false,
+    "live_kyc_integration": false
+  },
+  "deployment": {
+    "netlify_site_id": "3e8f8c18-d896-4249-959e-7be9deb60d43",
+    "netlify_site_name": "troptions-live",
+    "github_actions_workflow": ".github/workflows/netlify.yml",
+    "deploy_status": "NOT DEPLOYED",
+    "missing_secrets": ["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"],
+    "last_gha_run_result": "completed success (build only — deploy skipped)"
+  },
+  "dns": {
+    "primary_domain": "troptions.unykorn.org",
+    "dns_provider": "Cloudflare (proxied)",
+    "ips": ["104.21.71.137", "172.67.170.153"],
+    "routes_to_netlify": false,
+    "health_live": "200 OK",
+    "health_ready": "503 Service Unavailable",
+    "momentum_route": "404 Not Found",
+    "netlify_direct": {
+      "url": "troptions-live.netlify.app",
+      "status": "404 (no deploy)"
+    }
+  },
+  "validation": {
+    "typescript_compile": {
+      "command": "npx tsc --noEmit --skipLibCheck",
+      "exit_code": 0,
+      "status": "CLEAN"
+    },
+    "build": {
+      "command": "npm run build",
+      "exit_code": 0,
+      "build_time_seconds": 24.2,
+      "status": "SUCCESS",
+      "non_fatal_warning": "TypeError: b.mask is not a function (canvas package)"
+    },
+    "jest_tests": [
+      {
+        "suite": "Momentum Compliance Engine",
+        "tests": 63,
+        "passing": 63,
+        "status": "PASS"
+      },
+      {
+        "suite": "NIL Bridge",
+        "tests": 52,
+        "passing": 52,
+        "status": "PASS"
+      },
+      {
+        "suite": "XRPL/Stellar Institutional Compliance",
+        "tests": 48,
+        "passing": 48,
+        "status": "PASS"
+      }
+    ],
+    "rust_tests": [
+      {
+        "crate": "tsn-nil",
+        "unit_tests": 39,
+        "integration_tests": 12,
+        "total": 51,
+        "passing": 51,
+        "status": "PASS"
+      }
+    ],
+    "total_focused_tests": 163,
+    "total_focused_passing": 163
+  },
+  "api_route_count": {
+    "total_api_routes": 100,
+    "total_pages": 115
+  },
+  "test_file_count": 39,
+  "content_registry_count": 100,
+  "documentation_file_count": 107,
+  "rust_crate_count": 28,
+  "blockers": [
+    {
+      "id": 1,
+      "description": "NETLIFY_AUTH_TOKEN missing from GitHub secrets",
+      "severity": "critical",
+      "action": "Add Netlify personal access token to GitHub repo secrets"
+    },
+    {
+      "id": 2,
+      "description": "NETLIFY_SITE_ID missing from GitHub secrets",
+      "severity": "critical",
+      "action": "Add 3e8f8c18-d896-4249-959e-7be9deb60d43 to GitHub repo secrets"
+    },
+    {
+      "id": 3,
+      "description": "DNS points to wrong origin (Cloudflare, not Netlify)",
+      "severity": "high",
+      "action": "Update Cloudflare DNS CNAME to point to troptions-live.netlify.app after deploy"
+    },
+    {
+      "id": 4,
+      "description": "Production environment variables not configured in Netlify",
+      "severity": "high",
+      "action": "Set TROPTIONS_JWT_KEYS_JSON, TROPTIONS_BASE_URL, DATABASE_URL in Netlify site settings"
+    },
+    {
+      "id": 5,
+      "description": "No legal review for token operations",
+      "severity": "critical",
+      "action": "Retain securities counsel before any token sale, x402, or live blockchain operations"
+    },
+    {
+      "id": 6,
+      "description": "No KYC/AML vendor integration",
+      "severity": "high",
+      "action": "Select and integrate KYC vendor and live OFAC feed"
+    },
+    {
+      "id": 7,
+      "description": "External signer not configured for blockchain operations",
+      "severity": "high",
+      "action": "Configure external signing service (HSM or custodian)"
+    }
+  ]
+}

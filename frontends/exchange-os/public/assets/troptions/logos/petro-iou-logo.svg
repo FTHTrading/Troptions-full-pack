@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg-petro" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#14120A"/>
+      <stop offset="100%" stop-color="#0A0805"/>
+    </radialGradient>
+    <radialGradient id="coin-petro" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#5A4A20"/>
+      <stop offset="100%" stop-color="#2A2010"/>
+    </radialGradient>
+    <filter id="shadow-petro">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#3A3010" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <rect width="200" height="200" rx="20" fill="url(#bg-petro)"/>
+  <circle cx="100" cy="90" r="66" fill="none" stroke="#6A5A20" stroke-width="2" opacity="0.4"/>
+  <circle cx="100" cy="90" r="58" fill="url(#coin-petro)" filter="url(#shadow-petro)"/>
+  <!-- Oil barrel shape -->
+  <ellipse cx="100" cy="68" rx="26" ry="8" fill="#C09030"/>
+  <rect x="74" y="68" width="52" height="44" fill="#8A6820"/>
+  <ellipse cx="100" cy="112" rx="26" ry="8" fill="#C09030"/>
+  <!-- Barrel rings -->
+  <line x1="74" y1="80" x2="126" y2="80" stroke="#C09030" stroke-width="2"/>
+  <line x1="74" y1="94" x2="126" y2="94" stroke="#C09030" stroke-width="2"/>
+  <!-- PETRO text -->
+  <text x="100" y="96" font-family="'Arial Black', Arial, sans-serif" font-size="12" font-weight="900"
+        fill="white" text-anchor="middle" letter-spacing="1" opacity="0.9">PETRO</text>
+  <rect x="60" y="144" width="80" height="20" rx="10" fill="#6A5020"/>
+  <text x="100" y="158" font-family="Arial, sans-serif" font-size="9" font-weight="700"
+        fill="#F0C060" text-anchor="middle" letter-spacing="2">COMMODITY IOU</text>
+  <text x="100" y="183" font-family="Arial, sans-serif" font-size="7.5" font-weight="600"
+        fill="#7A6A40" text-anchor="middle" letter-spacing="1.5">TROPTIONS GATEWAY</text>
+</svg>

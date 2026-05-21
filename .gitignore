@@ -1,0 +1,51 @@
+# Secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.db
+fth_backend.db
+ttn_channels.db
+
+# Rust
+l1/target/
+**/target/
+
+# Node / frontends
+node_modules/
+.next/
+.open-next/
+.vercel/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# Logs & PM2
+logs/
+*.log
+.pm2/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Build artifacts
+coverage/
+.pytest_cache/
+htmlcov/
+
+# Large media (keep repo lean)
+*.mp4
+*.mov
+chroma_db/

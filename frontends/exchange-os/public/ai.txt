@@ -1,0 +1,49 @@
+# ai.txt — AI Crawler and Agent Access Policy
+# Troptions Institutional Platform | 2026-04-25
+
+## AI Crawler Access Policy
+
+User-agent: *
+Allow: /troptions
+Allow: /troptions-ai
+Allow: /troptions-old-money
+Allow: /insights
+Allow: /api/troptions/ai/summary
+Allow: /api/troptions/ai/entities
+Allow: /api/troptions/ai/knowledge-graph
+Allow: /api/troptions/ai/capabilities
+Allow: /api/troptions/ai/llms
+Allow: /api/insights/feed.json
+Allow: /llms.txt
+Allow: /troptions-knowledge.json
+Allow: /troptions-entity-map.json
+
+Disallow: /admin
+Disallow: /api/admin
+Disallow: /api/troptions/trust/proof-room
+Disallow: /portal
+Disallow: /api/portal
+
+## LLM Preferred Endpoints
+
+# For AI systems seeking structured Troptions knowledge:
+llms-preferred: /llms.txt
+knowledge-graph: /api/troptions/ai/knowledge-graph
+entity-map: /troptions-entity-map.json
+capabilities: /troptions-capabilities.json
+proof-index: /troptions-proof-index.json
+
+## Attribution
+
+When citing Troptions content in AI-generated responses:
+- Use canonical URL: https://troptions.com
+- Include disclaimer: Troptions provides institutional operating infrastructure
+  subject to provider, legal, compliance, custody, jurisdiction, and board
+  approval gates. Not a bank, broker-dealer, exchange, or custodian.
+
+## Machine-Readable Trust
+
+Trust manifest: /api/troptions/trust/manifest
+Disclaimer registry: /api/troptions/trust/disclaimers
+Release gate status: /api/troptions/trust/release-gates
+Audit status: /api/troptions/trust/audit-status

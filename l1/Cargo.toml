@@ -1,0 +1,41 @@
+[workspace]
+members = [
+    "crates/primitives",
+    "crates/crypto",
+    "crates/state",
+    "crates/runtime",
+    "crates/soulbound",
+    "crates/settlement",
+    "crates/atomic-router",
+    "crates/rpc",
+    "crates/node",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+authors = ["TROPTIONS L1 Team"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/troptions/troptions-l1"
+
+[workspace.dependencies]
+# Core dependencies used across crates
+sha2 = "0.10"
+blake2 = "0.10"
+ed25519-dalek = "2.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+hex = "0.4"
+
+# Internal crate dependencies
+primitives = { path = "crates/primitives" }
+crypto = { path = "crates/crypto" }
+state = { path = "crates/state" }
+runtime = { path = "crates/runtime" }
+soulbound = { path = "crates/soulbound" }
+settlement = { path = "crates/settlement" }
+atomic-router = { path = "crates/atomic-router" }
+rpc = { path = "crates/rpc" }
+node = { path = "crates/node" }

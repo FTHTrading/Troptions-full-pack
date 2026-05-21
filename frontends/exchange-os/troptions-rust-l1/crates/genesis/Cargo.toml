@@ -1,0 +1,18 @@
+[package]
+name = "tsn-genesis"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "TSN genesis block builder — assembles the canonical Troptions entity graph and produces the IPFS-ready genesis manifest"
+
+[dependencies]
+tsn-brands = { path = "../brands" }
+tsn-state  = { path = "../state" }
+serde       = { workspace = true }
+serde_json  = { workspace = true }
+uuid        = { workspace = true }
+chrono      = { workspace = true }
+thiserror   = { workspace = true }
+sha2        = { workspace = true }
+hex         = { workspace = true }

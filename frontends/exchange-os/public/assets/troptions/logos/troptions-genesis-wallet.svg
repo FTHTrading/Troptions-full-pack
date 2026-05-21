@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="TROPTIONS Genesis Wallet">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0cf82"/>
+      <stop offset="1" stop-color="#c99a3c"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="320" rx="40" fill="#071426"/>
+  <rect x="22" y="22" width="276" height="276" rx="34" fill="none" stroke="#c9a84c" stroke-opacity="0.4" stroke-width="4"/>
+  <path d="M160 62 L246 110 V210 L160 258 L74 210 V110 Z" fill="#0e223c" stroke="url(#g)" stroke-width="4"/>
+  <path d="M160 84 L224 120 V198 L160 234 L96 198 V120 Z" fill="#0b1a30" stroke="#f0cf82" stroke-opacity="0.5"/>
+  <path d="M124 128 H196" stroke="#f0cf82" stroke-width="8" stroke-linecap="round"/>
+  <path d="M160 128 V198" stroke="#f0cf82" stroke-width="8" stroke-linecap="round"/>
+  <text x="160" y="274" text-anchor="middle" fill="#f0cf82" font-size="24" font-family="Georgia, serif" font-weight="700">GENESIS WALLET</text>
+</svg>

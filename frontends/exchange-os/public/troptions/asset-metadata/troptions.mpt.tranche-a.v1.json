@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schema.xls33.dev/v1/mpt-metadata.json",
+  "schemaVersion": "XLS-33d-v1.0",
+  "ticker": "TRPA",
+  "name": "Troptions Tranche A",
+  "description": "Tranche A is the senior class of the Troptions XLS-33 Multi-Purpose Token (MPT) series. Each unit represents a unit of evidence-bound proof-gated capacity within the Troptions institutional operating infrastructure platform. Tranche A units are issued by a cold issuer wallet under multisig control and are transferred only to addresses that have completed XRPL MPTokenAuthorize handshake with the issuer.",
+  "icon": "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg",
+  "asset_class": "tranche",
+  "asset_subclass": "senior",
+  "issuer": {
+    "name": "Troptions",
+    "address": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+    "url": "https://troptions.org",
+    "email": "ops@troptions.org"
+  },
+  "ledger": {
+    "ledger": "xrpl",
+    "network": "mainnet",
+    "scale": 6,
+    "maximumAmount": "1000000000",
+    "transferFee": 0,
+    "flags": {
+      "tfMPTCanLock":         true,
+      "tfMPTRequireAuth":     true,
+      "tfMPTCanEscrow":       true,
+      "tfMPTCanTrade":        true,
+      "tfMPTCanTransfer":     true,
+      "tfMPTCanClawback":     true
+    }
+  },
+  "weblinks": [
+    { "url": "https://troptions.org",                           "type": "website" },
+    { "url": "https://troptions.org/governance",                 "type": "documentation" },
+    { "url": "https://troptions.org/.well-known/xrp-ledger.toml", "type": "toml" }
+  ],
+  "additional_info": {
+    "redemptionGuarantees": "none",
+    "liquidityGuarantees":  "none",
+    "returnGuarantees":     "none"
+  },
+  "compliance": {
+    "regulated": false,
+    "kycRequired": true,
+    "authRequired": true,
+    "clawbackEnabled": true,
+    "legalNotice": "Troptions Tranche A MPT units are not a security, a stablecoin, a redeemable instrument, or a payment instrument. Holding, transferring, or trading these units is at the holder's sole risk. Issuer reserves clawback authority for compliance reversals only."
+  },
+  "lastUpdated": "2026-04-28T00:00:00Z"
+}

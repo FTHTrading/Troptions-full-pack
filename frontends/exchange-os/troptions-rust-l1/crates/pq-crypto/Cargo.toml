@@ -1,0 +1,11 @@
+[package]
+name = "tsn-pq-crypto"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tsn-state = { path = "../state" }

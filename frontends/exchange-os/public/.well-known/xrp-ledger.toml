@@ -1,0 +1,74 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# xrp-ledger.toml — XLS-26d (XRP Ledger Information File)
+# ─────────────────────────────────────────────────────────────────────────────
+# Published at: https://troptions.org/.well-known/xrp-ledger.toml
+# Spec:         https://github.com/XRPLF/XRPL-Standards/tree/master/XLS-0026d-account-domain-format
+#               https://xrpl.org/docs/infrastructure/configuration/configure-the-xrp-ledger-toml-file
+#
+# This file is the canonical source of truth that XRPL wallets, exchanges,
+# and indexers (XRPSCAN, Bithomp, Sologenic, GateHub, XUMM) use to discover
+# and verify the TROPTIONS issuing accounts and supporting infrastructure.
+#
+# Required CORS header on this resource:   Access-Control-Allow-Origin: *
+# Issuer accounts must set their Domain field to the hex-encoded form of
+# "troptions.org" (744726F7074696F6E732E6F7267) so the verification handshake
+# can resolve back to this file.
+# ─────────────────────────────────────────────────────────────────────────────
+
+[METADATA]
+modified                 = "2026-04-28T00:00:00Z"
+
+# ─── Accounts ──────────────────────────────────────────────────────────────────
+[[ACCOUNTS]]
+address                  = "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
+network                  = "main"
+desc                     = "TROPTIONS IOU Issuer (cold) — XRPL Wallet A. AccountSet flags: DefaultRipple ON, RequireAuth optional (KYC gate), Domain = troptions.org. Long-term: master key disabled, multisig signers."
+
+[[ACCOUNTS]]
+address                  = "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt"
+network                  = "main"
+desc                     = "TROPTIONS Distributor + DEX Maker + AMM LP (warm) — XRPL Wallet B. Holds issued supply, places DEX offers on TROPTIONS/XRP and TROPTIONS/RLUSD, provides liquidity to AMM pools."
+
+[[ACCOUNTS]]
+address                  = "rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3"
+network                  = "main"
+desc                     = "Cold Treasury Reserve — XRPL Wallet C. DepositAuth ON. Long-term TROPTIONS reserve and regulated-dollar (RLUSD) reserve."
+
+# ─── Validators ────────────────────────────────────────────────────────────────
+# Troptions does not currently operate XRPL validators.
+
+# ─── Currencies ────────────────────────────────────────────────────────────────
+[[CURRENCIES]]
+code                     = "TROPTIONS"
+# Hex form is required when the human-readable code exceeds 3 characters.
+# 54524F5054494F4E530000000000000000000000  =  "TROPTIONS" padded to 20 bytes
+hex                      = "54524F5054494F4E530000000000000000000000"
+issuer                   = "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
+display_decimals         = 6
+name                     = "Troptions"
+desc                     = "TROPTIONS is the proof-gated unit-of-account asset of the Troptions institutional operating infrastructure platform. Issuance and transfer are governed by board-approved release gates and evidence-bound compliance procedures."
+icon                     = "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg"
+trust_line_icon          = "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg"
+weblinks                 = [
+    { url = "https://troptions.org",                    type = "website" },
+    { url = "https://troptions.org/governance",          type = "documentation" },
+    { url = "https://troptions.org/troptions/treasury/funding-plan", type = "transparency" },
+    { url = "https://github.com/FTHTrading/Troptions",  type = "sourcecode" }
+]
+
+# ─── Principals ────────────────────────────────────────────────────────────────
+[[PRINCIPALS]]
+name                     = "Troptions Operations"
+email                    = "ops@troptions.org"
+twitter                  = "troptions"
+github                   = "FTHTrading"
+
+# ─── Servers ───────────────────────────────────────────────────────────────────
+# Troptions does not currently operate public XRPL rippled servers.
+
+# ─── Compliance ────────────────────────────────────────────────────────────────
+# Troptions does not represent that the TROPTIONS asset is a security, a
+# stablecoin, a redeemable instrument, a payment instrument, or any licensed
+# financial product. Issuer flags (DefaultRipple, RequireAuth) exist to
+# support compliance and authorization control, not to imply any guaranteed
+# performance, redemption, or liquidity.

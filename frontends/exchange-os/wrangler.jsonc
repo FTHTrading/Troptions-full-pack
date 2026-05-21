@@ -1,0 +1,48 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "troptions",
+  "account_id": "07bcc4a189ef176261b818409c95891f",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-25",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    {
+      "pattern": "troptions.drunks.app",
+      "custom_domain": true
+    },
+    {
+      "pattern": "t.drunks.app",
+      "custom_domain": true
+    },
+    {
+      "pattern": "troptions.unykorn.org",
+      "custom_domain": true
+    },
+    {
+      "pattern": "troptionslive.unykorn.org",
+      "custom_domain": true
+    },
+    {
+      "pattern": "troptionsexchange.unykorn.org",
+      "custom_domain": true
+    },
+    {
+      "pattern": "api.troptions.unykorn.org",
+      "custom_domain": true
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "CAMPAIGN_DB",
+      "database_name": "troptions-campaigns",
+      "database_id": "756494ce-a3ea-4078-ae24-bc47eea1f040"
+    }
+  ]
+}

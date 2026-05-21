@@ -1,0 +1,242 @@
+.xp-theme {
+  background:
+    radial-gradient(circle at top right, rgba(201, 168, 76, 0.18), transparent 24%),
+    linear-gradient(180deg, #09111f 0%, #0f1d31 54%, #0a1422 100%);
+  color: #ecf2ff;
+}
+
+.xp-wrap {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.xp-header {
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  background: rgba(7, 13, 24, 0.82);
+  border-radius: 28px;
+  padding: 1.75rem;
+  box-shadow: 0 20px 60px rgba(2, 6, 23, 0.45);
+}
+
+.xp-kicker {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: #d9bc74;
+  margin: 0 0 0.75rem;
+}
+
+.xp-title {
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  line-height: 1.05;
+  font-weight: 700;
+  margin: 0;
+}
+
+.xp-intro {
+  margin: 1rem 0 0;
+  max-width: 72ch;
+  color: #b7c4de;
+  line-height: 1.75;
+}
+
+.xp-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.xp-nav a,
+.xp-chip,
+.xp-link {
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  background: rgba(13, 24, 42, 0.75);
+  color: #f4efe1;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+
+.xp-grid,
+.xp-grid-2,
+.xp-grid-3 {
+  display: grid;
+  gap: 1rem;
+}
+
+.xp-grid {
+  margin-top: 1.25rem;
+}
+
+.xp-grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.xp-grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.xp-card,
+.xp-panel,
+.xp-tableWrap {
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(8, 15, 28, 0.82);
+  border-radius: 24px;
+  padding: 1.25rem;
+}
+
+.xp-terminal {
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  background: linear-gradient(180deg, rgba(0, 15, 10, 0.96) 0%, rgba(2, 22, 18, 0.92) 100%);
+}
+
+.xp-label {
+  margin: 0 0 0.55rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #93a4c3;
+}
+
+.xp-value {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.xp-muted {
+  color: #9fb0cf;
+  line-height: 1.7;
+}
+
+.xp-badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.xp-badge {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.xp-badge-low,
+.xp-badge-allowed,
+.xp-badge-live-read-only,
+.xp-badge-live-documented,
+.xp-badge-authorized,
+.xp-badge-safe {
+  background: rgba(34, 197, 94, 0.14);
+  color: #95f3bf;
+}
+
+.xp-badge-medium,
+.xp-badge-simulated,
+.xp-badge-simulated-live,
+.xp-badge-review-required,
+.xp-badge-pending {
+  background: rgba(245, 158, 11, 0.16);
+  color: #ffd382;
+}
+
+.xp-badge-high,
+.xp-badge-blocked,
+.xp-badge-unsafe,
+.xp-badge-read-only {
+  background: rgba(239, 68, 68, 0.14);
+  color: #feb2b2;
+}
+
+.xp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.xp-table th,
+.xp-table td {
+  text-align: left;
+  padding: 0.85rem 0.7rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  vertical-align: top;
+}
+
+.xp-table th {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #d9bc74;
+}
+
+.xp-warning {
+  border: 1px solid rgba(248, 113, 113, 0.28);
+  background: rgba(69, 10, 10, 0.32);
+  color: #fdd3d3;
+}
+
+.xp-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.xp-code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.88rem;
+  color: #d6def0;
+}
+
+/* ── Genesis page helpers ── */
+.xp-cmd {
+  font-size: 0.75rem;
+  word-break: break-all;
+}
+
+.xp-small-muted {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+.xp-purpose {
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  opacity: 0.8;
+}
+
+.xp-actions-mini {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.xp-chip--sm {
+  font-size: 0.65rem;
+}
+
+.xp-desc {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 720px) {
+  .xp-wrap {
+    width: min(100% - 1rem, 1200px);
+  }
+
+  .xp-header,
+  .xp-card,
+  .xp-panel,
+  .xp-tableWrap {
+    border-radius: 20px;
+    padding: 1rem;
+  }
+}

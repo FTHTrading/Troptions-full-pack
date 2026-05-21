@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg-usdc" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A2744"/>
+      <stop offset="100%" stop-color="#0D1C3A"/>
+    </radialGradient>
+    <radialGradient id="coin-usdc" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#5AABFF"/>
+      <stop offset="100%" stop-color="#2775CA"/>
+    </radialGradient>
+    <filter id="shadow-usdc">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#2775CA" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="url(#bg-usdc)"/>
+
+  <!-- Outer glow ring -->
+  <circle cx="100" cy="95" r="66" fill="none" stroke="#2775CA" stroke-width="2" opacity="0.4"/>
+
+  <!-- Coin body -->
+  <circle cx="100" cy="95" r="60" fill="url(#coin-usdc)" filter="url(#shadow-usdc)"/>
+
+  <!-- Inner ring -->
+  <circle cx="100" cy="95" r="52" fill="none" stroke="white" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- USDC $ symbol -->
+  <text x="100" y="86" font-family="Georgia, serif" font-size="42" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle" opacity="0.95">$</text>
+
+  <!-- Dollar bar lines -->
+  <line x1="100" y1="53" x2="100" y2="62" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  <line x1="100" y1="128" x2="100" y2="137" stroke="white" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- "USDC" label under coin -->
+  <text x="100" y="115" font-family="'Arial Black', Arial, sans-serif" font-size="13"
+        font-weight="900" fill="white" text-anchor="middle" letter-spacing="3">USDC</text>
+
+  <!-- IOU badge -->
+  <rect x="66" y="142" width="68" height="20" rx="10" fill="#2775CA"/>
+  <text x="100" y="156" font-family="Arial, sans-serif" font-size="10" font-weight="700"
+        fill="white" text-anchor="middle" letter-spacing="2">IOU</text>
+
+  <!-- Footer -->
+  <text x="100" y="183" font-family="Arial, sans-serif" font-size="7.5" font-weight="600"
+        fill="#7A9CC4" text-anchor="middle" letter-spacing="1.5">TROPTIONS GATEWAY</text>
+</svg>

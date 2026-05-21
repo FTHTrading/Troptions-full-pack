@@ -1,0 +1,14 @@
+[package]
+name = "tsn-cli"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "tsn"
+path = "src/main.rs"
+
+[dependencies]
+tsn-state = { path = "../state" }
+tsn-nil = { path = "../nil" }
+serde_json = { workspace = true }
+uuid = { workspace = true }

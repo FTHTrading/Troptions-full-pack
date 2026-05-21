@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://troptions.local/schemas/trade-desk/cis.schema.json",
+  "title": "Trade Desk CIS",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "cisId",
+    "createdDate",
+    "legalEntityName",
+    "entityType",
+    "jurisdiction",
+    "taxId",
+    "controlPerson",
+    "beneficialOwners",
+    "authorizedSigners",
+    "compliance",
+    "tradeDeskUseCase",
+    "expectedActivity",
+    "attachments",
+    "approval"
+  ],
+  "properties": {
+    "cisId": { "type": "string", "minLength": 1 },
+    "createdDate": { "type": "string", "format": "date" },
+    "lastUpdated": { "type": "string", "format": "date" },
+    "legalEntityName": { "type": "string", "minLength": 1 },
+    "dbaName": { "type": "string" },
+    "entityType": { "type": "string", "minLength": 1 },
+    "jurisdiction": { "type": "string", "minLength": 1 },
+    "taxId": { "type": "string", "minLength": 1 },
+    "businessAddress": { "type": "string", "minLength": 1 },
+    "mailingAddress": { "type": "string", "minLength": 1 },
+    "website": { "type": "string" },
+    "businessPurpose": { "type": "string", "minLength": 1 },
+    "controlPerson": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "title"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 }
+      }
+    },
+    "beneficialOwners": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "ownershipPercent"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "ownershipPercent": { "type": "number", "minimum": 0, "maximum": 100 }
+        }
+      }
+    },
+    "authorizedSigners": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "title", "email"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "email": { "type": "string", "format": "email" },
+          "phone": { "type": "string" }
+        }
+      }
+    },
+    "compliance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kycCompleted", "amlCompleted", "ofacCompleted"],
+      "properties": {
+        "kycCompleted": { "type": "boolean" },
+        "amlCompleted": { "type": "boolean" },
+        "ofacCompleted": { "type": "boolean" },
+        "pepCompleted": { "type": "boolean" },
+        "adverseMediaCompleted": { "type": "boolean" },
+        "screeningTimestamp": { "type": "string", "format": "date-time" }
+      }
+    },
+    "tradeDeskUseCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["counterparty", "transactionPurpose", "requestedNotional"],
+      "properties": {
+        "counterparty": { "type": "string", "minLength": 1 },
+        "transactionPurpose": { "type": "string", "minLength": 1 },
+        "requestedNotional": { "type": "string", "minLength": 1 },
+        "timeline": { "type": "string" }
+      }
+    },
+    "expectedActivity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["monthlyVolume", "frequency"],
+      "properties": {
+        "monthlyVolume": { "type": "string", "minLength": 1 },
+        "frequency": { "type": "string", "minLength": 1 },
+        "assets": { "type": "array", "items": { "type": "string" } },
+        "sourceJurisdictions": { "type": "array", "items": { "type": "string" } },
+        "destinationJurisdictions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "attachments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["formationDocs", "ownershipDocs", "taxForm", "resolution", "pofReference"],
+      "properties": {
+        "formationDocs": { "type": "string", "minLength": 1 },
+        "ownershipDocs": { "type": "string", "minLength": 1 },
+        "taxForm": { "type": "string", "minLength": 1 },
+        "resolution": { "type": "string", "minLength": 1 },
+        "pofReference": { "type": "string", "minLength": 1 }
+      }
+    },
+    "approval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intake", "compliance", "tradeDesk", "finalDecision"],
+      "properties": {
+        "intake": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "compliance": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "tradeDesk": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "finalDecision": { "type": "string", "enum": ["PENDING", "PASS", "FAIL", "CONDITIONAL"] }
+      }
+    }
+  }
+}

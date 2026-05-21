@@ -1,0 +1,36 @@
+# Build artifacts (Vercel rebuilds on its own)
+.next/
+.open-next/
+.wrangler/
+out/
+
+# Local dev / OS
+node_modules/
+.DS_Store
+*.log
+
+# Cloudflare worker artifacts (irrelevant on Vercel)
+.dev.vars
+wrangler.jsonc
+
+# Rust L1 sub-project (deployed separately)
+troptions-rust-l1/
+
+# Local runtime data and secrets (root-level only — src/data/ is source files, must be available at build time)
+/data/
+env-secrets.txt
+.env.local
+.env*.local
+
+# Tests and coverage
+coverage/
+**/__tests__/**
+*.test.ts
+*.test.tsx
+*.spec.ts
+jest.config.ts
+
+# Docs and reports (not needed in build)
+docs/
+*.md
+!README.md

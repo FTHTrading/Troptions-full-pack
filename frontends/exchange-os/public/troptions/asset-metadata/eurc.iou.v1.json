@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "assetId": "EURC.TROPTIONS-GATEWAY",
+  "assetType": "stablecoin-iou",
+  "ticker": "EURC",
+  "name": "Euro Coin — Troptions Gateway IOU",
+  "description": "Euro Coin (EURC) issued as an on-ledger IOU from the Troptions Gateway. Each token represents one real EURC held in custody by the Troptions Gateway issuer. Redeemable 1:1 for EURC (1 EUR) upon verified deal settlement. Enables EUR-denominated deal settlement and cross-border transaction capability. Issued on XRPL and Stellar mainnet.",
+  "issuer": "Troptions Gateway — FTH Trading",
+  "underlyingAsset": "Euro Coin (EURC)",
+  "underlyingIssuer": "Circle Internet Financial, LLC",
+  "underlyingContractEth": "0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c",
+  "peg": "EUR",
+  "pegRatio": "1:1",
+  "supply": {
+    "initial": "50000000",
+    "unit": "EURC",
+    "decimals": 6
+  },
+  "aaveCompatible": false,
+  "aaveNotes": "EURC is not currently listed on AAVE v3 Mainnet. Suitable for direct gateway redemption and cross-border settlement.",
+  "branding": {
+    "logo": "https://troptions.org/assets/troptions/logos/eurc-iou-logo.svg",
+    "primaryColor": "#003399",
+    "backgroundColor": "#001940",
+    "textColor": "#FFFFFF",
+    "accentColor": "#FFD700"
+  },
+  "ledgers": {
+    "xrpl": {
+      "network": "mainnet",
+      "currencyCode": "EURC",
+      "currencyHex": "4555524300000000000000000000000000000000",
+      "issuerAddress": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributorAddress": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "defaultRipple": true,
+      "domain": "troptions.org",
+      "trustLimit": "500000000"
+    },
+    "stellar": {
+      "network": "mainnet",
+      "assetCode": "EURC",
+      "issuerAddress": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributorAddress": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "authRequired": true,
+      "authRevocable": true,
+      "authClawback": true,
+      "trustLimit": "500000000"
+    }
+  },
+  "compliance": {
+    "kycRequired": true,
+    "amlPolicy": "FTH Trading AML/KYC Policy v2",
+    "jurisdiction": "European Union / United States",
+    "redeemable": true,
+    "redemptionFee": "0.1%",
+    "redemptionContact": "gateway@troptions.org",
+    "custodianProof": "Available upon verified deal settlement",
+    "auditable": true
+  },
+  "dealReference": "TROPTIONS-STABLECOIN-EURC-ISSUANCE-2026",
+  "issuanceDate": "2026-04-28",
+  "metadataVersion": "1.0.0"
+}

@@ -1,0 +1,130 @@
+.cp-theme {
+  --cp-navy: #10202e;
+  --cp-navy-soft: #172e41;
+  --cp-ivory: #efe6d4;
+  --cp-gold: #bc9b58;
+  --cp-muted: #b8ad97;
+  --cp-line: rgba(188, 155, 88, 0.35);
+  min-height: 100vh;
+  color: var(--cp-ivory);
+  background: linear-gradient(165deg, #0d161f 0%, var(--cp-navy) 50%, #1a2a37 100%);
+}
+
+.cp-wrap {
+  width: min(1220px, 100% - 2.25rem);
+  margin: 0 auto;
+  padding: 1.2rem 0 2.2rem;
+}
+
+.cp-header {
+  border: 1px solid var(--cp-line);
+  background: rgba(19, 34, 47, 0.95);
+  border-radius: 0.75rem;
+  padding: 1rem 1.1rem;
+}
+
+.cp-header h1 {
+  margin: 0;
+  font: 700 clamp(1.25rem, 2.8vw, 2rem) / 1.15 "Georgia", "Times New Roman", serif;
+}
+
+.cp-header p {
+  margin: 0.5rem 0 0;
+  color: var(--cp-muted);
+  font: 500 0.88rem/1.5 "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.cp-nav {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.cp-nav a {
+  color: var(--cp-muted);
+  text-decoration: none;
+  border: 1px solid rgba(184, 173, 151, 0.2);
+  border-radius: 0.35rem;
+  padding: 0.45rem 0.6rem;
+  font: 600 0.72rem/1.2 "Trebuchet MS", "Segoe UI", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cp-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.cp-card {
+  border: 1px solid rgba(188, 155, 88, 0.25);
+  background: rgba(24, 41, 55, 0.94);
+  border-radius: 0.65rem;
+  padding: 0.8rem;
+}
+
+.cp-card h3 {
+  margin: 0;
+  font: 700 0.95rem/1.2 "Georgia", "Times New Roman", serif;
+}
+
+.cp-card p {
+  margin: 0.45rem 0 0;
+  color: var(--cp-muted);
+  font: 500 0.82rem/1.45 "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.cp-badge {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--cp-line);
+  color: var(--cp-gold);
+  font: 700 0.64rem/1 "Trebuchet MS", "Segoe UI", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.cp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cp-table th,
+.cp-table td {
+  border-bottom: 1px solid rgba(184, 173, 151, 0.2);
+  text-align: left;
+  padding: 0.45rem;
+  font: 500 0.78rem/1.4 "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.cp-table th {
+  color: var(--cp-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.66rem;
+}
+
+.cp-notice {
+  margin-top: 0.9rem;
+  border: 1px solid rgba(188, 155, 88, 0.25);
+  border-radius: 0.55rem;
+  background: rgba(20, 35, 46, 0.92);
+  padding: 0.7rem 0.8rem;
+  color: #d5c7aa;
+  font: 500 0.74rem/1.45 "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+@media (min-width: 900px) {
+  .cp-nav {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

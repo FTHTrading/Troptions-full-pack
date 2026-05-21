@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg-legacy" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A1A1A"/>
+      <stop offset="100%" stop-color="#0D0D0D"/>
+    </radialGradient>
+    <radialGradient id="coin-legacy" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#9A8060"/>
+      <stop offset="100%" stop-color="#6A5040"/>
+    </radialGradient>
+    <filter id="shadow-legacy">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#6A5040" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <rect width="200" height="200" rx="20" fill="url(#bg-legacy)"/>
+  <circle cx="100" cy="95" r="66" fill="none" stroke="#8A7060" stroke-width="2" opacity="0.4"/>
+  <circle cx="100" cy="95" r="60" fill="url(#coin-legacy)" filter="url(#shadow-legacy)"/>
+  <circle cx="100" cy="95" r="52" fill="none" stroke="white" stroke-width="1.5" opacity="0.35"/>
+  <!-- Archive icon -->
+  <rect x="72" y="78" width="56" height="10" rx="3" fill="white" opacity="0.85"/>
+  <rect x="76" y="91" width="48" height="18" rx="2" fill="none" stroke="white" stroke-width="2.5" opacity="0.85"/>
+  <line x1="88" y1="100" x2="112" y2="100" stroke="white" stroke-width="2" opacity="0.7"/>
+  <text x="100" y="183" font-family="Arial, sans-serif" font-size="7.5" font-weight="600"
+        fill="#8A8070" text-anchor="middle" letter-spacing="1.5">TROPTIONS GATEWAY</text>
+  <rect x="55" y="142" width="90" height="20" rx="10" fill="#6A5040"/>
+  <text x="100" y="156" font-family="Arial, sans-serif" font-size="9" font-weight="700"
+        fill="white" text-anchor="middle" letter-spacing="2">LEGACY IOU</text>
+</svg>

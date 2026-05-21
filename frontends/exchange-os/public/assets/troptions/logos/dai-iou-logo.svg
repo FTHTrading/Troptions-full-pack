@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg-dai" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2A1E00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </radialGradient>
+    <radialGradient id="coin-dai" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#F4C142"/>
+      <stop offset="100%" stop-color="#E8A200"/>
+    </radialGradient>
+    <filter id="shadow-dai">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#E8A200" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="url(#bg-dai)"/>
+
+  <!-- Outer glow ring -->
+  <circle cx="100" cy="95" r="66" fill="none" stroke="#E8A200" stroke-width="2" opacity="0.4"/>
+
+  <!-- Coin body -->
+  <circle cx="100" cy="95" r="60" fill="url(#coin-dai)" filter="url(#shadow-dai)"/>
+
+  <!-- Inner ring -->
+  <circle cx="100" cy="95" r="52" fill="none" stroke="white" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- DAI diamond symbol (◇ with horizontal bars — MakerDAO style) -->
+  <!-- Diamond shape -->
+  <polygon points="100,60 122,92 100,124 78,92" fill="none" stroke="white" stroke-width="4"
+           stroke-linejoin="round" opacity="0.95"/>
+  <!-- Horizontal lines through diamond (maker logo accent) -->
+  <line x1="82" y1="85" x2="118" y2="85" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+  <line x1="82" y1="99" x2="118" y2="99" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- "AAVE" small tag — shows AAVE compatibility -->
+  <rect x="73" y="124" width="54" height="14" rx="7" fill="rgba(255,255,255,0.15)"/>
+  <text x="100" y="135" font-family="Arial, sans-serif" font-size="8" font-weight="700"
+        fill="white" text-anchor="middle" letter-spacing="1.5">AAVE · DAI</text>
+
+  <!-- IOU badge -->
+  <rect x="66" y="142" width="68" height="20" rx="10" fill="#C88800"/>
+  <text x="100" y="156" font-family="Arial, sans-serif" font-size="10" font-weight="700"
+        fill="white" text-anchor="middle" letter-spacing="2">IOU</text>
+
+  <!-- Footer -->
+  <text x="100" y="183" font-family="Arial, sans-serif" font-size="7.5" font-weight="600"
+        fill="#A07020" text-anchor="middle" letter-spacing="1.5">TROPTIONS GATEWAY</text>
+</svg>

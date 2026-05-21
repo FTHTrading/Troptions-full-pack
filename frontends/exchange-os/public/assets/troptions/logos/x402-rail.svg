@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-label="x402 Rail">
+  <rect width="320" height="320" rx="40" fill="#071426" />
+  <rect x="24" y="24" width="272" height="272" rx="32" fill="none" stroke="#c9a84c" stroke-opacity="0.35" stroke-width="4" />
+  <path d="M56 216 L120 104 L170 176 L230 96 L264 160" fill="none" stroke="#22d3ee" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="56" cy="216" r="8" fill="#22d3ee"/>
+  <circle cx="120" cy="104" r="8" fill="#22d3ee"/>
+  <circle cx="170" cy="176" r="8" fill="#22d3ee"/>
+  <circle cx="230" cy="96" r="8" fill="#22d3ee"/>
+  <circle cx="264" cy="160" r="8" fill="#22d3ee"/>
+  <text x="160" y="254" text-anchor="middle" fill="#f0cf82" font-size="40" font-family="Arial Black, Arial" font-weight="900">x402</text>
+  <text x="160" y="280" text-anchor="middle" fill="#94a3b8" font-size="16" font-family="Arial, sans-serif">PAYMENT RAIL</text>
+</svg>

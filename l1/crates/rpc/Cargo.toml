@@ -1,0 +1,22 @@
+[package]
+name = "rpc"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+primitives = { workspace = true }
+state = { workspace = true }
+runtime = { workspace = true }
+soulbound = { workspace = true }
+settlement = { workspace = true }
+atomic-router = { workspace = true }
+crypto = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true }
+hex = { workspace = true }
+sha2 = { workspace = true }
+thiserror = { workspace = true }
+
+[dev-dependencies]

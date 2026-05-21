@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="bg-eurc" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#002B5C"/>
+      <stop offset="100%" stop-color="#001940"/>
+    </radialGradient>
+    <radialGradient id="coin-eurc" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#4A80E8"/>
+      <stop offset="100%" stop-color="#003399"/>
+    </radialGradient>
+    <filter id="shadow-eurc">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#003399" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="200" height="200" rx="20" fill="url(#bg-eurc)"/>
+
+  <!-- EU star ring (12 stars) -->
+  <g opacity="0.5">
+    <circle cx="100" cy="29" r="3" fill="#FFD700"/>
+    <circle cx="133" cy="38" r="3" fill="#FFD700"/>
+    <circle cx="155" cy="64" r="3" fill="#FFD700"/>
+    <circle cx="160" cy="98" r="3" fill="#FFD700"/>
+    <circle cx="152" cy="131" r="3" fill="#FFD700"/>
+    <circle cx="130" cy="155" r="3" fill="#FFD700"/>
+    <circle cx="100" cy="161" r="3" fill="#FFD700"/>
+    <circle cx="70" cy="155" r="3" fill="#FFD700"/>
+    <circle cx="48" cy="131" r="3" fill="#FFD700"/>
+    <circle cx="40" cy="98" r="3" fill="#FFD700"/>
+    <circle cx="45" cy="64" r="3" fill="#FFD700"/>
+    <circle cx="67" cy="38" r="3" fill="#FFD700"/>
+  </g>
+
+  <!-- Coin body -->
+  <circle cx="100" cy="95" r="58" fill="url(#coin-eurc)" filter="url(#shadow-eurc)"/>
+
+  <!-- Inner ring -->
+  <circle cx="100" cy="95" r="50" fill="none" stroke="white" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- Euro € symbol -->
+  <text x="100" y="108" font-family="Georgia, 'Times New Roman', serif" font-size="60"
+        font-weight="700" fill="white" text-anchor="middle" dominant-baseline="middle"
+        opacity="0.95">€</text>
+
+  <!-- IOU badge -->
+  <rect x="66" y="142" width="68" height="20" rx="10" fill="#003399"/>
+  <text x="100" y="156" font-family="Arial, sans-serif" font-size="10" font-weight="700"
+        fill="white" text-anchor="middle" letter-spacing="2">IOU</text>
+
+  <!-- EURC ticker -->
+  <text x="100" y="137" font-family="'Arial Black', Arial, sans-serif" font-size="10"
+        font-weight="900" fill="white" text-anchor="middle" letter-spacing="3">EURC</text>
+
+  <!-- Footer -->
+  <text x="100" y="183" font-family="Arial, sans-serif" font-size="7.5" font-weight="600"
+        fill="#5A80B8" text-anchor="middle" letter-spacing="1.5">TROPTIONS GATEWAY</text>
+</svg>

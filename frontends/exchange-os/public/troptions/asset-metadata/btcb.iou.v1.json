@@ -1,0 +1,81 @@
+{
+  "$schema": "https://troptions.org/schemas/troptions-asset.v1.schema.json",
+  "schemaVersion": "1.0.0",
+  "assetId": "btcb.iou.v1",
+  "assetClass": "fungible-iou",
+  "name": "Bitcoin IOU — Tranche B",
+  "symbol": "BTCB",
+  "displayName": "Bitcoin IOU Tranche B (BTCB)",
+  "tagline": "Bitcoin-backed IOU instrument — Deal Series B — issued via Troptions Gateway.",
+  "description": "BTCB is a Bitcoin-backed IOU issued by the Troptions Gateway on the XRP Ledger and Stellar mainnet. Each unit represents a redeemable claim on Bitcoin value under the terms of the Troptions Deal Series B project agreement. Issuance, transfer, and redemption are governed by the Troptions compliance framework and applicable deal documentation.",
+  "longDescription": "BTCB is Tranche B of the Troptions Bitcoin IOU series, structured to support the second Troptions capital-deployment project. The issuer (Troptions Gateway) maintains Bitcoin reserves in a segregated multi-sig custody arrangement. Holders may present BTCB IOUs for redemption against Bitcoin or USD-equivalent value subject to KYC verification and deal terms. The instrument is issued on both XRPL (hex currency code 4254434200000000000000000000000000000000) and Stellar (asset code BTCB) from the same governance-controlled issuer addresses.",
+  "dealSeries": "B",
+  "dealReference": "TROPTIONS-BTC-DEAL-SERIES-B-2026",
+  "underlyingAsset": "Bitcoin (BTC)",
+  "issuer": {
+    "name": "Troptions Gateway",
+    "url": "https://troptions.org",
+    "email": "ops@troptions.org",
+    "github": "FTHTrading",
+    "twitter": "troptions"
+  },
+  "branding": {
+    "primaryLogo": "https://troptions.org/assets/troptions/logos/btcb-iou-logo.svg",
+    "iconLogo": "https://troptions.org/assets/troptions/logos/btcb-iou-logo.svg",
+    "darkIconLogo": "https://troptions.org/assets/troptions/logos/btcb-iou-logo.svg",
+    "wordmarkLogo": "https://troptions.org/assets/troptions/logos/troptions-classic-white.jpg",
+    "poweredByLogo": "https://troptions.org/assets/troptions/logos/troptions-logo-powered-by.jpg",
+    "primaryColor": "#f7931a",
+    "secondaryColor": "#071426",
+    "backgroundColor": "#0b1f36",
+    "textColor": "#f0cf82"
+  },
+  "ledgers": [
+    {
+      "ledger": "xrpl",
+      "network": "mainnet",
+      "currencyCode": "BTCB",
+      "currencyHex": "4254434200000000000000000000000000000000",
+      "issuerAddress": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributorAddress": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "displayDecimals": 6,
+      "maxSupply": "100000000",
+      "tomlUrl": "https://troptions.org/.well-known/xrp-ledger.toml",
+      "explorerUrls": {
+        "xrpscan": "https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+        "bithomp": "https://bithomp.com/explorer/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
+      }
+    },
+    {
+      "ledger": "stellar",
+      "network": "mainnet",
+      "assetCode": "BTCB",
+      "issuerAddress": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributorAddress": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "displayDecimals": 7,
+      "maxSupply": "100000000",
+      "homeDomain": "troptions.org",
+      "tomlUrl": "https://troptions.org/.well-known/stellar.toml",
+      "explorerUrls": {
+        "stellarExpert": "https://stellar.expert/explorer/public/asset/BTCB-GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4"
+      }
+    }
+  ],
+  "compliance": {
+    "regulated": true,
+    "kycRequired": true,
+    "redemptionTerms": "Redemption requires KYC verification and execution of deal Series B redemption form. Bitcoin or USD-equivalent disbursed within 5 business days.",
+    "redemptionGuarantees": true,
+    "liquidityGuarantees": false,
+    "custodyArrangement": "Multi-sig Bitcoin custody, segregated from operating accounts.",
+    "auditTrail": "https://troptions.org/troptions/compliance"
+  },
+  "links": {
+    "homepage": "https://troptions.org",
+    "terms": "https://troptions.org/troptions/compliance",
+    "explorer_xrpl": "https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+    "explorer_stellar": "https://stellar.expert/explorer/public/asset/BTCB-GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4"
+  },
+  "createdAt": "2026-04-28T00:00:00.000Z",
+  "version": "1.0.0"
+}

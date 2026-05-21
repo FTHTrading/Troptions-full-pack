@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DONK AI TUTOR | TROPTIONS Education</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+            color: #ffffff;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 2px solid #00ff88;
+            margin-bottom: 2rem;
+        }
+        h1 { font-size: 3.5rem; background: linear-gradient(45deg, #00ff88, #D4AF37); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: #888; font-size: 1.2rem; margin-top: 0.5rem; }
+        .cta-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cta-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,255,136,0.3); }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0,255,136,0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(0,255,136,0.1); }
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: #00ff88; }
+        .stat-label { color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .course-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        .course-card:hover { border-color: #D4AF37; transform: scale(1.02); }
+        .course-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .course-title { font-size: 1.3rem; color: #D4AF37; }
+        .course-price { font-size: 1.1rem; color: #00ff88; font-weight: bold; }
+        .course-price .original { text-decoration: line-through; color: #888; margin-right: 0.5rem; }
+        .buy-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .buy-btn:hover { transform: scale(1.02); }
+        .buy-btn:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; }
+        .difficulty-beginner { background: rgba(0,255,136,0.2); color: #00ff88; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+        .difficulty-intermediate { background: rgba(255,165,0,0.2); color: #ffa500; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+        .difficulty-all-levels { background: rgba(37,99,235,0.2); color: #2563EB; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; }
+        .chat-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(0,255,136,0.1);
+        }
+        .chat-header { text-align: center; margin-bottom: 1.5rem; }
+        .chat-header h2 { color: #00ff88; margin-bottom: 0.5rem; }
+        .chat-messages { height: 400px; overflow-y: auto; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 12px; margin-bottom: 1rem; }
+        .message { margin-bottom: 1rem; padding: 1rem; border-radius: 12px; max-width: 80%; }
+        .message-user { background: rgba(0,255,136,0.1); margin-left: auto; border: 1px solid rgba(0,255,136,0.2); }
+        .message-assistant { background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.2); }
+        .message-header { font-size: 0.8rem; color: #888; margin-bottom: 0.25rem; }
+        .input-group { display: flex; gap: 1rem; }
+        input[type="text"] {
+            flex: 1;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0,255,136,0.3);
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+        input[type="text"]:focus { outline: none; border-color: #00ff88; }
+        button {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover { transform: scale(1.05); }
+        .loading { display: none; text-align: center; color: #00ff88; padding: 1rem; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .pulse { animation: pulse 1.5s infinite; }
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: #888;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 2rem;
+        }
+        .money-banner {
+            background: linear-gradient(90deg, rgba(0,255,136,0.1), rgba(212,175,55,0.1));
+            border: 1px solid rgba(0,255,136,0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .money-banner h3 { color: #00ff88; margin-bottom: 0.5rem; }
+        .money-banner p { color: #aaa; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DONK AI TUTOR</h1>
+            <p class="subtitle">TROPTIONS Education System v3.0 | Learn. Earn. Mint.</p>
+            <a href="#chat" class="cta-btn">Start Learning Free →</a>
+        </header>
+
+        <div class="money-banner">
+            <h3>💰 Every Course Purchase = $PICK Token Rewards</h3>
+            <p>Buy a course, earn $PICK tokens. Use them in WC2026 prediction markets or stake for passive income.</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Active Courses</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">11</div>
+                <div class="stat-label">Learning Modules</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$29</div>
+                <div class="stat-label">Starting Price</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10x</div>
+                <div class="stat-label">$PICK Rewards</div>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin: 2rem 0; color: #D4AF37;">Available Courses</h2>
+        <div class="courses-grid" id="coursesGrid">
+            <!-- Courses loaded dynamically -->
+        </div>
+
+        <div class="chat-section" id="chat">
+            <div class="chat-header">
+                <h2>Ask DONK AI Anything</h2>
+                <p style="color: #888;">Crypto, tokenomics, WC2026, $PICK — get instant answers</p>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message message-assistant">
+                    <div class="message-header">DONK AI</div>
+                    Yo! I'm DONK. Ask me about $PICK, WC2026, or how to mint your first moment. Let's go!
+                </div>
+            </div>
+            <div class="loading pulse" id="loading">DONK is thinking...</div>
+            <div class="input-group">
+                <input type="text" id="chatInput" placeholder="Ask about crypto, $PICK, WC2026..." onkeypress="if(event.key==='Enter')sendMessage()">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>TROPTIONS © 2003-2026 | World Cup 2026 Atlanta | 1-888-690-DONK</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Powered by RTX 5090 | Ollama | Stripe | Solana</p>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8090';
+        let currentCourse = null;
+        let stripe = null;
+
+        // Initialize Stripe
+        async function initStripe() {
+            const resp = await fetch(`${API_URL}/payments/config`);
+            const config = await resp.json();
+            stripe = Stripe(config.publishableKey);
+        }
+        initStripe().catch(console.error);
+
+        // Load courses
+        async function loadCourses() {
+            try {
+                const resp = await fetch(`${API_URL}/courses`);
+                const courses = await resp.json();
+                const grid = document.getElementById('coursesGrid');
+                grid.innerHTML = courses.map(course => {
+                    const isFree = course.price === 0;
+                    const priceText = isFree ? 'FREE' : `$${course.price.toFixed(2)}`;
+                    const btnText = isFree ? 'Start Free' : `Buy Now - Earn ${course.price * 10} $PICK`;
+                    
+                    return `
+                    <div class="course-card">
+                        <div class="course-header">
+                            <div class="course-title">${course.title}</div>
+                            <div class="course-price">${priceText}</div>
+                        </div>
+                        <span class="difficulty-${course.difficulty}">${course.difficulty}</span>
+                        <p style="color: #aaa; font-size: 0.9rem; margin: 1rem 0;">${course.description}</p>
+                        <div class="course-modules">
+                            ${course.modules.map(m => `<div style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.9rem; color: #aaa;">${m.title}</div>`).join('')}
+                        </div>
+                        <button class="buy-btn" onclick="purchaseCourse('${course.id}', ${course.price})" ${isFree ? '' : ''}>
+                            ${btnText}
+                        </button>
+                    </div>`
+                }).join('');
+            } catch (e) {
+                console.error('Failed to load courses:', e);
+            }
+        }
+
+        // Purchase course
+        async function purchaseCourse(courseId, price) {
+            if (price === 0) {
+                // Free course - just enroll
+                alert('Enrolled in free course! Redirecting...');
+                currentCourse = courseId;
+                return;
+            }
+            
+            const email = prompt('Enter your email for enrollment:');
+            if (!email) return;
+            
+            try {
+                const resp = await fetch(`${API_URL}/payments/create-checkout-session`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ course_id: courseId, email })
+                });
+                const data = await resp.json();
+                
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert(data.message || 'Free course enrolled!');
+                }
+            } catch (e) {
+                alert('Error: ' + e.message);
+            }
+        }
+
+        // Chat functions
+        function addMessage(role, content) {
+            const container = document.getElementById('chatMessages');
+            const msg = document.createElement('div');
+            msg.className = `message message-${role}`;
+            msg.innerHTML = `<div class="message-header">${role === 'user' ? 'You' : 'DONK AI'}</div>${content}`;
+            container.appendChild(msg);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            addMessage('user', message);
+            input.value = '';
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                const resp = await fetch(`${API_URL}/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message, course_id: currentCourse })
+                });
+                const data = await resp.json();
+                addMessage('assistant', data.response);
+            } catch (e) {
+                addMessage('assistant', 'Error connecting to DONK AI. Make sure the server is running.');
+            }
+
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        // Initialize
+        loadCourses();
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[package]
+name = "tsn-node"
+version.workspace = true
+edition.workspace = true
+
+[[bin]]
+name = "tsn-node"
+path = "src/main.rs"
+
+[dependencies]
+tsn-runtime = { path = "../runtime" }
+tsn-consensus = { path = "../consensus" }
+tsn-telemetry = { path = "../telemetry" }
+tsn-rpc = { path = "../rpc" }
+tsn-bridge-xrpl = { path = "../bridge-xrpl" }
+tsn-bridge-stellar = { path = "../bridge-stellar" }
+tsn-rln = { path = "../rln" }
+tsn-agora = { path = "../agora" }
+tsn-mbridge = { path = "../mbridge" }

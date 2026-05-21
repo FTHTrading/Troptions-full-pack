@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://troptions.local/schemas/trade-desk/evidence-checklist.schema.json",
+  "title": "Trade Desk Evidence Checklist",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["items"],
+  "properties": {
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requirement", "evidenceNeeded", "status", "owner", "reviewer", "date"],
+        "properties": {
+          "requirement": { "type": "string", "minLength": 1 },
+          "evidenceNeeded": { "type": "string", "minLength": 1 },
+          "status": {
+            "type": "string",
+            "enum": ["MISSING", "REQUESTED", "RECEIVED", "UNDER_REVIEW", "ACCEPTED", "REJECTED", "EXPIRED"]
+          },
+          "owner": { "type": "string", "minLength": 1 },
+          "notes": { "type": "string" },
+          "reviewer": { "type": "string", "minLength": 1 },
+          "date": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

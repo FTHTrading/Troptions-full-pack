@@ -1,0 +1,615 @@
+{
+  "apostle_chain": {
+    "chain_id": 7332,
+    "operator_agent_id": "87724c76-da93-4b1a-9fa6-271ba856338e",
+    "operator_label": "kevan-burns-chairman",
+    "rpc_port": 7332,
+    "simulation_only": true
+  },
+  "brands": [
+    {
+      "category": "Institutional Platform",
+      "chain_registrations": [
+        {
+          "chain": "xrpl",
+          "readiness": 75,
+          "role": "primary-issuer"
+        },
+        {
+          "chain": "stellar",
+          "readiness": 40,
+          "role": "anchor-issuer"
+        },
+        {
+          "chain": "polygon",
+          "readiness": 50,
+          "role": "observer"
+        },
+        {
+          "chain": "tsn_internal",
+          "readiness": 100,
+          "role": "genesis-entity"
+        }
+      ],
+      "display_name": "TROPTIONS.ORG",
+      "domain": "TROPTIONS.ORG",
+      "id": "troptions-org",
+      "status": "active",
+      "stellar_asset_symbol": "TROPTIONS",
+      "system_role": "Primary institutional operating infrastructure — the canonical platform entry point.",
+      "xrpl_asset_symbol": "TROPTIONS"
+    },
+    {
+      "category": "Exchange / Trade Platform",
+      "chain_registrations": [
+        {
+          "chain": "xrpl",
+          "readiness": 30,
+          "role": "exchange-wallet"
+        },
+        {
+          "chain": "stellar",
+          "readiness": 20,
+          "role": "exchange-anchor"
+        },
+        {
+          "chain": "tsn_internal",
+          "readiness": 80,
+          "role": "exchange-entity"
+        }
+      ],
+      "display_name": "Troptions Xchange",
+      "domain": "TROPTIONSXCHANGE.IO",
+      "id": "troptions-xchange",
+      "status": "draft",
+      "stellar_asset_symbol": "TXC",
+      "system_role": "Exchange venue routing — structured barter, asset routing, and value-exchange.",
+      "xrpl_asset_symbol": "TXC"
+    },
+    {
+      "category": "Token / Digital Asset",
+      "chain_registrations": [
+        {
+          "chain": "xrpl",
+          "readiness": 25,
+          "role": "mpt-issuer",
+          "standard": "XLS-33"
+        },
+        {
+          "chain": "stellar",
+          "readiness": 20,
+          "role": "asset-issuer"
+        },
+        {
+          "chain": "tsn_internal",
+          "readiness": 90,
+          "role": "governance-token"
+        }
+      ],
+      "display_name": "Troptions Unity Token",
+      "domain": "TROPTIONSUNITYTOKEN.COM",
+      "id": "troptions-unity-token",
+      "status": "draft",
+      "stellar_asset_symbol": "TUT",
+      "system_role": "Ecosystem coordination and governance participation token (TUT).",
+      "xrpl_asset_symbol": "TUT"
+    },
+    {
+      "category": "Education / Academy",
+      "chain_registrations": [
+        {
+          "chain": "xrpl",
+          "readiness": 20,
+          "role": "credential-nft-issuer",
+          "standard": "XLS-20"
+        },
+        {
+          "chain": "tsn_internal",
+          "readiness": 85,
+          "role": "education-entity"
+        }
+      ],
+      "display_name": "Troptions University",
+      "domain": "TROPTIONS-UNIVERSITY.COM",
+      "id": "troptions-university",
+      "status": "active",
+      "stellar_asset_symbol": null,
+      "system_role": "Education, certification, and onboarding layer for Troptions participants.",
+      "xrpl_asset_symbol": "TUTCERT"
+    },
+    {
+      "category": "Media / Broadcasting",
+      "chain_registrations": [
+        {
+          "chain": "xrpl",
+          "readiness": 15,
+          "role": "media-nft-issuer",
+          "standard": "XLS-20"
+        },
+        {
+          "chain": "tsn_internal",
+          "readiness": 60,
+          "role": "media-entity"
+        }
+      ],
+      "display_name": "Troptions Television Network",
+      "domain": "TROPTIONSTelevisionNetwork.Tv",
+      "id": "troptions-tv-network",
+      "status": "draft",
+      "stellar_asset_symbol": null,
+      "system_role": "Media broadcasting and content distribution for the Troptions ecosystem.",
+      "xrpl_asset_symbol": "TTVN"
+    },
+    {
+      "category": "Real Estate / RWA",
+      "chain_registrations": [
+        {
+          "chain": "xrpl",
+          "readiness": 30,
+          "role": "rwa-receipt-issuer"
+        },
+        {
+          "chain": "polygon",
+          "readiness": 50,
+          "role": "rwa-registry"
+        },
+        {
+          "chain": "tsn_internal",
+          "readiness": 80,
+          "role": "rwa-entity"
+        }
+      ],
+      "display_name": "The Real Estate Connections",
+      "domain": "TheRealEstateConnections.com",
+      "id": "real-estate-connections",
+      "rwa_category": "real_estate",
+      "status": "draft",
+      "stellar_asset_symbol": null,
+      "system_role": "Real estate RWA intake and institutional coordination layer.",
+      "xrpl_asset_symbol": "TERRAVL"
+    },
+    {
+      "category": "Energy / ESG / Asset",
+      "chain_registrations": [
+        {
+          "chain": "xrpl",
+          "readiness": 20,
+          "role": "energy-rwa-issuer"
+        },
+        {
+          "chain": "tsn_internal",
+          "readiness": 70,
+          "role": "energy-entity"
+        }
+      ],
+      "display_name": "Green-N-Go Solar",
+      "domain": "Green-N-Go.Solar",
+      "id": "green-n-go-solar",
+      "rwa_category": "energy",
+      "status": "draft",
+      "stellar_asset_symbol": null,
+      "system_role": "Solar and clean energy RWA, ESG reporting, and green asset coordination.",
+      "xrpl_asset_symbol": "SOLAR"
+    },
+    {
+      "category": "Utility / Service Platform",
+      "chain_registrations": [
+        {
+          "chain": "tsn_internal",
+          "readiness": 40,
+          "role": "service-entity"
+        }
+      ],
+      "display_name": "HOTRCW",
+      "domain": "HOTRCW.COM",
+      "id": "hotrcw",
+      "status": "needs_review",
+      "stellar_asset_symbol": null,
+      "system_role": "Utility and service coordination within the Troptions ecosystem.",
+      "xrpl_asset_symbol": null
+    }
+  ],
+  "chain_id": "tsn-mainnet",
+  "created_at": "2026-04-27T00:00:00Z",
+  "genesis_hash": "5c0a395f3a83008c8a644325145ac44679747fdd880c9c260ac7781613f4cd29",
+  "genesis_height": 0,
+  "genesis_timestamp": "2026-04-27T00:00:00Z",
+  "genesis_version": "1.0",
+  "governance": {
+    "compliance_gate": "Legal review + board authorization required for all live state transitions",
+    "model": "HotStuff BFT simulation layer",
+    "quorum_threshold_pct": 67,
+    "upgrade_authority": "Bryan Stone / FTH Trading board",
+    "voting_mechanism": "GENIUS Act compliant proposal/vote/execute pipeline"
+  },
+  "issued_assets": [
+    {
+      "chain": "xrpl",
+      "currency_hex": "54524F5054494F4E530000000000000000000000",
+      "decimals": 6,
+      "issuer": "rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3",
+      "live_execution_allowed": false,
+      "max_supply": null,
+      "name": "Troptions",
+      "status": "active_read_only",
+      "symbol": "TROPTIONS",
+      "type": "xrpl_iou"
+    },
+    {
+      "chain": "xrpl",
+      "decimals": 6,
+      "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "live_execution_allowed": false,
+      "name": "OPTKAS Claim Receipt",
+      "status": "spec_issued_gated",
+      "symbol": "OPTKAS",
+      "type": "xrpl_iou"
+    },
+    {
+      "chain": "xrpl",
+      "decimals": 6,
+      "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "live_execution_allowed": false,
+      "name": "Sovereign Bond Receipt",
+      "status": "spec_only_gated",
+      "symbol": "SOVBND",
+      "type": "xrpl_iou"
+    },
+    {
+      "chain": "xrpl",
+      "decimals": 6,
+      "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "live_execution_allowed": false,
+      "name": "Imperial Commodity Claim",
+      "status": "spec_only_gated",
+      "symbol": "IMPERIA",
+      "type": "xrpl_iou"
+    },
+    {
+      "chain": "xrpl",
+      "decimals": 6,
+      "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "live_execution_allowed": false,
+      "name": "Gem Vault Receipt",
+      "status": "spec_only_gated",
+      "symbol": "GEMVLT",
+      "type": "xrpl_iou"
+    },
+    {
+      "chain": "xrpl",
+      "decimals": 6,
+      "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "live_execution_allowed": false,
+      "name": "Terra Value — Real Estate",
+      "status": "spec_only_gated",
+      "symbol": "TERRAVL",
+      "type": "xrpl_iou"
+    },
+    {
+      "chain": "xrpl",
+      "decimals": 6,
+      "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "live_execution_allowed": false,
+      "name": "Petroleum Commodity Claim",
+      "status": "review_required_high_risk",
+      "symbol": "PETRO",
+      "type": "xrpl_iou"
+    },
+    {
+      "chain": "xrpl",
+      "decimals": 0,
+      "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "live_execution_allowed": false,
+      "name": "Evidence Attestation Marker",
+      "standard": "XLS-20",
+      "status": "spec_only_gated",
+      "symbol": "ATTEST",
+      "type": "xrpl_nft"
+    }
+  ],
+  "legal_notice": "This genesis manifest is informational infrastructure only. Nothing herein constitutes a financial offer, investment solicitation, securities issuance, or regulatory approval. All capabilities are subject to legal review, licensing, KYC/KYB, AML, custody approval, and board authorization before any live execution may occur.",
+  "lock_timestamp": "2026-04-28T02:00:54.961Z",
+  "mpt_definitions": [
+    {
+      "asset_scale": 6,
+      "chain": "xrpl",
+      "flags": [
+        "lsfMPTCanTransfer",
+        "lsfMPTCanTrade"
+      ],
+      "issuer_address": "PENDING_FRESH_GENERATION",
+      "issuer_wallet_role": "unity-token-mpt-issuer",
+      "max_amount": "1000000000",
+      "name": "Troptions Unity Token",
+      "notes": [
+        "XLS-33 MPTIssuanceCreate transaction required on XRPL mainnet",
+        "Securities counsel review required before any distribution",
+        "Fresh isolated wallet required as MPT issuer",
+        "Max supply 1,000,000,000 TUT with 6 decimal places (1e6 base units = 1 TUT)"
+      ],
+      "simulation_only": true,
+      "standard": "XLS-33",
+      "status": "spec_only_xls33_pending_legal_clearance_and_fresh_wallet",
+      "symbol": "TUT",
+      "transfer_fee_basis_pts": 0
+    }
+  ],
+  "network_name": "Troptions Settlement Network",
+  "nft_collections": [
+    {
+      "brand_id": "troptions-org",
+      "burnable": true,
+      "chain": "xrpl",
+      "collection_id": "nft-troptions-org-credential",
+      "max_supply": null,
+      "name": "TROPTIONS.ORG Institutional Credential",
+      "previous_status": "burned_during_compromise_2026_02_21",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_pending_re_issuance_post_compromise",
+      "transfer_fee_basis_pts": 0,
+      "transferable": false
+    },
+    {
+      "brand_id": "troptions-xchange",
+      "burnable": true,
+      "chain": "xrpl",
+      "collection_id": "nft-troptions-xchange-member",
+      "max_supply": null,
+      "name": "Troptions Xchange Member NFT",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_wallet_pending",
+      "transfer_fee_basis_pts": 0,
+      "transferable": false
+    },
+    {
+      "brand_id": "troptions-university",
+      "burnable": false,
+      "chain": "xrpl",
+      "collection_id": "nft-troptions-university-cert",
+      "max_supply": null,
+      "name": "Troptions University Completion Certificate",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_wallet_pending",
+      "transfer_fee_basis_pts": 0,
+      "transferable": false
+    },
+    {
+      "brand_id": "troptions-tv-network",
+      "burnable": true,
+      "chain": "xrpl",
+      "collection_id": "nft-troptions-tv-media-access",
+      "max_supply": null,
+      "name": "Troptions TV Premium Access NFT",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_wallet_pending",
+      "transfer_fee_basis_pts": 0,
+      "transferable": true
+    },
+    {
+      "brand_id": "real-estate-connections",
+      "burnable": true,
+      "chain": "xrpl",
+      "collection_id": "nft-real-estate-proof-of-interest",
+      "max_supply": null,
+      "name": "Real Estate Proof-of-Interest NFT",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_wallet_pending",
+      "transfer_fee_basis_pts": 0,
+      "transferable": false
+    },
+    {
+      "brand_id": "green-n-go-solar",
+      "burnable": true,
+      "chain": "xrpl",
+      "collection_id": "nft-green-n-go-solar-rec",
+      "max_supply": null,
+      "name": "Green-N-Go Solar REC NFT",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_wallet_pending",
+      "transfer_fee_basis_pts": 0,
+      "transferable": true
+    },
+    {
+      "brand_id": "hotrcw",
+      "burnable": true,
+      "chain": "xrpl",
+      "collection_id": "nft-hotrcw-service-credential",
+      "max_supply": null,
+      "name": "HOTRCW Service Credential NFT",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_model_under_review",
+      "transfer_fee_basis_pts": 0,
+      "transferable": false
+    },
+    {
+      "brand_id": "troptions-unity-token",
+      "burnable": false,
+      "chain": "xrpl",
+      "collection_id": "nft-troptions-unity-token-genesis-stake",
+      "max_supply": 1000,
+      "name": "Troptions Unity Token Genesis Stake NFT",
+      "simulation_only": true,
+      "standard": "XLS-20",
+      "status": "spec_only_securities_counsel_review_required",
+      "transfer_fee_basis_pts": 0,
+      "transferable": false
+    }
+  ],
+  "operator": {
+    "name": "Bryan Stone",
+    "organization": "FTH Trading / Troptions",
+    "role": "Founder and Genesis Operator"
+  },
+  "polygon": {
+    "evl_sale_contract": "0x496b0c4D2Ae3F7aa3B8Bc3fD9b2d9aFd72BC8e7A",
+    "evl_token": "0xAFe18578D2E7d4C3a9aA5Ef0EF85c2a2D57Bb1A",
+    "kenny_token": "0x93F2a3e8E13E0B81B5cE3a84b5c1BC23E1Ac45Ce",
+    "network": "polygon-mainnet",
+    "quantum_vault_factory": "0x9BE7E2A62D8fE9b76E50cBDB9C4e0B80a8b7Ff3A",
+    "simulation_only": true
+  },
+  "simulation_only": true,
+  "stellar": {
+    "accounts": [
+      {
+        "address": "GBJIMHMBGTPN5RS42OGBUY5NC2ATZLPT3B3EWV32SM2GQLS46TRJWG4I",
+        "notes": "Must be funded with minimum 1 XLM before any trustlines can be established",
+        "required_xlm_reserve": "1.0",
+        "role": "issuer",
+        "status": "generated_not_funded"
+      },
+      {
+        "address": "GAKCD7OKDM4HLZDBEE7KXTRFAYIE755UHL3JFQEOOHDPIMM5GEFY3RPF",
+        "notes": "Distribution wallet — receives from issuer for circulation",
+        "required_xlm_reserve": "1.0",
+        "role": "distribution",
+        "status": "generated_not_funded"
+      },
+      {
+        "address": "GC6O6Q7FG5FZGHE5D5BHGA6ZTLRAU7UWFJKKWNOJ36G3PKVVKVYLQGA6",
+        "notes": "Anchor — fiat on/off ramp coordination",
+        "required_xlm_reserve": "1.0",
+        "role": "anchor",
+        "status": "generated_not_funded"
+      }
+    ],
+    "activation_status": "accounts_generated_not_yet_funded_or_activated",
+    "activation_steps": [
+      "1. Fund each account with minimum 1 XLM on mainnet",
+      "2. Establish trustline: distribution → issuer (TROPTIONS asset)",
+      "3. Issue TROPTIONS asset from issuer to distribution account",
+      "4. Configure Stellar.toml at TROPTIONS.ORG/.well-known/stellar.toml",
+      "5. Enable AUTH_REQUIRED and AUTH_REVOCABLE flags on issuer if KYC-gated",
+      "6. Test AMM/DEX liquidity pool creation on testnet first",
+      "7. Legal + compliance review before mainnet issuance"
+    ],
+    "assets_to_issue": [
+      {
+        "code": "TROPTIONS",
+        "issuer": "GBJIMHMBGTPN5RS42OGBUY5NC2ATZLPT3B3EWV32SM2GQLS46TRJWG4I",
+        "status": "spec_only"
+      },
+      {
+        "code": "TUT",
+        "issuer": "GBJIMHMBGTPN5RS42OGBUY5NC2ATZLPT3B3EWV32SM2GQLS46TRJWG4I",
+        "status": "spec_only_securities_counsel_required"
+      },
+      {
+        "code": "TSU",
+        "issuer": "GBJIMHMBGTPN5RS42OGBUY5NC2ATZLPT3B3EWV32SM2GQLS46TRJWG4I",
+        "status": "spec_only"
+      },
+      {
+        "code": "TXC",
+        "issuer": "GBJIMHMBGTPN5RS42OGBUY5NC2ATZLPT3B3EWV32SM2GQLS46TRJWG4I",
+        "status": "spec_only_exchange_licensing_required"
+      }
+    ],
+    "last_activity": "2026-02-07",
+    "simulation_only": true
+  },
+  "trustlines": [
+    {
+      "asset": "OPTKAS",
+      "chain": "xrpl",
+      "holder": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+      "holder_role": "optkas-genesis-treasury",
+      "id": "tl-1",
+      "limit": "500000",
+      "status": "authorized"
+    },
+    {
+      "asset": "SOVBND",
+      "chain": "xrpl",
+      "holder": "rnAF6Ki5sbmPZ4dTNCVzH5iyb9ScdSqyNr",
+      "holder_role": "related-wallet",
+      "id": "tl-2",
+      "limit": "250000",
+      "status": "authorized"
+    },
+    {
+      "asset": "PETRO",
+      "chain": "xrpl",
+      "holder": "rDEW3swAxG4iJcBSRBdKLim33TfTciKzxX",
+      "holder_role": "related-wallet",
+      "id": "tl-3",
+      "limit": "100000",
+      "status": "review_required"
+    }
+  ],
+  "xrpl": {
+    "compromise_alert": {
+      "action_required": "DO NOT use rpP12ND2K7ZRzXZBEUnQM2i18tMGytXnW1 for any new operations. Generate fresh wallets per-brand.",
+      "compromised_wallet": "rpP12ND2K7ZRzXZBEUnQM2i18tMGytXnW1",
+      "drained_amounts": {
+        "EUR": "~50,000,000",
+        "GOLD": "~20,000,000",
+        "USDT": "~184,000,000"
+      },
+      "forensics_registry_status": "EMPTY — all previously minted NFTs were burned",
+      "funds_drained": "2026-03-05T00:29:00Z",
+      "master_key_disabled": "2026-02-25",
+      "nfts_burned": "2026-02-21"
+    },
+    "currency_code": "TROPTIONS",
+    "currency_hex": "54524F5054494F4E530000000000000000000000",
+    "default_trust_limit": "1000000000",
+    "issuer_address": "rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3",
+    "simulation_only": true,
+    "treasury_address": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+    "wallet_roles": [
+      {
+        "address": "rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3",
+        "role": "troptions-org-issuer",
+        "status": "active_read_only"
+      },
+      {
+        "address": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "role": "optkas-genesis-treasury",
+        "status": "active_trustlines_established"
+      },
+      {
+        "address": "PENDING_FRESH_GENERATION",
+        "role": "troptions-xchange-wallet",
+        "status": "to_be_generated"
+      },
+      {
+        "address": "PENDING_FRESH_GENERATION",
+        "role": "unity-token-mpt-issuer",
+        "status": "to_be_generated_requires_legal_clearance"
+      },
+      {
+        "address": "PENDING_FRESH_GENERATION",
+        "role": "university-nft-issuer",
+        "status": "to_be_generated"
+      },
+      {
+        "address": "PENDING_FRESH_GENERATION",
+        "role": "tv-network-nft-issuer",
+        "status": "to_be_generated"
+      },
+      {
+        "address": "PENDING_FRESH_GENERATION",
+        "role": "real-estate-rwa-issuer",
+        "status": "to_be_generated"
+      },
+      {
+        "address": "PENDING_FRESH_GENERATION",
+        "role": "solar-rwa-issuer",
+        "status": "to_be_generated"
+      },
+      {
+        "address": "PENDING_MODEL_REVIEW",
+        "role": "hotrcw-service-wallet",
+        "status": "pending_model_confirmation"
+      }
+    ]
+  }
+}

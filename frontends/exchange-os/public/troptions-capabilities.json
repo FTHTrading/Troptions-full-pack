@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "generated": "2026-04-25",
+  "disclaimer": "All capabilities subject to provider, legal, compliance, custody, jurisdiction, and board approval gates.",
+  "capabilities": {
+    "rwaIntake": {
+      "status": "gated",
+      "categories": ["gold", "energy", "carbon", "oil", "treasury"],
+      "gates": ["proof-gate", "legal-review", "custody-gate", "board-approval"]
+    },
+    "sblcTracking": {
+      "status": "gated",
+      "role": "intake-and-readiness-only",
+      "gates": ["compliance-gate", "legal-review", "provider-gate"]
+    },
+    "pofTracking": {
+      "status": "gated",
+      "role": "evidence-tracking-only",
+      "gates": ["compliance-gate", "source-document-required"]
+    },
+    "settlementReadiness": {
+      "status": "gated",
+      "rails": ["stablecoin", "XRPL", "banking"],
+      "gates": ["all-gates-cleared"]
+    },
+    "xrplSimulation": {
+      "status": "simulation-only",
+      "features": ["AMM-quote-modeling", "DEX-route-planning", "slippage-simulation"],
+      "liveExecutionAllowed": false
+    },
+    "mcpAgenticLayer": {
+      "status": "active",
+      "allowed": ["read", "simulate", "summarize", "draft", "explain"],
+      "blocked": ["approve", "execute", "sign", "transfer", "issue", "bypass"]
+    },
+    "x402Protocol": {
+      "status": "dry-run",
+      "gates": ["provider-gate", "board-approval"]
+    },
+    "telnyxTelecom": {
+      "status": "gated",
+      "consentRequired": ["TCPA", "CTIA"],
+      "gates": ["compliance-gate"]
+    },
+    "custodyCoordination": {
+      "status": "gated",
+      "role": "third-party-coordination-only",
+      "directCustody": false
+    },
+    "clientPortal": {
+      "status": "gated",
+      "features": ["KYC-KYB-tracking", "compliance-dashboard", "settlement-coordination"],
+      "gates": ["identity-gate", "entity-gate", "compliance-gate"]
+    }
+  },
+  "notCapable": [
+    "banking-services",
+    "securities-trading",
+    "broker-dealer-activity",
+    "direct-custody",
+    "document-fabrication",
+    "guaranteed-returns",
+    "risk-free-products",
+    "instant-liquidity"
+  ]
+}

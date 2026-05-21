@@ -1,0 +1,15 @@
+[package]
+name = "atomic-router"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+primitives = { workspace = true }
+state = { workspace = true }
+runtime = { workspace = true }
+crypto = { workspace = true }
+serde = { workspace = true, features = ["derive"] }
+
+[dev-dependencies]

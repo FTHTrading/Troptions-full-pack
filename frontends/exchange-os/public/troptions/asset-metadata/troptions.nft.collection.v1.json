@@ -1,0 +1,65 @@
+{
+  "$schema": "https://schema.xls20.dev/v1/collection.json",
+  "schemaVersion": "XLS-24-v1.0",
+  "collectionId": "troptions.nft.membership.v1",
+  "name": "Troptions Genesis Membership",
+  "symbol": "TRPMEM",
+  "description": "Genesis-tier membership credentials for the Troptions institutional operating infrastructure platform. Each NFT is a non-transferable proof-of-membership credential issued under the Troptions XLS-20 collection on the XRP Ledger mainnet. Membership confers access to gated platform capabilities, governance participation, and proof-of-evidence audit trails — it does not represent equity, securities, redemption rights, or any guaranteed return.",
+  "external_url": "https://troptions.org/troptions/membership",
+  "image": "https://troptions.org/assets/troptions/logos/troptions-classic-white.jpg",
+  "banner_image": "https://troptions.org/assets/troptions/logos/troptions-xchange-fire.jpg",
+  "featured_image": "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg",
+  "icon": "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg",
+  "issuer": {
+    "name": "Troptions",
+    "address": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+    "url": "https://troptions.org",
+    "email": "ops@troptions.org"
+  },
+  "ledger": {
+    "ledger": "xrpl",
+    "network": "mainnet",
+    "taxon": 1,
+    "transferFee": 0,
+    "flags": {
+      "tfBurnable": true,
+      "tfOnlyXRP": false,
+      "tfTransferable": false
+    }
+  },
+  "branding": {
+    "primaryColor": "#C9A24A",
+    "secondaryColor": "#071426",
+    "backgroundColor": "#F7F2E8"
+  },
+  "attributes": [
+    { "trait_type": "Collection",       "value": "Genesis Membership" },
+    { "trait_type": "Tier",             "value": "Founding" },
+    { "trait_type": "Transferable",     "value": "No" },
+    { "trait_type": "Governance Vote",  "value": "Yes" },
+    { "trait_type": "Issuance Network", "value": "XRPL Mainnet" }
+  ],
+  "compliance": {
+    "kycRequired": true,
+    "transferable": false,
+    "redemptionGuarantees": false,
+    "legalNotice": "This NFT is a non-transferable proof-of-membership credential. It is not a security, an investment contract, a redeemable instrument, or a financial product. Possession does not guarantee any return, distribution, redemption, or specific platform behavior."
+  },
+  "tokens": [],
+  "tokenTemplate": {
+    "name": "Troptions Genesis Member #{tokenNumber}",
+    "description": "Genesis member credential #{tokenNumber} of the Troptions institutional operating infrastructure platform.",
+    "image": "https://troptions.org/assets/troptions/logos/troptions-classic-white.jpg",
+    "external_url": "https://troptions.org/troptions/membership/{tokenNumber}",
+    "attributes": [
+      { "trait_type": "Member Number", "value": "{tokenNumber}" },
+      { "trait_type": "Tier",          "value": "Founding" }
+    ]
+  },
+  "links": {
+    "website": "https://troptions.org",
+    "membership": "https://troptions.org/troptions/membership",
+    "xrpLedgerToml": "https://troptions.org/.well-known/xrp-ledger.toml"
+  },
+  "lastUpdated": "2026-04-28T00:00:00Z"
+}

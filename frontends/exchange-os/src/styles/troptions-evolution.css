@@ -1,0 +1,188 @@
+.te-page {
+  background: linear-gradient(155deg, #091528 0%, #10233d 58%, #0d1a2d 100%);
+  color: #f2efe8;
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+}
+
+.te-wrap {
+  width: min(1200px, 100% - 1rem);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.te-panel,
+.te-future-panel,
+.te-evidence-banner,
+.te-claim-card,
+.te-capability-card,
+.te-timeline-item,
+.te-then-now-card {
+  background: rgba(245, 240, 228, 0.96);
+  color: #0f172a;
+  border: 1px solid rgba(201, 154, 60, 0.4);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.te-panel h1,
+.te-panel h2,
+.te-panel h3,
+.te-panel h4,
+.te-panel h5,
+.te-panel h6,
+.te-panel p,
+.te-panel span,
+.te-panel li {
+  color: #0f172a;
+}
+
+.te-future-panel,
+.te-evidence-banner {
+  background: rgba(13, 26, 45, 0.95);
+  color: #f6f1e3;
+  border-color: rgba(201, 154, 60, 0.5);
+}
+
+.te-heading {
+  font: 700 clamp(1.7rem, 3vw, 2.6rem) / 1.2 Georgia, "Times New Roman", serif;
+  color: #0f172a;
+  margin: 0;
+}
+
+.te-heading.light {
+  color: #f0cf82;
+}
+
+.te-subheading {
+  margin: 0.35rem 0 0;
+  color: #1e293b;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.te-kicker {
+  font: 700 0.72rem/1.15 "Segoe UI", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #1f2937;
+  margin: 0 0 0.25rem;
+  font-weight: 700;
+}
+
+.te-muted {
+  color: #374151;
+}
+
+.te-status {
+  color: #1f2937;
+  font-weight: 700;
+}
+
+.te-risk {
+  color: #7f1d1d;
+}
+
+.te-grid-2 {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.te-grid-3 {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.te-timeline,
+.te-then-now,
+.te-capability-grid,
+.te-claims-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.te-evidence-banner ul {
+  margin: 0.55rem 0 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.te-cta-row {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.te-cta-link {
+  text-decoration: none;
+  border: 1px solid rgba(201, 154, 60, 0.55);
+  background: rgba(201, 154, 60, 0.15);
+  color: #f0cf82;
+  border-radius: 0.45rem;
+  padding: 0.5rem 0.75rem;
+  font: 600 0.85rem/1.2 "Segoe UI", sans-serif;
+}
+
+.te-cta-link:hover {
+  background: rgba(201, 154, 60, 0.24);
+}
+
+.te-table-wrap {
+  overflow-x: auto;
+}
+
+.te-source-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(245, 240, 228, 0.98);
+  color: #111827;
+  border: 1px solid rgba(201, 154, 60, 0.45);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.te-source-table th,
+.te-source-table td {
+  border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+  text-align: left;
+  vertical-align: top;
+  padding: 0.55rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.te-source-table th {
+  background: rgba(11, 31, 54, 0.95);
+  color: #f0cf82;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.te-source-table a {
+  color: #0b2b55;
+}
+
+@media (min-width: 760px) {
+  .te-grid-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .te-grid-3,
+  .te-claims-grid,
+  .te-capability-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .te-timeline,
+  .te-then-now {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

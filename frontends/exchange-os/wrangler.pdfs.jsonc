@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "troptions-pdf-host",
+  "account_id": "07bcc4a189ef176261b818409c95891f",
+  "main": "workers/pdf-host.mjs",
+  "compatibility_date": "2026-04-29",
+  "routes": [
+    {
+      "pattern": "troptions.drunks.app",
+      "custom_domain": true
+    },
+    {
+      "pattern": "t.drunks.app",
+      "custom_domain": true
+    }
+  ],
+  "assets": {
+    "directory": "public/downloads",
+    "binding": "ASSETS"
+  }
+}

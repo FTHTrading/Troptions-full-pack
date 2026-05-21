@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "Troptions Wallet Assistant",
+  "description": "Quick launcher for Troptions wallet simulation routes and admin audit pages.",
+  "version": "0.1.0",
+  "action": {
+    "default_title": "Troptions Wallet Assistant",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage"]
+}

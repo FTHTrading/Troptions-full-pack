@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Troptions Wallet Assistant</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="panel">
+      <header class="hero">
+        <p class="eyebrow">Troptions Wallet Assistant</p>
+        <h1>Simulation Route Launcher</h1>
+        <p class="summary">Quick access to the restored local wallet flows and the admin navigation audit.</p>
+      </header>
+
+      <section class="base-url">
+        <label for="baseUrl">Local Base URL</label>
+        <div class="base-url-row">
+          <input id="baseUrl" type="url" value="http://localhost:8889" spellcheck="false" />
+          <button id="saveBaseUrl" type="button">Save</button>
+        </div>
+      </section>
+
+      <section>
+        <p class="section-title">Primary Routes</p>
+        <div class="link-grid" id="primaryLinks"></div>
+      </section>
+
+      <section>
+        <p class="section-title">Admin Oversight</p>
+        <div class="link-grid" id="adminLinks"></div>
+      </section>
+
+      <section class="notice">
+        <p>No live funds, live sends, live x402 settlement, live card funding, withdrawals, or chain signing are enabled.</p>
+      </section>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+  </html>

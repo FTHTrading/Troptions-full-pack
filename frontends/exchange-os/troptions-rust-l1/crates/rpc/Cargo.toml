@@ -1,0 +1,13 @@
+[package]
+name = "tsn-rpc"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+tsn-state = { path = "../state" }
+tsn-runtime = { path = "../runtime" }
+tsn-telemetry = { path = "../telemetry" }

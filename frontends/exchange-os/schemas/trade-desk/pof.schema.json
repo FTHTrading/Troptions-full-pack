@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://troptions.local/schemas/trade-desk/pof.schema.json",
+  "title": "Trade Desk POF",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "pofId",
+    "createdDate",
+    "legalEntityName",
+    "accountHolderName",
+    "matchResult",
+    "institution",
+    "account",
+    "restrictions",
+    "verification",
+    "checklist",
+    "decision"
+  ],
+  "properties": {
+    "pofId": { "type": "string", "minLength": 1 },
+    "createdDate": { "type": "string", "format": "date" },
+    "lastUpdated": { "type": "string", "format": "date" },
+    "legalEntityName": { "type": "string", "minLength": 1 },
+    "accountHolderName": { "type": "string", "minLength": 1 },
+    "matchResult": { "type": "string", "enum": ["MATCH", "MISMATCH", "PENDING"] },
+    "institution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "jurisdiction"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "enum": ["bank", "custodian", "broker", "other"] },
+        "jurisdiction": { "type": "string", "minLength": 1 },
+        "contactName": { "type": "string" },
+        "contactEmail": { "type": "string", "format": "email" },
+        "contactPhone": { "type": "string" }
+      }
+    },
+    "account": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["accountType", "currency", "availableBalance", "verificationDate", "statementDate"],
+      "properties": {
+        "accountType": { "type": "string", "minLength": 1 },
+        "currency": { "type": "string", "minLength": 1 },
+        "availableBalance": { "type": "number", "minimum": 0 },
+        "verificationDate": { "type": "string", "format": "date" },
+        "statementDate": { "type": "string", "format": "date" }
+      }
+    },
+    "restrictions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["restrictionsPresent", "liensPresent", "legalHoldPresent"],
+      "properties": {
+        "restrictionsPresent": { "type": "string", "enum": ["YES", "NO", "PENDING"] },
+        "liensPresent": { "type": "string", "enum": ["YES", "NO", "PENDING"] },
+        "legalHoldPresent": { "type": "string", "enum": ["YES", "NO", "PENDING"] },
+        "notes": { "type": "string" }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["performed", "method", "timestamp", "verifier"],
+      "properties": {
+        "performed": { "type": "boolean" },
+        "method": { "type": "string", "minLength": 1 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "verifier": { "type": "string", "minLength": 1 }
+      }
+    },
+    "checklist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "statementPresent",
+        "letterheadPresent",
+        "nameMatchEvidencePresent",
+        "freshnessCheckPassed",
+        "authenticityCheckPassed"
+      ],
+      "properties": {
+        "statementPresent": { "type": "boolean" },
+        "letterheadPresent": { "type": "boolean" },
+        "nameMatchEvidencePresent": { "type": "boolean" },
+        "freshnessCheckPassed": { "type": "boolean" },
+        "authenticityCheckPassed": { "type": "boolean" }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "reviewer", "date"],
+      "properties": {
+        "result": { "type": "string", "enum": ["PASS", "FAIL", "CONDITIONAL", "PENDING"] },
+        "reviewer": { "type": "string", "minLength": 1 },
+        "date": { "type": "string", "format": "date" },
+        "conditions": { "type": "string" }
+      }
+    }
+  }
+}

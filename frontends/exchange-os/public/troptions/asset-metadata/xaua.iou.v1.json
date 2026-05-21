@@ -1,0 +1,83 @@
+{
+  "$schema": "https://troptions.org/schemas/troptions-asset.v1.schema.json",
+  "schemaVersion": "1.0.0",
+  "assetId": "xaua.iou.v1",
+  "assetClass": "fungible-iou",
+  "name": "Gold IOU — Tranche A",
+  "symbol": "XAUA",
+  "displayName": "Gold IOU Tranche A (XAUA)",
+  "tagline": "Gold-backed IOU instrument — Deal Series A — issued via Troptions Gateway.",
+  "description": "XAUA is a gold-backed IOU issued by the Troptions Gateway on the XRP Ledger and Stellar mainnet. Each unit represents a redeemable claim on gold (XAU) value under the terms of the Troptions $100M Deal Series A agreement. Issuance, transfer, and redemption are governed by the Troptions compliance framework and applicable deal documentation. The currency code XAUA follows the ISO 4217 XAU (gold) convention with Tranche A designation.",
+  "longDescription": "XAUA is Tranche A of the Troptions Gold IOU series, structured to complement the BTCA Bitcoin IOU in the $100M Deal Series A capital arrangement. The issuer (Troptions Gateway) maintains gold or gold-equivalent reserves in a segregated custody arrangement. Holders may present XAUA IOUs for redemption against physical gold, gold futures, or USD-equivalent value subject to KYC verification and deal terms. The instrument is issued on both XRPL (hex currency code 5841554100000000000000000000000000000000) and Stellar (asset code XAUA) from the governance-controlled issuer addresses.",
+  "dealSeries": "A",
+  "dealReference": "TROPTIONS-XAU-DEAL-100M-2026",
+  "dealValueUSD": "100000000",
+  "underlyingAsset": "Gold (XAU — ISO 4217)",
+  "issuer": {
+    "name": "Troptions Gateway",
+    "url": "https://troptions.org",
+    "email": "ops@troptions.org",
+    "github": "FTHTrading",
+    "twitter": "troptions"
+  },
+  "branding": {
+    "primaryLogo": "https://troptions.org/assets/troptions/logos/xaua-iou-logo.svg",
+    "iconLogo": "https://troptions.org/assets/troptions/logos/xaua-iou-logo.svg",
+    "darkIconLogo": "https://troptions.org/assets/troptions/logos/xaua-iou-logo.svg",
+    "wordmarkLogo": "https://troptions.org/assets/troptions/logos/troptions-classic-white.jpg",
+    "poweredByLogo": "https://troptions.org/assets/troptions/logos/troptions-logo-powered-by.jpg",
+    "primaryColor": "#C9A24A",
+    "secondaryColor": "#071426",
+    "backgroundColor": "#F7F2E8",
+    "textColor": "#0B0B0D"
+  },
+  "ledgers": [
+    {
+      "ledger": "xrpl",
+      "network": "mainnet",
+      "currencyCode": "XAUA",
+      "currencyHex": "5841554100000000000000000000000000000000",
+      "issuerAddress": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributorAddress": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "displayDecimals": 6,
+      "maxSupply": "100000000",
+      "tomlUrl": "https://troptions.org/.well-known/xrp-ledger.toml",
+      "explorerUrls": {
+        "xrpscan": "https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+        "bithomp": "https://bithomp.com/explorer/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
+      }
+    },
+    {
+      "ledger": "stellar",
+      "network": "mainnet",
+      "assetCode": "XAUA",
+      "issuerAddress": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributorAddress": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "displayDecimals": 7,
+      "maxSupply": "100000000",
+      "homeDomain": "troptions.org",
+      "tomlUrl": "https://troptions.org/.well-known/stellar.toml",
+      "explorerUrls": {
+        "stellarExpert": "https://stellar.expert/explorer/public/asset/XAUA-GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4"
+      }
+    }
+  ],
+  "compliance": {
+    "regulated": true,
+    "kycRequired": true,
+    "redemptionTerms": "Redemption requires KYC verification and execution of deal Series A gold redemption form. Gold or USD-equivalent disbursed within 5 business days.",
+    "redemptionGuarantees": true,
+    "liquidityGuarantees": false,
+    "custodyArrangement": "Segregated gold or gold-equivalent custody, verifiable on request.",
+    "auditTrail": "https://troptions.org/troptions/compliance"
+  },
+  "links": {
+    "homepage": "https://troptions.org",
+    "whitepaper": "https://troptions.org/docs/xaua-iou-deal-series-a.pdf",
+    "terms": "https://troptions.org/troptions/compliance",
+    "explorer_xrpl": "https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+    "explorer_stellar": "https://stellar.expert/explorer/public/asset/XAUA-GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4"
+  },
+  "createdAt": "2026-04-28T00:00:00.000Z",
+  "version": "1.0.0"
+}

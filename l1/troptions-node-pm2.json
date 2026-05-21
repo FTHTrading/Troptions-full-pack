@@ -1,0 +1,21 @@
+{
+  "apps": [
+    {
+      "name": "troptions-l1-node",
+      "script": "C:\\cargo-target-burnzy\\release\\troptions-node.exe",
+      "args": "9944",
+      "exec_mode": "fork",
+      "autorestart": true,
+      "restart_delay": 5000,
+      "max_restarts": 10,
+      "min_uptime": "10s",
+      "env": {
+        "RUST_LOG": "info"
+      },
+      "log_date_format": "YYYY-MM-DD HH:mm:ss",
+      "out_file": "C:\\Users\\Kevan\\Documents\\UNYKORN_Ecosystem\\logs\\troptions-l1-node-out.log",
+      "err_file": "C:\\Users\\Kevan\\Documents\\UNYKORN_Ecosystem\\logs\\troptions-l1-node-err.log",
+      "merge_logs": true
+    }
+  ]
+}

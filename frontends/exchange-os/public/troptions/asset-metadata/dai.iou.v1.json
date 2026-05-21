@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "assetId": "DAI.TROPTIONS-GATEWAY",
+  "assetType": "stablecoin-iou",
+  "ticker": "DAI",
+  "name": "Dai Stablecoin — Troptions Gateway IOU",
+  "description": "MakerDAO DAI issued as an on-ledger IOU from the Troptions Gateway. Each token represents one real DAI held in custody by the Troptions Gateway issuer. Redeemable 1:1 for DAI upon verified deal settlement. DAI is an AAVE v3 listed collateral asset — enables DeFi-native proof workflows and gateway fee settlement via the AAVE liquidity protocol. Issued on XRPL and Stellar mainnet.",
+  "issuer": "Troptions Gateway — FTH Trading",
+  "underlyingAsset": "Dai Stablecoin (DAI)",
+  "underlyingIssuer": "MakerDAO / Sky Protocol",
+  "underlyingContractEth": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+  "peg": "USD",
+  "pegRatio": "1:1",
+  "supply": {
+    "initial": "50000000",
+    "unit": "DAI",
+    "decimals": 18
+  },
+  "aaveCompatible": true,
+  "aaveVersion": "v3",
+  "aavePool": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+  "aaveToken": "aDAI",
+  "aaveNotes": "DAI is a native AAVE v3 collateral asset. Gateway may deposit DAI into AAVE v3 to generate aDAI yield while IOUs are outstanding, with aDAI as backing proof.",
+  "branding": {
+    "logo": "https://troptions.org/assets/troptions/logos/dai-iou-logo.svg",
+    "primaryColor": "#E8A200",
+    "backgroundColor": "#1A1200",
+    "textColor": "#FFFFFF"
+  },
+  "ledgers": {
+    "xrpl": {
+      "network": "mainnet",
+      "currencyCode": "DAI",
+      "currencyHex": "DAI",
+      "xrplNote": "DAI is a 3-character code — use standard XRPL currency encoding (not 20-byte hex).",
+      "issuerAddress": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributorAddress": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "defaultRipple": true,
+      "domain": "troptions.org",
+      "trustLimit": "500000000"
+    },
+    "stellar": {
+      "network": "mainnet",
+      "assetCode": "DAI",
+      "issuerAddress": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributorAddress": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "authRequired": true,
+      "authRevocable": true,
+      "authClawback": true,
+      "trustLimit": "500000000"
+    }
+  },
+  "compliance": {
+    "kycRequired": true,
+    "amlPolicy": "FTH Trading AML/KYC Policy v2",
+    "jurisdiction": "United States",
+    "redeemable": true,
+    "redemptionFee": "0.1%",
+    "redemptionContact": "gateway@troptions.org",
+    "custodianProof": "Available upon verified deal settlement — AAVE aDAI position statement on request",
+    "auditable": true
+  },
+  "dealReference": "TROPTIONS-STABLECOIN-DAI-AAVE-ISSUANCE-2026",
+  "issuanceDate": "2026-04-28",
+  "metadataVersion": "1.0.0"
+}

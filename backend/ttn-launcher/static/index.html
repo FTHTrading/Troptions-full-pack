@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTN — TROPTIONS Television Network | Launch Your Channel</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111;
+            --gold: #d4af37;
+            --text: #e5e5e5;
+            --muted: #888;
+            --accent: #00d4ff;
+            --radius: 8px;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            padding-bottom: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .brand {
+            font-weight: 800;
+            letter-spacing: .05em;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-size: 1.3rem;
+        }
+        .brand span { color: var(--text); font-weight: 400; }
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-size: .9rem;
+            transition: color 0.3s;
+        }
+        nav a:hover { color: var(--gold); }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: linear-gradient(180deg, rgba(212,175,55,0.1) 0%, transparent 100%);
+            border-radius: var(--radius);
+            margin-bottom: 3rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--gold), #f0e68c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .stat {
+            background: var(--surface);
+            border: 1px solid #222;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+        .stat-num {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .stat-label { color: var(--muted); font-size: 0.9rem; }
+        
+        /* Channel Categories */
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .category-card {
+            background: var(--surface);
+            border: 1px solid #222;
+            padding: 2rem;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.1);
+        }
+        .category-card h3 {
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+        .category-card p { color: var(--muted); margin-bottom: 1rem; font-size: 0.95rem; }
+        .category-card .features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        .category-card .features li {
+            padding: 4px 0;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .category-card .features li:before {
+            content: "✓ ";
+            color: var(--gold);
+        }
+        .pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #333;
+            padding-top: 1rem;
+        }
+        .price { font-size: 1.5rem; font-weight: bold; color: var(--gold); }
+        .btn {
+            display: inline-block;
+            background: var(--gold);
+            color: #000;
+            padding: 0.7rem 1.4rem;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .btn:hover { background: #e5c158; }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+        .btn-outline:hover { background: rgba(212,175,55,0.1); }
+        
+        /* Namespace Search */
+        .namespace-section {
+            background: linear-gradient(135deg, #111, #1a1a2e);
+            border: 1px solid rgba(0,212,255,0.2);
+            border-radius: var(--radius);
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .namespace-section h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        .namespace-search {
+            display: flex;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        .namespace-search input {
+            flex: 1;
+            padding: 1rem;
+            border-radius: var(--radius);
+            border: 1px solid #333;
+            background: rgba(0,0,0,0.3);
+            color: var(--text);
+            font-size: 1.1rem;
+        }
+        .domain-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        .domain-tag {
+            background: rgba(0,212,255,0.1);
+            color: var(--accent);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+        .domain-tag:hover { background: rgba(0,212,255,0.2); }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid #222;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+        }
+        .feature-card h3 { color: var(--gold); margin-bottom: 0.5rem; }
+        .feature-card p { color: var(--muted); font-size: 0.9rem; }
+        
+        /* Footer */
+        footer {
+            border-top: 1px solid #222;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        footer a { color: var(--muted); }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid #333;
+            border-radius: var(--radius);
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+        }
+        .modal-content h2 { color: var(--gold); margin-bottom: 1rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-group label { display: block; color: var(--muted); margin-bottom: 0.3rem; font-size: 0.9rem; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: var(--radius);
+            border: 1px solid #333;
+            background: rgba(0,0,0,0.3);
+            color: var(--text);
+        }
+        .close-btn {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--muted);
+        }
+        .close-btn:hover { color: var(--text); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="brand">TTN <span>TROPTIONS Television Network</span></div>
+            <nav>
+                <a href="#channels">Channels</a>
+                <a href="#namespaces">Namespaces</a>
+                <a href="#features">Features</a>
+                <a href="#pricing">Pricing</a>
+                <a href="https://troptionslive.unykorn.org">TROPTIONS Live →</a>
+            </nav>
+        </header>
+        
+        <div class="hero">
+            <h1>Launch Your Channel.<br>Own Your Broadcast.</h1>
+            <p>Web3-native television infrastructure. No platform dependency. Solana proof. Namespace domains. Creator sovereignty.</p>
+            <a href="#channels" class="btn">Launch Channel</a>
+            <a href="#namespaces" class="btn btn-outline" style="margin-left: 1rem;">Claim Namespace</a>
+        </div>
+        
+        <div class="stats">
+            <div class="stat"><span class="stat-num" id="stat-channels">0</span><span class="stat-label">Channels Live</span></div>
+            <div class="stat"><span class="stat-num" id="stat-namespaces">0</span><span class="stat-label">Namespaces Claimed</span></div>
+            <div class="stat"><span class="stat-num">9</span><span class="stat-label">Domain Types</span></div>
+            <div class="stat"><span class="stat-num">∞</span><span class="stat-label">Creator Freedom</span></div>
+        </div>
+        
+        <h2 id="channels" style="color: var(--gold); margin-bottom: 1.5rem;">Choose Your Channel Type</h2>
+        <div class="categories" id="categories-container">
+            <!-- Categories loaded via JS -->
+        </div>
+        
+        <div class="namespace-section" id="namespaces">
+            <h2>Claim Your Namespace</h2>
+            <p style="color: var(--muted); max-width: 600px; margin: 0 auto;">Your channel deserves a real domain. Not a YouTube handle. A Web3 namespace you own forever.</p>
+            <div class="namespace-search">
+                <input type="text" id="namespace-input" placeholder="mycreator.tennis">
+                <button class="btn" onclick="checkNamespace()">Check</button>
+            </div>
+            <div id="namespace-result" style="margin-top: 1rem;"></div>
+            
+            <div class="domain-tags">
+                <span class="domain-tag" onclick="setDomain('.sports')">.sports</span>
+                <span class="domain-tag" onclick="setDomain('.tennis')">.tennis</span>
+                <span class="domain-tag" onclick="setDomain('.mlb')">.mlb</span>
+                <span class="domain-tag" onclick="setDomain('.ncaa')">.ncaa</span>
+                <span class="domain-tag" onclick="setDomain('.creator')">.creator</span>
+                <span class="domain-tag" onclick="setDomain('.local')">.local</span>
+                <span class="domain-tag" onclick="setDomain('.business')">.business</span>
+                <span class="domain-tag" onclick="setDomain('.events')">.events</span>
+                <span class="domain-tag" onclick="setDomain('.charity')">.charity</span>
+            </div>
+        </div>
+        
+        <h2 id="features" style="color: var(--gold); margin: 3rem 0 1.5rem;">What You Get</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>📡 Live Streaming</h3>
+                <p>RTMP ingest, HLS delivery, real-time chat via Owncast + MistServer.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📼 Video CMS</h3>
+                <p>Upload, transcode, organize, and publish your VOD library via MediaCMS.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔗 Solana Proof</h3>
+                <p>On-chain viewership, attendance, and revenue proof. No black boxes.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏷️ Sponsor Drops</h3>
+                <p>QR campaigns with live engagement tracking and on-chain claim verification.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💰 Pay with TROPTIONS</h3>
+                <p>Subscribe, tip, and sponsor using TROPTIONS tokens. Fiat also accepted.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🏆 NFT Certificates</h3>
+                <p>Proof-of-view and proof-of-attendance badges minted to viewer wallets.</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>TTN — TROPTIONS Television Network. Part of the <a href="https://troptions.unykorn.org">TROPTIONS</a> ecosystem.</p>
+            <p style="margin-top: 0.5rem;">Powered by Solana · IPFS · Owncast · MistServer · MediaCMS</p>
+        </footer>
+    </div>
+    
+    <!-- Launch Channel Modal -->
+    <div class="modal" id="launch-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Launch Your Channel</h2>
+            <form id="launch-form">
+                <div class="form-group">
+                    <label>Channel Name</label>
+                    <input type="text" id="ch-name" placeholder="Atlanta Sports Network">
+                </div>
+                <div class="form-group">
+                    <label>Namespace</label>
+                    <input type="text" id="ch-namespace" placeholder="atlanta-sports">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select id="ch-category">
+                        <option value="sports">Sports</option>
+                        <option value="events">Events</option>
+                        <option value="charity">Charity</option>
+                        <option value="local">Local</option>
+                        <option value="creators">Creators</option>
+                        <option value="business">Business</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tier</label>
+                    <select id="ch-tier">
+                        <option value="basic">Basic — $19-99/mo</option>
+                        <option value="pro">Pro — $48-248/mo</option>
+                        <option value="enterprise">Enterprise — $95-495/mo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Wallet Address</label>
+                    <input type="text" id="ch-wallet" placeholder="0x... or Solana address">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="ch-email" placeholder="you@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="ch-desc" rows="3" placeholder="What is your channel about?"></textarea>
+                </div>
+                <button type="button" class="btn" onclick="submitChannel()" style="width: 100%;">Create Channel & Pay</button>
+            </form>
+            <div id="launch-result" style="margin-top: 1rem;"></div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8092';
+        
+        async function loadStats() {
+            try {
+                const resp = await fetch(`${API_BASE}/health`);
+                const data = await resp.json();
+                document.getElementById('stat-channels').textContent = data.active_channels;
+                document.getElementById('stat-namespaces').textContent = data.registered_namespaces;
+            } catch (e) {
+                console.error('Failed to load stats:', e);
+            }
+        }
+        
+        async function loadCategories() {
+            try {
+                const resp = await fetch(`${API_BASE}/categories`);
+                const cats = await resp.json();
+                const container = document.getElementById('categories-container');
+                
+                container.innerHTML = Object.entries(cats).map(([id, cat]) => `
+                    <div class="category-card" onclick="openLaunchModal('${id}')">
+                        <h3>${cat.name}</h3>
+                        <p>${cat.description}</p>
+                        <ul class="features">
+                            ${cat.features.map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+                        <div class="pricing">
+                            <span>Starting at <span class="price">$${Math.round(cat.pricing.basic)}</span>/mo</span>
+                            <button class="btn">Launch →</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) {
+                console.error('Failed to load categories:', e);
+            }
+        }
+        
+        function openLaunchModal(category) {
+            document.getElementById('launch-modal').classList.add('active');
+            if (category) {
+                document.getElementById('ch-category').value = category;
+            }
+        }
+        
+        function closeModal() {
+            document.getElementById('launch-modal').classList.remove('active');
+        }
+        
+        async function submitChannel() {
+            const data = {
+                namespace: document.getElementById('ch-namespace').value,
+                name: document.getElementById('ch-name').value,
+                description: document.getElementById('ch-desc').value,
+                category: document.getElementById('ch-category').value,
+                creator_wallet: document.getElementById('ch-wallet').value,
+                creator_email: document.getElementById('ch-email').value,
+                tier: document.getElementById('ch-tier').value,
+                payment_method: 'stripe'
+            };
+            
+            const resultDiv = document.getElementById('launch-result');
+            resultDiv.innerHTML = '<p style="color: var(--gold)">Creating channel...</p>';
+            
+            try {
+                const resp = await fetch(`${API_BASE}/channels/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const result = await resp.json();
+                
+                if (result.payment?.checkout_url) {
+                    resultDiv.innerHTML = `
+                        <p style="color: var(--gold)">✅ Channel created! Complete payment to activate.</p>
+                        <a href="${result.payment.checkout_url}" target="_blank" class="btn" style="display: block; margin-top: 1rem; text-align: center;">Pay with Stripe →</a>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<p style="color: #ff4444">Error: ${result.detail || JSON.stringify(result)}</p>`;
+                }
+            } catch (e) {
+                resultDiv.innerHTML = `<p style="color: #ff4444">Error: ${e.message}</p>`;
+            }
+        }
+        
+        async function checkNamespace() {
+            const input = document.getElementById('namespace-input').value;
+            const resultDiv = document.getElementById('namespace-result');
+            
+            if (!input) return;
+            
+            try {
+                const resp = await fetch(`${API_BASE}/namespaces/check/${input}`);
+                const data = await resp.json();
+                
+                if (data.available) {
+                    resultDiv.innerHTML = `<p style="color: #6f6">✅ ${input} is available! <button class="btn" onclick="claimNamespace('${input}')">Claim Now</button></p>`;
+                } else {
+                    resultDiv.innerHTML = `<p style="color: #ff6">⚠️ ${input} is taken (expires: ${data.expires || 'unknown'})</p>`;
+                }
+            } catch (e) {
+                resultDiv.innerHTML = `<p style="color: #ff4444">Error checking namespace</p>`;
+            }
+        }
+        
+        function setDomain(domain) {
+            const input = document.getElementById('namespace-input');
+            const current = input.value;
+            // Remove existing domain if present
+            const base = current.replace(/\.[a-z]+$/, '');
+            input.value = base + domain;
+        }
+        
+        async function claimNamespace(namespace) {
+            // This would open a wallet connect flow in production
+            alert(`Claim ${namespace} — Wallet connect coming next`);
+        }
+        
+        // Load on ready
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadCategories();
+        });
+    </script>
+</body>
+</html>

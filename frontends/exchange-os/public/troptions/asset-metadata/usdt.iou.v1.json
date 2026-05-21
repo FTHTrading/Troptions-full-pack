@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0.0",
+  "assetId": "USDT.TROPTIONS-GATEWAY",
+  "assetType": "stablecoin-iou",
+  "ticker": "USDT",
+  "name": "Tether USD — Troptions Gateway IOU",
+  "description": "Tether (USDT) issued as an on-ledger IOU from the Troptions Gateway. Each token represents one real USDT held in custody by the Troptions Gateway issuer. Redeemable 1:1 for USDT upon verified deal settlement. Issued on XRPL and Stellar mainnet as gateway proof-of-issuance for high-value trade and deal-closing transactions.",
+  "issuer": "Troptions Gateway — FTH Trading",
+  "underlyingAsset": "Tether USD (USDT)",
+  "underlyingIssuer": "Tether Operations Limited",
+  "underlyingContractEth": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+  "peg": "USD",
+  "pegRatio": "1:1",
+  "supply": {
+    "initial": "100000000",
+    "unit": "USDT",
+    "decimals": 6
+  },
+  "aaveCompatible": true,
+  "aaveVersion": "v3",
+  "aavePool": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2",
+  "branding": {
+    "logo": "https://troptions.org/assets/troptions/logos/usdt-iou-logo.svg",
+    "primaryColor": "#26A17B",
+    "backgroundColor": "#071A10",
+    "textColor": "#FFFFFF"
+  },
+  "ledgers": {
+    "xrpl": {
+      "network": "mainnet",
+      "currencyCode": "USDT",
+      "currencyHex": "5553445400000000000000000000000000000000",
+      "issuerAddress": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributorAddress": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "defaultRipple": true,
+      "domain": "troptions.org",
+      "trustLimit": "1000000000"
+    },
+    "stellar": {
+      "network": "mainnet",
+      "assetCode": "USDT",
+      "issuerAddress": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributorAddress": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "authRequired": true,
+      "authRevocable": true,
+      "authClawback": true,
+      "trustLimit": "1000000000"
+    }
+  },
+  "compliance": {
+    "kycRequired": true,
+    "amlPolicy": "FTH Trading AML/KYC Policy v2",
+    "jurisdiction": "United States",
+    "redeemable": true,
+    "redemptionFee": "0.1%",
+    "redemptionContact": "gateway@troptions.org",
+    "custodianProof": "Available upon verified deal settlement",
+    "auditable": true
+  },
+  "dealReference": "TROPTIONS-STABLECOIN-USDT-ISSUANCE-2026",
+  "issuanceDate": "2026-04-28",
+  "metadataVersion": "1.0.0"
+}

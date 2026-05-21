@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "generated": "2026-04-25",
+  "organization": {
+    "name": "Troptions",
+    "type": "InstitutionalPlatform",
+    "description": "Institutional operating infrastructure for proof-gated RWA issuance, custody coordination, settlement readiness, and compliance workflows.",
+    "disclaimer": "Troptions provides institutional operating infrastructure subject to provider, legal, compliance, custody, jurisdiction, and board approval gates. Not a bank, broker-dealer, exchange, or custodian.",
+    "notA": ["bank", "broker-dealer", "exchange", "custodian", "licensed-financial-institution"]
+  },
+  "capabilities": [
+    {
+      "id": "rwa-intake",
+      "name": "RWA Intake Workflow",
+      "categories": ["gold", "energy", "carbon", "oil", "treasury"],
+      "status": "gated",
+      "gates": ["proof-gate", "legal-review", "custody-gate", "board-approval"]
+    },
+    {
+      "id": "sblc-tracking",
+      "name": "SBLC Readiness Tracking",
+      "status": "gated",
+      "gates": ["compliance-gate", "legal-review", "provider-gate"]
+    },
+    {
+      "id": "pof-tracking",
+      "name": "Proof of Funds Evidence Tracking",
+      "status": "gated",
+      "gates": ["compliance-gate", "source-document-required"]
+    },
+    {
+      "id": "settlement-readiness",
+      "name": "Multi-Rail Settlement Readiness",
+      "rails": ["stablecoin", "XRPL", "banking"],
+      "status": "gated",
+      "gates": ["all-gates-cleared"]
+    },
+    {
+      "id": "xrpl-simulation",
+      "name": "XRPL AMM/DEX Simulation",
+      "status": "simulation-only",
+      "gates": ["provider-gate", "legal-review", "board-approval"]
+    },
+    {
+      "id": "mcp-agentic",
+      "name": "MCP + RAG + Clawd Agentic Layer",
+      "allowedActions": ["read", "simulate", "summarize", "draft", "explain"],
+      "blockedActions": ["approve", "execute", "sign", "transfer", "issue", "bypass"],
+      "status": "active"
+    },
+    {
+      "id": "x402",
+      "name": "x402 Machine-Payable API",
+      "status": "dry-run",
+      "gates": ["provider-gate", "board-approval"]
+    },
+    {
+      "id": "telecom",
+      "name": "Telnyx Institutional Telecom",
+      "status": "gated",
+      "gates": ["tcpa-consent", "ctia-consent", "compliance-gate"]
+    }
+  ],
+  "urls": {
+    "overview": "/troptions",
+    "rwa": "/troptions-old-money/rwa",
+    "gold": "/troptions-old-money/gold",
+    "energy": "/troptions-old-money/energy",
+    "settlement": "/troptions-old-money/settlement",
+    "portal": "/portal/troptions",
+    "admin": "/admin/troptions",
+    "aiLayer": "/troptions-ai",
+    "media": "/troptions-old-money/media",
+    "insights": "/insights"
+  }
+}

@@ -1,0 +1,13 @@
+[package]
+name = "tsn-bridge-stellar"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tsn-state = { path = "../state" }
+tsn-compliance = { path = "../compliance" }
+tsn-control-hub = { path = "../control-hub" }

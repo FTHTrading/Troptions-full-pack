@@ -1,0 +1,90 @@
+[
+  {
+    "id": "ttn-sports",
+    "name": "TTN Sports",
+    "category": "Sports",
+    "purpose": "Live sports commentary, analysis, fan culture, and matchday city coverage",
+    "audience": "Sports fans, stadium overflow crowds, watch-party venues, city partners",
+    "content_types": ["live commentary", "matchday city guides", "fan culture", "post-match analysis"],
+    "revenue_model": "Sponsor activations, QR drops, partner venue placements, sponsor proof reports",
+    "web3_utility": "Proof-of-view badges, Solana moment drops, sponsor QR claims, attendance proof",
+    "status": "active"
+  },
+  {
+    "id": "ttn-music",
+    "name": "TTN Music",
+    "category": "Music",
+    "purpose": "Local artists, live performances, music culture, and city music scenes",
+    "audience": "Music fans, local community, event attendees, venue partners",
+    "content_types": ["live performance", "artist interviews", "local artist spotlights", "music city guides"],
+    "revenue_model": "Sponsor placements, creator monetization, venue partnerships",
+    "web3_utility": "Artist supporter passes, digital collectibles, proof-of-attendance for shows",
+    "status": "coming-soon"
+  },
+  {
+    "id": "ttn-creators",
+    "name": "TTN Creators",
+    "category": "Creators",
+    "purpose": "Independent creators, vloggers, content builders, and community shows",
+    "audience": "Creator economy, influencers, content fans, brand partners",
+    "content_types": ["vlogs", "tutorials", "community shows", "creator spotlights"],
+    "revenue_model": "Creator revenue share, channel memberships, brand integrations",
+    "web3_utility": "Creator supporter passes, token-gated content, digital collectibles",
+    "status": "coming-soon"
+  },
+  {
+    "id": "ttn-charity",
+    "name": "TTN Charity",
+    "category": "Charity",
+    "purpose": "Nonprofit storytelling, campaign launches, and transparent impact reporting",
+    "audience": "Donors, community partners, social impact brands, cause-driven audiences",
+    "content_types": ["campaign stories", "impact reports", "live fundraisers", "volunteer spotlights"],
+    "revenue_model": "Sponsor-funded charity campaigns, matching programs, brand CSR integrations",
+    "web3_utility": "Charity campaign receipts, proof-of-donation on Solana, impact badge drops",
+    "status": "active"
+  },
+  {
+    "id": "ttn-local",
+    "name": "TTN Local",
+    "category": "Local",
+    "purpose": "Neighborhood news, community events, and local business spotlights",
+    "audience": "Local residents, community members, neighborhood businesses, city partners",
+    "content_types": ["community events", "local business features", "neighborhood guides", "city news"],
+    "revenue_model": "Local merchant advertising, community sponsorships, neighborhood business packages",
+    "web3_utility": "Local business badge drops, community proof-of-attendance, neighborhood passes",
+    "status": "coming-soon"
+  },
+  {
+    "id": "ttn-business",
+    "name": "TTN Business",
+    "category": "Business",
+    "purpose": "Entrepreneur content, financial education, business culture, and deal flow",
+    "audience": "Entrepreneurs, investors, business professionals, emerging brands",
+    "content_types": ["interviews", "educational content", "business news", "founder spotlights"],
+    "revenue_model": "B2B sponsorships, professional service ads, premium content partnerships",
+    "web3_utility": "Sponsor QR claims, on-chain sponsor proof reports, business credentialing",
+    "status": "coming-soon"
+  },
+  {
+    "id": "ttn-events",
+    "name": "TTN Events",
+    "category": "Events",
+    "purpose": "Live event coverage, conferences, festivals, sports, and city activations",
+    "audience": "Event attendees, remote viewers, event sponsors, city brands",
+    "content_types": ["live coverage", "post-event recaps", "behind-the-scenes", "event guides"],
+    "revenue_model": "Event sponsor packages, branded coverage deals, partner venue packages",
+    "web3_utility": "Proof-of-attendance NFTs, event moment drops, sponsor claim badges",
+    "status": "active"
+  },
+  {
+    "id": "ttn-web3",
+    "name": "TTN Web3",
+    "category": "Web3",
+    "purpose": "Blockchain education, DeFi culture, crypto literacy, and on-chain analytics content",
+    "audience": "Web3 natives, builders, curious newcomers, protocol teams",
+    "content_types": ["educational shows", "project spotlights", "on-chain analytics", "builder interviews"],
+    "revenue_model": "Web3 native sponsorships, token-gated premium content, protocol partnerships",
+    "web3_utility": "Token-gated clips, on-chain community passes, protocol showcase drops",
+    "status": "coming-soon"
+  }
+]

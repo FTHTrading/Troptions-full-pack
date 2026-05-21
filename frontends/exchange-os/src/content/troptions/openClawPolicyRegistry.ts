@@ -1,0 +1,103 @@
+export const OPENCLAW_ALLOWED_ACTIONS = [
+  "read-status",
+  "summarize-blockers",
+  "draft-checklist",
+  "draft-board-package",
+  "simulate-x402",
+  "simulate-trading-route",
+  "simulate-settlement-route",
+  "run-site-check",
+  "monitor-broken-links",
+  "summarize-audit-log",
+  "route-human-task",
+  "draft-pr-plan",
+  "dry-run-workflow",
+  "request-approval",
+] as const;
+
+export const OPENCLAW_BLOCKED_ACTIONS = [
+  "approve",
+  "reject",
+  "sign",
+  "trade",
+  "settle",
+  "transfer-funds",
+  "issue-token",
+  "enable-live-x402",
+  "enable-live-trading",
+  "approve-pof",
+  "approve-sblc",
+  "approve-rwa",
+  "override-sanctions",
+  "expose-secrets",
+  "modify-dns",
+  "deploy-production-without-approval",
+] as const;
+
+export const OPENCLAW_REQUIRED_APPROVALS = [
+  "Provider approval",
+  "Legal approval",
+  "Compliance approval",
+  "Custody approval",
+  "Board approval",
+  "Operator review",
+] as const;
+
+export const OPENCLAW_AGENT_POLICIES = [
+  {
+    id: "ai-concierge",
+    label: "AI Concierge",
+    allowedActions: ["read-status", "summarize-blockers", "route-human-task"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "read-explain-only",
+  },
+  {
+    id: "site-operator-agent",
+    label: "Site Operator Agent",
+    allowedActions: ["run-site-check", "monitor-broken-links", "draft-pr-plan"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "checks-and-drafts-only",
+  },
+  {
+    id: "x402-agent",
+    label: "x402 Agent",
+    allowedActions: ["simulate-x402", "summarize-blockers", "draft-checklist"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "simulation-only",
+  },
+  {
+    id: "rag-agent",
+    label: "RAG Agent",
+    allowedActions: ["read-status", "summarize-audit-log", "draft-board-package"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "retrieve-and-summarize-only",
+  },
+  {
+    id: "compliance-agent",
+    label: "Compliance Agent",
+    allowedActions: ["summarize-blockers", "draft-checklist", "request-approval"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "checklist-only",
+  },
+  {
+    id: "trading-agent",
+    label: "Trading Simulation Agent",
+    allowedActions: ["simulate-trading-route", "simulate-settlement-route", "summarize-blockers"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "simulation-only",
+  },
+  {
+    id: "wallet-agent",
+    label: "Wallet Agent",
+    allowedActions: ["read-status", "summarize-blockers", "route-human-task"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "support-only",
+  },
+  {
+    id: "admin-agent",
+    label: "Admin Agent",
+    allowedActions: ["request-approval", "summarize-audit-log", "route-human-task"],
+    blockedActions: OPENCLAW_BLOCKED_ACTIONS,
+    mode: "request-only",
+  },
+] as const;

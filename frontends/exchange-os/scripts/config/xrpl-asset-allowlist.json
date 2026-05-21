@@ -1,0 +1,108 @@
+{
+  "version": "2026-05-01",
+  "assets": [
+    {
+      "symbol": "USDC",
+      "currencyHex": "5553444300000000000000000000000000000000",
+      "approvedIssuers": [
+        {
+          "label": "Circle XRPL USDC (official)",
+          "address": "rGm7WCVp9gb4jZHWTEtGUr4dd74z2XuWhE",
+          "class": "official",
+          "chain": "xrpl"
+        },
+        {
+          "label": "TROPTIONS internal issuer",
+          "address": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+          "class": "internal",
+          "chain": "xrpl"
+        }
+      ],
+      "ethereum": {
+        "tokenContract": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "decimals": 6,
+        "officialMinter": "0x5B6122C109B78C6755486966148C1D70a50A47D7",
+        "chainlinkFeed": "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6",
+        "chainlinkDecimals": 8,
+        "chainlinkHeartbeatMinutes": 1440,
+        "label": "Circle USDC ERC-20 (Ethereum mainnet)"
+      },
+      "sources": [
+        "https://developers.circle.com/stablecoins/usdc-contract-addresses",
+        "https://www.circle.com/multi-chain-usdc/xrpl",
+        "https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+      ]
+    },
+    {
+      "symbol": "USDT",
+      "currencyHex": "5553445400000000000000000000000000000000",
+      "approvedIssuers": [
+        {
+          "label": "Tether XRPL USDT (official)",
+          "address": "rcEGREd8NmkKRE8GE424sksyt1tJVFZwu",
+          "class": "official",
+          "chain": "xrpl"
+        },
+        {
+          "label": "TROPTIONS internal issuer",
+          "address": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+          "class": "internal",
+          "chain": "xrpl"
+        }
+      ],
+      "ethereum": {
+        "tokenContract": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+        "decimals": 6,
+        "officialMinter": "0x5754284f345afc66a98fbB0a0Afe71e0F007B949",
+        "chainlinkFeed": "0x3E7d1eAB13ad0104d2750B8863b489D65364e32D",
+        "chainlinkDecimals": 8,
+        "chainlinkHeartbeatMinutes": 1440,
+        "label": "Tether USDT ERC-20 (Ethereum mainnet)"
+      },
+      "sources": [
+        "https://tether.to/en/transparency/",
+        "https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7"
+      ]
+    },
+    {
+      "symbol": "DAI",
+      "currencyHex": "4441490000000000000000000000000000000000",
+      "approvedIssuers": [],
+      "ethereum": {
+        "tokenContract": "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+        "decimals": 18,
+        "officialMinter": "0x9759A6Ac90977b93B58547b4A71c78317f391A28",
+        "chainlinkFeed": "0xAed0c38402a5d19df6E4c03F4E2DceD6e29c1ee9",
+        "chainlinkDecimals": 8,
+        "chainlinkHeartbeatMinutes": 60,
+        "label": "MakerDAO DAI ERC-20 (Ethereum mainnet)"
+      },
+      "sources": [
+        "https://etherscan.io/token/0x6b175474e89094c44da98b954eedeac495271d0f"
+      ]
+    },
+    {
+      "symbol": "EURC",
+      "currencyHex": "4555524300000000000000000000000000000000",
+      "approvedIssuers": [
+        {
+          "label": "TROPTIONS internal issuer",
+          "address": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+          "class": "internal",
+          "chain": "xrpl"
+        }
+      ],
+      "ethereum": {
+        "tokenContract": "0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c",
+        "decimals": 6,
+        "officialMinter": "0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c",
+        "chainlinkFeed": null,
+        "label": "Circle EURC ERC-20 (Ethereum mainnet)"
+      },
+      "sources": [
+        "https://developers.circle.com/stablecoins/eurc-contract-addresses",
+        "https://etherscan.io/token/0x1aBaEA1f7C830bD89Acc67eC4af516284b1bC33c"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "generated": "2026-04-25",
+  "entities": [
+    {
+      "id": "troptions",
+      "name": "Troptions",
+      "type": "InstitutionalPlatform",
+      "relatedTo": ["rwa", "settlement", "compliance", "control-plane", "mcp", "xrpl"]
+    },
+    {
+      "id": "rwa",
+      "name": "Real World Assets",
+      "type": "AssetClass",
+      "categories": ["gold", "energy", "carbon", "oil", "treasury"],
+      "relatedTo": ["troptions", "custody", "proof-of-funds", "settlement"]
+    },
+    {
+      "id": "proof-of-funds",
+      "name": "Proof of Funds",
+      "type": "ComplianceDocument",
+      "nature": "evidence-tracking-only",
+      "notAllowed": "fabrication",
+      "relatedTo": ["sblc", "compliance", "rwa"]
+    },
+    {
+      "id": "sblc",
+      "name": "Standby Letter of Credit",
+      "type": "InstrumentWorkflow",
+      "workflowRole": "intake-and-readiness-tracking",
+      "notAllowed": "issuance",
+      "relatedTo": ["proof-of-funds", "banking-rails", "compliance"]
+    },
+    {
+      "id": "xrpl",
+      "name": "XRP Ledger",
+      "type": "BlockchainProtocol",
+      "useMode": "simulation-only",
+      "relatedTo": ["amm", "dex", "settlement", "troptions"]
+    },
+    {
+      "id": "amm",
+      "name": "Automated Market Maker",
+      "type": "TradingMechanism",
+      "mode": "simulation-only",
+      "relatedTo": ["xrpl", "dex"]
+    },
+    {
+      "id": "settlement",
+      "name": "Settlement Readiness",
+      "type": "OperationalReadiness",
+      "rails": ["stablecoin", "XRPL", "banking"],
+      "relatedTo": ["xrpl", "troptions", "custody"]
+    },
+    {
+      "id": "mcp",
+      "name": "Model Context Protocol",
+      "type": "AgenticProtocol",
+      "allowedActions": ["read", "simulate", "summarize"],
+      "blockedActions": ["approve", "execute", "sign", "transfer"],
+      "relatedTo": ["rag", "clawd", "troptions"]
+    },
+    {
+      "id": "rag",
+      "name": "Retrieval-Augmented Generation",
+      "type": "AgenticCapability",
+      "sourceRequired": true,
+      "relatedTo": ["mcp", "clawd"]
+    },
+    {
+      "id": "clawd",
+      "name": "Clawd Planning Engine",
+      "type": "AgenticCapability",
+      "mode": "simulation-and-draft-only",
+      "relatedTo": ["mcp", "rag"]
+    },
+    {
+      "id": "x402",
+      "name": "x402 Protocol",
+      "type": "PaymentProtocol",
+      "mode": "dry-run",
+      "relatedTo": ["troptions", "mcp"]
+    },
+    {
+      "id": "telecom",
+      "name": "Telnyx Telecom",
+      "type": "CommunicationLayer",
+      "consentRequired": ["tcpa", "ctia"],
+      "relatedTo": ["troptions", "compliance"]
+    },
+    {
+      "id": "custody",
+      "name": "Custody Coordination",
+      "type": "OperationalLayer",
+      "role": "coordination-only",
+      "notAllowed": "direct-custody",
+      "relatedTo": ["rwa", "settlement", "troptions"]
+    },
+    {
+      "id": "compliance",
+      "name": "Compliance Layer",
+      "type": "RegulatoryInfrastructure",
+      "gates": ["KYC", "KYB", "sanctions", "legal-review", "audit-log"],
+      "relatedTo": ["control-plane", "troptions", "proof-of-funds"]
+    }
+  ]
+}

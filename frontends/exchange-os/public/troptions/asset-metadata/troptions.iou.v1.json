@@ -1,0 +1,93 @@
+{
+  "$schema": "https://troptions.org/schemas/troptions-asset.v1.schema.json",
+  "schemaVersion": "1.0.0",
+  "assetId": "troptions.iou.v1",
+  "assetClass": "fungible-iou",
+  "name": "Troptions",
+  "symbol": "TROPTIONS",
+  "displayName": "Troptions (TROPTIONS)",
+  "tagline": "Trade anything. Prove everything. Gate the rest.",
+  "description": "TROPTIONS is the proof-gated unit-of-account asset of the Troptions institutional operating infrastructure platform. Issuance, transfer, and redemption are governed by board-approved release gates and evidence-bound compliance procedures.",
+  "longDescription": "Troptions is an institutional operating infrastructure platform providing trade, transaction, ledger, liquidity, education, media, real-estate, energy, and utility coordination. The TROPTIONS unit-of-account asset is issued on both the XRP Ledger (XRPL) and Stellar mainnet to support multi-rail liquidity and exchange interoperability. Issuance is performed by a cold issuer wallet under multisig control; the warm distributor wallet holds the operational supply and provides liquidity to DEX orderbooks and AMM/LP pools. All authorization is revocable and clawback-enabled to support regulatory and compliance reversals.",
+  "issuer": {
+    "name": "Troptions",
+    "url": "https://troptions.org",
+    "email": "ops@troptions.org",
+    "github": "FTHTrading",
+    "twitter": "troptions"
+  },
+  "branding": {
+    "primaryLogo": "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg",
+    "wordmarkLogo": "https://troptions.org/assets/troptions/logos/troptions-classic-white.jpg",
+    "iconLogo": "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg",
+    "darkIconLogo": "https://troptions.org/assets/troptions/logos/troptions-tt-black.jpg",
+    "poweredByLogo": "https://troptions.org/assets/troptions/logos/troptions-logo-powered-by.jpg",
+    "primaryColor": "#C9A24A",
+    "secondaryColor": "#071426",
+    "backgroundColor": "#F7F2E8",
+    "textColor": "#0B0B0D"
+  },
+  "ledgers": [
+    {
+      "ledger": "xrpl",
+      "network": "mainnet",
+      "currencyCode": "TROPTIONS",
+      "currencyHex": "54524F5054494F4E530000000000000000000000",
+      "issuerAddress": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "distributorAddress": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      "treasuryAddress": "rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3",
+      "displayDecimals": 6,
+      "tomlUrl": "https://troptions.org/.well-known/xrp-ledger.toml",
+      "explorerUrls": {
+        "xrpscan": "https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+        "bithomp": "https://bithomp.com/explorer/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+        "sologenic": "https://sologenic.org/profile/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
+      },
+      "issuerFlags": {
+        "asfDefaultRipple": true,
+        "asfRequireAuth": false,
+        "asfDisallowXRP": false,
+        "asfRequireDest": false,
+        "asfNoFreeze": false
+      }
+    },
+    {
+      "ledger": "stellar",
+      "network": "mainnet",
+      "assetCode": "TROPTIONS",
+      "issuerAddress": "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      "distributorAddress": "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      "treasuryAddress": "GCOTXN75SHALV4NIV2V4EBACXRMLAMU5J2MYLOGUJOLIA5HOO4DEYCLK",
+      "displayDecimals": 7,
+      "homeDomain": "troptions.org",
+      "tomlUrl": "https://troptions.org/.well-known/stellar.toml",
+      "explorerUrls": {
+        "stellarExpert": "https://stellar.expert/explorer/public/asset/TROPTIONS-GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+        "stellarchain": "https://stellarchain.io/accounts/GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4"
+      },
+      "issuerFlags": {
+        "auth_required": true,
+        "auth_revocable": true,
+        "auth_clawback_enabled": true,
+        "auth_immutable": false
+      }
+    }
+  ],
+  "compliance": {
+    "regulated": false,
+    "kycRequired": false,
+    "redemptionGuarantees": false,
+    "liquidityGuarantees": false,
+    "returnGuarantees": false,
+    "legalNotice": "Troptions is not a bank, broker-dealer, exchange, custodian, licensed financial institution, issuer of securities, payment processor, or investment advisor. TROPTIONS is not a security, stablecoin, redeemable instrument, or payment instrument. Holding, transferring, or trading TROPTIONS is at the holder's sole risk."
+  },
+  "links": {
+    "website": "https://troptions.org",
+    "governance": "https://troptions.org/governance",
+    "transparency": "https://troptions.org/troptions/treasury/funding-plan",
+    "github": "https://github.com/FTHTrading/Troptions",
+    "stellarToml": "https://troptions.org/.well-known/stellar.toml",
+    "xrpLedgerToml": "https://troptions.org/.well-known/xrp-ledger.toml"
+  },
+  "lastUpdated": "2026-04-28T00:00:00Z"
+}

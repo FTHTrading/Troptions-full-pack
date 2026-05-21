@@ -1,0 +1,12 @@
+[package]
+name = "tsn-stablecoin"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+uuid = { workspace = true }
+chrono = { workspace = true }
+tsn-state = { path = "../state" }
+tsn-compliance = { path = "../compliance" }

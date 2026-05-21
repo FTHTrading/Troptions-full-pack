@@ -1,0 +1,169 @@
+.openclaw-theme {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #060b17 0%, #0d1b2a 60%, #10243a 100%);
+  color: #e7dcc2;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.openclaw-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+
+.openclaw-header {
+  margin-bottom: 1.25rem;
+}
+
+.openclaw-header h1 {
+  font-size: 2rem;
+  margin: 0.35rem 0;
+}
+
+.openclaw-header p {
+  color: #a8b6cc;
+}
+
+.openclaw-eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a84c;
+}
+
+.openclaw-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.openclaw-grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+
+.openclaw-card,
+.openclaw-panel {
+  background: rgba(8, 15, 28, 0.92);
+  border: 1px solid rgba(201, 168, 76, 0.22);
+  border-radius: 10px;
+  padding: 0.95rem;
+}
+
+.openclaw-card-title {
+  margin: 0;
+  color: #99a7bf;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.openclaw-card-value {
+  margin: 0.25rem 0;
+  font-size: 1.35rem;
+  color: #f0d38a;
+  font-weight: 700;
+}
+
+.openclaw-card-note {
+  margin: 0;
+  color: #8fa1ba;
+  font-size: 0.8rem;
+}
+
+.openclaw-panel h3 {
+  margin: 0 0 0.6rem;
+  color: #f0d38a;
+  font-size: 1rem;
+}
+
+.openclaw-panel p {
+  margin: 0 0 0.55rem;
+  color: #a8b6cc;
+}
+
+.openclaw-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  color: #d2dbeb;
+  font-size: 0.9rem;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.openclaw-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.openclaw-tag {
+  font-size: 0.72rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.52rem;
+  border: 1px solid rgba(115, 133, 165, 0.5);
+  color: #c7d4e8;
+}
+
+.openclaw-tag-blocked {
+  border-color: #d85858;
+  color: #ff9c9c;
+}
+
+.openclaw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.openclaw-table th,
+.openclaw-table td {
+  border-bottom: 1px solid rgba(98, 116, 149, 0.35);
+  text-align: left;
+  padding: 0.42rem 0.33rem;
+  vertical-align: top;
+}
+
+.openclaw-table th {
+  color: #c9a84c;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.openclaw-chatbox {
+  background: rgba(10, 21, 39, 0.92);
+  border: 1px solid rgba(111, 130, 164, 0.45);
+  border-radius: 8px;
+  padding: 0.75rem;
+  color: #d9e4f8;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.openclaw-command-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.openclaw-command-chip {
+  border: 1px solid rgba(201, 168, 76, 0.55);
+  border-radius: 999px;
+  background: rgba(201, 168, 76, 0.08);
+  color: #f4dca0;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.77rem;
+  cursor: default;
+}
+
+@media (max-width: 720px) {
+  .openclaw-wrap {
+    padding: 1.25rem 0.85rem 2rem;
+  }
+
+  .openclaw-header h1 {
+    font-size: 1.6rem;
+  }
+}

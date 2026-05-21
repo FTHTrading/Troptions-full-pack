@@ -1,0 +1,50 @@
+{
+  "documentType": "Blockchain Evidence Packet - Desk Review",
+  "documentId": "TROPT-POF-USDC-175M-2026-05-01",
+  "generatedAt": "2026-05-01T19:41:31.518Z",
+  "finalStatus": "DESK REVIEW READY — VAULT CUSTODY AND WALLET CONTROL PENDING",
+  "issuer": {
+    "label": "TROPTIONS",
+    "domain": "troptions.org",
+    "xrplIssuer": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+    "holderWallet": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt"
+  },
+  "notice": "Important: The XRPL USDC balance shown in this packet represents TROPTIONS-issued XRPL USDC IOUs. It is not Circle-issued ERC-20 USDC. Chainlink is used only for Ethereum mainnet USDC/USD valuation reference.",
+  "balances": {
+    "usdc": "175,000,000",
+    "usdt": "100,000,000",
+    "eurc": "50,000,000"
+  },
+  "chainlink": {
+    "network": "Ethereum Mainnet",
+    "feed": "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6",
+    "usdcUsd": 0.99977,
+    "valueUsd": "$174,959,750.00",
+    "contractUsdcErc20": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+  },
+  "verificationMethod": [
+    "XRPL transaction hashes checked for tesSUCCESS.",
+    "XRPL trustline checked for holder balance and issuer address.",
+    "Minimum balance requirement checked against reported 175,000,000 USDC.",
+    "Chainlink USDC/USD feed checked on Ethereum mainnet.",
+    "Vault custody and wallet-control signature remain pending."
+  ],
+  "pending": [
+    "Vault Custody Lock",
+    "Wallet Control Signature"
+  ],
+  "txEvidence": [
+    {
+      "hash": "CD7271274743C20635ED58515F84B399A4113FE40E62CFC8248446A494D1E642",
+      "amount": "100,000,000 USDC",
+      "status": "VERIFIED",
+      "explorer": "https://xrpscan.com/tx/CD7271274743C20635ED58515F84B399A4113FE40E62CFC8248446A494D1E642"
+    },
+    {
+      "hash": "4CCB18E8838C6B40D4E022B68817D45BAD3E235652C52F0337D82C4E4E5AAB6E",
+      "amount": "75,000,000 USDC",
+      "status": "VERIFIED",
+      "explorer": "https://xrpscan.com/tx/4CCB18E8838C6B40D4E022B68817D45BAD3E235652C52F0337D82C4E4E5AAB6E"
+    }
+  ]
+}

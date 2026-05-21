@@ -1,0 +1,118 @@
+{
+  "packetVersion": "2.0",
+  "packetType": "multi-chain-pof",
+  "generatedAt": "2026-05-01T19:01:19.786Z",
+  "asset": "USDC",
+  "overallStatus": "PARTIAL_NO_VAULT",
+  "readyForDesk": true,
+  "operator": {
+    "name": "Bryan Stone",
+    "organization": "Troptions",
+    "authority": "Bryan Stone / Troptions board"
+  },
+  "xrplLayer": {
+    "role": "Master proof packet rail - issuer, asset metadata, IOU/trustline verification",
+    "status": "PARTIAL",
+    "holder": "rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+    "asset": "USDC",
+    "issuerClass": "internal",
+    "allowedIssuers": [
+      "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
+    ],
+    "ledgerIndex": 103940579,
+    "highestBalance": "175000000",
+    "minBalanceRequired": "175000000",
+    "minBalanceMet": true,
+    "trustlinePresent": true,
+    "txReports": [
+      {
+        "hash": "CD7271274743C20635ED58515F84B399A4113FE40E62CFC8248446A494D1E642",
+        "pass": true,
+        "validated": true,
+        "issuerMatch": true,
+        "result": "tesSUCCESS"
+      },
+      {
+        "hash": "4CCB18E8838C6B40D4E022B68817D45BAD3E235652C52F0337D82C4E4E5AAB6E",
+        "pass": true,
+        "validated": true,
+        "issuerMatch": true,
+        "result": "tesSUCCESS"
+      }
+    ],
+    "walletControl": null,
+    "institutionalDetermination": {
+      "onChainIssuerAndTxEvidence": true,
+      "proofOfFundsComplete": false,
+      "reason": "POF remains incomplete until wallet-control signed message, source-of-funds memo, compliance sign-off are attached."
+    },
+    "generatedAt": "2026-05-01T19:01:12.014Z",
+    "missingToComplete": [],
+    "reason": "POF remains incomplete until wallet-control signed message, source-of-funds memo, compliance sign-off are attached.",
+    "actionRequired": null
+  },
+  "ethereumLayer": {
+    "role": "Mainnet valuation evidence - Chainlink oracle price anchor",
+    "status": "PASS",
+    "asset": "USDC",
+    "supply": 175000000,
+    "valueUsd": 174959750,
+    "valueUsdFormatted": "$174,959,750.00",
+    "oracle": {
+      "feed": "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6",
+      "description": "USDC / USD",
+      "network": "ethereum",
+      "price": 0.99977,
+      "updatedAt": "2026-05-01T08:00:35.000Z",
+      "roundId": "55340232221128655768"
+    },
+    "tokenContract": null,
+    "tokenNetwork": "ethereum-mainnet",
+    "reportDate": "2026-05-01",
+    "reportFile": "data/observability/chainlink/chainlink-report-2026-05-01.json",
+    "reason": null
+  },
+  "vaultLayer": {
+    "role": "Custody evidence - locked ERC-20 balance with owner-release control",
+    "status": "NOT_DEPLOYED",
+    "vaultAddress": null,
+    "reason": "Vault not deployed. Run: npm run vault:deploy:confirm after setting .env.local",
+    "actionRequired": "Deploy vault: set .env.local keys then run npm run vault:deploy:confirm"
+  },
+  "deskSummary": {
+    "classification": "Multi-chain Proof-of-Funds packet",
+    "operator": "Bryan Stone",
+    "organization": "Troptions",
+    "authority": "Bryan Stone / Troptions board",
+    "asset": "USDC",
+    "reportedSupply": 175000000,
+    "reportedValueUsd": "$174,959,750.00",
+    "chainlinkStatus": "PASS",
+    "xrplOnChainEvidence": "PASS",
+    "vaultCustodyStatus": "NOT_DEPLOYED",
+    "readyForDesk": true,
+    "showableNow": true,
+    "completionPath": [
+      {
+        "step": 1,
+        "status": "PARTIAL",
+        "action": "Attach wallet-control proof and compliance sign-off to XRPL PoF report"
+      },
+      {
+        "step": 2,
+        "status": "DONE",
+        "action": "Chainlink USDC/USD valuation proof attached"
+      },
+      {
+        "step": 3,
+        "status": "FUTURE",
+        "action": "Deploy vault and lock USDC for full custody proof"
+      }
+    ]
+  },
+  "compliance": {
+    "disclaimer": "This packet is generated from on-chain mainnet data and Chainlink oracle feeds. It is intended for internal desk use and does not constitute a legal or regulatory proof of solvency. All values are point-in-time snapshots.",
+    "generatedBy": "Troptions automated PoF system",
+    "dataIntegrity": "All sources are mainnet — no test networks or simulated data"
+  }
+}

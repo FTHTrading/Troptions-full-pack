@@ -1,0 +1,20 @@
+[package]
+name = "tsn-runtime"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+chrono = { workspace = true }
+uuid = { workspace = true }
+tsn-state = { path = "../state" }
+tsn-assets = { path = "../assets" }
+tsn-compliance = { path = "../compliance" }
+tsn-trustlines = { path = "../trustlines" }
+tsn-stablecoin = { path = "../stablecoin" }
+tsn-rwa = { path = "../rwa" }
+tsn-nft = { path = "../nft" }
+tsn-amm = { path = "../amm" }
+tsn-governance = { path = "../governance" }
+tsn-telemetry = { path = "../telemetry" }

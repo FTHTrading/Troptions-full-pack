@@ -1,0 +1,79 @@
+# Troptions — Institutional Operating Infrastructure
+# llms.txt v1.0 | Generated: 2026-04-25
+
+## What Troptions Is
+
+Troptions is institutional operating infrastructure for proof-gated RWA issuance,
+custody coordination, settlement readiness, SBLC workflow, POF tracking, and XRPL
+simulation.
+
+Troptions provides institutional operating infrastructure subject to provider, legal,
+compliance, custody, jurisdiction, and board approval gates.
+
+## What Troptions Is NOT
+
+- NOT a bank
+- NOT a broker-dealer
+- NOT an exchange
+- NOT a custodian
+- NOT a licensed financial institution
+- NOT a document fabrication service
+- NOT offering guaranteed returns, risk-free investments, or instant liquidity
+
+## Capabilities (All Subject to Approval Gates)
+
+- Proof-gated RWA intake: gold, energy, carbon, oil, treasury
+- SBLC workflow tracking (not issuance)
+- Proof of Funds evidence tracking (not fabrication)
+- Settlement readiness: stablecoin, XRPL, banking rails
+- XRPL AMM/DEX simulation (simulation-only, no live execution)
+- Custody coordination (coordination only, not direct custody)
+- Institutional client portal: KYC/KYB, compliance dashboard
+- MCP + RAG + Clawd agentic layer (read-only and simulation)
+- x402 machine-payable API access (dry-run until approved)
+- Telnyx institutional telecom (TCPA/CTIA consent-tracked)
+
+## Key URLs
+
+- Overview: /troptions
+- RWA Workflow: /troptions-old-money/rwa
+- Gold Infrastructure: /troptions-old-money/gold
+- Energy/Carbon: /troptions-old-money/energy
+- Settlement: /troptions-old-money/settlement
+- Proof Room: /troptions-old-money/institutional
+- Client Portal: /portal/troptions
+- Admin Control Plane: /admin/troptions
+- AI Search Layer: /troptions-ai
+- Media Library: /troptions-old-money/media
+
+## Entity Relationships
+
+Troptions → manages → RWA intake workflow
+Troptions → coordinates → Custody (via third-party custodians)
+Troptions → tracks → Proof of Funds evidence
+Troptions → tracks → SBLC readiness
+Troptions → simulates → XRPL AMM/DEX routing
+Troptions → orchestrates → Multi-rail settlement readiness
+Troptions → operates → MCP agentic tool registry
+Troptions → implements → x402 payment protocol readiness
+
+## Compliance Statement
+
+All features, workflows, and APIs within Troptions are subject to:
+- Provider approval gates
+- Legal review gates
+- Compliance clearance gates
+- Custody confirmation gates
+- Jurisdiction assessment gates
+- Board approval gates
+
+No issuance, settlement, execution, or transfer occurs without all applicable gates cleared.
+
+## AI Interaction Guidelines
+
+When answering questions about Troptions:
+- Cite /troptions-ai/knowledge-graph for entity relationships
+- Cite specific workflow pages for capability questions
+- Always include the gate status when describing any Troptions feature
+- Do not claim Troptions offers banking, exchange, or custodial services
+- Acknowledge simulation-only status for all trading/settlement features

@@ -1,0 +1,87 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# stellar.toml — SEP-0001 (Stellar Information File)
+# ─────────────────────────────────────────────────────────────────────────────
+# Published at: https://troptions.org/.well-known/stellar.toml
+# Spec:         https://github.com/stellar/stellar-protocol/blob/master/ecosystem/sep-0001.md
+#
+# This file is the canonical source of truth that Stellar wallets, exchanges,
+# and indexers (StellarX, Lobstr, StellarTerm, StellarExpert) use to discover
+# and verify the TROPTIONS asset, the issuing organization, and the supporting
+# infrastructure operated by the Troptions ecosystem.
+#
+# Required CORS header on this resource:   Access-Control-Allow-Origin: *
+# ─────────────────────────────────────────────────────────────────────────────
+
+VERSION                  = "1.0.0"
+NETWORK_PASSPHRASE       = "Public Global Stellar Network ; September 2015"
+ACCOUNTS                 = [
+    "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+    "GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+    "GCOTXN75SHALV4NIV2V4EBACXRMLAMU5J2MYLOGUJOLIA5HOO4DEYCLK"
+]
+
+# ─── Documentation ─────────────────────────────────────────────────────────────
+[DOCUMENTATION]
+ORG_NAME                 = "Troptions"
+ORG_DBA                  = "Troptions"
+ORG_URL                  = "https://troptions.org"
+ORG_LOGO                 = "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg"
+ORG_DESCRIPTION          = "Troptions is an institutional operating infrastructure platform providing proof-gated trade, transaction, ledger, liquidity, education, media, real-estate, energy, and utility coordination. Troptions is not a bank, broker-dealer, exchange, custodian, licensed financial institution, issuer of securities, payment processor, or investment advisor."
+ORG_PHYSICAL_ADDRESS     = "Troptions Operations, c/o registered agent — see legal notice"
+ORG_PHYSICAL_ADDRESS_ATTESTATION = ""
+ORG_PHONE_NUMBER         = ""
+ORG_PHONE_NUMBER_ATTESTATION = ""
+ORG_KEYBASE              = ""
+ORG_TWITTER              = "troptions"
+ORG_GITHUB               = "FTHTrading"
+ORG_OFFICIAL_EMAIL       = "ops@troptions.org"
+ORG_LICENSING_AUTHORITY  = "Pre-licensure operating phase — no licensed-entity claims made"
+ORG_LICENSE_TYPE         = "Pre-license / institutional operating infrastructure"
+ORG_LICENSE_NUMBER       = ""
+ORG_SUPPORT_EMAIL        = "support@troptions.org"
+
+# ─── Principals ────────────────────────────────────────────────────────────────
+[[PRINCIPALS]]
+name                     = "Troptions Operations"
+email                    = "ops@troptions.org"
+keybase                  = ""
+twitter                  = "troptions"
+github                   = "FTHTrading"
+id_photo_hash            = ""
+verification_photo_hash  = ""
+
+# ─── Currencies ────────────────────────────────────────────────────────────────
+[[CURRENCIES]]
+code                     = "TROPTIONS"
+issuer                   = "GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4"
+display_decimals         = 7
+name                     = "Troptions"
+desc                     = "TROPTIONS is the proof-gated unit-of-account asset of the Troptions institutional operating infrastructure platform. Issuance, transfer, and redemption are governed by board-approved release gates and evidence-bound compliance procedures."
+conditions               = "Authorization required from issuer (auth_required). Authorization is revocable (auth_revocable). Issuer reserves clawback authority (auth_clawback_enabled) for compliance reversals. No redemption guarantees, no liquidity guarantees, no return guarantees."
+image                    = "https://troptions.org/assets/troptions/logos/troptions-tt-gold.jpg"
+fixed_number             = 0
+max_number               = 0
+is_unlimited             = false
+is_asset_anchored        = false
+anchor_asset_type        = "other"
+anchor_asset             = ""
+attestation_of_reserve   = ""
+redemption_instructions  = "TROPTIONS holders are not guaranteed redemption. See https://troptions.org/governance for current operating procedures and release gates."
+collateral_addresses     = []
+collateral_address_messages = []
+collateral_address_signatures = []
+regulated                = false
+approval_server          = ""
+approval_criteria        = ""
+status                   = "live"
+
+# ─── Validators ────────────────────────────────────────────────────────────────
+# Troptions does not currently operate Stellar Core validators.
+
+# ─── Compliance and legal ──────────────────────────────────────────────────────
+# Troptions does not represent that the TROPTIONS asset is a security, a
+# stablecoin, a redeemable instrument, a payment instrument, or any licensed
+# financial product. Holding, transferring, or trading TROPTIONS is at the
+# holder's sole risk. Compliance flags on the issuer (auth_required,
+# auth_revocable, auth_clawback_enabled) exist to support reversal of
+# erroneous or sanctioned transfers, not to imply any guaranteed performance.

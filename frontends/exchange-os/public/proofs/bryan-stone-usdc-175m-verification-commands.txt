@@ -1,0 +1,47 @@
+TROPTIONS USDC 175M - INDEPENDENT VERIFICATION COMMANDS
+Generated: 2026-05-01
+
+1) Verify XRPL USDC 175M (internal issuer)
+node scripts/xrpl-verify-real-issuer-pof.mjs --holder rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt --hash CD7271274743C20635ED58515F84B399A4113FE40E62CFC8248446A494D1E642 --hash 4CCB18E8838C6B40D4E022B68817D45BAD3E235652C52F0337D82C4E4E5AAB6E --asset USDC --issuer-class internal --min-balance 175000000 --json --out data/observability/pof/xrpl-real-issuer-report-usdc-175m.json
+
+Expected key checks:
+- txAllPass: true
+- trustlinePresent: true
+- minBalance: true
+- highestBalance: 175000000
+
+2) Verify XRPL USDT 100M (supporting position)
+node scripts/xrpl-verify-real-issuer-pof.mjs --holder rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt --hash 42092147E2D2BB2E944C7156378A6CEE8B8D0E78FB350266FC1990439D7F1F6F --asset USDT --issuer-class internal --min-balance 100000000 --json --out data/observability/pof/xrpl-real-issuer-report-usdt-100m.json
+
+3) Verify XRPL EURC 50M (supporting position)
+node scripts/xrpl-verify-real-issuer-pof.mjs --holder rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt --hash FF11D7773C0EDF38833A9CEE5AE03DEB6167D87FF07180A275A1DDCABCC560D1 --asset EURC --issuer-class internal --min-balance 50000000 --json --out data/observability/pof/xrpl-real-issuer-report-eurc-50m.json
+
+4) Rebuild Chainlink valuation report
+node scripts/chainlink-weekly-report.mjs
+
+5) Rebuild multichain packet
+node scripts/generate-multichain-pof-packet.mjs --asset USDC
+
+6) Rebuild desk artifacts (JSON/MD/HTML/PDF)
+node scripts/generate-desk-pof-pdf.mjs
+
+Key output files to share:
+- troptions-pof-usdc-175m-desk.pdf
+- public/proofs/bryan-stone-usdc-175m.html
+- public/bryan-stone-usdc-175m-desk-proof.json
+- public/bryan-stone-usdc-175m-desk-proof.md
+- data/observability/pof/xrpl-real-issuer-report-usdc-175m.json
+- data/observability/pof/multichain-pof-packet-usdc-2026-05-01.json
+
+Public tx/explorer checks:
+- https://xrpscan.com/tx/CD7271274743C20635ED58515F84B399A4113FE40E62CFC8248446A494D1E642
+- https://xrpscan.com/tx/4CCB18E8838C6B40D4E022B68817D45BAD3E235652C52F0337D82C4E4E5AAB6E
+- https://xrpscan.com/tx/42092147E2D2BB2E944C7156378A6CEE8B8D0E78FB350266FC1990439D7F1F6F
+- https://xrpscan.com/tx/FF11D7773C0EDF38833A9CEE5AE03DEB6167D87FF07180A275A1DDCABCC560D1
+
+Approval-to-finalization flow:
+A) Desk review and approve packet.
+B) Bryan signs wallet-control proof (XRPL signed challenge).
+C) Add signed wallet proof to XRPL report inputs and regenerate artifacts.
+D) Deploy and fund vault, generate vault receipt.
+E) Status upgrades from desk-review-ready to final institutional POF.

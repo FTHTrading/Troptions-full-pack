@@ -1,0 +1,152 @@
+{
+  "generatedAt": "2026-05-01T18:15:03.044Z",
+  "operator": {
+    "name": "Bryan Stone",
+    "organization": "Troptions",
+    "role": "Founder and Genesis Operator"
+  },
+  "authority": {
+    "upgradeAuthority": "Bryan Stone / Troptions board"
+  },
+  "holdings": {
+    "network": "ethereum-mainnet",
+    "stablecoinPositions": [
+      {
+        "asset": "USDC",
+        "quantity": 175000000,
+        "usdValue": 174959750,
+        "usdValueFormatted": "$174,959,750.00",
+        "status": "PASS",
+        "chainlink": {
+          "feed": "0x8fFfFfd4AfB6115b954Bd326cbe7B4BA576818f6",
+          "price": 0.99977,
+          "updatedAt": "2026-05-01T08:00:35.000Z"
+        }
+      },
+      {
+        "asset": "USDT",
+        "quantity": 100000000,
+        "usdValue": 99972020,
+        "usdValueFormatted": "$99,972,020.00",
+        "status": "PASS",
+        "chainlink": {
+          "feed": "0x3E7d1eAB13ad0104d2750B8863b489D65364e32D",
+          "price": 0.9997202,
+          "updatedAt": "2026-04-30T18:59:23.000Z"
+        }
+      },
+      {
+        "asset": "DAI",
+        "quantity": 50000000,
+        "usdValue": 49995800,
+        "usdValueFormatted": "$49,995,800.00",
+        "status": "PASS",
+        "chainlink": {
+          "feed": "0xAed0c38402a5d19df6E4c03F4E2DceD6e29c1ee9",
+          "price": 0.999916,
+          "updatedAt": "2026-05-01T17:10:35.000Z"
+        }
+      }
+    ],
+    "totalStablecoinValue": 324927570,
+    "totalStablecoinValueFormatted": "$324,927,570.00"
+  },
+  "vault": {
+    "gatewayVault": {
+      "status": "NOT_DEPLOYED",
+      "address": null,
+      "deployer": null,
+      "depositor": null,
+      "etherscan": null,
+      "deployCommand": "npm run vault:doctor ; npm run vault:deploy:confirm",
+      "statusCommand": "npm run vault:status",
+      "receiptCommand": "npm run chainlink:receipt:vault:175m"
+    },
+    "quantumVaultFactory": {
+      "network": "polygon-mainnet",
+      "address": "0x9BE7E2A62D8fE9b76E50cBDB9C4e0B80a8b7Ff3A",
+      "status": "LIVE"
+    }
+  },
+  "chainlink": {
+    "validationDate": "2026-05-01",
+    "reportFile": "data/observability/chainlink/chainlink-report-2026-05-01.json",
+    "oracle": "Chainlink Data Feeds",
+    "pass": true,
+    "totalValueUsd": 324927570,
+    "totalValueFormatted": "$324,927,570.00"
+  },
+  "mainnetIssuance": {
+    "xrplIssuedAssets": [
+      {
+        "symbol": "TROPTIONS",
+        "name": "Troptions",
+        "issuer": "rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3",
+        "status": "active_read_only",
+        "liveExecutionAllowed": false
+      },
+      {
+        "symbol": "OPTKAS",
+        "name": "OPTKAS Claim Receipt",
+        "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "status": "spec_issued_gated",
+        "liveExecutionAllowed": false
+      },
+      {
+        "symbol": "SOVBND",
+        "name": "Sovereign Bond Receipt",
+        "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "status": "spec_only_gated",
+        "liveExecutionAllowed": false
+      },
+      {
+        "symbol": "IMPERIA",
+        "name": "Imperial Commodity Claim",
+        "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "status": "spec_only_gated",
+        "liveExecutionAllowed": false
+      },
+      {
+        "symbol": "GEMVLT",
+        "name": "Gem Vault Receipt",
+        "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "status": "spec_only_gated",
+        "liveExecutionAllowed": false
+      },
+      {
+        "symbol": "TERRAVL",
+        "name": "Terra Value — Real Estate",
+        "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "status": "spec_only_gated",
+        "liveExecutionAllowed": false
+      },
+      {
+        "symbol": "PETRO",
+        "name": "Petroleum Commodity Claim",
+        "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "status": "review_required_high_risk",
+        "liveExecutionAllowed": false
+      },
+      {
+        "symbol": "ATTEST",
+        "name": "Evidence Attestation Marker",
+        "issuer": "rncYwc1ss8AdV2vKjaYwMAEj7RNRfKRV4r",
+        "status": "spec_only_gated",
+        "liveExecutionAllowed": false
+      }
+    ],
+    "polygonContracts": {
+      "network": "polygon-mainnet",
+      "quantumVaultFactory": "0x9BE7E2A62D8fE9b76E50cBDB9C4e0B80a8b7Ff3A",
+      "kennyToken": "0x93F2a3e8E13E0B81B5cE3a84b5c1BC23E1Ac45Ce",
+      "evlToken": "0xAFe18578D2E7d4C3a9aA5Ef0EF85c2a2D57Bb1A",
+      "evlSaleContract": "0x496b0c4D2Ae3F7aa3B8Bc3fD9b2d9aFd72BC8e7A"
+    },
+    "posture": "Mainnet display is ready now. The 175M USDC proof is already set up and provable for desk use through the Chainlink-validated reporting path, while the dedicated Ethereum vault surface still requires deployment."
+  },
+  "showableArtifacts": {
+    "publicJson": "/bryan-stone-mainnet-outline.json",
+    "publicMarkdown": "/bryan-stone-mainnet-outline.md",
+    "chainlinkReport": "/data/observability/chainlink/chainlink-report-2026-05-01.json"
+  }
+}

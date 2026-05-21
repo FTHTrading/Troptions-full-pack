@@ -1,0 +1,36 @@
+name: XRPL Weekly Proof
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+jobs:
+  xrpl-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run XRPL proof report
+        env:
+          XRPL_PROOF_ASSET: USDC
+          XRPL_PROOF_HASH: ${{ secrets.XRPL_PROOF_HASH }}
+          XRPL_PROOF_ACCOUNT: ${{ secrets.XRPL_PROOF_ACCOUNT }}
+          XRPL_PROOF_REPORT: data/tmp/xrpl-weekly-proof-report.json
+        run: |
+          node scripts/xrpl-proof-report.mjs
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: xrpl-weekly-proof-report
+          path: data/tmp/xrpl-weekly-proof-report.json
