@@ -17,8 +17,8 @@ minima:
     - platform: github
       user_url: "https://github.com/fthtrading/Troptions-full-pack"
 
+# Primary landing: static docs/index.html (not Jekyll). Former home: index.jekyll.md.bak
 header_pages:
-  - index.md
   - executive/overview.md
   - executive/history.md
   - executive/revenue.md

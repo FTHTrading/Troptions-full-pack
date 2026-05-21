@@ -47,9 +47,18 @@ Open http://127.0.0.1:4000/Troptions-full-pack/
 | **Offline Q&A** | Type or mic → keyword match against `site-narration.json` FAQ |
 | **Live Q&A** | Run [quickstart](deploy/quickstart.html), start donk-tutor on **8090**, then `?api=http://127.0.0.1:8090` or save API in the panel |
 
+## Primary landing page
+
+**Investor home:** static [`index.html`](index.html) at repo root of `/docs`.
+
+- GitHub Pages serves `index.html` before any Jekyll `index` when both exist at `/docs` root.
+- Former glass Jekyll home: [`index.jekyll.md.bak`](index.jekyll.md.bak) (archived).
+- Optional: [`docs/.nojekyll`](.nojekyll) ensures static assets and `index.html` are not overridden.
+
 ## What gets published
 
-- Showcase nav from `_config.yml` `header_pages` (includes audio tour)
+- **Home URL** → `index.html` (single-page investor site)
+- Showcase nav from `_config.yml` `header_pages` (executive + proof subpages)
 - Infra pages use shared `glass.css` nav accents via `head-custom.html`
 - Counterparty / investor drafts are **excluded** from nav (still in repo)
 - Mermaid diagrams via `_includes/head-custom.html`

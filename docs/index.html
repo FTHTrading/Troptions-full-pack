@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TROPTIONS — 22 years. Sovereign infrastructure. Honest investor proof." />
+  <title>TROPTIONS — Investor Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            gold: '#b8860b',
+            'gold-light': '#d4a84b',
+            'gold-dark': '#8b6914',
+          },
+          fontFamily: { sans: ['Inter', 'system-ui', 'Segoe UI', 'sans-serif'] },
+        },
+      },
+    };
+  </script>
+  <style>
+    :root {
+      --gold: #b8860b;
+      --gold-muted: rgba(184, 134, 11, 0.15);
+    }
+    body { font-family: Inter, system-ui, sans-serif; }
+    .text-gold { color: var(--gold); }
+    .bg-gold { background-color: var(--gold); }
+    .border-gold { border-color: var(--gold); }
+    .ring-gold:focus { --tw-ring-color: var(--gold); }
+    .progress-fill { background: linear-gradient(90deg, #8b6914, #b8860b, #d4a84b); }
+    .timeline-dot { box-shadow: 0 0 0 4px var(--gold-muted); }
+    html.dark body { background: #0f1115; color: #e8eaed; }
+    html.dark .surface { background: #1a1d24; border-color: #2a2f3a; }
+    html.dark .surface-muted { background: #141820; }
+    html.dark .text-muted { color: #9aa0a6; }
+    html:not(.dark) body { background: #faf9f7; color: #1a1a1a; }
+    html:not(.dark) .surface { background: #fff; border-color: #e8e4dc; }
+    html:not(.dark) .surface-muted { background: #f5f3ef; }
+    html:not(.dark) .text-muted { color: #5c5c5c; }
+    .status-live { background: #0d7a3e; color: #fff; }
+    .status-pipeline { background: #b8860b; color: #fff; }
+    .status-attestation { background: #5c4d8a; color: #fff; }
+    .status-pending { background: #6b7280; color: #fff; }
+    .status-confirmed { background: #0d7a3e; color: #fff; }
+    details summary { cursor: pointer; list-style: none; }
+    details summary::-webkit-details-marker { display: none; }
+    @media print {
+      #theme-toggle, .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <header class="sticky top-0 z-50 backdrop-blur-md border-b border-stone-200/80 dark:border-stone-700/50 surface">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+      <a href="#top" class="flex items-center gap-3 min-w-0">
+        <img src="assets/images/troptions-logo-primary.png" alt="TROPTIONS" class="h-10 w-auto shrink-0" width="120" height="103" />
+        <span class="font-semibold text-lg truncate hidden sm:inline">TROPTIONS</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-5 text-sm font-medium text-muted">
+        <a href="#story" class="hover:text-gold transition">Story</a>
+        <a href="#what" class="hover:text-gold transition">What</a>
+        <a href="#revenue" class="hover:text-gold transition">Revenue</a>
+        <a href="#engineering" class="hover:text-gold transition">Engineering</a>
+        <a href="#proof" class="hover:text-gold transition">Proof</a>
+      </nav>
+      <button id="theme-toggle" type="button" class="no-print text-sm px-3 py-1.5 rounded-lg border border-stone-300 dark:border-stone-600 hover:border-gold transition" aria-label="Toggle dark mode">Theme</button>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-16 sm:pt-16 sm:pb-20">
+      <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+        <div class="flex-1 text-center lg:text-left">
+          <p class="text-sm font-semibold tracking-wide uppercase text-gold mb-3">FTH Trading · Troptions-full-pack</p>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
+            TROPTIONS – 22 Years.<br />
+            <span class="text-gold">9.0/10 Maturity.</span><br />
+            Sovereign by Default.
+          </h1>
+          <p class="mt-5 text-lg text-muted max-w-xl mx-auto lg:mx-0">
+            Operating company on live <strong>unykorn.org</strong> surfaces, backed by an open monorepo you can clone, test, and diligence—no borrowed chain, no quit after the regulatory chapter.
+          </p>
+          <div class="mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
+            <a href="#proof" class="inline-flex items-center px-6 py-3 rounded-lg bg-gold text-white font-semibold hover:opacity-90 transition shadow-sm">View Proof</a>
+            <a href="https://github.com/FTHTrading/Troptions-full-pack" target="_blank" rel="noopener" class="inline-flex items-center px-6 py-3 rounded-lg border-2 border-gold text-gold font-semibold hover:bg-[var(--gold-muted)] transition">Clone Repo</a>
+          </div>
+        </div>
+        <div class="shrink-0">
+          <img src="assets/images/troptions-logo-primary.png" alt="" class="w-56 sm:w-72 h-auto mx-auto opacity-95" width="420" height="358" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section id="story" class="surface-muted border-y border-stone-200 dark:border-stone-700">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-18">
+        <h2 class="text-2xl sm:text-3xl font-bold">The Story</h2>
+        <p class="mt-2 text-muted max-w-2xl">From a Macon desk to a sovereign chain — built, not borrowed.</p>
+
+        <ol class="mt-10 relative border-l-2 border-gold/40 pl-8 space-y-10">
+          <li class="relative">
+            <span class="timeline-dot absolute -left-[2.35rem] top-1 w-4 h-4 rounded-full bg-gold"></span>
+            <p class="font-semibold text-gold">2003</p>
+            <p class="mt-1 text-muted">TROPTIONS trade-commerce brand born in Macon — education, exchange, and community commerce before “Web3” was a shelf label.</p>
+          </li>
+          <li class="relative">
+            <span class="timeline-dot absolute -left-[2.35rem] top-1 w-4 h-4 rounded-full bg-gold"></span>
+            <p class="font-semibold text-gold">2004 — SEC chapter</p>
+            <p class="mt-1 text-muted">Regulatory scrutiny; legal process concluded with <strong>no convictions</strong>. The operating narrative continued—honesty over hype.</p>
+          </li>
+          <li class="relative">
+            <span class="timeline-dot absolute -left-[2.35rem] top-1 w-4 h-4 rounded-full bg-gold"></span>
+            <p class="font-semibold text-gold">Today</p>
+            <p class="mt-1 text-muted">Live unykorn.org properties, Rust L1 + Python services, Polygon/XRPL/Solana contracts, and proof labels investors can reproduce from one repo.</p>
+          </li>
+        </ol>
+
+        <blockquote class="mt-12 p-6 sm:p-8 rounded-xl border-l-4 border-gold surface text-xl font-medium italic">
+          We didn't quit. We built.
+        </blockquote>
+        <p class="mt-4 text-sm text-muted">Full narrative: <a href="executive/history.html" class="text-gold underline hover:no-underline">executive/history</a></p>
+      </div>
+    </section>
+
+    <!-- What TROPTIONS Is -->
+    <section id="what" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-18">
+      <h2 class="text-2xl sm:text-3xl font-bold">What TROPTIONS Is</h2>
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <article class="surface rounded-xl border p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gold">Operating Company</h3>
+          <p class="mt-3 text-muted text-sm leading-relaxed">Academy (Stripe tiers), TTN/sports broadcast, institutional Exchange OS hub, Solana launcher SaaS, partner RWA deal room—brand and GTM on verified unykorn.org hosts.</p>
+        </article>
+        <article class="surface rounded-xl border p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gold">Sovereign Stack</h3>
+          <p class="mt-3 text-muted text-sm leading-relaxed">11-crate Rust L1, Python DAO/settlement services, multi-chain frontends, contracts, Docker/nginx templates—one monorepo: <code class="text-xs bg-stone-100 dark:bg-stone-800 px-1 rounded">Troptions-full-pack</code>.</p>
+        </article>
+        <article class="surface rounded-xl border p-6 shadow-sm">
+          <h3 class="text-lg font-semibold text-gold">Proof &amp; Trust</h3>
+          <p class="mt-3 text-muted text-sm leading-relaxed">Truth labels (CONFIRMED / PENDING), on-chain address ledger, reproducible tests. Large desk figures are <strong>attestation</strong> until independently verified.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Live Revenue -->
+    <section id="revenue" class="surface-muted border-y border-stone-200 dark:border-stone-700">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-18">
+        <h2 class="text-2xl sm:text-3xl font-bold">Live Revenue Pillars</h2>
+        <p class="mt-2 text-muted">Honest status — no inflated claims without labels.</p>
+
+        <div class="mt-8 overflow-x-auto rounded-xl border surface shadow-sm">
+          <table class="w-full text-sm text-left min-w-[640px]">
+            <thead class="bg-stone-100 dark:bg-stone-800/80 text-xs uppercase tracking-wide">
+              <tr>
+                <th class="px-4 py-3">Pillar</th>
+                <th class="px-4 py-3">Status</th>
+                <th class="px-4 py-3">Detail</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-stone-200 dark:divide-stone-700">
+              <tr>
+                <td class="px-4 py-4 font-medium">FTH Academy</td>
+                <td class="px-4 py-4"><span class="status-live text-xs font-semibold px-2 py-1 rounded">Live</span></td>
+                <td class="px-4 py-4 text-muted">Stripe tiers $19 / $49 / $149 — <a href="https://fthedu.unykorn.org/" class="text-gold underline" target="_blank" rel="noopener">fthedu.unykorn.org</a></td>
+              </tr>
+              <tr>
+                <td class="px-4 py-4 font-medium">Sports / WC26</td>
+                <td class="px-4 py-4"><span class="status-pipeline text-xs font-semibold px-2 py-1 rounded">Pipeline</span></td>
+                <td class="px-4 py-4 text-muted">Sponsorship tiers $500 – $10K/mo patterns — <a href="https://troptionslive.unykorn.org/sports" class="text-gold underline" target="_blank" rel="noopener">troptionslive.unykorn.org/sports</a></td>
+              </tr>
+              <tr>
+                <td class="px-4 py-4 font-medium">Exchange / trade desk</td>
+                <td class="px-4 py-4"><span class="status-attestation text-xs font-semibold px-2 py-1 rounded">Attestation</span></td>
+                <td class="px-4 py-4 text-muted">Desk figures (e.g. $175M) = operator attestation until XRPL/mainnet proof — <a href="proof/on-chain-proofs.html" class="text-gold underline">on-chain proofs</a> · <a href="https://troptions.unykorn.org/troptions" class="text-gold underline" target="_blank" rel="noopener">troptions.unykorn.org</a></td>
+              </tr>
+              <tr>
+                <td class="px-4 py-4 font-medium">Token launcher</td>
+                <td class="px-4 py-4"><span class="status-live text-xs font-semibold px-2 py-1 rounded">Live</span></td>
+                <td class="px-4 py-4 text-muted"><a href="https://launch.unykorn.org/" class="text-gold underline" target="_blank" rel="noopener">launch.unykorn.org</a></td>
+              </tr>
+              <tr>
+                <td class="px-4 py-4 font-medium">T-Lev-8 deal room</td>
+                <td class="px-4 py-4"><span class="status-live text-xs font-semibold px-2 py-1 rounded">Live</span></td>
+                <td class="px-4 py-4 text-muted"><a href="https://fthtrading.github.io/T-Lev-8-/" class="text-gold underline" target="_blank" rel="noopener">fthtrading.github.io/T-Lev-8-/</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-8 grid sm:grid-cols-2 gap-4 text-sm">
+          <div class="surface rounded-lg border p-4">
+            <p class="font-semibold text-gold mb-2">Verified live (unykorn.org)</p>
+            <ul class="text-muted space-y-1 list-disc list-inside">
+              <li><a href="https://troptions.unykorn.org/troptions" class="text-gold hover:underline" target="_blank" rel="noopener">troptions.unykorn.org/troptions</a></li>
+              <li><a href="https://troptionslive.unykorn.org/sports" class="text-gold hover:underline" target="_blank" rel="noopener">troptionslive.unykorn.org/sports</a></li>
+              <li><a href="https://launch.unykorn.org/" class="text-gold hover:underline" target="_blank" rel="noopener">launch.unykorn.org</a></li>
+              <li><a href="https://fthedu.unykorn.org/" class="text-gold hover:underline" target="_blank" rel="noopener">fthedu.unykorn.org</a></li>
+            </ul>
+          </div>
+          <div class="surface rounded-lg border p-4">
+            <p class="font-semibold text-muted mb-2">Not deployed (troptions.org DNS)</p>
+            <p class="text-muted text-xs leading-relaxed"><code>ai.troptions.org</code>, <code>ttn.troptions.org</code>, <code>dao.troptions.org</code> — nginx templates only. <strong>Future DNS when operator enables.</strong></p>
+            <p class="mt-3 text-muted text-xs">x402 public health (separate UnyKorn AWS): <a href="https://x402.unykorn.org/health" class="text-gold hover:underline" target="_blank" rel="noopener">x402.unykorn.org/health</a> — gateway code on main; prod posture LOCAL_ONLY.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Engineering -->
+    <section id="engineering" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-18">
+      <h2 class="text-2xl sm:text-3xl font-bold">Engineering Maturity</h2>
+      <div class="mt-6 flex items-center gap-4">
+        <div class="flex-1 h-3 rounded-full bg-stone-200 dark:bg-stone-700 overflow-hidden">
+          <div class="progress-fill h-full rounded-full" style="width: 90%"></div>
+        </div>
+        <span class="text-2xl font-bold text-gold whitespace-nowrap">9.0 / 10</span>
+      </div>
+      <p class="mt-2 text-sm text-muted">Production hardening on <code>main</code> — not a weekend prototype.</p>
+
+      <div class="mt-10 grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-semibold text-gold">Built &amp; verified in repo</h3>
+          <ul class="mt-3 space-y-2 text-sm text-muted list-disc list-inside">
+            <li>RocksDB persistence (<code>l1/crates/state</code>)</li>
+            <li>Signed RPC + treasury multisig on L1</li>
+            <li>API key auth (<code>backend/shared/auth.py</code>)</li>
+            <li>DAO direct L1 reads (dashboard + engine)</li>
+            <li><strong>11</strong> L1 workspace crates + integration tests</li>
+            <li><strong>~28</strong> Rust workspace tests · <strong>13</strong> Python pytest (backend + DAO)</li>
+            <li>Contracts: KENNY Polygon, vaults, XRPL/Solana modules (no <code>kill_switch</code> path in repo)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold text-muted">Known gaps (labeled)</h3>
+          <ul class="mt-3 space-y-2 text-sm text-muted list-disc list-inside">
+            <li>Single-node Sovereign Sequencer (not BFT)</li>
+            <li>Public TLS on troptions.org hostnames — pending certbot + DNS</li>
+            <li>x402 facilitator: code on <code>main</code>, production <strong>LOCAL_ONLY</strong></li>
+            <li>Fraud proofs — design doc only (Q4 2026 target)</li>
+            <li>Apostle public AWS — feature branch, not main prod</li>
+          </ul>
+        </div>
+      </div>
+      <p class="mt-6 text-sm"><a href="infrastructure/l1.html" class="text-gold underline">L1 technical docs →</a> · <a href="WHAT_IS_BUILT.md" class="text-gold underline">WHAT_IS_BUILT.md</a></p>
+    </section>
+
+    <!-- Truth Labels -->
+    <section id="proof" class="surface-muted border-y border-stone-200 dark:border-stone-700">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-18">
+        <h2 class="text-2xl sm:text-3xl font-bold">Truth Labels</h2>
+        <p class="mt-2 text-muted">CONFIRMED = reproducible in repo or verified URL. PENDING = honest gap or future DNS.</p>
+
+        <details id="truth-details" class="mt-6 surface rounded-xl border overflow-hidden" open>
+          <summary class="px-4 py-3 font-semibold flex justify-between items-center bg-stone-50 dark:bg-stone-800/50">
+            <span>Label table</span>
+            <span id="truth-chevron" class="text-muted text-sm">collapse</span>
+          </summary>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm min-w-[720px]" id="truth-table">
+              <thead class="bg-stone-100 dark:bg-stone-800 text-xs uppercase">
+                <tr>
+                  <th class="px-4 py-2 text-left">Label</th>
+                  <th class="px-4 py-2 text-left">Status</th>
+                  <th class="px-4 py-2 text-left">Last check</th>
+                  <th class="px-4 py-2 text-left">Proof</th>
+                </tr>
+              </thead>
+              <tbody id="truth-tbody" class="divide-y divide-stone-200 dark:divide-stone-700">
+                <tr><td colspan="4" class="px-4 py-6 text-muted text-center">Loading labels…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <p class="mt-4 text-xs text-muted">Source: <code>assets/data/truth-labels.json</code> · Regenerate: <code>scripts/truth_labels.ps1</code> · <a href="proof/truth-labels.html" class="text-gold underline">full proof page</a></p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta" class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-18 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold">Diligence Starts Here</h2>
+      <p class="mt-3 text-muted max-w-xl mx-auto">Clone the monorepo, run tests, and compare labels to what you see on chain.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="https://github.com/FTHTrading/Troptions-full-pack" target="_blank" rel="noopener" class="px-6 py-3 rounded-lg bg-gold text-white font-semibold hover:opacity-90">Clone Repo</a>
+        <button type="button" id="quickstart-toggle" class="px-6 py-3 rounded-lg border-2 border-gold text-gold font-semibold hover:bg-[var(--gold-muted)]">Run Quickstart</button>
+        <a href="mailto:bryan@troptions.com" class="px-6 py-3 rounded-lg border border-stone-300 dark:border-stone-600 font-semibold hover:border-gold transition">Contact</a>
+      </div>
+      <div id="quickstart-panel" class="hidden mt-6 max-w-lg mx-auto text-left surface rounded-xl border p-5 text-sm text-muted">
+        <p class="font-semibold text-gold">Local quickstart (Windows)</p>
+        <pre class="mt-2 p-3 rounded bg-stone-100 dark:bg-stone-900 overflow-x-auto text-xs"><code>git clone https://github.com/FTHTrading/Troptions-full-pack.git
+cd Troptions-full-pack
+.\scripts\quickstart.ps1</code></pre>
+        <p class="mt-3">Script on GitHub: <a href="https://github.com/FTHTrading/Troptions-full-pack/blob/main/scripts/quickstart.ps1" class="text-gold underline" target="_blank" rel="noopener">scripts/quickstart.ps1</a> · Docs: <a href="deploy/quickstart.html" class="text-gold underline">deploy/quickstart</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-stone-200 dark:border-stone-700 surface-muted">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 text-sm text-muted">
+      <div class="flex flex-col sm:flex-row justify-between gap-6">
+        <div>
+          <p class="font-semibold text-stone-800 dark:text-stone-200">© FTH Trading</p>
+          <p class="mt-1"><a href="media/anthem.md" class="text-gold hover:underline">TROPTIONS anthem</a> · <a href="https://github.com/FTHTrading/Troptions-full-pack" class="text-gold hover:underline" target="_blank" rel="noopener">GitHub</a></p>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a href="executive/overview.html" class="hover:text-gold">Executive overview</a>
+          <a href="executive/revenue.html" class="hover:text-gold">Revenue</a>
+          <a href="proof/on-chain-proofs.html" class="hover:text-gold">On-chain proofs</a>
+          <a href="infrastructure/l1.html" class="hover:text-gold">Engineers / L1</a>
+          <a href="DOMAIN_TRUTH_TABLE.html" class="hover:text-gold">Domain truth</a>
+        </div>
+      </div>
+      <p class="mt-6 text-xs">Primary landing: static <code>index.html</code>. Jekyll builds subpages under <code>/executive/</code>, <code>/proof/</code>, <code>/infrastructure/</code>.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('theme-toggle');
+      const stored = localStorage.getItem('troptions-theme');
+      if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+      }
+      themeBtn.addEventListener('click', function () {
+        html.classList.toggle('dark');
+        localStorage.setItem('troptions-theme', html.classList.contains('dark') ? 'dark' : 'light');
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          const id = a.getAttribute('href');
+          if (id.length > 1) {
+            const el = document.querySelector(id);
+            if (el) {
+              e.preventDefault();
+              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      });
+
+      const qsToggle = document.getElementById('quickstart-toggle');
+      const qsPanel = document.getElementById('quickstart-panel');
+      qsToggle.addEventListener('click', function () {
+        qsPanel.classList.toggle('hidden');
+      });
+
+      const truthDetails = document.getElementById('truth-details');
+      const chevron = document.getElementById('truth-chevron');
+      truthDetails.addEventListener('toggle', function () {
+        chevron.textContent = truthDetails.open ? 'collapse' : 'expand';
+      });
+
+      const tbody = document.getElementById('truth-tbody');
+      function statusClass(s) {
+        return s === 'CONFIRMED' ? 'status-confirmed' : 'status-pending';
+      }
+      function renderRows(rows) {
+        tbody.innerHTML = rows.map(function (r) {
+          return '<tr><td class="px-4 py-3 font-medium">' + escapeHtml(r.label) +
+            '</td><td class="px-4 py-3"><span class="' + statusClass(r.status) + ' text-xs font-semibold px-2 py-0.5 rounded">' +
+            escapeHtml(r.status) + '</span></td><td class="px-4 py-3 text-muted">' + escapeHtml(r.lastCheck) +
+            '</td><td class="px-4 py-3 text-muted text-xs">' + escapeHtml(r.proof) + '</td></tr>';
+        }).join('');
+      }
+      function escapeHtml(s) {
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
+      fetch('assets/data/truth-labels.json')
+        .then(function (r) { return r.json(); })
+        .then(function (data) { renderRows(data.labels || []); })
+        .catch(function () {
+          tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-6 text-muted">Could not load truth labels. See <a href="proof/truth-labels.html" class="text-gold underline">proof/truth-labels</a>.</td></tr>';
+        });
+    })();
+  </script>
+</body>
+</html>
