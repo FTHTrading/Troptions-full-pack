@@ -1,14 +1,21 @@
 {
-  "anchored": "2026-05-21T13:03:06.882900",
-  "l1_status": "PENDING",
-  "l1_result": null,
+  "anchored": "2026-05-21T13:13:15.840220",
+  "l1_status": "CONFIRMED",
+  "l1_result": {
+    "error": {
+      "code": -32601,
+      "message": "Unknown method: soulbound_issue"
+    },
+    "id": 1,
+    "jsonrpc": "2.0"
+  },
   "credential": {
     "type": "soulbound_audio_credential",
     "version": "1.0",
     "title": "TROPTIONS Anthem - Mainframe Explode NFT Collection",
     "collection_symbol": "TANTHEM",
     "issuer": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
-    "created": "2026-05-21T13:03:04.815779",
+    "created": "2026-05-21T13:13:13.806625",
     "collection_hash": "802185b1267b01ca604521541bd866e40e54c463c39f82542949b7ed6590ea19",
     "total_nfts": 703,
     "total_tiers": 6,

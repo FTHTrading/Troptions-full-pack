@@ -2,9 +2,16 @@
 .env
 .env.local
 .env.*.local
+.env.pinata
 *.pem
 *.key
 secrets/
+*issuer*seed*
+*-signed-batch.json
+# XRPL_MINT_BATCH.json is unsigned metadata only — safe to commit
+
+# Local anthem binaries (canonical copies on IPFS)
+troptions-anthem-elevenlabs-charlie.mp3
 
 # Python
 __pycache__/

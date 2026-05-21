@@ -1,5 +1,5 @@
 import { Section } from "./Section";
-import { BUILT_ITEMS, GAP_ITEMS } from "@/lib/constants";
+import { BUILT_ITEMS, GAP_ITEMS, MATURITY_GAP_NOTE, MATURITY_SCORE } from "@/lib/constants";
 
 export function EngineeringMaturity() {
   return (
@@ -10,12 +10,14 @@ export function EngineeringMaturity() {
     >
       <div className="mb-10 flex flex-wrap items-center gap-4">
         <div className="flex h-24 w-24 flex-col items-center justify-center rounded-2xl border-2 border-[var(--color-gold)] bg-[var(--color-gold)]/10">
-          <span className="text-3xl font-bold text-[var(--color-gold-light)]">9.5</span>
+          <span className="text-3xl font-bold text-[var(--color-gold-light)]">
+            {MATURITY_SCORE}
+          </span>
           <span className="text-xs text-[var(--color-muted)]">/ 10</span>
         </div>
         <p className="max-w-xl text-sm text-[var(--color-muted)]">
-          TLS templates, API-key writes, DAO reads L1 directly, signed governance
-          RPC. Sovereign Sequencer — single-node today; BFT planned.
+          DAO layer on main with L1 reads, signed governance RPC, TLS templates.
+          {MATURITY_GAP_NOTE} Sovereign Sequencer — single-node today; BFT planned.
         </p>
       </div>
       <div className="grid gap-8 md:grid-cols-2">

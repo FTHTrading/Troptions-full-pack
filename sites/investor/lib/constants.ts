@@ -66,7 +66,7 @@ export const TIMELINE = [
   {
     year: "2026",
     title: "Sovereign stack verified",
-    body: "9.5/10 maturity: Polygon + XRPL + Stellar issued supply user-verified (~874M on ledger). Gap: Cloudflare origin health on select web endpoints.",
+    body: "9.8/10 maturity: DAO + Polygon + XRPL + Stellar issued supply user-verified (~874M on ledger). Gap: TLS on troptions.org + XRPL reserves.",
   },
 ];
 
@@ -84,7 +84,7 @@ export const THREE_COLUMNS = [
     title: "Sovereign Stack",
     items: [
       "Rust L1: RocksDB, treasury multisig, soulbound, settlement",
-      "Sovereign Namespace Protocol (SNP) — 955 roots, Dilithium5, stateless verification",
+      "Sovereign Namespace Protocol (SNP) — 955 constitutional roots, Dilithium5, stateless verification",
       "DAO layer with governance API and dashboard",
       "Python/AI backends: Academy, DONK, TTN, DAO service",
       "Multi-chain: Polygon KENNY, XRPL gateway, Solana launcher",
@@ -116,8 +116,13 @@ export const FINAL_ECOSYSTEM_AUDIT_URL = `${PAGES_URL}/technical/FINAL_ECOSYSTEM
 export const ECOSYSTEM_MAP_URL = `${PAGES_URL}/technical/ECOSYSTEM_MAP.html`;
 export const XRPL_STELLAR_VERIFICATION_URL = `${PAGES_URL}/technical/XRPL_STELLAR_VERIFICATION.html`;
 export const PROOF_FOR_COUNTERPARTIES_URL = `${PAGES_URL}/technical/counterparty/PROOF_FOR_COUNTERPARTIES.html`;
+export const TANTHEM_NFT_COLLECTION_URL = `${PAGES_URL}/technical/TANTHEM_NFT_COLLECTION.html`;
+export const ANTHEM_IPFS_MANIFEST_CID = "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7";
+export const VALUATION_URL = `${PAGES_URL}/technical/VALUATION_AND_COMPARABLES.html`;
 
-export const MATURITY_SCORE = "9.5";
+export const MATURITY_SCORE = "9.8";
+export const MATURITY_GAP_NOTE =
+  "Gap to 10: public TLS on troptions.org hostnames + XRPL reserve top-up.";
 
 const dl = onPages ? `${PAGES_URL}/downloads` : "/downloads";
 
@@ -146,7 +151,104 @@ export const DOWNLOAD_ASSETS = [
     href: `${dl}/opportunity-and-roadmap.html`,
     note: "Pipeline + projections labeled",
   },
+  {
+    title: "Valuation & comparables",
+    file: "valuation-and-comparables.html",
+    href: `${dl}/valuation-and-comparables.html`,
+    note: "PROVEN · PIPELINE · PROJECTION",
+  },
 ];
+
+export const REPLACEMENT_COST = [
+  {
+    band: "Conservative rebuild",
+    range: "$2.6M – $4.8M",
+    note: "18–24 months — monorepo + partial satellites",
+    label: "PROVEN sunk engineering",
+  },
+  {
+    band: "With DAO hardening",
+    range: "$3.5M – $6.5M",
+    note: "20–28 months — governance plane included",
+    label: "PROVEN + DAO layer",
+  },
+] as const;
+
+export const VALUATION_PROJECTIONS = [
+  {
+    scenario: "Base",
+    band: "$3M – $5M",
+    assumptions: "Academy + launcher scale; modest x402 volume",
+  },
+  {
+    scenario: "Growth",
+    band: "$8M – $15M",
+    assumptions: "Issuers + WC26 sponsors + SNP integrators (PROJECTION)",
+  },
+  {
+    scenario: "Strategic",
+    band: "$20M – $40M",
+    assumptions: "RWA gates + agent mesh adoption (PROJECTION)",
+  },
+] as const;
+
+export const ROCKET_FUEL_WEEKS = [
+  { week: 1, focus: "Edge reliability", outcome: "Cloudflare + TLS" },
+  { week: 2, focus: "Commerce + treasury", outcome: "x402 twin + XRPL reserves" },
+  { week: 3, focus: "Identity + proof", outcome: "IPFS SNP links + L1 anchor" },
+  { week: 4, focus: "Partner readiness", outcome: "T-Build green + pipeline sales" },
+] as const;
+
+export const COMPETITIVE_PILLARS = [
+  {
+    id: "snp",
+    title: "SNP vs ENS · Unstoppable · Handshake",
+    honestTake:
+      "ENS wins EVM distribution. SNP wins post-quantum constitutional roots (955) tied to this L1 and partner OS.",
+    columns: ["Dimension", "ENS", "Unstoppable", "Handshake", "SNP (Unykorn)"],
+    rows: [
+      ["Supply", "Millions .eth", "Branded domains", "HNS coins", "955 PQ roots"],
+      ["Trust", "Ethereum L1", "Web2 hybrid", "Handshake chain", "Dilithium5 verify"],
+      ["Scope", "EVM-primary", "Marketing multi-chain", "HNS only", "Monorepo constitutional layer"],
+    ],
+  },
+  {
+    id: "x402",
+    title: "x402 vs Coinbase · BNB · Rootstock",
+    honestTake:
+      "Coinbase wins brand and distribution. Unykorn wins sovereign agent meter + ATP on Apostle — health LIVE, twin pending.",
+    columns: ["Dimension", "Coinbase", "BNB", "Rootstock", "Unykorn x402"],
+    rows: [
+      ["Settlement", "Partner/CEX", "BSC-native", "Bitcoin L2", "Apostle ATP 7332"],
+      ["Status", "Major pilots", "Exchange-native", "BTC DeFi", "Health LIVE; twin PENDING"],
+      ["Model", "Emerging", "Wallet-centric", "Contract-centric", "Metered AI-to-AI"],
+    ],
+  },
+  {
+    id: "l1",
+    title: "Unykorn L1 vs ICP · Fleek",
+    honestTake:
+      "ICP/Fleek win hosted scale. TROPTIONS L1 wins integrated treasury + DAO + SNP in this repo — single-node today.",
+    columns: ["Dimension", "ICP", "Fleek", "TROPTIONS L1"],
+    rows: [
+      ["Architecture", "Subnet cloud", "IPFS hosting", "Rust sequencer + RocksDB"],
+      ["Maturity", "Production network", "Production", "PM2 local + code PROVEN"],
+      ["Edge", "Chain-as-cloud", "Deploy UX", "Issuance + multisig + governance"],
+    ],
+  },
+  {
+    id: "dao",
+    title: "DAO vs Aragon · Snapshot · Tally · DAOstack",
+    honestTake:
+      "Aragon/Snapshot win ecosystem. FTH DAO wins L1-native council + treasury reads — lifts score to 9.8/10.",
+    columns: ["Dimension", "Aragon", "Snapshot", "Tally", "FTH DAO"],
+    rows: [
+      ["Voting", "On-chain orgs", "Off-chain sigs", "Governor UI", "Council + L1 RPC"],
+      ["Treasury", "Vault plugins", "External", "Multi-chain UI", "L1 multisig debits"],
+      ["Integration", "Generic", "Generic", "Generic", "Native to monorepo"],
+    ],
+  },
+] as const;
 
 export type ProofChainCard = {
   chain: string;
@@ -331,11 +433,11 @@ export const COMPARABLES = [
 
 export const ECONOMICS = {
   sunk:
-    "Years of multi-repo engineering (~7k audit-scope files). Replacement build in the $2–5M fintech band if started from zero today.",
+    "Years of multi-repo engineering (~7k audit-scope files). Replacement: $2.6M–$4.8M conservative; $3.5M–$6.5M with DAO hardening.",
   ongoing:
     "Cloudflare ~$20–200/mo · AWS x402 ~$100–800/mo · PM2 operator host ~$50–300/mo — ranges, not audited books.",
   drivers:
-    "PROJECTION — illustrative if clients close: cross-chain issuance utility, x402 metered AI revenue, SNP namespace scarcity.",
+    "PROJECTION — illustrative if clients close: cross-chain issuance utility, x402 metered AI revenue, SNP namespace scarcity (955 roots).",
 };
 
 export const CLIENTS_NEEDED = [
@@ -500,10 +602,10 @@ export const FTH_ECOSYSTEM_CARDS: EcosystemCard[] = [
     name: "x402 Payment Mesh (UnyKorn)",
     category: "Live · Apostle Chain ATP · agent commerce",
     detail:
-      "Pay-per-request for AI agents — not API keys. HTTP 402 challenges, ATP settlement on Apostle Chain (7332), TxEnvelope and X-Payment-Proof. Production mesh on AWS + Cloudflare; Troptions-full-pack ships a lightweight :4020 sidecar that can proxy upstream.",
+      "Pay-per-request for AI agents — not API keys. HTTP 402, ATP on Apostle (7332). Production health LIVE at x402.unykorn.org; digital twin at twin.unykorn.org still PENDING (origin flaky). Monorepo :4020 sidecar is not the public mesh.",
     status: "live",
-    deployUrl: X402_TWIN,
-    deployLabel: "Live demo (digital twin)",
+    deployUrl: X402_HEALTH,
+    deployLabel: "x402 health (LIVE)",
     repoUrl: UNYKORN_X402_REPO,
     repoLabel: "GitHub (public)",
     links: [
@@ -575,7 +677,7 @@ export const BUILT_ITEMS = [
   "11 Rust L1 crates + integration tests (~28 cargo tests)",
   "13 pytest (backend + DAO)",
   "RocksDB persistence, treasury multisig, signed submit tests",
-  "TLS nginx templates, API-key auth, DAO↔L1 reads",
+  "TLS nginx templates, API-key auth, DAO↔L1 reads (9.8/10 with DAO on main)",
   "Live unykorn.org surfaces (hub, sports, launcher, academy, x402 health)",
   "KENNY + EVL Polygon — PolygonScan verified (2026-05-21)",
   "Genesis-world 9 Polygon contracts + drunks.app live",
@@ -586,37 +688,62 @@ export const BUILT_ITEMS = [
 export const GAP_ITEMS = [
   "Cloudflare origin health — twin.unykorn.org / x402api (522/timeouts)",
   "Public TLS on troptions.org hostnames (ai, ttn, dao)",
-  "Fraud proofs — design only (Q4 2026 target)",
-  "Single-node Sovereign Sequencer (not BFT multi-validator)",
-  "T-Build Vitest suite — run after npm ci",
+  "L1 asset anchoring — anthem soulbound / IPFS manifest (prepared, needs anchor)",
+  "x402 prod alignment — health LIVE; twin.unykorn.org PENDING",
+  "IPFS SNP + anthem CIDs in counterparty proof path",
   "XRPL production XRP reserves thin — operational but needs top-up",
+  "T-Build Vitest suite — run after npm ci",
 ];
 
-export const ANTHEM_TRACKS = [
+export type AnthemTrack = {
+  file: string;
+  title: string;
+  meaning: string;
+  cid: string;
+  featured?: boolean;
+  sizeNote?: string;
+};
+
+/** IPFS CIDs — see TROPTIONS_IPFS_CIDS.json (repo root). */
+export const ANTHEM_TRACKS: AnthemTrack[] = [
+  {
+    file: "troptions-anthem-elevenlabs-charlie.mp3",
+    title: "ElevenLabs Charlie (featured)",
+    meaning:
+      "AI voice edition — SPECIAL TANTHEM tier; pinned ~154 KB on IPFS",
+    cid: "QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV",
+    featured: true,
+    sizeNote: "~154 KB",
+  },
   {
     file: "troptions-theme-primary.mp3",
     title: "Official TROPTIONS song",
-    meaning: "Main brand anthem — primary Mainframe Explode mix",
+    meaning: "Main brand anthem — LEGENDARY tier (5 supply)",
+    cid: "QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb",
   },
   {
     file: "troptions-theme-alt.mp3",
     title: "Alternate studio mix",
-    meaning: "Second pass from the same session — alternate energy",
+    meaning: "Second pass from the same session — UNCOMMON tier",
+    cid: "QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A",
   },
   {
     file: "troptions-anthem-mainframe-152254.mp3",
     title: "Latest master cut",
-    meaning: "Latest Mainframe Explode master from studio session",
+    meaning: "Latest Mainframe Explode master — RARE tier",
+    cid: "QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def",
   },
   {
     file: "troptions-anthem-22-years.mp3",
     title: "22 years narrative mix",
-    meaning: "Timeline narrative — 22 years deep in the bridge",
+    meaning: "Timeline narrative — EPIC tier (22 supply)",
+    cid: "Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV",
   },
   {
     file: "troptions-anthem-151853.mp3",
     title: "Session edit",
-    meaning: "Earlier timing export from the same recording session",
+    meaning: "Earlier timing export — COMMON tier (500 supply)",
+    cid: "QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj",
   },
 ];
 

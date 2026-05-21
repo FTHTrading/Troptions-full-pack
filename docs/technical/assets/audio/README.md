@@ -2,38 +2,56 @@
 
 Canonical **Mainframe Explode** tracks for the public showcase ([GitHub Pages](https://fthtrading.github.io/Troptions-full-pack/)). **Not royalty-free** for third parties — proprietary **FTH Trading**; internal and brand use only.
 
-## Published catalog (5 tracks, ~16.3 MB)
+## IPFS permanence (PROVEN — 2026-05-21)
 
-| Repo file | What it represents | Source (OneDrive Desktop) | Size |
-|-----------|-------------------|---------------------------|------|
-| `troptions-theme-primary.mp3` | Official **TROPTIONS song** — main brand anthem | `troptions song Mainframe_Explode_2026-05-21T144908.mp3` | ~3.34 MB |
-| `troptions-theme-alt.mp3` | Alternate studio mix (second pass, same session) | `troptions song 2 Mainframe_Explode_2026-05-21T144908.mp3` | ~3.68 MB |
-| `troptions-anthem-mainframe-152254.mp3` | Latest Mainframe Explode master cut | `Mainframe_Explode_2026-05-21T152254.mp3` | ~3.06 MB |
-| `troptions-anthem-22-years.mp3` | **22 years** narrative mix | `Mainframe_22 yrs 3Explode_2026-05-21T150232 (1).mp3` | ~3.15 MB |
-| `troptions-anthem-151853.mp3` | Shorter session export (earlier timing) | `Mainframe_Explode_2026-05-21T151853.mp3` | ~3.06 MB |
+Six audio files and one JSON manifest are content-addressed on IPFS (~16.3 MB audio total). Gateway links use the public resolver:
 
-**Total in repo:** ~16.3 MB (under the ~25 MB budget for audio assets). **Git LFS not used** — each file is well under GitHub’s 100 MB per-file limit.
+`https://ipfs.io/ipfs/{cid}`
+
+| Track | CID | Gateway |
+|-------|-----|---------|
+| Official TROPTIONS song (`troptions-theme-primary.mp3`) | `QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb` | [Play](https://ipfs.io/ipfs/QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb) |
+| Alternate studio mix (`troptions-theme-alt.mp3`) | `QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A` | [Play](https://ipfs.io/ipfs/QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A) |
+| Latest master cut (`troptions-anthem-mainframe-152254.mp3`) | `QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def` | [Play](https://ipfs.io/ipfs/QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def) |
+| 22 years narrative (`troptions-anthem-22-years.mp3`) | `Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV` | [Play](https://ipfs.io/ipfs/Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV) |
+| Session edit (`troptions-anthem-151853.mp3`) | `QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj` | [Play](https://ipfs.io/ipfs/QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj) |
+| **ElevenLabs Charlie (featured)** (`troptions-anthem-elevenlabs-charlie.mp3`, ~154 KB) | `QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV` | [Play](https://ipfs.io/ipfs/QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV) |
+| **Manifest** (CIDs + NFT tier metadata) | `Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7` | [Open](https://ipfs.io/ipfs/Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7) |
+
+Repo map: `TROPTIONS_IPFS_CIDS.json` (root). Pinata gateway (alternate): `https://gateway.pinata.cloud/ipfs/{cid}`.
+
+## Published catalog (GitHub Pages + investor site)
+
+| Repo / site file | What it represents | IPFS |
+|------------------|-------------------|------|
+| `troptions-theme-primary.mp3` | Official **TROPTIONS song** — main brand anthem | [CID](https://ipfs.io/ipfs/QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb) |
+| `troptions-theme-alt.mp3` | Alternate studio mix | [CID](https://ipfs.io/ipfs/QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A) |
+| `troptions-anthem-mainframe-152254.mp3` | Latest Mainframe Explode master cut | [CID](https://ipfs.io/ipfs/QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def) |
+| `troptions-anthem-22-years.mp3` | **22 years** narrative mix | [CID](https://ipfs.io/ipfs/Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV) |
+| `troptions-anthem-151853.mp3` | Shorter session export | [CID](https://ipfs.io/ipfs/QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj) |
+| `troptions-anthem-elevenlabs-charlie.mp3` | **ElevenLabs Charlie** AI voice edition (featured on investor site) | [CID](https://ipfs.io/ipfs/QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV) |
+
+**Local MP3 binaries** may be omitted from git (size); IPFS CIDs are the permanence proof. Investor site players use IPFS gateways first.
+
+## XRPL NFT collection (TANTHEM)
+
+| Field | Value |
+|-------|--------|
+| Symbol | `TANTHEM` |
+| Supply | 703 (6 tiers) |
+| Issuer | `rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ` |
+| Transfer fee | 2.5% |
+| Mint on ledger | **PREPARED** — unsigned batch in `XRPL_MINT_BATCH.json` |
+
+Full tier table and mint instructions: [`TANTHEM_NFT_COLLECTION.md`](../../TANTHEM_NFT_COLLECTION.html).
+
+**Mint (operator, local only):** run `scripts/xrpl_mint_ready.py` with the issuer seed on an operator machine. **Never** commit seeds, `.env` seeds, or signed transaction blobs to this repo.
 
 ## Desktop inventory (not committed)
 
-Twelve MP3s were on the Desktop (2026-05-21); seven were skipped as near-duplicates of the five canonical files above.
+Twelve MP3s were on the Desktop (2026-05-21); seven were skipped as near-duplicates of the five studio masters above. ElevenLabs Charlie was generated separately (~154 KB) and pinned as the SPECIAL tier.
 
-| Desktop filename | Size (MB) | Status |
-|------------------|-----------|--------|
-| troptions song Mainframe_Explode_2026-05-21T144908.mp3 | 3.34 | → `troptions-theme-primary.mp3` |
-| troptions song 2 Mainframe_Explode_2026-05-21T144908.mp3 | 3.68 | → `troptions-theme-alt.mp3` |
-| Mainframe_Explode_2026-05-21T152254.mp3 | 3.06 | → `troptions-anthem-mainframe-152254.mp3` |
-| Mainframe_22 yrs 3Explode_2026-05-21T150232 (1).mp3 | 3.15 | → `troptions-anthem-22-years.mp3` |
-| Mainframe_Explode_2026-05-21T151853.mp3 | 3.06 | → `troptions-anthem-151853.mp3` |
-| Mainframe_Explode_2026-05-21T144908.mp3 | 3.68 | Skip — same size family as alt; different hash, not “troptions song” master |
-| Mainframe_Explode_2026-05-21T150232.mp3 | 3.40 | Skip — non–22-yrs variant of same session |
-| Mainframe22 yrs_Explode_2026-05-21T150232 (1).mp3 | 3.40 | Skip — duplicate narrative lane vs `22 yrs 3Explode` |
-| Mainframe_Explode_2026-05-21T151426.mp3 | 3.43 | Skip — mid-session export, redundant with 151853/152254 |
-| Mainframe_Explode_2026-05-21T151426 (1).mp3 | 3.50 | Skip — `(1)` copy |
-| Mainframe_Explode_2026-05-21T151853 (1).mp3 | 2.65 | Skip — shorter `(1)` copy; kept non-`(1)` 151853 for catalog consistency |
-| Mainframe_Explode_2026-05-21T152254 (1).mp3 | 3.25 | Skip — `(1)` copy of 152254 master |
-
-Desktop path used for copy: `C:\Users\Kevan\OneDrive - FTH Trading\Desktop\`
+Desktop path used for studio copies: `C:\Users\Kevan\OneDrive - FTH Trading\Desktop\`
 
 ## Lyrics
 
@@ -41,30 +59,15 @@ Canonical text: [`TROPTIONS_ANTHEM_LYRICS.md`](TROPTIONS_ANTHEM_LYRICS.md) (this
 
 | Pages URL | Purpose |
 |-----------|---------|
-| `/` | Home — **TROPTIONS Anthem** table (play + download per track) |
-| `/media/anthem.html` | Rendered lyrics + honesty footnotes |
-| `/media/troptions-anthem.html` | Short alias → anthem page |
-| `/assets/audio/TROPTIONS_ANTHEM_LYRICS.md` | Raw markdown (repo / direct download) |
-| `/assets/audio/README.html` | This catalog (Jekyll-rendered) |
+| `/` | Home — **TROPTIONS Anthem** (IPFS players + featured Charlie) |
+| `/anthem/` | Lyrics + honesty footnotes |
+| `/assets/audio/TROPTIONS_ANTHEM_LYRICS.md` | Raw markdown |
+| `/technical/TANTHEM_NFT_COLLECTION.html` | NFT rarity + mint status |
 
 **Honesty (Bridge):**
 
 - **“Hunnid seventy-five mil…”** — Brand narrative / operator attestation only; verify via [Exchange OS proof docs](/Troptions-full-pack/proof/on-chain-proofs.html) before external citation.
-- **NEEDAI, CLAWD, Popeye** — Optional branch references (`feature/x402-full-integration` and related backends); not all agent integrations are on `main`. Do not imply live production status from the anthem bridge alone.
-
-## Pages URLs (after deploy)
-
-Base: `https://fthtrading.github.io/Troptions-full-pack`
-
-| URL | Asset |
-|-----|--------|
-| `/` | Anthem section `#anthem` |
-| `/assets/audio/troptions-theme-primary.mp3` | Primary theme |
-| `/assets/audio/troptions-theme-alt.mp3` | Alternate mix |
-| `/assets/audio/troptions-anthem-mainframe-152254.mp3` | Latest master |
-| `/assets/audio/troptions-anthem-22-years.mp3` | 22-years narrative |
-| `/assets/audio/troptions-anthem-151853.mp3` | Session edit |
-| `/media/anthem.html` | Full lyrics |
+- **NEEDAI, CLAWD, Popeye** — Optional branch references; not all agent integrations are on `main`. Do not imply live production status from the anthem bridge alone.
 
 ## License
 

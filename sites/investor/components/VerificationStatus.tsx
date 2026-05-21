@@ -17,7 +17,7 @@ export function VerificationStatus() {
   const [open, setOpen] = useState(false);
   const percent = 95;
   const baseline = 60;
-  const honestScore = "9.5/10";
+  const honestScore = "9.8/10";
 
   return (
     <Section

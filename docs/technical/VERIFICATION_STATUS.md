@@ -52,6 +52,8 @@ permalink: /technical/VERIFICATION_STATUS.html
 | 22 | XRPL + Stellar issued supply | ✅ CONFIRMED | WebSocket + Horizon — [`XRPL_STELLAR_VERIFICATION.md`](XRPL_STELLAR_VERIFICATION.html) |
 | 23 | TExchange build/test | ⏳ PENDING | Not run this pass |
 | 24 | UnyKorn-X402-aws `cargo test` | ⏳ PENDING | Prior `cargo check` only |
+| 25 | TROPTIONS Anthem IPFS (6 + manifest) | ✅ CONFIRMED | `TROPTIONS_IPFS_CIDS.json` · [`assets/audio/README.md`](assets/audio/README.html) |
+| 26 | TANTHEM XRPL NFT mint (703) | ⏳ PREPARED | Unsigned `XRPL_MINT_BATCH.json` — not on ledger until operator signs locally |
 
 ---
 

@@ -7,6 +7,8 @@ const nav = [
   { href: "#proof-wall", label: "Proof" },
   { href: "#infrastructure", label: "Infrastructure" },
   { href: "#opportunities", label: "Opportunities" },
+  { href: "#valuation", label: "Valuation" },
+  { href: "#competitive", label: "Competitive" },
   { href: "#economics", label: "Economics" },
   { href: "#skyrocket", label: "Playbook" },
   { href: "#downloads", label: "Downloads" },

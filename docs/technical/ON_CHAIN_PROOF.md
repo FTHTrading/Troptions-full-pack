@@ -9,6 +9,8 @@ permalink: /technical/ON_CHAIN_PROOF.html
 **Last updated:** 2026-05-21  
 **Purpose:** Single justified table for investors and counterparties. Labels: **PROVEN** (explorer-verified), **PIPELINE**, **PROJECTION** (illustrative only).
 
+**Maturity context:** Ecosystem audit **9.8 / 10** (up from 9.5) after DAO governance plane on main and cross-chain re-verification. Remaining gap to 10: public TLS on `troptions.org` hostnames and XRPL production reserve top-up. See [`VALUATION_AND_COMPARABLES.md`](VALUATION_AND_COMPARABLES.html).
+
 **XRPL/Stellar detail:** [`XRPL_STELLAR_VERIFICATION.md`](XRPL_STELLAR_VERIFICATION.html) — user-verified 2026-05-21 via WebSocket + Horizon.
 
 ---
@@ -120,7 +122,8 @@ Full table: [`GENESIS_POLYGON_CONTRACTS.md`](GENESIS_POLYGON_CONTRACTS.html). Li
 
 | File | Role |
 |------|------|
-| [`FINAL_ECOSYSTEM_AUDIT.md`](FINAL_ECOSYSTEM_AUDIT.html) | Score **9.5/10** |
+| [`FINAL_ECOSYSTEM_AUDIT.md`](FINAL_ECOSYSTEM_AUDIT.html) | Score **9.8/10** |
+| [`VALUATION_AND_COMPARABLES.md`](VALUATION_AND_COMPARABLES.html) | Cash value, replacement cost, comparables |
 | [`XRPL_STELLAR_VERIFICATION.md`](XRPL_STELLAR_VERIFICATION.html) | Full XRPL/Stellar report |
 | [`counterparty/PROOF_FOR_COUNTERPARTIES.md`](counterparty/PROOF_FOR_COUNTERPARTIES.html) | Institutional counterparty pack |
 | [`ECOSYSTEM_MAP.md`](ECOSYSTEM_MAP.html) | Repos + live URLs |

@@ -3,6 +3,7 @@ import {
   DOWNLOAD_ASSETS,
   ON_CHAIN_PROOF_URL,
   REPO_URL,
+  VALUATION_URL,
   XRPL_STELLAR_VERIFICATION_URL,
 } from "@/lib/constants";
 
@@ -48,6 +49,14 @@ export function Downloads() {
           className="text-[var(--color-gold-light)] hover:underline"
         >
           GitHub: XRPL_STELLAR_VERIFICATION.md
+        </a>
+        <a
+          href={VALUATION_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[var(--color-gold-light)] hover:underline"
+        >
+          GitHub: VALUATION_AND_COMPARABLES.md
         </a>
         <a
           href={REPO_URL}

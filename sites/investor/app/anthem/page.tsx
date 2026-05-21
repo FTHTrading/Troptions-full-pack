@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { PROOF_URL, REPO_URL } from "@/lib/constants";
+import {
+  ANTHEM_IPFS_MANIFEST_CID,
+  PROOF_URL,
+  REPO_URL,
+  TANTHEM_NFT_COLLECTION_URL,
+} from "@/lib/constants";
+import { ipfsUrl } from "@/lib/ipfs";
 
 export const metadata = {
   title: "TROPTIONS Anthem — Lyrics",
@@ -23,7 +29,36 @@ export default function AnthemPage() {
           TROPTIONS Anthem — Mainframe Explode
         </h1>
         <p className="mt-4 text-[var(--color-muted)]">
-          Proprietary FTH Trading. Internal and brand use only.
+          Proprietary FTH Trading. Internal and brand use only. Six tracks pinned
+          on IPFS; featured{" "}
+          <a
+            href={ipfsUrl("QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV")}
+            className="text-[var(--color-gold-light)] hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            ElevenLabs Charlie
+          </a>
+          . TANTHEM NFT mint is{" "}
+          <strong className="text-amber-200">PREPARED</strong> (not live on XRPL
+          until signed locally).
+        </p>
+        <p className="mt-2 text-sm">
+          <a
+            href={ipfsUrl(ANTHEM_IPFS_MANIFEST_CID)}
+            className="text-[var(--color-gold-light)] hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            IPFS manifest
+          </a>
+          {" · "}
+          <a
+            href={TANTHEM_NFT_COLLECTION_URL}
+            className="text-[var(--color-gold-light)] hover:underline"
+          >
+            TANTHEM collection doc
+          </a>
         </p>
 
         <article className="prose-invert mt-10 space-y-8 text-[var(--color-muted)]">

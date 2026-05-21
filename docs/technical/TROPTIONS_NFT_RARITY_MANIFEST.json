@@ -1,0 +1,84 @@
+{
+  "collection_name": "TROPTIONS Anthem - Mainframe Explode",
+  "collection_symbol": "TANTHEM",
+  "issuer": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+  "created": "2026-05-21T13:02:31.444400",
+  "total_tiers": 6,
+  "total_supply": 703,
+  "ipfs_manifest": "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7",
+  "tiers": [
+    {
+      "tier": "LEGENDARY",
+      "name": "TROPTIONS Anthem - Genesis Edition",
+      "supply": 5,
+      "cid": "QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb",
+      "track": "troptions-theme-primary.mp3",
+      "benefits": [
+        "Lifetime VIP access",
+        "Governance voting weight x5",
+        "Revenue share 2%"
+      ],
+      "color": "#FFD700"
+    },
+    {
+      "tier": "EPIC",
+      "name": "TROPTIONS Anthem - 22 Years Edition",
+      "supply": 22,
+      "cid": "Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV",
+      "track": "troptions-anthem-22-years.mp3",
+      "benefits": [
+        "Priority course access",
+        "Governance voting weight x3",
+        "Revenue share 1%"
+      ],
+      "color": "#8B0000"
+    },
+    {
+      "tier": "RARE",
+      "name": "TROPTIONS Anthem - Master Cut Edition",
+      "supply": 50,
+      "cid": "QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def",
+      "track": "troptions-anthem-mainframe-152254.mp3",
+      "benefits": [
+        "Early beta access",
+        "Governance voting weight x2"
+      ],
+      "color": "#4169E1"
+    },
+    {
+      "tier": "UNCOMMON",
+      "name": "TROPTIONS Anthem - Alternate Mix",
+      "supply": 100,
+      "cid": "QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A",
+      "track": "troptions-theme-alt.mp3",
+      "benefits": [
+        "Discord VIP channel",
+        "Governance voting weight x1"
+      ],
+      "color": "#228B22"
+    },
+    {
+      "tier": "COMMON",
+      "name": "TROPTIONS Anthem - Session Edit",
+      "supply": 500,
+      "cid": "QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj",
+      "track": "troptions-anthem-151853.mp3",
+      "benefits": [
+        "Newsletter early access"
+      ],
+      "color": "#C0C0C0"
+    },
+    {
+      "tier": "SPECIAL",
+      "name": "TROPTIONS Anthem - AI Voice Edition",
+      "supply": 26,
+      "cid": "QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV",
+      "track": "troptions-anthem-elevenlabs-charlie.mp3",
+      "benefits": [
+        "AI beta testing access",
+        "Future AI drops priority"
+      ],
+      "color": "#FF00FF"
+    }
+  ]
+}

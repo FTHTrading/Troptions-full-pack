@@ -23,9 +23,12 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 | Live HTTP (Unykorn / GSP) | **12+ URLs return 200** | PowerShell `Invoke-WebRequest -Method Head` |
 | Polygon on-chain | **PROVEN** | PolygonScan + user verification |
 | XRPL / Stellar issued supply | **PROVEN** | WebSocket + Horizon 2026-05-21 — [`XRPL_STELLAR_VERIFICATION.md`](XRPL_STELLAR_VERIFICATION.html) |
-| **Honest overall score** | **9.5 / 10** | Code + local + live edges + cross-chain issuance verified; **CF origin health** on twin/x402api keeps 0.5 gap |
+| TROPTIONS Anthem IPFS (6 tracks + manifest) | **PROVEN** | CIDs in `TROPTIONS_IPFS_CIDS.json` — [`assets/audio/README.md`](assets/audio/README.html) |
+| TANTHEM XRPL NFT mint (703) | **PREPARED** | `XRPL_MINT_BATCH.json` unsigned — live after local sign; [`TANTHEM_NFT_COLLECTION.md`](TANTHEM_NFT_COLLECTION.html) |
+| **Honest overall score** | **9.8 / 10** | Code + local + live edges + cross-chain issuance + **DAO governance plane** verified; gap to 10: **TLS** on troptions.org + **XRPL reserves** |
+| **DAO layer** | **PROVEN on main** | `dao-service` + dashboard, L1 reads, council multisig — contributes +0.3 vs prior 9.5 |
 
-**Bottom line:** Infrastructure and code are real. Cross-chain **~874M issued supply on ledger** is verified (not market cap). Do not cite **$175M desk** as on-chain fact — use **274M USDC issued** language.
+**Bottom line:** Infrastructure and code are real. Cross-chain **~874M issued supply on ledger** is verified (not market cap). Do not cite **$175M desk** as on-chain fact — use **274M USDC issued** language. Valuation detail: [`VALUATION_AND_COMPARABLES.md`](VALUATION_AND_COMPARABLES.html).
 
 ---
 
@@ -39,7 +42,8 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 | Live HTTP | 9/10 | Most Unykorn 200; twin/x402api intermittent |
 | On-chain verification | 9.5/10 | Polygon + XRPL + Stellar user-verified |
 | Test execution | 5/10 | Partial; T-Build blocked on deps |
-| **Overall** | **9.5/10** | Investor-safe: proven stack; label projections clearly |
+| **DAO / governance** | **9.5/10** | Service + dashboard on main; public `dao.troptions.org` DNS pending |
+| **Overall** | **9.8/10** | Investor-safe: proven stack + DAO; label projections clearly |
 
 ---
 
@@ -54,9 +58,22 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 
 ---
 
+## Anthem & TANTHEM (2026-05-21)
+
+| Item | Label | Evidence |
+|------|-------|----------|
+| IPFS audio + manifest | **PROVEN** | `TROPTIONS_IPFS_CIDS.json`; gateway `https://ipfs.io/ipfs/{cid}` |
+| ElevenLabs Charlie | **PROVEN** | CID `QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV` |
+| XRPL TANTHEM mint | **PREPARED** | 703 unsigned txs; issuer `rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ`; 2.5% transfer fee |
+
+Do not claim TANTHEM NFTs are minted on mainnet until XRPSCAN shows `NFToken` entries for the issuer.
+
+---
+
 ## Related docs
 
 - [VERIFICATION_STATUS.md](VERIFICATION_STATUS.html)
+- [TANTHEM_NFT_COLLECTION.md](TANTHEM_NFT_COLLECTION.html)
 - [XRPL_STELLAR_VERIFICATION.md](XRPL_STELLAR_VERIFICATION.html)
 - [ON_CHAIN_PROOF.md](ON_CHAIN_PROOF.html)
 - [ECOSYSTEM_MAP.md](ECOSYSTEM_MAP.html)

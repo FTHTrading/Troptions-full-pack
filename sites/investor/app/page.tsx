@@ -6,6 +6,7 @@ import { ProofWall } from "@/components/ProofWall";
 import { InfrastructureBuilt } from "@/components/InfrastructureBuilt";
 import { RevenueOpportunities } from "@/components/RevenueOpportunities";
 import { Comparables } from "@/components/Comparables";
+import { ComparativeAnalysis } from "@/components/ComparativeAnalysis";
 import { Economics } from "@/components/Economics";
 import { ClientsNeeded } from "@/components/ClientsNeeded";
 import { PathToSkyrocket } from "@/components/PathToSkyrocket";
@@ -30,6 +31,7 @@ export default function HomePage() {
         <InfrastructureBuilt />
         <RevenueOpportunities />
         <Comparables />
+        <ComparativeAnalysis />
         <Economics />
         <ClientsNeeded />
         <PathToSkyrocket />

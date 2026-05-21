@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { assetPath } from "@/lib/base-path";
-import { PROOF_URL, REPO_URL } from "@/lib/constants";
+import { MATURITY_GAP_NOTE, MATURITY_SCORE, PROOF_URL, REPO_URL } from "@/lib/constants";
 
 export function Hero() {
   return (
@@ -13,12 +13,13 @@ export function Hero() {
               Investor showcase
             </p>
             <h1 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-              TROPTIONS – 22 Years. 9.5/10 Maturity. Sovereign by Default.
+              TROPTIONS – 22 Years. {MATURITY_SCORE}/10 Maturity. Sovereign by
+              Default.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-[var(--color-muted)]">
               Operating company plus open monorepo: Rust L1, DAO, Academy, TTN,
               Exchange OS, and multi-chain contracts — with honest labels for
-              what is live, pipeline, or gated.
+              what is live, pipeline, or gated. {MATURITY_GAP_NOTE}
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
               <a
