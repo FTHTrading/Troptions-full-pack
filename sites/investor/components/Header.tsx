@@ -6,6 +6,7 @@ const nav = [
   { href: "#story", label: "Timeline" },
   { href: "#proof-wall", label: "Proof" },
   { href: "#infrastructure", label: "Infrastructure" },
+  { href: "#sovereign-dao", label: "Sovereign DAO" },
   { href: "#opportunities", label: "Opportunities" },
   { href: "#valuation", label: "Valuation" },
   { href: "#competitive", label: "Competitive" },

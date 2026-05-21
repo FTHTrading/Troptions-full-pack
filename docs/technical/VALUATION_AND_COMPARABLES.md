@@ -30,7 +30,7 @@ This document separates **what is cash-real today**, **what it would cost to reb
 | SNP namespaces | **PROVEN** (spec + roots) | Scarcity / governance fees | **955** constitutional roots per SNP docs (not 1,000) |
 | Genesis / GSP | **PROVEN** | Treasury rails · coordination | [drunks.app](https://drunks.app) · 9 Polygon contracts |
 | Cross-chain issuance utility | **PROVEN** | Trust lines · issuance services | ~874M **issued** on ledger — utility, not booked ARR |
-| DAO governance API | **PROVEN** | Platform / council tooling | `dao-service` + dashboard; public `dao.troptions.org` DNS **PIPELINE** |
+| DAO governance API | **PROVEN** | Platform / council tooling | `dao-service` + dashboard; public [Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) **LIVE** · `dao.troptions.org` DNS **PIPELINE** |
 | TTN / WC26 sports | **PIPELINE** | $500 / $2.5K / $10K sponsorship tiers | Not booked revenue until sponsors sign |
 | Exchange / desk | **GATED** | Spread / IOU desk fees | Do **not** cite $175M desk as on-chain fact |
 | RWA / T-Lev-8 | **PIPELINE** | LEV8 licensing gates | [T-Lev-8 Pages](https://fthtrading.github.io/T-Lev-8-/) |

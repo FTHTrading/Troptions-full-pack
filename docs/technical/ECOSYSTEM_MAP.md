@@ -107,6 +107,7 @@ flowchart TB
 | https://fifa.unykorn.org | 200 | WWAI FIFA host |
 | https://drunks.app | 200 | Genesis World (GSP) live dashboard |
 | https://gsp-api.kevanbtc.workers.dev/api/health | 200 | GSP API Worker health |
+| [GitHub Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) | 200 | Sovereign DAO public narrative + architecture links |
 
 ---
 
@@ -116,7 +117,7 @@ flowchart TB
 |------------|------|-------|
 | https://ai.troptions.org | ERR | DONK tutor — nginx template only in full-pack; use local quickstart or future DNS |
 | https://ttn.troptions.org | ERR | TTN edge hostname not pointed; sports live on `troptionslive.unykorn.org` |
-| https://dao.troptions.org | ERR | DAO dashboard public edge not deployed; `dao-service` local :8093 |
+| https://dao.troptions.org | ERR | DAO API edge not deployed; **public docs:** [Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) · dashboard local :8093 |
 | https://aurora.unykorn.org | ERR | Custom domain not resolving; use GitHub Pages URL until DNS fixed |
 | https://impact.unykorn.org | ERR | Custom domain not resolving; GitHub Pages project returns 404 — fix deploy branch |
 
@@ -148,7 +149,7 @@ Do **not** conflate monorepo `backend/x402-gateway` with `x402.unykorn.org` unle
 | `backend/fth-academy/` | Education platform backend | `fthedu.unykorn.org` |
 | `backend/ttn-launcher/` | Broadcast / TTN registry | `troptionslive.unykorn.org` |
 | `ai/donk-tutor/` | AI tutor (local) | Future `ai.troptions.org` |
-| `backend/dao-service/` + `frontends/dao-dashboard/` | Governance | Future `dao.troptions.org` |
+| `backend/dao-service/` + `frontends/dao-dashboard/` | Sovereign DAO | [Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) · future `dao.troptions.org` |
 | `frontends/exchange-os/` | Exchange OS (extract) | Synced from private **Troptions** repo |
 | `sites/investor/` | Investor showcase | Exports to `docs/` for Pages |
 | `contracts/polygon/` | KENNY / EVL community assets | Proof docs + mainnet addresses in README |
@@ -186,6 +187,7 @@ Not in the original operator table but present under `C:\Users\Kevan` or GitHub 
 - [x402 integration (monorepo ↔ UnyKorn)](X402_INTEGRATION.html)
 - [UNYKORN ecosystem map (layer detail)](UNYKORN-ECOSYSTEM-MAP.html)
 - [Truth labels](../proof/truth-labels.html)
-- [Investor site](https://fthtrading.github.io/Troptions-full-pack/) — sections **FTH Ecosystem** · **Verification**
+- [Sovereign DAO (public)](https://fthtrading.github.io/Troptions-full-pack/dao/) · [DAO architecture](DAO_ARCHITECTURE.html)
+- [Investor site](https://fthtrading.github.io/Troptions-full-pack/) — sections **FTH Ecosystem** · **Sovereign DAO** · **Verification**
 - [Verification status](VERIFICATION_STATUS.html)
 - [Final ecosystem audit (verified)](FINAL_ECOSYSTEM_AUDIT.html)

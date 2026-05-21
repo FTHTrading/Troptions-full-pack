@@ -125,6 +125,8 @@ export const TANTHEM_MINT_DAPP_URL = onPages
   : "/mint.html";
 export const ANTHEM_IPFS_MANIFEST_CID = "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7";
 export const VALUATION_URL = `${PAGES_URL}/technical/VALUATION_AND_COMPARABLES.html`;
+export const DAO_PAGE_URL = `${PAGES_URL}/dao/`;
+export const DAO_ARCHITECTURE_URL = `${PAGES_URL}/technical/DAO_ARCHITECTURE.html`;
 
 export const MATURITY_SCORE = "9.8";
 export const MATURITY_GAP_NOTE =
@@ -506,6 +508,20 @@ export const FTH_ECOSYSTEM_CARDS: EcosystemCard[] = [
     status: "live",
     repoUrl: SNP_URL,
     repoLabel: "SNP spec on GitHub",
+  },
+  {
+    name: "Sovereign DAO",
+    category: "Governance · L1-native",
+    detail:
+      "Soulbound-weighted proposals, timelock, signed RPC on L1 :9944; dao-service :8093 + dashboard. Eight genesis brand issuers — not EVM GovernorBravo as canonical.",
+    status: "pages",
+    deployUrl: DAO_PAGE_URL,
+    deployLabel: "Public DAO page (GitHub Pages)",
+    repoUrl: `${REPO_URL}/tree/main/dao`,
+    repoLabel: "dao/ in monorepo",
+    links: [
+      { label: "Architecture doc", url: DAO_ARCHITECTURE_URL },
+    ],
   },
   {
     name: "T-Lev-8 deal room",

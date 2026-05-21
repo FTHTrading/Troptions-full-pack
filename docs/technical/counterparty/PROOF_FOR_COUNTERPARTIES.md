@@ -6,31 +6,31 @@ permalink: /technical/counterparty/PROOF_FOR_COUNTERPARTIES.html
 
 # Institutional Counterparty Proof Package
 
-**Tone:** Links and verifiable facts only ΓÇö no hype.  
+**Tone:** Links and verifiable facts only — no hype.  
 **Not legal advice.** This document is a technical diligence aid. Figures labeled **PROJECTION** or **PIPELINE** are illustrative, not audited financial statements.
 
-**Configure path (2ΓÇô4 weeks engineering):** [`BUILD_AVID_ON_TROPTIONS.md`](BUILD_AVID_ON_TROPTIONS.md)
+**Configure path (2–4 weeks engineering):** [`BUILD_AVID_ON_TROPTIONS.md`](BUILD_AVID_ON_TROPTIONS.md)
 
 ---
 
 ## What exists (PROVEN)
 
-### Polygon ΓÇö community tokens
+### Polygon — community tokens
 
 | Asset | Address | Explorer | Repo |
 |-------|---------|----------|------|
 | **KENNY** | `0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7` | [PolygonScan](https://polygonscan.com/token/0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7) | `contracts/polygon/KennyToken.sol` |
 | **EVL** | `0xAFe185415D21671704EFaa5696dD219ACEB9fdA3` | [PolygonScan](https://polygonscan.com/token/0xAFe185415D21671704EFaa5696dD219ACEB9fdA3) | `contracts/polygon/EvolveToken.sol` |
 
-- **Operator UI:** [fthedu.unykorn.org](https://fthedu.unykorn.org) ΓÇö token pages reference contracts above.
+- **Operator UI:** [fthedu.unykorn.org](https://fthedu.unykorn.org) — token pages reference contracts above.
 
-### Polygon ΓÇö Genesis World (9 contracts)
+### Polygon — Genesis World (9 contracts)
 
 - Full table: [`../GENESIS_POLYGON_CONTRACTS.md`](../GENESIS_POLYGON_CONTRACTS.html)
 - Partner repo: [github.com/FTHTrading/genesis-world](https://github.com/FTHTrading/genesis-world)
 - Live app: [drunks.app](https://drunks.app)
 
-### XRPL & Stellar ΓÇö issued supply on ledger
+### XRPL & Stellar — issued supply on ledger
 
 - **Unified registry:** [`../ON_CHAIN_PROOF.md`](../ON_CHAIN_PROOF.html)
 - **Verification report:** [`../XRPL_STELLAR_VERIFICATION.md`](../XRPL_STELLAR_VERIFICATION.html)
@@ -47,16 +47,30 @@ permalink: /technical/counterparty/PROOF_FOR_COUNTERPARTIES.html
 
 ### x402 payment mesh (health)
 
-- [x402.unykorn.org/health](https://x402.unykorn.org/health) ΓÇö operator label **CONFIRMED** (2026-05-21)
+- [x402.unykorn.org/health](https://x402.unykorn.org/health) — operator label **CONFIRMED** (2026-05-21)
 - Repo: [github.com/FTHTrading/UnyKorn-X402-aws](https://github.com/FTHTrading/UnyKorn-X402-aws)
+
+### Cultural / IP permanence — TROPTIONS Anthem (IPFS)
+
+Six Mainframe Explode audio masters plus one JSON manifest are pinned on IPFS with public CIDs (content-addressed, third-party resolvable).
+
+| Asset | CID | Gateway |
+|-------|-----|---------|
+| Manifest (tracks + NFT tier metadata) | `Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7` | [ipfs.io](https://ipfs.io/ipfs/Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7) |
+| ElevenLabs Charlie (featured) | `QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV` | [ipfs.io](https://ipfs.io/ipfs/QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV) |
+| Official theme (primary) | `QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb` | [ipfs.io](https://ipfs.io/ipfs/QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb) |
+
+- Repo map: `TROPTIONS_IPFS_CIDS.json`
+- Catalog: [`../assets/audio/README.md`](../assets/audio/README.html)
+- **XRPL NFT (TANTHEM):** design + unsigned mint batch **PREPARED** — [`../TANTHEM_NFT_COLLECTION.md`](../TANTHEM_NFT_COLLECTION.html). Not live on ledger until operator signs `scripts/xrpl_mint_ready.py` locally (seeds never in repo).
 
 ### Monorepo, PM2 stack, Rust tests
 
 | Item | Link / command |
 |------|----------------|
 | **Troptions-full-pack** | [github.com/FTHTrading/Troptions-full-pack](https://github.com/FTHTrading/Troptions-full-pack) |
-| **Local quickstart** | `scripts/quickstart.ps1` ┬╖ **8 PM2 services** ΓÇö `FINAL_ECOSYSTEM_AUDIT.md` |
-| **Rust L1** | `l1/` ┬╖ `cargo test --workspace` (passes per audit 2026-05-21) |
+| **Local quickstart** | `scripts/quickstart.ps1` · **8 PM2 services** — `FINAL_ECOSYSTEM_AUDIT.md` |
+| **Rust L1** | `l1/` · `cargo test --workspace` (passes per audit 2026-05-21) |
 | **Docs / investor mirror** | [fthtrading.github.io/Troptions-full-pack/](https://fthtrading.github.io/Troptions-full-pack/) |
 
 ### Live UnyKorn URLs (operator HTTP checks)
@@ -71,11 +85,11 @@ permalink: /technical/counterparty/PROOF_FOR_COUNTERPARTIES.html
 | x402 health | [x402.unykorn.org/health](https://x402.unykorn.org/health) | PROVEN |
 | Genesis app | [drunks.app](https://drunks.app) | PROVEN |
 
-Full map: [`../ECOSYSTEM_MAP.md`](../ECOSYSTEM_MAP.html) ┬╖ scorecard: [`../FINAL_ECOSYSTEM_AUDIT.md`](../FINAL_ECOSYSTEM_AUDIT.html)
+Full map: [`../ECOSYSTEM_MAP.md`](../ECOSYSTEM_MAP.html) · scorecard: [`../FINAL_ECOSYSTEM_AUDIT.md`](../FINAL_ECOSYSTEM_AUDIT.html)
 
 ---
 
-## The DAO stack ΓÇö what was built
+## The DAO stack — what was built
 
 ### L1 sovereign sequencer (`l1/`)
 
@@ -83,34 +97,34 @@ Rust node exposing JSON-RPC (default `:9944`) with:
 
 | Module | Capability |
 |--------|------------|
-| **Soulbound** | Credential mint / revoke ΓÇö non-transferable attestations |
+| **Soulbound** | Credential mint / revoke — non-transferable attestations |
 | **Settlement** | HTLC-style settlement paths on L1 state |
 | **Treasury** | On-chain treasury balances and disbursement RPCs |
 | **Governance** | Proposals, votes, **execute** (signed submit-RPC in production branch) |
 
-Spec: `docs/L1_SPEC.md` ┬╖ persistence on `upgrade/10-production` branch (RocksDB).
+Spec: `docs/L1_SPEC.md` · persistence on `upgrade/10-production` branch (RocksDB).
 
 ### DAO service & dashboard
 
 | Component | Path | Port |
 |-----------|------|------|
-| **dao-service** | `backend/dao-service/` | `:8093` ΓÇö health, `/dao/state`, L1 mirror |
+| **dao-service** | `backend/dao-service/` | `:8093` — health, `/dao/state`, L1 mirror |
 | **dao-dashboard** | `frontends/dao-dashboard/` | Served with dao-service |
 | **Python light client** | `backend/dao-service/main.py` | Mirrors L1 governance + treasury for ops |
 
-Guide: `docs/DAO.md` ┬╖ bootstrap: `scripts/bootstrap-dao.ps1`
+Guide: `docs/DAO.md` · bootstrap: `scripts/bootstrap-dao.ps1` · **public narrative:** [Sovereign DAO on GitHub Pages](https://fthtrading.github.io/Troptions-full-pack/dao/)
 
 ### Eight genesis brand domains (soulbound issuers)
 
 Registered in `dao/registry/genesis_brands.json`:
 
-1. TROPTIONSXCHANGE.IO ΓÇö Exchange OS  
-2. TROPTIONS-UNIVERSITY.COM ΓÇö FTH Academy  
-3. TROPTIONSTelevisionNetwork.Tv ΓÇö TTN Sports  
-4. HOTRCW.COM ΓÇö TTN  
-5. TROPTIONS.IO / TROPTIONS.ORG ΓÇö Platform  
-6. TheRealEstateConnections.com ΓÇö Real Estate  
-7. Green-N-Go.Solar ΓÇö Solar Platform  
+1. TROPTIONSXCHANGE.IO — Exchange OS  
+2. TROPTIONS-UNIVERSITY.COM — FTH Academy  
+3. TROPTIONSTelevisionNetwork.Tv — TTN Sports  
+4. HOTRCW.COM — TTN  
+5. TROPTIONS.IO / TROPTIONS.ORG — Platform  
+6. TheRealEstateConnections.com — Real Estate  
+7. Green-N-Go.Solar — Solar Platform  
 
 Namespaces migrate to L1 soulbounds via `scripts/migrate-namespaces-to-l1.py` (dry-run first).
 
@@ -118,23 +132,23 @@ Namespaces migrate to L1 soulbounds via `scripts/migrate-namespaces-to-l1.py` (d
 
 Executable engineering path (not self-serve mainnet in one session):
 
-1. **Namespaces** ΓÇö map brand domains ΓåÆ L1 soulbound issuers (`dao/registry/`, Exchange OS `locked-namespaces.ts`).  
-2. **DAO realm** ΓÇö proposals, voter credentials, treasury policy (`dao/governance/`, L1 `governance` crate).  
-3. **Academy / TTN** ΓÇö `backend/fth-academy/`, `backend/ttn-launcher/`, WC2026 hooks in Exchange OS.  
-4. **Production cutover** ΓÇö merge `upgrade/10-production`, signed RPC keys, TLS/nginx, compliance gates in `docs/TROPTIONS-GENESIS-BUILD.md`.
+1. **Namespaces** — map brand domains → L1 soulbound issuers (`dao/registry/`, Exchange OS `locked-namespaces.ts`).  
+2. **DAO realm** — proposals, voter credentials, treasury policy (`dao/governance/`, L1 `governance` crate).  
+3. **Academy / TTN** — `backend/fth-academy/`, `backend/ttn-launcher/`, WC2026 hooks in Exchange OS.  
+4. **Production cutover** — merge `upgrade/10-production`, signed RPC keys, TLS/nginx, compliance gates in `docs/TROPTIONS-GENESIS-BUILD.md`.
 
-**Step-by-step configure doc:** [`BUILD_AVID_ON_TROPTIONS.md`](BUILD_AVID_ON_TROPTIONS.md) (2ΓÇô4 weeks with TROPTIONS engineering; ~15 minutes is local demo only).
+**Step-by-step configure doc:** [`BUILD_AVID_ON_TROPTIONS.md`](BUILD_AVID_ON_TROPTIONS.md) (2–4 weeks with TROPTIONS engineering; ~15 minutes is local demo only).
 
-### SNP ΓÇö constitutional namespace layer (optional satellite)
+### SNP — constitutional namespace layer (optional satellite)
 
-**Sovereign Namespace Protocol** ΓÇö post-quantum namespace roots and verification primitives consumed by L1 migration and Exchange OS proof surfaces. Not a standalone revenue product; governs allowed names/claims.
+**Sovereign Namespace Protocol** — post-quantum namespace roots and verification primitives consumed by L1 migration and Exchange OS proof surfaces. Not a standalone revenue product; governs allowed names/claims.
 
 - Repo: [github.com/FTHTrading/sovereign-namespace-protocol](https://github.com/FTHTrading/sovereign-namespace-protocol)
-- Context: [`../ECOSYSTEM_MAP.md`](../ECOSYSTEM_MAP.html) ┬º SNP
+- Context: [`../ECOSYSTEM_MAP.md`](../ECOSYSTEM_MAP.html) § SNP
 
-### x402 ΓÇö pay-per-request for agent APIs
+### x402 — pay-per-request for agent APIs
 
-Metered API pricing and ATP settlement on Apostle Chain ΓÇö **separate** from core DAO/L1 configure path. Optional branch `feature/x402-full-integration`; do not block ecosystem go-live on x402 unless contracted.
+Metered API pricing and ATP settlement on Apostle Chain — **separate** from core DAO/L1 configure path. Optional branch `feature/x402-full-integration`; do not block ecosystem go-live on x402 unless contracted.
 
 ---
 
@@ -142,8 +156,8 @@ Metered API pricing and ATP settlement on Apostle Chain ΓÇö **separate** from
 
 | Phase | Duration | Outcome |
 |-------|----------|---------|
-| Orientation | ~15 min | Clone, quickstart, architecture read ΓÇö **dev/demo only** |
-| Production configure | **2ΓÇô4 weeks** | Signed RPC, DAO realm, soulbound mapping, TLS, compliance sign-off |
+| Orientation | ~15 min | Clone, quickstart, architecture read — **dev/demo only** |
+| Production configure | **2–4 weeks** | Signed RPC, DAO realm, soulbound mapping, TLS, compliance sign-off |
 
 **Canonical configure prompt:** [`BUILD_AVID_ON_TROPTIONS.md`](BUILD_AVID_ON_TROPTIONS.md)
 
@@ -157,16 +171,16 @@ Metered API pricing and ATP settlement on Apostle Chain ΓÇö **separate** from
 |------|-------|
 | **ai.troptions.org** | DNS not pointed; AI edge on alternate host |
 | **twin.unykorn.org** | Cloudflare origin flaky / timeout (2026-05-21) |
-| **x402api.unykorn.org** | Same ΓÇö re-probe before demos |
+| **x402api.unykorn.org** | Same — re-probe before demos |
 | **Full BFT L1** | Single-node sovereign sequencer today; multi-validator quorum is roadmap |
 | **Public TLS on all L1 RPC** | Production nginx cutover per `docs/DEPLOY_PRODUCTION.md` |
-| **Legacy XRPL gateway** `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` | README only ΓÇö superseded by production issuer `rJLMSTΓÇª` |
+| **Legacy XRPL gateway** `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` | README only — superseded by production issuer `rJLMST…` |
 
 ---
 
 ## Engineering maturity (honest)
 
-**9.5 / 10** ΓÇö Polygon, genesis-world, and XRPL/Stellar issued-supply proofs verified; intermittent Cloudflare origins keep the gap. Breakdown: `FINAL_ECOSYSTEM_AUDIT.md` ┬º Honest Scorecard.
+**9.5 / 10** — Polygon, genesis-world, and XRPL/Stellar issued-supply proofs verified; intermittent Cloudflare origins keep the gap. Breakdown: `FINAL_ECOSYSTEM_AUDIT.md` § Honest Scorecard.
 
 **Not BFT mainnet today.** Do not describe current L1 as Byzantine-fault tolerant.
 
@@ -174,7 +188,7 @@ Metered API pricing and ATP settlement on Apostle Chain ΓÇö **separate** from
 
 ## Downloads (investor PDF HTML pack)
 
-Print ΓåÆ Save as PDF from browser:
+Print → Save as PDF from browser:
 
 | Document | Path |
 |----------|------|

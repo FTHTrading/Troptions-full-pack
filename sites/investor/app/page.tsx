@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { Story } from "@/components/Story";
 import { ProofWall } from "@/components/ProofWall";
 import { InfrastructureBuilt } from "@/components/InfrastructureBuilt";
+import { SovereignDaoSection } from "@/components/SovereignDaoSection";
 import { RevenueOpportunities } from "@/components/RevenueOpportunities";
 import { Comparables } from "@/components/Comparables";
 import { ComparativeAnalysis } from "@/components/ComparativeAnalysis";
@@ -29,6 +30,7 @@ export default function HomePage() {
         <Story />
         <ProofWall />
         <InfrastructureBuilt />
+        <SovereignDaoSection />
         <RevenueOpportunities />
         <Comparables />
         <ComparativeAnalysis />

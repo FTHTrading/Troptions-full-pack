@@ -1,3 +1,9 @@
+---
+title: DAO operator guide
+layout: default
+permalink: /technical/DAO.html
+---
+
 # TROPTIONS Full DAO — Attaining Sovereign Governance
 
 ## What this delivers
@@ -11,7 +17,7 @@ Production infrastructure most teams want but rarely ship together:
 
 ## Architecture
 
-See [`dao/ARCHITECTURE.md`](../dao/ARCHITECTURE.md). Summary: L1 is source of truth; Python mirrors to SQLite for dashboards and audit; optional Polygon Governor stubs for Phase 2.
+See [`dao/ARCHITECTURE.md`](../../dao/ARCHITECTURE.md) and [public Sovereign DAO page](../dao/index.html). Summary: L1 is source of truth; Python mirrors to SQLite for dashboards and audit; optional Polygon Governor stubs for Phase 2.
 
 ## Quick start
 

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sovereign DAO architecture</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1.5rem; font-size: 0.9rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); margin-right: 1rem; }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">← Investor showcase</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Technical index</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub repo</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Sovereign DAO architecture</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Sovereign DAO — technical architecture</h1>
+<p><strong>Last updated:</strong> 2026-05-21<br />
+<strong>Public overview:</strong> <a href="../dao/index.html">Sovereign DAO on GitHub Pages</a><br />
+<strong>Operator runbook:</strong> <a href="DAO.html">DAO.md</a> · repo <code>docs/technical/DAO.md</code></p>
+<hr />
+<h2>Design decision</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Location</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Canonical state</strong></td>
+<td><code>l1/crates/governance</code> + <code>state</code></td>
+<td>Proposals, soulbound-weighted votes, timelock, namespace registry</td>
+</tr>
+<tr>
+<td><strong>RPC</strong></td>
+<td><code>l1/crates/rpc</code> + <code>troptions-node</code> <code>:9944</code></td>
+<td>Query + signed <code>dao_*</code> submit</td>
+</tr>
+<tr>
+<td><strong>Orchestration</strong></td>
+<td><code>dao/governance</code>, <code>dao/treasury</code>, <code>dao/registry</code></td>
+<td>Business rules, multi-chain treasury lens, genesis brand bridge</td>
+</tr>
+<tr>
+<td><strong>HTTP API</strong></td>
+<td><code>backend/dao-service</code> <code>:8093</code>, <code>backend/fth-academy</code> <code>/dao/*</code></td>
+<td>Dashboard, WebSocket, enrollment hooks</td>
+</tr>
+<tr>
+<td><strong>Persistence mirror</strong></td>
+<td><code>backend/shared/dao_db.py</code></td>
+<td>SQLite audit log (Postgres-ready) — <strong>not</strong> canonical</td>
+</tr>
+<tr>
+<td><strong>UI</strong></td>
+<td><code>frontends/dao-dashboard</code></td>
+<td>Reads L1 via <code>dao-service</code>; <code>app.js</code> can call L1 directly</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Not canonical:</strong> Polygon GovernorBravo / Timelock stubs in <code>dao/contracts/</code> — optional Phase 2 for KENNY/EVL escrow votes. <strong>L1 soulbound credentials</strong> anchor identity and quorum.</p>
+<hr />
+<h2>Why L1-native (not EVM-only)</h2>
+<ol>
+<li><strong>Non-capturable policy</strong> — upgradeable proxy governors are a known seizure surface; brand-namespace governance needs issuer-bound credentials on the same sequencer that holds treasury state.</li>
+<li><strong>Soulbound weight</strong> — vote weight = count of non-revoked soulbound tokens; avoids naked token dumps changing outcomes overnight.</li>
+<li><strong>Treasury truth on L1</strong> — <code>treasury_getBalance</code> and disbursement paths live in Rust state; Python mirrors for UX only.</li>
+<li><strong>Signed submit trail</strong> — <code>dao_submit_proposal</code>, <code>dao_cast_vote</code>, <code>dao_execute</code> require Ed25519; integration test <code>l1/tests/integration/signed_dao_submit.rs</code>.</li>
+<li><strong>Triad completion</strong> — SNP (identity) + x402 (commerce) + DAO (governance) in one operator monorepo.</li>
+</ol>
+<hr />
+<h2>Proposal lifecycle</h2>
+<pre><code>draft → active → passed | failed → [timelock 720 blocks] → executed
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Default (governance crate)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vote weight</td>
+<td>Non-revoked soulbound count per voter</td>
+</tr>
+<tr>
+<td>Quorum</td>
+<td>10% of active credentials (configurable)</td>
+</tr>
+<tr>
+<td>Timelock</td>
+<td>720 blocks after pass before <code>dao_execute</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Service topology</h2>
+<pre><code class="language-mermaid">flowchart LR
+  UI[dao-dashboard] --&gt; API[dao-service :8093]
+  API --&gt; L1[L1 node :9944]
+  ACAD[fth-academy :8091] --&gt; API
+  REG[dao/registry] --&gt; API
+  GOV[dao/governance/engine.py] --&gt; API
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Port</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 node</td>
+<td>9944</td>
+<td>JSON-RPC + metrics 9945</td>
+</tr>
+<tr>
+<td>dao-service</td>
+<td>8093</td>
+<td><code>/dao/state</code>, <code>/dao/proposals</code>, <code>WS /ws</code></td>
+</tr>
+<tr>
+<td>fth-academy</td>
+<td>8091</td>
+<td><code>/dao/*</code>, <code>/health/l1</code></td>
+</tr>
+<tr>
+<td>donk</td>
+<td>8090</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ttn</td>
+<td>8092</td>
+<td>namespace bridge</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>L1 RPC reference</h2>
+<h3>Query</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dao_getProposals</code></td>
+<td>On-chain proposal list</td>
+</tr>
+<tr>
+<td><code>dao_getVotes</code></td>
+<td>Votes for <code>proposal_id</code></td>
+</tr>
+<tr>
+<td><code>treasury_getBalance</code></td>
+<td>Treasury by chain/asset</td>
+</tr>
+<tr>
+<td>Soulbound queries</td>
+<td>Credential mint/revoke state for voters</td>
+</tr>
+</tbody>
+</table>
+<h3>Signed submit</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dao_submit_proposal</code></td>
+<td>Create proposal (Ed25519)</td>
+</tr>
+<tr>
+<td><code>dao_cast_vote</code></td>
+<td>Weighted vote</td>
+</tr>
+<tr>
+<td><code>dao_execute</code></td>
+<td>Post-timelock execution</td>
+</tr>
+</tbody>
+</table>
+<p>Sign with <code>scripts/l1-gov-sign.py</code>. Reject invalid signatures at runtime (see <code>signed_dao_submit.rs</code>).</p>
+<h3>HTTP mirror (<code>dao-service</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET /dao/state</code></td>
+<td>L1 + governance + treasury snapshot</td>
+</tr>
+<tr>
+<td><code>GET /dao/proposals</code></td>
+<td>L1 + local mirror</td>
+</tr>
+<tr>
+<td><code>POST /dao/proposals</code></td>
+<td>Create</td>
+</tr>
+<tr>
+<td><code>POST /dao/proposals/vote</code></td>
+<td>Cast vote</td>
+</tr>
+<tr>
+<td><code>GET /dao/credentials/{owner}</code></td>
+<td>Soulbound credentials</td>
+</tr>
+<tr>
+<td><code>WS /ws</code></td>
+<td>Live L1 broadcast</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Genesis brand registry</h2>
+<p>Eight issuers in <code>dao/registry/genesis_brands.json</code> — Exchange OS, Academy, TTN, platform, real estate, solar. Migration path: <code>scripts/migrate-namespaces-to-l1.py</code> (<code>--dry-run</code> first).</p>
+<hr />
+<h2>Deployment surfaces</h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PM2 <code>dao-service</code> on operator host</td>
+<td><strong>LIVE</strong></td>
+</tr>
+<tr>
+<td>GitHub Pages <code>/dao/</code></td>
+<td><strong>LIVE</strong> (static narrative + architecture links)</td>
+</tr>
+<tr>
+<td><code>dao.troptions.org</code></td>
+<td><strong>NOT DEPLOYED</strong> — <code>infrastructure/nginx/sites/troptions.conf</code> template only</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Production gaps:</strong> public TLS for L1 submit; restrict writes via <code>API_KEYS</code> / signed relayer; do not expose unsigned submit to the open internet.</p>
+<hr />
+<h2>Related documents</h2>
+<ul>
+<li><a href="ECOSYSTEM_MAP.html">Ecosystem map</a></li>
+<li><a href="infrastructure/l1.html">L1 infrastructure</a></li>
+<li><a href="counterparty/PROOF_FOR_COUNTERPARTIES.html">Proof for counterparties</a></li>
+<li><a href="VALUATION_AND_COMPARABLES.html">Valuation &amp; comparables</a></li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/DAO_ARCHITECTURE.html</p>
+</body>
+</html>

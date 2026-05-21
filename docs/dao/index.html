@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sovereign DAO — TROPTIONS</title>
+  <meta name="description" content="Why FTH built sovereign L1-native governance: soulbound voting, on-chain treasury, signed RPC — complements SNP identity and x402 commerce." />
+  <style>
+    :root {
+      --gold: #b8860b;
+      --gold-light: #d4a84b;
+      --surface: #0f1114;
+      --elevated: #1a1d23;
+      --border: #2a2f38;
+      --muted: #9ca3af;
+      --glass: rgba(255, 255, 255, 0.04);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--surface);
+      color: #e5e7eb;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      background: rgba(15, 17, 20, 0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav a { color: var(--gold-light); text-decoration: none; font-size: 0.9rem; }
+    .nav a:hover { text-decoration: underline; }
+    .nav-brand { font-weight: 600; color: #fff; }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    .hero {
+      text-align: center;
+      padding: 2.5rem 1rem 2rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(180deg, rgba(184, 134, 11, 0.08) 0%, transparent 70%);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      background: linear-gradient(90deg, var(--gold-light), #f0d78c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .hero .tagline { color: var(--muted); font-size: 1.05rem; max-width: 42rem; margin: 0 auto 1.25rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+    .badge {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      padding: 0.35rem 0.75rem; border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+    }
+    .badge.live { border-color: #22c55e; color: #86efac; }
+    .badge.pipeline { border-color: var(--gold); color: var(--gold-light); }
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(8px);
+    }
+    .card h2 { color: var(--gold-light); font-size: 1.25rem; margin-bottom: 0.75rem; }
+    .card h3 { color: #fff; font-size: 1rem; margin: 1rem 0 0.5rem; }
+    .card p, .card li { color: var(--muted); }
+    .card ul { margin: 0.5rem 0 0 1.25rem; }
+    .card li { margin-bottom: 0.35rem; }
+    .why-grid { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .why-grid { grid-template-columns: 1fr 1fr; } }
+    .why-item {
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(26, 29, 35, 0.6);
+    }
+    .why-item strong { color: #fff; display: block; margin-bottom: 0.35rem; }
+    pre.diagram {
+      background: #0a0c0f;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      overflow-x: auto;
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: #a8b4c4;
+      margin: 1rem 0;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.75rem; }
+    th, td { border: 1px solid var(--border); padding: 0.5rem 0.65rem; text-align: left; }
+    th { color: var(--gold-light); background: rgba(184, 134, 11, 0.08); }
+    code { font-family: ui-monospace, monospace; font-size: 0.85em; color: var(--gold-light); background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 4px; }
+    .stack-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    .stack-pill {
+      flex: 1; min-width: 140px;
+      padding: 0.75rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+    .stack-pill span { display: block; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+    .stack-pill strong { color: #fff; font-size: 1rem; }
+    .dashboard-frame {
+      margin-top: 1rem;
+      border-radius: 12px;
+      border: 1px dashed var(--border);
+      background: linear-gradient(135deg, #1a1d23 0%, #0f1114 100%);
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+    .dashboard-frame .icon { font-size: 2.5rem; opacity: 0.5; margin-bottom: 0.5rem; }
+    .dashboard-frame p { color: var(--muted); font-size: 0.9rem; max-width: 28rem; }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
+    .btn {
+      display: inline-block;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: transform 0.15s;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--gold), #c9a227);
+      color: #0f1114;
+    }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--gold-light);
+      background: transparent;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .gaps { border-left: 3px solid #f59e0b; padding-left: 1rem; }
+    footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); text-align: center; }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav-brand" href="https://fthtrading.github.io/Troptions-full-pack/">TROPTIONS</a>
+    <div>
+      <a href="https://fthtrading.github.io/Troptions-full-pack/#sovereign-dao">Investor site</a>
+      <a href="../technical/DAO_ARCHITECTURE.html">Architecture</a>
+      <a href="../technical/QUICKSTART.html">Quickstart</a>
+      <a href="../technical/ECOSYSTEM_MAP.html">Ecosystem map</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <header class="hero">
+      <h1>Sovereign DAO</h1>
+      <p class="tagline">
+        L1-native governance for eight genesis brand domains — soulbound-weighted votes, on-chain treasury, signed proposals. Not upgradeable EVM GovernorBravo as canonical truth.
+      </p>
+      <div class="badges">
+        <span class="badge live">LIVE · local / PM2</span>
+        <span class="badge live">Public docs · this page</span>
+        <span class="badge pipeline">dao.troptions.org · DNS pending</span>
+      </div>
+    </header>
+
+    <section class="card" id="why">
+      <h2>Why we built it</h2>
+      <p style="margin-bottom:1rem;color:#cbd5e1">
+        FTH operates multiple live brand surfaces (Academy, TTN, Exchange OS, real estate, solar). Each needs <strong style="color:#fff">governance without capturable upgradeable contracts</strong> — where a token dump or proxy admin cannot seize namespace or treasury policy overnight.
+      </p>
+      <div class="why-grid">
+        <div class="why-item">
+          <strong>Brand domains need sovereign policy</strong>
+          Eight genesis issuers in <code>dao/registry/genesis_brands.json</code> map Exchange OS, Academy, TTN, and platform domains to L1 soulbound issuers — not a generic DAO template.
+        </div>
+        <div class="why-item">
+          <strong>Identity, not plutocracy</strong>
+          Soulbound credentials = voting weight. Weight is non-transferable attestations, not tradeable governance tokens alone.
+        </div>
+        <div class="why-item">
+          <strong>Treasury on L1</strong>
+          Canonical balances and disbursement paths live in the Rust <code>governance</code> + <code>state</code> crates — SQLite in <code>dao-service</code> is audit mirror only.
+        </div>
+        <div class="why-item">
+          <strong>Signed audit trail</strong>
+          <code>dao_submit_proposal</code>, <code>dao_cast_vote</code>, <code>dao_execute</code> require Ed25519 signatures — verifiable in <code>signed_dao_submit.rs</code>.
+        </div>
+        <div class="why-item" style="grid-column:1/-1">
+          <strong>Full triad with SNP + x402</strong>
+          Post-quantum <strong>identity</strong> (Sovereign Namespace Protocol) + agent <strong>commerce</strong> (x402 / ATP) + on-chain <strong>governance</strong> (this DAO ↔ L1). Together they complete operator-grade sovereign infrastructure in this monorepo.
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="architecture">
+      <h2>Architecture</h2>
+      <p>L1 at <code>:9944</code> is source of truth. Python orchestration mirrors for dashboards; EVM Governor stubs in <code>dao/contracts/</code> are Phase 2 only.</p>
+      <pre class="diagram">┌─────────────────────────────────────────────────────────────────┐
+│  SNP (identity roots)          x402 (agent commerce)            │
+└────────────┬───────────────────────────────┬────────────────────┘
+             │                               │
+             ▼                               ▼
+┌────────────────────────  TROPTIONS L1  :9944  ─────────────────────┐
+│  governance crate · soulbound votes · timelock · treasury RPC      │
+│  dao_getProposals · dao_submit_proposal · dao_cast_vote · execute  │
+└────────────┬──────────────────────────────────────────────────────┘
+             │ JSON-RPC read + signed submit
+             ▼
+┌──────────────── dao-service :8093 ────────────────────────────────┐
+│  FastAPI · WebSocket /ws · SQLite audit mirror · L1 light client   │
+│  serves frontends/dao-dashboard (reads L1 directly in app.js)    │
+└───────────────────────────────────────────────────────────────────┘
+             │
+             ▼
+   draft → active → passed|failed → [timelock 720 blocks] → executed</pre>
+      <div class="stack-row">
+        <div class="stack-pill"><span>L1 node</span><strong>:9944</strong></div>
+        <div class="stack-pill"><span>dao-service</span><strong>:8093</strong></div>
+        <div class="stack-pill"><span>FTH Academy</span><strong>:8091 /dao/*</strong></div>
+        <div class="stack-pill"><span>Dashboard</span><strong>local UI</strong></div>
+      </div>
+    </section>
+
+    <section class="card" id="rpc">
+      <h2>L1 RPC methods</h2>
+      <h3>Read (query)</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><code>dao_getProposals</code></td><td>List on-chain proposals</td></tr>
+          <tr><td><code>dao_getVotes</code></td><td>Votes for a proposal_id</td></tr>
+          <tr><td><code>treasury_getBalance</code></td><td>Treasury by chain / asset</td></tr>
+          <tr><td><code>get_soulbound_credentials</code></td><td>Credential set for voter weight</td></tr>
+        </tbody>
+      </table>
+      <h3>Submit (signed Ed25519)</h3>
+      <table>
+        <thead><tr><th>Method</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><code>dao_submit_proposal</code></td><td>Create proposal on L1</td></tr>
+          <tr><td><code>dao_cast_vote</code></td><td>Soulbound-weighted vote (for / against)</td></tr>
+          <tr><td><code>dao_execute</code></td><td>Execute after timelock</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:0.75rem;font-size:0.85rem">HTTP mirror at <code>GET/POST /dao/*</code> on port 8093. Sign payloads with <code>scripts/l1-gov-sign.py</code>.</p>
+    </section>
+
+    <section class="card" id="dashboard">
+      <h2>DAO dashboard</h2>
+      <p>The interactive dashboard is <strong>not</strong> embedded on GitHub Pages (no public TLS to your operator host). Run locally after bootstrap:</p>
+      <div class="dashboard-frame" aria-label="Dashboard placeholder">
+        <div class="icon">🟪</div>
+        <p><strong>Run locally:</strong> <code>.\scripts\bootstrap-dao.ps1</code> then open <code>http://127.0.0.1:8093</code><br />
+        Static UI: <code>frontends/dao-dashboard/</code> — proposals, treasury, L1 live panel via WebSocket.</p>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="../technical/QUICKSTART.html">Quickstart</a>
+        <a class="btn btn-secondary" href="https://github.com/FTHTrading/Troptions-full-pack/tree/main/frontends/dao-dashboard">Dashboard source</a>
+      </div>
+    </section>
+
+    <section class="card" id="brands">
+      <h2>Genesis brand issuers (8)</h2>
+      <table>
+        <thead><tr><th>Domain</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>TROPTIONSXCHANGE.IO</td><td>Exchange OS</td></tr>
+          <tr><td>TROPTIONS-UNIVERSITY.COM</td><td>FTH Academy</td></tr>
+          <tr><td>TROPTIONSTelevisionNetwork.Tv</td><td>TTN Sports</td></tr>
+          <tr><td>HOTRCW.COM</td><td>TTN</td></tr>
+          <tr><td>TROPTIONS.IO / TROPTIONS.ORG</td><td>Platform</td></tr>
+          <tr><td>TheRealEstateConnections.com</td><td>Real Estate</td></tr>
+          <tr><td>Green-N-Go.Solar</td><td>Solar Platform</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card" id="status">
+      <h2>Status</h2>
+      <table>
+        <thead><tr><th>Surface</th><th>State</th></tr></thead>
+        <tbody>
+          <tr><td>L1 + dao-service (PM2)</td><td><strong style="color:#86efac">LIVE</strong> on operator host</td></tr>
+          <tr><td>Public investor / docs</td><td><strong style="color:#86efac">LIVE</strong> — this page on GitHub Pages <code>/dao/</code></td></tr>
+          <tr><td><code>dao.troptions.org</code></td><td><strong style="color:var(--gold-light)">PIPELINE</strong> — nginx template ready; DNS not pointed</td></tr>
+        </tbody>
+      </table>
+      <div class="gaps" style="margin-top:1rem">
+        <h3 style="color:#fbbf24;font-size:0.95rem">Honest gaps</h3>
+        <ul>
+          <li>Public TLS edge for writes — production needs <code>API_KEYS</code> / signed relayer, not open submit from internet</li>
+          <li><code>dao.troptions.org</code> does not resolve — use Pages <code>/dao/</code> until DNS cutover</li>
+          <li>Dashboard requires local stack — not iframe-hosted on static Pages</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Run &amp; verify</h2>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="../technical/QUICKSTART.html">Ecosystem quickstart</a>
+        <a class="btn btn-secondary" href="../technical/ECOSYSTEM_MAP.html">Ecosystem map</a>
+        <a class="btn btn-secondary" href="../technical/DAO_ARCHITECTURE.html">Technical architecture</a>
+        <a class="btn btn-secondary" href="../technical/counterparty/PROOF_FOR_COUNTERPARTIES.html">Counterparty proof</a>
+      </div>
+    </section>
+
+    <footer>
+      TROPTIONS Sovereign DAO · FTH Trading · <a href="https://github.com/FTHTrading/Troptions-full-pack">Troptions-full-pack</a> · May 2026
+    </footer>
+  </div>
+</body>
+</html>

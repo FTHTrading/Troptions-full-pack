@@ -125,11 +125,19 @@ try {
             Write-Host "  docs/TROPTIONS_L1_ANCHOR_CONFIRMED.json" -ForegroundColor DarkGray
         }
 
+        $daoPage = Join-Path $Docs "dao\index.html"
+        if (-not (Test-Path $daoPage)) {
+            Write-Host "  WARN: docs/dao/index.html missing - commit Sovereign DAO page before deploy" -ForegroundColor Yellow
+        } else {
+            Write-Host "  docs/dao/index.html (Sovereign DAO public page)" -ForegroundColor DarkGray
+        }
+
         Write-Host "`nGitHub Pages home: $Docs\index.html" -ForegroundColor Green
         Write-Host "Live URL: https://fthtrading.github.io/Troptions-full-pack/" -ForegroundColor Green
         Write-Host "Mint DApp:  https://fthtrading.github.io/Troptions-full-pack/mint.html" -ForegroundColor Green
         Write-Host "NFT gallery: https://fthtrading.github.io/Troptions-full-pack/nft/" -ForegroundColor Green
         Write-Host "Technical docs: https://fthtrading.github.io/Troptions-full-pack/technical/" -ForegroundColor Green
+        Write-Host "Sovereign DAO:  https://fthtrading.github.io/Troptions-full-pack/dao/" -ForegroundColor Green
     }
 
     if ($VercelProd) {
