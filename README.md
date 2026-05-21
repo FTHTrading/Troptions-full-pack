@@ -159,6 +159,17 @@ npm run build  # static export → out/
 
 Technical markdown lives under [`docs/technical/`](docs/technical/) after Pages deploy; the polished investor build is `docs/index.html`.
 
+## FTH ecosystem (repos & live URLs)
+
+| Resource | Link |
+|----------|------|
+| **Investor site (Pages)** | https://fthtrading.github.io/Troptions-full-pack/ |
+| **Ecosystem map (full matrix)** | [docs/technical/ECOSYSTEM_MAP.md](docs/technical/ECOSYSTEM_MAP.md) |
+| **Domain truth table** | [docs/technical/DOMAIN_TRUTH_TABLE.md](docs/technical/DOMAIN_TRUTH_TABLE.md) |
+| **Re-verify URLs** | `.\scripts\verify-ecosystem-links.ps1` |
+
+Satellite repos (SNP, T-Lev-8, T-Build, Troptions, TExchange, aurora-site, impact-site, solana-launcher) and honest gaps are cataloged in **ECOSYSTEM_MAP**. The investor site section **FTH Ecosystem** mirrors the same labels.
+
 ## Documentation
 
 - [Architecture](docs/ARCHITECTURE.md)  

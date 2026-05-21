@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { Story } from "@/components/Story";
 import { ThreeColumns } from "@/components/ThreeColumns";
 import { RevenuePillars } from "@/components/RevenuePillars";
+import { FthEcosystem } from "@/components/FthEcosystem";
 import { EngineeringMaturity } from "@/components/EngineeringMaturity";
 import { TruthLabels } from "@/components/TruthLabels";
 import { AnthemSection } from "@/components/AnthemSection";
@@ -18,6 +19,7 @@ export default function HomePage() {
         <Story />
         <ThreeColumns />
         <RevenuePillars />
+        <FthEcosystem />
         <EngineeringMaturity />
         <TruthLabels />
         <AnthemSection />

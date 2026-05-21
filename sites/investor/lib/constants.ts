@@ -86,6 +86,155 @@ export const THREE_COLUMNS = [
   },
 ];
 
+export const T_LEV8_PAGES = "https://fthtrading.github.io/T-Lev-8-/";
+export const AURORA_PAGES = "https://fthtrading.github.io/aurora-site/";
+export const TROPTIONS_VERCEL = "https://troptions.vercel.app";
+export const TEXCHANGE_REPO = "https://github.com/FTHTrading/TExchange";
+export const T_BUILD_REPO = "https://github.com/FTHTrading/T-Build";
+export const SOLANA_LAUNCHER_REPO = "https://github.com/FTHTrading/solana-launcher";
+export const ECOSYSTEM_MAP_URL = `${PAGES_URL}/technical/ECOSYSTEM_MAP.html`;
+
+export type EcosystemCard = {
+  name: string;
+  category: string;
+  detail: string;
+  status:
+    | "live"
+    | "pages"
+    | "vercel"
+    | "private"
+    | "local"
+    | "pending"
+    | "pipeline"
+    | "gated";
+  deployUrl?: string;
+  deployLabel?: string;
+  repoUrl?: string;
+  repoLabel?: string;
+};
+
+export const FTH_ECOSYSTEM_CARDS: EcosystemCard[] = [
+  {
+    name: "Troptions-full-pack",
+    category: "Monorepo · this stack",
+    detail:
+      "L1 node, Academy, DONK, TTN, DAO, Exchange OS extract, contracts, and this investor site.",
+    status: "pages",
+    deployUrl: PAGES_URL,
+    deployLabel: "Investor site (GitHub Pages)",
+    repoUrl: REPO_URL,
+  },
+  {
+    name: "Sovereign Namespace Protocol",
+    category: "Constitutional layer",
+    detail:
+      "Post-quantum namespace roots (955+), Dilithium5 verification — trust primitive for L1 and partner OS.",
+    status: "live",
+    repoUrl: SNP_URL,
+    repoLabel: "SNP spec on GitHub",
+  },
+  {
+    name: "T-Lev-8 deal room",
+    category: "RWA · licensing",
+    detail: "LEV8-gated deal room and partner RWA licensing surface.",
+    status: "pages",
+    deployUrl: T_LEV8_PAGES,
+    repoUrl: "https://github.com/FTHTrading/T-Lev-8-",
+  },
+  {
+    name: "T-Build TPLOS",
+    category: "Partner launch OS",
+    detail: "Sandbox for TPLOS partner token launches — feeds launcher and Exchange OS playbooks.",
+    status: "local",
+    repoUrl: T_BUILD_REPO,
+  },
+  {
+    name: "Troptions Exchange OS",
+    category: "Institutional platform",
+    detail:
+      "Private institutional repo; Vercel preview live. Monorepo carries a synchronized extract under frontends/exchange-os.",
+    status: "vercel",
+    deployUrl: TROPTIONS_VERCEL,
+    repoUrl: "https://github.com/FTHTrading/Troptions",
+    repoLabel: "Private GitHub (org members)",
+  },
+  {
+    name: "TExchange",
+    category: "Exchange variant",
+    detail: "Public sibling repo and deployment lineage for Exchange OS patterns.",
+    status: "gated",
+    repoUrl: TEXCHANGE_REPO,
+  },
+  {
+    name: "Aurora RWA portal",
+    category: "Real-world assets",
+    detail: "Aurora storytelling and RWA portal. Custom aurora.unykorn.org DNS not resolving — Pages URL works.",
+    status: "pages",
+    deployUrl: AURORA_PAGES,
+    repoUrl: "https://github.com/FTHTrading/aurora-site",
+  },
+  {
+    name: "Impact ESG portal",
+    category: "Impact · ESG",
+    detail: "Impact site repo on GitHub; production Pages/DNS needs operator fix before investor claims.",
+    status: "pending",
+    repoUrl: "https://github.com/FTHTrading/impact-site",
+  },
+  {
+    name: "Solana launcher",
+    category: "Launch revenue",
+    detail: "SPL and NFT launcher SaaS — mint registry, campaigns, system truth.",
+    status: "live",
+    deployUrl: "https://launch.unykorn.org",
+    repoUrl: SOLANA_LAUNCHER_REPO,
+  },
+  {
+    name: "Institutional hub",
+    category: "Live · Unykorn",
+    detail: "Primary TROPTIONS brand and desk narrative on the public edge.",
+    status: "live",
+    deployUrl: "https://troptions.unykorn.org/troptions",
+  },
+  {
+    name: "Exchange OS edge",
+    category: "Live · Unykorn",
+    detail: "Control plane, readiness, and institutional routes.",
+    status: "live",
+    deployUrl: "https://troptionsexchange.unykorn.org/exchange-os",
+  },
+  {
+    name: "Sports & events",
+    category: "Live · Unykorn",
+    detail: "TTN / WC26 sponsorship and broadcast surfaces.",
+    status: "live",
+    deployUrl: "https://troptionslive.unykorn.org/sports",
+  },
+  {
+    name: "Education platform",
+    category: "Live · Unykorn",
+    detail: "FTH Academy subscriptions and curriculum delivery.",
+    status: "live",
+    deployUrl: "https://fthedu.unykorn.org",
+  },
+  {
+    name: "x402 Unykorn AWS",
+    category: "Payments · separate stack",
+    detail:
+      "Public health on AWS/Cloudflare. Facilitator on monorepo main remains LOCAL_ONLY — do not conflate with health 200.",
+    status: "live",
+    deployUrl: X402_HEALTH,
+    deployLabel: "Health check",
+    repoUrl: "https://github.com/FTHTrading/UnyKorn-X402-aws",
+    repoLabel: "Private GitHub (org members)",
+  },
+  {
+    name: "troptions.org DNS",
+    category: "Not deployed",
+    detail: "ai.troptions.org, ttn.troptions.org, dao.troptions.org — templates only until DNS enabled.",
+    status: "pending",
+  },
+];
+
 export const REVENUE_PILLARS = [
   {
     name: "FTH Academy",
