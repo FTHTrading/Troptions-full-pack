@@ -1,13 +1,23 @@
 @import "tailwindcss";
 
 @theme {
-  --color-gold: #b8860b;
-  --color-gold-light: #d4a84b;
-  --color-surface: #0f1114;
-  --color-surface-elevated: #1a1d23;
-  --color-border: #2a2f38;
-  --color-muted: #9ca3af;
+  --color-bg: #0a0e14;
+  --color-panel: #121820;
+  --color-panel-raised: #1a2230;
+  --color-border: #2a3344;
+  --color-text: #e8eaed;
+  --color-muted: #8b949e;
+  --color-accent-gold: #c9a227;
+  --color-accent-gold-dim: #9a7b1a;
+  --color-accent-blue: #3d7ea6;
+  --color-accent-blue-dim: #2d5f7f;
+  /* Legacy aliases used across components */
+  --color-gold: var(--color-accent-gold);
+  --color-gold-light: #dbb84a;
+  --color-surface: var(--color-bg);
+  --color-surface-elevated: var(--color-panel);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
 }
 
 html {
@@ -15,10 +25,73 @@ html {
 }
 
 body {
-  @apply bg-[var(--color-surface)] text-gray-100 antialiased;
+  @apply antialiased;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-sans);
+  font-feature-settings: "tnum" 1, "lnum" 1;
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--color-gold) 40%, transparent);
+  background: color-mix(in srgb, var(--color-accent-gold) 35%, transparent);
+}
+
+/* Terminal tables */
+.terminal-table {
+  @apply w-full min-w-[640px] text-left text-sm;
+  font-variant-numeric: tabular-nums;
+}
+
+.terminal-table thead {
+  @apply text-xs uppercase tracking-wide;
+  color: var(--color-muted);
+  background: var(--color-panel-raised);
+}
+
+.terminal-table th,
+.terminal-table td {
+  @apply border-b px-4 py-3;
+  border-color: var(--color-border);
+}
+
+.terminal-table tbody tr:hover {
+  background: color-mix(in srgb, var(--color-panel-raised) 60%, transparent);
+}
+
+.panel {
+  @apply rounded-lg border;
+  border-color: var(--color-border);
+  background: var(--color-panel);
+}
+
+.panel-raised {
+  @apply rounded-lg border;
+  border-color: var(--color-border);
+  background: var(--color-panel-raised);
+}
+
+.label-proven {
+  @apply inline-flex rounded px-2 py-0.5 text-xs font-medium uppercase tracking-wide;
+  background: color-mix(in srgb, var(--color-accent-blue) 18%, transparent);
+  color: #9ec5e0;
+  border: 1px solid color-mix(in srgb, var(--color-accent-blue) 40%, transparent);
+}
+
+.label-pipeline {
+  @apply inline-flex rounded px-2 py-0.5 text-xs font-medium uppercase tracking-wide;
+  background: color-mix(in srgb, var(--color-accent-gold) 15%, transparent);
+  color: var(--color-gold-light);
+  border: 1px solid color-mix(in srgb, var(--color-accent-gold) 35%, transparent);
+}
+
+.label-projection {
+  @apply inline-flex rounded px-2 py-0.5 text-xs font-medium uppercase tracking-wide;
+  background: color-mix(in srgb, var(--color-muted) 12%, transparent);
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+}
+
+.serif-heading {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
 }

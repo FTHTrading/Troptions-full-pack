@@ -44,7 +44,7 @@ export function VerificationStatus() {
             aria-valuemax={100}
           >
             <div
-              className="h-full rounded-full bg-gradient-to-r from-[var(--color-gold)] to-[var(--color-gold-light)] transition-all"
+              className="h-full rounded-full bg-[var(--color-accent-gold)] transition-all"
               style={{ width: `${percent}%` }}
             />
           </div>

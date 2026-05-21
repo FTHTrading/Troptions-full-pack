@@ -3,8 +3,7 @@ import { MATURITY_GAP_NOTE, MATURITY_SCORE, PROOF_URL, REPO_URL } from "@/lib/co
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-20 pt-16 md:pb-28 md:pt-24">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(184,134,11,0.12)_0%,_transparent_55%)]" />
+    <section className="relative overflow-hidden border-b border-[var(--color-border)] pb-20 pt-16 md:pb-28 md:pt-24">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-14">
           <div className="flex-1">

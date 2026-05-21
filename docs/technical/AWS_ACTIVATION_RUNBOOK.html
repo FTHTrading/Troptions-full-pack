@@ -22,35 +22,301 @@
   </nav>
   <header class="doc-header">
     <h1>AWS Full Stack Activation</h1>
-    <p class="tagline">PIPELINE / PROJECTION — not realized revenue until MSB + live exchange</p>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
   </header>
   <div class="md-body">
-    <p><strong>Status:</strong> PIPELINE · <strong>Date:</strong> 2026-05-21</p>
-    <h2>Honesty labels</h2>
-    <table>
-      <tr><th>Claim</th><th>Label</th></tr>
-      <tr><td>10/10 agent score</td><td><strong>PIPELINE</strong></td></tr>
-      <tr><td>$874K/month</td><td><strong>PROJECTION</strong></td></tr>
-      <tr><td>Revenue in seconds</td><td><strong>PIPELINE</strong> (fast JSON ≠ bank deposits)</td></tr>
-    </table>
-    <h2>Port map</h2>
-    <table>
-      <tr><th>Port</th><th>Service</th></tr>
-      <tr><td>4020</td><td>backend x402-gateway</td></tr>
-      <tr><td>4022–4028</td><td>fiat rails</td></tr>
-      <tr><td>4029</td><td>baas-dashboard</td></tr>
-      <tr><td>4030 / 4034 / 4035</td><td>x402 US / EU / JP</td></tr>
-      <tr><td>4031</td><td>legacy agent-orchestrator</td></tr>
-      <tr><td>4040</td><td>usdc-base-relay</td></tr>
-      <tr><td>4100 / 4101</td><td>agent-orchestrator / mcp stub</td></tr>
-      <tr><td>8097</td><td>baas-api</td></tr>
-      <tr><td>8443</td><td>telegram-bot</td></tr>
-    </table>
-    <h2>Windows one-liner</h2>
-    <pre><code>.\scripts\activate-full-stack.ps1 -DryRun</code></pre>
-    <h2>AWS one-liner</h2>
-    <pre><code>./scripts/deploy-aws.sh</code></pre>
-    <p>Full markdown: <a href="AWS_ACTIVATION_RUNBOOK.md">AWS_ACTIVATION_RUNBOOK.md</a></p>
+<h1>AWS Full Stack Activation Runbook</h1>
+<p><strong>Status:</strong> PIPELINE — services respond with stubs until MSB + live exchange<br />
+<strong>Date:</strong> 2026-05-21</p>
+<blockquote>
+<p><strong>Honesty banner (required in all operator comms)</strong><br />
+<strong>Crypto-native</strong> rails (x402, BaaS pools, USDC relay, agent trades) = <strong>PIPELINE</strong> stubs until MSB + bank/exchange partners are live.<br />
+<strong>$825/hour</strong> first-hour table and <strong>$874K/month</strong> run-rate = <strong>PROJECTION</strong> — modeled API math, <strong>not</strong> realized bank deposits.<br />
+Do <strong>not</strong> present PROJECTION figures to investors or regulators as realized revenue.</p>
+</blockquote>
+<h2>Honesty labels</h2>
+<table>
+<thead>
+<tr>
+<th>Claim</th>
+<th>Label</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10/10 agent score</td>
+<td><strong>PIPELINE</strong></td>
+<td>Readiness model, not audit score</td>
+</tr>
+<tr>
+<td>$874K/month, $825/hour</td>
+<td><strong>PROJECTION</strong></td>
+<td>Modeled revenue, not bank deposits</td>
+</tr>
+<tr>
+<td>Revenue in seconds</td>
+<td><strong>PIPELINE</strong></td>
+<td>API may return JSON fast; dollars are <strong>not</strong> realized</td>
+</tr>
+</tbody>
+</table>
+<h2>Canonical port map (AWS)</h2>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Service</th>
+<th>Path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4022</td>
+<td>payment-orchestrator</td>
+<td><code>fiat-rails/orchestrator/</code></td>
+</tr>
+<tr>
+<td>4025</td>
+<td>compliance-engine</td>
+<td><code>fiat-rails/compliance-engine/</code></td>
+</tr>
+<tr>
+<td>4028</td>
+<td>arbitrage-bot</td>
+<td><code>fiat-rails/arbitrage-bot/</code></td>
+</tr>
+<tr>
+<td><strong>4029</strong></td>
+<td><strong>baas-dashboard (UI only)</strong></td>
+<td><code>fiat-rails/baas-dashboard/</code></td>
+</tr>
+<tr>
+<td><strong>4030</strong></td>
+<td><strong>x402-us</strong></td>
+<td><code>fiat-rails/x402-gateway/</code></td>
+</tr>
+<tr>
+<td>4031</td>
+<td>agent-orchestrator (<strong>legacy</strong>)</td>
+<td><code>fiat-rails/agent-orchestrator/</code></td>
+</tr>
+<tr>
+<td><strong>4034</strong></td>
+<td><strong>x402-eu</strong></td>
+<td><code>fiat-rails/x402-gateway-eu/</code></td>
+</tr>
+<tr>
+<td><strong>4035</strong></td>
+<td><strong>x402-jp</strong></td>
+<td><code>fiat-rails/x402-gateway-jp/</code></td>
+</tr>
+<tr>
+<td><strong>4040</strong></td>
+<td><strong>usdc-base-relay</strong></td>
+<td><code>services/usdc-base-relay/</code></td>
+</tr>
+<tr>
+<td><strong>4100</strong></td>
+<td><strong>agent-orchestrator (AWS)</strong></td>
+<td><code>agents/orchestrator/</code></td>
+</tr>
+<tr>
+<td><strong>4101</strong></td>
+<td><strong>mcp-server stub</strong></td>
+<td><code>agents/mcp-server/</code></td>
+</tr>
+<tr>
+<td><strong>8097</strong></td>
+<td><strong>baas-api</strong> (agents, pools, billing)</td>
+<td><code>fiat-rails/baas-api/</code></td>
+</tr>
+<tr>
+<td><strong>8443</strong></td>
+<td><strong>telegram-bot</strong></td>
+<td><code>services/telegram-bot/</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Common mistakes</strong></p>
+<ul>
+<li>Pointing BaaS API calls at <strong>:4029</strong> — that is the <strong>dashboard UI</strong>; API is <strong>:8097</strong>.</li>
+<li>Assigning EU/JP x402 to <strong>:4031</strong> / <strong>:4032</strong> — regional gateways are <strong>:4034</strong> and <strong>:4035</strong>.</li>
+<li>Confusing <strong>:4101</strong> (MCP stub) with EU gateway — use <strong>:4034</strong> for EU x402.</li>
+</ul>
+<h3>Agent registration (two paths)</h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>Port</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /api/v1/agents/register</code></td>
+<td><strong>8097</strong></td>
+<td><strong>Canonical</strong> BaaS registration</td>
+</tr>
+<tr>
+<td><code>POST /api/v1/agents</code></td>
+<td><strong>8097</strong></td>
+<td>Alias (same handler)</td>
+</tr>
+<tr>
+<td><code>POST /agents/register</code></td>
+<td><strong>4031</strong></td>
+<td>Legacy fiat <code>agent-orchestrator</code> proxy</td>
+</tr>
+</tbody>
+</table>
+<h2>One-liner (fresh Ubuntu EC2)</h2>
+<p><strong>Prerequisites:</strong> Node 20, <code>pm2</code> global, <code>git</code>, <code>python3</code>, <code>pip</code>, <code>jq</code> — see <a href="../../deploy/aws/README.html">deploy/aws/README.md</a>.</p>
+<p><strong>Pipe install (no clone):</strong></p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/FTHTrading/Troptions-full-pack/main/deploy/aws/setup.sh | bash
+bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/FTHTrading/Troptions-full-pack/main/scripts/activate-revenue.sh)&quot;
+</code></pre>
+<p><strong>Git clone (exact operator block):</strong></p>
+<pre><code class="language-bash">git clone https://github.com/FTHTrading/Troptions-full-pack.git &amp;&amp;
+cd Troptions-full-pack &amp;&amp;
+npm install &amp;&amp;
+cp config/multi-gateway.env.template .env &amp;&amp;
+pm2 start ecosystem.config.js --only payment-orchestrator,compliance-engine,arbitrage-bot,baas-api,baas-dashboard,x402-us,x402-eu,x402-jp,agent-orchestrator,mcp-server,usdc-base-relay &amp;&amp;
+pm2 save &amp;&amp;
+./scripts/activate-revenue.sh
+</code></pre>
+<p>Edit <code>.env</code> on the host (<code>cp config/multi-gateway.env.template .env</code> or <code>setup.sh</code> creates <code>.env</code> only if missing).</p>
+<h2>EC2 setup (manual)</h2>
+<ol>
+<li><strong>Instance:</strong> Ubuntu 22.04+, 4 vCPU / 8 GB RAM minimum.</li>
+<li><strong>Deps:</strong> Node 20, <code>pm2</code>, <code>git</code>, <code>python3</code>, <code>pip</code>, <code>jq</code>.</li>
+<li><strong>Clone:</strong> <code>git clone https://github.com/FTHTrading/Troptions-full-pack.git &amp;&amp; cd Troptions-full-pack</code></li>
+<li><strong>Or run:</strong> <code>bash deploy/aws/setup.sh</code> from clone (same as curl pipe).</li>
+<li><strong>Secrets (never commit):</strong> <code>TELEGRAM_BOT_TOKEN</code>, <code>BAAS_API_KEY</code>, issuer seeds — see <code>deploy/aws/.env.aws.template</code>.</li>
+</ol>
+<h2>Security group (inbound)</h2>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>22</td>
+<td>SSH (restrict to your IP)</td>
+</tr>
+<tr>
+<td>4029</td>
+<td>BaaS dashboard UI (optional public)</td>
+</tr>
+<tr>
+<td>4030</td>
+<td>x402 US health (prefer internal)</td>
+</tr>
+<tr>
+<td><strong>4034</strong></td>
+<td>x402 EU (if exposing region)</td>
+</tr>
+<tr>
+<td><strong>4035</strong></td>
+<td>x402 JP (if exposing region)</td>
+</tr>
+<tr>
+<td><strong>4040</strong></td>
+<td>USDC Base relay health</td>
+</tr>
+<tr>
+<td><strong>4100</strong></td>
+<td>AWS agent-orchestrator (harden before public)</td>
+</tr>
+<tr>
+<td><strong>4101</strong></td>
+<td>MCP stub tools</td>
+</tr>
+<tr>
+<td><strong>8097</strong></td>
+<td>baas-api (harden before public)</td>
+</tr>
+<tr>
+<td><strong>8443</strong></td>
+<td>Telegram webhook (polling needs outbound only)</td>
+</tr>
+</tbody>
+</table>
+<p>Keep <strong>4022–4028, 4031</strong> on localhost/private unless hardened.</p>
+<h2>PM2 activation</h2>
+<pre><code class="language-bash">cd /opt/Troptions-full-pack   # or ~/Troptions-full-pack
+mkdir -p logs
+bash deploy/aws/setup.sh
+# or subset only:
+pm2 start ecosystem.config.js --only \
+  payment-orchestrator,compliance-engine,arbitrage-bot,baas-api,baas-dashboard,\
+  x402-us,x402-eu,x402-jp,agent-orchestrator,mcp-server,usdc-base-relay
+pm2 save
+</code></pre>
+<p>With <code>TELEGRAM_BOT_TOKEN</code> in <code>.env</code>:</p>
+<pre><code class="language-bash">pm2 start ecosystem.config.js --only telegram-bot --update-env
+</code></pre>
+<h2>Step 5 — activate revenue (DRY_RUN default)</h2>
+<pre><code class="language-bash">bash deploy/aws/activate-revenue.sh
+# or
+bash scripts/activate-revenue.sh
+</code></pre>
+<p>Equivalent manual curls:</p>
+<pre><code class="language-bash"># 1) Batch pools (8097)
+bash scripts/batch-create-pools.sh --dry-run
+
+# 2) Arbitrage
+curl -s -X POST http://127.0.0.1:4028/start
+
+# 3) Register agent — canonical (:8097, NOT :4029 dashboard or :4033)
+curl -s -X POST http://127.0.0.1:8097/api/v1/agents/register \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;agent_id&quot;:&quot;ec2-demo&quot;,&quot;wallet&quot;:&quot;rYourIssuer&quot;,&quot;capital_troptions&quot;:0}'
+
+# 3b) Legacy
+curl -s -X POST http://127.0.0.1:4031/agents/register \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;agent_id&quot;:&quot;ec2-demo&quot;,&quot;wallet_address&quot;:&quot;rYourIssuer&quot;,&quot;capital_troptions&quot;:0}'
+
+# 4) Trade batch (4100) — dry_run until live
+curl -s -X POST http://127.0.0.1:4100/trade/batch \
+  -H 'Content-Type: application/json' \
+  -d '{&quot;symbols&quot;:[&quot;USD-IOU/EUR-IOU&quot;],&quot;dry_run&quot;:true}'
+
+# 5) Billing (PROJECTION)
+curl -s http://127.0.0.1:8097/api/v1/billing/revenue | jq .
+</code></pre>
+<h2>Verification curls</h2>
+<pre><code class="language-bash">curl -s http://127.0.0.1:8097/health | jq .
+curl -s http://127.0.0.1:4100/health | jq .
+curl -s http://127.0.0.1:4101/tools | jq .
+curl -s http://127.0.0.1:4040/health | jq .
+curl -s http://127.0.0.1:4030/x402/stats | jq .
+curl -s http://127.0.0.1:4034/health | jq .
+curl -s http://127.0.0.1:4035/health | jq .
+</code></pre>
+<h2>Telegram</h2>
+<ol>
+<li>@BotFather → <code>TELEGRAM_BOT_TOKEN</code> in <code>.env</code></li>
+<li><code>pm2 restart telegram-bot</code></li>
+<li>Commands: <code>/start</code>, <code>/trade</code>, <code>/revenue</code>, <code>/pools</code> — replies include <strong>PROJECTION</strong> disclaimer</li>
+</ol>
+<h2>Windows</h2>
+<pre><code class="language-powershell">.\scripts\activate-full-stack.ps1 -DryRun
+</code></pre>
+<h2>npm install</h2>
+<p>Root <code>npm install</code> is sufficient for AWS floor services: <code>postinstall</code> installs <strong>fiat-rails</strong>, <strong>agents</strong>, and <strong>usdc-base-relay</strong>. <code>deploy/aws/setup.sh</code> also runs those paths explicitly and adds <strong>telegram-bot</strong> when <code>TELEGRAM_BOT_TOKEN</code> is set.</p>
+<h2>Related docs</h2>
+<ul>
+<li><a href="../../deploy/aws/README.html">deploy/aws/README.md</a></li>
+<li><a href="X402_GLOBAL_MESH.html">X402_GLOBAL_MESH</a></li>
+<li><a href="BAAS_BATCH_POOLS.html">BAAS_BATCH_POOLS</a></li>
+</ul>
   </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/AWS_ACTIVATION_RUNBOOK.html</p>
 </body>
 </html>

@@ -11,16 +11,25 @@ export type Status =
   | "local";
 
 const styles: Record<Status, string> = {
-  live: "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30",
-  pipeline: "bg-amber-500/15 text-amber-200 ring-amber-500/30",
-  projection: "bg-purple-500/15 text-purple-200 ring-purple-500/30",
-  gated: "bg-sky-500/15 text-sky-200 ring-sky-500/30",
-  confirmed: "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30",
-  pending: "bg-rose-500/15 text-rose-200 ring-rose-500/30",
-  pages: "bg-violet-500/15 text-violet-200 ring-violet-500/30",
-  vercel: "bg-indigo-500/15 text-indigo-200 ring-indigo-500/30",
-  private: "bg-slate-500/15 text-slate-200 ring-slate-500/30",
-  local: "bg-zinc-500/15 text-zinc-300 ring-zinc-500/30",
+  live: "bg-[color-mix(in_srgb,var(--color-accent-blue)_18%,transparent)] text-[#9ec5e0] ring-[color-mix(in_srgb,var(--color-accent-blue)_35%,transparent)]",
+  pipeline:
+    "bg-[color-mix(in_srgb,var(--color-accent-gold)_15%,transparent)] text-[var(--color-gold-light)] ring-[color-mix(in_srgb,var(--color-accent-gold)_35%,transparent)]",
+  projection:
+    "bg-[color-mix(in_srgb,var(--color-muted)_12%,transparent)] text-[var(--color-muted)] ring-[var(--color-border)]",
+  gated:
+    "bg-[color-mix(in_srgb,var(--color-accent-blue)_10%,transparent)] text-[var(--color-muted)] ring-[var(--color-border)]",
+  confirmed:
+    "bg-[color-mix(in_srgb,var(--color-accent-blue)_18%,transparent)] text-[#9ec5e0] ring-[color-mix(in_srgb,var(--color-accent-blue)_35%,transparent)]",
+  pending:
+    "bg-[color-mix(in_srgb,var(--color-accent-gold)_10%,transparent)] text-[var(--color-muted)] ring-[var(--color-border)]",
+  pages:
+    "bg-[color-mix(in_srgb,var(--color-muted)_12%,transparent)] text-[var(--color-muted)] ring-[var(--color-border)]",
+  vercel:
+    "bg-[color-mix(in_srgb,var(--color-muted)_12%,transparent)] text-[var(--color-muted)] ring-[var(--color-border)]",
+  private:
+    "bg-[color-mix(in_srgb,var(--color-muted)_12%,transparent)] text-[var(--color-muted)] ring-[var(--color-border)]",
+  local:
+    "bg-[color-mix(in_srgb,var(--color-muted)_12%,transparent)] text-[var(--color-muted)] ring-[var(--color-border)]",
 };
 
 const labels: Record<Status, string> = {

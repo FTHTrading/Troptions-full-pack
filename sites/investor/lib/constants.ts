@@ -143,6 +143,17 @@ export const TROPTIONS_REVENUE_ENGINE_URL = `${PAGES_URL}/technical/TROPTIONS_RE
 export const MSB_FIAT_RAILS_URL = `${PAGES_URL}/technical/MSB_FIAT_RAILS.html`;
 export const DAO_PAGE_URL = `${PAGES_URL}/dao/`;
 export const DAO_ARCHITECTURE_URL = `${PAGES_URL}/technical/DAO_ARCHITECTURE.html`;
+export const COMMAND_CENTER_URL = onPages
+  ? `${PAGES_URL}/command-center/`
+  : "/command-center/";
+export const TELEGRAM_PAGE_URL = onPages
+  ? `${PAGES_URL}/telegram/`
+  : "/telegram/";
+export const REVENUE_PAGE_URL = onPages
+  ? `${PAGES_URL}/revenue/`
+  : "/revenue/";
+export const X402_GLOBAL_MESH_URL = `${PAGES_URL}/technical/X402_GLOBAL_MESH.html`;
+export const AWS_ACTIVATION_RUNBOOK_URL = `${PAGES_URL}/technical/AWS_ACTIVATION_RUNBOOK.html`;
 
 export const MATURITY_SCORE = "9.9";
 export const MATURITY_GAP_NOTE =

@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
   assetPrefix: basePath ? `${basePath}/` : undefined,
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
+    NEXT_PUBLIC_TELEGRAM_BOT_USERNAME:
+      process.env.NEXT_PUBLIC_TELEGRAM_BOT_USERNAME ?? "",
   },
 };
 

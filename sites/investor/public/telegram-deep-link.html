@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open TROPTIONS Telegram</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0a0e14; color: #e8eaed; margin: 2rem; }
+    a { color: #3d7ea6; }
+    code { color: #c9a227; }
+  </style>
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var u = params.get("u") || "YOUR_BOT_USERNAME";
+      if (u && u !== "YOUR_BOT_USERNAME") {
+        location.replace("https://t.me/" + u.replace(/^@/, ""));
+      }
+    })();
+  </script>
+</head>
+<body>
+  <h1>TROPTIONS Telegram</h1>
+  <p>
+    Set <code>NEXT_PUBLIC_TELEGRAM_BOT_USERNAME</code> when building the investor site,
+    or pass <code>?u=YourBotUsername</code> on this URL.
+  </p>
+  <p><a href="./telegram/">Telegram setup page</a> · <a href="./command-center/">Command Center</a></p>
+</body>
+</html>
