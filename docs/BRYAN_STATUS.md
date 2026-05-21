@@ -15,7 +15,8 @@ Last reconciled against repo tree on **2026-05-21**. Use this table instead of i
 | `frontend/academy` | **No** | Use `backend/fth-academy/` + `frontends/fth-edu/` |
 | `frontend/sports-network` | **No** | Use `backend/ttn-launcher/` + `frontends/ttn-tv/` |
 | `scripts/pm2.config.js` | **No** | Use repo root `ecosystem.config.js` |
-| `BUILD_AVID_DREAM_ON_TROPTIONS.txt` | **No** | Not in repo |
+| `BUILD_AVID_DREAM_ON_TROPTIONS.txt` | **No** | Not in repo — use `docs/counterparty/BUILD_AVID_ON_TROPTIONS.md` |
+| `docs/counterparty/BUILD_AVID_ON_TROPTIONS.md` | **Yes** | Canonical Avid configure prompt (honest timeline) |
 | `docs/WHATS_BUILT_INVESTOR_ONE_PAGER.md` | **Yes** (legacy alias) | Points to `docs/investor/ONE_PAGER.md` |
 | `docs/email-bryan-to-bijan-draft.md` | **Yes** (legacy alias) | Points to `docs/counterparty/BIJAN_EMAIL.md` |
 
@@ -29,6 +30,8 @@ Last reconciled against repo tree on **2026-05-21**. Use this table instead of i
 |------|---------|
 | `docs/investor/ONE_PAGER.md` | Investor one-pager (canonical) |
 | `docs/counterparty/BIJAN_EMAIL.md` | Bijan outreach email |
+| `docs/counterparty/BUILD_AVID_ON_TROPTIONS.md` | Avid configure prompt (canonical) |
+| `docs/PRODUCTION_READINESS_CHECKLIST.md` | 7.5→10 internal tracker |
 | `docs/BRYAN_STATUS.md` | This file |
 | `docs/TROPTIONS-GENESIS-BUILD.md` | Genesis audit (copy of exchange-os doc) |
 | `docs/QUICKSTART.md` | Human quickstart guide |

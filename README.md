@@ -39,10 +39,13 @@ pm2 start ecosystem.config.js
     FTH Academy + DONK (8091/8090)
             │
             ▼ JSON-RPC
-    TROPTIONS L1 Node (9944)
+    TROPTIONS L1 Node (9944) · metrics (9945)
+    Sovereign Sequencer — single-node today; BFT planned Q4 2026
+    ├─ RocksDB persistence
     ├─ soulbound (credentials)
     ├─ settlement (HTLC / locks)
-    └─ atomic-router (batch txs)
+    ├─ on-chain DAO + treasury
+    └─ atomic-router (signed batch txs)
             │
             ▼
  Polygon · XRPL · Solana
@@ -145,6 +148,8 @@ npm run dev
 - [One-command quickstart](docs/QUICKSTART.md)
 - [Bryan status (verified paths)](docs/BRYAN_STATUS.md)
 - [Investor one-pager](docs/investor/ONE_PAGER.md)
+- [Configure Avid on stack](docs/counterparty/BUILD_AVID_ON_TROPTIONS.md)
+- [Production readiness checklist](docs/PRODUCTION_READINESS_CHECKLIST.md)
 - [Production deploy](docs/DEPLOY_PRODUCTION.md)
 - [Loom demo script](docs/LOOM_DEMO_SCRIPT.md)
 - [Ops runbook](docs/RUNBOOK.md)  

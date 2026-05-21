@@ -2,6 +2,14 @@
 
 **Executive headline:** A single monorepo ships the TROPTIONS L1 node, Python/AI backends, full DAO layer, multi-chain contract references, and production ops (PM2, Docker, nginx) — clone once, run locally, extend to eight Genesis brand domains.
 
+### Deployment timeline
+
+- **~15 minutes:** Clone, run local quickstart, review architecture and genesis audit — confirms the stack on your machine (demo/dev).
+- **2–4 weeks:** Production configure with TROPTIONS engineering — signed RPC, hardened persistence, DAO realm, TLS/nginx, API keys, compliance sign-off before counterparty mainnet moves.
+- **+2–4 weeks (optional):** x402 / Apostle / telecom integrations on a separate branch when a client explicitly requests them.
+
+Counterparty configure prompt: `docs/counterparty/BUILD_AVID_ON_TROPTIONS.md`.
+
 ---
 
 ## Stack at a glance
