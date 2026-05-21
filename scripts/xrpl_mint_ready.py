@@ -6,13 +6,14 @@ Ready for submission to XRPL mainnet.
 
 USAGE:
   python xrpl_mint_ready.py --show      # Show all prepared transactions
-  python xrpl_mint_ready.py --sign SEED # Sign with issuer seed (REQUIRES SECRET)
+  python xrpl_mint_ready.py --sign [SEED]  # Sign; seed from arg or XRPL_ISSUER_SEED env
 """
 
 import json
 import base64
 import hashlib
 import argparse
+import os
 from datetime import datetime
 
 # ============================================
@@ -223,7 +224,13 @@ def main():
     parser = argparse.ArgumentParser(description='TROPTIONS Anthem XRPL NFT Minter')
     parser.add_argument('--show', action='store_true', help='Show collection overview')
     parser.add_argument('--prepare', action='store_true', help='Prepare unsigned mint batch')
-    parser.add_argument('--sign', type=str, help='Sign with issuer seed (DANGER: exposes secret)')
+    parser.add_argument(
+        '--sign',
+        nargs='?',
+        const='',
+        default=None,
+        help='Sign with issuer seed (arg or XRPL_ISSUER_SEED env; DANGER: exposes secret)',
+    )
     parser.add_argument('--sequence', type=int, default=103862616, help='Starting sequence number')
     
     args = parser.parse_args()
@@ -238,11 +245,16 @@ def main():
         print(f'Prepared {len(batch)} unsigned transactions.')
         print('Next: Sign with seed and submit to XRPL mainnet.')
     
-    if args.sign:
-        print('Signing with provided seed...')
+    if args.sign is not None:
+        seed = (args.sign or '').strip() or os.getenv('XRPL_ISSUER_SEED', '').strip()
+        if not seed:
+            print('ERROR: No issuer seed. Set XRPL_ISSUER_SEED in local .env or pass --sign.')
+            raise SystemExit(1)
+        print('Signing with issuer seed from operator environment...')
         print('WARNING: This exposes the secret. Use offline/airgapped machine for production.')
         # Signing logic would go here using xrpl-py or similar
         print('Signing not yet implemented — use xrpl.js or manual signing for now.')
+        del seed  # minimize lifetime in memory
 
 if __name__ == '__main__':
     main()
