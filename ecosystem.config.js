@@ -72,5 +72,23 @@ module.exports = {
       env: { POPEYE_PORT: "4021", L1_RPC_URL: "http://127.0.0.1:9944" },
       autorestart: true,
     },
+    // PIPELINE — fiat rails stubs (do not autorestart until bank credentials wired)
+    {
+      name: "payment-orchestrator",
+      script: "main.py",
+      interpreter: "python",
+      cwd: path.join(ROOT, "backend", "payment-orchestrator"),
+      env: { PORT: "4022" },
+      autorestart: false,
+    },
+    {
+      name: "msb-compliance",
+      script: "main.py",
+      interpreter: "python",
+      cwd: path.join(ROOT, "backend", "msb-compliance"),
+      env: { PORT: "4098" },
+      autorestart: false,
+    },
+    // swift-bridge: container-only (PIPELINE) — add PM2 entry when image exists
   ],
 };

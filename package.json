@@ -1,0 +1,8 @@
+{
+  "name": "troptions-full-pack",
+  "private": true,
+  "description": "TROPTIONS sovereign stack monorepo",
+  "scripts": {
+    "docs:update": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/docs-update.ps1"
+  }
+}

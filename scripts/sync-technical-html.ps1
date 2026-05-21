@@ -76,6 +76,11 @@ $hub = @'
     <h1>Technical documentation</h1>
     <p class="tagline">Static HTML on GitHub Pages — May 2026</p>
   </header>
+  <h2>Banking &amp; system map (MSB / SWIFT / FedWire)</h2>
+  <ul>
+    <li><a href="SYSTEM_MANIFEST.html">System manifest (ports, rails, revenue labels)</a></li>
+    <li><a href="MSB_FIAT_RAILS.html">MSB fiat rails (capitalization tree)</a></li>
+  </ul>
   <h2>Investor diligence (primary)</h2>
   <ul>
     <li><a href="VALUATION_AND_COMPARABLES.html">Valuation &amp; comparables</a></li>
