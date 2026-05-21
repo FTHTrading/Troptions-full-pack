@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
-import { assetPath } from "@/lib/base-path";
 import {
   getSiteNavigation,
   type NavEntry,
@@ -192,9 +191,9 @@ export function NavigationMenu() {
 
 export function HeaderBrand() {
   return (
-    <Link href={assetPath("/")} className="flex shrink-0 items-center gap-3">
+    <Link href="/" className="flex shrink-0 items-center gap-3">
       <Image
-        src={assetPath("/logo.png")}
+        src="/logo.png"
         alt="TROPTIONS"
         width={32}
         height={32}

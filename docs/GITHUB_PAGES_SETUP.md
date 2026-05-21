@@ -1,18 +1,21 @@
 # GitHub Pages setup (for Bryan)
 
-**Canonical public investor face:** deploy [`sites/investor/`](../sites/investor/) to **Vercel** or **Netlify** (see [`sites/investor/DEPLOY.md`](../sites/investor/DEPLOY.md)). GitHub Pages below is **technical docs fallback** only.
+**Canonical public URL (share this):** **https://fthtrading.github.io/Troptions-full-pack/**
 
-Legacy Pages URL: **https://fthtrading.github.io/Troptions-full-pack/**
+Do **not** link to `…/Troptions-full-pack/Troptions-full-pack` — that path 404s without redirects. **`docs/Troptions-full-pack/index.html`** and **`docs/Troptions-full-pack.html`** (meta refresh + canonical to the root URL) catch stray double-segment hits. Internal `next/link` hrefs must use `/` paths only; `assetPath()` is for plain `<a>`, `fetch`, and assets.
+
+**Build:** [`sites/investor/`](../sites/investor/) static export copied into `docs/` via [`scripts/deploy-investor-site.ps1`](../scripts/deploy-investor-site.ps1) `-CopyToDocs`. Optional Vercel/Netlify: [`sites/investor/DEPLOY.md`](../sites/investor/DEPLOY.md).
 
 ## Enable in GitHub UI
 
-1. Open **https://github.com/fthtrading/Troptions-full-pack/settings/pages**
+1. Open **https://github.com/FTHTrading/Troptions-full-pack/settings/pages**
 2. **Build and deployment**
    - Source: **Deploy from a branch**
    - Branch: **`main`**
    - Folder: **`/docs`**
 3. Save. First build may take 2–10 minutes.
-4. Confirm Actions tab shows **pages build and deployment** green.
+4. Confirm **pages build and deployment** is green in Actions.
+5. Site URL in settings should show: `https://fthtrading.github.io/Troptions-full-pack/`
 
 ## Custom domain (optional)
 
@@ -51,11 +54,12 @@ Open http://127.0.0.1:4000/Troptions-full-pack/
 
 ## Primary landing page
 
-**Investor home:** static [`index.html`](index.html) at repo root of `/docs`.
+**Investor home:** [`docs/index.html`](index.html) (Next.js export from `sites/investor/out/`).
 
-- GitHub Pages serves `index.html` before any Jekyll `index` when both exist at `/docs` root.
-- Former glass Jekyll home: [`index.jekyll.md.bak`](index.jekyll.md.bak) (archived).
-- Optional: [`docs/.nojekyll`](.nojekyll) ensures static assets and `index.html` are not overridden.
+- [`docs/.nojekyll`](.nojekyll) — skip Jekyll; serve static HTML and `_next/` as-is.
+- [`docs/404.html`](404.html) — custom not-found page with link to home.
+- [`docs/Troptions-full-pack/index.html`](Troptions-full-pack/index.html) — redirect if someone uses the doubled path segment.
+- Technical markdown/HTML lives under [`docs/technical/`](technical/).
 
 ## What gets published
 

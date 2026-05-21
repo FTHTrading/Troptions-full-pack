@@ -32,7 +32,7 @@ export function homeHash(id: string): string {
 /** Slim top bar: 7 items (3 links + 3 dropdowns + home). */
 export function getSiteNavigation(): NavEntry[] {
   return [
-    { kind: "link", href: assetPath("/"), label: "Home" },
+    { kind: "link", href: "/", label: "Home" },
     { kind: "link", href: homeHash("story"), label: "Story" },
     { kind: "link", href: homeHash("proof-wall"), label: "Proof" },
     {
@@ -42,7 +42,7 @@ export function getSiteNavigation(): NavEntry[] {
         { href: homeHash("infrastructure"), label: "Infrastructure" },
         { href: homeHash("sovereign-dao"), label: "Sovereign DAO" },
         {
-          href: onPages ? DAO_PAGE_URL : assetPath("/dao/"),
+          href: onPages ? DAO_PAGE_URL : "/dao/",
           label: "DAO page",
           external: onPages,
         },
@@ -85,7 +85,7 @@ export function getSiteNavigation(): NavEntry[] {
           external: onPages,
         },
         { href: homeHash("anthem"), label: "Anthem" },
-        { href: assetPath("/anthem/"), label: "Lyrics" },
+        { href: "/anthem/", label: "Lyrics" },
         { href: homeHash("competitive"), label: "Competitive" },
         { href: homeHash("verification"), label: "Verification" },
         { href: homeHash("contact"), label: "Contact" },
@@ -106,7 +106,7 @@ export const MORE_NAV: NavLink[] = [
 ];
 
 export const ANTHEM_PAGE: NavLink = {
-  href: assetPath("/anthem/"),
+  href: "/anthem/",
   label: "Anthem lyrics",
 };
 

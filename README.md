@@ -160,22 +160,11 @@ npm run build  # static export → out/
 
 Technical markdown lives under [`docs/technical/`](docs/technical/) after Pages deploy; the polished investor build is `docs/index.html`.
 
-### GitHub Pages URL format
-
-| Item | Value |
-|------|--------|
-| Pages source | Branch `main`, folder **`/docs`** (repo Settings → Pages) |
-| Public URL | `https://fthtrading.github.io/Troptions-full-pack/` |
-| Entry file | `docs/index.html` (from `deploy-investor-site.ps1 -CopyToDocs`) |
-
-Use only the public URL above. Paths like `.../Troptions-full-pack/Troptions-full-pack/` are wrong and return **404**. A repo-root `index.html` is not used when Pages publishes from `/docs`.
-
-
 ## FTH ecosystem (repos & live URLs)
 
 | Resource | Link |
 |----------|------|
-| **Investor site (Pages)** | https://fthtrading.github.io/Troptions-full-pack/ |
+| **Investor site (Pages)** | https://fthtrading.github.io/Troptions-full-pack/ (not `…/Troptions-full-pack/Troptions-full-pack/`) |
 | **Ecosystem map (full matrix)** | [docs/technical/ECOSYSTEM_MAP.md](docs/technical/ECOSYSTEM_MAP.md) |
 | **Domain truth table** | [docs/technical/DOMAIN_TRUTH_TABLE.md](docs/technical/DOMAIN_TRUTH_TABLE.md) |
 | **Re-verify URLs** | `.\scripts\verify-ecosystem-links.ps1` |

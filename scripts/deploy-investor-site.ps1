@@ -104,6 +104,8 @@ try {
 
         Set-Content -Path (Join-Path $Docs ".nojekyll") -Value "" -NoNewline
 
+        & (Join-Path $Root "scripts\write-pages-redirects.ps1") -DocsRoot $Docs
+
         Write-Host "Syncing technical HTML artifacts for Pages..." -ForegroundColor Cyan
         & (Join-Path $Root "scripts\sync-technical-html.ps1")
 
