@@ -1,2 +1,27 @@
+<link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+<link rel="icon" href="{{ '/assets/images/troptions-logo-primary.png' | relative_url }}" type="image/png">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({ startOnLoad: true, theme: "neutral" });</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof mermaid === "undefined") return;
+
+    mermaid.initialize({ startOnLoad: false, theme: "neutral", securityLevel: "loose" });
+
+    document.querySelectorAll("pre code.language-mermaid").forEach(function (code) {
+      var pre = code.parentElement;
+      var div = document.createElement("div");
+      div.className = "mermaid";
+      div.textContent = code.textContent.trim();
+      if (pre && pre.tagName === "PRE") {
+        pre.replaceWith(div);
+      } else {
+        code.replaceWith(div);
+      }
+    });
+
+    var nodes = document.querySelectorAll("div.mermaid:not([data-processed])");
+    if (nodes.length) {
+      mermaid.run({ nodes: nodes });
+    }
+  });
+</script>

@@ -1,0 +1,182 @@
+/* TROPTIONS GitHub Pages — white-background friendly branding */
+
+:root {
+  --troptions-gold: #b8860b;
+  --troptions-gold-light: #d4a84b;
+  --troptions-text: #1a1a1a;
+  --troptions-muted: #4a4a4a;
+  --troptions-border: #e8e4dc;
+  --troptions-max: 52rem;
+}
+
+body {
+  background: #fff;
+  color: var(--troptions-text);
+}
+
+.wrapper {
+  max-width: var(--troptions-max);
+}
+
+.site-header {
+  border-top: 4px solid var(--troptions-gold);
+  border-bottom: 1px solid var(--troptions-border);
+  padding: 0.75rem 0;
+}
+
+.site-header .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.site-title {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.site-title:hover {
+  text-decoration: none;
+}
+
+.site-logo {
+  height: 48px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+}
+
+.site-nav {
+  margin-left: auto;
+}
+
+.site-nav .page-link {
+  color: var(--troptions-muted);
+}
+
+.site-nav .page-link:hover {
+  color: var(--troptions-gold);
+}
+
+.page-content {
+  padding-top: 1.5rem;
+}
+
+.post-content {
+  max-width: var(--troptions-max);
+}
+
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  color: var(--troptions-text);
+}
+
+.post-content h2 {
+  border-bottom: 1px solid var(--troptions-border);
+  padding-bottom: 0.35rem;
+  margin-top: 2rem;
+}
+
+.post-content a {
+  color: var(--troptions-gold);
+}
+
+.post-content a:hover {
+  color: var(--troptions-gold-light);
+}
+
+.post-content table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  font-size: 0.95rem;
+}
+
+.post-content th {
+  background: #faf8f4;
+  border-bottom: 2px solid var(--troptions-gold);
+}
+
+.post-content tr:nth-child(even) {
+  background: #fafafa;
+}
+
+/* Home page */
+.troptions-home .hero {
+  text-align: center;
+  margin: 0 0 2rem;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.troptions-home .hero-logo {
+  max-width: min(420px, 100%);
+  height: auto;
+  margin: 0 auto 1rem;
+}
+
+.troptions-home .hero-rings {
+  max-width: 140px;
+  opacity: 0.92;
+  margin: 0 auto 1.25rem;
+}
+
+.troptions-home .hero h1 {
+  font-size: 1.85rem;
+  margin: 0 0 0.5rem;
+  border: none;
+  padding: 0;
+}
+
+.troptions-home .tagline {
+  font-size: 1.15rem;
+  color: var(--troptions-muted);
+  max-width: 36rem;
+  margin: 0 auto 1.5rem;
+  line-height: 1.5;
+}
+
+.troptions-home .maturity-badge {
+  display: inline-block;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--troptions-border);
+  border-radius: 4px;
+  background: #faf8f4;
+  margin-bottom: 1.5rem;
+}
+
+.troptions-home .get-started {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.troptions-home .get-started li {
+  margin: 0.5rem 0;
+}
+
+.mermaid {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.page-intro {
+  font-style: italic;
+  color: var(--troptions-muted);
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 600px) {
+  .site-logo {
+    height: 40px;
+  }
+
+  .site-nav {
+    margin-left: 0;
+    width: 100%;
+  }
+}

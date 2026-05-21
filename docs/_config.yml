@@ -1,5 +1,8 @@
-title: TROPTIONS Sovereign Stack
-description: Public showcase for the TROPTIONS full-pack monorepo — L1, backends, frontends, and proof artifacts.
+title: TROPTIONS
+description: >-
+  TROPTIONS sovereign stack — L1 ledger, education and broadcast backends,
+  DAO and exchange frontends, and honest proof labels for the full-pack monorepo.
+logo: /assets/images/troptions-logo-primary.png
 baseurl: "/Troptions-full-pack"
 url: "https://fthtrading.github.io"
 theme: minima
