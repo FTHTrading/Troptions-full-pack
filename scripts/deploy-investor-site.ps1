@@ -136,6 +136,7 @@ try {
 
         Write-Host "`nGitHub Pages home: $Docs\index.html" -ForegroundColor Green
         Write-Host "Live URL: https://fthtrading.github.io/Troptions-full-pack/" -ForegroundColor Green
+        Write-Host "Anthem lyrics: https://fthtrading.github.io/Troptions-full-pack/anthem/" -ForegroundColor Green
         Write-Host "Mint DApp:  https://fthtrading.github.io/Troptions-full-pack/mint.html" -ForegroundColor Green
         Write-Host "NFT gallery: https://fthtrading.github.io/Troptions-full-pack/nft/" -ForegroundColor Green
         Write-Host "Technical docs: https://fthtrading.github.io/Troptions-full-pack/technical/" -ForegroundColor Green

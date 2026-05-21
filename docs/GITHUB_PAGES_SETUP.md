@@ -2,7 +2,7 @@
 
 **Canonical public URL (share this):** **https://fthtrading.github.io/Troptions-full-pack/**
 
-Do **not** link to `…/Troptions-full-pack/Troptions-full-pack` — that path 404s without redirects. **`docs/Troptions-full-pack/index.html`** and **`docs/Troptions-full-pack.html`** (meta refresh + canonical to the root URL) catch stray double-segment hits. Internal `next/link` hrefs must use `/` paths only; `assetPath()` is for plain `<a>`, `fetch`, and assets.
+Do **not** link to `…/Troptions-full-pack/Troptions-full-pack` — that path 404s without redirects. **`docs/Troptions-full-pack/index.html`** and **`docs/Troptions-full-pack.html`** (meta refresh + canonical to the root URL) catch stray double-segment hits. **`docs/Troptions-full-pack/anthem/index.html`** redirects doubled anthem URLs to **`/Troptions-full-pack/anthem/`**. Internal `next/link` hrefs must use `/` paths only; `assetPath()` is for plain `<a>`, `fetch`, and assets.
 
 **Build:** [`sites/investor/`](../sites/investor/) static export copied into `docs/` via [`scripts/deploy-investor-site.ps1`](../scripts/deploy-investor-site.ps1) `-CopyToDocs`. Optional Vercel/Netlify: [`sites/investor/DEPLOY.md`](../sites/investor/DEPLOY.md).
 
@@ -59,6 +59,7 @@ Open http://127.0.0.1:4000/Troptions-full-pack/
 - [`docs/.nojekyll`](.nojekyll) — skip Jekyll; serve static HTML and `_next/` as-is.
 - [`docs/404.html`](404.html) — custom not-found page with link to home.
 - [`docs/Troptions-full-pack/index.html`](Troptions-full-pack/index.html) — redirect if someone uses the doubled path segment.
+- [`docs/Troptions-full-pack/anthem/index.html`](Troptions-full-pack/anthem/index.html) — redirect `…/Troptions-full-pack/anthem` → canonical lyrics page.
 - Technical markdown/HTML lives under [`docs/technical/`](technical/).
 
 ## What gets published
