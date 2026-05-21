@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TROPTIONS — Institutional Counterparty Proof Package</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 52rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1a1a1a; }
+    h1, h2 { color: #0f172a; }
+    table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.9rem; }
+    th, td { border: 1px solid #cbd5e1; padding: 0.4rem 0.6rem; text-align: left; }
+    th { background: #f1f5f9; }
+    code { font-size: 0.85em; }
+    .disclaimer { background: #fffbeb; border: 1px solid #fcd34d; padding: 0.75rem 1rem; border-radius: 6px; }
+    a { color: #1d4ed8; }
+    .muted { color: #64748b; font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <p class="muted"><a href="PROOF_FOR_COUNTERPARTIES.md">Markdown source</a> · <a href="../../index.html">Investor home</a></p>
+
+  <h1>Institutional Counterparty Proof Package</h1>
+  <p class="disclaimer"><strong>Not legal advice.</strong> Technical diligence aid only. <strong>PROJECTION</strong> / <strong>PIPELINE</strong> labels are not audited financials. Links and verifiable facts — no hype.</p>
+  <p><strong>Configure path (2–4 weeks engineering):</strong> <a href="BUILD_AVID_ON_TROPTIONS.md">BUILD_AVID_ON_TROPTIONS.md</a></p>
+
+  <h2>What exists (PROVEN)</h2>
+  <h3>Polygon — KENNY &amp; EVL</h3>
+  <table>
+    <tr><th>Asset</th><th>Address</th><th>Explorer</th></tr>
+    <tr><td>KENNY</td><td><code>0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7</code></td><td><a href="https://polygonscan.com/token/0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7">PolygonScan</a></td></tr>
+    <tr><td>EVL</td><td><code>0xAFe185415D21671704EFaa5696dD219ACEB9fdA3</code></td><td><a href="https://polygonscan.com/token/0xAFe185415D21671704EFaa5696dD219ACEB9fdA3">PolygonScan</a></td></tr>
+  </table>
+  <p>UI: <a href="https://fthedu.unykorn.org">fthedu.unykorn.org</a></p>
+
+  <h3>Genesis World (9 contracts)</h3>
+  <p><a href="../GENESIS_POLYGON_CONTRACTS.md">GENESIS_POLYGON_CONTRACTS.md</a> · <a href="https://github.com/FTHTrading/genesis-world">genesis-world</a> · <a href="https://drunks.app">drunks.app</a></p>
+
+  <h3>XRPL &amp; Stellar issued supply</h3>
+  <p><a href="../ON_CHAIN_PROOF.md">ON_CHAIN_PROOF.md</a> · <a href="../XRPL_STELLAR_VERIFICATION.md">XRPL_STELLAR_VERIFICATION.md</a></p>
+  <p>Production issuer <code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code> · distribution <code>rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt</code> · ~874M issued IOU units (ledger, not market cap).</p>
+
+  <h3>x402, monorepo, live URLs</h3>
+  <ul>
+    <li><a href="https://x402.unykorn.org/health">x402.unykorn.org/health</a></li>
+    <li><a href="https://github.com/FTHTrading/Troptions-full-pack">Troptions-full-pack</a> — <code>cargo test --workspace</code> in <code>l1/</code></li>
+    <li><a href="https://troptions.unykorn.org/troptions">troptions hub</a> · <a href="https://launch.unykorn.org">launch</a> · <a href="https://troptionslive.unykorn.org/sports">sports</a> · <a href="https://troptionsexchange.unykorn.org/exchange-os">exchange-os</a></li>
+  </ul>
+
+  <h2>The DAO stack — what was built</h2>
+  <ul>
+    <li><strong>L1</strong> — soulbound credentials, HTLC settlement, on-chain treasury, governance proposals/votes/execute (signed RPC in prod branch)</li>
+    <li><strong>dao-service</strong> :8093 · <strong>dao-dashboard</strong> · Python light client mirroring L1</li>
+    <li><strong>8 genesis brand domains</strong> — <code>dao/registry/genesis_brands.json</code></li>
+    <li><strong>Counterparty configure</strong> — namespaces, soulbound mint, DAO realm, academy/TTN: <a href="BUILD_AVID_ON_TROPTIONS.md">BUILD_AVID_ON_TROPTIONS.md</a></li>
+    <li><strong>SNP</strong> (optional) — <a href="https://github.com/FTHTrading/sovereign-namespace-protocol">sovereign-namespace-protocol</a></li>
+    <li><strong>x402</strong> — separate pay-per-request mesh; optional integration branch</li>
+  </ul>
+
+  <h2>PENDING</h2>
+  <table>
+    <tr><th>Item</th><th>Notes</th></tr>
+    <tr><td>ai.troptions.org</td><td>DNS not pointed</td></tr>
+    <tr><td>twin.unykorn.org</td><td>CF origin flaky</td></tr>
+    <tr><td>x402api.unykorn.org</td><td>Re-probe before demos</td></tr>
+    <tr><td>Full BFT L1</td><td>Single-node sequencer today</td></tr>
+    <tr><td>Public TLS on all L1 RPC</td><td>Production nginx cutover</td></tr>
+  </table>
+
+  <h2>Downloads</h2>
+  <ul>
+    <li><a href="../../downloads/investor-executive-summary.html">Executive summary</a></li>
+    <li><a href="../../downloads/on-chain-proof-sheet.html">On-chain proof sheet</a></li>
+    <li><a href="../../downloads/infrastructure-atlas.html">Infrastructure atlas</a></li>
+    <li><a href="../../downloads/opportunity-and-roadmap.html">Opportunity &amp; roadmap</a></li>
+  </ul>
+
+  <p class="muted">Maturity: 9.5/10 per FINAL_ECOSYSTEM_AUDIT.md · Last updated 2026-05-21</p>
+</body>
+</html>

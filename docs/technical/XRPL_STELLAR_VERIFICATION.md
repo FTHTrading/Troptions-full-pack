@@ -81,4 +81,4 @@ Issued to distribution `rNX4fa…` unless noted. Amounts from live `account_line
 
 - [`ON_CHAIN_PROOF.md`](ON_CHAIN_PROOF.html) — Polygon + unified proof registry  
 - [`FINAL_ECOSYSTEM_AUDIT.md`](FINAL_ECOSYSTEM_AUDIT.html) — **9.5/10** scorecard  
-- [`counterparty/PROOF_FOR_COUNTERPARTIES.md`](counterparty/PROOF_FOR_COUNTERPARTIES.html) — Bijan / Avid package
+- [`counterparty/PROOF_FOR_COUNTERPARTIES.md`](counterparty/PROOF_FOR_COUNTERPARTIES.html) — institutional counterparty pack

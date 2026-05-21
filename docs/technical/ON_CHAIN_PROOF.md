@@ -122,5 +122,5 @@ Full table: [`GENESIS_POLYGON_CONTRACTS.md`](GENESIS_POLYGON_CONTRACTS.html). Li
 |------|------|
 | [`FINAL_ECOSYSTEM_AUDIT.md`](FINAL_ECOSYSTEM_AUDIT.html) | Score **9.5/10** |
 | [`XRPL_STELLAR_VERIFICATION.md`](XRPL_STELLAR_VERIFICATION.html) | Full XRPL/Stellar report |
-| [`counterparty/PROOF_FOR_COUNTERPARTIES.md`](counterparty/PROOF_FOR_COUNTERPARTIES.html) | Bijan-ready bullets |
+| [`counterparty/PROOF_FOR_COUNTERPARTIES.md`](counterparty/PROOF_FOR_COUNTERPARTIES.html) | Institutional counterparty pack |
 | [`ECOSYSTEM_MAP.md`](ECOSYSTEM_MAP.html) | Repos + live URLs |

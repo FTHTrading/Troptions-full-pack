@@ -1,5 +1,7 @@
 # Email draft — Bryan → Bijan (Avid)
 
+> **Superseded for outreach:** Use the generic institutional pack — [`PROOF_FOR_COUNTERPARTIES.md`](PROOF_FOR_COUNTERPARTIES.md) and [`PROOF_FOR_COUNTERPARTIES.html`](PROOF_FOR_COUNTERPARTIES.html). **Do not use** this named email for new counterparty diligence.
+
 Use placeholders below. Attach **`docs/counterparty/BUILD_AVID_ON_TROPTIONS.md`** and **`docs/TROPTIONS-GENESIS-BUILD.md`**. Optional: export `docs/investor/ONE_PAGER.md` as PDF.
 
 **Framing:** Client technical review under NDA — not a joint venture or partnership equity discussion.
