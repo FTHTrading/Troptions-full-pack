@@ -98,7 +98,15 @@ module.exports = {
     fiatApp('payment-orchestrator', './orchestrator/index.js', 4022),
     fiatApp('fedwire-adapter', './fedwire-adapter/server.js', 4023),
     fiatApp('swift-bridge', './swift-bridge/app.js', 4024),
-    fiatApp('compliance-engine', './compliance-engine/main.py', 4025),
+    {
+      name: 'compliance-engine',
+      script: './compliance-engine/main.py',
+      interpreter: 'python',
+      cwd: FIAT,
+      env: { PORT: '4025', PYTHONUNBUFFERED: '1' },
+      autorestart: false,
+      ...pm2Log('compliance-engine'),
+    },
     fiatApp('neobank-api', './neobank-api/server.js', 4026),
     fiatApp('iou-reserve-monitor', './iou-reserve-monitor/monitor.js', 4027),
     fiatApp('arbitrage-bot', './arbitrage-bot/index.js', 4028, {

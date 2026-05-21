@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AWS Full Stack Activation</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>AWS Full Stack Activation</h1>
+    <p class="tagline">PIPELINE / PROJECTION — not realized revenue until MSB + live exchange</p>
+  </header>
+  <div class="md-body">
+    <p><strong>Status:</strong> PIPELINE · <strong>Date:</strong> 2026-05-21</p>
+    <h2>Honesty labels</h2>
+    <table>
+      <tr><th>Claim</th><th>Label</th></tr>
+      <tr><td>10/10 agent score</td><td><strong>PIPELINE</strong></td></tr>
+      <tr><td>$874K/month</td><td><strong>PROJECTION</strong></td></tr>
+      <tr><td>Revenue in seconds</td><td><strong>PIPELINE</strong> (fast JSON ≠ bank deposits)</td></tr>
+    </table>
+    <h2>Port map</h2>
+    <table>
+      <tr><th>Port</th><th>Service</th></tr>
+      <tr><td>4020</td><td>backend x402-gateway</td></tr>
+      <tr><td>4022–4028</td><td>fiat rails</td></tr>
+      <tr><td>4029</td><td>baas-dashboard</td></tr>
+      <tr><td>4030 / 4034 / 4035</td><td>x402 US / EU / JP</td></tr>
+      <tr><td>4031</td><td>legacy agent-orchestrator</td></tr>
+      <tr><td>4040</td><td>usdc-base-relay</td></tr>
+      <tr><td>4100 / 4101</td><td>agent-orchestrator / mcp stub</td></tr>
+      <tr><td>8097</td><td>baas-api</td></tr>
+      <tr><td>8443</td><td>telegram-bot</td></tr>
+    </table>
+    <h2>Windows one-liner</h2>
+    <pre><code>.\scripts\activate-full-stack.ps1 -DryRun</code></pre>
+    <h2>AWS one-liner</h2>
+    <pre><code>./scripts/deploy-aws.sh</code></pre>
+    <p>Full markdown: <a href="AWS_ACTIVATION_RUNBOOK.md">AWS_ACTIVATION_RUNBOOK.md</a></p>
+  </div>
+</body>
+</html>

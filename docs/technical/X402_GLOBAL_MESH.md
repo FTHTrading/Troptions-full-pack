@@ -27,16 +27,21 @@ Agents and arbitrage bots should use **:4030+** for orderbook and orchestration.
 | **4020** | `backend/x402-gateway` | Apostle ATP mesh |
 | **4021** | popeye-relay | L1 relay |
 | **4022–4028** | fiat rails (orchestrator → arbitrage-bot) | MSB scaffold |
-| **4029** | **baas-api** | Agents, pools, tokens |
-| **4030** | **x402-gateway-v2** (US) | Canonical `GET /x402/stats` |
-| **4031** | **agent-orchestrator** | `POST /api/v1/arbitrage/multi` |
-| **4032** | **MCP XRPL** (reserved) | External vendor — **not** EU gateway |
-| **4034** | **x402-gateway-eu** | Frankfurt regional clone |
-| **4035** | **x402-gateway-jp** | Tokyo regional clone |
-| **4040** | baas-dashboard (UI) | Self-service |
-| **4731** | MCP | External vendor (mock when down) |
+| **4029** | **baas-dashboard** (UI) | Self-service |
+| **4030** | **x402-us** (US) | Canonical `GET /x402/stats` |
+| **4031** | **agent-orchestrator (legacy)** | `POST /api/v1/arbitrage/multi` |
+| **4034** | **x402-eu** | Frankfurt regional clone |
+| **4035** | **x402-jp** | Tokyo regional clone |
+| **4040** | **usdc-base-relay** | Base USDC mint stub (PIPELINE) |
+| **4100** | **agent-orchestrator (AWS)** | `POST /trade`, `POST /trade/batch` |
+| **4101** | **mcp-server stub** | `GET /tools` — not EU gateway |
+| **8097** | **baas-api** | Agents, pools, `GET /api/v1/billing/revenue` |
+| **8443** | **telegram-bot** | Operator commands |
+| **4731** | MCP vendor (optional) | External XRPL MCP when live |
 
-**Common mistake:** assigning EU/JP to **:4031** or **:4032**. Orchestrator is **4031**; MCP XRPL is **4032**; regional gateways are **4034** and **4035**.
+**Common mistake:** assigning EU/JP to **:4031** or **:4101**. Legacy orchestrator is **4031**; AWS orchestrator is **4100**; MCP stub is **4101**; regional gateways are **4034** and **4035**.
+
+See [AWS activation runbook](AWS_ACTIVATION_RUNBOOK.html).
 
 ## Step-by-step 402 flow (bot orderbook example)
 
