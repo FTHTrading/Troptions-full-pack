@@ -2,6 +2,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const wireRoutes = require('./routes/wire');
+const arbitrageRoutes = require('./routes/arbitrage');
 
 const app = express();
 app.use(express.json());
@@ -20,6 +21,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use('/api/v1/payments', wireRoutes);
+app.use('/api/v1/arbitrage', arbitrageRoutes);
 
 app.use((err, req, res, next) => {
   console.error('Orchestrator error:', err);
@@ -32,6 +34,7 @@ if (require.main === module) {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`Payment Orchestrator listening on :${PORT}`);
     console.log(`Wire webhook: POST http://127.0.0.1:${PORT}/api/v1/payments/wire`);
+    console.log(`Arbitrage: POST http://127.0.0.1:${PORT}/api/v1/arbitrage`);
   });
 }
 

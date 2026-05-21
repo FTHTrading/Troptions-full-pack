@@ -58,3 +58,31 @@ paths:
           description: Payment record
         "404":
           description: Not found
+  /api/v1/arbitrage:
+    post:
+      summary: Execute or dry-run arbitrage trade (PIPELINE)
+      description: |
+        Called by arbitrage-bot (:4028). Returns mock profit until MSB omnibus and exchange settlement live.
+        Set dry_run true or ARBITRAGE_DRY_RUN=true for simulation only.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pair:
+                  type: string
+                spread_bps:
+                  type: integer
+                amount_usd:
+                  type: number
+                dry_run:
+                  type: boolean
+                profit_reinvest_ratio:
+                  type: number
+      responses:
+        "200":
+          description: Dry-run result (PIPELINE)
+        "201":
+          description: Stub execution recorded

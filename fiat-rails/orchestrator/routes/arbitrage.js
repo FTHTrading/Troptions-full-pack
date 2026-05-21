@@ -56,6 +56,68 @@ router.get('/opportunities', (req, res) => {
  });
 });
 
+// POST /api/v1/arbitrage — execute or simulate trade (arbitrage-bot calls this)
+router.post('/', async (req, res) => {
+  const {
+    pair,
+    spread_bps,
+    amount_usd,
+    dry_run,
+    orderbook_mid,
+    profit_reinvest_ratio,
+    mock_orderbook,
+  } = req.body;
+
+  const amount = Number(amount_usd) || 0;
+  const bps = Number(spread_bps) || 0;
+  const isDry =
+    dry_run === true ||
+    dry_run === 'true' ||
+    (process.env.ARBITRAGE_DRY_RUN || 'true').toLowerCase() === 'true';
+
+  const grossProfit = Number((amount * (bps / 10000)).toFixed(2));
+  const reinvest = Number(profit_reinvest_ratio ?? process.env.PROFIT_REINVEST_RATIO ?? 0.5);
+  const netProfit = Number((grossProfit * reinvest).toFixed(2));
+
+  const arbitrageId = `arb_${Date.now()}`;
+
+  if (isDry) {
+    return res.status(200).json({
+      arbitrage_id: arbitrageId,
+      status: 'dry_run',
+      label: 'PIPELINE',
+      pair: pair || 'unknown',
+      spread_bps: bps,
+      amount_usd: amount,
+      profit_usd: netProfit,
+      gross_profit_usd: grossProfit,
+      profit_reinvest_ratio: reinvest,
+      orderbook_mid,
+      mock_orderbook: Boolean(mock_orderbook),
+      message: 'DRY_RUN — no settlement (MSB omnibus PIPELINE)',
+      disclaimer: 'PROJECTION — not audited P&L',
+    });
+  }
+
+  // PIPELINE stub: mock successful execution until exchange + bank rails live
+  const record = {
+    arbitrage_id: arbitrageId,
+    status: 'executed_stub',
+    label: 'PIPELINE',
+    pair,
+    spread_bps: bps,
+    amount_usd: amount,
+    profit_usd: netProfit,
+    executed_at: new Date().toISOString(),
+  };
+  opportunities.set(arbitrageId, record);
+
+  return res.status(201).json({
+    ...record,
+    message: 'PIPELINE mock execution — wire to Exchange OS when live',
+  });
+});
+
 // Core arbitrage logic
 async function scanArbitrageOpportunities() {
  // In production, this would:
