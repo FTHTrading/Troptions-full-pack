@@ -104,6 +104,12 @@ Details: [`docs/DOMAIN_MAP.md`](docs/DOMAIN_MAP.md)
 
 ## Quick start
 
+**Full stack (L1 + backends + DAO):** see [`docs/QUICKSTART.md`](docs/QUICKSTART.md)
+
+```powershell
+.\scripts\quickstart-all.ps1
+```
+
 ### L1
 
 ```powershell
@@ -136,6 +142,8 @@ npm run dev
 - [HTTP APIs](docs/API.md)  
 - [Domain map](docs/DOMAIN_MAP.md)
 - [Full DAO guide](docs/DAO.md)
+- [One-command quickstart](docs/QUICKSTART.md)
+- [Investor one-pager](docs/WHATS_BUILT_INVESTOR_ONE_PAGER.md)
 - [Ops runbook](docs/RUNBOOK.md)  
 
 ## Source provenance
