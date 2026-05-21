@@ -34,6 +34,18 @@ KNOWN = {
         "PIPELINE",
         "Omnibus vs ledger reconciliation stub",
     ),
+    "arbitrage-bot": (
+        "4028",
+        "fiat-rails/arbitrage-bot/",
+        "PIPELINE",
+        "Cross-bank arbitrage watch loop (`DRY_RUN` default)",
+    ),
+    "baas-api": (
+        "8097",
+        "fiat-rails/baas-api/",
+        "PROJECTION",
+        "BaaS x402 onboarding + revenue dashboard stubs",
+    ),
 }
 
 PM2_START = "<!-- AUTO:PM2_PORTS_START -->"

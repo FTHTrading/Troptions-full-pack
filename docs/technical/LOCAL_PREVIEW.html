@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local preview (port 3123)</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Local preview (port 3123)</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Local preview — fix <code>ERR_CONNECTION_REFUSED</code> on localhost:3123</h1>
+<p>GitHub Pages HTML under <code>docs/</code> and the investor Next.js app both use port <strong>3123</strong> for local preview. Nothing listens until you start a server.</p>
+<hr />
+<h2>Option A — static docs (GitHub Pages export)</h2>
+<p>From repo root:</p>
+<pre><code class="language-powershell">cd docs
+npx --yes serve . -l 3123
+</code></pre>
+<p>Or use the helper script:</p>
+<pre><code class="language-powershell">.\scripts\preview-pages-3123.ps1
+</code></pre>
+<p>Open:</p>
+<ul>
+<li>http://localhost:3123/technical/SYSTEM_MANIFEST.html  </li>
+<li>http://localhost:3123/technical/ARBITRAGE_AND_BAAS.html  </li>
+</ul>
+<p>If you previously opened <code>http://localhost:3123</code> with no path and saw <strong>ERR_CONNECTION_REFUSED</strong>, the fix is simply running one of the commands above first.</p>
+<hr />
+<h2>Option B — investor Next.js dev server</h2>
+<pre><code class="language-powershell">cd sites\investor
+npm install
+npm run dev
+</code></pre>
+<p><code>package.json</code> sets <code>next dev -p 3123</code>. Use the app's <code>basePath</code> when testing production-like URLs (see <code>sites/investor/DEPLOY.md</code>).</p>
+<hr />
+<h2>Option C — full technical HTML sync</h2>
+<p>After editing <code>docs/technical/*.md</code>:</p>
+<pre><code class="language-powershell">npm run docs:update
+</code></pre>
+<p>Then serve with Option A.</p>
+<hr />
+<h2>Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Symptom</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ERR_CONNECTION_REFUSED</code></td>
+<td>Start <code>serve</code> or <code>npm run dev</code> — port 3123 is not started by PM2</td>
+</tr>
+<tr>
+<td>Wrong paths / 404</td>
+<td>Use <code>serve</code> from <code>docs/</code> folder, or investor <code>basePath</code> per DEPLOY.md</td>
+</tr>
+<tr>
+<td>Firewall block</td>
+<td>Allow Node on private network once</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/LOCAL_PREVIEW.html</p>
+</body>
+</html>

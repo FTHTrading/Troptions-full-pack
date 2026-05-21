@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BaaS batch liquidity pools</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>BaaS batch liquidity pools</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>BaaS batch liquidity pools — API call sequence</h1>
+<p><strong>Audience:</strong> Operators wiring Exchange OS / fiat-rails liquidity.<br />
+<strong>Last updated:</strong> 2026-05-21<br />
+<strong>Service:</strong> <code>fiat-rails/baas-api</code> on <strong>:8097</strong> (<strong>PIPELINE</strong>)</p>
+<p><strong>Truth labels:</strong> <strong>PROVEN</strong> = ledger issuance exists · <strong>PIPELINE</strong> = BaaS API + job queue (no live AMM until worker runs) · <strong>PROJECTION</strong> = Alexandrite collateral economics</p>
+<p>See also: <a href="ARBITRAGE_AND_BAAS.html">Arbitrage &amp; BaaS hub</a> · <a href="SYSTEM_MANIFEST.html">System manifest</a> · <a href="XRPL_STELLAR_VERIFICATION.html">XRPL verification</a></p>
+<hr />
+<h2>Prerequisites</h2>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BAAS_API_KEY</code></td>
+<td><code>X-API-Key</code> on all mutating routes (optional in dev if unset)</td>
+</tr>
+<tr>
+<td><code>X-402-Wallet-Address</code></td>
+<td>Payer XRPL/ATP wallet for x402 settlement</td>
+</tr>
+<tr>
+<td>Payment orchestrator <strong>:4022</strong></td>
+<td>Wire → IOU rail (health check before batch)</td>
+</tr>
+<tr>
+<td>x402 gateway <strong>:4020</strong></td>
+<td><code>GET /health</code> — baas-api <code>/health</code> reports reachability</td>
+</tr>
+<tr>
+<td><code>node fiat-rails/baas-api/index.js</code></td>
+<td>BaaS API listening on <strong>8097</strong></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-powershell">cd fiat-rails
+$env:PORT = &quot;8097&quot;
+$env:BAAS_API_KEY = &quot;operator-key&quot;
+$env:X402_GATEWAY_URL = &quot;http://127.0.0.1:4020&quot;
+node baas-api/index.js
+</code></pre>
+<hr />
+<h2>Token inventory (repo truth)</h2>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>XRPL issuer</th>
+<th>Label</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TROPTIONS</td>
+<td><code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code></td>
+<td><strong>PROVEN</strong> IOU</td>
+<td>~100M XRPL leg</td>
+</tr>
+<tr>
+<td>USDC</td>
+<td>same</td>
+<td><strong>PROVEN</strong> IOU</td>
+<td>TROPTIONS-issued, <strong>not</strong> Circle native</td>
+</tr>
+<tr>
+<td>USDT</td>
+<td>same</td>
+<td><strong>PROVEN</strong> IOU</td>
+<td></td>
+</tr>
+<tr>
+<td>DAI</td>
+<td>same</td>
+<td><strong>PROVEN</strong> IOU</td>
+<td></td>
+</tr>
+<tr>
+<td>EURC</td>
+<td>same</td>
+<td><strong>PROVEN</strong> IOU</td>
+<td></td>
+</tr>
+<tr>
+<td>TROPTIONS-USD</td>
+<td>same</td>
+<td><strong>PIPELINE</strong> rail</td>
+<td>Fiat-backed label when MSB live</td>
+</tr>
+<tr>
+<td>Alexandrite / AXLUSD</td>
+<td>same (placeholder)</td>
+<td><strong>PROJECTION</strong></td>
+<td>Gem collateral playbook — not ledger-minted at scale</td>
+</tr>
+<tr>
+<td>KENNY / EVL</td>
+<td>Polygon mainnet</td>
+<td><strong>PROVEN</strong> (separate chain)</td>
+<td>Use <code>docs/technical/GENESIS_POLYGON_CONTRACTS.html</code> — <strong>not</strong> this XRPL batch</td>
+</tr>
+</tbody>
+</table>
+<p>Distribution treasury: <code>rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt</code> · AMM ops wallet: <code>rBU6exSQHkrTog6n1F5RX8gzcUrXoniGcp</code></p>
+<hr />
+<h2>Exact call sequence (one-shot batch)</h2>
+<h3>0. Health</h3>
+<pre><code class="language-http">GET http://127.0.0.1:8097/health
+GET http://127.0.0.1:4022/health
+GET http://127.0.0.1:4020/health
+</code></pre>
+<h3>1. Register token (per new asset) — <strong>402 then pay</strong></h3>
+<p>Only needed for assets <strong>not</strong> pre-seeded in baas-api (<code>token_usdc</code>, <code>token_eurc</code>, etc. are seeded).</p>
+<pre><code class="language-http">POST http://127.0.0.1:8097/api/v1/tokens
+X-API-Key: {BAAS_API_KEY}
+X-402-Wallet-Address: {wallet}
+Content-Type: application/json
+
+{
+  &quot;symbol&quot;: &quot;Alexandrite&quot;,
+  &quot;name&quot;: &quot;Alexandrite collateral IOU&quot;,
+  &quot;issuer&quot;: &quot;rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ&quot;,
+  &quot;chain&quot;: &quot;xrpl&quot;
+}
+</code></pre>
+<p><strong>Response (no payment):</strong> <code>402</code> + <code>x402-invoice</code> (~$10,000 default setup fee).</p>
+<p><strong>Retry with:</strong></p>
+<pre><code class="language-http">X-402-Payment: {receipt_or_tx_envelope_id}
+</code></pre>
+<p><strong>Response (paid):</strong> <code>201</code> + <code>token_id</code>.</p>
+<h3>2. Create pool (single) — <strong>402 then pay</strong></h3>
+<pre><code class="language-http">POST http://127.0.0.1:8097/api/v1/pools
+X-API-Key: {BAAS_API_KEY}
+X-402-Wallet-Address: {wallet}
+Content-Type: application/json
+
+{
+  &quot;token_id&quot;: &quot;token_usdc&quot;,
+  &quot;base&quot;: &quot;USDC&quot;,
+  &quot;counter&quot;: &quot;TROPTIONS-USD&quot;,
+  &quot;initial_liquidity&quot;: 2500000,
+  &quot;fee_percent&quot;: 0.25
+}
+</code></pre>
+<p>Fee: <strong>0.25%</strong> of <code>initial_liquidity</code> (minimum <strong>$250</strong>). Job appended to <code>fiat-rails/baas-api/data/baas-pool-jobs.json</code>.</p>
+<h3>3. Batch all pools — <strong>recommended one-shot</strong></h3>
+<pre><code class="language-http">POST http://127.0.0.1:8097/api/v1/pools/batch
+X-API-Key: {BAAS_API_KEY}
+X-402-Wallet-Address: {wallet}
+Content-Type: application/json
+
+{
+  &quot;pools&quot;: [
+    { &quot;token_id&quot;: &quot;token_troptions_usd&quot;, &quot;base&quot;: &quot;TROPTIONS-USD&quot;, &quot;counter&quot;: &quot;EUR-IOU&quot;, &quot;initial_liquidity&quot;: 1000000 },
+    { &quot;token_id&quot;: &quot;token_alexandrite&quot;, &quot;base&quot;: &quot;Alexandrite&quot;, &quot;counter&quot;: &quot;TROPTIONS-USD&quot;, &quot;initial_liquidity&quot;: 500000 },
+    { &quot;token_id&quot;: &quot;token_usdc&quot;, &quot;base&quot;: &quot;USDC&quot;, &quot;counter&quot;: &quot;TROPTIONS-USD&quot;, &quot;initial_liquidity&quot;: 2500000 },
+    { &quot;token_id&quot;: &quot;token_eurc&quot;, &quot;base&quot;: &quot;EURC&quot;, &quot;counter&quot;: &quot;TROPTIONS-USD&quot;, &quot;initial_liquidity&quot;: 1000000 }
+  ]
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Payment header</th>
+<th>Response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>First POST</td>
+<td>omitted</td>
+<td><code>402</code> — <code>amount_usd</code> = <strong>sum</strong> of per-pool fees</td>
+</tr>
+<tr>
+<td>Second POST</td>
+<td><code>X-402-Payment: …</code></td>
+<td><code>202</code> — <code>batch_id</code>, <code>jobs[]</code>, writes <code>baas-pool-jobs.json</code></td>
+</tr>
+</tbody>
+</table>
+<h3>4. Poll jobs</h3>
+<pre><code class="language-http">GET http://127.0.0.1:8097/api/v1/pools/jobs?batch_id={batch_id}
+X-API-Key: {BAAS_API_KEY}
+</code></pre>
+<hr />
+<h2>Operator script</h2>
+<pre><code class="language-powershell"># Quote fees (DryRun prints curl)
+.\scripts\batch-create-pools.ps1 -DryRun
+
+# Live: 402 invoice then auto-retry with staged payment header
+$env:BAAS_API_KEY = &quot;operator-key&quot;
+.\scripts\batch-create-pools.ps1
+</code></pre>
+<p>Config template: <code>config/pool-batch.example.json</code> → copy to <code>config/pool-batch.json</code>.</p>
+<hr />
+<h2>Honest pipeline labels</h2>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IOUs exist on XRPL/Stellar</td>
+<td><strong>PROVEN</strong></td>
+</tr>
+<tr>
+<td>BaaS token/pool HTTP API</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>x402 fee collection</td>
+<td><strong>PIPELINE</strong> (staged verify)</td>
+</tr>
+<tr>
+<td>Job queue file</td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>XRPL AMM / Exchange OS pool creation</td>
+<td><strong>PIPELINE</strong> (async worker TBD)</td>
+</tr>
+<tr>
+<td>Alexandrite collateral redemption</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Do <strong>not</strong> describe batch <code>202</code> as live tradable liquidity until AMM accounts show pool state on explorer.</p>
+<hr />
+<h2>Fee defaults</h2>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Token setup</td>
+<td>$10,000 (<code>BAAS_TOKEN_SETUP_FEE_USD</code>)</td>
+</tr>
+<tr>
+<td>Pool setup</td>
+<td>0.25% of <code>initial_liquidity</code>, min $250</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>Sum of pool lines</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>curl one-liner (batch, staged payment)</h2>
+<pre><code class="language-bash">curl -s -X POST http://127.0.0.1:8097/api/v1/pools/batch \
+  -H &quot;Content-Type: application/json&quot; \
+  -H &quot;X-API-Key: $BAAS_API_KEY&quot; \
+  -H &quot;X-402-Wallet-Address: rfbZzM6SGZHbfxrg85vyeKSEMMQCfNXTNw&quot; \
+  -H &quot;X-402-Payment: baas_batch_$(date +%s)&quot; \
+  -d '{&quot;pools&quot;:[{&quot;token_id&quot;:&quot;token_usdc&quot;,&quot;base&quot;:&quot;USDC&quot;,&quot;counter&quot;:&quot;TROPTIONS-USD&quot;,&quot;initial_liquidity&quot;:2500000}]}'
+</code></pre>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/BAAS_BATCH_POOLS.html</p>
+</body>
+</html>

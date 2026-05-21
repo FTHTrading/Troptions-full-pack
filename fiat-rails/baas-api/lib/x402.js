@@ -3,17 +3,30 @@
  */
 const crypto = require('crypto');
 
-const GATEWAY = process.env.X402_GATEWAY_URL || 'http://127.0.0.1:4020';
+const GATEWAY = process.env.X402_GATEWAY_URL || 'http://127.0.0.1:4030';
 
 function requireApiKey(req, res) {
   const expected = process.env.BAAS_API_KEY;
   if (!expected) return true;
   const key = req.headers['x-api-key'] || req.headers['authorization']?.replace(/^Bearer\s+/i, '');
-  if (key !== expected) {
-    res.status(401).json({ error: 'Invalid or missing BAAS_API_KEY', label: 'PIPELINE' });
+  const sig = req.headers['x-signature'];
+  const ts = req.headers['x-timestamp'];
+
+  if (sig && ts && key === expected) {
+    const body = JSON.stringify(req.body || {});
+    const expectedSig = crypto
+      .createHmac('sha256', expected)
+      .update(`${ts}.${body}`)
+      .digest('hex');
+    if (sig === expectedSig) return true;
+    res.status(401).json({ error: 'Invalid HMAC signature', label: 'PIPELINE' });
     return false;
   }
-  return true;
+
+  if (key === expected) return true;
+
+  res.status(401).json({ error: 'Invalid or missing BAAS_API_KEY', label: 'PIPELINE' });
+  return false;
 }
 
 function walletHeader(req) {

@@ -23,6 +23,25 @@ app.post('/start', (req, res) => {
   res.json({ status: 'started', ...arbitrator.getStatus() });
 });
 
+app.post('/execute', async (req, res) => {
+  const dryRun =
+    req.body?.dry_run !== undefined
+      ? Boolean(req.body.dry_run)
+      : (process.env.DRY_RUN || 'true').toLowerCase() === 'true';
+  try {
+    const results = await arbitrator.runScan({ dry_run: dryRun, ...req.body });
+    res.json({
+      status: 'executed',
+      dry_run: dryRun,
+      label: 'PIPELINE',
+      results,
+      ...arbitrator.getStatus(),
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message, label: 'PIPELINE' });
+  }
+});
+
 app.post('/stop', (req, res) => {
   arbitrator.stopWatch();
   res.json({ status: 'stopped' });

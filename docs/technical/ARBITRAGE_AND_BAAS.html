@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Arbitrage and BaaS</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Arbitrage and BaaS</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Arbitrage &amp; BaaS — fiat-rails hub</h1>
+<p><strong>Last updated:</strong> 2026-05-21</p>
+<p>Cross-links for operators running <strong>arbitrage-bot</strong> (:4028) and <strong>baas-api</strong> (:8097) against the payment orchestrator (:4022) and x402 gateway (:4020).</p>
+<hr />
+<h2>Services</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Port</th>
+<th>Path</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Payment orchestrator</td>
+<td>4022</td>
+<td><code>fiat-rails/orchestrator</code></td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>x402 gateway (monorepo sidecar)</td>
+<td>4020</td>
+<td><code>backend/x402-gateway</code></td>
+<td><strong>PIPELINE</strong> / prod on UnyKorn</td>
+</tr>
+<tr>
+<td>Arbitrage bot</td>
+<td>4028</td>
+<td><code>fiat-rails/arbitrage-bot</code></td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td>BaaS dashboard</td>
+<td>4029</td>
+<td><code>fiat-rails/baas-dashboard</code></td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+<tr>
+<td><strong>BaaS API (pools/tokens)</strong></td>
+<td><strong>8097</strong></td>
+<td><code>fiat-rails/baas-api</code></td>
+<td><strong>PIPELINE</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Arbitrage flow (<strong>PIPELINE</strong>)</h2>
+<ol>
+<li>Bot scans spreads via x402-gated orderbook (<code>arbitrage-bot/x402-client.js</code>).</li>
+<li>Compliance screen on :4025 (when enabled).</li>
+<li><code>POST /api/v1/arbitrage</code> on orchestrator (route stub in <code>orchestrator/routes/arbitrage.js</code>).</li>
+</ol>
+<p>Env template: <code>fiat-rails/arbitrage-bot/.env.arbitrage.template</code></p>
+<hr />
+<h2>BaaS liquidity batch (<strong>PIPELINE</strong>)</h2>
+<p><strong>Canonical doc:</strong> <a href="BAAS_BATCH_POOLS.html">BAAS_BATCH_POOLS</a></p>
+<p><strong>Quick run:</strong></p>
+<pre><code class="language-powershell">.\scripts\batch-create-pools.ps1 -DryRun
+$env:BAAS_API_KEY = &quot;operator-key&quot;
+.\scripts\batch-create-pools.ps1
+</code></pre>
+<p><strong>API:</strong> <code>POST /api/v1/pools/batch</code> on :8097 — sums x402 pool setup fees, queues <code>data/baas-pool-jobs.json</code>.</p>
+<hr />
+<h2>Shared prerequisites</h2>
+<ul>
+<li><code>BAAS_API_KEY</code> / orchestrator secrets in operator vault (never commit <code>.env</code>)</li>
+<li><code>X-402-Wallet-Address</code> for ATP settlement headers</li>
+<li><a href="X402_INTEGRATION.html">X402 integration</a> for production vs staged verify</li>
+<li><a href="XRPL_STELLAR_VERIFICATION.html">XRPL &amp; Stellar verification</a> for IOU inventory truth table</li>
+</ul>
+<hr />
+<h2>Document index</h2>
+<table>
+<thead>
+<tr>
+<th>Doc</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="BAAS_BATCH_POOLS.html">BAAS_BATCH_POOLS</a></td>
+<td>Exact POST sequence + token table</td>
+</tr>
+<tr>
+<td><a href="MSB_FIAT_RAILS.html">MSB_FIAT_RAILS</a></td>
+<td>Capitalization tree</td>
+</tr>
+<tr>
+<td><a href="SYSTEM_MANIFEST.html">SYSTEM_MANIFEST</a></td>
+<td>Ports &amp; revenue labels</td>
+</tr>
+<tr>
+<td><a href="../../fiat-rails/baas-api/README.html"><code>fiat-rails/baas-api/README</code></a></td>
+<td>API README</td>
+</tr>
+</tbody>
+</table>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/ARBITRAGE_AND_BAAS.html</p>
+</body>
+</html>

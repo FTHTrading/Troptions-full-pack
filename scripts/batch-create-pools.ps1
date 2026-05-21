@@ -1,149 +1,138 @@
-# TROPTIONS Batch Liquidity Pool Creator
-# Creates pools for all your tokens in one shot
-# Usage: .\scripts\batch-create-pools.ps1
-
+# Batch-create BaaS liquidity pools from config/pool-batch.json
+# Usage: .\scripts\batch-create-pools.ps1 [-DryRun] [-Config path]
 param(
- [string]$BaaSUrl = "http://localhost:4029",
- [string]$ApiKey = "your_api_key_here",
- [string]$WalletAddress = "rYourWalletAddress..."
+    [switch]$DryRun,
+    [string]$Config = ""
 )
 
 $ErrorActionPreference = "Stop"
+$Root = Split-Path -Parent $PSScriptRoot
+Set-Location $Root
 
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host "TROPTIONS BATCH POOL CREATOR" -ForegroundColor Cyan
-Write-Host "========================================" -ForegroundColor Cyan
-Write-Host ""
-
-# Define your tokens here
-$Tokens = @(
- # Token 1: Alexandrite
- @{
- symbol = "ALEX"
- name = "Alexandrite"
- issuer = "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
- collateral_type = "commodity"
- initial_supply = "1000000"
- base_amount = 50000
- counter_amount = 50000
- fee_percent = 0.25
- desired_pairs = @("ALEX/USD-IOU", "ALEX/EUR-IOU")
- },
- # Token 2: TROPTIONS-GOLD
- @{
- symbol = "XAU"
- name = "TROPTIONS-GOLD"
- issuer = "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ"
- collateral_type = "commodity"
- initial_supply = "100000"
- base_amount = 1000
- counter_amount = 200000
- fee_percent = 0.25
- desired_pairs = @("XAU/USD-IOU", "XAU/EUR-IOU")
- },
- # Token 3: Partner Token (placeholder)
- @{
- symbol = "PART"
- name = "Partner Token"
- issuer = "rPartnerAddress..."
- collateral_type = "fiat"
- initial_supply = "10000000"
- base_amount = 1000000
- counter_amount = 10000
- fee_percent = 0.25
- desired_pairs = @("PART/USD-IOU")
- }
-)
-
-$CreatedTokens = @()
-$CreatedPools = @()
-
-foreach ($token in $Tokens) {
- Write-Host "Processing $($token.symbol)..." -ForegroundColor Yellow
- 
- try {
- # Step 1: Onboard token (with x402 payment)
- Write-Host "  Step 1: Onboarding token..." -ForegroundColor Gray
- $tokenBody = @{
- symbol = $token.symbol
- name = $token.name
- issuer = $token.issuer
- collateral_type = $token.collateral_type
- initial_supply = $token.initial_supply
- desired_pairs = $token.desired_pairs
- } | ConvertTo-Json
- 
- $tokenResponse = Invoke-RestMethod -Uri "$BaaSUrl/api/v1/tokens" `
- -Method Post `
- -Headers @{
- "Authorization" = "Bearer $ApiKey"
- "X-402-Wallet-Address" = $WalletAddress
- "Content-Type" = "application/json"
- } `
- -Body $tokenBody
- 
- if ($tokenResponse.status -eq 'compliance_hold') {
- Write-Host "  ⚠️  Token $($token.symbol) held for compliance" -ForegroundColor Yellow
- continue
- }
- 
- $tokenId = $tokenResponse.token_id
- Write-Host "  ✅ Token onboarded: $tokenId" -ForegroundColor Green
- $CreatedTokens += $tokenResponse
- 
- # Step 2: Create liquidity pools for each desired pair
- foreach ($pair in $token.desired_pairs) {
- $counter = $pair.Split('/')[1]
- 
- Write-Host "  Step 2: Creating pool $($token.symbol)/$counter..." -ForegroundColor Gray
- $poolBody = @{
- token_id = $tokenId
- base = $token.symbol
- counter = $counter
- initial_liquidity = @{
- base_amount = $token.base_amount
- counter_amount = $token.counter_amount
- }
- fee_percent = $token.fee_percent
- } | ConvertTo-Json
- 
- $poolResponse = Invoke-RestMethod -Uri "$BaaSUrl/api/v1/tokens/$tokenId/pools" `
- -Method Post `
- -Headers @{
- "Authorization" = "Bearer $ApiKey"
- "X-402-Wallet-Address" = $WalletAddress
- "Content-Type" = "application/json"
- } `
- -Body $poolBody
- 
- Write-Host "  ✅ Pool created: $($poolResponse.pool_id)" -ForegroundColor Green
- $CreatedPools += $poolResponse
- }
- 
- } catch {
- Write-Host "  ❌ Error processing $($token.symbol): $_" -ForegroundColor Red
- }
+if (-not $Config) {
+    $Config = Join-Path $Root "config\pool-batch.json"
+    if (-not (Test-Path $Config)) {
+        $Config = Join-Path $Root "config\pool-batch.example.json"
+        Write-Host "Using example config: $Config" -ForegroundColor Yellow
+        Write-Host "Copy to config\pool-batch.json to customize." -ForegroundColor Yellow
+    }
 }
 
-Write-Host ""
-Write-Host "========================================" -ForegroundColor Green
-Write-Host "BATCH CREATION COMPLETE!" -ForegroundColor Green
-Write-Host "========================================" -ForegroundColor Green
-Write-Host ""
-Write-Host "Tokens Created: $($CreatedTokens.Count)" -ForegroundColor Cyan
-foreach ($t in $CreatedTokens) {
- Write-Host "  - $($t.symbol): $($t.token_id)" -ForegroundColor White
+$cfg = Get-Content $Config -Raw | ConvertFrom-Json
+$baseUrl = if ($cfg.baas_url) { $cfg.baas_url } else { "http://127.0.0.1:8097" }
+$apiKey = $env:BAAS_API_KEY
+if (-not $apiKey) {
+    Write-Warning "BAAS_API_KEY not set - API may reject requests if server requires a key."
 }
-Write-Host ""
-Write-Host "Pools Created: $($CreatedPools.Count)" -ForegroundColor Cyan
-foreach ($p in $CreatedPools) {
- Write-Host "  - $($p.base)/$($p.counter): $($p.pool_id)" -ForegroundColor White
+$wallet = if ($cfg.x402_wallet) { $cfg.x402_wallet } else { $env:X402_WALLET_ADDRESS }
+if (-not $wallet) {
+    Write-Warning "Set x402_wallet in config or X402_WALLET_ADDRESS env."
 }
-Write-Host ""
-Write-Host "Revenue streams now active:" -ForegroundColor Yellow
-Write-Host "  • Trading fees (0.25% per trade)" -ForegroundColor White
-Write-Host "  • Spread capture (arbitrage bot)" -ForegroundColor White
-Write-Host "  • x402 data fees (bot pays per snapshot)" -ForegroundColor White
-Write-Host ""
-Write-Host "Next: Start arbitrage bot" -ForegroundColor Yellow
-Write-Host "  curl -X POST http://localhost:4028/start" -ForegroundColor White
+
+$headers = @{
+    "Content-Type" = "application/json"
+}
+if ($apiKey) { $headers["X-API-Key"] = $apiKey }
+if ($wallet) { $headers["X-402-Wallet-Address"] = $wallet }
+
+Write-Host "`n=== BaaS batch pool setup ===" -ForegroundColor Cyan
+Write-Host "Config: $Config"
+Write-Host "Target: $baseUrl"
+Write-Host "DryRun: $DryRun`n"
+
+# Health
+$healthUrl = "$baseUrl/health"
+Write-Host "GET $healthUrl"
+if ($DryRun) {
+    Write-Host "  [DryRun] curl -s $healthUrl" -ForegroundColor DarkGray
+} else {
+    try {
+        $h = Invoke-RestMethod -Uri $healthUrl -Method Get -TimeoutSec 5
+        Write-Host "  status=$($h.status) x402=$($h.x402_gateway_reachable) label=$($h.label)" -ForegroundColor Green
+    } catch {
+        Write-Host "  health failed: $_" -ForegroundColor Red
+        throw "Start baas-api: cd fiat-rails; `$env:PORT=8097; node baas-api/index.js"
+    }
+}
+
+# Optional token registration
+if ($cfg.tokens -and -not $cfg.skip_token_registration) {
+    foreach ($t in $cfg.tokens) {
+        $body = $t | ConvertTo-Json -Depth 5
+        Write-Host "`nPOST $baseUrl/api/v1/tokens" -ForegroundColor Cyan
+        Write-Host '  Step: 402 invoice, then retry with X-402-Payment' -ForegroundColor DarkGray
+        if ($DryRun) {
+            Write-Host "  [DryRun] curl -X POST $baseUrl/api/v1/tokens -H 'X-API-Key: ...' -H 'X-402-Wallet-Address: $wallet' -d '$body'" -ForegroundColor DarkGray
+        } else {
+            Write-Host "  Skipping live token POST - set skip_token_registration:false and pay x402 to register." -ForegroundColor Yellow
+        }
+    }
+}
+
+$poolItems = @()
+foreach ($p in $cfg.pools) {
+    $poolItems += @{
+        token_id           = $p.token_id
+        base               = $p.base
+        counter            = $p.counter
+        initial_liquidity  = $p.initial_liquidity
+        fee_percent        = $p.fee_percent
+    }
+}
+$batchBody = (@{ pools = $poolItems } | ConvertTo-Json -Depth 8 -Compress)
+$batchUrl = "$baseUrl/api/v1/pools/batch"
+
+Write-Host "`nPOST $batchUrl"
+Write-Host "Pools: $($cfg.pools.Count)"
+
+if ($DryRun) {
+    Write-Host ''
+    Write-Host '[DryRun] Step 1: quote fees (expect HTTP 402)' -ForegroundColor Yellow
+    Write-Host @"
+curl -s -X POST "$batchUrl" `
+  -H "Content-Type: application/json" `
+  -H "X-API-Key: `$env:BAAS_API_KEY" `
+  -H "X-402-Wallet-Address: $wallet" `
+  -d '@$Config'
+"@ -ForegroundColor DarkGray
+    Write-Host ''
+    Write-Host '[DryRun] Step 2: submit with payment' -ForegroundColor Yellow
+    Write-Host @"
+curl -s -X POST "$batchUrl" `
+  -H "Content-Type: application/json" `
+  -H "X-API-Key: `$env:BAAS_API_KEY" `
+  -H "X-402-Wallet-Address: $wallet" `
+  -H "X-402-Payment: baas_receipt_`$(Get-Date -Format yyyyMMddHHmmss)" `
+  -d '@$Config'
+"@ -ForegroundColor DarkGray
+    Write-Host "`n[DryRun] Check jobs:" -ForegroundColor Yellow
+    Write-Host "curl -s `"$baseUrl/api/v1/pools/jobs`" -H `"X-API-Key: `$env:BAAS_API_KEY`"" -ForegroundColor DarkGray
+    exit 0
+}
+
+# Unpaid - get 402 invoice with total
+try {
+    $invoice = Invoke-WebRequest -Uri $batchUrl -Method Post -Headers $headers -Body $batchBody -TimeoutSec 30
+    if ($invoice.StatusCode -eq 202 -or $invoice.StatusCode -eq 201) {
+        $result = $invoice.Content | ConvertFrom-Json
+        Write-Host "Batch accepted: $($result.batch_id) pools=$($result.pool_count) fee=`$$($result.total_fee_usd)" -ForegroundColor Green
+        exit 0
+    }
+} catch {
+    $resp = $_.Exception.Response
+    if ($resp -and [int]$resp.StatusCode -eq 402) {
+        $reader = New-Object System.IO.StreamReader($resp.GetResponseStream())
+        $json = $reader.ReadToEnd() | ConvertFrom-Json
+        Write-Host "402 invoice - total USD: $($json.amount_usd) ATP: $($json.amount_atp)" -ForegroundColor Yellow
+        Write-Host "Pay via x402 gateway then re-run with X-402-Payment header." -ForegroundColor Yellow
+        $payHeaders = $headers.Clone()
+        $payHeaders["X-402-Payment"] = "baas_batch_$(Get-Date -Format 'yyyyMMddHHmmss')"
+        $paid = Invoke-RestMethod -Uri $batchUrl -Method Post -Headers $payHeaders -Body $batchBody -TimeoutSec 30
+        Write-Host "Batch queued: $($paid.batch_id) jobs=$($paid.jobs.Count) file=$($paid.jobs_file)" -ForegroundColor Green
+        exit 0
+    }
+    throw
+}
+
+Write-Host "Unexpected response" -ForegroundColor Red
+exit 1

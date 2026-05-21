@@ -1,0 +1,22 @@
+{
+  "jobs": [
+    {
+      "job_id": "job_b937040e-e070-4325-8306-798870280acf",
+      "batch_id": "batch_8f3d8fe0",
+      "status": "queued",
+      "label": "PIPELINE",
+      "token_id": "token_usdc",
+      "base": "USDC",
+      "counter": "TROPTIONS-USD",
+      "initial_liquidity": 1000000,
+      "fee_usd": 2500,
+      "x402_receipt": "rcpt1",
+      "wallet": "rTest",
+      "created_at": "2026-05-21T20:18:49.680Z",
+      "updated_at": "2026-05-21T20:18:49.680Z",
+      "orchestrator_url": "http://127.0.0.1:4022",
+      "note": "Queued for Exchange OS / XRPL AMM — not on-ledger until worker runs"
+    }
+  ],
+  "updated_at": "2026-05-21T20:18:49.680Z"
+}

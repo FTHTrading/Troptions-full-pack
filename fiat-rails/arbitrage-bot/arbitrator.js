@@ -105,7 +105,12 @@ async function scanPair(pair) {
   return { pair, bps, action: 'executed', trade, result };
 }
 
-async function runScan() {
+async function runScan(opts = {}) {
+  const prevDry = DRY_RUN;
+  if (opts.dry_run !== undefined) {
+    // eslint-disable-next-line no-global-assign
+    module.exports._overrideDryRun = opts.dry_run;
+  }
   state.scanCount += 1;
   state.lastScan = new Date().toISOString();
   const results = [];

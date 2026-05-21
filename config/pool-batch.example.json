@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Batch liquidity pool creation for BaaS API — copy to pool-batch.json and edit",
+  "label": "PIPELINE",
+  "baas_url": "http://127.0.0.1:8097",
+  "x402_wallet": "rfbZzM6SGZHbfxrg85vyeKSEMMQCfNXTNw",
+  "skip_token_registration": true,
+  "tokens": [
+    {
+      "symbol": "Alexandrite",
+      "name": "Alexandrite / AXLUSD collateral",
+      "issuer": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      "chain": "xrpl",
+      "label": "PROJECTION",
+      "note": "Collateral token — custody/appraisal not live"
+    }
+  ],
+  "pools": [
+    {
+      "token_id": "token_troptions_usd",
+      "base": "TROPTIONS-USD",
+      "counter": "EUR-IOU",
+      "initial_liquidity": 1000000,
+      "fee_percent": 0.25
+    },
+    {
+      "token_id": "token_alexandrite",
+      "base": "Alexandrite",
+      "counter": "TROPTIONS-USD",
+      "initial_liquidity": 500000,
+      "fee_percent": 0.25
+    },
+    {
+      "token_id": "token_usdc",
+      "base": "USDC",
+      "counter": "TROPTIONS-USD",
+      "initial_liquidity": 2500000,
+      "fee_percent": 0.25
+    },
+    {
+      "token_id": "token_eurc",
+      "base": "EURC",
+      "counter": "TROPTIONS-USD",
+      "initial_liquidity": 1000000,
+      "fee_percent": 0.25
+    }
+  ]
+}

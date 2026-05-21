@@ -19,6 +19,13 @@ import httpx
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel
 
+from payments import create_invoice, verify_payment
+
+try:
+    from routes.x402_proxied import router as x402_proxied_router
+except ImportError:
+    x402_proxied_router = None
+
 PORT = int(os.getenv("PORT", "4020"))
 X402_MODE = os.getenv("X402_MODE", "staged").lower()
 APOSTLE_URL = os.getenv("APOSTLE_URL", os.getenv("X402_APOSTLE_URL", "http://127.0.0.1:7332"))
@@ -71,7 +78,10 @@ async def lifespan(_app: FastAPI):
     yield
 
 
-app = FastAPI(title="TROPTIONS x402 Gateway", version="1.0.0", lifespan=lifespan)
+app = FastAPI(title="TROPTIONS x402 Gateway", version="1.1.0", lifespan=lifespan)
+
+if x402_proxied_router is not None:
+    app.include_router(x402_proxied_router)
 
 
 @app.get("/health")
@@ -177,6 +187,18 @@ async def pay(body: PayRequest, x_idempotency_key: Optional[str] = Header(None, 
 @app.post("/v1/needai/dispatch")
 async def needai_dispatch(payload: Dict[str, Any]):
     return {"ok": True, "routed": "needai-stub", "payload_keys": list(payload.keys())}
+
+
+@app.post("/v1/invoice")
+async def invoice_create(body: PayRequest):
+    """Create x402 invoice stub (dev)."""
+    return create_invoice(body.service, body.amount_atp)
+
+
+@app.post("/v1/invoice/verify")
+async def invoice_verify(body: VerifyRequest):
+    """Verify payment — mock true when X402_DEV_MOCK_VERIFY=true."""
+    return verify_payment(body.receipt_id, body.expected_atp)
 
 
 if __name__ == "__main__":

@@ -93,7 +93,7 @@ module.exports = {
  },
  {
  name: 'arbitrage-bot',
- script: './arbitrage-bot/bot.js',
+ script: './arbitrage-bot/index.js',
  cwd: __dirname,
  env: {
  PORT: 4028,
@@ -135,6 +135,40 @@ module.exports = {
  instances: 1,
  autorestart: true,
  max_memory_restart: '256M'
+ },
+ {
+ name: 'baas-api',
+ script: './baas-api/index.js',
+ cwd: __dirname,
+ env: {
+ NODE_ENV: 'production',
+ PORT: 8097,
+ ORCHESTRATOR_URL: 'http://localhost:4022',
+ X402_GATEWAY_URL: 'http://localhost:4030'
+ },
+ instances: 1,
+ autorestart: true,
+ max_memory_restart: '256M',
+ log_file: './logs/baas-api.log'
+ },
+ {
+ name: 'agent-orchestrator',
+ script: './agent-orchestrator/index.js',
+ cwd: __dirname,
+ env: {
+ PORT: 4031,
+ DRY_RUN: 'true',
+ MCP_XRPL_URL: 'http://localhost:4032',
+ ARBITRAGE_URL: 'http://localhost:4028',
+ COMPLIANCE_URL: 'http://localhost:4025',
+ X402_GATEWAY_URL: 'http://localhost:4030',
+ ORCHESTRATOR_URL: 'http://localhost:4022',
+ BAAS_API_URL: 'http://localhost:8097'
+ },
+ instances: 1,
+ autorestart: true,
+ max_memory_restart: '256M',
+ log_file: './logs/agent-orchestrator.log'
  }
  ]
 };
