@@ -41,7 +41,10 @@ $targets = @(
     @{ Name = "impact.unykorn.org"; Url = "https://impact.unykorn.org" },
     @{ Name = "ai.troptions.org"; Url = "https://ai.troptions.org" },
     @{ Name = "ttn.troptions.org"; Url = "https://ttn.troptions.org" },
-    @{ Name = "dao.troptions.org"; Url = "https://dao.troptions.org" }
+    @{ Name = "dao.troptions.org"; Url = "https://dao.troptions.org" },
+    @{ Name = "drunks.app (Genesis GSP)"; Url = "https://drunks.app" },
+    @{ Name = "gsp-api health"; Url = "https://gsp-api.kevanbtc.workers.dev/api/health" },
+    @{ Name = "genesis-world GitHub"; Url = "https://github.com/FTHTrading/genesis-world" }
 )
 
 $rows = @()

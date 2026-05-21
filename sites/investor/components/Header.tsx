@@ -6,6 +6,7 @@ const nav = [
   { href: "#story", label: "Story" },
   { href: "#pillars", label: "Revenue" },
   { href: "#fth-ecosystem", label: "FTH ecosystem" },
+  { href: "#verification", label: "Verification" },
   { href: "#engineering", label: "Engineering" },
   { href: "#truth", label: "Truth labels" },
   { href: "#anthem", label: "Anthem" },

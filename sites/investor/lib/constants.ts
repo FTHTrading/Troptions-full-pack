@@ -96,6 +96,11 @@ export const TROPTIONS_VERCEL = "https://troptions.vercel.app";
 export const TEXCHANGE_REPO = "https://github.com/FTHTrading/TExchange";
 export const T_BUILD_REPO = "https://github.com/FTHTrading/T-Build";
 export const SOLANA_LAUNCHER_REPO = "https://github.com/FTHTrading/solana-launcher";
+export const GENESIS_WORLD_REPO = "https://github.com/FTHTrading/genesis-world";
+export const GENESIS_DRUNKS_APP = "https://drunks.app";
+export const GENESIS_GSP_API_HEALTH =
+  "https://gsp-api.kevanbtc.workers.dev/api/health";
+export const VERIFICATION_STATUS_URL = `${PAGES_URL}/technical/VERIFICATION_STATUS.html`;
 export const ECOSYSTEM_MAP_URL = `${PAGES_URL}/technical/ECOSYSTEM_MAP.html`;
 
 export type EcosystemLink = {
@@ -197,6 +202,20 @@ export const FTH_ECOSYSTEM_CARDS: EcosystemCard[] = [
     status: "live",
     deployUrl: "https://launch.unykorn.org",
     repoUrl: SOLANA_LAUNCHER_REPO,
+  },
+  {
+    name: "Genesis World (GSP)",
+    category: "Parallel stack · not in monorepo",
+    detail:
+      "Genesis Sentience Protocol — 12-crate Rust L0, AI agents, 5 rails. Live drunks.app dashboard, gsp-api Worker, Moltbot x402 on Polygon. Nine Polygon contracts + 15 soul-bound NFTs (verify on PolygonScan). Complements SNP / x402 / TROPTIONS L1.",
+    status: "live",
+    deployUrl: GENESIS_DRUNKS_APP,
+    deployLabel: "Live dashboard (drunks.app)",
+    repoUrl: GENESIS_WORLD_REPO,
+    repoLabel: "GitHub (public)",
+    links: [
+      { label: "GSP API health", url: GENESIS_GSP_API_HEALTH },
+    ],
   },
   {
     name: "Institutional hub",

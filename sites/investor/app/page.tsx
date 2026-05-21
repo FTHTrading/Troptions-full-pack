@@ -7,6 +7,7 @@ import { RevenuePillars } from "@/components/RevenuePillars";
 import { FthEcosystem } from "@/components/FthEcosystem";
 import { EngineeringMaturity } from "@/components/EngineeringMaturity";
 import { TruthLabels } from "@/components/TruthLabels";
+import { VerificationStatus } from "@/components/VerificationStatus";
 import { AnthemSection } from "@/components/AnthemSection";
 import { CTA } from "@/components/CTA";
 
@@ -20,6 +21,7 @@ export default function HomePage() {
         <ThreeColumns />
         <RevenuePillars />
         <FthEcosystem />
+        <VerificationStatus />
         <EngineeringMaturity />
         <TruthLabels />
         <AnthemSection />
