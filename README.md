@@ -3,6 +3,7 @@
 > **Monorepo** for the TROPTIONS L1 node, FTH Academy, DONK AI Tutor, TTN Launcher, Exchange OS, and multi-chain contracts.  
 > Assembled from production paths on Windows (UNYKORN Ecosystem + clawd workspace).
 
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://fthtrading.github.io/Troptions-full-pack/)
 [![L1](https://img.shields.io/badge/L1-operational-9944-success)](http://127.0.0.1:9944)
 [![DONK](https://img.shields.io/badge/DONK-8090-blue)](http://127.0.0.1:8090/health)
 [![FTH](https://img.shields.io/badge/FTH_Academy-8091-purple)](http://127.0.0.1:8091/health)

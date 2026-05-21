@@ -9,7 +9,7 @@
 
 | Done | Item | Owner |
 |:----:|------|-------|
-| [ ] | Merge `upgrade/10-production` → `main` (persistence, signed RPC, L1 treasury/DAO, prod compose, tests) | Engineering |
+| [x] | Merge `upgrade/10-production` → `main` (persistence, signed RPC, L1 treasury/DAO, prod compose, tests) | Engineering |
 | [ ] | Tag release + update `UPGRADE_REPORT.md` on `main` after merge | Engineering |
 | [ ] | Keep `feature/x402-full-integration` **separate** until a client explicitly contracts x402/Apostle | Bryan |
 
@@ -85,8 +85,8 @@ Run before sending Bijan/Avid a production URL:
 
 | Branch | Score | Blocker to 10 |
 |--------|-------|----------------|
-| `main` | ~4.5 | Missing upgrade merge, prod keys, TLS |
-| `upgrade/10-production` | ~7.5 | Merge + ops cutover + counterparty compliance |
+| `main` (post-merge) | ~8.2 | Ops TLS, API keys, public x402 |
+| `upgrade/10-production` | merged | — |
 | `feature/x402-full-integration` | ~6.5 | Out of scope unless requested |
 
 *Last updated: 2026-05-21*
