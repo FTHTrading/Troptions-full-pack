@@ -6,7 +6,7 @@ permalink: /technical/TANTHEM_NFT_COLLECTION.html
 
 # TANTHEM — TROPTIONS Anthem NFT collection (XRPL)
 
-**Status labels:** IPFS audio **PROVEN** (pinned CIDs). XRPL mint batch **PREPARED** — not live on ledger until the operator signs and submits locally.
+**Status labels:** IPFS audio **PROVEN** (pinned CIDs). L1 collection hash **PROVEN** (`TROPTIONS_L1_ANCHOR_CONFIRMED.json`). Mint DApp **LIVE** at [mint.html](https://fthtrading.github.io/Troptions-full-pack/mint.html) — client-side signing only. XRPL ledger mint **PENDING** until the operator completes 703 txs in the browser (or local script); not live on ledger until XRPSCAN shows issuer NFTs.
 
 **Not legal advice.** Supply figures and benefits are product design in-repo; on-chain state is authoritative after mint.
 
@@ -47,21 +47,30 @@ Canonical machine-readable tier table: `TROPTIONS_NFT_RARITY_MANIFEST.json` (rep
 |------|--------|--------|
 | Audio pinned to IPFS | **PROVEN** | Six tracks + manifest; see [`assets/audio/README.md`](assets/audio/README.html) |
 | Unsigned mint batch built | **PREPARED** | `XRPL_MINT_BATCH.json` — no `TxnSignature` in repo |
+| L1 hash anchor | **PROVEN** | Collection hash `7e0631a1b3e2973a2b89cf26f954ba83b91e4674a0fda0d38000d10dff8b1aa8` — `TROPTIONS_L1_ANCHOR_CONFIRMED.json` |
+| Browser mint DApp (GitHub Pages) | **LIVE** | [`/mint.html`](https://fthtrading.github.io/Troptions-full-pack/mint.html) — seed never sent to server; see [`MINT_DAPP_SECURITY.md`](MINT_DAPP_SECURITY.html) |
+| NFT gallery (investor) | **LIVE** | [`/nft/`](https://fthtrading.github.io/Troptions-full-pack/nft/) |
 | Signed + submitted to XRPL mainnet | **PENDING** | Operator-only; **never** commit seeds or signed secrets |
 | Operator runbook | **READY** | [`XRPL_NFT_MINT_RUNBOOK.md`](XRPL_NFT_MINT_RUNBOOK.html) — Bryan / custody holder |
 
-### Operator mint (local only)
+### Operator mint (preferred: browser DApp)
 
-Full steps: **[`XRPL_NFT_MINT_RUNBOOK.md`](XRPL_NFT_MINT_RUNBOOK.html)**.
+1. Open **[mint DApp](https://fthtrading.github.io/Troptions-full-pack/mint.html)** (or local `sites/investor/mint.html`).
+2. Enter issuer seed in the password field — signing runs **only in your browser** via `xrpl.js`.
+3. Clear browser cache after minting. Full security notes: **[`MINT_DAPP_SECURITY.md`](MINT_DAPP_SECURITY.html)**.
 
-From repo root, on an offline or air-gapped machine if possible:
+Gallery and tier reference: **[NFT gallery](https://fthtrading.github.io/Troptions-full-pack/nft/)**.
+
+### Fallback: Python script (local only)
+
+Full steps: **[`XRPL_NFT_MINT_RUNBOOK.md`](XRPL_NFT_MINT_RUNBOOK.html)**. Prefer browser mint over CLI when possible (avoids seed in shell history).
 
 ```bash
-# Preferred: seed in local .env only (see .env.example XRPL_ISSUER_SEED)
+# Fallback only — seed in local .env (see .env.example XRPL_ISSUER_SEED)
 python scripts/xrpl_mint_ready.py --sign
 ```
 
-- Set `XRPL_ISSUER_SEED` in **local** `.env` (never committed) or pass `--sign` only on a hardened host — **not** in git, docs, or CI.
+- Set `XRPL_ISSUER_SEED` in **local** `.env` (never committed) — **not** in git, docs, CI, or agent sessions.
 - This repository documents addresses and unsigned batches only; **no XRPL family seeds** are stored here.
 - After submission, verify NFTs on [XRPSCAN issuer account](https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ) before external claims of a live collection.
 

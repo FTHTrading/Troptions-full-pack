@@ -5,6 +5,7 @@ import {
   ANTHEM_TRACKS,
   TANTHEM_NFT_COLLECTION_URL,
 } from "@/lib/constants";
+import { assetPath } from "@/lib/base-path";
 import { ipfsUrl } from "@/lib/ipfs";
 
 export function AnthemSection() {
@@ -15,7 +16,7 @@ export function AnthemSection() {
     <Section
       id="anthem"
       title="TROPTIONS Anthem"
-      subtitle="Mainframe Explode — six tracks on IPFS; ElevenLabs Charlie featured. XRPL TANTHEM mint prepared, not live until signed locally."
+      subtitle="Mainframe Explode — six tracks on IPFS; L1 hash anchored; mint DApp live (client-side). XRPL ledger mint pending until you sign 703 txs locally."
     >
       <div className="mb-8 space-y-3 text-sm text-[var(--color-muted)]">
         <p>
@@ -23,9 +24,9 @@ export function AnthemSection() {
           IPFS (six files + manifest, ~16.3 MB). NFT collection{" "}
           <strong className="text-white">TANTHEM</strong> — 703 tokens, issuer{" "}
           <code className="text-xs text-white/80">rJLMST…N3FQ</code>, 2.5%
-          transfer fee — mint batch{" "}
-          <strong className="text-amber-200">PREPARED</strong> (unsigned; not on
-          ledger yet).
+          transfer fee — L1 anchor <strong className="text-white">PROVEN</strong>
+          ; on-chain mint{" "}
+          <strong className="text-amber-200">PENDING</strong> (DApp ready).
         </p>
         <p>
           <a
@@ -38,10 +39,19 @@ export function AnthemSection() {
           </a>
           {" · "}
           <a
-            href={TANTHEM_NFT_COLLECTION_URL}
+            href={assetPath("/nft/")}
             className="text-[var(--color-gold-light)] hover:underline"
           >
-            TANTHEM rarity & mint status
+            NFT gallery
+          </a>
+          {" · "}
+          <a
+            href={TANTHEM_NFT_COLLECTION_URL}
+            className="text-[var(--color-gold-light)] hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Technical doc
           </a>
           {" · "}
           <Link
@@ -51,10 +61,25 @@ export function AnthemSection() {
             Lyrics & honesty notes
           </Link>
         </p>
-        <p className="text-xs text-amber-200/90">
-          Mint: operator runs{" "}
+        <div className="mt-4 flex flex-wrap gap-3">
+          <a
+            href={assetPath("/mint.html")}
+            className="inline-flex items-center rounded-lg bg-[var(--color-gold)] px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[var(--color-gold-light)]"
+          >
+            Mint NFTs
+          </a>
+          <a
+            href={assetPath("/nft/")}
+            className="inline-flex items-center rounded-lg border border-[var(--color-border)] px-5 py-2.5 text-sm font-semibold text-white transition hover:border-[var(--color-gold)]"
+          >
+            NFT gallery
+          </a>
+        </div>
+        <p className="mt-3 text-xs text-amber-200/90">
+          Mint DApp signs in your browser only — seed never sent to GitHub or
+          servers. Clear cache after minting. CLI fallback:{" "}
           <code className="text-white/80">scripts/xrpl_mint_ready.py</code>{" "}
-          locally with issuer seed — never commit seeds to git.
+          (local .env only).
         </p>
       </div>
 

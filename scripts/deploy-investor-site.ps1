@@ -103,8 +103,29 @@ try {
         }
 
         Set-Content -Path (Join-Path $Docs ".nojekyll") -Value "" -NoNewline
+
+        # Standalone mint DApp + NFT gallery (not part of Next export)
+        $mintSrc = Join-Path $Site "mint.html"
+        if (Test-Path $mintSrc) {
+            Copy-Item $mintSrc (Join-Path $Docs "mint.html") -Force
+            Write-Host "  docs/mint.html" -ForegroundColor DarkGray
+        }
+        $nftGallerySrc = Join-Path $Docs "nft\index.html"
+        if (-not (Test-Path $nftGallerySrc)) {
+            $nftDir = Join-Path $Docs "nft"
+            New-Item -ItemType Directory -Path $nftDir -Force | Out-Null
+            Write-Host "  WARN: docs/nft/index.html missing — commit gallery HTML before deploy" -ForegroundColor Yellow
+        }
+        $anchorSrc = Join-Path $Root "TROPTIONS_L1_ANCHOR_CONFIRMED.json"
+        if (Test-Path $anchorSrc) {
+            Copy-Item $anchorSrc (Join-Path $Docs "TROPTIONS_L1_ANCHOR_CONFIRMED.json") -Force
+            Write-Host "  docs/TROPTIONS_L1_ANCHOR_CONFIRMED.json" -ForegroundColor DarkGray
+        }
+
         Write-Host "`nGitHub Pages home: $Docs\index.html" -ForegroundColor Green
         Write-Host "Live URL: https://fthtrading.github.io/Troptions-full-pack/" -ForegroundColor Green
+        Write-Host "Mint DApp:  https://fthtrading.github.io/Troptions-full-pack/mint.html" -ForegroundColor Green
+        Write-Host "NFT gallery: https://fthtrading.github.io/Troptions-full-pack/nft/" -ForegroundColor Green
         Write-Host "Technical docs: https://fthtrading.github.io/Troptions-full-pack/technical/" -ForegroundColor Green
     }
 

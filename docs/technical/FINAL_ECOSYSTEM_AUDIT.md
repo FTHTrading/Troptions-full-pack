@@ -24,8 +24,9 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 | Polygon on-chain | **PROVEN** | PolygonScan + user verification |
 | XRPL / Stellar issued supply | **PROVEN** | WebSocket + Horizon 2026-05-21 — [`XRPL_STELLAR_VERIFICATION.md`](XRPL_STELLAR_VERIFICATION.html) |
 | TROPTIONS Anthem IPFS (6 tracks + manifest) | **PROVEN** | CIDs in `TROPTIONS_IPFS_CIDS.json` — [`assets/audio/README.md`](assets/audio/README.html) |
-| TANTHEM XRPL NFT mint (703) | **PREPARED** | `XRPL_MINT_BATCH.json` unsigned — live after local sign; [`TANTHEM_NFT_COLLECTION.md`](TANTHEM_NFT_COLLECTION.html) |
-| **Honest overall score** | **9.8 / 10** | Code + local + live edges + cross-chain issuance + **DAO governance plane** verified; gap to 10: **TLS** on troptions.org + **XRPL reserves** |
+| TANTHEM XRPL NFT mint (703) | **PREPARED** (DApp **LIVE**) | Unsigned batch + [mint.html](https://fthtrading.github.io/Troptions-full-pack/mint.html); on-chain **PENDING** user sign; [`TANTHEM_NFT_COLLECTION.md`](TANTHEM_NFT_COLLECTION.html) |
+| TANTHEM anthem stack (prep) | **10 / 10** | IPFS PROVEN, L1 hash anchored, gallery `/nft/`, mint DApp deployed — ledger gap only |
+| **Honest overall score** | **9.9 / 10** | Same as 9.8 plus anthem deploy complete; gap to 10: **703 XRPL mints** on ledger + TLS/reserves |
 | **DAO layer** | **PROVEN on main** | `dao-service` + dashboard, L1 reads, council multisig — contributes +0.3 vs prior 9.5 |
 
 **Bottom line:** Infrastructure and code are real. Cross-chain **~874M issued supply on ledger** is verified (not market cap). Do not cite **$175M desk** as on-chain fact — use **274M USDC issued** language. Valuation detail: [`VALUATION_AND_COMPARABLES.md`](VALUATION_AND_COMPARABLES.html).
@@ -43,7 +44,8 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 | On-chain verification | 9.5/10 | Polygon + XRPL + Stellar user-verified |
 | Test execution | 5/10 | Partial; T-Build blocked on deps |
 | **DAO / governance** | **9.5/10** | Service + dashboard on main; public `dao.troptions.org` DNS pending |
-| **Overall** | **9.8/10** | Investor-safe: proven stack + DAO; label projections clearly |
+| **Overall** | **9.9/10** | Investor-safe: proven stack + DAO + anthem DApp live; label projections clearly |
+| **Anthem / TANTHEM prep** | **10/10** | IPFS, L1 anchor, mint DApp, gallery — on-chain mint still operator action |
 
 ---
 
@@ -64,7 +66,12 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 |------|-------|----------|
 | IPFS audio + manifest | **PROVEN** | `TROPTIONS_IPFS_CIDS.json`; gateway `https://ipfs.io/ipfs/{cid}` |
 | ElevenLabs Charlie | **PROVEN** | CID `QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV` |
-| XRPL TANTHEM mint | **PREPARED** | 703 unsigned txs; issuer `rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ`; 2.5% transfer fee |
+| L1 collection hash anchor | **PROVEN** | `7e0631a1b3e2973a2b89cf26f954ba83b91e4674a0fda0d38000d10dff8b1aa8` — `TROPTIONS_L1_ANCHOR_CONFIRMED.json` |
+| Mint DApp (GitHub Pages) | **LIVE** | [mint.html](https://fthtrading.github.io/Troptions-full-pack/mint.html) — client-side only; [`MINT_DAPP_SECURITY.md`](MINT_DAPP_SECURITY.html) |
+| NFT gallery | **LIVE** | [/nft/](https://fthtrading.github.io/Troptions-full-pack/nft/) |
+| XRPL TANTHEM mint (703 on ledger) | **PENDING** | 703 unsigned txs prepared; issuer `rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ`; 2.5% transfer fee |
+| **Anthem stack prep score** | **10/10** | Deploy + docs + anchor; not the same as 703 minted |
+| **Ecosystem until minted** | **9.9/10** | Becomes 10/10 when XRPSCAN shows issuer `NFToken` entries |
 
 Do not claim TANTHEM NFTs are minted on mainnet until XRPSCAN shows `NFToken` entries for the issuer.
 

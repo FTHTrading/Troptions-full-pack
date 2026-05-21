@@ -4,9 +4,15 @@ XRPL NFT Mint Transaction Builder — TROPTIONS Anthem Collection
 Creates FULLY SIGNED or UNSIGNED NFTokenMint transactions.
 Ready for submission to XRPL mainnet.
 
-USAGE:
-  python xrpl_mint_ready.py --show      # Show all prepared transactions
+PREFERRED (seed safety): Browser mint DApp — sites/investor/mint.html (GitHub Pages:
+  https://fthtrading.github.io/Troptions-full-pack/mint.html)
+  Seed is used only in the browser via xrpl.js; never sent to a server.
+  See docs/technical/MINT_DAPP_SECURITY.md. Clear browser cache after minting.
+
+FALLBACK (local hardened host only):
+  python xrpl_mint_ready.py --show           # Show all prepared transactions
   python xrpl_mint_ready.py --sign [SEED]  # Sign; seed from arg or XRPL_ISSUER_SEED env
+  Never run --sign in CI, agents, or shared shells. Do not commit seeds.
 """
 
 import json

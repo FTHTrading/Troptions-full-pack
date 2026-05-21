@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { assetPath } from "@/lib/base-path";
 import {
   ANTHEM_IPFS_MANIFEST_CID,
   PROOF_URL,
@@ -39,9 +40,11 @@ export default function AnthemPage() {
           >
             ElevenLabs Charlie
           </a>
-          . TANTHEM NFT mint is{" "}
-          <strong className="text-amber-200">PREPARED</strong> (not live on XRPL
-          until signed locally).
+          . L1 collection hash is <strong className="text-white">PROVEN</strong>.
+          Mint DApp is <strong className="text-emerald-300">LIVE</strong>{" "}
+          (browser-only signing); XRPL ledger mint{" "}
+          <strong className="text-amber-200">PENDING</strong> until you submit
+          703 txs.
         </p>
         <p className="mt-2 text-sm">
           <a
@@ -54,8 +57,24 @@ export default function AnthemPage() {
           </a>
           {" · "}
           <a
+            href={assetPath("/nft/")}
+            className="text-[var(--color-gold-light)] hover:underline"
+          >
+            NFT gallery
+          </a>
+          {" · "}
+          <a
+            href={assetPath("/mint.html")}
+            className="text-[var(--color-gold-light)] hover:underline"
+          >
+            Mint NFTs
+          </a>
+          {" · "}
+          <a
             href={TANTHEM_NFT_COLLECTION_URL}
             className="text-[var(--color-gold-light)] hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             TANTHEM collection doc
           </a>

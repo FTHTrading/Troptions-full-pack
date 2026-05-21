@@ -117,6 +117,12 @@ export const ECOSYSTEM_MAP_URL = `${PAGES_URL}/technical/ECOSYSTEM_MAP.html`;
 export const XRPL_STELLAR_VERIFICATION_URL = `${PAGES_URL}/technical/XRPL_STELLAR_VERIFICATION.html`;
 export const PROOF_FOR_COUNTERPARTIES_URL = `${PAGES_URL}/technical/counterparty/PROOF_FOR_COUNTERPARTIES.html`;
 export const TANTHEM_NFT_COLLECTION_URL = `${PAGES_URL}/technical/TANTHEM_NFT_COLLECTION.html`;
+export const TANTHEM_NFT_GALLERY_URL = onPages
+  ? `${PAGES_URL}/nft/`
+  : "/nft/";
+export const TANTHEM_MINT_DAPP_URL = onPages
+  ? `${PAGES_URL}/mint.html`
+  : "/mint.html";
 export const ANTHEM_IPFS_MANIFEST_CID = "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7";
 export const VALUATION_URL = `${PAGES_URL}/technical/VALUATION_AND_COMPARABLES.html`;
 

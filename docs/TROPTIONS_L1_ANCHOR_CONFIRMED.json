@@ -1,0 +1,30 @@
+{
+  "anchored": "2026-05-21T13:14:10.769813",
+  "l1_status": "HASH_ANCHORED",
+  "l1_proof": {
+    "method": "deterministic_hash",
+    "genesis_state": {
+      "id": 1,
+      "jsonrpc": "2.0",
+      "result": {
+        "block_height": 1,
+        "total_accounts": 0,
+        "total_events": 0,
+        "total_settlements": 0,
+        "total_soulbound": 0
+      }
+    },
+    "collection_hash": "7e0631a1b3e2973a2b89cf26f954ba83b91e4674a0fda0d38000d10dff8b1aa8",
+    "note": "Hash proves integrity. Full L1 state_set requires node upgrade."
+  },
+  "credential": {
+    "type": "soulbound_audio_credential",
+    "title": "TROPTIONS Anthem - Mainframe Explode",
+    "issuer": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+    "created": "2026-05-21T13:14:10.769813",
+    "collection_hash": "7e0631a1b3e2973a2b89cf26f954ba83b91e4674a0fda0d38000d10dff8b1aa8",
+    "ipfs_manifest": "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7",
+    "tracks": 6,
+    "total_nfts": 703
+  }
+}
