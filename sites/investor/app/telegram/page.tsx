@@ -4,6 +4,8 @@ import { TelegramDeepLink } from "@/components/TelegramDeepLink";
 import { assetPath } from "@/lib/base-path";
 import { COMMAND_CENTER_URL, REPO_URL } from "@/lib/constants";
 import {
+  TELEGRAM_BOT_URL,
+  TELEGRAM_BOT_USERNAME,
   TELEGRAM_COMMANDS,
   TELEGRAM_CONNECT_CHECKLIST,
   TELEGRAM_ENV_VARS,
@@ -11,16 +13,16 @@ import {
 } from "@/lib/telegram";
 
 export const metadata = {
-  title: "Telegram — TROPTIONS Operator Bot",
+  title: "Telegram — NeedAI Ada Operator Bot",
   description:
-    "Connect the operator Telegram bot: BotFather, env vars, commands, honest PIPELINE labels.",
+    "Connect NeedAI Ada (@NeedAI_Ada_bot): BotFather, env vars, commands, honest PIPELINE labels.",
 };
 
 export default function TelegramPage() {
   return (
     <PageShell
-      title="Telegram Operator Bot"
-      subtitle="Mobile command surface for baas-api, agent orchestrator, and USDC relay stubs. All revenue-related replies carry PROJECTION disclaimers — not realized bank revenue."
+      title="Telegram — NeedAI Ada"
+      subtitle={`Primary bot @${TELEGRAM_BOT_USERNAME} — mobile command surface for baas-api, agent orchestrator, and USDC relay stubs. Revenue replies are PROJECTION — not realized bank revenue.`}
       actions={
         <>
           <TelegramDeepLink label="Open Telegram" />
@@ -40,10 +42,7 @@ export default function TelegramPage() {
         <ul className="mt-4 space-y-3">
           {TELEGRAM_CONNECT_CHECKLIST.map((item) => (
             <li key={item.id} className="flex gap-3 text-sm text-[var(--color-muted)]">
-              <span
-                className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded border border-[var(--color-border)] text-xs text-[var(--color-muted)]"
-                aria-hidden
-              >
+              <span className="checklist-marker mt-0.5" aria-hidden>
                 ○
               </span>
               <span>{item.text}</span>
@@ -52,9 +51,7 @@ export default function TelegramPage() {
         </ul>
         <p className="mt-4 text-xs text-[var(--color-muted)]">
           Status: <strong className="text-[var(--color-text)]">PIPELINE</strong> until{" "}
-          <code className="rounded bg-[var(--color-bg)] px-1 font-mono text-[11px]">
-            TELEGRAM_BOT_TOKEN
-          </code>{" "}
+          <code className="code-inline">TELEGRAM_BOT_TOKEN</code>{" "}
           is on the host and pm2 shows telegram-bot online.
         </p>
       </div>
@@ -77,8 +74,16 @@ export default function TelegramPage() {
             in Telegram.
           </li>
           <li>
-            Send <code className="font-mono text-[var(--color-text)]">/newbot</code> and
-            follow prompts for name and username.
+            Use existing bot{" "}
+            <a
+              href={TELEGRAM_BOT_URL}
+              className="text-[var(--color-accent-blue)] hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @{TELEGRAM_BOT_USERNAME}
+            </a>{" "}
+            (NeedAI Ada) or <code className="code-inline">/newbot</code> for a new bot.
           </li>
           <li>
             Copy the token into host{" "}

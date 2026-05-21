@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Open TROPTIONS Telegram</title>
+  <title>Open NeedAI Ada — Telegram</title>
   <style>
     body { font-family: system-ui, sans-serif; background: #0a0e14; color: #e8eaed; margin: 2rem; }
     a { color: #3d7ea6; }
@@ -12,18 +12,19 @@
   <script>
     (function () {
       var params = new URLSearchParams(location.search);
-      var u = params.get("u") || "YOUR_BOT_USERNAME";
-      if (u && u !== "YOUR_BOT_USERNAME") {
+      var u = params.get("u") || "NeedAI_Ada_bot";
+      if (u) {
         location.replace("https://t.me/" + u.replace(/^@/, ""));
       }
     })();
   </script>
 </head>
 <body>
-  <h1>TROPTIONS Telegram</h1>
+  <h1>NeedAI Ada — Telegram</h1>
   <p>
-    Set <code>NEXT_PUBLIC_TELEGRAM_BOT_USERNAME</code> when building the investor site,
-    or pass <code>?u=YourBotUsername</code> on this URL.
+    Default: <a href="https://t.me/NeedAI_Ada_bot">@NeedAI_Ada_bot</a>.
+    Override with <code>?u=BotUsername</code> or set
+    <code>NEXT_PUBLIC_TELEGRAM_BOT_USERNAME=NeedAI_Ada_bot</code> at build.
   </p>
   <p><a href="./telegram/">Telegram setup page</a> · <a href="./command-center/">Command Center</a></p>
 </body>

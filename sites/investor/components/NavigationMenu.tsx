@@ -1,6 +1,5 @@
 ﻿"use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useState } from "react";
 import {
@@ -65,7 +64,7 @@ function DesktopDropdown({
       >
         {label}
         <span className="text-[10px] opacity-70" aria-hidden>
-          â–¾
+          ▾
         </span>
       </button>
       <div className="pointer-events-none absolute left-0 top-full z-50 min-w-[11rem] pt-2 opacity-0 transition group-hover:pointer-events-auto group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:opacity-100">
@@ -100,7 +99,7 @@ function MobileGroup({
         aria-expanded={open}
       >
         {entry.label}
-        <span className="text-xs text-[var(--color-muted)]">{open ? "â–´" : "â–¾"}</span>
+        <span className="text-xs text-[var(--color-muted)]">{open ? "▴" : "▾"}</span>
       </button>
       {open && (
         <div className="space-y-0.5 px-2 pb-3">
@@ -191,17 +190,12 @@ export function NavigationMenu() {
 
 export function HeaderBrand() {
   return (
-    <Link href="/" className="flex shrink-0 items-center gap-3">
-      <Image
-        src="/logo.png"
-        alt="TROPTIONS"
-        width={32}
-        height={32}
-        className="rounded-full"
-        priority
-      />
-      <span className="text-xs font-semibold tracking-wide text-white sm:text-sm">
+    <Link href="/" className="flex shrink-0 flex-col leading-tight">
+      <span className="serif-heading text-sm font-semibold tracking-wide text-[var(--color-accent-gold)] sm:text-base">
         TROPTIONS
+      </span>
+      <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-[var(--color-muted)]">
+        FTH Trading
       </span>
     </Link>
   );

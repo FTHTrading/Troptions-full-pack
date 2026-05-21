@@ -43,7 +43,7 @@ export function RevenueOpportunities() {
         flywheel:{" "}
         <a
           href={TROPTIONS_REVENUE_ENGINE_URL}
-          className="text-[var(--color-accent)] underline-offset-2 hover:underline"
+          className="text-[var(--color-accent-blue)] underline-offset-2 hover:underline"
         >
           TROPTIONS revenue engine
         </a>{" "}

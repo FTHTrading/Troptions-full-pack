@@ -1,11 +1,10 @@
-﻿import Image from "next/image";
-import { MATURITY_GAP_NOTE, MATURITY_SCORE, PROOF_URL, REPO_URL } from "@/lib/constants";
+﻿import { MATURITY_GAP_NOTE, MATURITY_SCORE, PROOF_URL, REPO_URL } from "@/lib/constants";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-[var(--color-border)] pb-20 pt-16 md:pb-28 md:pt-24">
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-10 md:flex-row md:items-center md:gap-14">
+        <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between md:gap-14">
           <div className="flex-1">
             <p className="text-sm font-medium uppercase tracking-widest text-[var(--color-gold)]">
               Investor showcase
@@ -38,15 +37,13 @@ export function Hero() {
               </a>
             </div>
           </div>
-          <div className="flex shrink-0 justify-center md:justify-end">
-            <Image
-              src="/logo.png"
-              alt="TROPTIONS logo"
-              width={200}
-              height={200}
-              className="rounded-2xl shadow-2xl ring-1 ring-[var(--color-border)]"
-              priority
-            />
+          <div className="flex shrink-0 flex-col items-start md:items-end md:text-right">
+            <p className="serif-heading text-4xl font-semibold tracking-tight text-[var(--color-accent-gold)] md:text-5xl">
+              TROPTIONS
+            </p>
+            <p className="mt-2 text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-muted)]">
+              FTH Trading
+            </p>
           </div>
         </div>
       </div>

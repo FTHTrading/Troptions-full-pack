@@ -114,9 +114,7 @@ export default function CommandCenterPage() {
                 <span className="font-medium text-[var(--color-text)]">{step.step}</span>
                 <TruthChip label={step.label} />
               </div>
-              <pre className="mt-3 overflow-x-auto rounded border border-[var(--color-border)] bg-[var(--color-bg)] p-3 font-mono text-xs text-[var(--color-muted)]">
-                {step.cmd}
-              </pre>
+              <pre className="terminal-pre mt-3">{step.cmd}</pre>
             </li>
           ))}
         </ol>

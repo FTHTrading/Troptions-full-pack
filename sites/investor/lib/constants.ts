@@ -154,6 +154,7 @@ export const REVENUE_PAGE_URL = onPages
   : "/revenue/";
 export const X402_GLOBAL_MESH_URL = `${PAGES_URL}/technical/X402_GLOBAL_MESH.html`;
 export const AWS_ACTIVATION_RUNBOOK_URL = `${PAGES_URL}/technical/AWS_ACTIVATION_RUNBOOK.html`;
+export const TELEGRAM_OPERATOR_URL = `${PAGES_URL}/technical/TELEGRAM_OPERATOR.html`;
 
 export const MATURITY_SCORE = "9.9";
 export const MATURITY_GAP_NOTE =

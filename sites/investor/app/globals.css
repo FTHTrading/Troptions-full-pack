@@ -86,9 +86,43 @@ body {
 
 .label-projection {
   @apply inline-flex rounded px-2 py-0.5 text-xs font-medium uppercase tracking-wide;
-  background: color-mix(in srgb, var(--color-muted) 12%, transparent);
-  color: var(--color-muted);
-  border: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-accent-gold) 22%, transparent);
+  color: #f0e6c8;
+  border: 1px solid color-mix(in srgb, var(--color-accent-gold) 40%, transparent);
+}
+
+/* Readable highlights — never black-on-black */
+mark,
+.highlight {
+  background: var(--color-accent-gold);
+  color: #0a0e14;
+  padding: 0.1em 0.25em;
+  border-radius: 2px;
+}
+
+.highlight-blue {
+  background: var(--color-accent-blue);
+  color: #fff;
+}
+
+.code-inline {
+  @apply rounded px-1 font-mono text-[11px];
+  background: color-mix(in srgb, var(--color-accent-gold) 18%, var(--color-panel-raised));
+  color: var(--color-text);
+}
+
+.terminal-pre {
+  @apply overflow-x-auto rounded border p-3 font-mono text-xs;
+  border-color: var(--color-border);
+  background: var(--color-panel-raised);
+  color: var(--color-text);
+}
+
+.checklist-marker {
+  @apply flex h-5 w-5 shrink-0 items-center justify-center rounded text-xs;
+  border: 1px solid color-mix(in srgb, var(--color-accent-blue) 45%, var(--color-border));
+  background: color-mix(in srgb, var(--color-accent-blue) 18%, transparent);
+  color: #9ec5e0;
 }
 
 .serif-heading {

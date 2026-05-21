@@ -35,10 +35,12 @@ try {
 
     if ($CopyToDocs) {
         $env:GITHUB_PAGES = "true"
+        $env:NEXT_PUBLIC_TELEGRAM_BOT_USERNAME = "NeedAI_Ada_bot"
     }
     npm run build
     if ($LASTEXITCODE -ne 0) { throw "npm run build failed" }
     Remove-Item Env:GITHUB_PAGES -ErrorAction SilentlyContinue
+    Remove-Item Env:NEXT_PUBLIC_TELEGRAM_BOT_USERNAME -ErrorAction SilentlyContinue
     Write-Host "Build OK: $Out" -ForegroundColor Green
 
     if ($CopyToDocs) {
@@ -104,14 +106,6 @@ try {
 
         Set-Content -Path (Join-Path $Docs ".nojekyll") -Value "" -NoNewline
 
-        $logoSrc = Join-Path $Site "public\logo.png"
-        if (Test-Path $logoSrc) {
-            Copy-Item $logoSrc (Join-Path $Docs "logo.png") -Force
-            Write-Host "  docs/logo.png" -ForegroundColor DarkGray
-        } else {
-            Write-Host "  WARN: sites/investor/public/logo.png missing" -ForegroundColor Yellow
-        }
-
         & (Join-Path $Root "scripts\write-pages-redirects.ps1") -DocsRoot $Docs
 
         Write-Host "Syncing technical HTML artifacts for Pages..." -ForegroundColor Cyan
@@ -167,5 +161,6 @@ try {
 }
 finally {
     Remove-Item Env:GITHUB_PAGES -ErrorAction SilentlyContinue
+    Remove-Item Env:NEXT_PUBLIC_TELEGRAM_BOT_USERNAME -ErrorAction SilentlyContinue
     Pop-Location
 }

@@ -1,5 +1,9 @@
 import { REPO_URL } from "@/lib/constants";
 
+/** Primary operator bot — https://t.me/NeedAI_Ada_bot */
+export const TELEGRAM_BOT_USERNAME = "NeedAI_Ada_bot";
+export const TELEGRAM_BOT_URL = `https://t.me/${TELEGRAM_BOT_USERNAME}`;
+
 export type TelegramCommand = {
   command: string;
   action: string;
@@ -92,14 +96,14 @@ export const TELEGRAM_ENV_VARS = [
     name: "NEXT_PUBLIC_TELEGRAM_BOT_USERNAME",
     required: false,
     where: "Investor site build only (public deep link)",
-    source: "BotFather username without @",
+    source: `NeedAI Ada — ${TELEGRAM_BOT_USERNAME} (no @ in env)`,
   },
 ];
 
 export const TELEGRAM_CONNECT_CHECKLIST = [
   {
     id: "botfather",
-    text: "Create bot with @BotFather; copy token into host .env as TELEGRAM_BOT_TOKEN",
+    text: `Primary bot: NeedAI Ada (@${TELEGRAM_BOT_USERNAME}) — token in host .env as TELEGRAM_BOT_TOKEN only (never commit)`,
     done: false,
   },
   {
@@ -119,7 +123,7 @@ export const TELEGRAM_CONNECT_CHECKLIST = [
   },
   {
     id: "pages",
-    text: "Set NEXT_PUBLIC_TELEGRAM_BOT_USERNAME at build for Open Telegram CTA",
+    text: `Set NEXT_PUBLIC_TELEGRAM_BOT_USERNAME=${TELEGRAM_BOT_USERNAME} at build for Open Telegram CTA`,
     done: false,
   },
 ];

@@ -3,6 +3,7 @@ import {
   ECOSYSTEM_HUB_URL,
   PAGES_URL,
   REPO_URL,
+  TELEGRAM_OPERATOR_URL,
   TELEGRAM_PAGE_URL,
   X402_HEALTH,
   X402_GLOBAL_MESH_URL,
@@ -172,5 +173,6 @@ export const COMMAND_DOC_LINKS = [
   { title: "AWS activation runbook", href: AWS_ACTIVATION_RUNBOOK_URL },
   { title: "x402 global mesh", href: X402_GLOBAL_MESH_URL },
   { title: "Telegram setup", href: TELEGRAM_PAGE_URL },
+  { title: "Telegram operator (token security)", href: TELEGRAM_OPERATOR_URL },
   { title: "ACTIVATE_NOW.md", href: `${REPO_URL}/blob/main/ACTIVATE_NOW.md` },
 ];

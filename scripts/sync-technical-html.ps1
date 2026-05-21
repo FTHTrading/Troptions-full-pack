@@ -115,6 +115,8 @@ $hub = @'
     <li><a href="../mint.html">XRPL mint DApp</a></li>
     <li><a href="../nft/">NFT gallery</a></li>
     <li><a href="../">Investor site home</a></li>
+    <li><a href="../telegram/">Telegram setup (NeedAI Ada)</a></li>
+    <li><a href="TELEGRAM_OPERATOR.html">Telegram operator guide</a></li>
   </ul>
   <h2>Governance</h2>
   <ul>

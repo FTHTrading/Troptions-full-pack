@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Telegram operator — NeedAI Ada</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Telegram operator — NeedAI Ada</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Telegram operator — NeedAI Ada</h1>
+<p><strong>Bot:</strong> <a href="https://t.me/NeedAI_Ada_bot">@NeedAI_Ada_bot</a> (NeedAI Ada)</p>
+<h2>Token security</h2>
+<ul>
+<li>Put <code>TELEGRAM_BOT_TOKEN</code> in <strong>host <code>.env</code> only</strong> (<code>services/telegram-bot/.env</code> or root <code>.env</code>).</li>
+<li><strong>Never</strong> commit the token to the repo, GitHub Pages build, or docs.</li>
+<li>If a token was pasted in chat, email, or a ticket: <strong>revoke immediately</strong> in <a href="https://t.me/BotFather">@BotFather</a> → <code>/revoke</code>, then create a new token and update the host <code>.env</code> only.</li>
+</ul>
+<h2>BotFather</h2>
+<ol>
+<li>Open <a href="https://t.me/BotFather">@BotFather</a>.</li>
+<li>For a new bot: <code>/newbot</code>. For an existing bot: select <strong>NeedAI Ada</strong> / <code>@NeedAI_Ada_bot</code>.</li>
+<li><code>/setcommands</code> — paste the command list from <code>services/telegram-bot/README.md</code>.</li>
+<li>Copy token to local <code>.env</code> as <code>TELEGRAM_BOT_TOKEN</code>.</li>
+</ol>
+<h2>Stack</h2>
+<pre><code class="language-bash">pm2 start ecosystem.config.js --only telegram-bot --update-env
+</code></pre>
+<p>Requires <code>baas-api</code> on <code>:8097</code> for <code>/revenue</code>, <code>/pools</code>, <code>/agent</code>, <code>/setprice</code>.</p>
+<h2>Investor site</h2>
+<p>Public deep link (no secrets):</p>
+<pre><code class="language-env">NEXT_PUBLIC_TELEGRAM_BOT_USERNAME=NeedAI_Ada_bot
+</code></pre>
+<p>Set at <strong>build</strong> time (<code>sites/investor/.env.example</code>). Pages: <a href="https://fthtrading.github.io/Troptions-full-pack/telegram/">Telegram setup</a>, <a href="https://fthtrading.github.io/Troptions-full-pack/command-center/">Command Center</a>.</p>
+<h2>Commands (summary)</h2>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/start</code></td>
+<td>PIPELINE</td>
+</tr>
+<tr>
+<td><code>/revenue</code></td>
+<td>PROJECTION</td>
+</tr>
+<tr>
+<td><code>/trade</code></td>
+<td>PROJECTION</td>
+</tr>
+<tr>
+<td><code>/pools</code>, <code>/agent</code>, <code>/deposit</code>, <code>/withdraw</code>, <code>/setprice</code></td>
+<td>PIPELINE</td>
+</tr>
+</tbody>
+</table>
+<p>Implementation: <code>services/telegram-bot/bot.js</code>.</p>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/TELEGRAM_OPERATOR.html</p>
+</body>
+</html>
