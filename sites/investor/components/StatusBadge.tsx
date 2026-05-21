@@ -2,6 +2,7 @@ export type Status =
   | "live"
   | "pipeline"
   | "gated"
+  | "projection"
   | "confirmed"
   | "pending"
   | "pages"
@@ -12,6 +13,7 @@ export type Status =
 const styles: Record<Status, string> = {
   live: "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30",
   pipeline: "bg-amber-500/15 text-amber-200 ring-amber-500/30",
+  projection: "bg-purple-500/15 text-purple-200 ring-purple-500/30",
   gated: "bg-sky-500/15 text-sky-200 ring-sky-500/30",
   confirmed: "bg-emerald-500/15 text-emerald-300 ring-emerald-500/30",
   pending: "bg-rose-500/15 text-rose-200 ring-rose-500/30",
@@ -25,6 +27,7 @@ const labels: Record<Status, string> = {
   live: "Live",
   pipeline: "Pipeline",
   gated: "Gated",
+  projection: "Projection",
   confirmed: "Confirmed",
   pending: "Pending",
   pages: "GitHub Pages",

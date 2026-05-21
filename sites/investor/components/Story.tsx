@@ -5,8 +5,8 @@ export function Story() {
   return (
     <Section
       id="story"
-      title="Story"
-      subtitle="Macon 2003 → SEC chapter → sovereign stack today. Narrative for diligence; not legal advice."
+      title="22-year timeline"
+      subtitle="Macon 2003 → SEC chapter → legal cleared → 2026 sovereign stack. Narrative for diligence; not legal advice."
     >
       <ol className="relative border-l border-[var(--color-border)] pl-8">
         {TIMELINE.map((item, i) => (

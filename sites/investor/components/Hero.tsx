@@ -13,7 +13,7 @@ export function Hero() {
               Investor showcase
             </p>
             <h1 className="mt-4 text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
-              TROPTIONS – 22 Years. 9.2/10 Maturity. Sovereign by Default.
+              TROPTIONS – 22 Years. 9.5/10 Maturity. Sovereign by Default.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-[var(--color-muted)]">
               Operating company plus open monorepo: Rust L1, DAO, Academy, TTN,

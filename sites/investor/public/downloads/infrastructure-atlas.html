@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>TROPTIONS — Infrastructure Atlas</title>
+  <link rel="stylesheet" href="print-shared.css" />
+  <style>@media print { .page-break { page-break-before: always; } }</style>
+</head>
+<body>
+  <p class="print-hint no-print"><strong>Save as PDF:</strong> Print → Save as PDF (2 pages).</p>
+
+  <header class="doc-header">
+    <h1>Infrastructure Atlas</h1>
+    <p class="tagline">Repos · live URLs · SNP · x402 · Genesis · T-Lev-8</p>
+  </header>
+
+  <h2>Core repos</h2>
+  <table>
+    <tr><th>Repo</th><th>Role</th><th>Deploy</th></tr>
+    <tr><td>Troptions-full-pack</td><td>L1, backends, DAO, investor site</td><td>GitHub Pages</td></tr>
+    <tr><td>sovereign-namespace-protocol</td><td>SNP constitutional layer (955+ roots)</td><td>Spec / GitHub</td></tr>
+    <tr><td>UnyKorn-X402-aws</td><td>Production x402 mesh + Apostle ATP</td><td>x402.unykorn.org</td></tr>
+    <tr><td>genesis-world</td><td>GSP — 12-crate L0, 9 Polygon contracts</td><td>drunks.app</td></tr>
+    <tr><td>T-Lev-8-</td><td>RWA deal room, wallet registry</td><td>GitHub Pages</td></tr>
+    <tr><td>T-Build</td><td>TPLOS partner launch OS</td><td>Local / sandbox</td></tr>
+    <tr><td>Troptions (private)</td><td>Exchange OS source</td><td>troptions.vercel.app</td></tr>
+    <tr><td>solana-launcher</td><td>SPL / NFT launcher SaaS</td><td>launch.unykorn.org</td></tr>
+  </table>
+
+  <h2>Live Unykorn URLs (PROVEN — HTTP 200)</h2>
+  <table>
+    <tr><th>URL</th><th>Product</th></tr>
+    <tr><td>troptions.unykorn.org/troptions</td><td>Institutional hub</td></tr>
+    <tr><td>troptionsexchange.unykorn.org/exchange-os</td><td>Exchange OS</td></tr>
+    <tr><td>troptionslive.unykorn.org/sports</td><td>TTN / WC26</td></tr>
+    <tr><td>fthedu.unykorn.org</td><td>FTH Academy</td></tr>
+    <tr><td>launch.unykorn.org</td><td>Solana launcher</td></tr>
+    <tr><td>x402.unykorn.org/health</td><td>x402 mesh health</td></tr>
+    <tr><td>drunks.app</td><td>Genesis World dashboard</td></tr>
+    <tr><td>portfolio.unykorn.org</td><td>Portfolio registry</td></tr>
+  </table>
+
+  <h2>Intermittent / pending</h2>
+  <ul>
+    <li>twin.unykorn.org — agent twin (CF origin flaky)</li>
+    <li>x402api.unykorn.org — API docs host</li>
+    <li>ai.troptions.org, dao.troptions.org — DNS not deployed</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h2>Local services (PM2 — appendix ports)</h2>
+  <table>
+    <tr><th>Service</th><th>Port</th></tr>
+    <tr><td>troptions-l1-node</td><td>8080</td></tr>
+    <tr><td>fth-backend / Academy</td><td>8091</td></tr>
+    <tr><td>donk-ai-tutor</td><td>8090</td></tr>
+    <tr><td>ttn-launcher</td><td>8092</td></tr>
+    <tr><td>dao-service</td><td>8093</td></tr>
+    <tr><td>x402-gateway (sidecar)</td><td>4020</td></tr>
+    <tr><td>apostle-chain</td><td>7332</td></tr>
+    <tr><td>popeye-relay</td><td>3402</td></tr>
+  </table>
+
+  <p class="disclaimer">Ports are operator-machine defaults from quickstart; production edge uses Cloudflare + AWS for x402. Monorepo x402 sidecar ≠ public mesh unless deployed.</p>
+</body>
+</html>

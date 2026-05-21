@@ -3,13 +3,14 @@ import Link from "next/link";
 import { assetPath } from "@/lib/base-path";
 
 const nav = [
-  { href: "#story", label: "Story" },
-  { href: "#pillars", label: "Revenue" },
-  { href: "#fth-ecosystem", label: "FTH ecosystem" },
+  { href: "#story", label: "Timeline" },
+  { href: "#proof-wall", label: "Proof" },
+  { href: "#infrastructure", label: "Infrastructure" },
+  { href: "#opportunities", label: "Opportunities" },
+  { href: "#economics", label: "Economics" },
+  { href: "#skyrocket", label: "Playbook" },
+  { href: "#downloads", label: "Downloads" },
   { href: "#verification", label: "Verification" },
-  { href: "#engineering", label: "Engineering" },
-  { href: "#truth", label: "Truth labels" },
-  { href: "#anthem", label: "Anthem" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -30,7 +31,7 @@ export function Header() {
             TROPTIONS
           </span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm text-[var(--color-muted)] md:flex">
+        <nav className="hidden items-center gap-5 text-sm text-[var(--color-muted)] lg:flex">
           {nav.map((item) => (
             <a
               key={item.href}

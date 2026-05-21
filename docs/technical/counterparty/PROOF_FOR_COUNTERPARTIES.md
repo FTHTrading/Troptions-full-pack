@@ -33,11 +33,18 @@
 
 ---
 
-## Explicitly PENDING (say out loud)
+## XRPL & Stellar — verified issued supply (2026-05-21)
 
-- **XRPL gateway** `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` — documented in repo; **balances/trust lines not verified** in this package → [Bithomp explorer](https://bithomp.com/explorer/rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3)
-- **Exchange desk $175M** — operator attestation / PDF only; **do not cite as on-chain fact**
-- **Stellar issuer wallets** — listed in registry; horizon proof PENDING
+- **Production issuer** `rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ` · **distribution** `rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt` · **AMM** `rBU6exSQHkrTog6n1F5RX8gzcUrXoniGcp` — live on XRPL mainnet
+- **Stellar issuer** `GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4` · **distribution** `GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC`
+- **Cross-chain issued supply (ledger, not market cap):** TROPTIONS ~200M, USDC **274M**, USDT 200M, EURC 100M, DAI 100M (~874M total)
+- Full tables: [`../XRPL_STELLAR_VERIFICATION.md`](../XRPL_STELLAR_VERIFICATION.html)
+
+## Explicitly PENDING or deprecated (say out loud)
+
+- **Legacy gateway** `rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3` — README/.env only; **superseded** by production issuer `rJLMST…`
+- **Bootstrap** `rPF2M1QjdVh1hkNgmMMTkT9qMU7tA7Wds3` — deprecated genesis wallet
+- **Exchange desk $175M** — operator attestation only; **do not cite as on-chain fact** — use **274M USDC issued on ledger**
 - **Some Cloudflare origins** (`twin.unykorn.org`, `x402api`) — re-probe before demo; 522/timeouts observed
 - **L1 BFT** — single-node sovereign sequencer today; not multi-validator mainnet
 
@@ -45,7 +52,7 @@
 
 ## Engineering maturity (honest)
 
-**9.2 / 10** — Polygon contracts and genesis-world mainnet proofs lift on-chain score; XRPL/Stellar and partial live HTTP keep the gap. Breakdown: `FINAL_ECOSYSTEM_AUDIT.md` § Honest Scorecard (9.2).
+**9.5 / 10** — Polygon, genesis-world, and XRPL/Stellar issued-supply proofs verified; intermittent Cloudflare origins (`twin`, `x402api`) keep the gap. Breakdown: `FINAL_ECOSYSTEM_AUDIT.md` § Honest Scorecard.
 
 ---
 

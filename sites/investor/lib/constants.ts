@@ -41,22 +41,32 @@ export const TIMELINE = [
   {
     year: "2003",
     title: "Macon origins",
-    body: "Trade-credit and community-commerce concept in Macon, Georgia — alternative settlement before crypto was mainstream.",
+    body: "Trade-credit and community-commerce in Macon, Georgia — alternative settlement and local exchange before crypto was mainstream.",
   },
   {
-    year: "2004+",
+    year: "2004",
     title: "Washington & SEC chapter",
-    body: "Regulatory attention and structured response. Materials in-repo document compliance posture; counsel review required for external legal characterization.",
+    body: "Regulatory scrutiny and structured response. In-repo materials document compliance posture; external legal characterization requires counsel.",
   },
   {
-    year: "Legal",
+    year: "Legal cleared",
     title: "Books clean, brand endures",
-    body: "Operator narrative: every dime accounted for, no charges dropped — TROPTIONS continued building through headlines and doubt.",
+    body: "Operator narrative: accounts reconciled; TROPTIONS continued building through headlines — brand and community outlasted the news cycle.",
   },
   {
-    year: "Today",
-    title: "Operating company + sovereign stack",
-    body: "Academy, TTN, Exchange OS, launcher, and Troptions-full-pack L1/DAO — live on unykorn.org; troptions.org subdomains when DNS enables.",
+    year: "2010s",
+    title: "Digital rails emerge",
+    body: "XRPL and Stellar issuance programs, Exchange OS prototypes, and multi-chain treasury topology — predecessor to today's production wallets.",
+  },
+  {
+    year: "2020s",
+    title: "Unykorn & open monorepo",
+    body: "Troptions-full-pack: Rust L1, SNP, DAO, Academy, TTN, x402 mesh, Genesis World, Solana launcher — public GitHub + live unykorn.org surfaces.",
+  },
+  {
+    year: "2026",
+    title: "Sovereign stack verified",
+    body: "9.5/10 maturity: Polygon + XRPL + Stellar issued supply user-verified (~874M on ledger). Gap: Cloudflare origin health on select web endpoints.",
   },
 ];
 
@@ -104,6 +114,245 @@ export const GENESIS_GSP_API_HEALTH =
 export const VERIFICATION_STATUS_URL = `${PAGES_URL}/technical/VERIFICATION_STATUS.html`;
 export const FINAL_ECOSYSTEM_AUDIT_URL = `${PAGES_URL}/technical/FINAL_ECOSYSTEM_AUDIT.html`;
 export const ECOSYSTEM_MAP_URL = `${PAGES_URL}/technical/ECOSYSTEM_MAP.html`;
+export const XRPL_STELLAR_VERIFICATION_URL = `${PAGES_URL}/technical/XRPL_STELLAR_VERIFICATION.html`;
+export const PROOF_FOR_COUNTERPARTIES_URL = `${PAGES_URL}/technical/counterparty/PROOF_FOR_COUNTERPARTIES.html`;
+
+export const MATURITY_SCORE = "9.5";
+
+const dl = onPages ? `${PAGES_URL}/downloads` : "/downloads";
+
+export const DOWNLOAD_ASSETS = [
+  {
+    title: "Executive summary",
+    file: "investor-executive-summary.html",
+    href: `${dl}/investor-executive-summary.html`,
+    note: "Print → Save as PDF",
+  },
+  {
+    title: "On-chain proof sheet",
+    file: "on-chain-proof-sheet.html",
+    href: `${dl}/on-chain-proof-sheet.html`,
+    note: "Polygon + XRPL + Stellar",
+  },
+  {
+    title: "Infrastructure atlas",
+    file: "infrastructure-atlas.html",
+    href: `${dl}/infrastructure-atlas.html`,
+    note: "Repos, ports, live URLs",
+  },
+  {
+    title: "Opportunity & roadmap",
+    file: "opportunity-and-roadmap.html",
+    href: `${dl}/opportunity-and-roadmap.html`,
+    note: "Pipeline + projections labeled",
+  },
+];
+
+export type ProofChainCard = {
+  chain: string;
+  status: "proven";
+  summary: string;
+  rows: { label: string; value: string; href?: string }[];
+};
+
+export const PROOF_WALL: ProofChainCard[] = [
+  {
+    chain: "Polygon",
+    status: "proven",
+    summary: "KENNY, EVL, Genesis 9 contracts — PolygonScan verified.",
+    rows: [
+      {
+        label: "KENNY",
+        value: "0x93F2…9BD7",
+        href: "https://polygonscan.com/token/0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7",
+      },
+      {
+        label: "EVL",
+        value: "0xAFe1…fdA3",
+        href: "https://polygonscan.com/token/0xAFe185415D21671704EFaa5696dD219ACEB9fdA3",
+      },
+      {
+        label: "Genesis",
+        value: "9 contracts",
+        href: `${PAGES_URL}/technical/GENESIS_POLYGON_CONTRACTS.html`,
+      },
+    ],
+  },
+  {
+    chain: "XRPL",
+    status: "proven",
+    summary:
+      "~474M issued on XRPL leg; AMM live; reserves thin. ~874M cross-chain total.",
+    rows: [
+      {
+        label: "Issuer",
+        value: "rJLMST…N3FQ",
+        href: "https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+      },
+      {
+        label: "Distribution",
+        value: "rNX4fa…AyCt",
+        href: "https://xrpscan.com/account/rNX4faQ35SdtE4rDoEg8YeVLQKQ57AYyCt",
+      },
+      {
+        label: "AMM",
+        value: "rBU6ex…niGcp",
+        href: "https://xrpscan.com/account/rBU6exSQHkrTog6n1F5RX8gzcUrXoniGcp",
+      },
+      {
+        label: "USDC (XRPL)",
+        value: "174M issued",
+      },
+      {
+        label: "TROPTIONS (XRPL)",
+        value: "~100M issued",
+      },
+    ],
+  },
+  {
+    chain: "Stellar",
+    status: "proven",
+    summary: "Mirror issuance on Horizon — issuer GB4FH, distribution GBH4Y.",
+    rows: [
+      {
+        label: "Issuer",
+        value: "GB4FH…JGEG4",
+        href: "https://stellar.expert/explorer/public/account/GB4FHGFUTLLMS3SC5RWRK6RYBGDIUQ5NR7IGN5TWAA3QVHULJ34JGEG4",
+      },
+      {
+        label: "Distribution",
+        value: "GBH4YY…GGVWC",
+        href: "https://stellar.expert/explorer/public/account/GBH4YY6EKSIM3LEHUQHEXFDZKMLON64HKMCB2K7CCOXGNCIVGH5GGVWC",
+      },
+      {
+        label: "USDC (Stellar)",
+        value: "100M issued",
+      },
+      {
+        label: "Cross-chain USDC",
+        value: "274M total",
+      },
+    ],
+  },
+];
+
+export type RevenueOpportunity = {
+  opportunity: string;
+  status: "live" | "pipeline" | "gated" | "projection";
+  revenueModel: string;
+  tamNote: string;
+  clientType: string;
+};
+
+export const REVENUE_OPPORTUNITIES: RevenueOpportunity[] = [
+  {
+    opportunity: "FTH Academy",
+    status: "live",
+    revenueModel: "$19 / $49 / $149 subscriptions",
+    tamNote: "Trading & alt-ed literacy",
+    clientType: "Education cohorts",
+  },
+  {
+    opportunity: "Solana launcher SaaS",
+    status: "live",
+    revenueModel: "Per-launch & mint fees",
+    tamNote: "Token launch market",
+    clientType: "Launch customers",
+  },
+  {
+    opportunity: "x402 agent commerce",
+    status: "live",
+    revenueModel: "Metered API · ATP on Apostle",
+    tamNote: "AI-to-AI payments",
+    clientType: "Agent developers",
+  },
+  {
+    opportunity: "SNP namespaces",
+    status: "live",
+    revenueModel: "Namespace scarcity / governance",
+    tamNote: "Post-quantum identity roots",
+    clientType: "Platform integrators",
+  },
+  {
+    opportunity: "Genesis / GSP",
+    status: "live",
+    revenueModel: "Treasury rails · coordination",
+    tamNote: "Capital coordination stack",
+    clientType: "Strategic partners",
+  },
+  {
+    opportunity: "WC26 / TTN sports",
+    status: "pipeline",
+    revenueModel: "$500 – $10K sponsorship tiers",
+    tamNote: "Event & broadcast media",
+    clientType: "Sports sponsors",
+  },
+  {
+    opportunity: "Exchange desk",
+    status: "gated",
+    revenueModel: "Spread / IOU desk fees",
+    tamNote: "Institutional IOU — not $175M verified fact",
+    clientType: "Issuers & liquidity",
+  },
+  {
+    opportunity: "RWA / T-Lev-8",
+    status: "pipeline",
+    revenueModel: "LEV8 licensing gates",
+    tamNote: "Tokenized real assets",
+    clientType: "RWA partners",
+  },
+  {
+    opportunity: "Cross-chain issuance utility",
+    status: "live",
+    revenueModel: "Trust lines · issuance services",
+    tamNote: "~874M issued on ledger",
+    clientType: "Corporates / funds",
+  },
+];
+
+export const COMPARABLES = [
+  {
+    path: "Traditional fintech stack build",
+    costTime: "$2–5M · 18+ months",
+    advantage:
+      "Monorepo + satellites already built; Academy, launcher, mesh, L1 live",
+  },
+  {
+    path: "Token launch only",
+    costTime: "$50K–500K · 3–6 months",
+    advantage: "Full operating stack — not a single memecoin deploy",
+  },
+  {
+    path: "Identity / namespace SaaS",
+    costTime: "Recurring namespace fees",
+    advantage: "SNP + cross-chain issuance + x402 agent rails in one stack",
+  },
+];
+
+export const ECONOMICS = {
+  sunk:
+    "Years of multi-repo engineering (~7k audit-scope files). Replacement build in the $2–5M fintech band if started from zero today.",
+  ongoing:
+    "Cloudflare ~$20–200/mo · AWS x402 ~$100–800/mo · PM2 operator host ~$50–300/mo — ranges, not audited books.",
+  drivers:
+    "PROJECTION — illustrative if clients close: cross-chain issuance utility, x402 metered AI revenue, SNP namespace scarcity.",
+};
+
+export const CLIENTS_NEEDED = [
+  "Issuers & treasury partners (XRPL/Stellar trust-line programs)",
+  "Sports sponsors (WC26 / TTN pipeline)",
+  "RWA asset partners (T-Lev-8 gates)",
+  "Agent developers (x402 mesh integrators)",
+  "Education cohorts (Academy scale)",
+];
+
+export const PATH_TO_SKYROCKET = [
+  "Fix Cloudflare origin health for twin.unykorn.org and x402api.unykorn.org",
+  "Enable troptions.org subdomains (ai, ttn, dao) or standardize investor URLs on unykorn.org",
+  "Merge x402 production paths; green T-Build Vitest suite",
+  "Top up XRPL production reserves (issuer/AMM thin margin)",
+  "Sales motion: close pipeline segments — label booked vs illustrative revenue",
+];
 
 export type EcosystemLink = {
   label: string;
@@ -327,18 +576,20 @@ export const BUILT_ITEMS = [
   "13 pytest (backend + DAO)",
   "RocksDB persistence, treasury multisig, signed submit tests",
   "TLS nginx templates, API-key auth, DAO↔L1 reads",
-  "Live unykorn.org surfaces (hub, sports, launcher, academy)",
-  "KENNY + EVL Polygon mainnet — PolygonScan verified (2026-05-21)",
-  "Genesis-world 9 contracts on Polygon — see ON_CHAIN_PROOF.md",
+  "Live unykorn.org surfaces (hub, sports, launcher, academy, x402 health)",
+  "KENNY + EVL Polygon — PolygonScan verified (2026-05-21)",
+  "Genesis-world 9 Polygon contracts + drunks.app live",
+  "XRPL + Stellar issued supply verified — ~874M on ledger (not market cap)",
+  "AMM pool live on XRPL; cross-chain USDC 274M issued total",
 ];
 
 export const GAP_ITEMS = [
-  "Public TLS on troptions.org hostnames (DNS + certbot pending)",
+  "Cloudflare origin health — twin.unykorn.org / x402api (522/timeouts)",
+  "Public TLS on troptions.org hostnames (ai, ttn, dao)",
   "Fraud proofs — design only (Q4 2026 target)",
-  "ai.troptions.org / ttn / dao troptions DNS — Future DNS",
-  "twin.unykorn.org / x402api — probe when origin slow (522/timeouts possible)",
   "Single-node Sovereign Sequencer (not BFT multi-validator)",
-  "Exchange desk $175M — attestation only, not verified fact",
+  "T-Build Vitest suite — run after npm ci",
+  "XRPL production XRP reserves thin — operational but needs top-up",
 ];
 
 export const ANTHEM_TRACKS = [

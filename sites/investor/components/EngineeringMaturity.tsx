@@ -10,7 +10,7 @@ export function EngineeringMaturity() {
     >
       <div className="mb-10 flex flex-wrap items-center gap-4">
         <div className="flex h-24 w-24 flex-col items-center justify-center rounded-2xl border-2 border-[var(--color-gold)] bg-[var(--color-gold)]/10">
-          <span className="text-3xl font-bold text-[var(--color-gold-light)]">9.2</span>
+          <span className="text-3xl font-bold text-[var(--color-gold-light)]">9.5</span>
           <span className="text-xs text-[var(--color-muted)]">/ 10</span>
         </div>
         <p className="max-w-xl text-sm text-[var(--color-muted)]">

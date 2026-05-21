@@ -2,9 +2,17 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { Story } from "@/components/Story";
+import { ProofWall } from "@/components/ProofWall";
+import { InfrastructureBuilt } from "@/components/InfrastructureBuilt";
+import { RevenueOpportunities } from "@/components/RevenueOpportunities";
+import { Comparables } from "@/components/Comparables";
+import { Economics } from "@/components/Economics";
+import { ClientsNeeded } from "@/components/ClientsNeeded";
+import { PathToSkyrocket } from "@/components/PathToSkyrocket";
+import { Downloads } from "@/components/Downloads";
+import { BijanCounterparty } from "@/components/BijanCounterparty";
 import { ThreeColumns } from "@/components/ThreeColumns";
 import { RevenuePillars } from "@/components/RevenuePillars";
-import { FthEcosystem } from "@/components/FthEcosystem";
 import { EngineeringMaturity } from "@/components/EngineeringMaturity";
 import { TruthLabels } from "@/components/TruthLabels";
 import { VerificationStatus } from "@/components/VerificationStatus";
@@ -18,12 +26,20 @@ export default function HomePage() {
       <main>
         <Hero />
         <Story />
+        <ProofWall />
+        <InfrastructureBuilt />
+        <RevenueOpportunities />
+        <Comparables />
+        <Economics />
+        <ClientsNeeded />
+        <PathToSkyrocket />
         <ThreeColumns />
         <RevenuePillars />
-        <FthEcosystem />
         <VerificationStatus />
         <EngineeringMaturity />
         <TruthLabels />
+        <Downloads />
+        <BijanCounterparty />
         <AnthemSection />
         <CTA />
       </main>

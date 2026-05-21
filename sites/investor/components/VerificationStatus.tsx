@@ -15,9 +15,9 @@ const PRIORITY = [
 
 export function VerificationStatus() {
   const [open, setOpen] = useState(false);
-  const percent = 85;
+  const percent = 95;
   const baseline = 60;
-  const honestScore = "8.5/10";
+  const honestScore = "9.5/10";
 
   return (
     <Section
@@ -83,15 +83,16 @@ export function VerificationStatus() {
           </ol>
           <p>
             <strong className="text-white">Confirmed this run:</strong> PM2 8/8;
-            Apostle ~4.7 MB on :7332; genesis-world + SNP public on GitHub;
-            drunks.app, x402 health, fthedu, troptions, portfolio, goat, launch,
-            fifa — HTTP 200; no kill_switch Anchor in full-pack.
+            Polygon KENNY/EVL + Genesis 9 contracts; XRPL/Stellar issued supply
+            (~874M on ledger, USDC 274M cross-chain); live unykorn URLs + x402
+            health; drunks.app; no kill_switch Anchor in full-pack.
           </p>
           <p>
-            <strong className="text-white">Still pending:</strong> PolygonScan /
-            XRPL on-chain proofs; T-Build tests after{" "}
-            <code className="text-xs">npm ci</code>; twin + x402api origins;{" "}
-            <code className="text-xs">ai.troptions.org</code> not deployed.
+            <strong className="text-white">Gap to 10/10:</strong> Cloudflare
+            origin health (twin, x402api); T-Build tests after{" "}
+            <code className="text-xs">npm ci</code>;{" "}
+            <code className="text-xs">ai.troptions.org</code> DNS; thin XRPL
+            XRP reserves.
           </p>
           <p className="text-xs">
             Re-run:{" "}
