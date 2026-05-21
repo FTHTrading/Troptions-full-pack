@@ -36,15 +36,16 @@ cd "$ROOT"
 echo "Repo root: $ROOT"
 mkdir -p logs
 
-# .env from template (never overwrite)
+# .env from template (never overwrite) — multi-gateway matches operator one-liner
 ENV_TEMPLATE="${ROOT}/deploy/aws/.env.aws.template"
+MGW_TEMPLATE="${ROOT}/config/multi-gateway.env.template"
 if [[ ! -f .env ]]; then
-  if [[ -f "$ENV_TEMPLATE" ]]; then
+  if [[ -f "$MGW_TEMPLATE" ]]; then
+    cp "$MGW_TEMPLATE" .env
+    echo "Created .env from config/multi-gateway.env.template — edit secrets on host."
+  elif [[ -f "$ENV_TEMPLATE" ]]; then
     cp "$ENV_TEMPLATE" .env
     echo "Created .env from deploy/aws/.env.aws.template — edit secrets on host."
-  elif [[ -f config/multi-gateway.env.template ]]; then
-    cp config/multi-gateway.env.template .env
-    echo "Created .env from config/multi-gateway.env.template"
   else
     echo "WARN: no .env template found — create .env manually."
   fi
@@ -125,8 +126,8 @@ echo ""
 echo "# Arbitrage"
 echo "  curl -s -X POST http://127.0.0.1:4028/start"
 echo ""
-echo "# Register agent — canonical"
-echo "  curl -s -X POST http://127.0.0.1:8097/api/v1/agents \\"
+echo "# Register agent — canonical (:8097, NOT :4029 or :4033)"
+echo "  curl -s -X POST http://127.0.0.1:8097/api/v1/agents/register \\"
 echo "    -H 'Content-Type: application/json' \\"
 echo "    -d '{\"agent_id\":\"ec2-demo\",\"wallet\":\"rDemo\",\"capital_troptions\":0}'"
 echo ""

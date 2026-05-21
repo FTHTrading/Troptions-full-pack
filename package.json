@@ -3,6 +3,7 @@
   "private": true,
   "description": "TROPTIONS sovereign stack monorepo",
   "scripts": {
+    "postinstall": "npm install --prefix fiat-rails --omit=dev && npm install --prefix agents && npm install --prefix services/usdc-base-relay",
     "docs:update": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/docs-update.ps1"
   }
 }

@@ -50,18 +50,34 @@ permalink: /technical/AWS_ACTIVATION_RUNBOOK.html
 
 | Endpoint | Port | Notes |
 |----------|------|-------|
-| `POST /api/v1/agents` | **8097** | **Canonical** BaaS registration |
+| `POST /api/v1/agents/register` | **8097** | **Canonical** BaaS registration |
+| `POST /api/v1/agents` | **8097** | Alias (same handler) |
 | `POST /agents/register` | **4031** | Legacy fiat `agent-orchestrator` proxy |
 
 ## One-liner (fresh Ubuntu EC2)
 
-Install apt deps first (Node 20, git, python3, pip, jq, pm2), then:
+**Prerequisites:** Node 20, `pm2` global, `git`, `python3`, `pip`, `jq` — see [deploy/aws/README.md](../../deploy/aws/README.md).
+
+**Pipe install (no clone):**
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/FTHTrading/Troptions-full-pack/main/deploy/aws/setup.sh | bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/FTHTrading/Troptions-full-pack/main/scripts/activate-revenue.sh)"
 ```
 
-Edit `.env` on the host (`deploy/aws/setup.sh` copies `deploy/aws/.env.aws.template` → `.env` only if missing).
+**Git clone (exact operator block):**
+
+```bash
+git clone https://github.com/FTHTrading/Troptions-full-pack.git &&
+cd Troptions-full-pack &&
+npm install &&
+cp config/multi-gateway.env.template .env &&
+pm2 start ecosystem.config.js --only payment-orchestrator,compliance-engine,arbitrage-bot,baas-api,baas-dashboard,x402-us,x402-eu,x402-jp,agent-orchestrator,mcp-server,usdc-base-relay &&
+pm2 save &&
+./scripts/activate-revenue.sh
+```
+
+Edit `.env` on the host (`cp config/multi-gateway.env.template .env` or `setup.sh` creates `.env` only if missing).
 
 ## EC2 setup (manual)
 
@@ -124,8 +140,8 @@ bash scripts/batch-create-pools.sh --dry-run
 # 2) Arbitrage
 curl -s -X POST http://127.0.0.1:4028/start
 
-# 3) Register agent — canonical
-curl -s -X POST http://127.0.0.1:8097/api/v1/agents \
+# 3) Register agent — canonical (:8097, NOT :4029 dashboard or :4033)
+curl -s -X POST http://127.0.0.1:8097/api/v1/agents/register \
   -H 'Content-Type: application/json' \
   -d '{"agent_id":"ec2-demo","wallet":"rYourIssuer","capital_troptions":0}'
 
@@ -167,7 +183,12 @@ curl -s http://127.0.0.1:4035/health | jq .
 .\scripts\activate-full-stack.ps1 -DryRun
 ```
 
+## npm install
+
+Root `npm install` is sufficient for AWS floor services: `postinstall` installs **fiat-rails**, **agents**, and **usdc-base-relay**. `deploy/aws/setup.sh` also runs those paths explicitly and adds **telegram-bot** when `TELEGRAM_BOT_TOKEN` is set.
+
 ## Related docs
 
+- [deploy/aws/README.md](../../deploy/aws/README.md)
 - [X402_GLOBAL_MESH](X402_GLOBAL_MESH.html)
 - [BAAS_BATCH_POOLS](BAAS_BATCH_POOLS.html)
