@@ -2,6 +2,7 @@ import { assetPath } from "@/lib/base-path";
 import {
   DAO_PAGE_URL,
   DOCS_URL,
+  ECOSYSTEM_HUB_URL,
   ECOSYSTEM_MAP_URL,
   PAGES_URL,
   TANTHEM_MINT_DAPP_URL,
@@ -44,6 +45,11 @@ export function getSiteNavigation(): NavEntry[] {
           href: onPages ? DAO_PAGE_URL : assetPath("/dao/"),
           label: "DAO page",
           external: onPages,
+        },
+        {
+          href: ECOSYSTEM_HUB_URL,
+          label: "Ecosystem status",
+          external: true,
         },
         {
           href: ECOSYSTEM_MAP_URL,

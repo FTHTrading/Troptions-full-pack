@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cloudflare origin fix — twin & x402api</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Cloudflare origin fix — twin & x402api</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Cloudflare origin fix — <code>twin.unykorn.org</code> &amp; <code>x402api.unykorn.org</code></h1>
+<p><strong>Last updated:</strong> 2026-05-21<br />
+<strong>Symptom:</strong> Cloudflare <strong>522</strong> (connection timed out) or browser <strong>timeout</strong> on these hostnames while <code>https://x402.unykorn.org/health</code> returns <strong>200</strong>.</p>
+<p><strong>Root cause (typical):</strong> Cloudflare reaches the edge, but the <strong>origin</strong> behind the hostname (EC2 process, tunnel connector, or wrong DNS target) is down, unreachable, or listening on the wrong port.</p>
+<p>Production mesh and operator runbooks live in <strong><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a></strong> (<code>aws/</code>, <code>packages/x402-credit-gateway/docs/</code>). This doc is the Troptions operator checklist for the two flaky Unykorn hostnames.</p>
+<hr />
+<h2>Prerequisites</h2>
+<ol>
+<li><strong>Local credentials</strong> (gitignored):</li>
+</ol>
+<p><code>powershell
+   .\scripts\setup-cloudflare-env.ps1
+   # Optional custom path:
+   .\scripts\setup-cloudflare-env.ps1 "C:\path\to\Read all resources API token was su.txt"</code></p>
+<ol start="2">
+<li><strong>Variables</strong> in repo-root <code>.env</code>:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CLOUDFLARE_API_TOKEN</code></td>
+<td>Zone/DNS/tunnel API ("Read all resources" <code>cfut_…</code>)</td>
+</tr>
+<tr>
+<td><code>CLOUDFLARE_ACCOUNT_ID</code></td>
+<td>Account scope for API calls (set manually if not in txt)</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li><strong>Verify token</strong> (redact token in logs; use env var):</li>
+</ol>
+<p><code>powershell
+   $token = (Get-Content .env -Raw | Select-String 'CLOUDFLARE_API_TOKEN=(.+)' -AllMatches).Matches[0].Groups[1].Value
+   curl.exe -s "https://api.cloudflare.com/client/v4/user/tokens/verify" -H "Authorization: Bearer $token"</code></p>
+<p>Expect <code>"success": true</code>.</p>
+<hr />
+<h2>Hostname map</h2>
+<table>
+<thead>
+<tr>
+<th>Hostname</th>
+<th>Role</th>
+<th>Healthy reference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>x402.unykorn.org</code></td>
+<td>Public gateway health</td>
+<td><code>/health</code> → <strong>200</strong></td>
+</tr>
+<tr>
+<td><code>twin.unykorn.org</code></td>
+<td>Digital twin / agent mesh UI</td>
+<td>Should return HTML/JSON, not 522</td>
+</tr>
+<tr>
+<td><code>x402api.unykorn.org</code></td>
+<td>x402 API docs / edge</td>
+<td>Should return docs or API, not timeout</td>
+</tr>
+<tr>
+<td><code>goat.unykorn.org</code></td>
+<td>GoatX SPL token site</td>
+<td>CF tunnel → local <strong>:3001</strong> (<code>goat-site</code>) — <strong>502</strong> when origin stopped</td>
+</tr>
+<tr>
+<td><code>junior.unykorn.org</code></td>
+<td>Junior / Tilden AI node</td>
+<td>CF tunnel → <strong>:4099</strong> (<code>junior-tilden</code>); aliases <code>tilden</code>, <code>jr</code></td>
+</tr>
+<tr>
+<td><code>portfolio.unykorn.org</code></td>
+<td>UNYKORN portfolio book</td>
+<td>Cloudflare Pages (<code>portfolio-unykorn</code>) — usually <strong>200</strong></td>
+</tr>
+<tr>
+<td><code>fifa.unykorn.org</code></td>
+<td>WWAI FIFA router</td>
+<td>Worker <code>fifa-unykorn-router</code> (<code>fifa app/wrangler.toml</code>)</td>
+</tr>
+<tr>
+<td><code>whichway.live</code></td>
+<td>WhichWay guest OS</td>
+<td>Worker <code>whichway-live</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Do not conflate</strong> monorepo <code>backend/x402-gateway</code> (:4020) with the public mesh unless you repoint DNS yourself. See <a href="X402_INTEGRATION.html">X402_INTEGRATION.md</a>.</p>
+<h3>Cloudflare Workers (UnyKorn-X402-aws + satellites)</h3>
+<table>
+<thead>
+<tr>
+<th>Worker / repo</th>
+<th>Route pattern</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fifa-unykorn-router</code></td>
+<td><code>fifa.unykorn.org/*</code></td>
+<td><code>C:\Users\Kevan\Desktop\fifa-unykorn-router\wrangler.toml</code></td>
+</tr>
+<tr>
+<td><code>whichway-live</code></td>
+<td><code>whichway.live</code></td>
+<td><code>fifa app/wrangler.toml</code></td>
+</tr>
+<tr>
+<td><code>fth-x402-gateway</code></td>
+<td>staging/production Workers</td>
+<td><code>FACILITATOR_URL</code> → <code>https://x402api.unykorn.org</code> in production env</td>
+</tr>
+<tr>
+<td><code>unykorn-api</code></td>
+<td><code>api.unykorn.org/*</code></td>
+<td>ICO / exchange API proxy</td>
+</tr>
+<tr>
+<td><code>x407-ai-proxy</code></td>
+<td>(407 / AI edge)</td>
+<td>Optional <code>ai.407.unykorn.org</code> route — commented in wrangler</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tunnel origins (not Workers):</strong> <code>goat.unykorn.org</code> → <code>:3001</code>, <code>junior.unykorn.org</code> → <code>:4099</code>. Operator landings on GitHub Pages: <code>/sites/goat/</code>, <code>/sites/junior/</code>.</p>
+<hr />
+<h2>Diagnosis order</h2>
+<h3>1. Edge vs origin (curl)</h3>
+<p>From any machine:</p>
+<pre><code class="language-bash">curl -sS -o /dev/null -w &quot;twin HTTP %{http_code} time %{time_total}s\n&quot; --max-time 25 https://twin.unykorn.org/
+curl -sS -o /dev/null -w &quot;x402api HTTP %{http_code} time %{time_total}s\n&quot; --max-time 25 https://x402api.unykorn.org/
+curl -sS -o /dev/null -w &quot;health HTTP %{http_code} time %{time_total}s\n&quot; --max-time 15 https://x402.unykorn.org/health
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>health <strong>200</strong>, twin/x402api <strong>522</strong> or timeout</td>
+<td>Origin for twin/x402api down; health may use a different route/tunnel</td>
+</tr>
+<tr>
+<td>All <strong>522</strong></td>
+<td>Broader origin/tunnel outage on AWS host</td>
+</tr>
+<tr>
+<td><strong>403/1010</strong></td>
+<td>WAF or access rule — check Cloudflare Security</td>
+</tr>
+</tbody>
+</table>
+<p>PowerShell equivalent:</p>
+<pre><code class="language-powershell">foreach ($u in @(
+  'https://twin.unykorn.org/',
+  'https://x402api.unykorn.org/',
+  'https://x402.unykorn.org/health'
+)) {
+  try {
+    $r = Invoke-WebRequest -Uri $u -UseBasicParsing -TimeoutSec 25
+    Write-Host &quot;$u -&gt; $($r.StatusCode)&quot;
+  } catch {
+    Write-Host &quot;$u -&gt; $($_.Exception.Message)&quot;
+  }
+}
+</code></pre>
+<h3>2. Cloudflare DNS (dashboard or API)</h3>
+<p>In <strong>Cloudflare → DNS → Records</strong> for zone <code>unykorn.org</code>:</p>
+<ul>
+<li>Confirm <code>twin</code> and <code>x402api</code> records exist and point to the <strong>intended</strong> target (tunnel CNAME <code>*.cfargotunnel.com</code>, A/AAAA to EC2, or Worker route).</li>
+<li>Compare with the working <code>x402</code> record — often twin/x402api still point at a <strong>stale EC2 IP</strong> while health uses <strong>cloudflared</strong>.</li>
+</ul>
+<p>List records (requires <code>CLOUDFLARE_API_TOKEN</code> + zone ID):</p>
+<pre><code class="language-powershell"># Zone ID from dashboard → unykorn.org → Overview (right column)
+$env:CF_TOKEN = (Select-String -Path .env -Pattern '^CLOUDFLARE_API_TOKEN=(.+)$').Matches[0].Groups[1].Value
+$zoneId = 'YOUR_ZONE_ID'
+curl.exe -s &quot;https://api.cloudflare.com/client/v4/zones/$zoneId/dns_records?name=twin.unykorn.org&quot; -H &quot;Authorization: Bearer $env:CF_TOKEN&quot;
+curl.exe -s &quot;https://api.cloudflare.com/client/v4/zones/$zoneId/dns_records?name=x402api.unykorn.org&quot; -H &quot;Authorization: Bearer $env:CF_TOKEN&quot;
+</code></pre>
+<h3>3. Workers routes vs tunnel vs direct origin</h3>
+<p>Check <strong>Workers &amp; Pages → Routes</strong> and <strong>Zero Trust → Tunnels</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hostname routed to <strong>Worker</strong> with no healthy <code>fetch()</code> to origin</td>
+<td>Update Worker script or route <code>twin</code> / <code>x402api</code> to live origin URL</td>
+</tr>
+<tr>
+<td><strong>Tunnel</strong> hostname missing or connector offline</td>
+<td>Restart <code>cloudflared</code> on EC2; re-bind public hostname in tunnel config</td>
+</tr>
+<tr>
+<td><strong>Proxied A record</strong> to stopped EC2</td>
+<td>Start services on origin IP <strong>or</strong> repoint DNS to active tunnel</td>
+</tr>
+</tbody>
+</table>
+<p>UnyKorn operator docs: <code>aws/X402_AWS_DEPLOYMENT_RUNBOOK.md</code>, tunnel cutover notes in <code>UnyKorn-X402-aws</code>.</p>
+<h3>4. Origin health on AWS (EC2)</h3>
+<p>SSH to the x402 production host and verify processes that serve twin and API docs (ports vary by deployment; mesh gateway is commonly <strong>4020</strong>, facilitator <strong>3100</strong>):</p>
+<pre><code class="language-bash">sudo systemctl status cloudflared x402-gateway  # names per UnyKorn unit files
+curl -sS -o /dev/null -w &quot;%{http_code}\n&quot; http://127.0.0.1:4020/health
+ss -tlnp | grep -E '4020|3100|7332'
+</code></pre>
+<p>If localhost is healthy but public hostnames fail, the break is <strong>Cloudflare routing</strong> (DNS/tunnel/Worker), not the app binary.</p>
+<h3>5. SSL/TLS mode</h3>
+<p><strong>SSL/TLS → Overview:</strong> use <strong>Full (strict)</strong> when origin serves valid HTTPS; <strong>Full</strong> only if origin uses self-signed. Wrong mode can cause 525/526 (not 522), but worth confirming while in the dashboard.</p>
+<hr />
+<h2>Fix checklist (operator)</h2>
+<ol>
+<li>[ ] <code>setup-cloudflare-env.ps1</code> — <code>CLOUDFLARE_API_TOKEN</code> in <code>.env</code> (never commit).</li>
+<li>[ ] Token verify API returns success.</li>
+<li>[ ] <code>x402.unykorn.org/health</code> still <strong>200</strong> (baseline).</li>
+<li>[ ] DNS: <code>twin</code> and <code>x402api</code> match the <strong>same class</strong> of target as working <code>x402</code> (tunnel vs EC2).</li>
+<li>[ ] <code>cloudflared</code> / tunnel connector running on origin host.</li>
+<li>[ ] App processes for twin UI and API docs listening on expected ports.</li>
+<li>[ ] <strong>GoatX:</strong> <code>goat-site</code> on <code>:3001</code> — tunnel healthy (Exchange OS: tunnel a2da25a0).</li>
+<li>[ ] <strong>Junior:</strong> <code>junior-tilden</code> on <code>:4099</code> — tunnel healthy.</li>
+<li>[ ] Workers route rules updated if hostnames are Worker-fronted.</li>
+<li>[ ] Re-run curl block — expect <strong>200</strong> or <strong>301/302</strong>, not <strong>522</strong> or timeout.</li>
+</ol>
+<hr />
+<h2>After fix — verification (copy/paste)</h2>
+<pre><code class="language-bash">curl -sS -D- --max-time 25 https://twin.unykorn.org/ -o /dev/null | head -n 1
+curl -sS -D- --max-time 25 https://x402api.unykorn.org/ -o /dev/null | head -n 1
+curl -sS https://x402.unykorn.org/health | head -c 400
+</code></pre>
+<p><strong>Pass criteria:</strong></p>
+<ul>
+<li>First two lines: <code>HTTP/2 200</code> (or <code>301</code>/<code>302</code> to HTTPS canonical URL), <strong>not</strong> <code>522</code> or empty reply.</li>
+<li>Health JSON includes live gateway / chain fields (see <a href="X402_AWS_VERIFICATION.html">X402_AWS_VERIFICATION.md</a>).</li>
+</ul>
+<p>Update investor-facing status in <code>VERIFICATION_STATUS.md</code> / <code>ECOSYSTEM_MAP.md</code> after a clean probe.</p>
+<hr />
+<h2>Token types (do not mix)</h2>
+<table>
+<thead>
+<tr>
+<th>Token file</th>
+<th>Env var</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read all resources (Downloads)</td>
+<td><code>CLOUDFLARE_API_TOKEN</code></td>
+<td>DNS, zones, tunnels, origin diagnostics</td>
+</tr>
+<tr>
+<td>Workers AI (Desktop, 3rd <code>cfut_</code>)</td>
+<td><code>CLOUDFLARE_WORKERS_AI_TOKEN</code></td>
+<td>Workers AI inference in donk-tutor / dao-service</td>
+</tr>
+</tbody>
+</table>
+<p><code>setup-local-env.ps1</code> handles Workers AI + Telnyx + ElevenLabs; <code>setup-cloudflare-env.ps1</code> handles the <strong>Read all resources</strong> admin token only.</p>
+<hr />
+<h2>Related docs</h2>
+<ul>
+<li><a href="X402_INTEGRATION.html">X402_INTEGRATION.md</a></li>
+<li><a href="deploy/secrets-setup.html">deploy/secrets-setup.md</a></li>
+<li><a href="ECOSYSTEM_MAP.html">ECOSYSTEM_MAP.md</a> — live URL matrix</li>
+<li><a href="https://github.com/FTHTrading/UnyKorn-X402-aws">UnyKorn-X402-aws</a></li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/CLOUDFLARE_ORIGIN_FIX.html</p>
+</body>
+</html>

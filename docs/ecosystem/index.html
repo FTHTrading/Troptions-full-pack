@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FTH / TROPTIONS ecosystem status</title>
+  <meta name="description" content="Live status of all FTH Trading, Unykorn, GitHub Pages, and troptions.org surfaces." />
+  <link rel="stylesheet" href="../sites/site-landing.css" />
+  <style>
+    table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1rem 0; }
+    th, td { border: 1px solid var(--border); padding: 0.45rem 0.55rem; text-align: left; vertical-align: top; }
+    th { color: var(--gold-light); background: rgba(0,0,0,0.25); }
+    .st-live { color: #4ade80; font-weight: 600; }
+    .st-pages { color: #60a5fa; font-weight: 600; }
+    .st-pending { color: #fbbf24; font-weight: 600; }
+    .st-origin { color: #f87171; font-weight: 600; }
+    .st-dns { color: #a78bfa; font-weight: 600; }
+    .st-vercel { color: #38bdf8; font-weight: 600; }
+    .st-worker { color: #2dd4bf; font-weight: 600; }
+    .st-github { color: #94a3b8; font-weight: 600; }
+    .meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 1rem; }
+    .filter { margin: 0.5rem 0 1rem; font-size: 0.8rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <span class="brand">Ecosystem status</span>
+    <a href="../">Investor hub</a>
+    <a href="../technical/ECOSYSTEM_MAP.html">Ecosystem map (doc)</a>
+    <a href="last-verification.md">Last curl report</a>
+  </nav>
+  <main class="wrap" style="max-width: 1100px;">
+    <h1>FTH / TROPTIONS ecosystem</h1>
+    <p class="lead">All associated sites — investor hub, deal rooms, Unykorn edge, x402 mesh, Genesis, and future troptions.org DNS.</p>
+    <p class="meta">Last operator probe: <strong>2026-05-21</strong> · Re-run <code>scripts/verify-all-ecosystem-sites.ps1</code> from repo root.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Surface</th>
+          <th>URL</th>
+          <th>HTTP</th>
+          <th>Status</th>
+          <th>Deploy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Investor hub</td><td><a href="https://fthtrading.github.io/Troptions-full-pack/">fthtrading.github.io/Troptions-full-pack</a></td><td>200</td><td class="st-pages">Pages LIVE</td><td>GitHub Pages</td></tr>
+        <tr><td>T-Lev-8 deal room</td><td><a href="https://fthtrading.github.io/T-Lev-8-/">T-Lev-8 Pages</a></td><td>200</td><td class="st-pages">Pages LIVE</td><td>GitHub Pages</td></tr>
+        <tr><td>Aurora RWA</td><td><a href="https://fthtrading.github.io/aurora-site/">aurora-site Pages</a></td><td>200</td><td class="st-pages">Pages LIVE</td><td>GitHub Pages</td></tr>
+        <tr><td>Impact ESG</td><td><a href="https://fthtrading.github.io/impact-site/">impact-site Pages</a></td><td>404</td><td class="st-origin">Pages broken</td><td>GitHub Pages</td></tr>
+        <tr><td>Sovereign DAO</td><td><a href="../dao/">/dao/</a></td><td>200</td><td class="st-pages">Pages LIVE</td><td>GitHub Pages</td></tr>
+        <tr><td>Mint DApp</td><td><a href="../mint.html">mint.html</a></td><td>200</td><td class="st-pages">Pages LIVE</td><td>GitHub Pages</td></tr>
+        <tr><td>NFT gallery</td><td><a href="../nft/">/nft/</a></td><td>200</td><td class="st-pages">Pages LIVE</td><td>GitHub Pages</td></tr>
+        <tr><td>ai.troptions.org landing</td><td><a href="../sites/ai/">/sites/ai/</a></td><td>—</td><td class="st-pending">DNS pending</td><td>Pages landing</td></tr>
+        <tr><td>ttn.troptions.org landing</td><td><a href="../sites/ttn/">/sites/ttn/</a></td><td>—</td><td class="st-pending">DNS pending</td><td>Pages landing</td></tr>
+        <tr><td>dao.troptions.org landing</td><td><a href="../sites/dao/">/sites/dao/</a></td><td>—</td><td class="st-pending">DNS pending</td><td>Pages → /dao/</td></tr>
+        <tr><td>GoatX landing</td><td><a href="../sites/goat/">/sites/goat/</a></td><td>—</td><td class="st-pending">Operator doc</td><td>Tunnel + goat-site</td></tr>
+        <tr><td>Junior landing</td><td><a href="../sites/junior/">/sites/junior/</a></td><td>—</td><td class="st-pending">Operator doc</td><td>Tunnel :4099</td></tr>
+        <tr><td>TROPTIONS hub</td><td><a href="https://troptions.unykorn.org/troptions">troptions.unykorn.org</a></td><td>200</td><td class="st-live">LIVE</td><td>Unykorn edge</td></tr>
+        <tr><td>Exchange OS</td><td><a href="https://troptionsexchange.unykorn.org/exchange-os">troptionsexchange</a></td><td>200</td><td class="st-live">LIVE</td><td>Unykorn edge</td></tr>
+        <tr><td>TTN sports</td><td><a href="https://troptionslive.unykorn.org/sports">troptionslive</a></td><td>200</td><td class="st-live">LIVE</td><td>Unykorn edge</td></tr>
+        <tr><td>Launcher</td><td><a href="https://launch.unykorn.org">launch.unykorn.org</a></td><td>200</td><td class="st-live">LIVE</td><td>Vercel / Unykorn</td></tr>
+        <tr><td>Academy</td><td><a href="https://fthedu.unykorn.org">fthedu.unykorn.org</a></td><td>200</td><td class="st-live">LIVE</td><td>Unykorn edge</td></tr>
+        <tr><td>Portfolio</td><td><a href="https://portfolio.unykorn.org">portfolio.unykorn.org</a></td><td>200</td><td class="st-live">LIVE</td><td>CF Pages (portfolio-unykorn)</td></tr>
+        <tr><td>GoatX</td><td><a href="https://goat.unykorn.org">goat.unykorn.org</a></td><td>502</td><td class="st-origin">ORIGIN down</td><td>CF tunnel → :3001</td></tr>
+        <tr><td>Junior</td><td><a href="https://junior.unykorn.org">junior.unykorn.org</a></td><td>502</td><td class="st-origin">ORIGIN down</td><td>CF tunnel → :4099</td></tr>
+        <tr><td>WhichWay</td><td><a href="https://whichway.live">whichway.live</a></td><td>200</td><td class="st-live">LIVE</td><td>CF Worker (whichway-live)</td></tr>
+        <tr><td>FIFA</td><td><a href="https://fifa.unykorn.org">fifa.unykorn.org</a></td><td>200</td><td class="st-live">LIVE</td><td>CF Worker router</td></tr>
+        <tr><td>x402 health</td><td><a href="https://x402.unykorn.org/health">x402/health</a></td><td>200</td><td class="st-live">LIVE</td><td>AWS + CF</td></tr>
+        <tr><td>Digital twin</td><td><a href="https://twin.unykorn.org">twin.unykorn.org</a></td><td>522</td><td class="st-origin">ORIGIN down</td><td>AWS tunnel</td></tr>
+        <tr><td>x402 API docs</td><td><a href="https://x402api.unykorn.org">x402api.unykorn.org</a></td><td>522</td><td class="st-origin">ORIGIN down</td><td>AWS / gateway</td></tr>
+        <tr><td>Genesis GSP</td><td><a href="https://drunks.app">drunks.app</a></td><td>200</td><td class="st-live">LIVE</td><td>External app</td></tr>
+        <tr><td>GSP API</td><td><a href="https://gsp-api.kevanbtc.workers.dev/api/health">gsp-api Worker</a></td><td>200</td><td class="st-worker">Worker LIVE</td><td>Cloudflare Worker</td></tr>
+        <tr><td>Troptions preview</td><td><a href="https://troptions.vercel.app">troptions.vercel.app</a></td><td>200</td><td class="st-vercel">Vercel LIVE</td><td>Vercel</td></tr>
+        <tr><td>ai.troptions.org</td><td>https://ai.troptions.org</td><td>ERR</td><td class="st-dns">DNS not set</td><td>Future → Pages /sites/ai</td></tr>
+        <tr><td>ttn.troptions.org</td><td>https://ttn.troptions.org</td><td>ERR</td><td class="st-dns">DNS not set</td><td>Future → /sites/ttn</td></tr>
+        <tr><td>dao.troptions.org</td><td>https://dao.troptions.org</td><td>ERR</td><td class="st-dns">DNS not set</td><td>Future → /dao/</td></tr>
+        <tr><td>aurora.unykorn.org</td><td>https://aurora.unykorn.org</td><td>ERR</td><td class="st-dns">DNS not set</td><td>Use Pages URL</td></tr>
+        <tr><td>impact.unykorn.org</td><td>https://impact.unykorn.org</td><td>ERR</td><td class="st-dns">DNS not set</td><td>Fix impact-site Pages</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card">
+      <h2>Cloudflare Workers (UnyKorn-X402-aws)</h2>
+      <ul>
+        <li><code>fifa-unykorn-router</code> — route <code>fifa.unykorn.org/*</code></li>
+        <li><code>whichway-live</code> — <code>whichway.live</code> (fifa app repo)</li>
+        <li><code>fth-x402-gateway</code> — staging/production; <code>FACILITATOR_URL</code> → x402api.unykorn.org</li>
+        <li><code>unykorn-api</code> — <code>api.unykorn.org/*</code></li>
+        <li><code>x407-ai-proxy</code> — AI proxy (407.unykorn.org pattern)</li>
+      </ul>
+      <p style="margin-top:0.75rem;font-size:0.85rem;color:var(--muted);">
+        Tunnel origins (goat :3001, junior :4099, twin, x402api): see
+        <a href="../technical/CLOUDFLARE_ORIGIN_FIX.html">Cloudflare origin fix</a>.
+      </p>
+    </div>
+  </main>
+</body>
+</html>

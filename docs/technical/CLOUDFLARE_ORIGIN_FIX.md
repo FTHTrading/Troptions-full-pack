@@ -50,8 +50,25 @@ Production mesh and operator runbooks live in **[UnyKorn-X402-aws](https://githu
 | `x402.unykorn.org` | Public gateway health | `/health` → **200** |
 | `twin.unykorn.org` | Digital twin / agent mesh UI | Should return HTML/JSON, not 522 |
 | `x402api.unykorn.org` | x402 API docs / edge | Should return docs or API, not timeout |
+| `goat.unykorn.org` | GoatX SPL token site | CF tunnel → local **:3001** (`goat-site`) — **502** when origin stopped |
+| `junior.unykorn.org` | Junior / Tilden AI node | CF tunnel → **:4099** (`junior-tilden`); aliases `tilden`, `jr` |
+| `portfolio.unykorn.org` | UNYKORN portfolio book | Cloudflare Pages (`portfolio-unykorn`) — usually **200** |
+| `fifa.unykorn.org` | WWAI FIFA router | Worker `fifa-unykorn-router` (`fifa app/wrangler.toml`) |
+| `whichway.live` | WhichWay guest OS | Worker `whichway-live` |
 
 **Do not conflate** monorepo `backend/x402-gateway` (:4020) with the public mesh unless you repoint DNS yourself. See [X402_INTEGRATION.md](X402_INTEGRATION.html).
+
+### Cloudflare Workers (UnyKorn-X402-aws + satellites)
+
+| Worker / repo | Route pattern | Notes |
+|---------------|---------------|-------|
+| `fifa-unykorn-router` | `fifa.unykorn.org/*` | `C:\Users\Kevan\Desktop\fifa-unykorn-router\wrangler.toml` |
+| `whichway-live` | `whichway.live` | `fifa app/wrangler.toml` |
+| `fth-x402-gateway` | staging/production Workers | `FACILITATOR_URL` → `https://x402api.unykorn.org` in production env |
+| `unykorn-api` | `api.unykorn.org/*` | ICO / exchange API proxy |
+| `x407-ai-proxy` | (407 / AI edge) | Optional `ai.407.unykorn.org` route — commented in wrangler |
+
+**Tunnel origins (not Workers):** `goat.unykorn.org` → `:3001`, `junior.unykorn.org` → `:4099`. Operator landings on GitHub Pages: `/sites/goat/`, `/sites/junior/`.
 
 ---
 
@@ -145,6 +162,8 @@ If localhost is healthy but public hostnames fail, the break is **Cloudflare rou
 4. [ ] DNS: `twin` and `x402api` match the **same class** of target as working `x402` (tunnel vs EC2).
 5. [ ] `cloudflared` / tunnel connector running on origin host.
 6. [ ] App processes for twin UI and API docs listening on expected ports.
+7. [ ] **GoatX:** `goat-site` on `:3001` — tunnel healthy (Exchange OS: tunnel a2da25a0).
+8. [ ] **Junior:** `junior-tilden` on `:4099` — tunnel healthy.
 7. [ ] Workers route rules updated if hostnames are Worker-fronted.
 8. [ ] Re-run curl block — expect **200** or **301/302**, not **522** or timeout.
 

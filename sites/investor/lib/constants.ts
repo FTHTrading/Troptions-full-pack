@@ -3,6 +3,7 @@ export const REPO_URL =
 export const SNP_URL =
   "https://github.com/FTHTrading/sovereign-namespace-protocol";
 export const PAGES_URL = "https://fthtrading.github.io/Troptions-full-pack";
+export const ECOSYSTEM_HUB_URL = `${PAGES_URL}/ecosystem/`;
 const onPages = Boolean(process.env.NEXT_PUBLIC_BASE_PATH);
 export const ON_CHAIN_PROOF_URL = onPages
   ? `${PAGES_URL}/technical/ON_CHAIN_PROOF.html`
@@ -26,9 +27,21 @@ export const LIVE_SURFACES = [
 ];
 
 export const FUTURE_DNS = [
-  { host: "ai.troptions.org", note: "DONK AI tutor — nginx template only" },
-  { host: "ttn.troptions.org", note: "TTN edge — live sports on unykorn.org" },
-  { host: "dao.troptions.org", note: "DAO dashboard — run locally or post-DNS" },
+  {
+    host: "ai.troptions.org",
+    note: "DONK AI tutor — Pages landing until DNS; live Academy on fthedu",
+    pagesPath: `${PAGES_URL}/sites/ai/`,
+  },
+  {
+    host: "ttn.troptions.org",
+    note: "TTN edge — Pages landing; sports live on troptionslive.unykorn.org",
+    pagesPath: `${PAGES_URL}/sites/ttn/`,
+  },
+  {
+    host: "dao.troptions.org",
+    note: "DAO — Pages landing redirects to /dao/; operator :8093 local",
+    pagesPath: `${PAGES_URL}/sites/dao/`,
+  },
 ];
 
 export const X402_HEALTH = "https://x402.unykorn.org/health";
@@ -261,6 +274,10 @@ export const PATH_TO_SKYROCKET: SkyrocketStep[] = [
     detail:
       "Top up issuer rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ and AMM rBU6ex… (~500 XRP each operational account per runbook); thin but operational",
     label: "Ops",
+    bullets: [
+      `Runbook: ${PAGES_URL}/technical/XRPL_NFT_MINT_RUNBOOK.html`,
+      `Verification: ${XRPL_STELLAR_VERIFICATION_URL}`,
+    ],
   },
   {
     title: "Sales motion",
@@ -695,10 +712,62 @@ export const FTH_ECOSYSTEM_CARDS: EcosystemCard[] = [
     ],
   },
   {
-    name: "troptions.org DNS",
-    category: "Not deployed",
-    detail: "ai.troptions.org, ttn.troptions.org, dao.troptions.org — templates only until DNS enabled.",
+    name: "UNYKORN Portfolio",
+    category: "Live · Unykorn",
+    detail: "System book and portfolio registry (portfolio-unykorn).",
+    status: "live",
+    deployUrl: "https://portfolio.unykorn.org",
+    repoUrl: "https://github.com/kevanbtc/portfolio-unykorn",
+    repoLabel: "portfolio-unykorn",
+  },
+  {
+    name: "GoatX (TGOAT)",
+    category: "Polygon · Cloudflare tunnel",
+    detail:
+      "goat.yml tunnel → goat-launch static server :8850. Start node server.js + cloudflared before demos.",
+    status: "live",
+    deployUrl: "https://goat.unykorn.org",
+    deployLabel: "GoatX site",
+    repoUrl: "https://github.com/kevanbtc/goat-launch",
+    links: [{ label: "Operator landing (Pages)", url: `${PAGES_URL}/sites/goat/` }],
+  },
+  {
+    name: "Junior / Tilden OS",
+    category: "AI node · tunnel",
+    detail:
+      "junior.unykorn.org → :4099; aliases tilden.unykorn.org, jr.unykorn.org. Start junior-tilden + tunnel when 502.",
     status: "pending",
+    deployUrl: "https://junior.unykorn.org",
+    repoUrl: "https://github.com/kevanbtc/junior-tilden",
+    links: [{ label: "Operator landing (Pages)", url: `${PAGES_URL}/sites/junior/` }],
+  },
+  {
+    name: "WhichWay guest OS",
+    category: "Live · Cloudflare",
+    detail: "WWAI guest operating system — whichway-live Worker.",
+    status: "live",
+    deployUrl: "https://whichway.live",
+  },
+  {
+    name: "FIFA / WWAI host",
+    category: "Live · Cloudflare",
+    detail: "fifa-unykorn-router Worker on fifa.unykorn.org.",
+    status: "live",
+    deployUrl: "https://fifa.unykorn.org",
+  },
+  {
+    name: "troptions.org DNS",
+    category: "Pages landings ready",
+    detail:
+      "ai, ttn, dao — static landings under /sites/* until DNS cutover. Full matrix: ecosystem hub.",
+    status: "pages",
+    deployUrl: ECOSYSTEM_HUB_URL,
+    deployLabel: "Ecosystem status hub",
+    links: [
+      { label: "ai landing", url: `${PAGES_URL}/sites/ai/` },
+      { label: "ttn landing", url: `${PAGES_URL}/sites/ttn/` },
+      { label: "dao landing", url: `${PAGES_URL}/sites/dao/` },
+    ],
   },
 ];
 
@@ -760,6 +829,11 @@ export const BUILT_ITEMS = [
   "RocksDB persistence, treasury multisig, signed submit tests",
   "TLS nginx templates, API-key auth, DAO↔L1 reads (9.8/10 with DAO on main)",
   "Live unykorn.org surfaces (hub, sports, launcher, academy, x402 health)",
+  "PM2 AI stack — donk :8090, fth :8091, ttn :8092, dao :8093, x402 :4020, popeye :4021",
+  "x402_PUBLIC — https://x402.unykorn.org/health CONFIRMED; X402_UPSTREAM → :4020",
+  "goat.unykorn.org — GoatX tunnel + :8850 origin (when server + cloudflared running)",
+  "L1 anthem collection hash anchored — TROPTIONS_L1_ANCHOR_CONFIRMED.json",
+  "IPFS anthem + manifest CIDs — TROPTIONS_IPFS_CIDS.json (counterparty proof)",
   "KENNY + EVL Polygon — PolygonScan verified (2026-05-21)",
   "Genesis-world 9 Polygon contracts + drunks.app live",
   "XRPL + Stellar issued supply verified — ~874M on ledger (not market cap)",
@@ -767,13 +841,13 @@ export const BUILT_ITEMS = [
 ];
 
 export const GAP_ITEMS = [
-  "Cloudflare origin health — twin.unykorn.org / x402api (522/timeouts)",
+  "Cloudflare origin — twin.unykorn.org / x402api.unykorn.org (522 — EC2 98.91.89.169 down)",
+  "junior.unykorn.org — tunnel live; origin :4099 (junior-tilden) must be started",
   "Public TLS on troptions.org hostnames (ai, ttn, dao)",
-  "L1 asset anchoring — anthem soulbound / IPFS manifest (prepared, needs anchor)",
-  "x402 prod alignment — health LIVE; twin.unykorn.org PENDING",
-  "IPFS SNP + anthem CIDs in counterparty proof path",
-  "XRPL production XRP reserves thin — operational but needs top-up",
-  "T-Build Vitest suite — run after npm ci",
+  "XRPL TANTHEM 703 mints on ledger — mint DApp LIVE; user sign pending",
+  "XRPL production XRP reserves thin — top-up per runbook (~500 XRP each)",
+  "T-Build Vitest suite — npm ci && npm test on CI",
+  "Workers AI — enable WORKERS_AI_ENABLED=1 when cfut token configured",
 ];
 
 export type AnthemTrack = {

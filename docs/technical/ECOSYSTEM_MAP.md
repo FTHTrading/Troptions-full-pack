@@ -8,7 +8,7 @@ permalink: /technical/ECOSYSTEM_MAP.html
 
 **Last verified:** 2026-05-21 (HTTP HEAD + `gh repo view` + local path scan)
 
-This document is the **authoritative catalog** of repos, deploy surfaces, and how each piece connects to **Troptions-full-pack**. Re-run [`scripts/verify-ecosystem-links.ps1`](../../scripts/verify-ecosystem-links.ps1) before investor decks.
+This document is the **authoritative catalog** of repos, deploy surfaces, and how each piece connects to **Troptions-full-pack**. Re-run [`scripts/verify-all-ecosystem-sites.ps1`](../../scripts/verify-all-ecosystem-sites.ps1) (full matrix) or [`scripts/verify-ecosystem-links.ps1`](../../scripts/verify-ecosystem-links.ps1) before investor decks. Live badges: [ecosystem status hub](https://fthtrading.github.io/Troptions-full-pack/ecosystem/).
 
 ---
 
@@ -102,9 +102,11 @@ flowchart TB
 \*Twin/API docs: intermittent at 2026-05-21 curl; health endpoint was stable.
 | https://troptions.vercel.app | 200 | Troptions institutional preview (private repo deploy) |
 | https://portfolio.unykorn.org | 200 | Portfolio & proof registry |
-| https://goat.unykorn.org | 200 | GoatX token surface |
-| https://whichway.live | 200 | WWAI guest OS |
-| https://fifa.unykorn.org | 200 | WWAI FIFA host |
+| https://goat.unykorn.org | 502* | GoatX token surface — restart goat-site :3001 + tunnel |
+| https://junior.unykorn.org | 502* | Junior / Tilden OS — restart :4099 + tunnel |
+| https://whichway.live | 200 | WWAI guest OS (whichway-live Worker) |
+| https://fifa.unykorn.org | 200 | WWAI FIFA host (fifa-unykorn-router Worker) |
+| [Ecosystem status hub](https://fthtrading.github.io/Troptions-full-pack/ecosystem/) | 200 | All URLs + operator badges |
 | https://drunks.app | 200 | Genesis World (GSP) live dashboard |
 | https://gsp-api.kevanbtc.workers.dev/api/health | 200 | GSP API Worker health |
 | [GitHub Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) | 200 | Sovereign DAO public narrative + architecture links |
@@ -115,9 +117,9 @@ flowchart TB
 
 | Host / URL | HTTP | Notes |
 |------------|------|-------|
-| https://ai.troptions.org | ERR | DONK tutor — nginx template only in full-pack; use local quickstart or future DNS |
-| https://ttn.troptions.org | ERR | TTN edge hostname not pointed; sports live on `troptionslive.unykorn.org` |
-| https://dao.troptions.org | ERR | DAO API edge not deployed; **public docs:** [Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) · dashboard local :8093 |
+| https://ai.troptions.org | ERR | DNS not set — **Pages landing:** [/sites/ai/](https://fthtrading.github.io/Troptions-full-pack/sites/ai/) · live Academy on fthedu |
+| https://ttn.troptions.org | ERR | DNS not set — **Pages landing:** [/sites/ttn/](https://fthtrading.github.io/Troptions-full-pack/sites/ttn/) · sports on troptionslive |
+| https://dao.troptions.org | ERR | DNS not set — **Pages landing:** [/sites/dao/](https://fthtrading.github.io/Troptions-full-pack/sites/dao/) → [Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) · local :8093 |
 | https://aurora.unykorn.org | ERR | Custom domain not resolving; use GitHub Pages URL until DNS fixed |
 | https://impact.unykorn.org | ERR | Custom domain not resolving; GitHub Pages project returns 404 — fix deploy branch |
 
@@ -163,6 +165,10 @@ Not in the original operator table but present under `C:\Users\Kevan` or GitHub 
 | Name | Notes |
 |------|-------|
 | `portfolio-unykorn` / **portfolio-** | Live https://portfolio.unykorn.org |
+| `goat-site` / **goat** | Tunnel → https://goat.unykorn.org (:3001) — operator landing [/sites/goat/](https://fthtrading.github.io/Troptions-full-pack/sites/goat/) |
+| `junior-tilden` / **junior** | Tunnel → https://junior.unykorn.org (:4099) — [/sites/junior/](https://fthtrading.github.io/Troptions-full-pack/sites/junior/) |
+| `fifa-unykorn-router` | Worker route `fifa.unykorn.org/*` |
+| `whichway-live` | Worker — https://whichway.live |
 | `UnyKorn-X402-aws` | **Public** — production x402 mesh + Apostle on AWS (`aws/`, `proofs/`) |
 | `fth-capital-os`, `fth-distribution-os`, `fth-operator-hub` | Capital / distribution operator tools |
 | `unykorn-rwa-treasury-os`, `unykorn-asset-infrastructure-os` | RWA treasury & asset OS |

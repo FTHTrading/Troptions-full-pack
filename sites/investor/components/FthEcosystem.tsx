@@ -1,5 +1,9 @@
 import { Section } from "./Section";
-import { ECOSYSTEM_MAP_URL, FTH_ECOSYSTEM_CARDS } from "@/lib/constants";
+import {
+  ECOSYSTEM_HUB_URL,
+  ECOSYSTEM_MAP_URL,
+  FTH_ECOSYSTEM_CARDS,
+} from "@/lib/constants";
 import { StatusBadge } from "./StatusBadge";
 
 export function FthEcosystem() {
@@ -62,7 +66,15 @@ export function FthEcosystem() {
         ))}
       </div>
       <p className="mt-6 text-center text-sm text-[var(--color-muted)]">
-        Full matrix:{" "}
+        <a
+          href={ECOSYSTEM_HUB_URL}
+          className="text-[var(--color-gold-light)] hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ecosystem status hub
+        </a>
+        {" · "}
         <a
           href={ECOSYSTEM_MAP_URL}
           className="text-[var(--color-gold-light)] hover:underline"
@@ -71,7 +83,7 @@ export function FthEcosystem() {
         >
           Ecosystem map
         </a>{" "}
-        · Re-verify with <code className="text-xs">scripts/verify-ecosystem-links.ps1</code>
+        · <code className="text-xs">scripts/verify-all-ecosystem-sites.ps1</code>
       </p>
     </Section>
   );

@@ -27,7 +27,7 @@
   <div class="md-body">
 <h1>FTH Trading / TROPTIONS ecosystem map</h1>
 <p><strong>Last verified:</strong> 2026-05-21 (HTTP HEAD + <code>gh repo view</code> + local path scan)</p>
-<p>This document is the <strong>authoritative catalog</strong> of repos, deploy surfaces, and how each piece connects to <strong>Troptions-full-pack</strong>. Re-run <a href="../../scripts/verify-ecosystem-links.ps1"><code>scripts/verify-ecosystem-links.ps1</code></a> before investor decks.</p>
+<p>This document is the <strong>authoritative catalog</strong> of repos, deploy surfaces, and how each piece connects to <strong>Troptions-full-pack</strong>. Re-run <a href="../../scripts/verify-all-ecosystem-sites.ps1"><code>scripts/verify-all-ecosystem-sites.ps1</code></a> (full matrix) or <a href="../../scripts/verify-ecosystem-links.ps1"><code>scripts/verify-ecosystem-links.ps1</code></a> before investor decks. Live badges: <a href="https://fthtrading.github.io/Troptions-full-pack/ecosystem/">ecosystem status hub</a>.</p>
 <hr />
 <h2>Architecture (how pieces connect)</h2>
 <pre><code class="language-mermaid">flowchart TB
@@ -259,9 +259,11 @@
 <p>*Twin/API docs: intermittent at 2026-05-21 curl; health endpoint was stable.<br />
 | https://troptions.vercel.app | 200 | Troptions institutional preview (private repo deploy) |<br />
 | https://portfolio.unykorn.org | 200 | Portfolio &amp; proof registry |<br />
-| https://goat.unykorn.org | 200 | GoatX token surface |<br />
-| https://whichway.live | 200 | WWAI guest OS |<br />
-| https://fifa.unykorn.org | 200 | WWAI FIFA host |<br />
+| https://goat.unykorn.org | 502<em> | GoatX token surface — restart goat-site :3001 + tunnel |<br />
+| https://junior.unykorn.org | 502</em> | Junior / Tilden OS — restart :4099 + tunnel |<br />
+| https://whichway.live | 200 | WWAI guest OS (whichway-live Worker) |<br />
+| https://fifa.unykorn.org | 200 | WWAI FIFA host (fifa-unykorn-router Worker) |<br />
+| <a href="https://fthtrading.github.io/Troptions-full-pack/ecosystem/">Ecosystem status hub</a> | 200 | All URLs + operator badges |<br />
 | https://drunks.app | 200 | Genesis World (GSP) live dashboard |<br />
 | https://gsp-api.kevanbtc.workers.dev/api/health | 200 | GSP API Worker health |<br />
 | <a href="https://fthtrading.github.io/Troptions-full-pack/dao/">GitHub Pages /dao/</a> | 200 | Sovereign DAO public narrative + architecture links |</p>
@@ -279,17 +281,17 @@
 <tr>
 <td>https://ai.troptions.org</td>
 <td>ERR</td>
-<td>DONK tutor — nginx template only in full-pack; use local quickstart or future DNS</td>
+<td>DNS not set — <strong>Pages landing:</strong> <a href="https://fthtrading.github.io/Troptions-full-pack/sites/ai/">/sites/ai/</a> · live Academy on fthedu</td>
 </tr>
 <tr>
 <td>https://ttn.troptions.org</td>
 <td>ERR</td>
-<td>TTN edge hostname not pointed; sports live on <code>troptionslive.unykorn.org</code></td>
+<td>DNS not set — <strong>Pages landing:</strong> <a href="https://fthtrading.github.io/Troptions-full-pack/sites/ttn/">/sites/ttn/</a> · sports on troptionslive</td>
 </tr>
 <tr>
 <td>https://dao.troptions.org</td>
 <td>ERR</td>
-<td>DAO API edge not deployed; <strong>public docs:</strong> <a href="https://fthtrading.github.io/Troptions-full-pack/dao/">Pages /dao/</a> · dashboard local :8093</td>
+<td>DNS not set — <strong>Pages landing:</strong> <a href="https://fthtrading.github.io/Troptions-full-pack/sites/dao/">/sites/dao/</a> → <a href="https://fthtrading.github.io/Troptions-full-pack/dao/">Pages /dao/</a> · local :8093</td>
 </tr>
 <tr>
 <td>https://aurora.unykorn.org</td>
@@ -420,6 +422,22 @@
 <tr>
 <td><code>portfolio-unykorn</code> / <strong>portfolio-</strong></td>
 <td>Live https://portfolio.unykorn.org</td>
+</tr>
+<tr>
+<td><code>goat-site</code> / <strong>goat</strong></td>
+<td>Tunnel → https://goat.unykorn.org (:3001) — operator landing <a href="https://fthtrading.github.io/Troptions-full-pack/sites/goat/">/sites/goat/</a></td>
+</tr>
+<tr>
+<td><code>junior-tilden</code> / <strong>junior</strong></td>
+<td>Tunnel → https://junior.unykorn.org (:4099) — <a href="https://fthtrading.github.io/Troptions-full-pack/sites/junior/">/sites/junior/</a></td>
+</tr>
+<tr>
+<td><code>fifa-unykorn-router</code></td>
+<td>Worker route <code>fifa.unykorn.org/*</code></td>
+</tr>
+<tr>
+<td><code>whichway-live</code></td>
+<td>Worker — https://whichway.live</td>
 </tr>
 <tr>
 <td><code>UnyKorn-X402-aws</code></td>

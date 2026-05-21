@@ -88,6 +88,16 @@ export function CTA() {
                 <li key={d.host}>
                   <span className="font-mono text-amber-100/90">{d.host}</span>
                   <span className="block text-xs">{d.note}</span>
+                  {"pagesPath" in d && d.pagesPath ? (
+                    <a
+                      href={d.pagesPath}
+                      className="mt-1 inline-block text-xs text-[var(--color-gold-light)] hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Pages landing →
+                    </a>
+                  ) : null}
                 </li>
               ))}
             </ul>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DONK AI — ai.troptions.org</title>
+  <meta name="description" content="DONK sovereign AI tutor — production on fthedu.unykorn.org; local dev on :8090 until troptions.org DNS cutover." />
+  <link rel="stylesheet" href="../site-landing.css" />
+</head>
+<body>
+  <nav class="nav">
+    <span class="brand">TROPTIONS · DONK</span>
+    <a href="../../">Investor hub</a>
+    <a href="../../ecosystem/">Ecosystem status</a>
+    <a href="../../technical/index.html">Technical docs</a>
+  </nav>
+  <main class="wrap">
+    <span class="badge badge-pending">DNS pending · Pages landing LIVE</span>
+    <h1>ai.troptions.org</h1>
+    <p class="lead">
+      DONK is the sovereign AI tutor in Troptions-full-pack (<code>ai/donk-tutor/</code>).
+      Public edge today is <strong>fthedu.unykorn.org</strong>; this hostname is reserved for a dedicated DONK edge when DNS is enabled.
+    </p>
+    <div class="card">
+      <h2>Live today</h2>
+      <ul>
+        <li><a href="https://fthedu.unykorn.org" target="_blank" rel="noopener">fthedu.unykorn.org</a> — FTH Academy + DONK curriculum delivery</li>
+        <li><a href="../../technical/QUICKSTART.html">Quickstart</a> — stack bootstrap in monorepo</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Local operator</h2>
+      <ul>
+        <li><code>pm2 start ecosystem.config.js</code> — includes donk-tutor on <strong>:8090</strong></li>
+        <li><code>http://127.0.0.1:8090</code> — local DONK API (not exposed until nginx/CF route)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>DNS cutover (future)</h2>
+      <p>Point <code>ai.troptions.org</code> at GitHub Pages or Cloudflare, then proxy to :8090 or Workers AI per <code>deploy/nginx/</code> templates in the monorepo.</p>
+    </div>
+  </main>
+</body>
+</html>
