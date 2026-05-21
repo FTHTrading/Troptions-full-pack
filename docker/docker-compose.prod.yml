@@ -1,13 +1,23 @@
 services:
   l1:
-    image: rust:1-bookworm
-    working_dir: /app/l1
-    volumes:
-      - ../l1:/app/l1
-    command: ["cargo", "run", "-p", "node", "--release", "--", "9944"]
+    build:
+      context: ../l1
+      dockerfile: Dockerfile
+    command: ["troptions-node", "9944", "/data/l1-rocksdb"]
     ports:
       - "9944:9944"
+      - "9945:9945"
+    environment:
+      L1_METRICS_PORT: "9945"
+      RUST_LOG: info
+    volumes:
+      - l1_rocksdb:/data/l1-rocksdb
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://127.0.0.1:9944"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
 
   ollama:
     image: ollama/ollama:latest
@@ -69,6 +79,10 @@ services:
     environment:
       L1_RPC_URL: http://l1:9944
       DAO_PORT: "8093"
+      SETTLEMENT_API_KEYS: ${SETTLEMENT_API_KEYS:-}
+      L1_PUBLIC_KEY: ${L1_PUBLIC_KEY:-}
+    volumes:
+      - dao_sqlite:/app/dao/data
     depends_on:
       - l1
     restart: unless-stopped
@@ -86,8 +100,11 @@ services:
       - donk-tutor
       - ttn-launcher
       - dao-service
+      - l1
     restart: unless-stopped
 
 volumes:
   ollama_data:
   qdrant_data:
+  l1_rocksdb:
+  dao_sqlite:

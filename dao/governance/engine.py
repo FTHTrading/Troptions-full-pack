@@ -1,4 +1,4 @@
-"""Governance engine — L1-backed proposal lifecycle with SQLite mirror."""
+"""Governance engine — L1 light client proxy (no SQLite writes for proposals/votes)."""
 
 from __future__ import annotations
 
@@ -10,11 +10,13 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "backend" / "fth-academy"))
 sys.path.insert(0, str(ROOT / "backend" / "shared"))
 
-from dao_db import init_dao_db, list_proposals, log_audit, upsert_proposal  # noqa: E402
+from dao_db import init_dao_db, log_audit  # noqa: E402
 from l1_client import L1ClientError, TroptionsL1Client  # noqa: E402
 
 
 class GovernanceEngine:
+    """Proxies governance to L1; SQLite used for audit log only."""
+
     def __init__(self, l1_url: Optional[str] = None):
         self.l1 = TroptionsL1Client(l1_url) if l1_url else TroptionsL1Client()
         init_dao_db()
@@ -22,23 +24,22 @@ class GovernanceEngine:
     def state(self) -> Dict[str, Any]:
         try:
             l1_state = self.l1.state_get()
-            gov = self.l1.call("governance_get")
+            gov = self.l1.governance_get()
         except L1ClientError as exc:
             l1_state = {"reachable": False, "error": str(exc)}
             gov = {}
         return {
             "l1": l1_state,
             "governance": gov,
-            "proposals_local": list_proposals(),
+            "source": "l1_only",
         }
 
-    def list_proposals(self) -> List[Dict[str, Any]]:
+    def list_proposals(self) -> Dict[str, Any]:
         try:
-            remote = self.l1.call("proposal_list") or []
+            remote = self.l1.call("dao_getProposals") or self.l1.proposal_list() or []
         except L1ClientError:
             remote = []
-        local = list_proposals()
-        return {"l1": remote, "local": local}
+        return {"l1": remote, "source": "l1_only"}
 
     def create_proposal(
         self,
@@ -46,34 +47,44 @@ class GovernanceEngine:
         title: str,
         description: str,
         action_uri: Optional[str] = None,
+        signature: Optional[str] = None,
     ) -> Dict[str, Any]:
-        params: Dict[str, Any] = {
-            "proposer": proposer,
-            "title": title,
-            "description": description,
-        }
-        if action_uri:
-            params["action_uri"] = action_uri
-        result = self.l1.call("submit_proposal_create", params)
-        l1_id = result.get("proposal_id", "")
-        upsert_proposal(
-            l1_id,
-            title,
-            description,
-            proposer,
-            status=result.get("status", "Active"),
-            votes_for=int(result.get("votes_for", 0)),
-            votes_against=int(result.get("votes_against", 0)),
-            votes_abstain=int(result.get("votes_abstain", 0)),
-        )
+        if signature:
+            params: Dict[str, Any] = {
+                "proposer": proposer,
+                "title": title,
+                "description": description,
+                "signature": signature,
+            }
+            if action_uri:
+                params["action_uri"] = action_uri
+            result = self.l1.call("dao_submit_proposal", params)
+        else:
+            result = self.l1.submit_proposal_create(
+                proposer, title, description, action_uri
+            )
         log_audit("proposal_create", proposer, result)
         return result
 
-    def vote(self, proposal_id: str, voter: str, choice: str = "for") -> Dict[str, Any]:
-        result = self.l1.call(
-            "submit_proposal_vote",
-            {"proposal_id": proposal_id, "voter": voter, "choice": choice},
-        )
+    def vote(
+        self,
+        proposal_id: str,
+        voter: str,
+        choice: str = "for",
+        signature: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        if signature:
+            result = self.l1.call(
+                "dao_cast_vote",
+                {
+                    "proposal_id": proposal_id,
+                    "voter": voter,
+                    "choice": choice,
+                    "signature": signature,
+                },
+            )
+        else:
+            result = self.l1.submit_proposal_vote(proposal_id, voter, choice)
         log_audit("proposal_vote", voter, result)
         return result
 
@@ -82,7 +93,22 @@ class GovernanceEngine:
         log_audit("proposal_finalize", None, result)
         return result
 
-    def execute(self, proposal_id: str) -> Dict[str, Any]:
-        result = self.l1.call("submit_proposal_execute", {"proposal_id": proposal_id})
-        log_audit("proposal_execute", None, result)
+    def execute(
+        self, proposal_id: str, executor: Optional[str] = None, signature: Optional[str] = None
+    ) -> Dict[str, Any]:
+        if signature and executor:
+            result = self.l1.call(
+                "dao_execute",
+                {
+                    "proposal_id": proposal_id,
+                    "executor": executor,
+                    "signature": signature,
+                },
+            )
+        else:
+            result = self.l1.call("submit_proposal_execute", {"proposal_id": proposal_id})
+        log_audit("proposal_execute", executor, result)
         return result
+
+    def get_votes(self, proposal_id: str) -> List[Dict[str, Any]]:
+        return self.l1.call("dao_getVotes", {"proposal_id": proposal_id}) or []

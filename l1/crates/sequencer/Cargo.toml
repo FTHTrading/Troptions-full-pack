@@ -1,0 +1,10 @@
+[package]
+name = "sequencer"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Sovereign sequencer stub — single-node today; multi-node + fraud proofs planned"
+
+[dependencies]
+primitives = { workspace = true }

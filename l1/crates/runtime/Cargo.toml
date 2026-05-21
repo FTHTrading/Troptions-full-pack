@@ -15,3 +15,8 @@ sha2 = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
+crypto = { workspace = true }
+primitives = { workspace = true }
+state = { workspace = true }
+ed25519-dalek = { workspace = true }
+sha2 = { workspace = true }

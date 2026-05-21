@@ -1,14 +1,20 @@
 //! RPC server for TROPTIONS L1.
 //! Exposes REST-like endpoints for querying and submitting transactions.
 
+pub mod metrics;
+pub mod x402;
+
 use governance::{
     cast_vote, create_proposal, execute_proposal, finalize_proposal, get_proposal, governance_summary,
-    list_proposals, register_namespace, VoteChoice,
+    list_proposals, register_namespace,
 };
-use primitives::{AccountId, Amount, AssetId};
+use primitives::{AccountId, Amount, AssetId, Signature};
+use governance::{signed_cast_vote, signed_create_proposal, signed_execute_proposal};
+use runtime::{execute_transaction, Transaction};
 use serde::{Deserialize, Serialize};
+use settlement::create_time_locked_settlement;
 use soulbound::mint_soulbound;
-use state::{Proposal, Settlement, SoulboundToken, State};
+use state::{Proposal, Settlement, SoulboundToken, State, VoteChoice};
 use std::sync::{Arc, Mutex};
 
 /// Global state accessible across RPC calls.
@@ -257,6 +263,134 @@ pub fn query_governance_state(state: &State) -> serde_json::Value {
     serde_json::json!(governance_summary(state))
 }
 
+/// DAO RPC: list all proposals (alias `dao_getProposals`).
+pub fn dao_get_proposals(state: &State) -> Vec<ProposalResponse> {
+    query_proposals(state)
+}
+
+/// DAO RPC: list votes for a proposal (alias `dao_getVotes`).
+pub fn dao_get_votes(state: &State, proposal_id_hex: &str) -> Result<Vec<serde_json::Value>, String> {
+    let proposal_id = parse_id32(proposal_id_hex)?;
+    let votes: Vec<serde_json::Value> = state
+        .governance_votes
+        .values()
+        .filter(|v| v.proposal_id == proposal_id)
+        .map(|v| {
+            serde_json::json!({
+                "proposal_id": hex::encode_upper(&v.proposal_id[..8]),
+                "voter": hex::encode_upper(&v.voter.as_bytes()[..8]),
+                "choice": format!("{:?}", v.choice),
+                "weight": v.weight,
+                "cast_at": v.cast_at,
+            })
+        })
+        .collect();
+    Ok(votes)
+}
+
+/// Treasury balance on L1 (source of truth).
+pub fn treasury_get_balance(state: &State, chain: &str, asset: &str) -> serde_json::Value {
+    serde_json::json!({
+        "chain": chain,
+        "asset": asset,
+        "balance": state.get_treasury_balance(chain, asset).to_string(),
+        "source": "l1_state"
+    })
+}
+
+/// Submit a signed transaction to L1 (requires valid Ed25519 signature).
+pub fn submit_transaction(state: &mut State, tx: Transaction) -> Result<serde_json::Value, String> {
+    metrics::inc_tx_submitted();
+    let events = execute_transaction(state, &tx).map_err(|e| format!("{}", e))?;
+    state.current_height = state.current_height.saturating_add(1);
+    metrics::set_block_height(state.current_height);
+    Ok(serde_json::json!({
+        "tx_accepted": true,
+        "events": events.len(),
+        "block_height": state.current_height,
+    }))
+}
+
+pub fn dao_submit_proposal(
+    state: &mut State,
+    proposer_hex: &str,
+    title: &str,
+    description: &str,
+    action_uri: Option<String>,
+    signature_hex: &str,
+) -> Result<ProposalResponse, String> {
+    let proposer = parse_account(proposer_hex)?;
+    let sig_bytes = hex::decode(signature_hex).map_err(|e| format!("invalid signature: {}", e))?;
+    if sig_bytes.len() != 64 {
+        return Err("signature must be 64 bytes".into());
+    }
+    let mut sig_arr = [0u8; 64];
+    sig_arr.copy_from_slice(&sig_bytes);
+    let signature = Signature::new(sig_arr);
+    let p = signed_create_proposal(
+        state,
+        proposer,
+        title.to_string(),
+        description.to_string(),
+        action_uri,
+        signature,
+    )
+    .map_err(|e| format!("{}", e))?;
+    Ok(proposal_to_response(&p))
+}
+
+pub fn dao_cast_vote(
+    state: &mut State,
+    proposal_id_hex: &str,
+    voter_hex: &str,
+    choice: &str,
+    signature_hex: &str,
+) -> Result<serde_json::Value, String> {
+    let proposal_id = parse_id32(proposal_id_hex)?;
+    let voter = parse_account(voter_hex)?;
+    let vote_choice = match choice.to_lowercase().as_str() {
+        "for" | "yes" => VoteChoice::For,
+        "against" | "no" => VoteChoice::Against,
+        "abstain" => VoteChoice::Abstain,
+        _ => return Err("choice must be for|against|abstain".into()),
+    };
+    let sig_bytes = hex::decode(signature_hex).map_err(|e| format!("invalid signature: {}", e))?;
+    if sig_bytes.len() != 64 {
+        return Err("signature must be 64 bytes".into());
+    }
+    let mut sig_arr = [0u8; 64];
+    sig_arr.copy_from_slice(&sig_bytes);
+    let signature = Signature::new(sig_arr);
+    let record = signed_cast_vote(state, proposal_id, voter, vote_choice, signature)
+        .map_err(|e| format!("{}", e))?;
+    Ok(serde_json::json!({
+        "proposal_id": hex::encode_upper(&record.proposal_id[..8]),
+        "voter": hex::encode_upper(&record.voter.as_bytes()[..8]),
+        "choice": format!("{:?}", record.choice),
+        "weight": record.weight,
+    }))
+}
+
+pub fn dao_execute(
+    state: &mut State,
+    proposal_id_hex: &str,
+    executor_hex: &str,
+    signature_hex: &str,
+) -> Result<ProposalResponse, String> {
+    let proposal_id = parse_id32(proposal_id_hex)?;
+    let executor = parse_account(executor_hex)?;
+    let sig_bytes = hex::decode(signature_hex).map_err(|e| format!("invalid signature: {}", e))?;
+    if sig_bytes.len() != 64 {
+        return Err("signature must be 64 bytes".into());
+    }
+    let mut sig_arr = [0u8; 64];
+    sig_arr.copy_from_slice(&sig_bytes);
+    let signature = Signature::new(sig_arr);
+    let p = signed_execute_proposal(state, proposal_id, executor, signature)
+        .map_err(|e| format!("{}", e))?;
+    Ok(proposal_to_response(&p))
+}
+
 fn parse_account(hex_str: &str) -> Result<AccountId, String> {
     let bytes = hex::decode(hex_str).map_err(|e| format!("invalid hex: {}", e))?;
     if bytes.len() != 32 {
@@ -293,6 +427,44 @@ pub fn submit_soulbound_mint(
         _ => return Err("unexpected event".into()),
     };
     query_soulbound_token(state, &hex::encode(token_id))
+}
+
+pub fn submit_settlement_create(
+    state: &mut State,
+    creator_hex: &str,
+    asset: &str,
+    amount: &str,
+    recipient_hex: &str,
+    condition: &str,
+) -> Result<SettlementQueryResponse, String> {
+    let creator = parse_account(creator_hex)?;
+    let recipient = parse_account(recipient_hex)?;
+    let amount_val: Amount = amount.parse().map_err(|_| "invalid amount")?;
+    let asset_id = match asset.to_uppercase().as_str() {
+        "NATIVE" | "TROPTIONS" => AssetId::Native,
+        _ => return Err("unsupported asset".into()),
+    };
+    let release_height = state.current_height.saturating_add(10);
+    let expires_at = state.current_height.saturating_add(1000);
+    let event = if condition.contains("hash") {
+        return Err("hash-locked via settlement API not yet exposed".into());
+    } else {
+        create_time_locked_settlement(
+            state,
+            creator,
+            asset_id,
+            amount_val,
+            recipient,
+            release_height,
+            expires_at,
+        )
+        .map_err(|e| format!("{}", e))?
+    };
+    let id = match event {
+        state::Event::SettlementCreated { id } => id,
+        _ => return Err("unexpected event".into()),
+    };
+    query_settlement(state, &hex::encode(id))
 }
 
 pub fn submit_namespace_register(

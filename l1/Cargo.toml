@@ -9,7 +9,9 @@ members = [
     "crates/atomic-router",
     "crates/rpc",
     "crates/governance",
+    "crates/sequencer",
     "crates/node",
+    "tests/integration",
 ]
 resolver = "2"
 
@@ -41,3 +43,4 @@ atomic-router = { path = "crates/atomic-router" }
 rpc = { path = "crates/rpc" }
 governance = { path = "crates/governance" }
 node = { path = "crates/node" }
+sequencer = { path = "crates/sequencer" }

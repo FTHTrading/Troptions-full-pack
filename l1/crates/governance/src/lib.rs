@@ -1,6 +1,7 @@
 //! DAO governance for TROPTIONS L1 — proposals, soulbound-weighted votes, execution queue.
 
-use crypto::sha256_hash;
+use crypto::{sha256_hash, sign_message, verify_signature};
+use primitives::Signature;
 use primitives::{AccountId, BlockHeight};
 use serde::{Deserialize, Serialize};
 use state::{
@@ -223,6 +224,61 @@ pub fn list_proposals(state: &State) -> Vec<Proposal> {
 
 pub fn get_proposal(state: &State, id: &[u8; 32]) -> Option<Proposal> {
     state.governance_proposals.get(id).cloned()
+}
+
+pub fn governance_action_message(action: &str, proposal_id: &[u8; 32], actor: &AccountId) -> Vec<u8> {
+    let mut data = Vec::new();
+    data.extend_from_slice(b"GOV_ACTION_V1");
+    data.extend_from_slice(action.as_bytes());
+    data.extend_from_slice(proposal_id);
+    data.extend_from_slice(actor.as_bytes());
+    data
+}
+
+pub fn signed_create_proposal(
+    state: &mut State,
+    proposer: AccountId,
+    title: String,
+    description: String,
+    action_uri: Option<String>,
+    signature: Signature,
+) -> Result<Proposal, GovernanceError> {
+    let msg = governance_action_message("create", &[0u8; 32], &proposer);
+    verify_signature(&msg, &signature, &proposer).map_err(|_| GovernanceError::NoVotingPower)?;
+    create_proposal(state, proposer, title, description, action_uri)
+}
+
+pub fn signed_cast_vote(
+    state: &mut State,
+    proposal_id: [u8; 32],
+    voter: AccountId,
+    choice: VoteChoice,
+    signature: Signature,
+) -> Result<VoteRecord, GovernanceError> {
+    let msg = governance_action_message("vote", &proposal_id, &voter);
+    verify_signature(&msg, &signature, &voter).map_err(|_| GovernanceError::NoVotingPower)?;
+    cast_vote(state, proposal_id, voter, choice)
+}
+
+pub fn signed_execute_proposal(
+    state: &mut State,
+    proposal_id: [u8; 32],
+    executor: AccountId,
+    signature: Signature,
+) -> Result<Proposal, GovernanceError> {
+    let msg = governance_action_message("execute", &proposal_id, &executor);
+    verify_signature(&msg, &signature, &executor).map_err(|_| GovernanceError::NoVotingPower)?;
+    execute_proposal(state, proposal_id)
+}
+
+pub fn sign_governance_action(
+    action: &str,
+    proposal_id: &[u8; 32],
+    actor: &AccountId,
+    secret_key: &[u8],
+) -> Result<Signature, primitives::PrimitiveError> {
+    let msg = governance_action_message(action, proposal_id, actor);
+    sign_message(&msg, secret_key)
 }
 
 pub fn governance_summary(state: &State) -> HashMap<String, serde_json::Value> {
