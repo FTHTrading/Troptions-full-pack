@@ -173,18 +173,48 @@ router.post('/baas/onboard', async (req, res) => {
  }
 });
 
+// POST /x402/compliance/screen — proxy to compliance-engine :4025
+router.post('/compliance/screen', async (req, res) => {
+ const complianceUrl = (process.env.COMPLIANCE_URL || 'http://127.0.0.1:4025').replace(/\/$/, '');
+ const region = process.env.REGION || req.gatewayRegion || 'us';
+ try {
+ const response = await axios.post(`${complianceUrl}/screen`, req.body, { timeout: 5000 });
+ res.json({
+ ...response.data,
+ x402_gated: true,
+ gateway_region: region,
+ label: response.data?.label || 'PIPELINE',
+ });
+ } catch (err) {
+ console.error('Compliance screen error:', err.message);
+ res.status(502).json({
+ approved: false,
+ label: 'PIPELINE',
+ gateway_region: region,
+ error: 'compliance_unreachable',
+ message: err.message,
+ });
+ }
+});
+
 // GET /x402/stats
 // x402 revenue statistics
 router.get('/stats', (req, res) => {
+ const region = process.env.REGION || req.gatewayRegion || 'us';
  res.json({
+ region,
+ label: 'PIPELINE',
+ revenue_label: 'PROJECTION',
  total_payments: 0,
  total_revenue: 0,
+ atp_price_setting: 'operator PIPELINE strategy — pools not live',
  endpoints: {
  'market-data': { fee: 0.001, calls: 0 },
  'place-order': { fee: '0.01%', calls: 0 },
  'cards-auth': { fee: 0.02, calls: 0 },
- 'baas-onboard': { fee: 10000, calls: 0 }
- }
+ 'baas-onboard': { fee: 10000, calls: 0 },
+ 'compliance-screen': { fee: 0, calls: 0 },
+ },
  });
 });
 

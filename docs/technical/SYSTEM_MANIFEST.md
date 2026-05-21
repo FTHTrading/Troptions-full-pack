@@ -68,7 +68,7 @@ Legacy Python stubs under `backend/payment-orchestrator` and `backend/msb-compli
        └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
 ```
 
-**Port discipline:** `popeye-relay` **:4021**; fiat rails **:4022–:4028**; BaaS dashboard **:4029**; x402-gateway-v2 **:4030**; agent-orchestrator **:4031**; MCP XRPL **:4032**; BaaS liquidity API **:8097** — no collision with core backends 8090–8093.
+**Port discipline:** `popeye-relay` **:4021**; fiat rails **:4022–:4028**; **baas-api** **:4029**; x402-gateway-v2 (US) **:4030**; agent-orchestrator **:4031**; x402-eu **:4032**; x402-jp **:4033**; baas-dashboard UI **:4040**; MCP **:4731** — no collision with core backends 8090–8093. See [MULTI_X402_MESH.md](MULTI_X402_MESH.md), [AGENTIC_RAG_AMM.md](AGENTIC_RAG_AMM.md).
 
 ---
 
@@ -83,13 +83,15 @@ Legacy Python stubs under `backend/payment-orchestrator` and `backend/msb-compli
 | `neobank-api` | **4026** | `fiat-rails/neobank-api/` | Mobile/card partner (design) | **PROJECTION** |
 | `iou-reserve-monitor` | **4027** | `fiat-rails/iou-reserve-monitor/` | Omnibus statements vs ledger supply | **PIPELINE** |
 | `arbitrage-bot` | **4028** | `fiat-rails/arbitrage-bot/` | x402 orderbook watch → orchestrator arb | **PIPELINE** |
-| `baas-dashboard` | **4029** | `fiat-rails/baas-dashboard/` | BaaS self-service UI (tokens, billing) | **PIPELINE** |
-| `x402-gateway-v2` | **4030** | `fiat-rails/x402-gateway/` | Paid proxies; `GET /x402/stats` | **PIPELINE** |
-| `agent-orchestrator` | **4031** | `fiat-rails/agent-orchestrator/` | MCP XRPL + Research/Risk/Execution agents | **PIPELINE** |
-| MCP XRPL (vendor) | **4032** | external | Ledger tools for agents | **PIPELINE** |
-| `baas-api` | **8097** | `fiat-rails/baas-api/` | Liquidity API; `POST /api/v1/agents/register` | **PROJECTION** |
+| `baas-api` | **4029** | `fiat-rails/baas-api/` | Agents, pools, tokens; `POST /api/v1/agents` | **PROJECTION** |
+| `x402-gateway-v2` (US) | **4030** | `fiat-rails/x402-gateway/` | Paid proxies; `GET /x402/stats` | **PIPELINE** |
+| `agent-orchestrator` | **4031** | `fiat-rails/agent-orchestrator/` | Agent Orchestration Layer | **PIPELINE** |
+| `x402-eu` | **4032** | `fiat-rails/x402-gateway-regional/` | Frankfurt regional stub | **PIPELINE** |
+| `x402-jp` | **4033** | `fiat-rails/x402-gateway-regional/` | Tokyo regional stub | **PIPELINE** |
+| `baas-dashboard` | **4040** | `fiat-rails/baas-dashboard/` | BaaS self-service UI | **PIPELINE** |
+| MCP (vendor) | **4731** | external | Ledger tools; mock when down | **PIPELINE** |
 
-**Setup:** `.\scripts\setup-fiat-rails.ps1` · `.\scripts\setup-arbitrage-baas.ps1` · `.\scripts\setup-mcp-xrpl.ps1` · `.\scripts\activate-troptions-revenue.ps1 -DryRun` · **PM2:** `pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,baas-dashboard,agent-orchestrator`
+**Setup:** `.\scripts\deploy-agentic-floor.ps1` · `.\scripts\setup-second-x402.ps1` · `.\scripts\activate-troptions-revenue.ps1 -DryRun` · **PM2:** `pm2 start fiat-rails/ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-eu,x402-jp,agent-orchestrator`
 
 **OpenAPI:** `fiat-rails/orchestrator/openapi.yaml`
 
@@ -334,10 +336,13 @@ GET  /api/swift/status/:id      # swift-bridge
 GET  /api/reserve/attestation   # iou-reserve-monitor :4027
 GET  /api/neobank/balance       # neobank-api :4026 (PROJECTION)
 POST /api/v1/arbitrage          # orchestrator :4022 — arb execute/dry-run
-POST /api/v1/tokens             # baas-api :8097 — x402 $10K setup stub
-POST /api/v1/pools              # baas-api :8097 — single pool (402)
-POST /api/v1/pools/batch        # baas-api :8097 — batch pools (402 sum)
-GET  /api/v1/pools/jobs         # baas-api :8097 — job queue
+POST /api/v1/tokens             # baas-api :4029 — x402 $10K setup stub
+POST /api/v1/pools              # baas-api :4029 — single pool (402)
+POST /api/v1/pools/batch        # baas-api :4029 — batch pools (402 sum)
+GET  /api/v1/pools/jobs         # baas-api :4029 — job queue
+POST /api/v1/agents             # baas-api :4029 — agent register
+POST /api/v1/agents/:id/trades  # baas-api :4029 — trade report (PROJECTION)
+GET  /api/v1/agents/:id/revenue # baas-api :4029 — PROJECTION revenue
 GET  /api/v1/dashboard/:id/revenue  # baas-api — PROJECTION revenue
 GET  /x402/market-data/orderbook    # x402-gateway :4020
 ```
@@ -359,7 +364,8 @@ See [ARBITRAGE_AND_BAAS](ARBITRAGE_AND_BAAS.html) · [LOCAL_PREVIEW](LOCAL_PREVI
 | [PARTNER_BANK_MESH](PARTNER_BANK_MESH.html) | Multi-bank mesh + Alexandrite (**PROJECTION**) |
 | [`fiat-rails/orchestrator/README`](../../fiat-rails/orchestrator/README.md) | Wire → IOU ops |
 | [ARBITRAGE_AND_BAAS](ARBITRAGE_AND_BAAS.html) | Arbitrage bot + BaaS x402 |
-| [BAAS_BATCH_POOLS](BAAS_BATCH_POOLS.html) | Batch pool call sequence (:8097) |
+| [BAAS_BATCH_POOLS](BAAS_BATCH_POOLS.html) | Batch pool call sequence (:4029) |
+| [MULTI_X402_MESH](MULTI_X402_MESH.html) | NY / Frankfurt / Tokyo x402 mesh |
 | [`fiat-rails/baas-api/README`](../../fiat-rails/baas-api/README.md) | BaaS liquidity API |
 | [LOCAL_PREVIEW](LOCAL_PREVIEW.html) | Port 3123 preview fix |
 

@@ -200,7 +200,7 @@ module.exports = {
 
       env: {
 
-        PORT: "8097",
+        PORT: "4029",
 
         NODE_PATH: path.join(FIAT, "node_modules"),
 
@@ -228,7 +228,7 @@ module.exports = {
 
       cwd: path.join(FIAT, "baas-dashboard"),
 
-      env: { PORT: "4029", NODE_PATH: path.join(FIAT, "node_modules") },
+      env: { PORT: "4040", BAAS_API_URL: "http://127.0.0.1:4029", NODE_PATH: path.join(FIAT, "node_modules") },
 
       autorestart: false,
 
@@ -270,9 +270,69 @@ module.exports = {
 
     {
 
+      name: "x402-eu",
+
+      script: "server.js",
+
+      cwd: path.join(FIAT, "x402-gateway-regional"),
+
+      env: {
+
+        PORT: "4032",
+
+        REGION: "eu",
+
+        NODE_PATH: path.join(FIAT, "node_modules"),
+
+        EXCHANGE_OS_URL: "http://127.0.0.1:8091",
+
+      },
+
+      autorestart: false,
+
+      out_file: path.join(ROOT, "logs", "x402-eu-out.log"),
+
+      err_file: path.join(ROOT, "logs", "x402-eu-err.log"),
+
+      merge_logs: true,
+
+    },
+
+    {
+
+      name: "x402-jp",
+
+      script: "server.js",
+
+      cwd: path.join(FIAT, "x402-gateway-regional"),
+
+      env: {
+
+        PORT: "4033",
+
+        REGION: "jp",
+
+        NODE_PATH: path.join(FIAT, "node_modules"),
+
+        EXCHANGE_OS_URL: "http://127.0.0.1:8091",
+
+      },
+
+      autorestart: false,
+
+      out_file: path.join(ROOT, "logs", "x402-jp-out.log"),
+
+      err_file: path.join(ROOT, "logs", "x402-jp-err.log"),
+
+      merge_logs: true,
+
+    },
+
+    {
+
       name: "agent-orchestrator",
 
-      script: "index.js",
+      script: "server.js",
 
       cwd: path.join(FIAT, "agent-orchestrator"),
 
@@ -284,7 +344,10 @@ module.exports = {
 
         NODE_PATH: path.join(FIAT, "node_modules"),
 
-        MCP_XRPL_URL: "http://127.0.0.1:4032",
+        MCP_URL: "http://127.0.0.1:4731",
+        X402_US_URL: "http://127.0.0.1:4030",
+        X402_EU_URL: "http://127.0.0.1:4032",
+        X402_JP_URL: "http://127.0.0.1:4033",
 
         ARBITRAGE_URL: "http://127.0.0.1:4028",
 
@@ -292,7 +355,7 @@ module.exports = {
 
         X402_GATEWAY_URL: "http://127.0.0.1:4030",
 
-        BAAS_API_URL: "http://127.0.0.1:8097",
+        BAAS_API_URL: "http://127.0.0.1:4029",
 
       },
 

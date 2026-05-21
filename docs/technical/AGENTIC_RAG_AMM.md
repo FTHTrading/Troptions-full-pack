@@ -6,115 +6,129 @@ permalink: /technical/AGENTIC_RAG_AMM.html
 
 # Agentic RAG + AMM Orchestration
 
-**Status:** PIPELINE (stubs respond; revenue figures are PROJECTION)  
+**Status:** PIPELINE (stubs respond; revenue figures are **PROJECTION**)  
 **Date:** 2026-05-21
 
 ## Architecture
 
 ```mermaid
 flowchart TB
-  subgraph agents [Agent Orchestrator :4031]
+  subgraph orch [Agent Orchestrator :4031]
+    START[POST /agents/start]
+    CYCLE[POST /run-cycle]
+    MULTI[POST /api/v1/arbitrage/multi]
     RA[ResearchAgent]
     RK[RiskAgent]
     EX[ExecutionAgent]
     RA --> RK --> EX
+    CYCLE --> RA
   end
 
-  MCP[MCP XRPL Server :4032]
+  MCP[MCP Server :4731]
   ARB[arbitrage-bot :4028]
   CE[compliance-engine :4025]
-  X4[x402-gateway-v2 :4030]
+  XUS[x402-us :4030]
+  XEU[x402-eu :4032]
+  XJP[x402-jp :4033]
+  BAAS[baas-api :4029]
   PO[payment-orchestrator :4022]
-  BAAS[baas-api :8097]
-  DASH[baas-dashboard :4029]
   X4M[backend x402-gateway :4020]
 
-  agents --> MCP
+  orch --> MCP
   EX --> ARB
   RK --> CE
-  RA --> X4
+  RA --> XUS
+  MULTI --> XUS
+  MULTI --> XEU
   EX --> PO
-  agents --> BAAS
-  X4 --> BAAS
-  DASH -. UI .-> BAAS
-  X4M -. Apostle mesh .-> X4
+  orch --> BAAS
+  XUS --> BAAS
 ```
+
+## Agent Orchestration Layer (`fiat-rails/agent-orchestrator/`)
+
+| File | Role |
+|------|------|
+| `server.js` | Express — `/agents/start`, `/agents/stop`, `/agents/status`, `/run-cycle`, `/api/v1/arbitrage/multi` |
+| `agent-runner.js` | Research → Risk → Execute loop; `DRY_RUN` default |
+| `mcp-client.js` | MCP at `:4731` (mock when down) |
+| `x402-client.js` | Regional gateways; stats at `:4030/x402/stats` |
+| `compliance-client.js` | `:4025` |
+| `baas-client.js` | `:4029` |
+| `orchestrator-client.js` | payment-orchestrator `:4022` |
+| `arbitrage-client.js` | `:4028` + multi-mesh stub |
+| `config.js` | Agent profiles |
 
 ## Port map (local PM2)
 
 | Service | Port | Path | Label |
 |---------|------|------|-------|
 | backend `x402-gateway` (Apostle mesh) | **4020** | `backend/x402-gateway/` | PROVEN (health) |
-| popeye-relay | 4021 | `backend/popeye-relay/` | PIPELINE |
 | payment-orchestrator | **4022** | `fiat-rails/orchestrator/` | PIPELINE |
-| fedwire-adapter | 4023 | `fiat-rails/fedwire-adapter/` | PIPELINE |
-| swift-bridge | 4024 | `fiat-rails/swift-bridge/` | PIPELINE |
 | compliance-engine | **4025** | `fiat-rails/compliance-engine/` | PIPELINE |
-| neobank-api | 4026 | `fiat-rails/neobank-api/` | PIPELINE |
-| iou-reserve-monitor | 4027 | `fiat-rails/iou-reserve-monitor/` | PIPELINE |
 | arbitrage-bot | **4028** | `fiat-rails/arbitrage-bot/` | PIPELINE |
-| baas-dashboard (UI) | **4029** | `fiat-rails/baas-dashboard/` | PIPELINE |
-| x402-gateway-v2 (paid proxies + stats) | **4030** | `fiat-rails/x402-gateway/` | PIPELINE |
+| **baas-api** | **4029** | `fiat-rails/baas-api/` | PIPELINE |
+| x402-gateway-v2 (US) | **4030** | `fiat-rails/x402-gateway/` | PIPELINE |
 | **agent-orchestrator** | **4031** | `fiat-rails/agent-orchestrator/` | PIPELINE |
-| MCP XRPL (external vendor) | **4032** | install per `scripts/setup-mcp-xrpl.ps1` | PIPELINE |
-| baas-api (liquidity API) | **8097** | `fiat-rails/baas-api/` | PIPELINE |
+| x402-eu | **4032** | `fiat-rails/x402-gateway-regional/` | PIPELINE |
+| x402-jp | **4033** | `fiat-rails/x402-gateway-regional/` | PIPELINE |
+| baas-dashboard (UI) | **4040** | `fiat-rails/baas-dashboard/` | PIPELINE |
+| MCP (external) | **4731** | vendor install | PIPELINE |
 
-**Note:** User-facing BaaS “:4029” is the dashboard; programmatic agent registration uses **baas-api :8097** (`POST /api/v1/agents/register`). The orchestrator proxies registration to 8097.
+See [MULTI_X402_MESH.md](MULTI_X402_MESH.md) for NY / Frankfurt / Tokyo table.
+
+## BaaS agent API (`:4029`)
+
+| Method | Path |
+|--------|------|
+| POST | `/api/v1/agents` — register |
+| POST | `/api/v1/agents/:id/trades` — report trade |
+| GET | `/api/v1/agents/:id/revenue` — **PROJECTION** |
 
 ## x402 stats
 
-- **Canonical (fiat-rails):** `GET http://127.0.0.1:4030/x402/stats`
-- **Legacy mesh sidecar:** `GET http://127.0.0.1:4020/health` (Python gateway)
+- **Canonical:** `GET http://127.0.0.1:4030/x402/stats` (alias `GET /stats`)
+- **EU / JP:** `:4032` / `:4033` — same path
+- **Apostle mesh:** `GET http://127.0.0.1:4020/health` (Python sidecar)
 
 ## Agent revenue honesty
 
 | Claim | Truth label |
 |-------|-------------|
-| Health endpoints return JSON | **PROVEN** |
-| Agent cycle runs Research → Risk → Execution | **PROVEN** (stub logic) |
-| Arbitrage profit today | **PIPELINE** until MSB omnibus + live pools |
-| x402 metered revenue totals | **PROJECTION** (counters at zero) |
-| MCP XRPL ledger reads | **PIPELINE** (requires vendor MCP on :4032) |
-| FTH Academy Stripe | **PROVEN** (separate product) |
-
-## Tool wrappers (`agent-orchestrator/lib/tools.js`)
-
-| Tool | Target |
-|------|--------|
-| `execute_arbitrage` | `POST :4028/execute` or `/start`; fallback `POST :4022/api/v1/arbitrage` |
-| `compliance_screen` | `POST :4025/screen` |
-| `x402_pay_and_fetch` | `GET :4030/x402/...` with mock `X-402-Payment` |
-| `registerAgent` | `POST :8097/api/v1/agents/register` |
-
-## MCP XRPL setup
-
-```powershell
-.\scripts\setup-mcp-xrpl.ps1
-```
-
-Install the vendor MCP XRPL server separately (placeholder repo in script). Set `MCP_XRPL_URL=http://127.0.0.1:4032` in `fiat-rails/agent-orchestrator/.env`.
+| Health + cycle JSON | **PROVEN** (stub logic) |
+| Arbitrage profit today | **PIPELINE** |
+| x402 fee totals | **PROJECTION** |
+| Agent revenue / $791K marketing | **PROJECTION — NOT FACT** |
+| MCP ledger reads | **PIPELINE** (needs MCP on :4731) |
 
 ## Activation
 
 ```powershell
+.\scripts\deploy-agentic-floor.ps1
 .\scripts\activate-troptions-revenue.ps1 -DryRun
+.\scripts\setup-second-x402.ps1
 ```
 
 ## API quick reference
 
 ```bash
-# Agent cycle (DRY_RUN default true)
-curl -X POST http://127.0.0.1:4031/run-cycle -H "Content-Type: application/json" -d "{\"agent_id\":\"agent-demo\",\"wallet\":\"rDemo\",\"capital_troptions\":100000,\"dry_run\":true}"
+# Lifecycle
+curl -X POST http://127.0.0.1:4031/agents/start -H "Content-Type: application/json" -d '{"agent_id":"agent-demo"}'
+curl http://127.0.0.1:4031/agents/status?agent_id=agent-demo
+curl -X POST http://127.0.0.1:4031/agents/stop -H "Content-Type: application/json" -d '{"agent_id":"agent-demo"}'
 
-# Register agent (orchestrator proxy → baas-api)
-curl -X POST http://127.0.0.1:4031/agents/register -H "Content-Type: application/json" -d "{\"agent_id\":\"agent-demo\",\"wallet\":\"rDemo\",\"capital_troptions\":100000}"
+# Cycle (DRY_RUN default)
+curl -X POST http://127.0.0.1:4031/run-cycle -H "Content-Type: application/json" -d '{"agent_id":"agent-demo","wallet":"rDemo","capital_troptions":100000,"dry_run":true}'
 
-# Arbitrage
-curl -X POST http://127.0.0.1:4028/start
-curl -X POST http://127.0.0.1:4028/execute -H "Content-Type: application/json" -d "{\"dry_run\":true}"
+# BaaS
+curl -X POST http://127.0.0.1:4029/api/v1/agents -H "Content-Type: application/json" -d '{"agent_id":"agent-demo","wallet":"rDemo","capital_troptions":100000}'
+curl http://127.0.0.1:4029/api/v1/agents/agent-demo/revenue
 
-# x402 stats (use 4030, not 4020)
+# Multi-x402 arbitrage
+curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi -H "Content-Type: application/json" -d '{"buy_location":"us","sell_location":"eu","dry_run":true}'
+
+# x402 stats
 curl http://127.0.0.1:4030/x402/stats
 ```
 
-See also: [TROPTIONS_REVENUE_ENGINE.md](TROPTIONS_REVENUE_ENGINE.md), [ARBITRAGE_AND_BAAS.md](ARBITRAGE_AND_BAAS.md).
+See also: [TROPTIONS_REVENUE_ENGINE.md](TROPTIONS_REVENUE_ENGINE.md), [MULTI_X402_MESH.md](MULTI_X402_MESH.md), [SYSTEM_MANIFEST.md](SYSTEM_MANIFEST.md).

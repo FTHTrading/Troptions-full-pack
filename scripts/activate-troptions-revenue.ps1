@@ -13,6 +13,7 @@ Write-Host "activate-troptions-revenue — DryRun=$DryRun" -ForegroundColor Cyan
 
 & (Join-Path $Root "scripts\setup-arbitrage-baas.ps1") -SkipNpmInstall:$false
 & (Join-Path $Root "scripts\setup-mcp-xrpl.ps1")
+& (Join-Path $Root "scripts\setup-second-x402.ps1")
 
 $agentEnv = Join-Path $Fiat "agent-orchestrator\.env"
 if (-not (Test-Path $agentEnv)) {
@@ -22,7 +23,7 @@ if (-not (Test-Path $agentEnv)) {
 if (-not $SkipPm2) {
     Push-Location $Fiat
     $dryFlag = if ($DryRun) { "true" } else { "false" }
-    pm2 start ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,baas-dashboard,agent-orchestrator --update-env 2>$null
+    pm2 start ecosystem.config.js --only arbitrage-bot,baas-api,x402-gateway-v2,x402-eu,x402-jp,agent-orchestrator --update-env 2>$null
     pm2 set agent-orchestrator:DRY_RUN $dryFlag 2>$null
     pm2 set arbitrage-bot:DRY_RUN $dryFlag 2>$null
     Pop-Location
@@ -35,7 +36,8 @@ if (-not $SkipHealth) {
         @{ Name = "agent-orchestrator"; Url = "http://127.0.0.1:4031/health" },
         @{ Name = "arbitrage-bot"; Url = "http://127.0.0.1:4028/health" },
         @{ Name = "x402-gateway-v2"; Url = "http://127.0.0.1:4030/health" },
-        @{ Name = "baas-api"; Url = "http://127.0.0.1:8097/health" },
+        @{ Name = "x402-eu"; Url = "http://127.0.0.1:4032/health" },
+        @{ Name = "baas-api"; Url = "http://127.0.0.1:4029/health" },
         @{ Name = "x402-stats"; Url = "http://127.0.0.1:4030/x402/stats" }
     )
     foreach ($c in $checks) {
@@ -62,8 +64,8 @@ if (-not $SkipHealth) {
 
 Write-Host ""
 Write-Host "Ports:" -ForegroundColor Cyan
-Write-Host "  4031 agent-orchestrator | 4030 x402 stats | 4028 arbitrage | 8097 baas-api | 4029 dashboard"
-Write-Host "  4032 MCP XRPL (external) | 4020 backend x402 (Apostle mesh)"
+Write-Host "  4031 agent-orchestrator | 4029 baas-api | 4030 x402-us | 4032 x402-eu | 4033 x402-jp"
+Write-Host "  4731 MCP | 4020 backend x402 (Apostle) | 4040 baas-dashboard UI"
 Write-Host ""
-Write-Host "All exchange/agent revenue: PROJECTION until pools live." -ForegroundColor Yellow
-Write-Host "Docs: docs/technical/TROPTIONS_REVENUE_ENGINE.md" -ForegroundColor Cyan
+Write-Host "All exchange/agent revenue: PROJECTION (not $791K fact)" -ForegroundColor Yellow
+Write-Host "Docs: docs/technical/TROPTIONS_REVENUE_ENGINE.md, MULTI_X402_MESH.md" -ForegroundColor Cyan

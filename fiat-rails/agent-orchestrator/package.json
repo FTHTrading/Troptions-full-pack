@@ -1,10 +1,17 @@
 {
-  "name": "troptions-agent-orchestrator",
-  "private": true,
-  "version": "1.0.0",
-  "description": "Agent orchestration layer — MCP XRPL + fiat rails (**PIPELINE**)",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js"
-  }
+ "name": "troptions-agent-orchestrator",
+ "version": "2.0.0",
+ "description": "Agent Orchestration Layer for TROPTIONS multi-gateway trading",
+ "main": "server.js",
+ "scripts": {
+ "start": "node server.js",
+ "test": "jest"
+ },
+ "dependencies": {
+ "express": "^4.18.2",
+ "axios": "^1.6.0"
+ },
+ "engines": {
+ "node": ">=18.0.0"
+ }
 }

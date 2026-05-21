@@ -1,4 +1,4 @@
-# Setup arbitrage-bot (:4028) and baas-api (:8097)
+# Setup arbitrage-bot (:4028) and baas-api (:4029)
 param(
     [switch]$SkipNpmInstall
 )

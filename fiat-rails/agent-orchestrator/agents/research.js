@@ -1,26 +1,18 @@
-/**
- * ResearchAgent — market / ledger context (**PIPELINE** stub).
- */
 const { callTool, healthCheck } = require('../mcp-client');
-const { x402PayAndFetch } = require('../lib/tools');
+const { payAndFetch } = require('../x402-client');
 
 async function run(ctx) {
   const steps = [];
   const mcp = await healthCheck();
   steps.push({ step: 'mcp_health', mcp });
 
-  if (mcp.ok) {
-    try {
-      const tools = await callTool('xrpl_account_info', {
-        account: ctx.wallet || process.env.XRPL_ISSUER || 'rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ',
-      });
-      steps.push({ step: 'xrpl_account_info', tools });
-    } catch (err) {
-      steps.push({ step: 'xrpl_account_info', skipped: true, reason: err.message });
-    }
-  }
+  const tools = await callTool('xrpl_account_info', {
+    account: ctx.wallet || process.env.XRPL_ISSUER || 'rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ',
+  });
+  steps.push({ step: 'xrpl_account_info', tools });
 
-  const orderbook = await x402PayAndFetch('/x402/market-data/orderbook', { pair: 'USD-IOU/EUR-IOU' });
+  const region = (ctx.regions && ctx.regions[0]) || 'us';
+  const orderbook = await payAndFetch('/x402/market-data/orderbook', { pair: ctx.pair || 'USD-IOU/EUR-IOU' }, region);
   steps.push({ step: 'orderbook_snapshot', orderbook });
 
   return {

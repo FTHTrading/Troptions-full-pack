@@ -1,7 +1,4 @@
-/**
- * ExecutionAgent — arbitrage trigger (**PIPELINE** stub).
- */
-const { executeArbitrage } = require('../lib/tools');
+const { execute } = require('../arbitrage-client');
 
 async function run(ctx) {
   if (!ctx.risk_approved) {
@@ -13,9 +10,8 @@ async function run(ctx) {
     };
   }
 
-  const pair = ctx.pair || 'USD-IOU/EUR-IOU';
-  const result = await executeArbitrage({
-    pair,
+  const result = await execute({
+    pair: ctx.pair || 'USD-IOU/EUR-IOU',
     spread_bps: ctx.spread_bps || 30,
     amount_usd: ctx.amount_usd || 5000,
     dry_run: ctx.dry_run !== false,
