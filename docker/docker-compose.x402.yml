@@ -1,0 +1,31 @@
+services:
+  apostle:
+    image: rust:1-bookworm
+    working_dir: /app
+    volumes:
+      - ${APOSTLE_CHAIN_PATH:-C:/Users/Kevan/apostle-chain}:/app:ro
+    command: ["sh", "-c", "echo Apostle — run deploy_apostle.sh on host; exit 0"]
+    ports:
+      - "7332:7332"
+    restart: unless-stopped
+
+  x402-gateway:
+    build:
+      context: ../backend/x402-gateway
+    ports:
+      - "4020:4020"
+    environment:
+      PORT: "4020"
+      X402_MODE: ${X402_MODE:-staged}
+      APOSTLE_URL: http://host.docker.internal:7332
+    restart: unless-stopped
+
+  popeye-relay:
+    build:
+      context: ../backend/popeye-relay
+    ports:
+      - "4021:4021"
+    environment:
+      L1_RPC_URL: http://host.docker.internal:9944
+      POPEYE_PORT: "4021"
+    restart: unless-stopped
