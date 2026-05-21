@@ -25,6 +25,7 @@ header_pages:
   - infrastructure/frontends.md
   - proof/truth-labels.md
   - deploy/quickstart.md
+  - deploy/secrets-setup.md
   - ROADMAP.md
 
 exclude:

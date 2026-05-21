@@ -8,6 +8,12 @@ Uses: Ollama (local LLM), Faster Whisper (STT), ElevenLabs/OpenClaw (TTS),
 import os
 import json
 import asyncio
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parents[2] / ".env")
+load_dotenv()
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 from contextlib import asynccontextmanager
@@ -31,6 +37,15 @@ from sentence_transformers import SentenceTransformer
 # -- Configuration --
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
+ELEVENLABS_VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "pNInz6obpgDQGcFmaJgB")
+WORKERS_AI_ENABLED = os.getenv("WORKERS_AI_ENABLED", "0").lower() in ("1", "true", "yes")
+CLOUDFLARE_ACCOUNT_ID = os.getenv("CLOUDFLARE_ACCOUNT_ID", "")
+WORKERS_AI_TOKEN = (
+    os.getenv("WORKERS_AI_API_TOKEN")
+    or os.getenv("CLOUDFLARE_WORKERS_AI_TOKEN")
+    or os.getenv("CLOUDFLARE_API_TOKEN", "")
+)
+WORKERS_AI_MODEL = os.getenv("WORKERS_AI_MODEL", "@cf/meta/llama-3.1-8b-instruct")
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
 QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
 QDRANT_PORT = int(os.getenv("QDRANT_PORT", "6333"))
@@ -155,21 +170,62 @@ def seed_courses():
 seed_courses()
 
 # -- Ollama Integration --
+async def query_workers_ai(prompt: str, system: str = "") -> Optional[str]:
+    """Optional Cloudflare Workers AI fallback (server-side token only)."""
+    if not WORKERS_AI_ENABLED or not CLOUDFLARE_ACCOUNT_ID or not WORKERS_AI_TOKEN:
+        return None
+    combined = f"{system}\n\nUser: {prompt}" if system else prompt
+    url = (
+        f"https://api.cloudflare.com/client/v4/accounts/{CLOUDFLARE_ACCOUNT_ID}"
+        f"/ai/run/{WORKERS_AI_MODEL}"
+    )
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        try:
+            resp = await client.post(
+                url,
+                headers={"Authorization": f"Bearer {WORKERS_AI_TOKEN}"},
+                json={"messages": [{"role": "user", "content": combined}]},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            result = data.get("result", data)
+            if isinstance(result, dict):
+                return result.get("response") or str(result)
+            return str(result)
+        except Exception:
+            return None
+
+
 async def query_ollama(prompt: str, model: str = "qwen2.5:7b", system: str = "") -> str:
-    """Query local Ollama instance."""
+    """Query local Ollama; fall back to Workers AI when enabled and Ollama fails."""
+    default_system = (
+        "You are DONK AI, the voice of TROPTIONS. Be direct, energetic, and knowledgeable "
+        "about crypto, sports commerce, and tokenization."
+    )
+    system_text = system or default_system
     async with httpx.AsyncClient(timeout=60.0) as client:
         payload = {
             "model": model,
             "prompt": prompt,
             "stream": False,
-            "system": system or "You are DONK AI, the voice of TROPTIONS. Be direct, energetic, and knowledgeable about crypto, sports commerce, and tokenization."
+            "system": system_text,
         }
         try:
             resp = await client.post(f"{OLLAMA_URL}/api/generate", json=payload)
             resp.raise_for_status()
-            return resp.json().get("response", "No response")
-        except Exception as e:
-            return f"Error: {str(e)}"
+            text = resp.json().get("response", "")
+            if text and not text.startswith("Error:"):
+                return text
+        except Exception:
+            pass
+
+    cf_answer = await query_workers_ai(prompt, system=system_text)
+    if cf_answer:
+        return cf_answer
+    return (
+        "Error: Ollama unreachable and Workers AI fallback not configured. "
+        "Start Ollama or set WORKERS_AI_ENABLED=1 with Cloudflare env vars."
+    )
 
 # -- RAG Retrieval --
 def retrieve_context(query: str, course_id: Optional[str] = None, top_k: int = 3) -> List[Dict]:
@@ -196,10 +252,25 @@ def transcribe_audio(audio_path: str) -> str:
     segments, _ = whisper.transcribe(audio_path, language="en")
     return " ".join([s.text for s in segments])
 
-# -- Text-to-Speech (via OpenClaw/ElevenLabs) --
+# -- Text-to-Speech (ElevenLabs) --
 async def generate_voice(text: str) -> Optional[str]:
-    """Generate voice audio using ElevenLabs via OpenClaw."""
-    return None
+    """Generate voice audio via ElevenLabs when ELEVENLABS_API_KEY is set."""
+    if not ELEVENLABS_API_KEY or not text.strip():
+        return None
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{ELEVENLABS_VOICE_ID}"
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        try:
+            resp = await client.post(
+                url,
+                headers={"xi-api-key": ELEVENLABS_API_KEY, "Accept": "audio/mpeg"},
+                json={"text": text[:2500], "model_id": "eleven_monolingual_v1"},
+            )
+            resp.raise_for_status()
+            import base64
+
+            return f"data:audio/mpeg;base64,{base64.b64encode(resp.content).decode('ascii')}"
+        except Exception:
+            return None
 
 # -- FastAPI App --
 @asynccontextmanager
@@ -362,6 +433,9 @@ async def health():
         "qdrant": f"{QDRANT_HOST}:{QDRANT_PORT}",
         "gpu": GPU_NAME,
         "courses": len(COURSES),
+        "elevenlabs_configured": bool(ELEVENLABS_API_KEY),
+        "workers_ai_enabled": WORKERS_AI_ENABLED,
+        "workers_ai_configured": bool(CLOUDFLARE_ACCOUNT_ID and WORKERS_AI_TOKEN),
         "timestamp": datetime.now().isoformat()
     }
 

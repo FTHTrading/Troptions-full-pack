@@ -1,22 +1,26 @@
-"""Telnyx webhook + NEED AI / CLAWD dispatch with x402 ATP path."""
+"""Telnyx webhook + NEED AI dispatch — dry-run when API key missing."""
 
 from __future__ import annotations
 
 import os
 from typing import Any, Dict, Optional
 
-from fastapi import APIRouter, Header, HTTPException, Request
+import httpx
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel
-
-from x402_middleware import X402_MODE, verify_payment
 
 router = APIRouter(prefix="/telecom", tags=["telecom"])
 
+TELNYX_API_KEY = os.getenv("TELNYX_API_KEY", "")
+TELNYX_PUBLIC_KEY = os.getenv("TELNYX_PUBLIC_KEY", "")
 TELNYX_WEBHOOK_SECRET = os.getenv("TELNYX_WEBHOOK_SECRET", "")
 TELECOM_DRY_RUN = os.getenv("TELECOM_DRY_RUN", "true").lower() in ("1", "true", "yes")
-CLAWD_WORKSPACE = os.getenv("CLAWD_WORKSPACE", r"C:\Users\Kevan\.openclaw\workspace")
-NEEDAI_DISPATCH_URL = os.getenv("NEEDAI_DISPATCH_URL", "http://127.0.0.1:4020/v1/needai/dispatch")
-TELECOM_FEE_ATP = os.getenv("TELECOM_FEE_ATP", "500000000000000000")  # 0.5 ATP
+NEEDAI_DISPATCH_URL = os.getenv(
+    "NEEDAI_DISPATCH_URL", "http://127.0.0.1:4020/v1/needai/dispatch"
+)
+
+if not TELNYX_API_KEY:
+    TELECOM_DRY_RUN = True
 
 
 class TelnyxEvent(BaseModel):
@@ -39,44 +43,48 @@ async def telecom_health():
     return {
         "status": "ok",
         "dry_run": TELECOM_DRY_RUN,
-        "x402_mode": X402_MODE,
-        "clawd_workspace": CLAWD_WORKSPACE,
+        "telnyx_api_key_set": bool(TELNYX_API_KEY),
+        "telnyx_public_key_set": bool(TELNYX_PUBLIC_KEY),
+        "webhook_secret_set": bool(TELNYX_WEBHOOK_SECRET),
+        "needai_dispatch_url": NEEDAI_DISPATCH_URL,
     }
 
 
 @router.post("/telnyx/webhook")
-async def telnyx_webhook(
-    request: Request,
-    body: TelnyxEvent,
-    x_payment_receipt: Optional[str] = Header(None, alias="X-Payment-Receipt"),
-):
+async def telnyx_webhook(request: Request, body: TelnyxEvent):
     if TELNYX_WEBHOOK_SECRET:
         sig = request.headers.get("telnyx-signature-ed25519", "")
         if not sig and not TELECOM_DRY_RUN:
             raise HTTPException(status_code=401, detail="missing telnyx signature")
 
     category = classify_call(body.event_type, body.payload)
-    dispatch = {"category": category, "agent": "needai-router", "dry_run": TELECOM_DRY_RUN}
-
-    if X402_MODE == "production" and not TELECOM_DRY_RUN:
-        if not x_payment_receipt:
-            raise HTTPException(status_code=402, detail="ATP payment required for telecom dispatch")
-        pay = await verify_payment(x_payment_receipt, expected_atp=TELECOM_FEE_ATP)
-        if not pay.get("ok"):
-            raise HTTPException(status_code=402, detail=pay)
-        dispatch["x402"] = pay
+    dispatch: Dict[str, Any] = {
+        "category": category,
+        "agent": "needai-router",
+        "dry_run": TELECOM_DRY_RUN,
+    }
 
     if TELECOM_DRY_RUN:
-        dispatch["note"] = "DRY_RUN — no outbound Telnyx or agent call"
+        dispatch["note"] = (
+            "DRY_RUN — set TELNYX_API_KEY and TELECOM_DRY_RUN=false for outbound dispatch"
+        )
         return {"ok": True, "dispatch": dispatch}
 
-    import httpx
+    if not TELNYX_API_KEY:
+        dispatch["note"] = "TELNYX_API_KEY missing — staying in dry-run"
+        dispatch["dry_run"] = True
+        return {"ok": True, "dispatch": dispatch}
 
     async with httpx.AsyncClient(timeout=15.0) as client:
         try:
-            r = await client.post(NEEDAI_DISPATCH_URL, json={"event": body.model_dump(), "category": category})
+            r = await client.post(
+                NEEDAI_DISPATCH_URL,
+                json={"event": body.model_dump(), "category": category},
+                headers={"Authorization": f"Bearer {TELNYX_API_KEY}"},
+            )
             dispatch["needai_status"] = r.status_code
-            dispatch["needai_body"] = r.json() if r.headers.get("content-type", "").startswith("application/json") else r.text
+            ct = r.headers.get("content-type", "")
+            dispatch["needai_body"] = r.json() if ct.startswith("application/json") else r.text
         except Exception as exc:
             dispatch["needai_error"] = str(exc)
 

@@ -1,6 +1,11 @@
+/**
+ * TROPTIONS Glass guide — offline FAQ + optional live DONK at http://127.0.0.1:8090
+ * Never embed Cloudflare, Telnyx, or ElevenLabs keys in this file or any static JS.
+ */
 (function () {
   "use strict";
 
+  var DEFAULT_LIVE_API = "http://127.0.0.1:8090";
   var NARRATION_URL = null;
   var narrationData = null;
   var synth = window.speechSynthesis;
@@ -95,11 +100,7 @@
   function askLive(apiBase, question, log) {
     appendBubble(log, "Thinking…", "bot", "Live · " + apiBase);
     var chatUrl = apiBase + "/chat";
-    var body = {
-      message: question,
-      system:
-        "You answer questions about the TROPTIONS Troptions-full-pack monorepo honestly. Maturity 9.0 on main, Sovereign Sequencer not BFT, x402 on feature branch only. Keep answers concise.",
-    };
+    var body = { message: question, voice: false };
 
     return fetch(chatUrl, {
       method: "POST",
@@ -121,7 +122,9 @@
         appendBubble(
           log,
           offline ||
-            "Live API unreachable. Run deploy quickstart and set API to http://127.0.0.1:8090, or use offline FAQ mode.",
+            "Live API unreachable. Run deploy quickstart, configure .env (see docs/deploy/secrets-setup), start donk-tutor, then set API to " +
+              DEFAULT_LIVE_API +
+              " — or use offline FAQ mode.",
           "bot",
           "Fallback"
         );
@@ -141,7 +144,9 @@
       appendBubble(
         log,
         ans ||
-          "No FAQ match. Try keywords: L1, DAO, x402, revenue, launch, sports, KENNY, maturity, Avid, deploy. For live AI, run quickstart and set ?api=http://127.0.0.1:8090",
+          "No FAQ match. Try keywords: L1, DAO, x402, revenue, launch, sports, KENNY, maturity, Avid, deploy. For live AI: ?api=" +
+            DEFAULT_LIVE_API +
+            " (DONK with .env — no provider keys in the browser)",
         "bot",
         "Offline FAQ"
       );
