@@ -26,6 +26,7 @@
   </header>
   <div class="md-body">
 <h1>TROPTIONS Sovereign Stack Architecture</h1>
+<p>Published on GitHub Pages: <code>https://fthtrading.github.io/Troptions-full-pack/technical/ARCHITECTURE.html</code></p>
 <h2>Layer diagram</h2>
 <pre><code>┌─────────────────────────────────────────────────────────────────┐
 │  GENESIS DOMAINS (8) — TROPTIONSXCHANGE.IO, TTN.Tv, etc.        │
@@ -37,13 +38,14 @@
 └────────────────────────────┬────────────────────────────────────┘
                              │ HTTPS / WS
 ┌────────────────────────────▼────────────────────────────────────┐
-│  BACKENDS + AI                                                   │
-│  fth-academy :8091 · ttn-launcher :8092 · donk-tutor :8090      │
+│  BACKENDS + AI (PM2 — ecosystem.config.js)                       │
+│  donk-ai-tutor :8090 · fth-backend :8091 · ttn-launcher :8092   │
+│  dao-service :8093 · x402-gateway :4020 · popeye-relay :4021    │
 │  Ollama :11434 · Qdrant :6333                                    │
 └────────────────────────────┬────────────────────────────────────┘
                              │ JSON-RPC
 ┌────────────────────────────▼────────────────────────────────────┐
-│  L1 NODE :9944 (Rust) · metrics :9945                            │
+│  L1 NODE :9944 (Rust) · Prometheus metrics :9945                 │
 │  Sovereign Sequencer (single-node; multi-node + fraud proofs planned) │
 │  RocksDB · signed submit · on-chain DAO + treasury · multisig    │
 └────────────────────────────┬────────────────────────────────────┘
@@ -53,22 +55,72 @@
 │  Polygon (KENNY/EVL) · XRPL gateway · Solana ($PICK)             │
 └─────────────────────────────────────────────────────────────────┘
 </code></pre>
+<h2>PM2 service map</h2>
+<table>
+<thead>
+<tr>
+<th>PM2 name</th>
+<th>Port</th>
+<th>Monorepo path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>troptions-l1-node</code></td>
+<td><strong>9944</strong> (RPC), <strong>9945</strong> (<code>/metrics</code>)</td>
+<td><code>l1/</code></td>
+</tr>
+<tr>
+<td><code>donk-ai-tutor</code></td>
+<td><strong>8090</strong></td>
+<td><code>ai/donk-tutor/</code></td>
+</tr>
+<tr>
+<td><code>fth-backend</code></td>
+<td><strong>8091</strong></td>
+<td><code>backend/fth-academy/</code></td>
+</tr>
+<tr>
+<td><code>ttn-launcher</code></td>
+<td><strong>8092</strong></td>
+<td><code>backend/ttn-launcher/</code></td>
+</tr>
+<tr>
+<td><code>dao-service</code></td>
+<td><strong>8093</strong></td>
+<td><code>backend/dao-service/</code> + <code>frontends/dao-dashboard/</code></td>
+</tr>
+<tr>
+<td><code>x402-gateway</code></td>
+<td><strong>4020</strong></td>
+<td><code>backend/x402-gateway/</code></td>
+</tr>
+<tr>
+<td><code>popeye-relay</code></td>
+<td><strong>4021</strong></td>
+<td><code>backend/popeye-relay/</code></td>
+</tr>
+</tbody>
+</table>
+<p>Start all apps: <code>pm2 start ecosystem.config.js</code> from repo root. The <a href="QUICKSTART.html">quickstart</a> script starts L1 plus core backends (8090–8093); add x402 and popeye with <code>pm2 start ecosystem.config.js --only x402-gateway,popeye-relay</code> when needed.</p>
 <h2>Clawd / OpenClaw integration</h2>
-<p>Operational services run with <code>exec_cwd</code> under <code>C:\Users\Kevan\.openclaw\workspace</code> (PM2). Knowledge artifacts from clawd are copied to <code>ai/knowledge-base/openclaw-content</code> and architecture notes in <code>docs/</code>.</p>
+<p>Operational context lives under <code>C:\Users\Kevan\.openclaw\workspace</code> (clawd). PM2 processes run from the monorepo root via <code>ecosystem.config.js</code>. Knowledge artifacts from clawd are mirrored to <code>ai/knowledge-base/openclaw-content</code>; architecture notes live under <code>docs/</code> and <code>docs/technical/</code>.</p>
 <h2>Data flows</h2>
 <ol>
-<li><strong>Education:</strong> User → fth-edu / exchange-os → fth-academy → Stripe + Ollama; certificates → IPFS (planned) + KENNY burn proof.</li>
-<li><strong>Tutoring:</strong> User → donk-tutor → Qdrant RAG → Ollama; optional voice via ElevenLabs.</li>
+<li><strong>Education:</strong> User → fth-edu / exchange-os → <strong>fth-backend</strong> (<code>:8091</code>) → Stripe + Ollama; certificates → IPFS (planned) + KENNY burn proof.</li>
+<li><strong>Tutoring:</strong> User → <strong>donk-ai-tutor</strong> (<code>:8090</code>) → Qdrant RAG → Ollama; optional voice via ElevenLabs.</li>
 <li><strong>Broadcast:</strong> Creator → ttn-launcher → namespace registry (SQLite) → L1 soulbound migration (script).</li>
-<li><strong>Sovereign state:</strong> Backends → <code>l1_client</code> → <code>state_get</code> / <code>soulbound_*</code> / <code>settlement_*</code> on port 9944.</li>
+<li><strong>Sovereign state:</strong> Backends → <code>l1_client</code> → <code>state_get</code> / <code>soulbound_*</code> / <code>settlement_*</code> on port <strong>9944</strong>.</li>
+<li><strong>DAO + payments:</strong> <strong>dao-service</strong> (<code>:8093</code>) → L1 governance RPC; optional <strong>x402-gateway</strong> (<code>:4020</code>) for metered ATP settlement; <strong>popeye-relay</strong> (<code>:4021</code>) for L1-adjacent relay hooks.</li>
 </ol>
 <h2>DAO layer (implemented)</h2>
-<p>See <code>dao/ARCHITECTURE.md</code>. Services: <code>dao-service:8093</code>, FTH <code>/dao/*</code>, L1 <code>governance</code> crate + submit RPC.</p>
-<h2>Recommended build order</h2>
+<p>See <a href="https://github.com/FTHTrading/Troptions-full-pack/blob/main/dao/ARCHITECTURE.md"><code>dao/ARCHITECTURE.md</code></a> in the repo. Runtime: <strong>dao-service</strong> on <strong>8093</strong>, FTH <strong>fth-backend</strong> routes under <code>/dao/*</code>, L1 <code>governance</code> crate + signed submit RPC.</p>
+<h2>Production readiness (current)</h2>
 <ol>
-<li>~~L1 bridge in fth-backend~~ — <code>/health/l1</code>, <code>/dao/state</code> wired.</li>
+<li><strong>L1 bridge (fth-backend)</strong> — <code>/health/l1</code>, <code>/dao/state</code> wired to JSON-RPC on <strong>9944</strong>.</li>
 <li><strong>Persistence</strong> — RocksDB on L1 (<code>L1_DATA_DIR</code>); SQLite audit/allocations cache only in dao-service.</li>
-<li>~~WebSockets~~ — <code>backend/shared/ws_hub.py</code> on DAO service <code>/ws</code>.</li>
+<li><strong>WebSockets</strong> — <code>backend/shared/ws_hub.py</code> on dao-service <code>/ws</code>.</li>
+<li><strong>x402 + popeye</strong> — Present in <code>ecosystem.config.js</code>; enable per environment when Apostle / payment rails are up.</li>
 </ol>
   </div>
   <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/ARCHITECTURE.html</p>

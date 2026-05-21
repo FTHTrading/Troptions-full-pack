@@ -26,7 +26,8 @@
   </header>
   <div class="md-body">
 <h1>TROPTIONS — One-command quickstart</h1>
-<p>Start the full sovereign stack (L1 → backends → DAO) in dependency order.</p>
+<p>Published on GitHub Pages: <code>https://fthtrading.github.io/Troptions-full-pack/technical/QUICKSTART.html</code></p>
+<p>Start the sovereign stack (L1 → backends → DAO) in dependency order. Repo root: <code>C:\Users\Kevan\Troptions-full-pack</code> (adjust path on Linux/macOS).</p>
 <h2>Prerequisites</h2>
 <ul>
 <li><strong>PM2</strong> — <code>npm install -g pm2</code></li>
@@ -50,47 +51,86 @@
 <table>
 <thead>
 <tr>
-<th>Service</th>
+<th>PM2 name</th>
+<th>Port</th>
+<th>Health / URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>troptions-l1-node</code></td>
+<td><strong>9944</strong></td>
+<td>JSON-RPC <code>state_get</code> — http://127.0.0.1:9944</td>
+</tr>
+<tr>
+<td><code>troptions-l1-node</code> (metrics)</td>
+<td><strong>9945</strong></td>
+<td>Prometheus — http://127.0.0.1:9945/metrics</td>
+</tr>
+<tr>
+<td><code>donk-ai-tutor</code></td>
+<td><strong>8090</strong></td>
+<td>http://127.0.0.1:8090/health</td>
+</tr>
+<tr>
+<td><code>fth-backend</code></td>
+<td><strong>8091</strong></td>
+<td>http://127.0.0.1:8091/health (also <code>/health/l1</code>)</td>
+</tr>
+<tr>
+<td><code>ttn-launcher</code></td>
+<td><strong>8092</strong></td>
+<td>http://127.0.0.1:8092/health</td>
+</tr>
+<tr>
+<td><code>dao-service</code></td>
+<td><strong>8093</strong></td>
+<td>http://127.0.0.1:8093/health</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Optional</strong> (in <code>ecosystem.config.js</code>, not started by default quickstart):</p>
+<table>
+<thead>
+<tr>
+<th>PM2 name</th>
+<th>Port</th>
 <th>URL</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>L1 JSON-RPC</td>
-<td>http://127.0.0.1:9944</td>
+<td><code>x402-gateway</code></td>
+<td><strong>4020</strong></td>
+<td>http://127.0.0.1:4020/health</td>
 </tr>
 <tr>
-<td>DONK</td>
-<td>http://127.0.0.1:8090/health</td>
-</tr>
-<tr>
-<td>FTH Academy</td>
-<td>http://127.0.0.1:8091/health</td>
-</tr>
-<tr>
-<td>TTN</td>
-<td>http://127.0.0.1:8092/health</td>
-</tr>
-<tr>
-<td>DAO + dashboard</td>
-<td>http://127.0.0.1:8093</td>
+<td><code>popeye-relay</code></td>
+<td><strong>4021</strong></td>
+<td>http://127.0.0.1:4021/health</td>
 </tr>
 </tbody>
 </table>
-<p>Health check: <code>.\scripts\health-check-all.ps1</code> (Windows) or curl JSON-RPC <code>state_get</code> on :9944.</p>
+<pre><code class="language-powershell">pm2 start ecosystem.config.js --only x402-gateway,popeye-relay
+</code></pre>
+<p>Health check: <code>.\scripts\health-check-all.ps1</code> (Windows) or curl JSON-RPC <code>state_get</code> on <strong>9944</strong>.</p>
 <p>DAO-only bootstrap (build L1 + init DB): <code>scripts/bootstrap-dao.ps1</code> / <code>scripts/bootstrap-dao.sh</code>.</p>
+<p>Full PM2 stack without the script: <code>pm2 start ecosystem.config.js</code> from repo root.</p>
 <h2>L1 binary path</h2>
 <p><code>ecosystem.config.js</code> uses <code>L1_NODE_BIN</code> or defaults to <code>C:\cargo-target-burnzy\release\troptions-node.exe</code> on Windows. Override:</p>
 <pre><code class="language-powershell">$env:L1_NODE_BIN = &quot;C:\path\to\troptions-node.exe&quot;
 .\scripts\quickstart.ps1
 </code></pre>
+<p>Metrics port defaults to <strong>9945</strong> (<code>L1_METRICS_PORT</code> in the node).</p>
 <h2>Related docs</h2>
 <ul>
+<li><a href="ARCHITECTURE.html">Architecture</a></li>
 <li><a href="DAO.html">DAO guide</a></li>
 <li><a href="RUNBOOK.html">Runbook</a></li>
 <li><a href="BRYAN_STATUS.html">Bryan status</a></li>
 <li><a href="investor/ONE_PAGER.html">Investor one-pager</a></li>
 <li><a href="DEPLOY_PRODUCTION.html">Production deploy</a></li>
+<li><a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a></li>
 </ul>
   </div>
   <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/QUICKSTART.html</p>
