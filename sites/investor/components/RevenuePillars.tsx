@@ -6,8 +6,8 @@ export function RevenuePillars() {
   return (
     <Section
       id="pillars"
-      title="Revenue pillars"
-      subtitle="Honest map: live surfaces, pipeline sponsorship, and gated or attestation-only claims."
+      title="Revenue & ecosystem"
+      subtitle="Honest map: live surfaces, namespace trust (SNP), pipeline sponsorship, and gated or attestation-only claims."
     >
       <div className="grid gap-4 sm:grid-cols-2">
         {REVENUE_PILLARS.map((pillar) => (

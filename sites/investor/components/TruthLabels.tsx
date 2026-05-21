@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Section } from "./Section";
 import { StatusBadge } from "./StatusBadge";
+import { assetPath } from "@/lib/base-path";
 import type { TruthLabelsData } from "@/lib/truth-labels";
 
 export function TruthLabels() {
@@ -10,7 +11,7 @@ export function TruthLabels() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/data/truth-labels.json")
+    fetch(assetPath("/data/truth-labels.json"))
       .then((r) => {
         if (!r.ok) throw new Error("load failed");
         return r.json();

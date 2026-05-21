@@ -1,7 +1,15 @@
 export const REPO_URL =
   "https://github.com/FTHTrading/Troptions-full-pack";
-export const PROOF_URL = `${REPO_URL}/tree/main/docs/proof`;
-export const DOCS_URL = `${REPO_URL}/tree/main/docs`;
+export const SNP_URL =
+  "https://github.com/FTHTrading/sovereign-namespace-protocol";
+export const PAGES_URL = "https://fthtrading.github.io/Troptions-full-pack";
+const onPages = Boolean(process.env.NEXT_PUBLIC_BASE_PATH);
+export const PROOF_URL = onPages
+  ? `${PAGES_URL}/technical/proof`
+  : `${REPO_URL}/tree/main/docs/proof`;
+export const DOCS_URL = onPages
+  ? `${PAGES_URL}/technical`
+  : `${REPO_URL}/tree/main/docs`;
 
 export const LIVE_SURFACES = [
   {
@@ -61,6 +69,7 @@ export const THREE_COLUMNS = [
     title: "Sovereign Stack",
     items: [
       "Rust L1: RocksDB, treasury multisig, soulbound, settlement",
+      "Sovereign Namespace Protocol (SNP) — 955 roots, Dilithium5, stateless verification",
       "DAO layer with governance API and dashboard",
       "Python/AI backends: Academy, DONK, TTN, DAO service",
       "Multi-chain: Polygon KENNY, XRPL gateway, Solana launcher",
@@ -118,6 +127,13 @@ export const REVENUE_PILLARS = [
     status: "gated" as const,
     detail: "Code on main; production LOCAL_ONLY. Public health on UnyKorn AWS",
     url: X402_HEALTH,
+  },
+  {
+    name: "Sovereign Namespace Protocol (SNP)",
+    status: "live" as const,
+    detail:
+      "Constitutional namespace layer — 955 roots, Dilithium5, stateless verification. Root trust primitive of the FTH/UnyKorn stack.",
+    url: SNP_URL,
   },
 ];
 

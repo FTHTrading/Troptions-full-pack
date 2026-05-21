@@ -1,0 +1,126 @@
+{
+  "generated": "2026-05-21T00:00:00Z",
+  "source": "scripts/truth_labels.ps1 + docs/proof/truth-labels.md",
+  "labels": [
+    {
+      "label": "L1 Rust workspace tests",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "cd l1 && cargo test --workspace"
+    },
+    {
+      "label": "Backend + DAO pytest",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "python -m pytest tests/backend tests/dao -q (13 tests)"
+    },
+    {
+      "label": "RocksDB persistence module",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "l1/crates/state/src/persistence.rs"
+    },
+    {
+      "label": "Treasury multisig",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "l1/crates/runtime/src/multisig.rs"
+    },
+    {
+      "label": "Signed submit integration test",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "l1/tests/integration/signed_submit.rs"
+    },
+    {
+      "label": "Signed DAO submit test",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "l1/tests/integration/signed_dao_submit.rs"
+    },
+    {
+      "label": "L1 workspace crate count",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "11 crates under l1/crates/ (not 27)"
+    },
+    {
+      "label": "Sequencer labeling (Sovereign, not BFT)",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "README.md — Sovereign Sequencer"
+    },
+    {
+      "label": "TLS_ENABLED (local/nginx templates)",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "docker/nginx/nginx.conf + scripts/setup-tls.ps1"
+    },
+    {
+      "label": "API_KEY_AUTH",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "backend/shared/auth.py + tests/backend/test_api_key_auth.py"
+    },
+    {
+      "label": "DAO_DIRECT_L1 reads",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "dao/governance/engine.py + frontends/dao-dashboard/app.js"
+    },
+    {
+      "label": "KENNY Polygon mainnet",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7"
+    },
+    {
+      "label": "XRPL gateway address",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3"
+    },
+    {
+      "label": "troptions.unykorn.org institutional hub",
+      "status": "CONFIRMED",
+      "lastCheck": "2026-05-21",
+      "proof": "https://troptions.unykorn.org/troptions"
+    },
+    {
+      "label": "TLS_PUBLIC_DNS (production certbot)",
+      "status": "PENDING",
+      "lastCheck": "2026-05-21",
+      "proof": "Self-signed OK locally; troptions.org hostnames need DNS + certbot"
+    },
+    {
+      "label": "FRAUD_PROOFS_LIVE",
+      "status": "PENDING",
+      "lastCheck": "2026-05-21",
+      "proof": "Design: docs/design/fraud_proofs.md — Q4 2026"
+    },
+    {
+      "label": "ai.troptions.org / ttn / dao troptions DNS",
+      "status": "PENDING",
+      "lastCheck": "2026-05-21",
+      "proof": "Future DNS when operator enables; live surfaces use unykorn.org"
+    },
+    {
+      "label": "x402 facilitator on main branch",
+      "status": "PENDING",
+      "lastCheck": "2026-05-21",
+      "proof": "Gateway code on main; production posture LOCAL_ONLY. Public health: https://x402.unykorn.org/health (UnyKorn AWS, separate stack)"
+    },
+    {
+      "label": "Apostle Chain AWS public endpoint",
+      "status": "PENDING",
+      "lastCheck": "2026-05-21",
+      "proof": "feature/x402-full-integration branch only"
+    },
+    {
+      "label": "Exchange desk $175M notional",
+      "status": "PENDING",
+      "lastCheck": "2026-05-21",
+      "proof": "Operator attestation only — proof/on-chain-proofs.html"
+    }
+  ]
+}

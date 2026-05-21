@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:3000** (landing) and **http://localhost:3000/anthem/** (lyrics).
+Open **http://localhost:3123** (landing) and **http://localhost:3123/anthem/** (lyrics).
 
 ## Production build
 
@@ -20,49 +20,50 @@ cd sites/investor
 npm run build
 ```
 
-Static output: `sites/investor/out/`
+Static output: `sites/investor/out/` (no `basePath` — for Vercel/Netlify root hosting).
 
-## Vercel (recommended for Bryan)
+## GitHub Pages (canonical public URL)
+
+From repo root:
+
+```powershell
+.\scripts\deploy-investor-site.ps1 -CopyToDocs
+```
+
+This sets `GITHUB_PAGES=true`, builds with `basePath: /Troptions-full-pack`, moves legacy Jekyll/markdown under `docs/technical/`, and copies `out/` to `docs/` root (`index.html`, `_next/`, `audio/`, `data/`, `.nojekyll`).
+
+**Live URL:** https://fthtrading.github.io/Troptions-full-pack/
+
+**Preview built Pages export locally:**
+
+```powershell
+.\scripts\preview-pages-3123.ps1
+```
+
+Then open **http://localhost:3123/Troptions-full-pack/** (paths match production).
+
+## Vercel (optional)
 
 1. Import **FTHTrading/Troptions-full-pack** in [Vercel](https://vercel.com).
 2. Set **Root Directory** to `sites/investor`.
 3. Framework preset: **Next.js** (uses `vercel.json`).
 4. Deploy. No env secrets required for the static showcase.
 
-**Placeholder URL after first deploy:**  
-`https://troptions-investor.vercel.app` (rename project / add custom domain in Vercel dashboard)
-
-## Netlify
+## Netlify (optional)
 
 1. New site from Git → repo **Troptions-full-pack**.
-2. Build settings (also in repo `netlify.toml` at monorepo root is **not** used — configure UI or set base):
-   - **Base directory:** `sites/investor`
-   - **Build command:** `npm run build`
-   - **Publish directory:** `out`
-3. Deploy.
-
-**Placeholder URL:**  
-`https://troptions-investor.netlify.app`
-
-## GitHub Pages (optional fallback)
-
-Static export is compatible with Pages. From repo root:
-
-```powershell
-.\scripts\deploy-investor-site.ps1 -CopyToDocs
-```
-
-Then enable Pages on `/docs` or commit `out/` contents. Prefer pointing README visitors to Vercel/Netlify for the canonical investor URL.
+2. **Base directory:** `sites/investor`
+3. **Build command:** `npm run build`
+4. **Publish directory:** `out`
 
 ## Monorepo script
 
 ```powershell
 .\scripts\deploy-investor-site.ps1
+.\scripts\deploy-investor-site.ps1 -CopyToDocs
 .\scripts\deploy-investor-site.ps1 -VercelProd
 .\scripts\deploy-investor-site.ps1 -NetlifyProd
 ```
-
-Requires Vercel CLI / Netlify CLI installed and authenticated locally.
 
 ## Custom domain (operator)
 

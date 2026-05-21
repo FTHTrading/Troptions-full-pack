@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Section } from "./Section";
+import { assetPath } from "@/lib/base-path";
 import { ANTHEM_TRACKS } from "@/lib/constants";
 
 export function AnthemSection() {
@@ -19,7 +20,7 @@ export function AnthemSection() {
       </p>
       <div className="space-y-6">
         {ANTHEM_TRACKS.map((track) => {
-          const src = `/audio/${track.file}`;
+          const src = assetPath(`/audio/${track.file}`);
           return (
             <article
               key={track.file}

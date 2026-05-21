@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/base-path";
 
 const nav = [
   { href: "#story", label: "Story" },
-  { href: "#pillars", label: "Revenue" },
+  { href: "#pillars", label: "Ecosystem" },
   { href: "#engineering", label: "Engineering" },
   { href: "#truth", label: "Truth labels" },
   { href: "#anthem", label: "Anthem" },
@@ -16,7 +17,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
           <Image
-            src="/logo.png"
+            src={assetPath("/logo.png")}
             alt="TROPTIONS"
             width={40}
             height={40}

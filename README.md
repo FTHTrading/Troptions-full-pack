@@ -143,20 +143,21 @@ npm run dev
 
 ## Public investor site
 
-**Canonical showcase:** Next.js app in [`sites/investor/`](sites/investor/) — deploy to Vercel or Netlify (see [`sites/investor/DEPLOY.md`](sites/investor/DEPLOY.md)).
+**Canonical showcase:** Next.js app in [`sites/investor/`](sites/investor/) — **GitHub Pages** at https://fthtrading.github.io/Troptions-full-pack/ (see [`sites/investor/DEPLOY.md`](sites/investor/DEPLOY.md)).
 
 ```powershell
 cd sites/investor
 npm install
-npm run dev    # http://localhost:3000
+npm run dev    # http://localhost:3123
 npm run build  # static export → out/
 ```
 
 ```powershell
-.\scripts\deploy-investor-site.ps1
+.\scripts\deploy-investor-site.ps1 -CopyToDocs   # build + publish to docs/ for Pages
+.\scripts\preview-pages-3123.ps1               # local preview of Pages export
 ```
 
-Legacy Jekyll/docs under `docs/` remain for technical documentation; prefer the investor app for the public face.
+Technical markdown lives under [`docs/technical/`](docs/technical/) after Pages deploy; the polished investor build is `docs/index.html`.
 
 ## Documentation
 
