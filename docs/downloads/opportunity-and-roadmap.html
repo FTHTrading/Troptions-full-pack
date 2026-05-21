@@ -43,14 +43,16 @@
     <li><strong class="projection">Future drivers (PROJECTION):</strong> Cross-chain issuance utility; x402 metered AI; SNP namespace scarcity — illustrative if enterprise clients close</li>
   </ul>
 
-  <h2>Path to 10/10 &amp; scale</h2>
+  <h2>Path to 10/10 &amp; scale (9.8 → 10.0)</h2>
   <ol>
-    <li>Fix Cloudflare origins (twin, x402api)</li>
-    <li>DNS troptions.org subdomains or standardize on unykorn.org</li>
-    <li>Merge x402 production paths; green T-Build tests</li>
-    <li>Close issuers, sports sponsors, RWA partners, agent devs, education cohorts</li>
-    <li>Sales motion on pipeline — label booked vs illustrative revenue</li>
+    <li><strong>Engineering</strong> — Fix Cloudflare origin health: <code>twin.unykorn.org</code>, <code>x402api.unykorn.org</code> (522/timeouts); Workers/tunnels to live origins</li>
+    <li><strong>Ops</strong> — Public hostnames: <code>ai.troptions.org</code>, <code>ttn.troptions.org</code>, <code>dao.troptions.org</code> DNS + TLS <em>or</em> document <code>unykorn.org</code> + GitHub Pages until cutover</li>
+    <li><strong>Engineering</strong> — x402 production: merge <code>feature/x402-full-integration</code>; <code>X402_MODE=production</code>, Apostle :7332, UnyKorn mesh gateway</li>
+    <li><strong>Engineering</strong> — T-Build: <code>npm ci &amp;&amp; npm test</code>; green Vitest on CI</li>
+    <li><strong>Ops</strong> — XRPL reserves: issuer <code>rJLMST…</code> + AMM <code>rBU6ex…</code> (~500 XRP each); thin but operational</li>
+    <li><strong>Sales</strong> — Honest labels: <strong>Booked/LIVE</strong> (Academy Stripe, launch.unykorn.org, proofs) vs <strong>Pipeline/illustrative</strong> (WC26, T-Lev-8, desk attestation, valuation PROJECTIONs)</li>
   </ol>
+  <p class="disclaimer"><strong>Honest:</strong> Items 1–5 require operator/infra action — not completed by docs-only commits.</p>
 
   <p class="disclaimer"><strong>Projections</strong> (e.g. “revenue skyrocket if X clients”) are illustrative scenarios only — not forecasts or guarantees. Live revenue today is Academy + launcher + mesh fees at early scale.</p>
 </body>

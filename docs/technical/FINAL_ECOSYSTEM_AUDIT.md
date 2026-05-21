@@ -51,12 +51,14 @@ permalink: /technical/FINAL_ECOSYSTEM_AUDIT.html
 
 ## Path to 10/10 (actionable)
 
-1. **Cloudflare origins** — stabilize `twin.unykorn.org` and `x402api.unykorn.org` (522/timeouts).
-2. **DNS** — `troptions.org` subdomains (`ai`, `ttn`, `dao`) or keep investor copy on unykorn.org only.
-3. **x402 prod merge** — align monorepo sidecar with UnyKorn-X402-aws production mesh where needed.
-4. **T-Build** — `npm ci && npm test` green for partner demos.
-5. **XRPL reserves** — top up production issuer/AMM XRP (thin margin today).
-6. **Truth labels** — automate `scripts/truth_labels.ps1` refresh after each verification run.
+See investor playbook (**9.8 → 10.0**) — full table in [`VALUATION_AND_COMPARABLES.md`](VALUATION_AND_COMPARABLES.html):
+
+1. **Engineering** — Cloudflare origins: `twin.unykorn.org`, `x402api.unykorn.org` (Workers/tunnels).
+2. **Ops** — `troptions.org` hostnames (`ai`, `ttn`, `dao`) TLS **or** documented `unykorn.org` + Pages standard.
+3. **Engineering** — x402 production merge (`feature/x402-full-integration`, Apostle :7332).
+4. **Engineering** — T-Build Vitest green on CI.
+5. **Ops** — XRPL issuer/AMM reserve top-up (~500 XRP each).
+6. **Sales** — Booked/LIVE vs pipeline/illustrative revenue labels.
 
 ---
 

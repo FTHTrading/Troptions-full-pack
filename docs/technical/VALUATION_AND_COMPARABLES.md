@@ -64,18 +64,35 @@ This document separates **what is cash-real today**, **what it would cost to reb
 | 6 | XRPL production XRP reserves (issuer / AMM thin) | **PROVEN** thin | Operational but needs top-up |
 | 7 | T-Build Vitest suite green after `npm ci` | **PROVEN** blocked | Partner launch OS demos |
 
-**Score impact:** Fixing **#1 + #2 + #6** moves narrative from **9.8 → 10/10** on engineering maturity (investor site copy).
+**Score impact:** Fixing **#1 + #2 + #5 + #6** (engineering maturity + honest sales labels) moves narrative from **9.8 → 10/10** on investor site copy.
+
+---
+
+## Path to 10/10 and scale (9.8 → 10.0)
+
+| # | Item | Label | Detail |
+|---|------|-------|--------|
+| 1 | **Fix Cloudflare origin health** | **Engineering** | `twin.unykorn.org`, `x402api.unykorn.org` (522/timeouts); route through Workers/tunnels to live origins |
+| 2 | **Public hostnames** | **Ops** | Enable `ai.troptions.org`, `ttn.troptions.org`, `dao.troptions.org` DNS + TLS **or** document standard: investor URLs on `unykorn.org` + GitHub Pages until DNS cutover |
+| 3 | **x402 production** | **Engineering** | Merge `feature/x402-full-integration` production paths; `X402_MODE=production`, Apostle :7332, gateway → UnyKorn mesh |
+| 4 | **T-Build quality** | **Engineering** | `npm ci && npm test` in T-Build; green Vitest suite on CI |
+| 5 | **XRPL reserves** | **Ops** | Top up issuer `rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ` and AMM `rBU6ex…` (~500 XRP each per runbook); thin but operational |
+| 6 | **Sales motion** | **Sales** | **Booked / LIVE:** Academy Stripe, launch.unykorn.org, unykorn product URLs, Polygon/XRPL/Stellar proofs · **Pipeline / illustrative:** WC26 tiers, T-Lev-8 gates, desk attestation revenue, valuation PROJECTION scenarios |
+
+**Honest:** Items **1–5** do not auto-complete from a documentation commit — CF origin fixes and reserve top-ups require operator/infra action (probe scripts + runbooks in repo; live fixes out of band).
 
 ---
 
 ## 30-day rocket fuel (weeks)
 
+Aligned with the playbook above (investor site **Path to skyrocket** section).
+
 | Week | Focus | Outcomes |
 |------|-------|----------|
-| **1** | Edge reliability | Stabilize Cloudflare origins; document probe scripts; TLS templates → production certs on chosen hostnames |
-| **2** | Commerce + treasury | x402 twin green; reconcile UnyKorn-AWS vs monorepo sidecar docs; XRPL reserve top-up + published reserve policy |
-| **3** | Identity + proof | SNP ↔ IPFS cross-links in counterparty pack; L1 anchor anthem credential; refresh `ON_CHAIN_PROOF` |
-| **4** | Partner readiness | T-Build tests green; label **booked vs PIPELINE** revenue in CRM; sponsor + issuer outreach |
+| **1** | Edge + hostnames (#1–2) | Cloudflare origins green; `troptions.org` TLS **or** documented `unykorn.org` + Pages standard |
+| **2** | Commerce + reserves (#3, #5) | x402 production merge (Apostle :7332); XRPL issuer/AMM ~500 XRP top-up |
+| **3** | Partner OS quality (#4) | T-Build `npm ci && npm test` green on CI |
+| **4** | Sales motion (#6) | Booked/LIVE vs pipeline/illustrative labels in CRM + investor copy |
 
 ---
 

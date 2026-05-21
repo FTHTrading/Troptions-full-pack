@@ -201,11 +201,77 @@ export const VALUATION_PROJECTIONS = [
 ] as const;
 
 export const ROCKET_FUEL_WEEKS = [
-  { week: 1, focus: "Edge reliability", outcome: "Cloudflare + TLS" },
-  { week: 2, focus: "Commerce + treasury", outcome: "x402 twin + XRPL reserves" },
-  { week: 3, focus: "Identity + proof", outcome: "IPFS SNP links + L1 anchor" },
-  { week: 4, focus: "Partner readiness", outcome: "T-Build green + pipeline sales" },
+  {
+    week: 1,
+    focus: "Edge + hostnames (#1–2)",
+    outcome: "CF origins green; troptions.org TLS or documented unykorn.org + Pages standard",
+  },
+  {
+    week: 2,
+    focus: "Commerce + reserves (#3, #5)",
+    outcome: "x402 production merge (Apostle :7332); XRPL issuer/AMM ~500 XRP top-up",
+  },
+  {
+    week: 3,
+    focus: "Partner OS quality (#4)",
+    outcome: "T-Build npm ci && npm test green on CI",
+  },
+  {
+    week: 4,
+    focus: "Sales motion (#6)",
+    outcome: "Booked/LIVE vs pipeline/illustrative labels in CRM + investor copy",
+  },
 ] as const;
+
+export type SkyrocketLabel = "Engineering" | "Ops" | "Sales";
+
+export type SkyrocketStep = {
+  title: string;
+  detail: string;
+  label: SkyrocketLabel;
+  bullets?: string[];
+};
+
+export const PATH_TO_SKYROCKET: SkyrocketStep[] = [
+  {
+    title: "Fix Cloudflare origin health",
+    detail:
+      "twin.unykorn.org, x402api.unykorn.org (522/timeouts); route through Workers/tunnels to live origins",
+    label: "Engineering",
+  },
+  {
+    title: "Public hostnames",
+    detail:
+      "Enable ai.troptions.org, ttn.troptions.org, dao.troptions.org DNS + TLS — or document standard: investor-facing URLs stay on unykorn.org + GitHub Pages until DNS cutover",
+    label: "Ops",
+  },
+  {
+    title: "x402 production",
+    detail:
+      "Merge feature/x402-full-integration production paths; X402_MODE=production, Apostle :7332, point gateway at UnyKorn mesh",
+    label: "Engineering",
+  },
+  {
+    title: "T-Build quality",
+    detail: "npm ci && npm test in T-Build; green Vitest suite on CI",
+    label: "Engineering",
+  },
+  {
+    title: "XRPL reserves",
+    detail:
+      "Top up issuer rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ and AMM rBU6ex… (~500 XRP each operational account per runbook); thin but operational",
+    label: "Ops",
+  },
+  {
+    title: "Sales motion",
+    detail: "Close pipeline with honest labels:",
+    label: "Sales",
+    bullets: [
+      "Booked / LIVE: Academy Stripe, launch.unykorn.org, unykorn product URLs, Polygon/XRPL/Stellar proofs",
+      "Pipeline / illustrative: WC26 sponsor tiers, T-Lev-8 gates, exchange desk attestation revenue, projection scenarios in valuation doc",
+    ],
+  },
+];
 
 export const COMPETITIVE_PILLARS = [
   {
@@ -456,13 +522,6 @@ export const CLIENTS_NEEDED = [
   "Education cohorts (Academy scale)",
 ];
 
-export const PATH_TO_SKYROCKET = [
-  "Fix Cloudflare origin health for twin.unykorn.org and x402api.unykorn.org",
-  "Enable troptions.org subdomains (ai, ttn, dao) or standardize investor URLs on unykorn.org",
-  "Merge x402 production paths; green T-Build Vitest suite",
-  "Top up XRPL production reserves (issuer/AMM thin margin)",
-  "Sales motion: close pipeline segments — label booked vs illustrative revenue",
-];
 
 export type EcosystemLink = {
   label: string;
