@@ -29,7 +29,7 @@ app.post('/execute', async (req, res) => {
       ? Boolean(req.body.dry_run)
       : (process.env.DRY_RUN || 'true').toLowerCase() === 'true';
   try {
-    const results = await arbitrator.runScan({ dry_run: dryRun, ...req.body });
+    const results = await arbitrator.runScan();
     res.json({
       status: 'executed',
       dry_run: dryRun,

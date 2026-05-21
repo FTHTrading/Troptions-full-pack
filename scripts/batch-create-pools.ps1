@@ -86,6 +86,8 @@ Write-Host "`nPOST $batchUrl"
 Write-Host "Pools: $($cfg.pools.Count)"
 
 if ($DryRun) {
+    $bodyFile = Join-Path $env:TEMP "baas-pool-batch-body.json"
+    $batchBody | Set-Content -Path $bodyFile -Encoding UTF8
     Write-Host ''
     Write-Host '[DryRun] Step 1: quote fees (expect HTTP 402)' -ForegroundColor Yellow
     Write-Host @"
@@ -93,7 +95,7 @@ curl -s -X POST "$batchUrl" `
   -H "Content-Type: application/json" `
   -H "X-API-Key: `$env:BAAS_API_KEY" `
   -H "X-402-Wallet-Address: $wallet" `
-  -d '@$Config'
+  -d "@$bodyFile"
 "@ -ForegroundColor DarkGray
     Write-Host ''
     Write-Host '[DryRun] Step 2: submit with payment' -ForegroundColor Yellow
@@ -103,7 +105,7 @@ curl -s -X POST "$batchUrl" `
   -H "X-API-Key: `$env:BAAS_API_KEY" `
   -H "X-402-Wallet-Address: $wallet" `
   -H "X-402-Payment: baas_receipt_`$(Get-Date -Format yyyyMMddHHmmss)" `
-  -d '@$Config'
+  -d "@$bodyFile"
 "@ -ForegroundColor DarkGray
     Write-Host "`n[DryRun] Check jobs:" -ForegroundColor Yellow
     Write-Host "curl -s `"$baseUrl/api/v1/pools/jobs`" -H `"X-API-Key: `$env:BAAS_API_KEY`"" -ForegroundColor DarkGray
