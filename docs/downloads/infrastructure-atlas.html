@@ -7,27 +7,31 @@
   <style>@media print { .page-break { page-break-before: always; } }</style>
 </head>
 <body>
-  <p class="print-hint no-print"><strong>Save as PDF:</strong> Print → Save as PDF (2 pages).</p>
+  <p class="print-hint no-print"><strong>Save as PDF:</strong> Print → Save as PDF (2–3 pages). Source: ECOSYSTEM_MAP.md · DAO_ARCHITECTURE.md · May 2026</p>
 
   <header class="doc-header">
     <h1>Infrastructure Atlas</h1>
-    <p class="tagline">Repos · live URLs · SNP · x402 · Genesis · T-Lev-8</p>
+    <p class="tagline">Repos · live URLs · SNP · x402 · Genesis · DAO · May 2026</p>
   </header>
+
+  <h2>Architecture (how pieces connect)</h2>
+  <p><strong>SNP</strong> (constitutional layer, 955 PQ roots) → <strong>TROPTIONS L1</strong> + backends. Satellites: genesis-world (GSP), T-Lev-8, T-Build, Exchange OS, solana-launcher, UnyKorn-X402-aws. Live edge: unykorn.org + GitHub Pages.</p>
 
   <h2>Core repos</h2>
   <table>
-    <tr><th>Repo</th><th>Role</th><th>Deploy</th></tr>
-    <tr><td>Troptions-full-pack</td><td>L1, backends, DAO, investor site</td><td>GitHub Pages</td></tr>
-    <tr><td>sovereign-namespace-protocol</td><td>SNP constitutional layer (955+ roots)</td><td>Spec / GitHub</td></tr>
-    <tr><td>UnyKorn-X402-aws</td><td>Production x402 mesh + Apostle ATP</td><td>x402.unykorn.org</td></tr>
-    <tr><td>genesis-world</td><td>GSP — 12-crate L0, 9 Polygon contracts</td><td>drunks.app</td></tr>
-    <tr><td>T-Lev-8-</td><td>RWA deal room, wallet registry</td><td>GitHub Pages</td></tr>
-    <tr><td>T-Build</td><td>TPLOS partner launch OS</td><td>Local / sandbox</td></tr>
-    <tr><td>Troptions (private)</td><td>Exchange OS source</td><td>troptions.vercel.app</td></tr>
-    <tr><td>solana-launcher</td><td>SPL / NFT launcher SaaS</td><td>launch.unykorn.org</td></tr>
+    <tr><th>Repo</th><th>Role</th><th>Deploy / status</th></tr>
+    <tr><td>Troptions-full-pack</td><td>L1, backends, DAO, investor site</td><td class="proven">GitHub Pages LIVE</td></tr>
+    <tr><td>sovereign-namespace-protocol</td><td>SNP — 955+ roots, Dilithium5</td><td class="proven">Public spec</td></tr>
+    <tr><td>UnyKorn-X402-aws</td><td>Production x402 + Apostle ATP</td><td class="proven">x402 health LIVE; twin PENDING</td></tr>
+    <tr><td>genesis-world</td><td>GSP — 12-crate L0, 9 Polygon contracts</td><td class="proven">drunks.app LIVE</td></tr>
+    <tr><td>T-Lev-8-</td><td>RWA deal room, LEV8 gates</td><td class="proven">GitHub Pages</td></tr>
+    <tr><td>T-Build</td><td>TPLOS partner launch OS</td><td class="pipeline">Local; CI gate pending</td></tr>
+    <tr><td>Troptions (private)</td><td>Exchange OS source</td><td class="proven">troptions.vercel.app</td></tr>
+    <tr><td>solana-launcher</td><td>SPL / NFT launcher SaaS</td><td class="proven">launch.unykorn.org</td></tr>
+    <tr><td>TExchange · aurora-site · impact-site</td><td>Exchange variant · RWA · ESG</td><td>Pages / DNS varies</td></tr>
   </table>
 
-  <h2>Live Unykorn URLs (PROVEN — HTTP 200)</h2>
+  <h2>Live Unykorn URLs <span class="proven">(PROVEN — HTTP 200)</span></h2>
   <table>
     <tr><th>URL</th><th>Product</th></tr>
     <tr><td>troptions.unykorn.org/troptions</td><td>Institutional hub</td></tr>
@@ -35,33 +39,56 @@
     <tr><td>troptionslive.unykorn.org/sports</td><td>TTN / WC26</td></tr>
     <tr><td>fthedu.unykorn.org</td><td>FTH Academy</td></tr>
     <tr><td>launch.unykorn.org</td><td>Solana launcher</td></tr>
-    <tr><td>x402.unykorn.org/health</td><td>x402 mesh health</td></tr>
+    <tr><td>x402.unykorn.org/health</td><td>x402 mesh health (AWS+CF)</td></tr>
     <tr><td>drunks.app</td><td>Genesis World dashboard</td></tr>
     <tr><td>portfolio.unykorn.org</td><td>Portfolio registry</td></tr>
+    <tr><td>goat.unykorn.org</td><td>GoatX (when :8850 + tunnel up)</td></tr>
+    <tr><td>whichway.live · fifa.unykorn.org</td><td>WWAI / FIFA Workers</td></tr>
   </table>
 
   <h2>Intermittent / pending</h2>
   <ul>
-    <li>twin.unykorn.org — agent twin (CF origin flaky)</li>
-    <li>x402api.unykorn.org — API docs host</li>
-    <li>ai.troptions.org, dao.troptions.org — DNS not deployed</li>
+    <li><strong>twin.unykorn.org</strong> — 522/timeout (EC2 origin down)</li>
+    <li><strong>x402api.unykorn.org</strong> — API docs host flaky</li>
+    <li><strong>junior.unykorn.org</strong> — tunnel live; origin :4099 not running</li>
+    <li><strong>ai / ttn / dao.troptions.org</strong> — Pages landings ready; DNS <span class="pipeline">PIPELINE</span></li>
   </ul>
 
   <div class="page-break"></div>
 
-  <h2>Local services (PM2 — appendix ports)</h2>
+  <h2>Sovereign DAO summary <span class="proven">(PROVEN on main)</span></h2>
   <table>
-    <tr><th>Service</th><th>Port</th></tr>
-    <tr><td>troptions-l1-node</td><td>8080</td></tr>
-    <tr><td>fth-backend / Academy</td><td>8091</td></tr>
-    <tr><td>donk-ai-tutor</td><td>8090</td></tr>
-    <tr><td>ttn-launcher</td><td>8092</td></tr>
-    <tr><td>dao-service</td><td>8093</td></tr>
-    <tr><td>x402-gateway (sidecar)</td><td>4020</td></tr>
-    <tr><td>apostle-chain</td><td>7332</td></tr>
-    <tr><td>popeye-relay</td><td>3402</td></tr>
+    <tr><th>Layer</th><th>Location</th><th>Role</th></tr>
+    <tr><td>Canonical state</td><td>l1/crates/governance</td><td>Proposals, soulbound votes, timelock</td></tr>
+    <tr><td>RPC</td><td>troptions-node :9944</td><td>Query + signed dao_* submit</td></tr>
+    <tr><td>HTTP API</td><td>dao-service :8093</td><td>Dashboard, WebSocket</td></tr>
+    <tr><td>UI</td><td>frontends/dao-dashboard</td><td>Reads L1 via dao-service</td></tr>
+    <tr><td>Public page</td><td>fthtrading.github.io/…/dao/</td><td class="proven">Pages LIVE</td></tr>
+  </table>
+  <p><strong>Not canonical:</strong> Polygon GovernorBravo stubs — optional Phase 2. L1 soulbound credentials anchor identity. Lifecycle: draft → active → passed/failed → timelock 720 blocks → executed.</p>
+
+  <h2>Local services (PM2 — operator defaults)</h2>
+  <table>
+    <tr><th>Service</th><th>Port</th><th>Notes</th></tr>
+    <tr><td>troptions-l1-node</td><td>9944 / 8080</td><td>JSON-RPC + metrics</td></tr>
+    <tr><td>fth-backend / Academy</td><td>8091</td><td>/dao/* routes</td></tr>
+    <tr><td>donk-ai-tutor</td><td>8090</td><td>RAG tutor</td></tr>
+    <tr><td>ttn-launcher</td><td>8092</td><td>Namespace registry</td></tr>
+    <tr><td>dao-service</td><td>8093</td><td>Governance API</td></tr>
+    <tr><td>x402-gateway (sidecar)</td><td>4020</td><td>≠ public AWS mesh</td></tr>
+    <tr><td>apostle-chain</td><td>7332</td><td>ATP settlement</td></tr>
+    <tr><td>popeye-relay</td><td>3402 / 4021</td><td>Relay</td></tr>
+  </table>
+  <p><strong>Audit 2026-05-21:</strong> PM2 8/8 online; ~6,937 source files; 17 Rust workspace crates; T-Build 32/32 Vitest pass after npm ci.</p>
+
+  <h2>Future DNS (Pages landings)</h2>
+  <table>
+    <tr><th>Host</th><th>Status</th></tr>
+    <tr><td>ai.troptions.org</td><td class="pipeline">Pages /sites/ai/ until DNS</td></tr>
+    <tr><td>ttn.troptions.org</td><td class="pipeline">Pages /sites/ttn/</td></tr>
+    <tr><td>dao.troptions.org</td><td class="pipeline">Pages /dao/ + local :8093</td></tr>
   </table>
 
-  <p class="disclaimer">Ports are operator-machine defaults from quickstart; production edge uses Cloudflare + AWS for x402. Monorepo x402 sidecar ≠ public mesh unless deployed.</p>
+  <p class="disclaimer">Ports are operator-machine defaults. Production x402 uses Cloudflare + AWS (UnyKorn-X402-aws). Monorepo :4020 sidecar is not the public mesh unless deployed. Re-verify: scripts/verify-ecosystem-links.ps1</p>
 </body>
 </html>

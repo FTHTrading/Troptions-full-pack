@@ -97,6 +97,7 @@ $hub = @'
     <li><a href="../downloads/infrastructure-atlas.html">Infrastructure atlas</a></li>
     <li><a href="../downloads/opportunity-and-roadmap.html">Opportunity &amp; roadmap</a></li>
     <li><a href="../downloads/valuation-and-comparables.html">Valuation &amp; comparables</a></li>
+    <li><a href="../downloads/INVESTOR_MASTER.pdf.html">Master pack (all sections)</a></li>
   </ul>
   <h2>Live surfaces</h2>
   <ul>

@@ -1,5 +1,5 @@
 import { Section } from "./Section";
-import { PATH_TO_SKYROCKET, type SkyrocketLabel } from "@/lib/constants";
+import { MATURITY_SCORE, PATH_TO_SKYROCKET, type SkyrocketLabel } from "@/lib/constants";
 
 const LABEL_STYLES: Record<SkyrocketLabel, string> = {
   Engineering: "border-sky-500/40 bg-sky-500/10 text-sky-200",
@@ -12,7 +12,7 @@ export function PathToSkyrocket() {
     <Section
       id="skyrocket"
       title="Path to skyrocket"
-      subtitle="Path to 10/10 and scale (9.8 → 10.0) — numbered playbook."
+      subtitle={`Path to 10/10 and scale (${MATURITY_SCORE} → 10.0) — numbered playbook.`}
     >
       <ol className="list-decimal space-y-5 pl-6 text-sm text-[var(--color-muted)]">
         {PATH_TO_SKYROCKET.map((step) => (

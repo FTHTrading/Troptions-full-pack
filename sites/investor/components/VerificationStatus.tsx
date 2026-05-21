@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Section } from "./Section";
 import {
   FINAL_ECOSYSTEM_AUDIT_URL,
+  MATURITY_SCORE,
   VERIFICATION_STATUS_URL,
 } from "@/lib/constants";
 
@@ -17,7 +18,7 @@ export function VerificationStatus() {
   const [open, setOpen] = useState(false);
   const percent = 95;
   const baseline = 60;
-  const honestScore = "9.8/10";
+  const honestScore = `${MATURITY_SCORE}/10`;
 
   return (
     <Section

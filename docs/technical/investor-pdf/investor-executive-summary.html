@@ -6,23 +6,40 @@
   <link rel="stylesheet" href="print-shared.css" />
 </head>
 <body>
-  <p class="print-hint no-print"><strong>Save as PDF:</strong> Open in browser → Print → Save as PDF. Optional CLI: <code>npx playwright pdf downloads/investor-executive-summary.html investor-executive-summary.pdf</code></p>
+  <p class="print-hint no-print"><strong>Save as PDF:</strong> Open in browser → Print → Save as PDF. Bundle: <a href="INVESTOR_MASTER.pdf.html">INVESTOR_MASTER.pdf.html</a>. CLI: <code>npx playwright pdf investor-executive-summary.html investor-executive-summary.pdf</code></p>
 
   <header class="doc-header">
-    <p><span class="badge">CONFIDENTIAL</span><span class="badge">9.8/10 MATURITY</span></p>
+    <p><span class="badge">CONFIDENTIAL</span><span class="badge">9.8–9.9/10 MATURITY</span></p>
     <h1>TROPTIONS — Investor Executive Summary</h1>
-    <p class="tagline">22 years. Operating company + sovereign stack. May 2026.</p>
+    <p class="tagline">22 years · operating company + sovereign stack · May 2026</p>
   </header>
 
   <h2>What we are</h2>
-  <p>FTH Trading / TROPTIONS is an operating company with a production-grade technology stack: education, sports events, exchange surfaces, multi-chain issuance, agent payment rails, and an open monorepo investors can clone and verify.</p>
+  <p>FTH Trading / TROPTIONS is an operating company with a production-grade technology stack: education, sports events, exchange surfaces, multi-chain issuance (~874M IOU supply on ledger), agent payment rails (x402), post-quantum identity (SNP), and L1-native governance (DAO). The monorepo is public on GitHub; live products run on unykorn.org and GitHub Pages.</p>
 
-  <h2>Proof at a glance (PROVEN)</h2>
+  <h2>Maturity scorecard (honest)</h2>
+  <table>
+    <tr><th>Baseline</th><th>With DAO on main</th><th>Current (2026-05-21)</th></tr>
+    <tr><td class="proven">9.5 / 10</td><td class="proven">9.8 / 10</td><td class="proven"><strong>9.9 / 10</strong></td></tr>
+  </table>
+  <p><strong>Gap to 10:</strong> Cloudflare origins (twin, x402api), junior.unykorn.org :4099, 703 XRPL TANTHEM mints on ledger, public TLS on troptions.org hostnames, XRPL reserve top-up.</p>
+
+  <h2>Proof at a glance <span class="proven">(PROVEN)</span></h2>
   <ul>
     <li><strong>Polygon:</strong> KENNY &amp; EVL mainnet + nine Genesis World contracts — PolygonScan</li>
     <li><strong>XRPL + Stellar:</strong> ~874M <em>issued supply on ledger</em> (TROPTIONS ~200M, USDC 274M, USDT 200M, EURC 100M, DAI 100M) — not market cap</li>
-    <li><strong>Live products:</strong> Academy, launcher, institutional hub, x402 health, Genesis drunks.app</li>
+    <li><strong>IPFS anthem:</strong> Six tracks + manifest CID <code>Qmc54zWP…FP7o7</code>; L1 collection hash anchored</li>
+    <li><strong>TANTHEM (703 XRPL NFTs):</strong> Mint DApp <span class="proven">LIVE</span>; on-chain mint <span class="pipeline">PENDING</span> operator sign</li>
+    <li><strong>Live products:</strong> Academy, launcher, institutional hub, x402 health, Genesis drunks.app, DAO Pages</li>
   </ul>
+
+  <h2>Full stack triad (this monorepo)</h2>
+  <table>
+    <tr><th>Leg</th><th>What ships</th><th>Label</th></tr>
+    <tr><td>Identity</td><td>SNP — 955 constitutional roots, Dilithium5</td><td class="proven">PROVEN spec</td></tr>
+    <tr><td>Commerce</td><td>x402 metered AI-to-AI · ATP Apostle :7332</td><td class="proven">Health LIVE</td></tr>
+    <tr><td>Governance</td><td>DAO ↔ L1 council, timelock, treasury reads</td><td class="proven">PROVEN on main</td></tr>
+  </table>
 
   <h2>22-year timeline</h2>
   <table>
@@ -30,28 +47,36 @@
     <tr><td>2003</td><td>Macon, Georgia — trade-credit / community commerce origins</td></tr>
     <tr><td>2004+</td><td>Washington &amp; SEC chapter — structured compliance response</td></tr>
     <tr><td>Legal</td><td>Operator narrative: books clean; brand continued through scrutiny</td></tr>
-    <tr><td>2020s</td><td>Multi-chain issuance, Exchange OS, SNP, x402, Rust L1</td></tr>
-    <tr><td>2026</td><td>Sovereign stack live on unykorn.org — 9.8/10 engineering maturity (DAO on main)</td></tr>
+    <tr><td>2010s</td><td>XRPL/Stellar issuance, Exchange OS prototypes</td></tr>
+    <tr><td>2020s</td><td>Unykorn monorepo: L1, SNP, DAO, x402, Genesis, launcher</td></tr>
+    <tr><td>2026</td><td>Sovereign stack verified — 9.9/10; ~874M issued supply user-verified</td></tr>
   </table>
 
   <h2>Revenue today vs pipeline</h2>
   <table>
     <tr><th>Line</th><th>Status</th><th>Model</th></tr>
-    <tr><td>FTH Academy</td><td class="proven">LIVE</td><td>$19 / $49 / $149 subscriptions</td></tr>
-    <tr><td>Solana launcher</td><td class="proven">LIVE</td><td>Launch &amp; mint fees</td></tr>
-    <tr><td>x402 agent mesh</td><td class="proven">LIVE</td><td>Metered AI-to-AI (ATP / Apostle)</td></tr>
+    <tr><td>FTH Academy</td><td class="proven">PROVEN · LIVE</td><td>$19 / $49 / $149 subscriptions</td></tr>
+    <tr><td>Solana launcher</td><td class="proven">PROVEN · LIVE</td><td>Launch &amp; mint fees</td></tr>
+    <tr><td>x402 agent mesh</td><td class="proven">PROVEN · LIVE</td><td>Metered AI-to-AI (ATP / Apostle)</td></tr>
+    <tr><td>SNP namespaces</td><td class="proven">PROVEN</td><td>955 roots — scarcity / governance</td></tr>
+    <tr><td>DAO governance API</td><td class="proven">PROVEN</td><td>dao-service :8093 + dashboard</td></tr>
     <tr><td>TTN / WC26 sports</td><td class="pipeline">PIPELINE</td><td>Sponsorship tiers — not booked revenue</td></tr>
+    <tr><td>Exchange desk</td><td class="pipeline">GATED</td><td>Not $175M verified on-chain</td></tr>
     <tr><td>RWA / T-Lev-8</td><td class="pipeline">PIPELINE</td><td>Partner licensing gates</td></tr>
   </table>
 
   <h2>Why now</h2>
-  <p>Repos exist = years of engineering sunk cost. Cross-chain issuance utility, namespace scarcity (SNP), and x402 metered AI commerce are the primary <strong>future value drivers</strong> — labeled projections in the full opportunity brief, not guaranteed revenue.</p>
+  <p>Repos exist = years of engineering sunk cost (~6,937 audit-scope files). Cross-chain issuance utility, SNP namespace scarcity, and x402 metered AI commerce are primary <strong class="projection">PROJECTION</strong> value drivers — not guaranteed revenue.</p>
 
-  <h2>Gap to 10/10</h2>
-  <p>Fix Cloudflare origin health for twin/x402api; DNS for troptions.org subdomains; T-Build test green; sales motion on pipeline segments.</p>
+  <h2>Related diligence (full HTML)</h2>
+  <ul style="font-size:0.85rem">
+    <li>On-chain proof · XRPL/Stellar verification · Counterparty pack</li>
+    <li>Valuation &amp; comparables · Ecosystem map · Final audit 9.9/10</li>
+    <li>DAO architecture · TANTHEM NFT collection</li>
+  </ul>
 
-  <p class="disclaimer"><strong>Disclaimer:</strong> Forward-looking revenue scenarios are <em>illustrative projections</em> (“if X clients”) — not audited financials. Issued token amounts are on-ledger IOU supply, not market capitalization. Exchange desk notional figures are operator attestation unless matched to explorer exports. Not legal or investment advice.</p>
+  <p class="disclaimer"><strong>Disclaimer:</strong> Forward-looking scenarios are <em>illustrative PROJECTIONS</em> — not audited financials. Issued token amounts are on-ledger IOU supply, not market capitalization. Exchange desk notional figures are operator attestation unless matched to explorer exports. Not legal or investment advice.</p>
 
-  <p style="font-size:0.8rem;color:var(--muted)">https://fthtrading.github.io/Troptions-full-pack/ · github.com/FTHTrading/Troptions-full-pack</p>
+  <p style="font-size:0.8rem;color:var(--muted)">https://fthtrading.github.io/Troptions-full-pack/ · github.com/FTHTrading/Troptions-full-pack · Updated May 2026</p>
 </body>
 </html>

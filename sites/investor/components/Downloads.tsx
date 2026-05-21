@@ -68,11 +68,16 @@ export function Downloads() {
         </a>
       </div>
       <p className="mt-4 text-xs text-[var(--color-muted)]">
-        Optional CLI:{" "}
+        Print all sheets:{" "}
         <code className="text-[var(--color-gold-light)]">
-          npx playwright pdf downloads/investor-executive-summary.html
-          investor-executive-summary.pdf
+          .\scripts\regenerate-investor-pdfs.ps1
         </code>
+        {" "}
+        · optional{" "}
+        <code className="text-[var(--color-gold-light)]">
+          -GeneratePdf
+        </code>{" "}
+        (Playwright)
       </p>
     </Section>
   );

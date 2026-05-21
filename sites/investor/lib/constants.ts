@@ -79,7 +79,7 @@ export const TIMELINE = [
   {
     year: "2026",
     title: "Sovereign stack verified",
-    body: "9.8/10 maturity: DAO + Polygon + XRPL + Stellar issued supply user-verified (~874M on ledger). Gap: TLS on troptions.org + XRPL reserves.",
+    body: "9.9/10 maturity: DAO + Polygon + XRPL + Stellar + IPFS anthem user-verified (~874M issued on ledger). Gap: CF origins, TANTHEM mint, troptions.org TLS.",
   },
 ];
 
@@ -141,9 +141,9 @@ export const VALUATION_URL = `${PAGES_URL}/technical/VALUATION_AND_COMPARABLES.h
 export const DAO_PAGE_URL = `${PAGES_URL}/dao/`;
 export const DAO_ARCHITECTURE_URL = `${PAGES_URL}/technical/DAO_ARCHITECTURE.html`;
 
-export const MATURITY_SCORE = "9.8";
+export const MATURITY_SCORE = "9.9";
 export const MATURITY_GAP_NOTE =
-  "Gap to 10: public TLS on troptions.org hostnames + XRPL reserve top-up.";
+  "Gap to 10: CF origins (twin/x402api), junior :4099, TANTHEM ledger mint, troptions.org TLS, XRPL reserves.";
 
 const dl = onPages ? `${PAGES_URL}/downloads` : "/downloads";
 
@@ -177,6 +177,12 @@ export const DOWNLOAD_ASSETS = [
     file: "valuation-and-comparables.html",
     href: `${dl}/valuation-and-comparables.html`,
     note: "PROVEN · PIPELINE · PROJECTION",
+  },
+  {
+    title: "Master pack (all sections)",
+    file: "INVESTOR_MASTER.pdf.html",
+    href: `${dl}/INVESTOR_MASTER.pdf.html`,
+    note: "Single print bundle · May 2026",
   },
 ];
 

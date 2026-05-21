@@ -1,6 +1,8 @@
 import { Section } from "./Section";
 import {
   COMPETITIVE_PILLARS,
+  MATURITY_GAP_NOTE,
+  MATURITY_SCORE,
   REPLACEMENT_COST,
   ROCKET_FUEL_WEEKS,
   VALUATION_PROJECTIONS,
@@ -18,13 +20,12 @@ export function ComparativeAnalysis() {
         <div className="mb-8 flex flex-wrap items-center gap-4">
           <div className="flex h-20 w-20 flex-col items-center justify-center rounded-2xl border-2 border-[var(--color-gold)] bg-[var(--color-gold)]/10">
             <span className="text-2xl font-bold text-[var(--color-gold-light)]">
-              9.8
+              {MATURITY_SCORE}
             </span>
             <span className="text-xs text-[var(--color-muted)]">/ 10</span>
           </div>
           <p className="max-w-2xl text-sm text-[var(--color-muted)]">
-            DAO + cross-chain proof on main. Gap to 10: public TLS on
-            troptions.org hostnames and XRPL reserve top-up only.
+            DAO + cross-chain + IPFS anthem on main. Gap to 10: {MATURITY_GAP_NOTE}
           </p>
           <a
             href={VALUATION_URL}
