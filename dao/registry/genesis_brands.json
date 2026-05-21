@@ -1,0 +1,12 @@
+{
+  "issuers": [
+    {"domain": "TROPTIONSXCHANGE.IO", "purpose": "Exchange OS"},
+    {"domain": "TROPTIONS-UNIVERSITY.COM", "purpose": "FTH Academy"},
+    {"domain": "TROPTIONSTelevisionNetwork.Tv", "purpose": "TTN Sports"},
+    {"domain": "HOTRCW.COM", "purpose": "TTN"},
+    {"domain": "TROPTIONS.IO", "purpose": "Platform"},
+    {"domain": "TROPTIONS.ORG", "purpose": "Platform"},
+    {"domain": "TheRealEstateConnections.com", "purpose": "Real Estate"},
+    {"domain": "Green-N-Go.Solar", "purpose": "Solar Platform"}
+  ]
+}

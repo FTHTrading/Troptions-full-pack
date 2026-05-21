@@ -15,6 +15,9 @@ pub struct State {
     pub soulbound_tokens: HashMap<[u8; 32], SoulboundToken>,
     pub soulbound_issuers: HashMap<AccountId, SoulboundIssuer>,
     pub settlements: HashMap<[u8; 32], Settlement>,
+    pub governance_proposals: HashMap<[u8; 32], Proposal>,
+    pub governance_votes: HashMap<String, VoteRecord>,
+    pub namespaces: HashMap<String, NamespaceRecord>,
     pub events: Vec<Event>,
 }
 
@@ -27,6 +30,9 @@ impl State {
             soulbound_tokens: HashMap::new(),
             soulbound_issuers: HashMap::new(),
             settlements: HashMap::new(),
+            governance_proposals: HashMap::new(),
+            governance_votes: HashMap::new(),
+            namespaces: HashMap::new(),
             events: Vec::new(),
         }
     }
@@ -40,6 +46,9 @@ impl State {
             soulbound_tokens: self.soulbound_tokens.clone(),
             soulbound_issuers: self.soulbound_issuers.clone(),
             settlements: self.settlements.clone(),
+            governance_proposals: self.governance_proposals.clone(),
+            governance_votes: self.governance_votes.clone(),
+            namespaces: self.namespaces.clone(),
             events: self.events.clone(),
             current_height: self.current_height,
         }
@@ -53,6 +62,9 @@ impl State {
         self.soulbound_tokens = snapshot.soulbound_tokens.clone();
         self.soulbound_issuers = snapshot.soulbound_issuers.clone();
         self.settlements = snapshot.settlements.clone();
+        self.governance_proposals = snapshot.governance_proposals.clone();
+        self.governance_votes = snapshot.governance_votes.clone();
+        self.namespaces = snapshot.namespaces.clone();
         self.events = snapshot.events.clone();
         self.current_height = snapshot.current_height;
     }
@@ -135,6 +147,9 @@ pub struct StateSnapshot {
     pub soulbound_tokens: HashMap<[u8; 32], SoulboundToken>,
     pub soulbound_issuers: HashMap<AccountId, SoulboundIssuer>,
     pub settlements: HashMap<[u8; 32], Settlement>,
+    pub governance_proposals: HashMap<[u8; 32], Proposal>,
+    pub governance_votes: HashMap<String, VoteRecord>,
+    pub namespaces: HashMap<String, NamespaceRecord>,
     pub events: Vec<Event>,
     pub current_height: BlockHeight,
 }
@@ -146,6 +161,9 @@ impl StateSnapshot {
         state.soulbound_tokens = self.soulbound_tokens;
         state.soulbound_issuers = self.soulbound_issuers;
         state.settlements = self.settlements;
+        state.governance_proposals = self.governance_proposals;
+        state.governance_votes = self.governance_votes;
+        state.namespaces = self.namespaces;
         state.events = self.events;
         state.current_height = self.current_height;
     }
@@ -207,6 +225,63 @@ pub enum Event {
     SettlementClaimed { id: [u8; 32] },
     SettlementCancelled { id: [u8; 32] },
     Transfer { from: AccountId, to: AccountId, asset: AssetId, amount: Amount },
+    ProposalCreated { id: [u8; 32], proposer: AccountId },
+    ProposalVoted { id: [u8; 32], voter: AccountId, weight: u64 },
+    ProposalFinalized { id: [u8; 32], passed: bool },
+    ProposalExecuted { id: [u8; 32] },
+    NamespaceRegistered { namespace: String, owner: AccountId },
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub enum ProposalStatus {
+    Draft,
+    Active,
+    Passed,
+    Failed,
+    Executed,
+    Cancelled,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Proposal {
+    pub id: [u8; 32],
+    pub proposer: AccountId,
+    pub title: String,
+    pub description: String,
+    pub action_uri: Option<String>,
+    pub status: ProposalStatus,
+    pub created_at: BlockHeight,
+    pub voting_ends_at: BlockHeight,
+    pub timelock_until: BlockHeight,
+    pub quorum_bps: u32,
+    pub votes_for: u64,
+    pub votes_against: u64,
+    pub votes_abstain: u64,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub enum VoteChoice {
+    For,
+    Against,
+    Abstain,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct VoteRecord {
+    pub proposal_id: [u8; 32],
+    pub voter: AccountId,
+    pub choice: VoteChoice,
+    pub weight: u64,
+    pub cast_at: BlockHeight,
+}
+
+/// TTN / brand namespace binding on L1.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct NamespaceRecord {
+    pub namespace: String,
+    pub owner: AccountId,
+    pub brand_domain: Option<String>,
+    pub registered_at: BlockHeight,
 }
 
 #[cfg(test)]

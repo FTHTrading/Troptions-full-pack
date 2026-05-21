@@ -40,8 +40,12 @@ Operational services run with `exec_cwd` under `C:\Users\Kevan\.openclaw\workspa
 3. **Broadcast:** Creator → ttn-launcher → namespace registry (SQLite) → L1 soulbound migration (script).
 4. **Sovereign state:** Backends → `l1_client` → `state_get` / `soulbound_*` / `settlement_*` on port 9944.
 
+## DAO layer (implemented)
+
+See `dao/ARCHITECTURE.md`. Services: `dao-service:8093`, FTH `/dao/*`, L1 `governance` crate + submit RPC.
+
 ## Recommended build order
 
-1. **L1 bridge in fth-backend** — health + enrollment writes to soulbound.
-2. **Persistence** — Postgres for enrollments/channels; keep SQLite for dev.
-3. **WebSockets** — DONK `/ws` + dashboard live metrics from L1 `state_get`.
+1. ~~L1 bridge in fth-backend~~ — `/health/l1`, `/dao/state` wired.
+2. **Persistence** — Postgres migration in `scripts/migrations/001_dao_schema.sql`.
+3. ~~WebSockets~~ — `backend/shared/ws_hub.py` on DAO service `/ws`.

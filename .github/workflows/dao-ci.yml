@@ -1,0 +1,36 @@
+name: DAO CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'l1/**'
+      - 'dao/**'
+      - 'backend/**'
+      - 'tests/**'
+      - '.github/workflows/dao-ci.yml'
+  pull_request:
+    branches: [main]
+
+jobs:
+  l1-tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: l1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --workspace
+
+  python-dao:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install pytest httpx pydantic fastapi
+      - run: pytest tests/backend tests/dao -q --tb=short
+        env:
+          PYTHONPATH: backend/fth-academy:backend/shared:dao

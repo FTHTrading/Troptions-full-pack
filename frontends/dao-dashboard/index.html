@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TROPTIONS Full DAO</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>🟪 TROPTIONS Full DAO</h1>
+    <p class="tagline">Sovereign governance · Soulbound votes · Multi-chain treasury</p>
+    <div id="l1-status" class="pill">L1 connecting…</div>
+  </header>
+
+  <main class="grid">
+    <section class="panel">
+      <h2>Proposals</h2>
+      <div id="proposals-list"></div>
+      <form id="proposal-form" class="form">
+        <input name="title" placeholder="Proposal title" required />
+        <textarea name="description" placeholder="Description" required></textarea>
+        <input name="proposer" placeholder="Proposer (32-byte hex)" required />
+        <button type="submit">Create on L1</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Treasury</h2>
+      <div id="treasury-view"></div>
+    </section>
+
+    <section class="panel wide">
+      <h2>L1 Live State</h2>
+      <pre id="l1-panel">{}</pre>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

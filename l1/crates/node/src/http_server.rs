@@ -1,7 +1,12 @@
 //! HTTP RPC server for TROPTIONS L1.
 //! Uses raw TCP for maximum portability — no external HTTP framework dependencies.
 
-use rpc::{query_balance, query_settlement, query_soulbound_by_owner, query_soulbound_token, RpcResponse, SharedState};
+use rpc::{
+    query_balance, query_governance_state, query_proposal, query_proposals, query_settlement,
+    query_soulbound_by_owner, query_soulbound_token, submit_namespace_register,
+    submit_proposal_create, submit_proposal_execute, submit_proposal_finalize,
+    submit_proposal_vote, submit_soulbound_mint, RpcResponse, SharedState,
+};
 use serde_json;
 use std::io::{Read, Write};
 use std::net::{TcpListener, TcpStream};
@@ -37,8 +42,8 @@ fn handle_http_request(stream: &mut TcpStream, shared_state: &SharedState) {
         )
         .unwrap()
     } else {
-        let state = shared_state.lock().unwrap();
-        let result = handle_json_rpc(&state, &body);
+        let mut state = shared_state.lock().unwrap();
+        let result = handle_json_rpc(&mut state, &body);
         drop(state);
         result
     };
@@ -54,7 +59,7 @@ fn handle_http_request(stream: &mut TcpStream, shared_state: &SharedState) {
 }
 
 /// Process a JSON-RPC request.
-fn handle_json_rpc(state: &state::State, body: &str) -> String {
+fn handle_json_rpc(state: &mut state::State, body: &str) -> String {
     #[derive(serde::Deserialize)]
     struct JsonRpcRequest {
         #[allow(dead_code)]
@@ -107,9 +112,55 @@ fn handle_json_rpc(state: &state::State, body: &str) -> String {
                 "total_accounts": state.balances.len(),
                 "total_soulbound": state.soulbound_tokens.len(),
                 "total_settlements": state.settlements.len(),
+                "total_proposals": state.governance_proposals.len(),
+                "total_namespaces": state.namespaces.len(),
                 "total_events": state.events.len(),
             });
             Ok(summary)
+        }
+        "governance_get" => Ok(query_governance_state(state)),
+        "proposal_get" => {
+            let proposal_id = req.params.get("proposal_id").and_then(|v| v.as_str()).unwrap_or("");
+            query_proposal(state, proposal_id).map(|r| serde_json::to_value(r).unwrap())
+        }
+        "proposal_list" => Ok(serde_json::to_value(query_proposals(state)).unwrap()),
+        "submit_soulbound_mint" => {
+            let issuer = req.params.get("issuer").and_then(|v| v.as_str()).unwrap_or("");
+            let owner = req.params.get("owner").and_then(|v| v.as_str()).unwrap_or("");
+            let metadata_uri = req.params.get("metadata_uri").and_then(|v| v.as_str()).map(String::from);
+            let nonce = req.params.get("nonce").and_then(|v| v.as_u64()).unwrap_or(0);
+            submit_soulbound_mint(state, issuer, owner, metadata_uri, nonce)
+                .map(|r| serde_json::to_value(r).unwrap())
+        }
+        "submit_namespace_register" => {
+            let namespace = req.params.get("namespace").and_then(|v| v.as_str()).unwrap_or("");
+            let owner = req.params.get("owner").and_then(|v| v.as_str()).unwrap_or("");
+            let brand_domain = req.params.get("brand_domain").and_then(|v| v.as_str()).map(String::from);
+            submit_namespace_register(state, namespace, owner, brand_domain)
+        }
+        "submit_proposal_create" => {
+            let proposer = req.params.get("proposer").and_then(|v| v.as_str()).unwrap_or("");
+            let title = req.params.get("title").and_then(|v| v.as_str()).unwrap_or("");
+            let description = req.params.get("description").and_then(|v| v.as_str()).unwrap_or("");
+            let action_uri = req.params.get("action_uri").and_then(|v| v.as_str()).map(String::from);
+            submit_proposal_create(state, proposer, title, description, action_uri)
+                .map(|r| serde_json::to_value(r).unwrap())
+        }
+        "submit_proposal_vote" => {
+            let proposal_id = req.params.get("proposal_id").and_then(|v| v.as_str()).unwrap_or("");
+            let voter = req.params.get("voter").and_then(|v| v.as_str()).unwrap_or("");
+            let choice = req.params.get("choice").and_then(|v| v.as_str()).unwrap_or("for");
+            submit_proposal_vote(state, proposal_id, voter, choice)
+        }
+        "submit_proposal_finalize" => {
+            let proposal_id = req.params.get("proposal_id").and_then(|v| v.as_str()).unwrap_or("");
+            submit_proposal_finalize(state, proposal_id)
+                .map(|r| serde_json::to_value(r).unwrap())
+        }
+        "submit_proposal_execute" => {
+            let proposal_id = req.params.get("proposal_id").and_then(|v| v.as_str()).unwrap_or("");
+            submit_proposal_execute(state, proposal_id)
+                .map(|r| serde_json::to_value(r).unwrap())
         }
         _ => Err(format!("Unknown method: {}", req.method)),
     };

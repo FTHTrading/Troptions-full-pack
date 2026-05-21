@@ -1,0 +1,93 @@
+services:
+  l1:
+    image: rust:1-bookworm
+    working_dir: /app/l1
+    volumes:
+      - ../l1:/app/l1
+    command: ["cargo", "run", "-p", "node", "--release", "--", "9944"]
+    ports:
+      - "9944:9944"
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+
+  donk-tutor:
+    build:
+      context: ../ai/donk-tutor
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    environment:
+      OLLAMA_URL: http://ollama:11434
+      QDRANT_HOST: qdrant
+    depends_on:
+      - ollama
+      - qdrant
+    restart: unless-stopped
+
+  fth-academy:
+    build:
+      context: ..
+      dockerfile: backend/fth-academy/Dockerfile
+    ports:
+      - "8091:8091"
+    environment:
+      L1_RPC_URL: http://l1:9944
+      OLLAMA_URL: http://ollama:11434
+    depends_on:
+      - l1
+    restart: unless-stopped
+
+  ttn-launcher:
+    build:
+      context: ../backend/ttn-launcher
+      dockerfile: Dockerfile
+    ports:
+      - "8092:8092"
+    restart: unless-stopped
+
+  dao-service:
+    build:
+      context: ..
+      dockerfile: backend/dao-service/Dockerfile
+    ports:
+      - "8093:8093"
+    environment:
+      L1_RPC_URL: http://l1:9944
+      DAO_PORT: "8093"
+    depends_on:
+      - l1
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../infrastructure/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../infrastructure/nginx/sites:/etc/nginx/conf.d:ro
+    depends_on:
+      - fth-academy
+      - donk-tutor
+      - ttn-launcher
+      - dao-service
+    restart: unless-stopped
+
+volumes:
+  ollama_data:
+  qdrant_data:

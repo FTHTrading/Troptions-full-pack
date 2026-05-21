@@ -1,9 +1,14 @@
 //! RPC server for TROPTIONS L1.
 //! Exposes REST-like endpoints for querying and submitting transactions.
 
+use governance::{
+    cast_vote, create_proposal, execute_proposal, finalize_proposal, get_proposal, governance_summary,
+    list_proposals, register_namespace, VoteChoice,
+};
 use primitives::{AccountId, Amount, AssetId};
 use serde::{Deserialize, Serialize};
-use state::{Settlement, SoulboundToken, State};
+use soulbound::mint_soulbound;
+use state::{Proposal, Settlement, SoulboundToken, State};
 use std::sync::{Arc, Mutex};
 
 /// Global state accessible across RPC calls.
@@ -204,6 +209,168 @@ pub fn query_settlements_by_creator(
         .collect();
 
     Ok(settlements)
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ProposalResponse {
+    pub proposal_id: String,
+    pub proposer: String,
+    pub title: String,
+    pub description: String,
+    pub status: String,
+    pub votes_for: u64,
+    pub votes_against: u64,
+    pub votes_abstain: u64,
+    pub voting_ends_at: u64,
+    pub timelock_until: u64,
+}
+
+fn proposal_to_response(p: &Proposal) -> ProposalResponse {
+    ProposalResponse {
+        proposal_id: hex::encode_upper(&p.id[..8]),
+        proposer: hex::encode_upper(&p.proposer.as_bytes()[..8]),
+        title: p.title.clone(),
+        description: p.description.clone(),
+        status: format!("{:?}", p.status),
+        votes_for: p.votes_for,
+        votes_against: p.votes_against,
+        votes_abstain: p.votes_abstain,
+        voting_ends_at: p.voting_ends_at,
+        timelock_until: p.timelock_until,
+    }
+}
+
+pub fn query_proposal(state: &State, proposal_id_hex: &str) -> Result<ProposalResponse, String> {
+    let id = parse_id32(proposal_id_hex)?;
+    let p = get_proposal(state, &id).ok_or("proposal not found")?;
+    Ok(proposal_to_response(&p))
+}
+
+pub fn query_proposals(state: &State) -> Vec<ProposalResponse> {
+    list_proposals(state)
+        .iter()
+        .map(proposal_to_response)
+        .collect()
+}
+
+pub fn query_governance_state(state: &State) -> serde_json::Value {
+    serde_json::json!(governance_summary(state))
+}
+
+fn parse_account(hex_str: &str) -> Result<AccountId, String> {
+    let bytes = hex::decode(hex_str).map_err(|e| format!("invalid hex: {}", e))?;
+    if bytes.len() != 32 {
+        return Err("account must be 32 bytes".to_string());
+    }
+    let mut arr = [0u8; 32];
+    arr.copy_from_slice(&bytes);
+    Ok(AccountId::new(arr))
+}
+
+fn parse_id32(hex_str: &str) -> Result<[u8; 32], String> {
+    let bytes = hex::decode(hex_str).map_err(|e| format!("invalid hex: {}", e))?;
+    if bytes.len() != 32 {
+        return Err("id must be 32 bytes".to_string());
+    }
+    let mut arr = [0u8; 32];
+    arr.copy_from_slice(&bytes);
+    Ok(arr)
+}
+
+pub fn submit_soulbound_mint(
+    state: &mut State,
+    issuer_hex: &str,
+    owner_hex: &str,
+    metadata_uri: Option<String>,
+    nonce: u64,
+) -> Result<SoulboundQueryResponse, String> {
+    let issuer = parse_account(issuer_hex)?;
+    let owner = parse_account(owner_hex)?;
+    let event = mint_soulbound(state, issuer, owner, metadata_uri, nonce)
+        .map_err(|e| format!("mint failed: {}", e))?;
+    let token_id = match event {
+        state::Event::SoulboundMinted { id, .. } => id,
+        _ => return Err("unexpected event".into()),
+    };
+    query_soulbound_token(state, &hex::encode(token_id))
+}
+
+pub fn submit_namespace_register(
+    state: &mut State,
+    namespace: &str,
+    owner_hex: &str,
+    brand_domain: Option<String>,
+) -> Result<serde_json::Value, String> {
+    let owner = parse_account(owner_hex)?;
+    let record = register_namespace(state, namespace.to_string(), owner, brand_domain)
+        .map_err(|e| format!("register failed: {}", e))?;
+    Ok(serde_json::json!({
+        "namespace": record.namespace,
+        "owner": hex::encode_upper(&record.owner.as_bytes()[..8]),
+        "brand_domain": record.brand_domain,
+        "registered_at": record.registered_at,
+    }))
+}
+
+pub fn submit_proposal_create(
+    state: &mut State,
+    proposer_hex: &str,
+    title: &str,
+    description: &str,
+    action_uri: Option<String>,
+) -> Result<ProposalResponse, String> {
+    let proposer = parse_account(proposer_hex)?;
+    let p = create_proposal(
+        state,
+        proposer,
+        title.to_string(),
+        description.to_string(),
+        action_uri,
+    )
+    .map_err(|e| format!("create failed: {}", e))?;
+    Ok(proposal_to_response(&p))
+}
+
+pub fn submit_proposal_vote(
+    state: &mut State,
+    proposal_id_hex: &str,
+    voter_hex: &str,
+    choice: &str,
+) -> Result<serde_json::Value, String> {
+    let proposal_id = parse_id32(proposal_id_hex)?;
+    let voter = parse_account(voter_hex)?;
+    let vote_choice = match choice.to_lowercase().as_str() {
+        "for" | "yes" => VoteChoice::For,
+        "against" | "no" => VoteChoice::Against,
+        "abstain" => VoteChoice::Abstain,
+        _ => return Err("choice must be for|against|abstain".into()),
+    };
+    let record = cast_vote(state, proposal_id, voter, vote_choice)
+        .map_err(|e| format!("vote failed: {}", e))?;
+    Ok(serde_json::json!({
+        "proposal_id": hex::encode_upper(&record.proposal_id[..8]),
+        "voter": hex::encode_upper(&record.voter.as_bytes()[..8]),
+        "choice": format!("{:?}", record.choice),
+        "weight": record.weight,
+    }))
+}
+
+pub fn submit_proposal_finalize(
+    state: &mut State,
+    proposal_id_hex: &str,
+) -> Result<ProposalResponse, String> {
+    let proposal_id = parse_id32(proposal_id_hex)?;
+    let p = finalize_proposal(state, proposal_id).map_err(|e| format!("finalize failed: {}", e))?;
+    Ok(proposal_to_response(&p))
+}
+
+pub fn submit_proposal_execute(
+    state: &mut State,
+    proposal_id_hex: &str,
+) -> Result<ProposalResponse, String> {
+    let proposal_id = parse_id32(proposal_id_hex)?;
+    let p = execute_proposal(state, proposal_id).map_err(|e| format!("execute failed: {}", e))?;
+    Ok(proposal_to_response(&p))
 }
 
 /// Query balance for an account.

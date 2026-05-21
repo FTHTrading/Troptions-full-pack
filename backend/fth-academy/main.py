@@ -25,12 +25,26 @@ import stripe
 # Import multi-chain labs
 from multi_chain_labs import MULTI_CHAIN_LABS, MULTI_CHAIN_CAREERS
 
-# Import DONK system prompt
+# Import DONK system prompt (monorepo path: ai/donk-tutor)
 import importlib.util
-spec = importlib.util.spec_from_file_location("system_prompt", os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "DONK_AI_TUTOR", "system_prompt.py"))
+_donk_prompt_path = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "..", "..", "ai", "donk-tutor", "system_prompt.py",
+)
+spec = importlib.util.spec_from_file_location("system_prompt", _donk_prompt_path)
 system_prompt_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(system_prompt_module)
 DONK_SYSTEM_PROMPT = system_prompt_module.DONK_SYSTEM_PROMPT
+
+# DAO layer
+import sys as _sys
+_repo_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")
+_sys.path.insert(0, os.path.join(_repo_root, "backend", "shared"))
+_sys.path.insert(0, os.path.join(_repo_root, "dao"))
+from l1_client import get_l1_client, L1ClientError  # noqa: E402
+from dao_db import init_dao_db  # noqa: E402
+from governance.engine import GovernanceEngine  # noqa: E402
+from registry.members import MemberRegistry  # noqa: E402
 
 # ── Configuration ──
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY", "")
@@ -187,7 +201,8 @@ def seed_db():
 async def lifespan(app: FastAPI):
     init_db()
     seed_db()
-    print("FTH Backend operational")
+    init_dao_db()
+    print("FTH Backend operational (DAO enabled)")
     yield
     print("FTH Backend shutting down")
 
@@ -827,6 +842,61 @@ async def health():
         "evl_treasury": EVL_TREASURY,
         "timestamp": datetime.now().isoformat()
     }
+
+
+@app.get("/health/l1")
+async def health_l1():
+    client = get_l1_client()
+    try:
+        state = client.state_get()
+        gov = client.governance_get()
+        return {"reachable": True, "state": state, "governance": gov}
+    except L1ClientError as exc:
+        return {"reachable": False, "error": str(exc)}
+
+
+# ── DAO routes (orchestration via L1 + SQLite mirror) ──
+_dao_engine = None
+_dao_registry = None
+
+
+def _get_dao_engine() -> GovernanceEngine:
+    global _dao_engine
+    if _dao_engine is None:
+        _dao_engine = GovernanceEngine(os.getenv("L1_RPC_URL", "http://127.0.0.1:9944"))
+    return _dao_engine
+
+
+def _get_dao_registry() -> MemberRegistry:
+    global _dao_registry
+    if _dao_registry is None:
+        _dao_registry = MemberRegistry(os.getenv("L1_RPC_URL", "http://127.0.0.1:9944"))
+    return _dao_registry
+
+
+@app.get("/dao/state")
+async def fth_dao_state():
+    eng = _get_dao_engine()
+    reg = _get_dao_registry()
+    return {
+        **eng.state(),
+        "members_count": len(reg.list_members()),
+    }
+
+
+@app.get("/dao/credentials/{owner}")
+async def fth_dao_credentials(owner: str):
+    return _get_dao_registry().credentials_for_owner(owner)
+
+
+@app.get("/dao/proposals")
+async def fth_dao_proposals():
+    return _get_dao_engine().list_proposals()
+
+
+@app.get("/dao/members")
+async def fth_dao_members():
+    return _get_dao_registry().list_members()
 
 # ── Serve Frontend ──
 os.makedirs("static", exist_ok=True)

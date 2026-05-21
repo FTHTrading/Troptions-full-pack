@@ -1,5 +1,5 @@
 [package]
-name = "rpc"
+name = "governance"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -7,17 +7,12 @@ license.workspace = true
 
 [dependencies]
 primitives = { workspace = true }
+crypto = { workspace = true }
 state = { workspace = true }
 runtime = { workspace = true }
 soulbound = { workspace = true }
-settlement = { workspace = true }
-atomic-router = { workspace = true }
-crypto = { workspace = true }
-governance = { workspace = true }
-serde = { workspace = true, features = ["derive"] }
+serde = { workspace = true }
 serde_json = { workspace = true }
-hex = { workspace = true }
 sha2 = { workspace = true }
+hex = { workspace = true }
 thiserror = { workspace = true }
-
-[dev-dependencies]

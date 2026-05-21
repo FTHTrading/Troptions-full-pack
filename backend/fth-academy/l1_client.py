@@ -60,6 +60,62 @@ class TroptionsL1Client:
     def balance_get(self, account: str, asset: str = "NATIVE") -> Dict[str, Any]:
         return self.call("balance_get", {"account": account, "asset": asset})
 
+    def governance_get(self) -> Dict[str, Any]:
+        return self.call("governance_get")
+
+    def proposal_list(self) -> Any:
+        return self.call("proposal_list")
+
+    def proposal_get(self, proposal_id: str) -> Dict[str, Any]:
+        return self.call("proposal_get", {"proposal_id": proposal_id})
+
+    def submit_soulbound_mint(
+        self,
+        issuer: str,
+        owner: str,
+        metadata_uri: Optional[str] = None,
+        nonce: int = 0,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {"issuer": issuer, "owner": owner, "nonce": nonce}
+        if metadata_uri:
+            params["metadata_uri"] = metadata_uri
+        return self.call("submit_soulbound_mint", params)
+
+    def submit_namespace_register(
+        self,
+        namespace: str,
+        owner: str,
+        brand_domain: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {"namespace": namespace, "owner": owner}
+        if brand_domain:
+            params["brand_domain"] = brand_domain
+        return self.call("submit_namespace_register", params)
+
+    def submit_proposal_create(
+        self,
+        proposer: str,
+        title: str,
+        description: str,
+        action_uri: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        params: Dict[str, Any] = {
+            "proposer": proposer,
+            "title": title,
+            "description": description,
+        }
+        if action_uri:
+            params["action_uri"] = action_uri
+        return self.call("submit_proposal_create", params)
+
+    def submit_proposal_vote(
+        self, proposal_id: str, voter: str, choice: str = "for"
+    ) -> Dict[str, Any]:
+        return self.call(
+            "submit_proposal_vote",
+            {"proposal_id": proposal_id, "voter": voter, "choice": choice},
+        )
+
 
 def get_l1_client() -> TroptionsL1Client:
     return TroptionsL1Client()

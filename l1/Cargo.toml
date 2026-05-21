@@ -8,6 +8,7 @@ members = [
     "crates/settlement",
     "crates/atomic-router",
     "crates/rpc",
+    "crates/governance",
     "crates/node",
 ]
 resolver = "2"
@@ -38,4 +39,5 @@ soulbound = { path = "crates/soulbound" }
 settlement = { path = "crates/settlement" }
 atomic-router = { path = "crates/atomic-router" }
 rpc = { path = "crates/rpc" }
+governance = { path = "crates/governance" }
 node = { path = "crates/node" }

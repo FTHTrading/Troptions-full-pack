@@ -182,6 +182,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "governance"
+version = "0.1.0"
+dependencies = [
+ "crypto",
+ "hex",
+ "primitives",
+ "runtime",
+ "serde",
+ "serde_json",
+ "sha2",
+ "soulbound",
+ "state",
+ "thiserror",
+]
+
+[[package]]
 name = "hex"
 version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -309,6 +325,7 @@ version = "0.1.0"
 dependencies = [
  "atomic-router",
  "crypto",
+ "governance",
  "hex",
  "primitives",
  "runtime",

@@ -12,6 +12,7 @@ import argparse
 import json
 import sqlite3
 import sys
+from hashlib import sha256
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -67,8 +68,33 @@ def main() -> int:
     print(f"Wrote preview: {args.out} ({len(namespaces)} namespaces)")
 
     if args.apply and not args.dry_run:
-        print("Apply mode requested but L1 write RPC is not exposed yet — export only.")
-        return 2
+        applied = 0
+        for ns in namespaces:
+            owner = ns.get("owner_wallet") or sha256(ns["namespace"].encode()).hexdigest()
+            meta = f"ttn://{ns['namespace']}"
+            try:
+                client.call(
+                    "submit_namespace_register",
+                    {
+                        "namespace": ns["namespace"],
+                        "owner": owner if len(owner) == 64 else sha256(owner.encode()).hexdigest(),
+                        "brand_domain": ns.get("registration_type"),
+                    },
+                )
+                client.call(
+                    "submit_soulbound_mint",
+                    {
+                        "issuer": owner,
+                        "owner": owner,
+                        "metadata_uri": meta,
+                        "nonce": applied,
+                    },
+                )
+                applied += 1
+            except Exception as exc:
+                print(f"  skip {ns['namespace']}: {exc}")
+        print(f"Applied {applied} namespace migrations to L1")
+        return 0 if applied else 2
 
     return 0
 

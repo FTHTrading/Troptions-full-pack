@@ -7,6 +7,7 @@
 [![DONK](https://img.shields.io/badge/DONK-8090-blue)](http://127.0.0.1:8090/health)
 [![FTH](https://img.shields.io/badge/FTH_Academy-8091-purple)](http://127.0.0.1:8091/health)
 [![TTN](https://img.shields.io/badge/TTN-8092-red)](http://127.0.0.1:8092/health)
+[![DAO](https://img.shields.io/badge/🟪_DAO-8093-8b5cf6)](http://127.0.0.1:8093/health)
 
 ## Live services (PM2)
 
@@ -16,6 +17,7 @@
 | `donk-ai-tutor` | **8090** | `ai/donk-tutor/` |
 | `fth-backend` | **8091** | `backend/fth-academy/` |
 | `ttn-launcher` | **8092** | `backend/ttn-launcher/` |
+| `dao-service` | **8093** | `backend/dao-service/` + `frontends/dao-dashboard/` |
 
 ```bash
 cp .env.example .env   # fill secrets locally — never commit .env
@@ -50,20 +52,24 @@ pm2 start ecosystem.config.js
 
 ```
 Troptions-full-pack/
-├── l1/                    # Rust workspace (8 crates)
+├── l1/                    # Rust workspace (9 crates incl. governance)
+├── dao/                   # 🟪 Full DAO — governance, treasury, registry
 ├── backend/
-│   ├── fth-academy/       # Revenue engine, courses, Stripe, l1_client.py
+│   ├── fth-academy/       # Revenue engine, courses, Stripe, /dao/* routes
+│   ├── dao-service/       # DAO API + WebSocket :8093
 │   ├── ttn-launcher/      # Channel + namespace registry
-│   └── shared/
+│   └── shared/            # dao_models, dao_db, ws_hub
 ├── ai/
 │   ├── donk-tutor/        # RAG tutor, Qdrant, Whisper
 │   └── knowledge-base/    # OpenClaw + whichway docs
 ├── frontends/
+│   ├── dao-dashboard/     # 🟪 Proposals, treasury, L1 live panel
 │   ├── exchange-os/       # Full TROPTIONS Next.js app
 │   ├── fth-edu/           # T-EDU mobile/web app
 │   ├── ttn-tv/            # TTN pages (extracted from exchange-os)
 │   ├── unified-dashboard/
 │   └── landing-pages/
+├── infrastructure/        # nginx templates for *.troptions.org
 ├── contracts/
 │   ├── polygon/           # KENNY, EVL, vaults
 │   ├── solana/            # Launcher scripts
@@ -128,7 +134,9 @@ npm run dev
 - [Architecture](docs/ARCHITECTURE.md)  
 - [L1 RPC spec](docs/L1_SPEC.md)  
 - [HTTP APIs](docs/API.md)  
-- [Domain map](docs/DOMAIN_MAP.md)  
+- [Domain map](docs/DOMAIN_MAP.md)
+- [Full DAO guide](docs/DAO.md)
+- [Ops runbook](docs/RUNBOOK.md)  
 
 ## Source provenance
 

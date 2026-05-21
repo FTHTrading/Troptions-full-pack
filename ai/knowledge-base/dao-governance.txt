@@ -1,0 +1,34 @@
+TROPTIONS Full DAO — Governance Knowledge Base
+
+OVERVIEW
+The Full DAO is a production-grade sovereign stack: L1-native proposals and soulbound-weighted voting, Python orchestration on ports 8091/8093, multi-chain treasury visibility, and real-time WebSocket updates.
+
+L1 RPC (port 9944)
+Query: state_get, soulbound_get, soulbound_by_owner, settlement_get, balance_get, governance_get, proposal_get, proposal_list
+Submit: submit_soulbound_mint, submit_namespace_register, submit_proposal_create, submit_proposal_vote, submit_proposal_finalize, submit_proposal_execute
+
+PROPOSAL LIFECYCLE
+1. submit_proposal_create — proposer must be 32-byte hex account
+2. Voting window — soulbound credentials determine weight (non-revoked tokens per owner)
+3. submit_proposal_vote — choice: for, against, abstain
+4. submit_proposal_finalize — after voting_ends_at block height
+5. Timelock — passed proposals wait DEFAULT_TIMELOCK_BLOCKS
+6. submit_proposal_execute — marks Executed
+
+QUORUM
+10% of active soulbound credentials must participate; majority for wins.
+
+TREASURY
+- XRPL: rPF2M1QjRj72rHdJyRqfFRTqWREBdJds3 (TROPTIONS, USDC, USDT)
+- Polygon KENNY: 0x93F2a3266a81c1F3Ee2c196b90890A959bC69BD7
+- Polygon EVL: 0x496b0802a3CB2Ce101A3F20e1dada33B78fDD806
+Allocations link to proposals; L1 settlement escrows for disbursement.
+
+GENESIS BRAND ISSUERS
+TROPTIONSXCHANGE.IO, TROPTIONS-UNIVERSITY.COM, TROPTIONSTelevisionNetwork.Tv, HOTRCW.COM, TROPTIONS.IO, TROPTIONS.ORG, TheRealEstateConnections.com, Green-N-Go.Solar
+
+OPERATIONS
+Bootstrap: scripts/bootstrap-dao.ps1 or bootstrap-dao.sh
+Health: scripts/health-check-all.ps1
+Migrate TTN: scripts/migrate-namespaces-to-l1.py --apply
+PM2: troptions-l1-node, donk-ai-tutor, fth-backend, ttn-launcher, dao-service

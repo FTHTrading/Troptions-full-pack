@@ -1,0 +1,72 @@
+:root {
+  --purple: #7c3aed;
+  --bg: #0f0a1a;
+  --panel: #1a1228;
+  --text: #f3e8ff;
+  --muted: #a78bfa;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+header {
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid var(--purple);
+}
+h1 { margin: 0; color: var(--purple); }
+.tagline { color: var(--muted); margin: 0.25rem 0 0.75rem; }
+.pill {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: var(--panel);
+  font-size: 0.85rem;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem 2rem 2rem;
+}
+.panel {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid #3b2667;
+}
+.panel.wide { grid-column: 1 / -1; }
+.form input, .form textarea {
+  width: 100%;
+  margin: 0.35rem 0;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #4c1d95;
+  background: #120b1f;
+  color: var(--text);
+}
+button {
+  background: var(--purple);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+.proposal-card {
+  border: 1px solid #4c1d95;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+pre {
+  background: #120b1f;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow: auto;
+  max-height: 280px;
+  font-size: 0.8rem;
+}

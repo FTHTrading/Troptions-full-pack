@@ -46,5 +46,15 @@ module.exports = {
       env: { TTN_PORT: "8092" },
       autorestart: true,
     },
+    {
+      name: "dao-service",
+      script: "main.py",
+      interpreter: "python",
+      cwd: path.join(ROOT, "backend", "dao-service"),
+      env: { DAO_PORT: "8093", L1_RPC_URL: "http://127.0.0.1:9944" },
+      autorestart: true,
+      out_file: path.join(ROOT, "logs", "dao-service-out.log"),
+      err_file: path.join(ROOT, "logs", "dao-service-err.log"),
+    },
   ],
 };
