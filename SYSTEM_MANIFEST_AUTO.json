@@ -1,0 +1,196 @@
+{
+  "generated_at": "2026-05-21T15:37:01.776502",
+  "version": "2.0.0-MSB",
+  "ai_system": "DocsBuilderAI v1.0",
+  "overview": {
+    "total_services": 15,
+    "total_ports": 12,
+    "blockchain_rails": [
+      "XRPL",
+      "Stellar",
+      "Polygon",
+      "Solana",
+      "TROPTIONS L1"
+    ],
+    "banking_rails": [
+      "MSB",
+      "FedWire",
+      "SWIFT"
+    ],
+    "revenue_streams": 12
+  },
+  "services": {
+    "layer_1_client": [
+      {
+        "name": "T-EDU-AI-APP",
+        "type": "Mobile",
+        "revenue": "Subscriptions"
+      },
+      {
+        "name": "fthedu.unykorn.org",
+        "type": "Web",
+        "revenue": "Courses"
+      },
+      {
+        "name": "troptionslive.unykorn.org",
+        "type": "Web",
+        "revenue": "Sponsorships"
+      },
+      {
+        "name": "TTN Launcher",
+        "type": "Web3",
+        "revenue": "Channel fees"
+      },
+      {
+        "name": "Exchange OS",
+        "type": "Hybrid",
+        "revenue": "Trading fees"
+      },
+      {
+        "name": "Neobank App",
+        "type": "Banking",
+        "revenue": "Interchange"
+      }
+    ],
+    "layer_2_api": [
+      {
+        "name": "DONK AI TUTOR",
+        "port": 8090,
+        "revenue": "Courses"
+      },
+      {
+        "name": "FTH Backend",
+        "port": 8091,
+        "revenue": "Certifications"
+      },
+      {
+        "name": "TTN API",
+        "port": 8092,
+        "revenue": "Sponsors"
+      },
+      {
+        "name": "DAO Service",
+        "port": 8093,
+        "revenue": "Governance"
+      },
+      {
+        "name": "x402 Gateway",
+        "port": 4020,
+        "revenue": "Metering"
+      },
+      {
+        "name": "Popeye Relay",
+        "port": 4021,
+        "revenue": "Monitoring"
+      },
+      {
+        "name": "Payment Orchestrator",
+        "port": 4022,
+        "revenue": "Wire fees",
+        "status": "NEW"
+      },
+      {
+        "name": "MSB Compliance",
+        "port": 4098,
+        "revenue": "Compliance",
+        "status": "NEW"
+      }
+    ],
+    "layer_3_blockchain": [
+      {
+        "name": "TROPTIONS L1",
+        "port": 9944,
+        "revenue": "Gas fees"
+      },
+      {
+        "name": "Apostle Chain",
+        "port": 7332,
+        "revenue": "Settlement"
+      },
+      {
+        "name": "XRPL Issuer",
+        "address": "rJLMSTy...",
+        "revenue": "Transfer fees"
+      },
+      {
+        "name": "Stellar Issuer",
+        "address": "GB4FH...",
+        "revenue": "Transfer fees"
+      }
+    ],
+    "layer_4_banking": [
+      {
+        "name": "MSB License",
+        "status": "PENDING",
+        "time": "15:00"
+      },
+      {
+        "name": "FedWire",
+        "status": "PENDING",
+        "time": "16:00"
+      },
+      {
+        "name": "SWIFT",
+        "status": "PENDING",
+        "time": "17:00"
+      },
+      {
+        "name": "Bank Partner",
+        "status": "TBD",
+        "time": "TBD"
+      }
+    ]
+  },
+  "revenue_projections": {
+    "current_crypto_only": {
+      "academy": "$2K-5K/month",
+      "launcher": "$500-2K/month",
+      "x402": "Negligible",
+      "total": "$3K-7K/month"
+    },
+    "conservative_with_banking": {
+      "exchange_fees": "$30K/month",
+      "stablecoin_issuance": "$25K/month",
+      "wire_fees": "$5K/month",
+      "b2b_payments": "$20K/month",
+      "interchange": "$75K/month",
+      "subscriptions": "$20K/month",
+      "lending_margin": "$80K/month",
+      "baas": "$50K/month",
+      "total": "$305K/month ($3.6M/year)"
+    },
+    "scale_with_banking": {
+      "exchange_fees": "$300K/month",
+      "stablecoin_issuance": "$250K/month",
+      "wire_fees": "$20K/month",
+      "b2b_payments": "$200K/month",
+      "interchange": "$750K/month",
+      "subscriptions": "$200K/month",
+      "lending_margin": "$400K/month",
+      "baas": "$500K/month",
+      "total": "$2.6M/month ($31M+/year)"
+    }
+  },
+  "integration_checklist": {
+    "today": [
+      "Receive MSB License (3:00 PM)",
+      "Receive SWIFT credentials (4:00 PM)",
+      "Receive FedWire routing (5:00 PM)",
+      "Configure Payment Orchestrator",
+      "Test end-to-end flow"
+    ],
+    "this_week": [
+      "Connect Exchange OS to Payment Orchestrator",
+      "Enable fiat on-ramps",
+      "Configure compliance screening",
+      "Test SWIFT MT103/202",
+      "Test FedWire RTGS"
+    ],
+    "this_month": [
+      "Onboard first B2B clients",
+      "Launch neobank beta",
+      "Activate BaaS APIs",
+      "Process first $1M fiat volume"
+    ]
+  }
+}

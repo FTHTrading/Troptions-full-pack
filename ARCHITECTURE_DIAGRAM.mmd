@@ -1,0 +1,40 @@
+
+graph TD
+    A[Client] -->|Deposit USD| B[Payment Orchestrator :4022]
+    A -->|Buy Tokens| C[Exchange OS]
+    A -->|Subscribe| D[Academy :8090]
+    A -->|Sponsor| E[TTN :8092]
+    A -->|Buy RWA| F[RWA Contracts]
+    
+    B -->|FedWire| G[Bank Partner]
+    B -->|SWIFT MT103| H[Correspondent Bank]
+    B -->|ACH| G
+    
+    C -->|Crypto| I[XRPL/Solana]
+    C -->|Fiat| B
+    
+    D -->|Stripe| J[Stripe]
+    D -->|Crypto| I
+    
+    E -->|Fiat| B
+    E -->|Crypto| I
+    
+    F -->|Escrow| K[Apostle Chain :7332]
+    F -->|Settlement| B
+    
+    G -->|USD| L[Reserve Account]
+    L -->|Yield| M[Free Float Income]
+    
+    I -->|Tokens| N[User Wallets]
+    I -->|Fees| O[Treasury]
+    
+    P[MSB Compliance :4098] -->|Screen| B
+    P -->|Log| Q[Audit Trail]
+    
+    R[SWIFT Bridge] -->|MT202| H
+    R -->|MT103| S[Beneficiary Bank]
+    
+    style A fill:#FFD700
+    style B fill:#00FF00
+    style P fill:#FF0000
+    style I fill:#4169E1
