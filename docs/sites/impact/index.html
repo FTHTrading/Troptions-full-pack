@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impact — impact.unykorn.org</title>
+  <meta name="description" content="Impact ESG portal — GitHub Pages on impact-site; custom domain impact.unykorn.org after Cloudflare DNS + Pages deploy." />
+  <link rel="stylesheet" href="../site-landing.css" />
+</head>
+<body>
+  <nav class="nav">
+    <span class="brand">TROPTIONS · Impact</span>
+    <a href="../../">Investor hub</a>
+    <a href="../../ecosystem/">Ecosystem status</a>
+    <a href="../../technical/IMPACT_DNS.html">DNS runbook</a>
+  </nav>
+  <main class="wrap">
+    <span class="badge badge-pending">DNS / TLS propagating · Pages deploy required</span>
+    <h1>impact.unykorn.org</h1>
+    <p class="lead">
+      Green energy and ESG impact portal (<code>FTHTrading/impact-site</code>).
+      Production HTML is served from GitHub Pages; this monorepo page is the investor-facing status landing until custom DNS is fully green.
+    </p>
+    <div class="card">
+      <h2>Live today (GitHub Pages)</h2>
+      <ul>
+        <li><a href="https://fthtrading.github.io/impact-site/" target="_blank" rel="noopener">fthtrading.github.io/impact-site/</a> — canonical Pages URL</li>
+        <li><a href="https://impact.unykorn.org/" target="_blank" rel="noopener">impact.unykorn.org</a> — custom domain (CNAME → <code>fthtrading.github.io</code>)</li>
+        <li>Repo: <a href="https://github.com/FTHTrading/impact-site">FTHTrading/impact-site</a> — root <code>CNAME</code> file must contain <code>impact.unykorn.org</code></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Related surfaces</h2>
+      <ul>
+        <li><a href="https://fthedu.unykorn.org/" target="_blank" rel="noopener">fthedu.unykorn.org</a> — FTH Academy</li>
+        <li><a href="https://troptionslive.unykorn.org/sports" target="_blank" rel="noopener">troptionslive — sports / WC26</a></li>
+        <li><a href="https://fthtrading.github.io/aurora-site/">Aurora RWA</a> · <a href="../aurora/">aurora landing</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>Operator checklist</h2>
+      <ol style="margin:0.5rem 0 0 1.25rem;color:var(--muted);font-size:0.9rem;">
+        <li>Cloudflare zone <code>unykorn.org</code>: CNAME <code>impact</code> → <code>fthtrading.github.io</code> (DNS only / grey cloud).</li>
+        <li>GitHub → impact-site → Settings → Pages → Source: <strong>GitHub Actions</strong>; workflow must succeed.</li>
+        <li>GitHub → impact-site → Pages → Custom domain: verify <code>impact.unykorn.org</code> (HTTPS).</li>
+        <li>Re-run <code>scripts/verify-all-ecosystem-sites.ps1</code> from Troptions-full-pack.</li>
+      </ol>
+    </div>
+  </main>
+</body>
+</html>

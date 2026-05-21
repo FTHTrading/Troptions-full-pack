@@ -12,7 +12,7 @@ Summary: **19** LIVE Â· **15** need operator attention (of 34 probed).
 | GitHub Pages | Ecosystem status hub | https://fthtrading.github.io/Troptions-full-pack/ecosystem/ | 404 | 404 |
 | GitHub Pages | T-Lev-8 deal room | https://fthtrading.github.io/T-Lev-8-/ | 200 | LIVE |
 | GitHub Pages | Aurora RWA site | https://fthtrading.github.io/aurora-site/ | 200 | LIVE |
-| GitHub Pages | Impact site | https://fthtrading.github.io/impact-site/ | 404 | 404 |
+| GitHub Pages | Impact site | https://fthtrading.github.io/impact-site/ | 200 | LIVE |
 | GitHub Pages | DAO public page | https://fthtrading.github.io/Troptions-full-pack/dao/ | 200 | LIVE |
 | GitHub Pages | Mint DApp | https://fthtrading.github.io/Troptions-full-pack/mint.html | 200 | LIVE |
 | GitHub Pages | NFT gallery | https://fthtrading.github.io/Troptions-full-pack/nft/ | 200 | LIVE |
@@ -40,12 +40,12 @@ Summary: **19** LIVE Â· **15** need operator attention (of 34 probed).
 | Future DNS | ai.troptions.org | https://ai.troptions.org | ERR | DNS |
 | Future DNS | ttn.troptions.org | https://ttn.troptions.org | ERR | DNS |
 | Future DNS | dao.troptions.org | https://dao.troptions.org | ERR | DNS |
-| Broken DNS | aurora.unykorn.org | https://aurora.unykorn.org | ERR | DNS |
-| Broken DNS | impact.unykorn.org | https://impact.unykorn.org | ERR | DNS |
+| Custom DNS | aurora.unykorn.org | https://aurora.unykorn.org | PENDING | CNAME 2026-05-21 → fthtrading.github.io |
+| Custom DNS | impact.unykorn.org | https://impact.unykorn.org | PENDING | CNAME 2026-05-21 · Pages deploy fixed |
 
 ## Operator actions
 
 - **twin / x402api / goat / junior (502/522):** restart tunnel + origin per [CLOUDFLARE_ORIGIN_FIX.md](../technical/CLOUDFLARE_ORIGIN_FIX.md).
 - **troptions.org subdomains:** use Pages landings under `/sites/*` until DNS cutover.
-- **impact-site Pages:** fix deploy branch (404 on GitHub Pages project).
+- **impact/aurora TLS:** confirm HTTPS on custom domains in GitHub Pages UI after propagation ([IMPACT_DNS.md](../technical/IMPACT_DNS.md)).
 

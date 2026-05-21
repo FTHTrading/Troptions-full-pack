@@ -67,8 +67,8 @@ flowchart TB
 | **T-Lev-8-** | [FTHTrading/T-Lev-8-](https://github.com/FTHTrading/T-Lev-8-) | `C:\Users\Kevan\Documents\GitHub\T-Lev-8-` | [GitHub Pages](https://fthtrading.github.io/T-Lev-8-/) | **Pages LIVE** | RWA deal room, LEV8 gates; licensing surface adjacent to Exchange OS desk narrative |
 | **T-Build** | [FTHTrading/T-Build](https://github.com/FTHTrading/T-Build) | `C:\Users\Kevan\Documents\UNYKORN_Ecosystem\T-Build` | — | **Local / sandbox** | TPLOS partner launch OS; sandbox for partner token launches (feeds launcher + Exchange OS patterns) |
 | **Troptions** | [FTHTrading/Troptions](https://github.com/FTHTrading/Troptions) | `C:\Users\Kevan\troptions` | [Vercel](https://troptions.vercel.app) | **Private repo · Vercel LIVE** | Institutional Exchange OS source; `frontends/exchange-os` in full-pack is a synchronized extract |
-| **aurora-site** | [FTHTrading/aurora-site](https://github.com/FTHTrading/aurora-site) | `C:\Users\Kevan\Documents\UNYKORN_Ecosystem\aurora-site` | [Pages](https://fthtrading.github.io/aurora-site/) · `aurora.unykorn.org` | **Pages LIVE · custom DNS ERR** | Aurora RWA portal (ESG / asset storytelling) |
-| **impact-site** | [FTHTrading/impact-site](https://github.com/FTHTrading/impact-site) | `C:\Users\Kevan\Documents\UNYKORN_Ecosystem\impact-site` | `impact.unykorn.org` | **Custom DNS ERR · Pages 404** | Impact / ESG portal — repo exists; production Pages/DNS needs operator fix |
+| **aurora-site** | [FTHTrading/aurora-site](https://github.com/FTHTrading/aurora-site) | `C:\Users\Kevan\Documents\UNYKORN_Ecosystem\aurora-site` | [Pages](https://fthtrading.github.io/aurora-site/) · `aurora.unykorn.org` | **Pages LIVE · DNS PENDING TLS** | Aurora RWA portal — CNAME added 2026-05-21; see [IMPACT_DNS.md](IMPACT_DNS.html) |
+| **impact-site** | [FTHTrading/impact-site](https://github.com/FTHTrading/impact-site) | `C:\Users\Kevan\Documents\UNYKORN_Ecosystem\impact-site` | [Pages](https://fthtrading.github.io/impact-site/) · `impact.unykorn.org` | **Pages LIVE · DNS PENDING TLS** | Impact / ESG portal — Pages deploy fixed + CNAME 2026-05-21 |
 | **solana-launcher** | [FTHTrading/solana-launcher](https://github.com/FTHTrading/solana-launcher) | `C:\Users\Kevan\solana-launcher` *(verify remote)* | [launch.unykorn.org](https://launch.unykorn.org) | **Vercel/Unykorn LIVE** | SPL + NFT launcher SaaS; mint registry + system truth linked from Exchange OS nav |
 | **UnyKorn-X402-aws** | [FTHTrading/UnyKorn-X402-aws](https://github.com/FTHTrading/UnyKorn-X402-aws) | `C:\Users\Kevan\UnyKorn-X402-aws` | [x402.unykorn.org/health](https://x402.unykorn.org/health) · [twin.unykorn.org](https://twin.unykorn.org) | **Public · LIVE AWS+CF** | Production x402 mesh + Apostle ATP; monorepo `backend/x402-gateway` is lightweight sidecar only |
 | **genesis-world** | [FTHTrading/genesis-world](https://github.com/FTHTrading/genesis-world) | `C:\Users\Kevan\genesis-world` | [drunks.app](https://drunks.app) · [gsp-api health](https://gsp-api.kevanbtc.workers.dev/api/health) | **GitHub public · LIVE** | Genesis Sentience Protocol (GSP): 12-crate Rust L0, AI agents, 5 rails. **Not** in full-pack monorepo — parallel stack to SNP/x402/TROPTIONS L1 |
@@ -120,8 +120,8 @@ flowchart TB
 | https://ai.troptions.org | ERR | DNS not set — **Pages landing:** [/sites/ai/](https://fthtrading.github.io/Troptions-full-pack/sites/ai/) · live Academy on fthedu |
 | https://ttn.troptions.org | ERR | DNS not set — **Pages landing:** [/sites/ttn/](https://fthtrading.github.io/Troptions-full-pack/sites/ttn/) · sports on troptionslive |
 | https://dao.troptions.org | ERR | DNS not set — **Pages landing:** [/sites/dao/](https://fthtrading.github.io/Troptions-full-pack/sites/dao/) → [Pages /dao/](https://fthtrading.github.io/Troptions-full-pack/dao/) · local :8093 |
-| https://aurora.unykorn.org | ERR | Custom domain not resolving; use GitHub Pages URL until DNS fixed |
-| https://impact.unykorn.org | ERR | Custom domain not resolving; GitHub Pages project returns 404 — fix deploy branch |
+| https://aurora.unykorn.org | PENDING | CNAME → `fthtrading.github.io` added 2026-05-21; HTTPS may lag — use [Pages URL](https://fthtrading.github.io/aurora-site/) · landing [/sites/aurora/](../sites/aurora/) |
+| https://impact.unykorn.org | PENDING | CNAME + Pages deploy fixed 2026-05-21 — confirm TLS in GitHub Pages settings · landing [/sites/impact/](../sites/impact/) |
 
 ---
 
@@ -180,7 +180,7 @@ Not in the original operator table but present under `C:\Users\Kevan` or GitHub 
 ## Gaps (action items)
 
 1. Point **troptions.org** subdomains (`ai`, `ttn`, `dao`) or keep investor copy on **unykorn.org** only.
-2. Fix **impact-site** GitHub Pages deploy (404) and **aurora/impact** custom DNS at `*.unykorn.org`.
+2. Confirm **impact/aurora** custom-domain HTTPS in GitHub Pages UI after DNS propagation ([IMPACT_DNS.md](IMPACT_DNS.html)).
 3. Align **solana-launcher** local folder remote (operator machine may point at wrong origin — verify before edits).
 4. Publish **T-Build** sandbox to a stable preview URL when TPLOS partners need demos.
 5. Keep **Exchange desk $175M** and similar figures in **attestation / PENDING** truth labels until proofs land.

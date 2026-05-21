@@ -93,6 +93,20 @@ See [X402_INTEGRATION.md](X402_INTEGRATION.html).
 
 ---
 
+## GitHub Pages custom domains (impact / aurora)
+
+Per [IMPACT_DNS.md](IMPACT_DNS.html). **Zone:** `unykorn.org` (`8aa6916f4c1c7e8e42130455dfd5c029`).
+
+| Hostname | DNS (Cloudflare) | Origin | Status (2026-05-21) |
+|----------|------------------|--------|---------------------|
+| `impact.unykorn.org` | CNAME → `fthtrading.github.io` (DNS only) | [impact-site](https://github.com/FTHTrading/impact-site) Pages | **PENDING TLS** — NXDOMAIN fixed; Pages **200** at `/impact-site/` |
+| `aurora.unykorn.org` | CNAME → `fthtrading.github.io` (DNS only) | [aurora-site](https://github.com/FTHTrading/aurora-site) Pages | **PENDING TLS** — same pattern |
+
+**Manual dashboard:** DNS → Add CNAME `impact` / `aurora` → `fthtrading.github.io` → Proxy **off**.  
+**GitHub:** Each repo → Settings → Pages → Source **GitHub Actions**; custom domain must match repo root `CNAME` file.
+
+---
+
 ## Related live surfaces (same zone)
 
 | Hostname | Notes |

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impact & Aurora DNS — GitHub Pages on unykorn.org</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Impact & Aurora DNS — GitHub Pages on unykorn.org</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Impact &amp; Aurora DNS — GitHub Pages on unykorn.org</h1>
+<p><strong>Last verified:</strong> 2026-05-21<br />
+<strong>Zone:</strong> <code>unykorn.org</code> (<code>8aa6916f4c1c7e8e42130455dfd5c029</code>)<br />
+<strong>Symptom:</strong> Browser <code>DNS_PROBE_POSSIBLE</code> / “site can’t be reached” for <code>impact.unykorn.org</code> (and <code>aurora.unykorn.org</code>).</p>
+<hr />
+<h2>Root cause (2026-05-21)</h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th><code>impact.unykorn.org</code></th>
+<th><code>aurora.unykorn.org</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Public DNS</strong></td>
+<td><strong>Missing</strong> — <code>nslookup</code> returned NXDOMAIN</td>
+<td><strong>Missing</strong> — same</td>
+</tr>
+<tr>
+<td><strong>Cloudflare</strong></td>
+<td>No CNAME in zone <code>unykorn.org</code></td>
+<td>No CNAME</td>
+</tr>
+<tr>
+<td><strong>GitHub Pages</strong></td>
+<td>Workflow failed until Pages source = Actions; then <strong>404</strong> on <code>/impact-site/</code></td>
+<td><strong>200</strong> on <code>/aurora-site/</code></td>
+</tr>
+<tr>
+<td><strong>Repo CNAME file</strong></td>
+<td><code>impact.unykorn.org</code> in <a href="https://github.com/FTHTrading/impact-site/blob/main/CNAME">impact-site/CNAME</a></td>
+<td><code>aurora.unykorn.org</code> in aurora-site</td>
+</tr>
+</tbody>
+</table>
+<p><code>DNS_PROBE_POSSIBLE</code> was <strong>not</strong> a GitHub outage — the hostname did not exist in DNS. Secondary issue: <strong>impact-site</strong> Pages deploy had never succeeded (Actions run failed at <code>configure-pages</code> until Pages was enabled).</p>
+<hr />
+<h2>Correct DNS (Cloudflare)</h2>
+<p>Add <strong>one CNAME per hostname</strong> (DNS only — <strong>disable</strong> orange-cloud proxy for GitHub custom domains unless you follow GitHub’s SSL proxy docs):</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Target</th>
+<th>Proxy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CNAME</td>
+<td><code>impact</code></td>
+<td><code>fthtrading.github.io</code></td>
+<td><strong>DNS only</strong> (grey cloud)</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td><code>aurora</code></td>
+<td><code>fthtrading.github.io</code></td>
+<td><strong>DNS only</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Full names: <code>impact.unykorn.org</code>, <code>aurora.unykorn.org</code>.</p>
+<p><strong>API (token in gitignored <code>.env</code> as <code>CLOUDFLARE_API_TOKEN</code>):</strong></p>
+<pre><code class="language-powershell">$zoneId = &quot;8aa6916f4c1c7e8e42130455dfd5c029&quot;
+$token = $env:CLOUDFLARE_API_TOKEN  # or read from .env locally — never commit
+$body = '{&quot;type&quot;:&quot;CNAME&quot;,&quot;name&quot;:&quot;impact&quot;,&quot;content&quot;:&quot;fthtrading.github.io&quot;,&quot;ttl&quot;:1,&quot;proxied&quot;:false}'
+curl.exe -s -X POST &quot;https://api.cloudflare.com/client/v4/zones/$zoneId/dns_records&quot; `
+  -H &quot;Authorization: Bearer $token&quot; -H &quot;Content-Type: application/json&quot; `
+  --data-binary &quot;@impact-cname.json&quot;
+</code></pre>
+<p>Repeat with <code>"name":"aurora"</code> for Aurora.</p>
+<p><strong>Dashboard (no API):</strong> Cloudflare → <strong>unykorn.org</strong> → DNS → Add record → CNAME → name <code>impact</code> → target <code>fthtrading.github.io</code> → Proxy status <strong>DNS only</strong> → Save.</p>
+<hr />
+<h2>GitHub Pages (impact-site)</h2>
+<p>Repo: <a href="https://github.com/FTHTrading/impact-site">FTHTrading/impact-site</a></p>
+<ol>
+<li><strong>Settings → Pages → Build and deployment:</strong> Source = <strong>GitHub Actions</strong> (workflow <code>.github/workflows/pages.yml</code> on <code>main</code>).</li>
+<li><strong>Custom domain:</strong> <code>impact.unykorn.org</code> — must match root <code>CNAME</code> file in repo.</li>
+<li>After DNS propagates, wait for <strong>HTTPS certificate</strong> (can take up to 24h; usually minutes).</li>
+<li>If workflow fails with <code>Get Pages site failed</code>, enable Pages in Settings once, then re-run workflow:</li>
+</ol>
+<pre><code class="language-bash">gh workflow run &quot;Deploy to GitHub Pages&quot; -R FTHTrading/impact-site
+</code></pre>
+<p><strong>Canonical URLs</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Impact Pages</td>
+<td>https://fthtrading.github.io/impact-site/</td>
+</tr>
+<tr>
+<td>Impact custom</td>
+<td>https://impact.unykorn.org/</td>
+</tr>
+<tr>
+<td>Aurora Pages</td>
+<td>https://fthtrading.github.io/aurora-site/</td>
+</tr>
+<tr>
+<td>Aurora custom</td>
+<td>https://aurora.unykorn.org/</td>
+</tr>
+<tr>
+<td>Investor landing</td>
+<td>https://fthtrading.github.io/Troptions-full-pack/sites/impact/</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>Verification</h2>
+<pre><code class="language-powershell">nslookup impact.unykorn.org
+nslookup aurora.unykorn.org
+curl.exe -sI https://fthtrading.github.io/impact-site/
+curl.exe -sI https://impact.unykorn.org/
+.\scripts\verify-all-ecosystem-sites.ps1
+</code></pre>
+<p>Expect: CNAME to <code>fthtrading.github.io</code> (or GitHub Pages anycast A after flattening), HTTP <strong>200</strong> on Pages URL, then custom domain once TLS is ready.</p>
+<hr />
+<h2>Operator actions already taken (2026-05-21)</h2>
+<ul>
+<li>Created Cloudflare CNAME <code>impact</code> → <code>fthtrading.github.io</code> (DNS only).</li>
+<li>Created Cloudflare CNAME <code>aurora</code> → <code>fthtrading.github.io</code> (DNS only).</li>
+<li>Re-ran <strong>Deploy to GitHub Pages</strong> on <code>impact-site</code> — workflow <strong>success</strong>.</li>
+</ul>
+<p><strong>You should still confirm in GitHub UI:</strong> impact-site → Pages → custom domain shows verified green check.</p>
+<hr />
+<h2>Related docs</h2>
+<ul>
+<li><a href="CLOUDFLARE_SERVICES.html">CLOUDFLARE_SERVICES.md</a> — tunnels, x402, junior, goat</li>
+<li><a href="ECOSYSTEM_MAP.html">ECOSYSTEM_MAP.md</a> — full repo catalog</li>
+<li>Monorepo landing: <a href="../sites/impact/">/sites/impact/</a></li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/IMPACT_DNS.html</p>
+</body>
+</html>
