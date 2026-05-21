@@ -85,8 +85,8 @@
 </tr>
 <tr>
 <td><strong>4029</strong></td>
-<td>baas-dashboard (UI)</td>
-<td>Self-service</td>
+<td><strong>baas-api</strong></td>
+<td>Agents, pools, tokens</td>
 </tr>
 <tr>
 <td><strong>4030</strong></td>
@@ -114,13 +114,18 @@
 <td>Tokyo regional clone</td>
 </tr>
 <tr>
-<td><strong>8097</strong></td>
-<td>baas-api</td>
-<td>Agent registration API</td>
+<td><strong>4040</strong></td>
+<td>baas-dashboard (UI)</td>
+<td>Self-service</td>
+</tr>
+<tr>
+<td><strong>4731</strong></td>
+<td>MCP</td>
+<td>External vendor (mock when down)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Common mistake:</strong> assigning EU/JP to <strong>:4031</strong> or <strong>:4032</strong>. Those ports are orchestrator and MCP respectively. Regional gateways are <strong>4034</strong> and <strong>4035</strong>.</p>
+<p><strong>Common mistake:</strong> assigning EU/JP to <strong>:4031</strong> or <strong>:4032</strong>. Orchestrator is <strong>4031</strong>; MCP XRPL is <strong>4032</strong>; regional gateways are <strong>4034</strong> and <strong>4035</strong>.</p>
 <h2>Step-by-step 402 flow (bot orderbook example)</h2>
 <ol>
 <li><strong>Bot</strong> <code>GET http://127.0.0.1:4030/x402/market-data/orderbook?pair=USD-IOU/EUR-IOU</code> with no payment header.</li>
@@ -225,7 +230,7 @@
   US[x402 US :4030]
   EU[x402 EU :4034]
   JP[x402 JP :4035]
-  MCP[MCP XRPL :4032]
+  MCP[MCP :4731]
   EX[Exchange OS :8091]
   CE[compliance :4025]
   AO --&gt; US

@@ -26,12 +26,14 @@
   </header>
   <div class="md-body">
 <h1>Multi-x402 Global Mesh</h1>
-<p><strong>Canonical doc:</strong> <a href="X402_GLOBAL_MESH.html">X402_GLOBAL_MESH</a> — full 402 flow, endpoint map, arbitrage sequence, fee projections, and activation.</p>
-<h2>Quick port reference (corrected)</h2>
+<p><strong>Status:</strong> PIPELINE · Revenue labels: <strong>PROJECTION</strong> (not realized; do not cite $791K-style totals as fact)<br />
+<strong>Date:</strong> 2026-05-21</p>
+<h2>Regional gateways (NY / Frankfurt / Tokyo)</h2>
 <table>
 <thead>
 <tr>
 <th>Region</th>
+<th>City</th>
 <th>Port</th>
 <th>PM2 name</th>
 <th>Path</th>
@@ -39,38 +41,109 @@
 </thead>
 <tbody>
 <tr>
-<td>US</td>
+<td><strong>US</strong></td>
+<td>New York (NY)</td>
 <td><strong>4030</strong></td>
 <td><code>x402-gateway-v2</code></td>
 <td><code>fiat-rails/x402-gateway/</code></td>
 </tr>
 <tr>
-<td>EU</td>
-<td><strong>4034</strong></td>
+<td><strong>EU</strong></td>
+<td>Frankfurt</td>
+<td><strong>4032</strong></td>
 <td><code>x402-gateway-eu</code></td>
 <td><code>fiat-rails/x402-gateway-eu/</code></td>
 </tr>
 <tr>
-<td>JP</td>
-<td><strong>4035</strong></td>
+<td><strong>JP</strong></td>
+<td>Tokyo</td>
+<td><strong>4033</strong></td>
 <td><code>x402-gateway-jp</code></td>
 <td><code>fiat-rails/x402-gateway-jp/</code></td>
 </tr>
 <tr>
 <td>Orchestrator</td>
+<td>—</td>
 <td><strong>4031</strong></td>
 <td><code>agent-orchestrator</code></td>
 <td>not a gateway</td>
 </tr>
 <tr>
-<td>MCP XRPL</td>
-<td><strong>4032</strong></td>
+<td>MCP</td>
+<td>—</td>
+<td><strong>4731</strong></td>
 <td>external</td>
-<td>reserved — <strong>not</strong> EU gateway</td>
+<td>ledger tools (mock when down)</td>
+</tr>
+<tr>
+<td>Apostle mesh</td>
+<td>—</td>
+<td><strong>4020</strong></td>
+<td><code>x402-gateway</code> (Python)</td>
+<td>separate from fiat-rails v2</td>
 </tr>
 </tbody>
 </table>
-<p>Setup: <code>.\scripts\setup-x402-global-mesh.ps1</code></p>
+<h2>Stats</h2>
+<table>
+<thead>
+<tr>
+<th>Gateway</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US</td>
+<td><code>GET http://127.0.0.1:4030/x402/stats</code> (alias <code>/stats</code>)</td>
+</tr>
+<tr>
+<td>EU</td>
+<td><code>GET http://127.0.0.1:4032/x402/stats</code></td>
+</tr>
+<tr>
+<td>JP</td>
+<td><code>GET http://127.0.0.1:4033/x402/stats</code></td>
+</tr>
+</tbody>
+</table>
+<h2>ATP price setting</h2>
+<p>ATP and metered fees are an <strong>operator PIPELINE strategy</strong> — configure PASS tiers / OpenMeter externally. Regional gateways proxy to Exchange OS; they do not auto-set live ATP prices in this repo.</p>
+<h2>Multi-region arbitrage</h2>
+<pre><code class="language-bash">curl -X POST http://127.0.0.1:4031/api/v1/arbitrage/multi \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;buy_location&quot;:&quot;us&quot;,&quot;sell_location&quot;:&quot;eu&quot;,&quot;pair&quot;:&quot;USD-IOU/EUR-IOU&quot;,&quot;amount_usd&quot;:5000,&quot;dry_run&quot;:true}'
+</code></pre>
+<p>Response is <strong>PROJECTION</strong> until cross-gateway settlement is live.</p>
+<h2>PROJECTION revenue</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regional x402 counters</td>
+<td><strong>PROJECTION</strong> (default zero)</td>
+</tr>
+<tr>
+<td>Multi-mesh arb PnL</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+<tr>
+<td>Agent dashboards</td>
+<td><strong>PROJECTION</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>Setup</h2>
+<pre><code class="language-powershell">.\scripts\setup-second-x402.ps1
+.\scripts\deploy-agentic-floor.ps1
+.\scripts\activate-troptions-revenue.ps1 -DryRun
+</code></pre>
+<p>See <a href="AGENTIC_RAG_AMM.html">AGENTIC_RAG_AMM.md</a>, <a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS_REVENUE_ENGINE.md</a>.</p>
   </div>
   <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/MULTI_X402_MESH.html</p>
 </body>

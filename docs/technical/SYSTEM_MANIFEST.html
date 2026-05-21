@@ -108,7 +108,7 @@
        ▲
        └── iou-reserve-monitor :4027 (ledger vs bank — NOT claiming backed today)
 </code></pre>
-<p><strong>Port discipline:</strong> <code>popeye-relay</code> <strong>:4021</strong>; fiat rails <strong>:4022–:4028</strong>; <strong>baas-api</strong> <strong>:4029</strong>; x402-gateway-v2 (US) <strong>:4030</strong>; agent-orchestrator <strong>:4031</strong>; MCP XRPL <strong>:4032</strong>; x402-gateway-eu <strong>:4034</strong>; x402-gateway-jp <strong>:4035</strong>; baas-dashboard UI <strong>:4040</strong>; MCP vendor <strong>:4731</strong> — no collision with core backends 8090–8093. See <a href="X402_GLOBAL_MESH.html">X402_GLOBAL_MESH</a>, <a href="AGENTIC_RAG_AMM.html">AGENTIC_RAG_AMM</a>.</p>
+<p><strong>Port discipline:</strong> <code>popeye-relay</code> <strong>:4021</strong>; fiat rails <strong>:4022–:4028</strong>; <strong>baas-api</strong> <strong>:4029</strong>; x402-gateway-v2 (US) <strong>:4030</strong>; agent-orchestrator <strong>:4031</strong>; x402-gateway-eu <strong>:4032</strong>; x402-gateway-jp <strong>:4033</strong>; baas-dashboard UI <strong>:4040</strong>; MCP <strong>:4731</strong> — no collision with core backends 8090–8093. See <a href="MULTI_X402_MESH.html">MULTI_X402_MESH</a>, <a href="AGENTIC_RAG_AMM.html">AGENTIC_RAG_AMM</a>.</p>
 <hr />
 <h2>Fiat-rails service integration table</h2>
 <table>
@@ -201,14 +201,14 @@
 </tr>
 <tr>
 <td><code>x402-gateway-eu</code></td>
-<td><strong>4034</strong></td>
+<td><strong>4032</strong></td>
 <td><code>fiat-rails/x402-gateway-eu/</code></td>
 <td>Frankfurt regional gateway</td>
 <td><strong>PIPELINE</strong></td>
 </tr>
 <tr>
 <td><code>x402-gateway-jp</code></td>
-<td><strong>4035</strong></td>
+<td><strong>4033</strong></td>
 <td><code>fiat-rails/x402-gateway-jp/</code></td>
 <td>Tokyo regional gateway</td>
 <td><strong>PIPELINE</strong></td>

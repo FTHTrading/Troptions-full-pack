@@ -16,7 +16,7 @@ HTTP **402 Payment Required** is the metered API rail for agent and bot access a
 | Layer | Port | Path | Role | Label |
 |-------|------|------|------|-------|
 | **Apostle mesh** | **4020** | `backend/x402-gateway/` | ATP / Lightning sidecar for dao-service and legacy mesh | PROVEN (health) |
-| **Fiat-rails v2** | **4030** (US), **4032** (EU), **4033** (JP) | `fiat-rails/x402-gateway*/` | Paid proxies to Exchange OS, neobank, BaaS, compliance | PIPELINE |
+| **Fiat-rails v2** | **4030** (US), **4034** (EU), **4035** (JP) | `fiat-rails/x402-gateway*/` | Paid proxies to Exchange OS, neobank, BaaS, compliance | PIPELINE |
 
 Agents and arbitrage bots should use **:4030+** for orderbook and orchestration. Do not point production bots at **:4020** unless you explicitly deploy the Python Apostle gateway.
 
@@ -30,12 +30,13 @@ Agents and arbitrage bots should use **:4030+** for orderbook and orchestration.
 | **4029** | **baas-api** | Agents, pools, tokens |
 | **4030** | **x402-gateway-v2** (US) | Canonical `GET /x402/stats` |
 | **4031** | **agent-orchestrator** | `POST /api/v1/arbitrage/multi` |
-| **4032** | **x402-gateway-eu** | Frankfurt regional clone |
-| **4033** | **x402-gateway-jp** | Tokyo regional clone |
+| **4032** | **MCP XRPL** (reserved) | External vendor — **not** EU gateway |
+| **4034** | **x402-gateway-eu** | Frankfurt regional clone |
+| **4035** | **x402-gateway-jp** | Tokyo regional clone |
 | **4040** | baas-dashboard (UI) | Self-service |
 | **4731** | MCP | External vendor (mock when down) |
 
-**Common mistake:** conflating **:4031** (orchestrator) with a regional gateway. EU/JP are **4032** and **4033**.
+**Common mistake:** assigning EU/JP to **:4031** or **:4032**. Orchestrator is **4031**; MCP XRPL is **4032**; regional gateways are **4034** and **4035**.
 
 ## Step-by-step 402 flow (bot orderbook example)
 
@@ -83,7 +84,7 @@ Regional gateways expose the **same routes**; `REGION` and `BASE_CURRENCY` diffe
            ┌───────────────────┼───────────────────┐
            ▼                   ▼                   ▼
     x402-gateway-v2      x402-gateway-eu    x402-gateway-jp
-         :4030 US            :4032 EU           :4033 JP
+         :4030 US            :4034 EU           :4035 JP
            │                   │                   │
            └───────────────────┴───────────────────┘
                                │
@@ -95,8 +96,8 @@ Regional gateways expose the **same routes**; `REGION` and `BASE_CURRENCY` diffe
 flowchart LR
   AO[agent-orchestrator :4031]
   US[x402 US :4030]
-  EU[x402 EU :4032]
-  JP[x402 JP :4033]
+  EU[x402 EU :4034]
+  JP[x402 JP :4035]
   MCP[MCP :4731]
   EX[Exchange OS :8091]
   CE[compliance :4025]
@@ -114,7 +115,7 @@ flowchart LR
 
 1. Research agent reads stats from US/EU/JP (`GET /x402/stats` per region).
 2. Operator or bot calls `POST http://127.0.0.1:4031/api/v1/arbitrage/multi` with body `{ "buy": "us", "sell": "eu", "pair": "USD-IOU/EUR-IOU", "dry_run": true }`.
-3. Orchestrator returns **PIPELINE** legs with gateway URLs `4030` / `4032` (not live settlement).
+3. Orchestrator returns **PIPELINE** legs with gateway URLs `4030` / `4034` (not live settlement).
 4. When pools are live, Execution agent will place buy on buy-region gateway and sell on sell-region gateway with compliance screen on each leg.
 
 ## ATP price setting (operator strategy)
@@ -156,7 +157,7 @@ cd C:\Users\Kevan\Troptions-full-pack; .\scripts\setup-x402-global-mesh.ps1 -Sta
 
 ## Arbitrage bot `GATEWAY_URLS`
 
-Default: `http://127.0.0.1:4030,http://127.0.0.1:4032,http://127.0.0.1:4033` — bot walks the list for the first live orderbook.
+Default: `http://127.0.0.1:4030,http://127.0.0.1:4034,http://127.0.0.1:4035` — bot walks the list for the first live orderbook.
 
 ## Related docs
 

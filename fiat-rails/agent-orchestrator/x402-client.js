@@ -6,8 +6,8 @@ const X402_MESH_URL = process.env.X402_MESH_URL || 'http://127.0.0.1:4020';
 
 const REGION_GATEWAYS = {
   us: process.env.X402_US_URL || 'http://127.0.0.1:4030',
-  eu: process.env.X402_EU_URL || 'http://127.0.0.1:4032',
-  jp: process.env.X402_JP_URL || 'http://127.0.0.1:4033',
+  eu: process.env.X402_EU_URL || 'http://127.0.0.1:4034',
+  jp: process.env.X402_JP_URL || 'http://127.0.0.1:4035',
 };
 
 async function getJson(url, headers = {}) {
