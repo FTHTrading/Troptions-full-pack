@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { assetPath } from "@/lib/base-path";
 import { MATURITY_GAP_NOTE, MATURITY_SCORE, PROOF_URL, REPO_URL } from "@/lib/constants";
 
 export function Hero() {
@@ -41,7 +42,7 @@ export function Hero() {
           </div>
           <div className="flex shrink-0 justify-center md:justify-end">
             <Image
-              src="/logo.png"
+              src={assetPath("/logo.png")}
               alt="TROPTIONS logo"
               width={200}
               height={200}

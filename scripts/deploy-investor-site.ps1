@@ -104,6 +104,14 @@ try {
 
         Set-Content -Path (Join-Path $Docs ".nojekyll") -Value "" -NoNewline
 
+        $logoSrc = Join-Path $Site "public\logo.png"
+        if (Test-Path $logoSrc) {
+            Copy-Item $logoSrc (Join-Path $Docs "logo.png") -Force
+            Write-Host "  docs/logo.png" -ForegroundColor DarkGray
+        } else {
+            Write-Host "  WARN: sites/investor/public/logo.png missing" -ForegroundColor Yellow
+        }
+
         & (Join-Path $Root "scripts\write-pages-redirects.ps1") -DocsRoot $Docs
 
         Write-Host "Syncing technical HTML artifacts for Pages..." -ForegroundColor Cyan

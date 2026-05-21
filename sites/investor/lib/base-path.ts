@@ -3,8 +3,9 @@ export const BASE_PATH =
   process.env.NEXT_PUBLIC_BASE_PATH?.replace(/\/$/, "") ?? "";
 
 /**
- * Absolute path for plain `<a>`, `fetch`, and static assets on GitHub Pages.
- * Do not use with `next/link` or `next/image` — those apply `basePath` themselves.
+ * Absolute path for static assets, `fetch`, and plain `<a href>`.
+ * Use with `next/image` `src` on GitHub Pages — static export does not prefix image URLs.
+ * Do not use with `next/link` `href` — that already applies `basePath`.
  */
 export function assetPath(path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
