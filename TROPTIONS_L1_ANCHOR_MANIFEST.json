@@ -1,0 +1,67 @@
+{
+  "anchored": "2026-05-21T13:03:06.882900",
+  "l1_status": "PENDING",
+  "l1_result": null,
+  "credential": {
+    "type": "soulbound_audio_credential",
+    "version": "1.0",
+    "title": "TROPTIONS Anthem - Mainframe Explode NFT Collection",
+    "collection_symbol": "TANTHEM",
+    "issuer": "rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ",
+    "created": "2026-05-21T13:03:04.815779",
+    "collection_hash": "802185b1267b01ca604521541bd866e40e54c463c39f82542949b7ed6590ea19",
+    "total_nfts": 703,
+    "total_tiers": 6,
+    "ipfs_manifest": "Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7",
+    "tracks": [
+      {
+        "name": "Official TROPTIONS Song",
+        "cid": "QmX7Wc9MtXmwvG46qw8jViN27jjyUNG8dBLEFbUkYJ2ECb",
+        "tier": "LEGENDARY",
+        "supply": 5
+      },
+      {
+        "name": "22 Years Narrative",
+        "cid": "Qmcz2htAJFpaP2mcUT4CDCzVjMmbQoTVo8uQCWsTjNAKyV",
+        "tier": "EPIC",
+        "supply": 22
+      },
+      {
+        "name": "Latest Master Cut",
+        "cid": "QmUjCZXLux8BnD17cNdBs3pTshtrswgKecjYpQiyMh7Def",
+        "tier": "RARE",
+        "supply": 50
+      },
+      {
+        "name": "Alternate Studio Mix",
+        "cid": "QmbGT6jyRMP1Q2fuW6cz8ByKPydZmgAZo4kVsVg4FWAS2A",
+        "tier": "UNCOMMON",
+        "supply": 100
+      },
+      {
+        "name": "Session Edit",
+        "cid": "QmddQzssL3RdNhCFfBSPFSLZBLpgyUvDbUnfWhmorU1Wsj",
+        "tier": "COMMON",
+        "supply": 500
+      },
+      {
+        "name": "AI Voice Edition (ElevenLabs Charlie)",
+        "cid": "QmeLmHMuWvj556cjGR5snaVTtYG4hYTbDDkqe5xUA3j2XV",
+        "tier": "SPECIAL",
+        "supply": 26
+      }
+    ],
+    "license": "Proprietary - FTH Trading",
+    "external_url": "https://fthtrading.github.io/Troptions-full-pack/",
+    "metadata_standard": "TROPTIONS L1 Soulbound v1.0"
+  },
+  "proof": {
+    "ipfs_gateway": "https://gateway.pinata.cloud/ipfs/",
+    "l1_rpc": "http://localhost:9944",
+    "verification_steps": [
+      "1. Check IPFS: https://gateway.pinata.cloud/ipfs/Qmc54zWPjwuo666RGWh1Tf3nVJQvkmwLSVwmnFomCFP7o7",
+      "2. Check L1: POST to http://localhost:9944 with soulbound_get method",
+      "3. Verify collection hash: 802185b1267b01ca604521541bd866e40e54c463c39f82542949b7ed6590ea19"
+    ]
+  }
+}
