@@ -197,33 +197,13 @@ export const TECHNICAL_FOOTER_LINKS: NavLink[] = [
     external: true,
   },
   {
-    href: `${PAGES_URL}/technical/MSB_FIAT_RAILS.html`,
-    label: "MSB fiat rails",
-    external: true,
-  },
-  {
-    href: `${PAGES_URL}/technical/PARTNER_BANK_MESH.html`,
-    label: "Partner bank mesh",
-    external: true,
-  },
-  {
     href: `${PAGES_URL}/technical/BAAS_BATCH_POOLS.html`,
     label: "BaaS batch pools",
     external: true,
   },
   {
-    href: `${PAGES_URL}/technical/AGENTIC_RAG_AMM.html`,
-    label: "Agentic RAG + AMM",
-    external: true,
-  },
-  {
     href: `${PAGES_URL}/technical/TELEGRAM_OPERATOR.html`,
     label: "Telegram operator",
-    external: true,
-  },
-  {
-    href: `${PAGES_URL}/technical/WHAT_YOU_CAN_DO_NOW.html`,
-    label: "What you can do NOW",
     external: true,
   },
 ];

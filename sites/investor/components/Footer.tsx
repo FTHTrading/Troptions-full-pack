@@ -129,7 +129,7 @@ export function Footer() {
                 </a>
               </li>
               {TECHNICAL_FOOTER_LINKS.map((item) => (
-                <li key={item.href}>
+                <li key={`${item.href}-${item.label}`}>
                   <a
                     href={item.href}
                     className="hover:text-[var(--color-text)]"
