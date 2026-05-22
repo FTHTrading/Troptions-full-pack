@@ -5,10 +5,14 @@ import {
   COMMAND_ACTIVATION,
   COMMAND_DOC_LINKS,
   COMMAND_EXTERNAL,
+  COMMAND_INSTITUTIONAL_RAILS,
   COMMAND_SERVICES,
+  COMMAND_SITE_MAP,
 } from "@/lib/command-center";
 import {
+  PAGES_URL,
   REVENUE_PAGE_URL,
+  SWIFT_PAGE_URL,
   TELEGRAM_PAGE_URL,
 } from "@/lib/constants";
 
@@ -93,6 +97,75 @@ export default function CommandCenterPage() {
                     <TruthChip label={s.label} />
                   </td>
                   <td className="text-[var(--color-muted)]">{s.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mb-12">
+        <h2 className="serif-heading text-xl font-semibold text-[var(--color-text)]">
+          Institutional partner rails
+        </h2>
+        <p className="mt-2 text-sm text-[var(--color-muted)]">
+          Fiat settlement requires MSB program + institutional partner BIC and nostro. Software
+          stubs are PIPELINE until the bank is wired.
+        </p>
+        <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+          {COMMAND_INSTITUTIONAL_RAILS.map((row) => (
+            <li key={row.href}>
+              <a
+                href={row.href}
+                className="panel block p-4 hover:border-[var(--color-accent-gold)]"
+              >
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-sm font-medium text-[var(--color-accent-blue)]">
+                    {row.title} →
+                  </span>
+                  <TruthChip label={row.label} />
+                </div>
+                <p className="mt-2 text-xs text-[var(--color-muted)]">{row.note}</p>
+              </a>
+            </li>
+          ))}
+          <li>
+            <a
+              href={SWIFT_PAGE_URL}
+              className="panel block p-4 text-sm text-[var(--color-accent-gold)] hover:underline"
+            >
+              Full SWIFT / FedWire diligence page →
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section className="mb-12">
+        <h2 className="serif-heading text-xl font-semibold text-[var(--color-text)]">
+          Site map (operator routes + docs)
+        </h2>
+        <p className="mt-2 text-sm text-[var(--color-muted)]">
+          GitHub Pages base: {PAGES_URL}
+        </p>
+        <div className="panel mt-4 overflow-x-auto">
+          <table className="terminal-table">
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Title</th>
+                <th>Label</th>
+              </tr>
+            </thead>
+            <tbody>
+              {COMMAND_SITE_MAP.map((row) => (
+                <tr key={row.route}>
+                  <td className="font-mono text-xs text-[var(--color-accent-gold)]">
+                    {row.route}
+                  </td>
+                  <td className="text-[var(--color-text)]">{row.title}</td>
+                  <td>
+                    <TruthChip label={row.label} />
+                  </td>
                 </tr>
               ))}
             </tbody>

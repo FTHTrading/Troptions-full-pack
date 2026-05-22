@@ -1,10 +1,16 @@
 import {
   AWS_ACTIVATION_RUNBOOK_URL,
+  BAAS_BATCH_POOLS_URL,
   ECOSYSTEM_HUB_URL,
+  MSB_FIAT_RAILS_URL,
+  OVERVIEW_URL,
   PAGES_URL,
+  PARTNER_BANK_MESH_URL,
   REPO_URL,
+  SWIFT_PAGE_URL,
   TELEGRAM_OPERATOR_URL,
   TELEGRAM_PAGE_URL,
+  WHAT_YOU_CAN_DO_NOW_URL,
   X402_HEALTH,
   X402_GLOBAL_MESH_URL,
 } from "@/lib/constants";
@@ -169,9 +175,42 @@ export const COMMAND_ACTIVATION = [
   },
 ];
 
+export const COMMAND_INSTITUTIONAL_RAILS = [
+  {
+    title: "Institutional fiat rails (SWIFT / FedWire)",
+    href: SWIFT_PAGE_URL,
+    label: "PIPELINE" as TruthLabel,
+    note: ":4022 orchestrator · :4023 FedWire · :4024 SWIFT — until bank wired",
+  },
+  {
+    title: "What you can do NOW",
+    href: OVERVIEW_URL,
+    label: "PROVEN" as TruthLabel,
+    note: "Capability matrix — crypto PROVEN vs fiat needs partner",
+  },
+];
+
+export const COMMAND_SITE_MAP = [
+  { route: "/command-center/", title: "Command Center", label: "PROVEN" as TruthLabel },
+  { route: "/overview/", title: "What you can do NOW", label: "PROVEN" as TruthLabel },
+  { route: "/swift/", title: "Institutional rails", label: "PROVEN" as TruthLabel },
+  { route: "/revenue/", title: "Revenue engine", label: "PROVEN" as TruthLabel },
+  { route: "/telegram/", title: "Telegram operator", label: "PROVEN" as TruthLabel },
+  { route: "/ecosystem/", title: "Ecosystem status", label: "PROVEN" as TruthLabel },
+  { route: "/dao/", title: "Sovereign DAO", label: "PROVEN" as TruthLabel },
+  { route: "/technical/index.html", title: "Technical docs hub", label: "PROVEN" as TruthLabel },
+];
+
 export const COMMAND_DOC_LINKS = [
+  { title: "What you can do NOW (overview)", href: OVERVIEW_URL },
+  { title: "Institutional rails (SWIFT / FedWire)", href: SWIFT_PAGE_URL },
+  { title: "Operator seed + partner (no secrets)", href: `${PAGES_URL}/technical/OPERATOR_SEED_AND_PARTNER.html` },
   { title: "AWS activation runbook", href: AWS_ACTIVATION_RUNBOOK_URL },
   { title: "x402 global mesh", href: X402_GLOBAL_MESH_URL },
+  { title: "MSB fiat rails", href: MSB_FIAT_RAILS_URL },
+  { title: "Partner bank mesh", href: PARTNER_BANK_MESH_URL },
+  { title: "BaaS batch pools", href: BAAS_BATCH_POOLS_URL },
+  { title: "What you can do NOW (technical doc)", href: WHAT_YOU_CAN_DO_NOW_URL },
   { title: "Telegram setup", href: TELEGRAM_PAGE_URL },
   { title: "Telegram operator (token security)", href: TELEGRAM_OPERATOR_URL },
   { title: "ACTIVATE_NOW.md", href: `${REPO_URL}/blob/main/ACTIVATE_NOW.md` },

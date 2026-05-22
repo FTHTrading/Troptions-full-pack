@@ -3,9 +3,11 @@ import {
   COMMAND_CENTER_URL,
   DAO_PAGE_URL,
   ECOSYSTEM_HUB_URL,
+  OVERVIEW_URL,
   PAGES_URL,
   REPO_URL,
   REVENUE_PAGE_URL,
+  SWIFT_PAGE_URL,
   TELEGRAM_PAGE_URL,
 } from "@/lib/constants";
 import {
@@ -38,6 +40,16 @@ export function Footer() {
               <li>
                 <Link href={COMMAND_CENTER_URL} className="text-[var(--color-accent-blue)] hover:underline">
                   Command Center
+                </Link>
+              </li>
+              <li>
+                <Link href={OVERVIEW_URL} className="text-[var(--color-accent-blue)] hover:underline">
+                  Overview
+                </Link>
+              </li>
+              <li>
+                <Link href={SWIFT_PAGE_URL} className="text-[var(--color-accent-blue)] hover:underline">
+                  Institutional rails
                 </Link>
               </li>
               <li>

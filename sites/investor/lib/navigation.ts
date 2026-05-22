@@ -4,8 +4,10 @@ import {
   DAO_PAGE_URL,
   DOCS_URL,
   ECOSYSTEM_HUB_URL,
+  OVERVIEW_URL,
   PAGES_URL,
   REVENUE_PAGE_URL,
+  SWIFT_PAGE_URL,
   TELEGRAM_PAGE_URL,
   TANTHEM_MINT_DAPP_URL,
   TANTHEM_NFT_GALLERY_URL,
@@ -36,6 +38,8 @@ export function getSiteNavigation(): NavEntry[] {
   return [
     { kind: "link", href: "/", label: "Home" },
     { kind: "link", href: COMMAND_CENTER_URL, label: "Command Center" },
+    { kind: "link", href: OVERVIEW_URL, label: "Overview" },
+    { kind: "link", href: SWIFT_PAGE_URL, label: "SWIFT" },
     { kind: "link", href: REVENUE_PAGE_URL, label: "Revenue" },
     { kind: "link", href: TELEGRAM_PAGE_URL, label: "Telegram" },
     {
@@ -81,6 +85,8 @@ export function getSiteNavigation(): NavEntry[] {
           external: onPages,
         },
         { href: homeHash("contact"), label: "Contact" },
+        { href: SWIFT_PAGE_URL, label: "Institutional rails" },
+        { href: OVERVIEW_URL, label: "What you can do NOW" },
       ],
     },
   ];
@@ -89,6 +95,8 @@ export function getSiteNavigation(): NavEntry[] {
 /** Footer “On this page” — sections not in the slim top bar. */
 export const MORE_NAV: NavLink[] = [
   { href: COMMAND_CENTER_URL, label: "Command Center" },
+  { href: OVERVIEW_URL, label: "Overview" },
+  { href: SWIFT_PAGE_URL, label: "Institutional rails" },
   { href: REVENUE_PAGE_URL, label: "Revenue" },
   { href: TELEGRAM_PAGE_URL, label: "Telegram" },
   { href: homeHash("economics"), label: "Economics" },
@@ -159,8 +167,63 @@ export const TECHNICAL_FOOTER_LINKS: NavLink[] = [
     external: true,
   },
   {
+    href: `${PAGES_URL}/technical/WHAT_YOU_CAN_DO_NOW.html`,
+    label: "What you can do NOW",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/OPERATOR_SEED_AND_PARTNER.html`,
+    label: "Operator seed (paths only)",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/MSB_FIAT_RAILS.html`,
+    label: "MSB fiat rails",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/PARTNER_BANK_MESH.html`,
+    label: "Partner bank mesh",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/AGENTIC_RAG_AMM.html`,
+    label: "Agentic RAG + AMM",
+    external: true,
+  },
+  {
     href: `${PAGES_URL}/technical/DOMAIN_TRUTH_TABLE.html`,
     label: "Domain truth",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/MSB_FIAT_RAILS.html`,
+    label: "MSB fiat rails",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/PARTNER_BANK_MESH.html`,
+    label: "Partner bank mesh",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/BAAS_BATCH_POOLS.html`,
+    label: "BaaS batch pools",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/AGENTIC_RAG_AMM.html`,
+    label: "Agentic RAG + AMM",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/TELEGRAM_OPERATOR.html`,
+    label: "Telegram operator",
+    external: true,
+  },
+  {
+    href: `${PAGES_URL}/technical/WHAT_YOU_CAN_DO_NOW.html`,
+    label: "What you can do NOW",
     external: true,
   },
 ];

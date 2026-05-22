@@ -5,6 +5,9 @@ import {
   AWS_ACTIVATION_RUNBOOK_URL,
   COMMAND_CENTER_URL,
   MSB_FIAT_RAILS_URL,
+  OVERVIEW_URL,
+  SWIFT_PAGE_URL,
+  PARTNER_BANK_MESH_URL,
   REVENUE_OPPORTUNITIES,
   SYSTEM_MANIFEST_URL,
   TELEGRAM_PAGE_URL,
@@ -115,6 +118,22 @@ export default function RevenuePage() {
         </div>
       </section>
 
+      <section className="mb-12">
+        <h2 className="serif-heading text-xl font-semibold text-[var(--color-text)]">
+          Partner-enabled streams
+        </h2>
+        <p className="mt-2 text-sm text-[var(--color-muted)]">
+          Omnibus, SWIFT B2B, and BaaS white-label fees unlock after institutional partner rails
+          are live — see investor SWIFT page and partner bank mesh doc.
+        </p>
+        <a
+          href={SWIFT_PAGE_URL}
+          className="panel mt-4 inline-block p-4 text-sm text-[var(--color-accent-gold)] hover:underline"
+        >
+          Institutional fiat rails (SWIFT · FedWire · :4022–:4024) →
+        </a>
+      </section>
+
       <section>
         <h2 className="serif-heading text-xl font-semibold text-[var(--color-text)]">
           Technical documentation
@@ -126,7 +145,11 @@ export default function RevenuePage() {
             { title: "AWS Activation Runbook", href: AWS_ACTIVATION_RUNBOOK_URL },
             { title: "System Manifest", href: SYSTEM_MANIFEST_URL },
             { title: "MSB Fiat Rails", href: MSB_FIAT_RAILS_URL },
+            { title: "Partner bank mesh", href: PARTNER_BANK_MESH_URL },
+            { title: "Institutional rails (investor)", href: SWIFT_PAGE_URL },
             { title: "Command Center", href: COMMAND_CENTER_URL },
+            { title: "What you can do NOW", href: OVERVIEW_URL },
+            { title: "Institutional rails (SWIFT)", href: SWIFT_PAGE_URL },
             { title: "Telegram /revenue command", href: TELEGRAM_PAGE_URL },
           ].map((doc) => (
             <li key={doc.href}>

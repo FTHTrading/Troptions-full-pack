@@ -70,12 +70,25 @@ $hub = @'
 <body>
   <nav class="site-nav no-print" style="margin-bottom:1rem;font-size:0.75rem;display:flex;flex-wrap:wrap;gap:0.5rem 0.75rem">
     <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/command-center/">Command Center</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/overview/">Overview</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/swift/">Institutional rails</a>
     <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
   </nav>
   <header class="doc-header">
     <h1>Technical documentation</h1>
     <p class="tagline">Static HTML on GitHub Pages — May 2026</p>
   </header>
+  <h2>Operator hub (investor site)</h2>
+  <ul>
+    <li><a href="../overview/">What you can do NOW — capability matrix</a></li>
+    <li><a href="../swift/">Institutional fiat rails (SWIFT · FedWire)</a></li>
+    <li><a href="../command-center/">Command Center — ports, health, activation</a></li>
+    <li><a href="../revenue/">Revenue engine summary (PROJECTION labeled)</a></li>
+    <li><a href="../telegram/">Telegram bot setup</a></li>
+    <li><a href="WHAT_YOU_CAN_DO_NOW.html">What you can do NOW (technical doc)</a></li>
+    <li><a href="OPERATOR_SEED_AND_PARTNER.html">Operator seed + partner (paths only)</a></li>
+  </ul>
   <h2>Banking &amp; system map (MSB / SWIFT / FedWire)</h2>
   <ul>
     <li><a href="TROPTIONS_REVENUE_ENGINE.html">TROPTIONS revenue engine (waves, 18 streams, flywheel)</a></li>
@@ -85,6 +98,9 @@ $hub = @'
     <li><a href="ARBITRAGE_AND_BAAS.html">Arbitrage &amp; BaaS hub</a></li>
     <li><a href="X402_GLOBAL_MESH.html">x402 global mesh (US/EU/JP ports)</a></li>
     <li><a href="BAAS_BATCH_POOLS.html">BaaS batch liquidity pools</a></li>
+    <li><a href="AGENTIC_RAG_AMM.html">Agentic RAG + AMM (orchestrator mesh)</a></li>
+    <li><a href="TELEGRAM_OPERATOR.html">Telegram operator guide</a></li>
+    <li><a href="AWS_ACTIVATION_RUNBOOK.html">AWS activation runbook</a></li>
   </ul>
   <h2>Investor diligence (primary)</h2>
   <ul>
@@ -111,12 +127,11 @@ $hub = @'
   </ul>
   <h2>Live surfaces</h2>
   <ul>
+    <li><a href="../ecosystem/">Ecosystem status hub</a></li>
     <li><a href="../dao/">Sovereign DAO (public)</a></li>
     <li><a href="../mint.html">XRPL mint DApp</a></li>
     <li><a href="../nft/">NFT gallery</a></li>
     <li><a href="../">Investor site home</a></li>
-    <li><a href="../telegram/">Telegram setup (NeedAI Ada)</a></li>
-    <li><a href="TELEGRAM_OPERATOR.html">Telegram operator guide</a></li>
   </ul>
   <h2>Governance</h2>
   <ul>

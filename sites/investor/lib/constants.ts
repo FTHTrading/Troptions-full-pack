@@ -152,9 +152,21 @@ export const TELEGRAM_PAGE_URL = onPages
 export const REVENUE_PAGE_URL = onPages
   ? `${PAGES_URL}/revenue/`
   : "/revenue/";
+export const SWIFT_PAGE_URL = onPages
+  ? `${PAGES_URL}/swift/`
+  : "/swift/";
+export const OVERVIEW_URL = onPages
+  ? `${PAGES_URL}/overview/`
+  : "/overview/";
+export const PARTNER_BANK_MESH_URL = `${PAGES_URL}/technical/PARTNER_BANK_MESH.html`;
+export const BAAS_BATCH_POOLS_URL = `${PAGES_URL}/technical/BAAS_BATCH_POOLS.html`;
+export const AGENTIC_RAG_AMM_URL = `${PAGES_URL}/technical/AGENTIC_RAG_AMM.html`;
+export const ARBITRAGE_AND_BAAS_URL = `${PAGES_URL}/technical/ARBITRAGE_AND_BAAS.html`;
+export const WHAT_YOU_CAN_DO_NOW_URL = `${PAGES_URL}/technical/WHAT_YOU_CAN_DO_NOW.html`;
 export const X402_GLOBAL_MESH_URL = `${PAGES_URL}/technical/X402_GLOBAL_MESH.html`;
 export const AWS_ACTIVATION_RUNBOOK_URL = `${PAGES_URL}/technical/AWS_ACTIVATION_RUNBOOK.html`;
 export const TELEGRAM_OPERATOR_URL = `${PAGES_URL}/technical/TELEGRAM_OPERATOR.html`;
+export const OPERATOR_SEED_PARTNER_URL = `${PAGES_URL}/technical/OPERATOR_SEED_AND_PARTNER.html`;
 
 export const MATURITY_SCORE = "9.9";
 export const MATURITY_GAP_NOTE =
@@ -526,8 +538,15 @@ export const REVENUE_OPPORTUNITIES: RevenueOpportunity[] = [
     opportunity: "MSB fiat rails (A–E fees)",
     status: "pipeline",
     revenueModel: "Issuance/redemption, float, B2B — when omnibus live",
-    tamNote: "See SYSTEM_MANIFEST + MSB_FIAT_RAILS",
+    tamNote: "See SYSTEM_MANIFEST + MSB_FIAT_RAILS · investor /swift/",
     clientType: "Institutional / banks",
+  },
+  {
+    opportunity: "Partner-enabled fiat + BaaS",
+    status: "pipeline",
+    revenueModel: "Omnibus fees, SWIFT B2B, white-label BaaS — after BIC + nostro",
+    tamNote: "Institutional partner rails — PIPELINE until bank wired",
+    clientType: "Banks / MSB correspondents",
   },
   {
     opportunity: "TROPTIONS revenue engine (A–F + flywheel)",

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Operator seed and partner rails</title>
+  <link rel="stylesheet" href="../downloads/print-shared.css" />
+  <style>
+    .site-nav { margin-bottom: 1rem; font-size: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0.75rem; }
+    .site-nav a { color: var(--gold-light, #d4af37); }
+    .md-body table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .md-body th, .md-body td { border: 1px solid #333; padding: 0.4rem 0.6rem; text-align: left; }
+    .md-body code { background: #1a1f26; padding: 0.1rem 0.35rem; border-radius: 3px; }
+    .md-body pre { background: #1a1f26; padding: 1rem; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav no-print">
+    <a href="https://fthtrading.github.io/Troptions-full-pack/">Investor</a>
+    <a href="https://fthtrading.github.io/Troptions-full-pack/technical/index.html">Docs hub</a>
+    <a href="https://github.com/FTHTrading/Troptions-full-pack">GitHub</a>
+  </nav>
+  <header class="doc-header">
+    <h1>Operator seed and partner rails</h1>
+    <p class="tagline">TROPTIONS technical — static export for GitHub Pages</p>
+  </header>
+  <div class="md-body">
+<h1>Operator seed and partner rails</h1>
+<p><strong>Audience:</strong> Operator on the Windows host — not investors. <strong>No secrets</strong> in this document or in git.</p>
+<h2>Tonight (operator checklist)</h2>
+<ol>
+<li><strong>Clone / pull</strong> <code>Troptions-full-pack</code> on the operator machine.</li>
+<li><strong>Copy env:</strong> <code>cp config/multi-gateway.env.template .env</code> (or merge into existing root <code>.env</code>).</li>
+<li><strong>XRPL seed (host only):</strong> Set <code>XRPL_SEED</code> in <code>.env</code> from your secure vault — never commit, never paste into chat or Cursor output.</li>
+<li><strong>Issuer address (public):</strong> XRPL issuer <code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code> — verify on <a href="https://xrpscan.com/account/rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ">XRPScan</a>.</li>
+<li><strong>PM2 floor:</strong> <code>pm2 start ecosystem.config.js --only payment-orchestrator,compliance-engine,swift-bridge,fedwire-adapter,baas-api</code></li>
+<li><strong>Health:</strong> <code>curl http://127.0.0.1:4022/health</code> (orchestrator), <code>:4024</code> (swift-bridge), <code>:8097</code> (baas-api).</li>
+<li><strong>Wire test:</strong> Only after partner omnibus + counsel sign-off — otherwise dry-run stubs only (<strong>PIPELINE</strong>).</li>
+</ol>
+<p>Telegram: <code>TELEGRAM_BOT_TOKEN</code> in <code>.env</code> only — see <a href="TELEGRAM_OPERATOR.html">TELEGRAM_OPERATOR.html</a>.</p>
+<p>Investor pages (no secrets): <a href="https://fthtrading.github.io/Troptions-full-pack/command-center/">Command Center</a>, <a href="https://fthtrading.github.io/Troptions-full-pack/overview/">Overview</a>, <a href="https://fthtrading.github.io/Troptions-full-pack/swift/">Institutional rails</a>.</p>
+<h2>Safe Cursor prompt — find XRPL seed <strong>paths only</strong></h2>
+<p>Use this in Cursor <strong>yourself</strong> (operator). Do <strong>not</strong> ask an agent to scan all of <code>C:\Users\Kevan</code>.</p>
+<p><strong>Rules:</strong></p>
+<ul>
+<li>Output <strong>file paths only</strong> — never print seed words or <code>XRPL_SEED=</code> values.</li>
+<li>Scope search to: repo <code>Troptions-full-pack</code>, optional <code>OneDrive</code> subtree, and known config names.</li>
+<li>Search for issuer address <code>rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ</code> or env key <code>XRPL_SEED</code> — report paths, not matching lines.</li>
+</ul>
+<p><strong>Prompt (copy/paste):</strong></p>
+<pre><code class="language-text">Find where XRPL_SEED or the issuer rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ is referenced in this workspace.
+
+Rules:
+- Search only: Troptions-full-pack repo and optionally C:\Users\Kevan\OneDrive (not entire C:\Users\Kevan).
+- Return a markdown table: path | why it matters (e.g. .env.example template, docs, script).
+- NEVER print seed content, sEd… values, or lines containing XRPL_SEED=.
+- If a file is .env or contains secrets, list the path only and say &quot;operator local — do not commit&quot;.
+</code></pre>
+<p><strong>PowerShell (paths only, repo + OneDrive):</strong></p>
+<pre><code class="language-powershell">$roots = @(
+  &quot;C:\Users\Kevan\Troptions-full-pack&quot;,
+  &quot;C:\Users\Kevan\OneDrive&quot;
+)
+$patterns = &quot;XRPL_SEED&quot;, &quot;rJLMSTy77hTxqgDw9WMxCnYC8m5vhqN3FQ&quot;
+foreach ($root in $roots) {
+  if (-not (Test-Path $root)) { continue }
+  foreach ($pat in $patterns) {
+    Get-ChildItem $root -Recurse -File -ErrorAction SilentlyContinue |
+      Where-Object {
+        $_.FullName -notmatch '\\node_modules\\|\\.git\\|\\.next\\' -and
+        $_.Extension -match '\.(env|example|md|ps1|js|ts|json|template|cjs)$'
+      } |
+      Select-String -Pattern $pat -List -ErrorAction SilentlyContinue |
+      ForEach-Object { $_.Path }
+  }
+}
+</code></pre>
+<p>Review listed paths manually on the operator host. Rotate seed if it ever appeared in chat, email, or a committed file.</p>
+<h2>Partner rails (PIPELINE)</h2>
+<table>
+<thead>
+<tr>
+<th>Port</th>
+<th>Service</th>
+<th>Until live</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:4022</td>
+<td>payment-orchestrator</td>
+<td>Bank webhook + compliance pass</td>
+</tr>
+<tr>
+<td>:4023</td>
+<td>fedwire-adapter</td>
+<td>Partner FedWire routing</td>
+</tr>
+<tr>
+<td>:4024</td>
+<td>swift-bridge</td>
+<td>BIC + RMA + bureau</td>
+</tr>
+<tr>
+<td>:4025</td>
+<td>compliance-engine</td>
+<td>OFAC/KYC keys in .env</td>
+</tr>
+</tbody>
+</table>
+<p>Full diligence table: <a href="https://fthtrading.github.io/Troptions-full-pack/swift/">Investor /swift/</a>.</p>
+<h2>Honesty</h2>
+<ul>
+<li><strong>PROVEN:</strong> Code, public issuer address, ledger issuance totals in proof docs.</li>
+<li><strong>PIPELINE:</strong> Fiat adapters, omnibus, MT103/FedWire production.</li>
+<li><strong>PROJECTION:</strong> Revenue scripts ($825/hour, $874K/month) — not guaranteed deposits.</li>
+</ul>
+  </div>
+  <p style="font-size:0.8rem;color:var(--muted);margin-top:2rem">https://fthtrading.github.io/Troptions-full-pack/technical/OPERATOR_SEED_AND_PARTNER.html</p>
+</body>
+</html>

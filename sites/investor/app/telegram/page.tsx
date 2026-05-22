@@ -2,7 +2,7 @@ import { PageShell } from "@/components/terminal/PageShell";
 import { TruthChip } from "@/components/terminal/TruthChip";
 import { TelegramDeepLink } from "@/components/TelegramDeepLink";
 import { assetPath } from "@/lib/base-path";
-import { COMMAND_CENTER_URL, REPO_URL } from "@/lib/constants";
+import { COMMAND_CENTER_URL, OVERVIEW_URL, REPO_URL } from "@/lib/constants";
 import {
   TELEGRAM_BOT_URL,
   TELEGRAM_BOT_USERNAME,
@@ -31,6 +31,12 @@ export default function TelegramPage() {
             className="inline-flex items-center rounded border border-[var(--color-border)] px-4 py-2 text-sm text-[var(--color-text)] transition hover:border-[var(--color-accent-gold)]"
           >
             Command Center
+          </a>
+          <a
+            href={OVERVIEW_URL}
+            className="inline-flex items-center rounded border border-[var(--color-border)] px-4 py-2 text-sm text-[var(--color-text)] transition hover:border-[var(--color-accent-blue)]"
+          >
+            Overview
           </a>
         </>
       }
@@ -207,6 +213,14 @@ export default function TelegramPage() {
             </tbody>
           </table>
         </div>
+      </section>
+
+      <section className="panel border-l-2 border-l-[var(--color-accent-blue)] p-5 text-sm text-[var(--color-muted)]">
+        <strong className="text-[var(--color-text)]">Capability overview:</strong>{" "}
+        <a href={OVERVIEW_URL} className="text-[var(--color-accent-blue)] hover:underline">
+          What you can do NOW
+        </a>{" "}
+        lists PROVEN crypto steps vs PIPELINE fiat (partner MSB + BIC + nostro).
       </section>
 
       <section className="panel border-l-2 border-l-[var(--color-accent-blue)] p-5 text-sm text-[var(--color-muted)]">
